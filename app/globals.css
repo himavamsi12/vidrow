@@ -812,7 +812,14 @@ a {
     position: static;
     display: grid;
     grid-template-columns: 42.4% 8px 13.2% 8px 42.4%;
-    grid-template-rows: repeat(2, minmax(100px, auto)) 10px repeat(2, minmax(100px, auto));
+    /* track 2 (s2's wide bottom half) and track 4 (s3's wide top half) each
+       need more room than the others: their text is taller than the shared
+       64px min, so it spills into the neighbouring track. That's harmless
+       when it spills toward the side the shape keeps (s1 and s4 both do
+       this safely), but s2's spillover goes toward the side its own shape
+       cuts away, clipping the start of "5x - 10x" — so its track has to be
+       tall enough that no spillover happens at all */
+    grid-template-rows: minmax(64px, auto) minmax(88px, auto) 10px minmax(86px, auto) minmax(64px, auto);
     gap: 0;
     padding: 32px 20px 0
   }
@@ -852,11 +859,51 @@ a {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%, 25% 50%, 0 50%)
   }
 
+  /* text stacks in normal flow now, not absolute % offsets — those assumed
+     a specific card height, which broke the instant the row got shorter.
+     Flow re-centers itself around however tall the text actually is. */
+  .hx-step {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 7%
+  }
+
+  /* each card's own text sits inside its wide half — s1's is the top half,
+     s2's and s4's the bottom half, s3's the top half again */
+  .hx-s1,
+  .hx-s3 {
+    justify-content: flex-start;
+    padding-top: 14px
+  }
+
+  .hx-s2,
+  .hx-s4 {
+    justify-content: flex-end;
+    padding-bottom: 14px
+  }
+
+  .hx-s3 {
+    padding-left: 28%
+  }
+
+  /* s2's notch cuts away its own left edge in the half its text can spill
+     into (unlike s1/s4, where a spill lands on the side the shape keeps) —
+     so its text is pushed right of that cut instead of relying on the row
+     being tall enough to never spill at all */
+  .hx-s2 {
+    padding-left: 30%
+  }
+
+  .hx-s2 .hx-note {
+    width: 65% !important
+  }
+
   .hx-stat,
   .hx-note,
   .hx-tag {
-    position: absolute;
-    left: 7% !important;
+    position: static !important;
+    left: auto !important;
     right: auto !important;
     width: auto !important;
     text-align: left !important
@@ -868,41 +915,13 @@ a {
 
   .hx-note {
     font-size: 12px;
-    width: 78% !important
+    width: 78% !important;
+    margin-top: 6px
   }
 
   .hx-tag {
     font-size: 20px;
     width: 70% !important
-  }
-
-  /* each card's own text sits inside its wide half — s1's is the top half,
-     s2's and s4's the bottom half, s3's the top half again. These repeat the
-     desktop rules' ".hx-sN .hx-x" specificity so the !importants above don't
-     have to also cover top, and so a plain top/left order can't lose to them. */
-  .hx-s1 .hx-stat {
-    top: 10% !important
-  }
-
-  .hx-s1 .hx-note {
-    top: 30% !important
-  }
-
-  .hx-s2 .hx-stat {
-    top: 58% !important
-  }
-
-  .hx-s2 .hx-note {
-    top: 78% !important
-  }
-
-  .hx-s3 .hx-tag {
-    top: 12% !important;
-    left: 18% !important
-  }
-
-  .hx-s4 .hx-tag {
-    top: 60% !important
   }
 }
 
