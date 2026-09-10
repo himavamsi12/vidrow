@@ -1,0 +1,81 @@
+// One entry per connected run of a single shade in the footer wordmark artwork.
+// x/y/w/h/fall position and size the piece on the 35x5 well grid; at/dur/uat time its fall
+// and flatten-to-yellow animation; cells are the inner tile coordinates within its own w x h box.
+// `pre: true` pieces sit in their final spot from first paint (already flattened) — only the
+// remaining pieces fall when the footer scrolls into view, so the wordmark finishes forming.
+export const FOOTER_PIECES = [
+  { x: 10, y: 1, w: 2, h: 4, fall: 19.8, at: 0, dur: 659, uat: 3471, shade: "b", pre: true, cells: [[0,0], [0,1], [1,1], [0,2], [1,2], [0,3], [1,3]] },
+  { x: 1, y: 2, w: 2, h: 3, fall: 19.8, at: 84, dur: 659, uat: 3533, shade: "c", pre: true, cells: [[0,0], [0,1], [0,2], [1,2]] },
+  { x: 30, y: 3, w: 3, h: 2, fall: 19.8, at: 168, dur: 659, uat: 3539, shade: "a", pre: true, cells: [[0,0], [1,0], [2,0], [2,1]] },
+  { x: 18, y: 3, w: 3, h: 2, fall: 19.8, at: 251, dur: 659, uat: 3545, shade: "b", pre: true, cells: [[0,0], [1,0], [1,1], [2,1]] },
+  { x: 3, y: 2, w: 2, h: 3, fall: 19.8, at: 335, dur: 659, uat: 3565, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2]] },
+  { x: 24, y: 3, w: 3, h: 2, fall: 19.8, at: 419, dur: 659, uat: 3588, shade: "b", pre: true, cells: [[1,0], [2,0], [0,1], [1,1], [2,1]] },
+  { x: 33, y: 3, w: 2, h: 2, fall: 19.8, at: 502, dur: 659, uat: 3606, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1], [1,1]] },
+  { x: 16, y: 3, w: 2, h: 2, fall: 19.8, at: 586, dur: 659, uat: 3624, shade: "a", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 6, y: 1, w: 2, h: 4, fall: 19.8, at: 670, dur: 659, uat: 3627, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [0,3]] },
+  { x: 28, y: 3, w: 3, h: 2, fall: 19.8, at: 754, dur: 659, uat: 3695, shade: "d", pre: true, cells: [[1,0], [0,1], [1,1], [2,1]] },
+  { x: 12, y: 3, w: 2, h: 2, fall: 19.8, at: 838, dur: 659, uat: 3697, shade: "a", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 22, y: 3, w: 3, h: 2, fall: 19.8, at: 921, dur: 659, uat: 3699, shade: "d", pre: true, cells: [[1,0], [2,0], [0,1], [1,1]] },
+  { x: 7, y: 3, w: 2, h: 2, fall: 19.8, at: 1005, dur: 659, uat: 3742, shade: "c", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 28, y: 2, w: 3, h: 2, fall: 18.8, at: 1089, dur: 643, uat: 3489, shade: "b", pre: true, cells: [[0,0], [1,0], [2,0], [0,1]] },
+  { x: 8, y: 1, w: 1, h: 3, fall: 18.8, at: 1172, dur: 643, uat: 3532, shade: "b", pre: true, cells: [[0,0], [0,1], [0,2]] },
+  { x: 0, y: 0, w: 2, h: 4, fall: 18.8, at: 1256, dur: 643, uat: 3557, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [0,3]] },
+  { x: 2, y: 1, w: 1, h: 3, fall: 18.8, at: 1340, dur: 643, uat: 3573, shade: "b", pre: true, cells: [[0,0], [0,1], [0,2]] },
+  { x: 13, y: 2, w: 2, h: 2, fall: 18.8, at: 1424, dur: 643, uat: 3652, shade: "b", pre: true, cells: [[1,0], [0,1], [1,1]] },
+  { x: 22, y: 2, w: 2, h: 2, fall: 18.8, at: 1508, dur: 643, uat: 3705, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1]] },
+  { x: 16, y: 0, w: 2, h: 4, fall: 18.8, at: 1591, dur: 643, uat: 3728, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [1,2], [1,3]] },
+  { x: 25, y: 0, w: 2, h: 3, fall: 17.8, at: 1675, dur: 625, uat: 3487, shade: "a", cells: [[1,0], [0,1], [1,1], [0,2], [1,2]] },
+  { x: 30, y: 0, w: 3, h: 3, fall: 17.8, at: 1759, dur: 625, uat: 3524, shade: "d", cells: [[0,0], [1,0], [2,0], [2,1], [2,2]] },
+  { x: 18, y: 1, w: 3, h: 2, fall: 17.8, at: 1842, dur: 625, uat: 3554, shade: "a", cells: [[0,0], [1,0], [2,0], [1,1], [2,1]] },
+  { x: 33, y: 0, w: 2, h: 3, fall: 17.8, at: 1926, dur: 625, uat: 3587, shade: "a", cells: [[1,0], [0,1], [1,1], [0,2], [1,2]] },
+  { x: 13, y: 1, w: 2, h: 2, fall: 17.8, at: 2010, dur: 625, uat: 3597, shade: "a", cells: [[0,0], [1,0], [0,1]] },
+  { x: 28, y: 0, w: 4, h: 3, fall: 17.8, at: 2094, dur: 625, uat: 3719, shade: "c", cells: [[0,0], [0,1], [1,1], [2,1], [3,1], [3,2]] },
+  { x: 22, y: 0, w: 2, h: 2, fall: 16.8, at: 2178, dur: 607, uat: 3517, shade: "a", cells: [[0,0], [1,0], [0,1]] },
+  { x: 11, y: 1, w: 2, h: 1, fall: 16.8, at: 2261, dur: 607, uat: 3574, shade: "c", cells: [[0,0], [1,0]] },
+  { x: 23, y: 0, w: 3, h: 2, fall: 16.8, at: 2345, dur: 607, uat: 3601, shade: "b", cells: [[1,0], [2,0], [0,1], [1,1]] },
+  { x: 3, y: 0, w: 2, h: 2, fall: 16.8, at: 2429, dur: 607, uat: 3708, shade: "c", cells: [[0,0], [1,0], [0,1], [1,1]] },
+  { x: 6, y: 0, w: 3, h: 1, fall: 15.8, at: 2512, dur: 589, uat: 3483, shade: "c", cells: [[0,0], [1,0], [2,0]] },
+  { x: 18, y: 0, w: 3, h: 1, fall: 15.8, at: 2596, dur: 589, uat: 3622, shade: "d", cells: [[0,0], [1,0], [2,0]] },
+  { x: 10, y: 0, w: 4, h: 1, fall: 15.8, at: 2680, dur: 589, uat: 3713, shade: "b", cells: [[0,0], [1,0], [2,0], [3,0]] },
+];
+
+// same pieces, same fall timing — just regrouped onto two lines ("VID" /
+// "ROW") on a 19x11 grid instead of one 35x5 row, so the wordmark reads on
+// narrow screens. Letters V/I/D keep their original x/y; R/O/W (originally
+// at x>=16) are shifted left by 16 columns and down by 6 rows (5 rows +
+// a 1-row gap) onto the second line.
+export const FOOTER_PIECES_MOBILE = [
+  { x: 10, y: 1, w: 2, h: 4, fall: 19.8, at: 0, dur: 659, uat: 3471, shade: "b", pre: true, cells: [[0,0], [0,1], [1,1], [0,2], [1,2], [0,3], [1,3]] },
+  { x: 1, y: 2, w: 2, h: 3, fall: 19.8, at: 84, dur: 659, uat: 3533, shade: "c", pre: true, cells: [[0,0], [0,1], [0,2], [1,2]] },
+  { x: 14, y: 9, w: 3, h: 2, fall: 19.8, at: 168, dur: 659, uat: 3539, shade: "a", pre: true, cells: [[0,0], [1,0], [2,0], [2,1]] },
+  { x: 2, y: 9, w: 3, h: 2, fall: 19.8, at: 251, dur: 659, uat: 3545, shade: "b", pre: true, cells: [[0,0], [1,0], [1,1], [2,1]] },
+  { x: 3, y: 2, w: 2, h: 3, fall: 19.8, at: 335, dur: 659, uat: 3565, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2]] },
+  { x: 8, y: 9, w: 3, h: 2, fall: 19.8, at: 419, dur: 659, uat: 3588, shade: "b", pre: true, cells: [[1,0], [2,0], [0,1], [1,1], [2,1]] },
+  { x: 17, y: 9, w: 2, h: 2, fall: 19.8, at: 502, dur: 659, uat: 3606, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1], [1,1]] },
+  { x: 0, y: 9, w: 2, h: 2, fall: 19.8, at: 586, dur: 659, uat: 3624, shade: "a", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 6, y: 1, w: 2, h: 4, fall: 19.8, at: 670, dur: 659, uat: 3627, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [0,3]] },
+  { x: 12, y: 9, w: 3, h: 2, fall: 19.8, at: 754, dur: 659, uat: 3695, shade: "d", pre: true, cells: [[1,0], [0,1], [1,1], [2,1]] },
+  { x: 12, y: 3, w: 2, h: 2, fall: 19.8, at: 838, dur: 659, uat: 3697, shade: "a", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 6, y: 9, w: 3, h: 2, fall: 19.8, at: 921, dur: 659, uat: 3699, shade: "d", pre: true, cells: [[1,0], [2,0], [0,1], [1,1]] },
+  { x: 7, y: 3, w: 2, h: 2, fall: 19.8, at: 1005, dur: 659, uat: 3742, shade: "c", pre: true, cells: [[0,0], [0,1], [1,1]] },
+  { x: 12, y: 8, w: 3, h: 2, fall: 18.8, at: 1089, dur: 643, uat: 3489, shade: "b", pre: true, cells: [[0,0], [1,0], [2,0], [0,1]] },
+  { x: 8, y: 1, w: 1, h: 3, fall: 18.8, at: 1172, dur: 643, uat: 3532, shade: "b", pre: true, cells: [[0,0], [0,1], [0,2]] },
+  { x: 0, y: 0, w: 2, h: 4, fall: 18.8, at: 1256, dur: 643, uat: 3557, shade: "a", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [0,3]] },
+  { x: 2, y: 1, w: 1, h: 3, fall: 18.8, at: 1340, dur: 643, uat: 3573, shade: "b", pre: true, cells: [[0,0], [0,1], [0,2]] },
+  { x: 13, y: 2, w: 2, h: 2, fall: 18.8, at: 1424, dur: 643, uat: 3652, shade: "b", pre: true, cells: [[1,0], [0,1], [1,1]] },
+  { x: 6, y: 8, w: 2, h: 2, fall: 18.8, at: 1508, dur: 643, uat: 3705, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1]] },
+  { x: 0, y: 6, w: 2, h: 4, fall: 18.8, at: 1591, dur: 643, uat: 3728, shade: "c", pre: true, cells: [[0,0], [1,0], [0,1], [1,1], [0,2], [1,2], [1,3]] },
+  { x: 9, y: 6, w: 2, h: 3, fall: 17.8, at: 1675, dur: 625, uat: 3487, shade: "a", cells: [[1,0], [0,1], [1,1], [0,2], [1,2]] },
+  { x: 14, y: 6, w: 3, h: 3, fall: 17.8, at: 1759, dur: 625, uat: 3524, shade: "d", cells: [[0,0], [1,0], [2,0], [2,1], [2,2]] },
+  { x: 2, y: 7, w: 3, h: 2, fall: 17.8, at: 1842, dur: 625, uat: 3554, shade: "a", cells: [[0,0], [1,0], [2,0], [1,1], [2,1]] },
+  { x: 17, y: 6, w: 2, h: 3, fall: 17.8, at: 1926, dur: 625, uat: 3587, shade: "a", cells: [[1,0], [0,1], [1,1], [0,2], [1,2]] },
+  { x: 13, y: 1, w: 2, h: 2, fall: 17.8, at: 2010, dur: 625, uat: 3597, shade: "a", cells: [[0,0], [1,0], [0,1]] },
+  { x: 12, y: 6, w: 4, h: 3, fall: 17.8, at: 2094, dur: 625, uat: 3719, shade: "c", cells: [[0,0], [0,1], [1,1], [2,1], [3,1], [3,2]] },
+  { x: 6, y: 6, w: 2, h: 2, fall: 16.8, at: 2178, dur: 607, uat: 3517, shade: "a", cells: [[0,0], [1,0], [0,1]] },
+  { x: 11, y: 1, w: 2, h: 1, fall: 16.8, at: 2261, dur: 607, uat: 3574, shade: "c", cells: [[0,0], [1,0]] },
+  { x: 7, y: 6, w: 3, h: 2, fall: 16.8, at: 2345, dur: 607, uat: 3601, shade: "b", cells: [[1,0], [2,0], [0,1], [1,1]] },
+  { x: 3, y: 0, w: 2, h: 2, fall: 16.8, at: 2429, dur: 607, uat: 3708, shade: "c", cells: [[0,0], [1,0], [0,1], [1,1]] },
+  { x: 6, y: 0, w: 3, h: 1, fall: 15.8, at: 2512, dur: 589, uat: 3483, shade: "c", cells: [[0,0], [1,0], [2,0]] },
+  { x: 2, y: 6, w: 3, h: 1, fall: 15.8, at: 2596, dur: 589, uat: 3622, shade: "d", cells: [[0,0], [1,0], [2,0]] },
+  { x: 10, y: 0, w: 4, h: 1, fall: 15.8, at: 2680, dur: 589, uat: 3713, shade: "b", cells: [[0,0], [1,0], [2,0], [3,0]] },
+];

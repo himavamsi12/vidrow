@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vidrow — Marketing partner behind fastest growing startups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   Vidrow homepage
+   Display face: Stack Sans Notch (self-hosted)
+   Body face:    Inter
+   Grid unit:    --cell (one Tetris block)
+   ───────────────────────────────────────────── */
+
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-ExtraLight.ttf") format("truetype");font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  --acid:#F5FA5E;
+  --violet:#715BE4;
+  --ink:#0B0B0D;
+  --paper:#FFFFFF;
+  --offwhite:#FBFBF7;
+  --well:#17141F;
+  --mute:#6C6A78;
+  --mute-dark:#8D89A3;
+
+  --display:"Stack Sans Notch","Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+
+  --cell:clamp(30px,4.6vw,62px);
+  --pad:clamp(60px,8vw,132px);
+  --gut:clamp(20px,4.4vw,64px);
+  --maxw:1440px;
+  --side:max(20px,6%);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.5;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ── type primitives ───────────────────────── */
+.d1,.d2,.d3{font-family:var(--display);font-weight:700;letter-spacing:-.022em;margin:0}
+.d1{font-size:clamp(38px,6vw,88px);line-height:.94}
+.d2{font-size:clamp(30px,4.4vw,62px);line-height:.98}
+.d3{font-size:clamp(20px,2.1vw,30px);line-height:1.06;letter-spacing:-.015em}
+.lead{font-size:clamp(16px,1.28vw,19px);line-height:1.45;margin:0}
+.body{font-size:15px;line-height:1.55;margin:0}
+.nb{display:none}
+@media (min-width:641px){.nb{display:inline}}
+.label{
+  font-family:var(--body);font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.185em;margin:0;
+}
+
+/* ── shared shell ──────────────────────────── */
+.wrap{max-width:none;margin:0;padding-left:var(--side);padding-right:var(--side)}
+.sec{padding-top:var(--pad);padding-bottom:var(--pad);position:relative}
+.f-acid{background:var(--acid);color:var(--ink)}
+.f-ink{background:var(--ink);color:var(--paper)}
+.f-paper{background:var(--paper);color:var(--ink)}
+.f-violet{background:var(--violet);color:var(--paper)}
+
+.sec-head{display:grid;gap:18px;max-width:900px}
+.sec-head .label{opacity:.62}
+.f-ink .sec-head .lead,.f-violet .sec-head .lead{color:rgba(255,255,255,.74)}
+.f-acid .sec-head .lead{color:rgba(11,11,13,.68)}
+.f-paper .sec-head .lead{color:var(--mute)}
+
+/* ── logo mark: the 6-cell staircase ───────── */
+.mark{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px;width:26px;height:26px;flex:none}
+.mark i{background:currentColor;display:block}
+.mark i:nth-child(4){grid-column:1}
+.mark i:nth-child(6){grid-column:1}
+
+
+
+/* ── hero ──────────────────────────────────── */
+/* laid out against the 1440 design frame; --k is one design px */
+.hx{position:relative;background:var(--paper);color:#121212;display:flex;justify-content:center;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='4' height='4' fill='%23F7F7F7'/%3E%3C/svg%3E")}
+.hx-in{position:relative;width:100%;overflow:hidden;
+  container-type:inline-size;--k:min(.0694444cqw, 1.111px);
+  min-height:max(calc(800 * var(--k)), 100vh);min-height:max(calc(800 * var(--k)), 100svh)}
+
+/* top bar: mark left, menu right */
+.hx-bar{position:absolute;z-index:4;transition:opacity .5s ease;left:6%;right:6%;
+  top:calc(40 * var(--k));display:flex;align-items:flex-start;justify-content:space-between}
+.hx-logo{display:block;width:calc(72 * var(--k));height:calc(72 * var(--k));text-decoration:none}
+.hx-logo img{width:100%;height:100%;display:block}
+.hx-menu{position:relative}
+.hx-menu-b{background:none;border:0;padding:0;cursor:pointer;color:#181818;
+  font-family:var(--body);font-size:calc(16 * var(--k));font-weight:500;line-height:1.2}
+.hx-menu-p{position:absolute;right:0;top:calc(100% + 14px);min-width:190px;
+  background:var(--paper);border:1px solid #E4E4E4;padding:10px 0;display:none;z-index:5}
+.hx-menu.open .hx-menu-p{display:block}
+.hx-menu-p a{display:block;padding:9px 18px;text-decoration:none;color:#121212;
+  font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.hx-menu-p a:hover{background:var(--acid)}
+
+/* the staircase — full-bleed, steps butt against each other */
+.hx-stair{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hx-step{position:absolute;bottom:0;background:#F2F2F2;
+  box-shadow:inset 0 0 0 1px var(--paper);
+  transition:top .75s cubic-bezier(.5,0,.2,1),clip-path .75s cubic-bezier(.5,0,.2,1),
+    background-color .5s ease,box-shadow .5s ease}
+/* opening again runs the stagger the other way round */
+.hx-s4{transition-delay:0s}
+.hx-s6{transition-delay:.06s}
+.hx-s3{transition-delay:.12s}
+.hx-s2{transition-delay:.18s}
+.hx-s5{transition-delay:.24s}
+.hx-s1{transition-delay:.30s}
+.hx-step.lit{box-shadow:none}
+.hx-step.lit.hx-y{background:var(--acid)}
+.hx-step.lit.hx-v{background:var(--violet)}
+.hx-s1{left:0;width:51%;top:88.43%;z-index:1}
+.hx-s5{left:44%;width:28%;top:75.46%;z-index:1}
+.hx-s3{left:58%;width:21%;top:62.96%;z-index:1}
+.hx-s6{left:72%;width:7%;top:50%;z-index:1}
+.hx-s2{left:51%;width:13.5%;top:75.46%;z-index:2}
+.hx-s4{left:79%;width:21%;top:25.93%;z-index:1;
+  clip-path:polygon(66.7% 0,100% 0,100% 100%,0 100%,0 21.7%,33.3% 21.7%,33.3% 10.9%,66.7% 10.9%)}
+
+/* once all four have shown, the blocks rise and close the hero */
+.hx-stair.closed .hx-step{top:0;box-shadow:none;
+  transition:top .75s cubic-bezier(.5,0,.2,1),background-color .4s ease,clip-path .75s cubic-bezier(.5,0,.2,1)}
+.hx-stair.closed .hx-s1,.hx-stair.closed .hx-s5,.hx-stair.closed .hx-s3,.hx-stair.closed .hx-s6{background:var(--acid)}
+.hx-stair.closed .hx-s2,.hx-stair.closed .hx-s4{background:var(--violet)}
+.hx-stair.closed .hx-s4{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,0 0,0 0,0 0,0 0)}
+.hx-stair.closed .hx-s1{transition-delay:0s}
+.hx-stair.closed .hx-s5{transition-delay:.06s}
+.hx-stair.closed .hx-s2{transition-delay:.12s}
+.hx-stair.closed .hx-s3{transition-delay:.18s}
+.hx-stair.closed .hx-s6{transition-delay:.24s}
+.hx-stair.closed .hx-s4{transition-delay:.3s}
+.hx-stair.closed .hx-step .hx-stat,
+.hx-stair.closed .hx-step .hx-note,
+.hx-stair.closed .hx-step .hx-tag{opacity:0;transition-delay:0s}
+.hx-in.closing .hx-copy,.hx-in.closing .hx-bar{opacity:0;transition:opacity .5s ease}
+.hx-stat,.hx-note,.hx-tag{opacity:0;transition:opacity .38s ease}
+.hx-step.lit .hx-stat,.hx-step.lit .hx-note,.hx-step.lit .hx-tag{opacity:1;transition-delay:.1s}
+.hx-stat{position:absolute;font-family:var(--display);font-weight:700;
+  font-size:calc(48 * var(--k));line-height:1.2;letter-spacing:-.01em;white-space:nowrap}
+.hx-note{position:absolute;font-family:var(--body);font-weight:400;
+  font-size:calc(16 * var(--k));line-height:1.2}
+.hx-tag{position:absolute;font-family:var(--display);font-weight:700;
+  font-size:calc(28 * var(--k));line-height:1.2}
+.hx-s1 .hx-stat{left:41.2%;top:22%;color:#121212}
+.hx-s1 .hx-note{left:71.6%;top:34%;width:23.5%;color:#121212}
+.hx-s2 .hx-stat{left:9%;top:66%;color:var(--paper)}
+.hx-s2 .hx-note{left:11%;top:18%;width:80%;color:var(--paper)}
+.hx-s3 .hx-tag{right:14.3%;top:17.4%;width:61.9%;text-align:right;color:#121212}
+.hx-s4 .hx-tag{left:24.3%;top:55%;width:59.5%;color:var(--paper)}
+
+/* copy */
+.hx-copy{position:absolute;z-index:3;transition:opacity .5s ease;left:6%;top:calc(184 * var(--k));
+  width:calc(748 * var(--k))}
+.hx-h{font-family:var(--display);font-weight:400;margin:0;
+  font-size:calc(64 * var(--k));line-height:1.5;letter-spacing:calc(-2 * var(--k));color:#121212}
+.hx-h u{text-decoration:underline;text-decoration-thickness:calc(3 * var(--k));
+  text-underline-offset:calc(9 * var(--k))}
+.hx-w{position:relative}
+.hx-w::before{content:"";position:absolute;z-index:-1;
+  left:calc(-10 * var(--k));right:calc(-10 * var(--k));
+  top:calc(2 * var(--k));bottom:calc(-2 * var(--k));
+  background:var(--acid);opacity:0;transition:opacity .24s ease}
+.hx-w.lit::before{opacity:1}
+.hx-sub{font-family:var(--body);font-weight:400;font-size:18px;line-height:1.4;
+  color:#4C4546;margin:calc(28 * var(--k)) 0 0;max-width:calc(724 * var(--k))}
+.hx-cta{display:inline-flex;align-items:stretch;text-decoration:none;
+  margin-top:calc(30 * var(--k));background:#121212}
+.hx-cta-t{display:flex;align-items:center;padding:0 calc(12 * var(--k));
+  height:calc(40 * var(--k));color:var(--paper);
+  font-family:var(--body);font-size:calc(12 * var(--k));font-weight:700;
+  letter-spacing:calc(1.2 * var(--k));text-transform:uppercase;white-space:nowrap}
+.hx-cta-i{flex:none;width:calc(40 * var(--k));height:calc(40 * var(--k));background:var(--acid);
+  display:grid;place-items:center}
+.hx-cta-i svg{width:calc(40 * var(--k));height:calc(40 * var(--k));display:block}
+.hx-cta:hover .hx-cta-i{background:var(--paper)}
+
+@media (max-width:900px){
+  .hx-in{min-height:0;container-type:normal;padding:0 0 40px;display:flex;flex-direction:column}
+  .hx-bar{order:0}
+  .hx-copy{order:1}
+  .hx-stair{order:2}
+  .hx-s1{order:1}
+  .hx-s2{order:2}
+  .hx-s3{order:3}
+  .hx-s4{order:4}
+  .hx-s5,.hx-s6{display:none}
+  .hx-step{box-shadow:none}
+  .hx-y{background:var(--acid)}
+  .hx-v{background:var(--violet)}
+  .hx-stat,.hx-note,.hx-tag{opacity:1}
+  .hx-w::before{left:-6px;right:-6px;top:2px;bottom:0}
+  .hx-bar{position:static;padding:24px 20px 0}
+  .hx-logo{width:52px;height:52px}
+  .hx-menu-b{font-size:15px}
+  .hx-copy{position:static;width:auto;padding:32px 20px 0}
+  .hx-h{font-size:clamp(32px,8.6vw,44px);letter-spacing:-1px}
+  .hx-h u{text-decoration-thickness:2px;text-underline-offset:5px}
+  .hx-sub{font-size:18px;max-width:none;margin-top:18px}
+  .hx-cta{margin-top:24px}
+  .hx-cta-t{height:44px;padding:0 16px;font-size:12px;letter-spacing:.1em}
+  .hx-cta-i{width:44px;height:44px}
+  .hx-cta-i svg{width:44px;height:44px}
+  .hx-stair{position:static;display:grid;gap:12px;padding:32px 20px 0}
+  .hx-step{position:static;width:auto !important;height:auto !important;
+    clip-path:none !important;padding:20px;min-height:112px;display:flex;
+    flex-direction:column;justify-content:flex-end;gap:6px}
+  .hx-stat,.hx-note,.hx-tag{position:static;width:auto !important;text-align:left !important}
+  .hx-stat{font-size:34px}
+  .hx-note{font-size:14px;order:-1}
+  .hx-tag{font-size:20px}
+}
+
+/* ── nav ───────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:50;background:var(--acid);color:var(--ink)}
+.nav-in{display:flex;align-items:center;gap:clamp(18px,3vw,44px);height:74px;padding-left:var(--side);padding-right:var(--side)}
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand img{width:46px;height:46px;display:block}
+.nav-links{display:flex;gap:clamp(14px,2.2vw,32px);margin-left:auto;align-items:center}
+.nav-links a{
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.185em;
+  text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;
+}
+.nav-links a:hover{border-bottom-color:var(--ink)}
+.nav-cta{
+  background:var(--ink);color:var(--acid);text-decoration:none;
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.185em;
+  padding:13px 20px;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--violet);color:var(--paper)}
+
+/* ── hero ──────────────────────────────────── */
+.hero{background:var(--acid);color:var(--ink);padding-top:clamp(48px,6vw,86px);padding-bottom:0;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,.68fr);gap:clamp(28px,4vw,64px);align-items:end;max-width:var(--maxw);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.hero-copy{padding-bottom:clamp(56px,7vw,104px)}
+.hero h1{margin:0 0 clamp(22px,2.4vw,32px)}
+.hero .lead{max-width:31em;color:rgba(11,11,13,.72)}
+.hero-cta{margin-top:clamp(28px,3vw,44px)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--ink);color:var(--acid);text-decoration:none;
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.185em;
+  padding:19px 28px;border:0;cursor:pointer;font-family:var(--body);
+  transition:background .16s ease,color .16s ease,transform .16s ease;
+}
+.btn:hover{background:var(--violet);color:var(--paper);transform:translateY(-2px)}
+.btn-light{background:var(--paper);color:var(--ink)}
+.btn-light:hover{background:var(--ink);color:var(--acid)}
+
+/* hero block composition — the brand's staircase mask, built from cells */
+.hero-art{position:relative;height:calc(var(--cell) * 6);align-self:end;margin-right:calc(var(--gut) * -1)}
+.hero-art .blk{position:absolute;width:var(--cell);height:var(--cell)}
+.hero-art .v{background:var(--violet)}
+.hero-art .k{background:var(--ink)}
+.hero-art .a{background:var(--acid)}
+
+/* ── seam: staircase boundary between fields ─ */
+.seam{display:flex;align-items:flex-end;height:calc(var(--cell) * 1.5);line-height:0;background:var(--seam-from)}
+.seam i{flex:1;display:block;background:var(--seam);height:var(--h,100%)}
+
+/* ── case rail ─────────────────────────────── */
+.rail{
+  display:flex;gap:0;margin-top:clamp(34px,4vw,56px);
+  margin-right:calc(var(--gut) * -1);padding-right:var(--gut);
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:14px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.28) transparent;
+}
+.rail::-webkit-scrollbar{height:5px}
+.rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28)}
+.case{
+  flex:0 0 clamp(268px,25vw,338px);scroll-snap-align:start;
+  border:1px solid rgba(255,255,255,.16);border-right:0;
+  padding:24px 24px 22px;display:flex;flex-direction:column;gap:14px;
+  text-decoration:none;color:inherit;
+  transition:background .18s ease;
+}
+.rail .case:last-child{border-right:1px solid rgba(255,255,255,.16)}
+.case:hover{background:rgba(255,255,255,.05)}
+.case-top{display:flex;align-items:center;gap:12px}
+.mono{
+  width:38px;height:38px;flex:none;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.02em;
+  background:var(--acid);color:var(--ink);
+}
+.mono.alt{background:var(--violet);color:var(--paper)}
+.case-name{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
+.case-line{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.16;letter-spacing:-.015em;margin:0;flex:1}
+.case-foot{display:grid;gap:9px;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-dark)}
+.case-foot .go{color:rgba(255,255,255,.72)}
+.case:hover .case-foot .go{color:var(--acid)}
+
+/* ── the well (signature) ──────────────────── */
+.well-sec{background:var(--ink);color:var(--paper)}
+/* cases and the well share the ink field — don't stack two full section pads */
+.f-ink + .well-sec{padding-top:calc(var(--pad) * .35)}
+.stagebar{display:flex;flex-wrap:wrap;gap:0;margin-top:clamp(34px,4vw,54px);border:1px solid rgba(255,255,255,.18)}
+.stagebar button{
+  flex:1 1 auto;min-width:118px;background:transparent;color:rgba(255,255,255,.62);
+  border:0;border-right:1px solid rgba(255,255,255,.18);
+  font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.185em;text-transform:uppercase;
+  padding:17px 12px;cursor:pointer;transition:background .16s ease,color .16s ease;
+}
+.stagebar button:last-child{border-right:0}
+.stagebar button:hover{color:var(--paper);background:rgba(255,255,255,.06)}
+.stagebar button[aria-selected="true"]{background:var(--acid);color:var(--ink)}
+
+.wellgrid{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(28px,4vw,64px);align-items:start;margin-top:clamp(28px,3.4vw,48px);
+}
+.board{
+  position:relative;flex:none;
+  width:calc(var(--cell) * 10);height:calc(var(--cell) * 6);
+  background:var(--well);
+  background-image:linear-gradient(to right,rgba(255,255,255,.055) 1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(255,255,255,.055) 1px,transparent 1px);
+  background-size:var(--cell) var(--cell);
+  outline:1px solid rgba(255,255,255,.14);
+}
+.pc{
+  position:absolute;width:var(--cell);height:var(--cell);
+  border:2px solid var(--well);
+  animation:drop .3s cubic-bezier(.16,.84,.34,1) both;
+}
+.pc.paid{background:var(--acid)}
+.pc.audience{background:var(--violet)}
+@keyframes drop{
+  from{transform:translateY(calc(var(--cell) * -7));opacity:0}
+  60%{opacity:1}
+  to{transform:translateY(0);opacity:1}
+}
+.pl{
+  position:absolute;display:grid;place-items:center;pointer-events:none;
+  font-size:clamp(7.5px,.72vw,10px);font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  animation:drop .3s cubic-bezier(.16,.84,.34,1) both;
+}
+.pl.paid{color:var(--ink)}
+.pl.audience{color:var(--paper)}
+@keyframes lockflash{
+  0%{background:var(--paper)}
+  100%{background:var(--flashback)}
+}
+.pc.lock{animation:drop .3s cubic-bezier(.16,.84,.34,1) both,lockflash .5s ease-out .1s both}
+
+.baseline{
+  display:flex;align-items:center;gap:10px;margin-top:14px;
+  font-size:10.5px;font-weight:600;letter-spacing:.185em;text-transform:uppercase;
+  color:var(--acid);opacity:0;transition:opacity .4s ease;
+}
+.baseline.on{opacity:1}
+.baseline .tick{width:9px;height:9px;background:var(--acid);flex:none}
+
+.wellcopy{display:grid;gap:20px;padding-top:4px}
+.wellcopy .stage-k{font-size:10.5px;font-weight:600;letter-spacing:.185em;text-transform:uppercase;color:var(--acid);margin:0}
+.wellcopy .body{color:rgba(255,255,255,.72);max-width:44ch}
+.piecekey{display:flex;flex-wrap:wrap;gap:9px 20px;padding-top:2px}
+.piecekey span{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.piecekey i{width:11px;height:11px;display:block}
+.k-paid{background:var(--acid)}
+.k-audience{background:var(--violet)}
+.storylink{
+  display:inline-flex;align-items:center;gap:12px;text-decoration:none;
+  border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2);
+  padding:18px 0;margin-top:2px;max-width:44ch;
+}
+.storylink .sl-t{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.2;letter-spacing:-.015em;flex:1}
+.storylink .sl-a{color:var(--acid);font-size:11px;font-weight:600;letter-spacing:.185em;text-transform:uppercase;white-space:nowrap}
+.storylink:hover .sl-t{color:var(--acid)}
+
+
+/* ── featured work ─────────────────────────── */
+/* laid out against a 1440 design width; --k is one design px, so the whole
+   row scales with its own width instead of breaking at odd viewports */
+.fw{background:var(--paper);color:var(--ink);
+  padding:clamp(56px,7vw,100px) 0 120px}
+.fw-in{width:100%;container-type:inline-size;--k:min(.0694444cqw, 1.111px)}
+.fw-head{display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  padding:0 6%;margin-bottom:clamp(32px,4.2vw,60px)}
+.fw-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:22px}
+.fw-tag{position:relative;height:18px;padding:4px 6px;box-sizing:border-box;
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:14px;font-weight:400;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.fw-tagwrap .mark{position:absolute;left:100%;top:-9px;width:15px;height:15px;gap:1px;transform:rotate(90deg)}
+.fw-h{font-family:var(--display);font-weight:400;font-size:clamp(32px,3.9vw,56px);line-height:1.2;
+  letter-spacing:-.025em;color:#1A1C1C;margin:0}
+
+.fw-list{border-top:1px solid #E4E4E4}
+.fw-row{position:relative;display:block;text-decoration:none;color:inherit;overflow:hidden;
+  height:calc(180 * var(--k));background:var(--paper);border-bottom:1px solid #E4E4E4;
+  transition:height .5s cubic-bezier(.16,.84,.34,1),background-color .4s ease}
+.fw-row.is-open,.fw-row:focus-visible{height:calc(260 * var(--k));background:#F5F5F5}
+
+/* left: logo tile, client, industry */
+.fw-brand{position:absolute;left:6%;top:50%;transform:translateY(-50%);
+  display:flex;align-items:center;gap:calc(12 * var(--k));z-index:3;
+  transition:top .5s cubic-bezier(.16,.84,.34,1),transform .5s cubic-bezier(.16,.84,.34,1)}
+.fw-row.is-open .fw-brand,.fw-row:focus-visible .fw-brand{top:calc(20 * var(--k));transform:none}
+.fw-logo{width:calc(72 * var(--k));height:calc(72 * var(--k));flex:none;background:var(--paper);
+  display:grid;place-items:center;overflow:hidden}
+.fw-logo img,.fw-logo svg{width:calc(44 * var(--k));height:auto;display:block}
+.fw-logo b{font-family:var(--body);font-size:calc(10 * var(--k));font-weight:500;line-height:1.25;
+  letter-spacing:.1em;color:#121212;text-transform:uppercase;text-align:center;
+  padding:0 calc(4 * var(--k));overflow-wrap:normal}
+.fw-id{display:flex;flex-direction:column;gap:calc(6 * var(--k));padding-top:calc(2 * var(--k))}
+.fw-name{font-family:var(--display);font-weight:400;font-size:calc(18 * var(--k));line-height:1.2;
+  letter-spacing:-.01em;color:#121212}
+.fw-cat{font-family:var(--body);font-size:calc(12 * var(--k));line-height:1.4;color:#4C4546}
+
+/* right: the line + the button. on hover it becomes the acid block, notched bottom-right */
+.fw-say{position:absolute;right:calc(41 * var(--k));top:50%;transform:translateY(-50%);
+  width:calc(416 * var(--k));box-sizing:border-box;z-index:3;
+  display:flex;flex-direction:column;justify-content:center;gap:calc(8 * var(--k));
+  padding:0;background-color:rgba(245,250,94,0);
+  clip-path:polygon(0 0,100% 0,100% 100%,42.07% 100%,42.07% 100%,0 100%);
+  transition:right .5s cubic-bezier(.16,.84,.34,1),top .5s cubic-bezier(.16,.84,.34,1),
+    transform .5s cubic-bezier(.16,.84,.34,1),width .5s cubic-bezier(.16,.84,.34,1),
+    padding .5s cubic-bezier(.16,.84,.34,1),background-color .4s ease,clip-path .5s cubic-bezier(.16,.84,.34,1)}
+.fw-row.is-open .fw-say,.fw-row:focus-visible .fw-say{
+  right:0;top:calc(138 * var(--k));transform:none;
+  width:calc(473 * var(--k));height:calc(122 * var(--k));gap:calc(4 * var(--k));
+  padding:calc(10 * var(--k)) calc(16 * var(--k)) calc(12 * var(--k));
+  background-color:var(--acid);
+  clip-path:polygon(0 0,100% 0,100% 57.98%,42.07% 57.98%,42.07% 100%,0 100%)}
+.fw-line{font-family:var(--body);font-weight:400;font-size:calc(18 * var(--k));line-height:1.35;
+  letter-spacing:-.01em;color:#4D4D4D;margin:0;
+  transition:font-size .5s cubic-bezier(.16,.84,.34,1),color .3s ease}
+.fw-row.is-open .fw-line,.fw-row:focus-visible .fw-line{font-size:calc(20 * var(--k));line-height:1.4;
+  font-weight:500;color:#1A1C1C}
+.fw-row.is-open .fw-read,.fw-row:focus-visible .fw-read{opacity:1;pointer-events:auto;transition-delay:.12s}
+.fw-read{display:inline-flex;align-items:center;gap:calc(10 * var(--k));
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  font-family:var(--body);font-size:calc(12 * var(--k));font-weight:700;line-height:1.2;
+  letter-spacing:calc(1.2 * var(--k));text-transform:uppercase;color:#121212}
+.fw-arw{width:calc(26 * var(--k));height:auto;flex:none}
+
+/* hover-only layer: founder cut-outs, name plates, the pull quote */
+.fw-extra{position:absolute;inset:0;z-index:2;pointer-events:none}
+.fw-extra > *{opacity:0;transition:opacity .34s ease,transform .55s cubic-bezier(.16,.84,.34,1)}
+.fw-row.is-open .fw-extra > *,.fw-row:focus-visible .fw-extra > *{opacity:1;transform:none}
+.fw-ph{position:absolute;top:calc(22 * var(--k));width:calc(276 * var(--k));height:calc(238 * var(--k));
+  margin:0;overflow:hidden;transform:translateY(calc(26 * var(--k)))}
+.fw-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.fw-ph1{left:18.681%;z-index:1}
+.fw-ph2{left:30.764%;z-index:2}
+.fw-plate{position:absolute;top:calc(202 * var(--k));min-width:calc(202 * var(--k));height:calc(58 * var(--k));
+  white-space:nowrap;
+  box-sizing:border-box;background:var(--paper);z-index:3;
+  display:flex;flex-direction:column;justify-content:center;gap:calc(2 * var(--k));
+  padding:calc(12 * var(--k)) calc(10 * var(--k)) calc(8 * var(--k));
+  transform:translateY(calc(14 * var(--k)))}
+.fw-plate b{font-family:var(--display);font-weight:400;font-size:calc(24 * var(--k));line-height:.8;
+  letter-spacing:calc(-1 * var(--k));color:#121212}
+.fw-plate span{font-family:var(--body);font-size:calc(12 * var(--k));line-height:1.4;color:#4C4546}
+.fw-plate1{left:18.681%;align-items:flex-start;text-align:left}
+.fw-plate2{left:auto;right:50%;align-items:flex-start;text-align:left}
+.fw-phSolo{left:24.722%;z-index:2}
+.fw-plateSolo{left:23.611%;right:auto;align-items:flex-start;text-align:left;z-index:3}
+.fw-quote{position:absolute;left:43.611%;top:0;width:calc(470 * var(--k));box-sizing:border-box;
+  background:var(--paper);padding:calc(16 * var(--k));margin:0;z-index:0;
+  font-family:var(--body);font-size:calc(16 * var(--k));line-height:1.4;color:#121212;
+  transform:translateY(calc(-14 * var(--k)))}
+.fw-quote{z-index:0}
+
+@media (prefers-reduced-motion:reduce){
+  .fw-row,.fw-brand,.fw-say,.fw-line,.fw-extra > *{transition-duration:.01ms}
+}
+@media (max-width:900px){
+  .fw-row{height:auto;padding:26px clamp(20px,5vw,28px);border-bottom:1px solid #E4E4E4}
+  .fw-row.is-open,.fw-row:focus-visible{height:auto;background:var(--paper)}
+  .fw-brand,.fw-row.is-open .fw-brand{position:static;transform:none;gap:12px}
+  .fw-logo{width:56px;height:56px}
+  .fw-logo img,.fw-logo svg{width:34px}
+  .fw-logo b{font-size:9px}
+  .fw-id{gap:4px;padding-top:0}
+  .fw-name{font-size:18px}
+  .fw-cat{font-size:12px}
+  .fw-say,.fw-row.is-open .fw-say{position:static;transform:none;width:100%;height:auto;
+    padding:0;margin-top:16px;background-color:transparent;clip-path:none;gap:12px}
+  .fw-line,.fw-row.is-open .fw-line{font-size:17px}
+  .fw-read{opacity:1;pointer-events:auto}
+  .fw-read{font-size:12px;letter-spacing:.1em;gap:10px}
+  .fw-arw{width:24px}
+  .fw-extra{display:none}
+}
+
+/* ── where you are now ─────────────────────── */
+/* 1440 design frame; --k is one design px (container lives on .wy) */
+.wy{background:var(--paper);color:var(--ink);container-type:inline-size;--k:min(.0694444cqw, 1.111px)}
+.wy-in{width:100%;max-width:calc(1440 * var(--k));margin:0 auto;
+  padding:0 6%;box-sizing:border-box;display:flex;flex-direction:column;
+  justify-content:center;gap:calc(40 * var(--k))}
+
+.wy-head{display:flex;flex-direction:column;align-items:center;gap:calc(18 * var(--k));
+  text-align:center;margin:0 auto}
+.wy-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:calc(22 * var(--k))}
+.wy-tag{position:relative;height:calc(18 * var(--k));
+  box-sizing:border-box;padding:calc(4 * var(--k)) calc(6 * var(--k));
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:calc(14 * var(--k));font-weight:400;line-height:1.12;
+  letter-spacing:-.03em;white-space:nowrap}
+.wy-tagwrap .mark{position:absolute;left:100%;top:0;width:calc(12 * var(--k));height:calc(12 * var(--k));
+  gap:calc(.3 * var(--k));transform:rotate(90deg)}
+.wy-h{font-family:var(--display);font-weight:400;font-size:calc(44 * var(--k));line-height:1.2;
+  letter-spacing:-.025em;color:#1A1C1C;margin:0;max-width:calc(620 * var(--k))}
+
+/* the panel sticks and stays inside the viewport while the stages open */
+.wy-track{position:relative;padding:0}
+.wy-track.scroll-on{height:420vh;padding:0}
+.wy-track.scroll-on .wy-sticky{position:sticky;top:0;height:100vh}
+.wy-sticky{display:flex;align-items:center}
+.wy-panel{box-sizing:border-box;width:100%;background:#1A1A1A;color:var(--paper);
+  display:flex;align-items:center;gap:calc(180 * var(--k));
+  padding:calc(40 * var(--k));height:calc(560 * var(--k));overflow:hidden}
+.wy-left{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+
+/* the stages: always in order, the live one opens in place */
+.wy-item{border-bottom:1px solid #2F2F2F;padding:calc(14 * var(--k)) 0}
+
+.wy-title{font-family:var(--body);font-weight:400;margin:0;color:#7C7C82;
+  font-size:calc(18 * var(--k));line-height:1.25;letter-spacing:-.01em;
+  transition:color .35s ease,font-size .45s cubic-bezier(.16,.84,.34,1),font-weight .3s ease}
+.wy-item.on .wy-title{color:var(--paper);font-size:calc(26 * var(--k));font-weight:600}
+.wy-body{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .5s cubic-bezier(.16,.84,.34,1)}
+.wy-item.on .wy-body{grid-template-rows:1fr}
+.wy-body > div{overflow:hidden}
+.wy-bodyIn{padding-top:calc(14 * var(--k));opacity:0;transform:translateY(calc(10 * var(--k)));
+  transition:opacity .4s ease,transform .5s cubic-bezier(.16,.84,.34,1)}
+.wy-item.on .wy-bodyIn{opacity:1;transform:none;transition-delay:.14s}
+.wy-copy{font-family:var(--body);font-weight:400;font-size:calc(14 * var(--k));line-height:1.35;
+  color:#BEBEBE;margin:0 0 calc(20 * var(--k));max-width:calc(560 * var(--k))}
+
+.wy-cardwrap{position:relative}
+.wy-card{box-sizing:border-box;background:#F0F0F0;padding:calc(18 * var(--k));
+  display:flex;flex-direction:column;gap:calc(18 * var(--k));
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 60 * var(--k)),
+    calc(100% - 152 * var(--k)) calc(100% - 60 * var(--k)),
+    calc(100% - 152 * var(--k)) 100%,0 100%)}
+.wy-stat{display:block;font-family:var(--body);font-weight:600;font-size:calc(30 * var(--k));
+  line-height:1.3;color:#121212}
+.wy-quote{font-family:var(--body);font-weight:400;font-size:calc(14 * var(--k));line-height:1.3;
+  color:#0A0A0A;margin:calc(4 * var(--k)) 0 0}
+.wy-read{align-self:flex-start;display:inline-flex;align-items:center;background:var(--paper);
+  height:calc(38 * var(--k));padding-left:calc(12 * var(--k));text-decoration:none;color:#121212;
+  font-family:var(--body);font-size:calc(12 * var(--k));font-weight:700;line-height:1.2;
+  letter-spacing:calc(1.2 * var(--k));text-transform:uppercase;white-space:nowrap;
+  transition:background .18s ease,color .18s ease}
+.wy-read:hover{background:#121212;color:var(--paper)}
+.wy-mark{flex:none;width:calc(38 * var(--k));height:calc(38 * var(--k));
+  display:grid;place-content:center;
+  grid-template-columns:repeat(3,calc(5 * var(--k)));grid-template-rows:repeat(3,calc(5 * var(--k)));
+  gap:calc(1 * var(--k))}
+.wy-mark i{grid-column:calc(var(--x) + 1);grid-row:calc(var(--y) + 1);background:var(--violet)}
+.wy-client{position:absolute;right:0;bottom:0;width:calc(152 * var(--k));height:calc(60 * var(--k));
+  display:grid;place-items:center;font-family:var(--body);font-weight:600;
+  font-size:calc(18 * var(--k));letter-spacing:-.01em;color:var(--paper)}
+
+/* the board: one tetromino lands per stage */
+.wy-boardwrap{flex:0 0 calc(420 * var(--k));align-self:center;display:grid;place-items:center}
+.wy-grid{display:grid;grid-template-columns:repeat(4,calc(64 * var(--k)));
+  grid-auto-rows:calc(64 * var(--k));gap:calc(4 * var(--k))}
+.wy-cell{background:#2D2D2D;
+  transform:translateY(calc(-14 * var(--k))) scale(.86);opacity:.55;
+  transition:background .45s ease,transform .55s cubic-bezier(.16,.84,.34,1),opacity .45s ease}
+.wy-cell.lit{background:#715BE4;transform:none;opacity:1}
+
+@media (prefers-reduced-motion:reduce){.wy-cell{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sw-item{transform:none}}
+
+/* no-scroll fallback: everything open, in flow */
+.wy-track:not(.scroll-on) .wy-body{grid-template-rows:1fr}
+.wy-track:not(.scroll-on) .wy-bodyIn{opacity:1;transform:none;transition:none}
+.wy-track:not(.scroll-on) .wy-title{color:var(--paper);font-size:calc(22 * var(--k));font-weight:600}
+
+@media (max-width:900px){
+  .wy{--k:1px}
+  .wy-in{max-width:none;padding:0 20px 56px;gap:36px}
+  .wy-track,.wy-track.scroll-on{padding:0;height:auto}
+  .wy-sticky{display:block}
+  .wy-h{font-size:clamp(28px,7vw,40px);max-width:none}
+  .wy-panel{flex-direction:column;align-items:stretch;padding:24px;gap:28px;height:auto}
+  .wy-left{gap:0;width:100%}
+  .wy-boardwrap{flex:none;width:100%;order:-1}
+  .wy-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;width:min(100%,264px)}
+  .wy-cell{aspect-ratio:1}
+  .wy-card{clip-path:none}
+  .wy-client{position:static;width:auto;height:auto;place-items:start;margin-top:10px;font-size:18px}
+}
+
+/* ── the levers: one cube, six pieces ──────── */
+.lev{background:var(--paper);color:var(--ink)}
+.lev-track{position:relative}
+.lev-track.scroll-on{height:340vh}
+.lev-stage{
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(56px,7vw,100px) var(--side);
+}
+.lev-track.scroll-on .lev-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+
+.lev-mid{position:relative;z-index:2}
+.lev-eyebrow{display:flex;justify-content:center;margin:0 0 clamp(16px,1.8vw,26px)}
+.lev-eyebrow-t{
+  position:relative;background:var(--acid);color:var(--ink);padding:4px 8px;
+  font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+}
+.lev-eyebrow .mark{position:absolute;left:100%;top:-9px;width:15px;height:15px;gap:1px}
+.lev-h{
+  font-family:var(--display);font-weight:400;margin:0;
+  font-size:48px;line-height:1.06;letter-spacing:-.02em;text-align:center;white-space:nowrap;
+}
+.lev-a,.lev-b,.lev-hy{display:inline-block;will-change:transform}
+
+.lev-row{display:grid;grid-template-columns:repeat(3,minmax(0,300px));
+  justify-content:space-between;gap:clamp(16px,2vw,34px);position:relative;z-index:0}
+.lev-col{display:grid;gap:0;align-content:start;will-change:transform,opacity}
+.lev-slot{display:block;width:var(--slotW);height:var(--slotH);--slotW:80px;--slotH:120px}
+.lev-col h3{
+  font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;margin:28px 0 0;
+}
+.lev-col p{font-family:var(--body);font-size:15px;line-height:1.45;color:#5A5A62;max-width:36ch;margin:8px 0 0}
+
+.lev-cubes{display:none}
+.js-lev .lev-cubes{display:block;position:absolute;inset:0;pointer-events:none;z-index:1}
+.lev-cell{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform}
+
+@media (max-width:900px){
+  .lev-h{font-size:clamp(28px,6.2vw,40px);white-space:normal}
+  .lev-stage{gap:clamp(36px,7vw,64px)}
+}
+@media (max-width:640px){
+  .lev-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
+  .lev-slot{--slotW:64px;--slotH:96px}
+}
+
+/* ── selected work ─────────────────────────── */
+.sw{background:var(--paper);color:var(--ink);
+  padding:clamp(56px,7vw,100px) var(--side);
+  display:flex;flex-direction:column;align-items:flex-start;gap:clamp(32px,4.2vw,60px)}
+.sw-in{width:100%;display:flex;flex-direction:column;gap:inherit}
+
+.sw-head{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.sw-headL{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.sw-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:22px}
+.sw-tag{position:relative;height:18px;padding:0 6px;
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:14px;font-weight:400;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.sw-tagwrap .mark{position:absolute;left:100%;top:-9px;width:15px;height:15px;gap:1px;transform:rotate(90deg);color:var(--ink)}
+.sw-h{font-family:var(--display);font-weight:400;font-size:48px;line-height:110%;
+  letter-spacing:-.025em;color:var(--ink);margin:0}
+
+.sw-filters{display:flex;flex-wrap:wrap;gap:8px}
+.sw-filter{position:relative;height:38px;padding:0 18px;box-sizing:border-box;cursor:pointer;
+  background:#F2F2F2;border:0;border-radius:2px;
+  font-family:var(--body);font-size:15px;line-height:1;color:#4D4D4D;
+  transition:background .16s ease,color .16s ease}
+.sw-filter:hover{background:#E6E6E6;color:var(--ink)}
+.sw-filter[aria-pressed="true"]{background:var(--violet);color:var(--paper)}
+/* the active pill carries a small block tab, like the brand mark */
+.sw-filter[aria-pressed="true"]::after{content:"";position:absolute;right:0;bottom:-12px;
+  width:12px;height:12px;background:var(--violet)}
+
+/* a 12-column field; each tile sits where it likes on it */
+.sw-field{position:relative}
+.sw-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  column-gap:clamp(20px,2.2vw,32px);row-gap:clamp(60px,7vw,110px);position:relative}
+.sw-item{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  transform:translate3d(0,var(--ty,0px),0);will-change:transform}
+.sw-item[hidden]{display:none}
+.sw-shot{position:relative;width:100%;aspect-ratio:var(--ar,16/10);overflow:hidden;background:#EDEDED}
+.sw-shot img{position:absolute;left:0;top:-10%;width:100%;height:120%;
+  object-fit:cover;display:block;will-change:transform;
+  transform:translate3d(0,var(--py,0px),0) scale(var(--ps,1));
+  transition:scale .5s cubic-bezier(.16,.84,.34,1)}
+.sw-item:hover .sw-shot img{--ps:1.04}
+.sw-meta{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.sw-client{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:#4D4D4D}
+.sw-title{font-family:var(--display);font-size:clamp(18px,1.5vw,22px);font-weight:400;
+  line-height:1.2;letter-spacing:-.02em;color:var(--ink)}
+
+@media (max-width:1000px){
+  .sw-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:52px}
+  .sw-item{grid-column:auto !important;grid-row:auto !important;margin-top:0 !important;
+    transform:none;--ty:0px}
+  .sw-item:nth-child(2n){margin-top:52px !important}
+}
+@media (max-width:640px){
+  .sw-grid{grid-template-columns:minmax(0,1fr);row-gap:40px}
+  .sw-item:nth-child(2n){margin-top:0 !important}
+  .sw-h{font-size:clamp(28px,7vw,40px)}
+  .sw-filter{height:34px;padding:0 14px;font-size:13px}
+}
+
+/* ── deep dive ─────────────────────────────── */
+/* 1440 x 800 design frame; --k is one design px */
+.cs{position:relative;background:#F6F6EF;color:var(--ink);overflow:hidden;
+  container-type:inline-size;--k:min(.0694444cqw, 1.111px);
+  height:calc(800 * var(--k))}
+
+.cs-head{position:absolute;z-index:3;left:calc(50% - 380 * var(--k));top:calc(80 * var(--k));
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:calc(4 * var(--k));
+  width:calc(760 * var(--k))}
+.cs-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:calc(22 * var(--k))}
+.cs-tag{position:relative;height:calc(18 * var(--k));box-sizing:border-box;
+  padding:calc(4 * var(--k)) calc(6 * var(--k));
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:calc(14 * var(--k));font-weight:400;line-height:1.12;
+  letter-spacing:-.03em;white-space:nowrap;text-transform:uppercase}
+.cs-tagwrap .mark{position:absolute;left:100%;top:0;width:calc(12 * var(--k));height:calc(12 * var(--k));
+  gap:calc(.3 * var(--k));transform:rotate(90deg)}
+.cs-h{font-family:var(--display);font-weight:400;font-size:calc(48 * var(--k));line-height:1.1;
+  letter-spacing:-.025em;color:#1A1C1C;margin:calc(10 * var(--k)) 0 0}
+.cs-sub{font-family:var(--body);font-weight:400;font-size:18px;line-height:1.2;
+  color:#3D3D3D;margin:calc(12 * var(--k)) 0 0}
+
+/* the deck */
+.cs-deck{position:absolute;z-index:2;left:50%;top:calc(283 * var(--k));
+  transform:translateX(-50%);width:calc(764 * var(--k));height:calc(360 * var(--k))}
+.cs-card{position:absolute;inset:0;box-sizing:border-box;background:var(--paper);
+  display:flex;align-items:center;gap:calc(20 * var(--k));padding:calc(12 * var(--k));
+  opacity:0;pointer-events:none;transition:opacity .4s ease}
+.cs-card.on{opacity:1;pointer-events:auto}
+.cs-cardL{flex:none;width:calc(394 * var(--k));height:calc(336 * var(--k));
+  display:flex;flex-direction:column;justify-content:space-between}
+.cs-brand{font-family:var(--display);font-weight:700;font-size:calc(22 * var(--k));
+  line-height:1;letter-spacing:-.02em;color:#121212}
+.cs-brand em{font-style:normal;color:#E8622A}
+.cs-title{font-family:var(--body);font-weight:500;font-size:calc(28 * var(--k));line-height:1.2;
+  letter-spacing:calc(-.48 * var(--k));color:#1A1C1C;margin:calc(24 * var(--k)) 0 0}
+.cs-copy{font-family:var(--body);font-weight:400;font-size:calc(14 * var(--k));line-height:1.2;
+  color:#4C4546;margin:calc(8 * var(--k)) 0 0}
+
+/* the two stepped stat blocks */
+.cs-stats{position:relative;width:calc(394 * var(--k));height:calc(112 * var(--k))}
+.cs-band{position:absolute;top:0;height:100%}
+.cs-band-a{left:0;width:calc(267.5 * var(--k));background:rgba(245,250,94,.45);
+  clip-path:polygon(0 0,100% 0,100% 50%,58.3% 50%,58.3% 100%,0 100%)}
+.cs-band-b{left:calc(156 * var(--k));width:calc(238 * var(--k));background:rgba(113,91,228,.26);
+  clip-path:polygon(46.8% 0,100% 0,100% 100%,0 100%,0 50%,46.8% 50%)}
+.cs-fig{position:absolute;height:calc(80 * var(--k));display:flex;flex-direction:column;
+  justify-content:space-between}
+.cs-fig b{font-family:var(--display);font-weight:700;font-size:calc(32 * var(--k));line-height:1.2;
+  color:#181818}
+.cs-fig span{font-family:var(--body);font-weight:500;font-size:calc(12 * var(--k));line-height:1.2;
+  text-transform:uppercase;color:#181818;white-space:nowrap}
+.cs-fig-a{left:calc(16 * var(--k));top:calc(16 * var(--k));width:calc(170 * var(--k));align-items:flex-start}
+.cs-fig-b{right:calc(16 * var(--k));left:auto;top:calc(16 * var(--k));width:calc(150 * var(--k));
+  align-items:flex-end;text-align:right}
+.cs-shot{flex:none;width:calc(326 * var(--k));height:calc(336 * var(--k));overflow:hidden}
+.cs-shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* prev / next */
+.cs-nav{position:absolute;z-index:3;left:50%;top:calc(675 * var(--k));transform:translateX(-50%);
+  display:flex;align-items:center;gap:calc(8 * var(--k))}
+.cs-nav button{width:calc(48 * var(--k));height:calc(48 * var(--k));border:0;padding:0;cursor:pointer;
+  background:var(--paper);display:grid;place-items:center;transition:background .16s ease}
+.cs-nav button:hover{background:#121212}
+.cs-nav svg{width:calc(32 * var(--k));height:calc(32 * var(--k));display:block}
+.cs-nav button:hover svg path{stroke:var(--paper)}
+.cs-nav .prev svg{transform:rotate(180deg)}
+
+/* the quiet furniture behind it all */
+.cs-deco{position:absolute;inset:0;z-index:1;pointer-events:none}
+.cs-blk{position:absolute;width:calc(72 * var(--k));height:calc(72 * var(--k));background:var(--paper)}
+.cs-logos{position:absolute;display:flex;align-items:center;gap:calc(16 * var(--k));height:calc(54 * var(--k))}
+.cs-dot{width:calc(10 * var(--k));height:calc(10 * var(--k));background:#C7BCFF;flex:none}
+.cs-dot.sm{width:calc(4 * var(--k));height:calc(4 * var(--k))}
+.cs-tile{position:relative;display:grid;place-items:center;background:#F3F3F3;
+  padding:calc(2 * var(--k));flex:none}
+.cs-tile.lg{width:calc(106 * var(--k));height:calc(54 * var(--k))}
+.cs-tile.sm{width:calc(53 * var(--k));height:calc(27 * var(--k));background:rgba(245,250,94,.3)}
+.cs-tile img{position:relative;z-index:1;max-width:70%;max-height:70%;object-fit:contain;
+  opacity:.55;filter:grayscale(1)}
+
+@media (max-width:900px){
+  .cs{height:auto;--k:1px;padding:56px 20px}
+  .cs-head{position:static;width:auto;transform:none;text-align:left;align-items:flex-start}
+  .cs-h{font-size:clamp(28px,7vw,40px)}
+  .cs-deck{position:relative;left:0;top:0;transform:none;width:100%;height:auto;margin-top:32px}
+  .cs-card{position:relative;inset:auto;flex-direction:column;align-items:stretch;height:auto;
+    display:none;opacity:1;pointer-events:auto}
+  .cs-card.on{display:flex}
+  .cs-cardL,.cs-shot{width:100%;height:auto}
+  .cs-shot{aspect-ratio:326/336;margin-top:20px}
+  .cs-stats{width:100%;margin-top:28px}
+  .cs-nav{position:relative;left:0;top:0;transform:none;margin-top:24px;justify-content:center}
+  .cs-deco{display:none}
+}
+
+/* ── founders ──────────────────────────────── */
+.fo{background:var(--paper);color:var(--ink);
+  padding:clamp(56px,7vw,100px) var(--side);
+  display:flex;flex-direction:column;align-items:flex-start;gap:clamp(32px,4.2vw,60px)}
+.fo-in{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:inherit}
+
+.fo-head{display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:min(578px,100%)}
+.fo-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:22px}
+.fo-tag{position:relative;height:18px;padding:0 6px;
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:14px;font-weight:400;line-height:1;letter-spacing:-.03em}
+.fo-tagwrap .mark{position:absolute;left:100%;top:0;width:12px;height:12px;gap:1px;transform:rotate(90deg)}
+.fo-h{font-family:var(--display);font-weight:400;font-size:48px;line-height:110%;
+  letter-spacing:-.025em;color:#1A1C1C;margin:0;align-self:stretch}
+.fo-sub{font-family:var(--body);font-weight:400;font-size:20px;line-height:120%;
+  letter-spacing:-.48px;color:#3D3D3D;margin:0;align-self:stretch}
+
+.fo-body{display:flex;flex-direction:row;align-items:center;gap:clamp(32px,8.6vw,124px);width:100%}
+.fo-shot{flex:none;width:412px;max-width:42%;aspect-ratio:412/515;border-radius:4px;overflow:hidden;
+  background:#EEE url("Founder's Image.png") center top/cover no-repeat}
+.fo-col{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;
+  justify-content:space-between;gap:24px}
+
+.fo-lead{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.fo-lead-t{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.fo-statement{font-family:var(--body);font-weight:400;font-size:clamp(28px,3.34vw,48px);
+  line-height:100%;letter-spacing:-1px;color:#0A0A0A;margin:0}
+.fo-copy{font-family:var(--body);font-weight:400;font-size:14px;line-height:140%;color:#333;margin:0}
+.fo-pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:4px 6px;height:24px;background:var(--acid);color:#181818;text-decoration:none;
+  font-family:var(--body);font-weight:400;font-size:12px;line-height:16px;text-transform:uppercase}
+.fo-pill:hover{background:var(--ink);color:var(--acid)}
+
+/* three steps climbing left to right, all standing on one base.
+   The wrapper carries the step as padding, so the boxes grow upward and
+   the row still sizes itself to whichever cell needs the most room. */
+.fo-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.fo-step{display:flex;align-items:flex-end;min-width:0}
+.fo-step:nth-child(1){padding-top:72px}
+.fo-step:nth-child(2){padding-top:36px}
+.fo-step + .fo-step{margin-left:-1px}
+.fo-stat{width:100%;height:100%;min-width:0;box-sizing:border-box;
+  display:flex;flex-direction:column;align-items:flex-start;gap:24px;padding:20px;
+  border:1px solid #000}
+.fo-stat b{font-family:var(--display);font-weight:300;font-size:24px;line-height:120%;color:#181818}
+.fo-stat p{font-family:var(--body);font-weight:400;font-size:14px;line-height:120%;color:#181818;margin:0}
+
+@media (max-width:900px){
+  .fo-body{flex-direction:column;align-items:stretch;gap:32px}
+  .fo-shot{width:100%;max-width:100%}
+  .fo-h{font-size:clamp(28px,6.2vw,40px)}
+  .fo-sub{font-size:17px}
+}
+@media (max-width:900px){
+  .fo-step:nth-child(1){padding-top:48px}
+  .fo-step:nth-child(2){padding-top:24px}
+}
+@media (max-width:640px){
+  .fo-stats{grid-template-columns:minmax(0,1fr)}
+  .fo-step{padding-top:0 !important}
+  .fo-step + .fo-step{margin-left:0;margin-top:-1px}
+}
+
+/* ── inside the partnership: the hex web ───── */
+/* 1440 x 1180 design frame; --k is one design px */
+.pr{position:relative;background:var(--paper);color:var(--ink);overflow:hidden;
+  container-type:inline-size;--k:min(.0694444cqw, 1.111px);
+  padding:calc(80 * var(--k)) 6% calc(60 * var(--k))}
+.pr-in{width:100%;position:relative}
+
+.pr-top{display:flex;flex-direction:row;justify-content:space-between;
+  align-items:center;gap:calc(32 * var(--k));flex-wrap:wrap}
+.pr-head{display:flex;flex-direction:column;align-items:flex-start;gap:calc(6 * var(--k))}
+.pr-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:calc(22 * var(--k))}
+.pr-tag{position:relative;height:calc(18 * var(--k));box-sizing:border-box;
+  padding:calc(4 * var(--k)) calc(6 * var(--k));
+  display:inline-flex;align-items:center;justify-content:center;background:var(--acid);color:#000;
+  font-family:var(--body);font-size:calc(14 * var(--k));font-weight:400;line-height:1.12;
+  letter-spacing:-.03em;white-space:nowrap}
+.pr-tagwrap .mark{position:absolute;left:100%;top:0;width:calc(12 * var(--k));height:calc(12 * var(--k));
+  gap:calc(.3 * var(--k));transform:rotate(90deg)}
+.pr-h{font-family:var(--display);font-weight:400;font-size:calc(48 * var(--k));line-height:1.15;
+  letter-spacing:-.025em;color:#1A1C1C;margin:calc(10 * var(--k)) 0 0;max-width:calc(620 * var(--k))}
+
+.pr-filters{display:flex;flex-wrap:wrap;gap:calc(8 * var(--k));padding-top:0}
+.pr-filter{display:inline-flex;align-items:stretch;height:calc(38 * var(--k));padding:0;cursor:pointer;
+  background:var(--paper);border:1px solid #EAEAEA;
+  font-family:var(--body);font-size:calc(15 * var(--k));line-height:1;color:#1A1C1C;
+  transition:border-color .16s ease}
+.pr-filter span{display:flex;align-items:center;padding:0 calc(12 * var(--k))}
+.pr-filter-n{background:#F2F2F2;font-variant-numeric:tabular-nums;color:#5A5A62}
+.pr-filter:hover{border-color:#C9C9C9}
+.pr-filter[aria-pressed="true"]{border-color:var(--acid)}
+.pr-filter[aria-pressed="true"] .pr-filter-n{background:var(--acid);color:#1A1C1C}
+.pr-filter[aria-pressed="true"] .pr-filter-l{background:#FBFDD2}
+
+/* the web */
+.pr-stage{position:relative;width:100%;aspect-ratio:1440 / 860;margin-top:calc(20 * var(--k));
+  overflow:hidden;container-type:inline-size;--s:.0694444cqw}
+.pr-web{position:absolute;inset:0;width:100%;height:100%}
+.pr-web .hex{fill:none;stroke:#E6E6E6;stroke-width:1.2}
+.pr-web .spoke{stroke:#EDEDED;stroke-width:1.2}
+.pr-web .ring{fill:none;stroke:var(--acid);stroke-width:26;stroke-linejoin:miter}
+.pr-web text{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.02em;
+  fill:#1A1C1C;text-anchor:middle;dominant-baseline:middle}
+
+.pr-node{position:absolute;left:50%;top:50%;
+  transform:translate(calc(-50% + var(--x) * var(--s)),calc(-50% + var(--y) * var(--s)));
+  width:calc(132 * var(--s));height:calc(56 * var(--s));box-sizing:border-box;overflow:hidden;
+  display:grid;place-items:center;background:var(--paper);border:1px solid #EFEFEF;
+  transition:opacity .3s ease,box-shadow .2s ease}
+.pr-node img{max-width:calc(100 * var(--s));max-height:calc(34 * var(--s));
+  width:auto;height:auto;object-fit:contain;display:block}
+.pr-stage.filtered .pr-node{opacity:.16}
+.pr-stage.filtered .pr-node.on{opacity:1}
+
+@media (max-width:1000px){
+  .pr{--k:min(.1cqw, 1px);padding:56px 20px}
+  .pr-h{font-size:clamp(28px,6vw,40px);max-width:none}
+  .pr-filters{padding-top:16px}
+
+}
+@media (max-width:640px){
+  .pr-stage{aspect-ratio:auto;height:auto;overflow:visible;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:28px}
+  .pr-web{display:none}
+  .pr-node{position:static;transform:none;width:100%;height:64px}
+}
+
+/* ── news ──────────────────────────────────── */
+.news{background:var(--paper);color:var(--ink);
+  padding:clamp(56px,7vw,100px) var(--side);
+  display:flex;flex-direction:column;align-items:flex-start;gap:clamp(32px,4.2vw,60px)}
+.news-in{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:inherit}
+
+.news-head{display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:min(578px,100%)}
+.news-tagwrap{position:relative;display:inline-flex;align-items:flex-end;height:22px}
+.news-tag{
+  position:relative;height:18px;padding:0 6px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--acid);color:#000;
+  font-family:var(--body);font-size:14px;font-weight:400;line-height:1;letter-spacing:-.03em;
+}
+.news-tagwrap .mark{position:absolute;left:100%;top:0;width:12px;height:12px;gap:1px;transform:rotate(90deg)}
+.news-h{
+  font-family:var(--display);font-weight:400;font-size:48px;line-height:110%;
+  letter-spacing:-.025em;text-transform:capitalize;color:#1A1C1C;margin:0;
+}
+.news-sub{
+  font-family:var(--body);font-weight:400;font-size:20px;line-height:120%;
+  letter-spacing:-.48px;color:#3D3D3D;margin:0;
+}
+
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;width:100%}
+.news-card{
+  position:relative;aspect-ratio:412/515;overflow:hidden;background:var(--paper);
+  container-type:inline-size;text-decoration:none;color:inherit;display:block;
+}
+/* drop a photo in with --img: url("…") on the card */
+.news-shot{position:absolute;inset:0;background:#E8E6E0 var(--img,none) center/cover no-repeat}
+.news-bar{position:absolute;left:0;bottom:0;width:100%;height:11.65%;background:var(--acid)}
+.news-step{position:absolute;left:60.194%;top:80.669%;width:39.806%;height:7.767%;background:var(--acid)}
+.news-panel{position:absolute;left:0;top:51.769%;width:60.194%;height:29.126%;background:var(--paper)}
+.news-title{
+  position:absolute;left:4.854cqw;top:55.653%;width:48.544cqw;margin:0;
+  font-family:var(--display);font-weight:400;font-size:6.31cqw;line-height:112%;
+  letter-spacing:-.03em;color:#000;
+}
+.news-read{
+  position:absolute;left:5.097cqw;top:92.276%;
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--body);font-weight:500;font-size:3.883cqw;line-height:120%;
+  letter-spacing:-.48px;color:#000;
+}
+.news-read svg{width:4.854cqw;height:4.854cqw;flex:none;display:block}
+.news-card:hover .news-read svg{transform:translateX(4px)}
+.news-read svg{transition:transform .18s cubic-bezier(.16,.84,.34,1)}
+
+@media (max-width:1199px){.news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:759px){
+  .news-grid{grid-template-columns:minmax(0,1fr)}
+  .news-h{font-size:clamp(28px,7vw,40px)}
+  .news-sub{font-size:17px}
+}
+
+/* ── final cta ─────────────────────────────── */
+.endcta{display:grid;gap:clamp(28px,3vw,44px);justify-items:start}
+.endcta h2{max-width:14ch}
+
+
+/* ── footer ────────────────────────────────── */
+/* V2 assembly: 33 pieces fall in, build the wordmark, flatten to one yellow.
+   Every piece carries its own --x/--y/--w/--h grid slot and --at/--dur/--uat
+   timing in the markup, so retiming one piece is a one-line change. */
+.vfoot{
+  --shade-a:#F5FA5E;          /* the colour everything flattens to */
+  --shade-b:#E2E84A;
+  --shade-c:#FAFCC9;          /* pale */
+  --shade-d:#C9D06B;          /* olive */
+  background:var(--ink);color:var(--paper);
+  padding:clamp(56px,7vw,100px) var(--side);
+  display:flex;flex-direction:column;gap:clamp(48px,6vw,90px)}
+.vfoot__copy{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(24px,3vw,40px)}
+.vfoot__title{font-family:var(--display);font-weight:400;margin:0;
+  font-size:clamp(30px,4vw,56px);line-height:1.14;letter-spacing:-.025em;max-width:16ch}
+.vfoot__ctaWrap{display:flex}
+.vfoot__cta{display:inline-flex;align-items:stretch;text-decoration:none;background:var(--paper)}
+.vfoot__ctaLabel{display:flex;align-items:center;height:44px;padding:0 16px;color:#121212;
+  font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;white-space:nowrap}
+.vfoot__ctaIcon{flex:none;width:44px;height:44px;background:var(--acid);display:grid;place-items:center}
+.vfoot__ctaMark{display:grid;grid-template-columns:repeat(3,6px);grid-template-rows:repeat(3,6px);gap:1px}
+.vfoot__ctaMark i{grid-column:calc(var(--x) + 1);grid-row:calc(var(--y) + 1);background:var(--violet)}
+.vfoot__cta:hover .vfoot__ctaIcon{background:var(--paper)}
+
+/* the well: 35 x 5 cells, pieces sit on it by grid slot */
+.vfoot__well{position:relative;display:grid;
+  grid-template-columns:repeat(35,1fr);grid-template-rows:repeat(5,1fr);
+  aspect-ratio:35 / 5;overflow:hidden}
+.vfoot__piece{grid-column:calc(var(--x) + 1) / span var(--w);
+  grid-row:calc(var(--y) + 1) / span var(--h);
+  /* --fall is in cell-heights; the piece is --h cells tall, so this is its own height */
+  transform:translateY(calc(var(--fall) / var(--h) * -100%))}
+.vfoot__pieceIn{display:grid;width:100%;height:100%;
+  grid-template-columns:repeat(var(--w),1fr);grid-template-rows:repeat(var(--h),1fr)}
+.vfoot__pieceIn i{grid-column:calc(var(--x) + 1);grid-row:calc(var(--y) + 1);
+  background:var(--c)}
+
+.vfoot.is-playing .vfoot__piece{
+  animation:vfootFall var(--dur) cubic-bezier(.4,0,.7,1) var(--at) both}
+.vfoot.is-playing .vfoot__pieceIn i{
+  animation:vfootFlat 320ms linear var(--uat) both}
+@keyframes vfootFall{
+  0%  {transform:translateY(calc(var(--fall) / var(--h) * -100%))}
+  86% {transform:translateY(0);animation-timing-function:cubic-bezier(.3,0,.5,1)}
+  93% {transform:translateY(-9%)}
+  100%{transform:translateY(0)}
+}
+@keyframes vfootFlat{from{background:var(--c)} to{background:var(--shade-a)}}
+
+@media (prefers-reduced-motion:reduce){
+  .vfoot__piece{transform:none}
+  .vfoot__pieceIn i{background:var(--shade-a)}
+  .vfoot.is-playing .vfoot__piece,
+  .vfoot.is-playing .vfoot__pieceIn i{animation:none}
+}
+@media (max-width:640px){
+  .vfoot{gap:36px}
+  .vfoot__title{font-size:clamp(26px,7vw,36px)}
+}
+
+/* ── reveal ────────────────────────────────── */
+.rv{opacity:0;transform:translateY(calc(var(--cell) * .5))}
+.rv.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.34,1)}
+
+/* ── focus ─────────────────────────────────── */
+a:focus-visible,button:focus-visible,.rail:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+.f-violet a:focus-visible,.f-violet button:focus-visible,
+.f-ink a:focus-visible,.f-ink button:focus-visible,.f-ink .rail:focus-visible,
+.well-sec a:focus-visible,.well-sec button:focus-visible{outline-color:var(--acid)}
+
+/* ── responsive ────────────────────────────── */
+@media (max-width:1080px){
+  .levers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .workgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feed{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr;align-items:start}
+  .hero-copy{padding-bottom:clamp(30px,5vw,48px)}
+  .hero-art{margin-left:calc(var(--gut) * -1);height:calc(var(--cell) * 5.2)}
+  .wellgrid{grid-template-columns:1fr}
+  .dive{grid-template-columns:1fr;align-items:start}
+  .people{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-cta{margin-left:auto}
+}
+@media (max-width:640px){
+  :root{--cell:clamp(28px,8.4vw,38px)}
+  .levers,.workgrid,.feed{grid-template-columns:1fr}
+  .board{width:calc(var(--cell) * 10)}
+  .stagebar{flex-wrap:wrap}
+  .stagebar button{flex:1 1 44%;border-bottom:1px solid rgba(255,255,255,.18)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;transition-duration:.001ms!important}
+  .rv{opacity:1;transform:none}
+  .gl,.connect-tab{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hx" id="top">
+  <div class="hx-in">
+
+    <div class="hx-bar">
+      <a class="hx-logo" href="#top" aria-label="Vidrow"><img src="Logo.svg" alt="Vidrow"></a>
+      <div class="hx-menu" id="hxMenu">
+        <button class="hx-menu-b" type="button" id="hxMenuBtn" aria-expanded="false" aria-controls="hxMenuPanel">Menu</button>
+        <div class="hx-menu-p" id="hxMenuPanel">
+          <a href="#stage">Solutions</a>
+          <a href="#work">Work</a>
+          <a href="#deepdive">Case studies</a>
+          <a href="#news">News</a>
+          <a href="#people">About us</a>
+          <a href="#contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hx-stair" aria-hidden="true">
+      <div class="hx-step hx-s5 hx-y" data-g="0"></div>
+      <div class="hx-step hx-s6 hx-y" data-g="2"></div>
+      <div class="hx-step hx-s1 hx-y" data-g="0">
+        <span class="hx-stat">2x - 10x</span>
+        <span class="hx-note">Increase in ad spends without CAC increase</span>
+      </div>
+      <div class="hx-step hx-s3 hx-y" data-g="2">
+        <span class="hx-tag">REPEATABLE<br>GROWTH<br>ENGINE</span>
+      </div>
+      <div class="hx-step hx-s2 hx-v" data-g="1">
+        <span class="hx-stat">5x - 10x</span>
+        <span class="hx-note">Increase in ad spends without CAC increase</span>
+      </div>
+      <div class="hx-step hx-s4 hx-v" data-g="3">
+        <span class="hx-tag">SPEED THAT<br>COMPOUNDS</span>
+      </div>
+    </div>
+
+    <div class="hx-copy">
+      <h1 class="hx-h"><u class="hx-w" data-i="0">Marketing</u> <u class="hx-w" data-i="1">Partner</u>&nbsp; behind<br>Fastest <u class="hx-w" data-i="2">Growing</u> <u class="hx-w" data-i="3">Startups.</u></h1>
+      <p class="hx-sub">We work alongside founders to turn marketing into a clearer, faster and more repeatable path to growth.</p>
+      <a class="hx-cta" href="#contact">
+        <span class="hx-cta-t">Click to grow</span>
+        <span class="hx-cta-i" aria-hidden="true"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="#715BE4"><rect x="10" y="10" width="6" height="6"/><rect x="17" y="10" width="6" height="6"/><rect x="24" y="10" width="6" height="6"/><rect x="17" y="17" width="6" height="6"/><rect x="24" y="17" width="6" height="6"/><rect x="24" y="24" width="6" height="6"/></g></svg></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ FEATURED WORK ══ -->
+<section class="fw" id="featured">
+  <div class="fw-in">
+    <div class="fw-head rv">
+      <div class="fw-tagwrap">
+        <span class="fw-tag">Featured work</span>
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <h2 class="fw-h">Featured Work</h2>
+    </div>
+
+    <div class="fw-list rv">
+      <a class="fw-row" href="#featured">
+        <span class="fw-brand">
+          <span class="fw-logo"><b>Helium</b></span>
+          <span class="fw-id">
+            <span class="fw-name">Helium Smart Air</span>
+            <span class="fw-cat">Consumer Hardware</span>
+          </span>
+        </span>
+        <div class="fw-extra" aria-hidden="true">
+          <figure class="fw-ph fw-ph1"><img src="work/Ashish Helium.png" alt="" loading="lazy" width="276" height="238"></figure>
+          <figure class="fw-ph fw-ph2"><img src="work/Aman Helium.png" alt="" loading="lazy" width="276" height="238"></figure>
+          <span class="fw-plate fw-plate1"><b>Ashish Sharma</b><span>Founder &amp; CEO</span></span>
+          <span class="fw-plate fw-plate2"><b>Aman Munka</b><span>Co-founder &amp; CTO</span></span>
+          <p class="fw-quote">&ldquo; What stood out about Vidrow was how they connected strategy, storytelling, and design into one clear brand experience. &rdquo;</p>
+        </div>
+        <span class="fw-say">
+          <span class="fw-line">How Helium is selling 500 ACs per day within a month of launch?</span>
+          <span class="fw-read">Read full story <svg class="fw-arw" viewBox="9 9 22 22" aria-hidden="true"><path fill="#715BE4" d="M20.511 12.511 17 9l-3.511 3.511L17 16.022z"/><path fill="#715BE4" d="M24.411 16.413 20.9 12.902l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M28.314 20.312 24.803 16.8l-3.511 3.512 3.511 3.511z"/><path fill="#715BE4" d="M20.511 20.312 17 16.8l-3.511 3.512L17 23.823z"/><path fill="#715BE4" d="M24.411 24.214 20.9 20.703l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M20.511 28.116 17 24.605l-3.511 3.511L17 31.628z"/></svg></span>
+        </span>
+      </a>
+      <a class="fw-row" href="#featured">
+        <span class="fw-brand">
+          <span class="fw-logo"><b>Platinum Rx</b></span>
+          <span class="fw-id">
+            <span class="fw-name">Platinum RX</span>
+            <span class="fw-cat">Consumer Health</span>
+          </span>
+        </span>
+        <div class="fw-extra" aria-hidden="true">
+          <figure class="fw-ph fw-ph1"><img src="work/Ashutosh Platinum.png" alt="" loading="lazy" width="276" height="238"></figure>
+          <figure class="fw-ph fw-ph2"><img src="work/Piyush Platinum.png" alt="" loading="lazy" width="276" height="238"></figure>
+          <span class="fw-plate fw-plate1"><b>Ashutosh Pandey</b><span>Co-founder &amp; CEO</span></span>
+          <span class="fw-plate fw-plate2"><b>Piyush Kumar</b><span>Co-founder &amp; CTO</span></span>
+          <p class="fw-quote">&ldquo; Vidrow helped us simplify a complex proposition and build the kind of trust and awareness we needed to scale much faster. &rdquo;</p>
+        </div>
+        <span class="fw-say">
+          <span class="fw-line">PlatinumRx is growing 3X every 3 months</span>
+          <span class="fw-read">Read full story <svg class="fw-arw" viewBox="9 9 22 22" aria-hidden="true"><path fill="#715BE4" d="M20.511 12.511 17 9l-3.511 3.511L17 16.022z"/><path fill="#715BE4" d="M24.411 16.413 20.9 12.902l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M28.314 20.312 24.803 16.8l-3.511 3.512 3.511 3.511z"/><path fill="#715BE4" d="M20.511 20.312 17 16.8l-3.511 3.512L17 23.823z"/><path fill="#715BE4" d="M24.411 24.214 20.9 20.703l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M20.511 28.116 17 24.605l-3.511 3.511L17 31.628z"/></svg></span>
+        </span>
+      </a>
+      <a class="fw-row" href="#featured">
+        <span class="fw-brand">
+          <span class="fw-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#121212" d="M7.6 24.4 20.2 11.8h-8.9V7h17.1v17.1h-4.8v-8.9L11 26.8z"/></svg></span>
+          <span class="fw-id">
+            <span class="fw-name">Away AI</span>
+            <span class="fw-cat">Quick Com</span>
+          </span>
+        </span>
+        <div class="fw-extra" aria-hidden="true">
+          <figure class="fw-ph fw-ph fw-phSolo"><img src="work/Sukesh Away AI.png" alt="" loading="lazy" width="276" height="238"></figure>
+          <span class="fw-plate fw-plate1 fw-plateSolo"><b>Sukesh Shetty</b><span>Co-founder &amp; CEO</span></span>
+          <p class="fw-quote">&ldquo; What stood out about Vidrow was how they connected strategy, storytelling, and design into one clear brand experience. &rdquo;</p>
+        </div>
+        <span class="fw-say">
+          <span class="fw-line">Away AI had a team of 20 experienced marketers before they even raised seed</span>
+          <span class="fw-read">Read full story <svg class="fw-arw" viewBox="9 9 22 22" aria-hidden="true"><path fill="#715BE4" d="M20.511 12.511 17 9l-3.511 3.511L17 16.022z"/><path fill="#715BE4" d="M24.411 16.413 20.9 12.902l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M28.314 20.312 24.803 16.8l-3.511 3.512 3.511 3.511z"/><path fill="#715BE4" d="M20.511 20.312 17 16.8l-3.511 3.512L17 23.823z"/><path fill="#715BE4" d="M24.411 24.214 20.9 20.703l-3.511 3.511 3.511 3.511z"/><path fill="#715BE4" d="M20.511 28.116 17 24.605l-3.511 3.511L17 31.628z"/></svg></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHERE YOU ARE NOW ══ -->
+<section class="wy" id="stage">
+  <div class="wy-track" id="wyTrack">
+    <div class="wy-sticky">
+      <div class="wy-in">
+        <div class="wy-head rv">
+          <div class="wy-tagwrap">
+            <span class="wy-tag">Where You Are Now</span>
+            <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+          <h2 class="wy-h">We help founders hit their milestones faster.</h2>
+        </div>
+
+        <div class="wy-panel">
+          <div class="wy-left" id="wyList">
+          <article class="wy-item" data-i="0">
+            <h3 class="wy-title">Get to PMF Fast</h3>
+            <div class="wy-body"><div><div class="wy-bodyIn">
+              <p class="wy-copy">Startups that reach PMF faster often become market leaders. We help you bring your product out of the lab and find you a PMF with real audiences and real feedback.</p>
+              <div class="wy-cardwrap">
+                <div class="wy-card">
+                  <div>
+                    <span class="wy-stat">1 Month</span>
+                    <p class="wy-quote">&ldquo;A health tech startup that built its first 10,000-subscriber base before a single rupee was spent on ads.&rdquo;</p>
+                  </div>
+                  <a class="wy-read" href="#featured">Read full story <span class="wy-mark" aria-hidden="true"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i></span></a>
+                </div>
+                <span class="wy-client">Jumpp</span>
+              </div>
+            </div></div></div>
+          </article>
+          <article class="wy-item" data-i="1">
+            <h3 class="wy-title">Reach Scale Targets Months Early</h3>
+            <div class="wy-body"><div><div class="wy-bodyIn">
+              <p class="wy-copy">Scaling early breaks in predictable places. We have usually already seen the break before it happens, and we build for it ahead of time.</p>
+              <div class="wy-cardwrap">
+                <div class="wy-card">
+                  <div>
+                    <span class="wy-stat">4 Months</span>
+                    <p class="wy-quote">&ldquo;Selling 500 units a day within a month of launch, well ahead of what the plan allowed for.&rdquo;</p>
+                  </div>
+                  <a class="wy-read" href="#featured">Read full story <span class="wy-mark" aria-hidden="true"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i></span></a>
+                </div>
+                <span class="wy-client">Helium</span>
+              </div>
+            </div></div></div>
+          </article>
+          <article class="wy-item" data-i="2">
+            <h3 class="wy-title">Control CAC and Grow Sustainably</h3>
+            <div class="wy-body"><div><div class="wy-bodyIn">
+              <p class="wy-copy">This is rarely a spend problem. It is a transparency problem &mdash; knowing exactly where the money is going and what it is returning.</p>
+              <div class="wy-cardwrap">
+                <div class="wy-card">
+                  <div>
+                    <span class="wy-stat">&minus;38% CAC</span>
+                    <p class="wy-quote">&ldquo;Acquisition cost cut by more than a third while revenue kept climbing month on month.&rdquo;</p>
+                  </div>
+                  <a class="wy-read" href="#featured">Read full story <span class="wy-mark" aria-hidden="true"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i></span></a>
+                </div>
+                <span class="wy-client">Masai</span>
+              </div>
+            </div></div></div>
+          </article>
+          <article class="wy-item" data-i="3">
+            <h3 class="wy-title">Build Brand and Grow Organically</h3>
+            <div class="wy-body"><div><div class="wy-bodyIn">
+              <p class="wy-copy">Category leadership isn&rsquo;t a campaign. It&rsquo;s what&rsquo;s left after the campaigns stop and people still remember you.</p>
+              <div class="wy-cardwrap">
+                <div class="wy-card">
+                  <div>
+                    <span class="wy-stat">3&times; recall</span>
+                    <p class="wy-quote">&ldquo;The awareness layer that carried the brand from Series B all the way to acquisition.&rdquo;</p>
+                  </div>
+                  <a class="wy-read" href="#featured">Read full story <span class="wy-mark" aria-hidden="true"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i></span></a>
+                </div>
+                <span class="wy-client">Testbook</span>
+              </div>
+            </div></div></div>
+          </article>
+          </div>
+          <div class="wy-boardwrap" aria-hidden="true">
+            <div class="wy-grid" id="wyGrid">
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            <span class="wy-cell"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ THE LEVERS ══ -->
+<section class="lev" id="levers">
+  <div class="lev-track" id="levTrack">
+    <div class="lev-stage" id="levStage">
+      <div class="lev-row" id="levRowTop"></div>
+      <div class="lev-mid">
+        <div class="lev-eyebrow" id="levEyebrow"><span class="lev-eyebrow-t">The levers<span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span></div>
+        <h2 class="lev-h"><span class="lev-a">Unlock high</span><span class="lev-hy">-</span><span class="lev-b">velocity growth.</span></h2>
+      </div>
+      <div class="lev-row" id="levRowBot"></div>
+      <div class="lev-cubes" id="levCubes" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SELECTED WORK ══ -->
+<section class="sw" id="work">
+  <div class="sw-in">
+    <div class="sw-head rv">
+      <div class="sw-headL">
+        <div class="sw-tagwrap">
+          <span class="sw-tag">Selected Work</span>
+          <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </div>
+        <h2 class="sw-h">Our Selected Works</h2>
+      </div>
+      <div class="sw-filters" role="group" aria-label="Filter work by industry">
+        <button class="sw-filter" data-cat="all" aria-pressed="true">All</button>
+        <button class="sw-filter" data-cat="edtech" aria-pressed="false">Ed Tech</button>
+        <button class="sw-filter" data-cat="retail" aria-pressed="false">Retail</button>
+        <button class="sw-filter" data-cat="consumer" aria-pressed="false">Consumer</button>
+        <button class="sw-filter" data-cat="fintech" aria-pressed="false">Fintech</button>
+      </div>
+    </div>
+
+    <div class="sw-field">
+      <div class="sw-grid" id="swGrid">
+      <a class="sw-item" href="#work" data-cat="edtech"
+         style="grid-column:1 / span 3;grid-row:1;margin-top:19px;--ar:355/254">
+        <span class="sw-shot">
+          <img src="selected/a.png" alt="Vyapar x Manoj Joshi — The Trust Factor" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">The Trust Factor</span>
+        </span>
+      </a>
+      <a class="sw-item" href="#work" data-cat="retail"
+         style="grid-column:4 / span 5;grid-row:1;margin-top:124px;--ar:492/298">
+        <span class="sw-shot">
+          <img src="selected/b.png" alt="Vyapar x Manoj Joshi — khul Ke Bolo" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">khul Ke Bolo</span>
+        </span>
+      </a>
+      <a class="sw-item" href="#work" data-cat="consumer"
+         style="grid-column:9 / span 4;grid-row:1;margin-top:0px;--ar:453/258">
+        <span class="sw-shot">
+          <img src="selected/c.png" alt="Vyapar x Manoj Joshi — Coding for Kids" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">Coding for Kids</span>
+        </span>
+      </a>
+      <a class="sw-item" href="#work" data-cat="fintech"
+         style="grid-column:1 / span 4;grid-row:2;margin-top:40px;--ar:492/298">
+        <span class="sw-shot">
+          <img src="selected/b.png" alt="Vyapar x Manoj Joshi — khul Ke Bolo" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">khul Ke Bolo</span>
+        </span>
+      </a>
+      <a class="sw-item" href="#work" data-cat="edtech"
+         style="grid-column:5 / span 5;grid-row:2;margin-top:178px;--ar:453/258">
+        <span class="sw-shot">
+          <img src="selected/c.png" alt="Vyapar x Manoj Joshi — Coding for Kids" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">Coding for Kids</span>
+        </span>
+      </a>
+      <a class="sw-item" href="#work" data-cat="retail"
+         style="grid-column:10 / span 3;grid-row:2;margin-top:0px;--ar:355/254">
+        <span class="sw-shot">
+          <img src="selected/a.png" alt="Vyapar x Manoj Joshi — The Trust Factor" loading="lazy" width="492" height="298">
+        </span>
+        <span class="sw-meta">
+          <span class="sw-client">Vyapar &times; Manoj Joshi</span>
+          <span class="sw-title">The Trust Factor</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASE STUDIES ══ -->
+<section class="cs" id="deepdive">
+
+  <div class="cs-deco" aria-hidden="true">
+    <span class="cs-blk" style="left:86.458%;top:0"></span>
+    <span class="cs-blk" style="left:calc(86.458% + 72 * var(--k));top:0"></span>
+    <span class="cs-blk" style="left:calc(86.458% + 72 * var(--k));top:calc(72 * var(--k))"></span>
+    <span class="cs-blk" style="left:3.611%;top:calc(728 * var(--k))"></span>
+    <span class="cs-blk" style="left:calc(3.611% + 72 * var(--k));top:calc(728 * var(--k))"></span>
+    <span class="cs-blk" style="left:calc(3.611% + 144 * var(--k));top:calc(728 * var(--k))"></span>
+    <span class="cs-blk" style="left:calc(3.611% + 72 * var(--k));top:calc(656 * var(--k))"></span>
+
+    <span class="cs-logos" style="left:7.014%;top:calc(448 * var(--k))">
+      <span class="cs-tile sm"><img src="logos/glance.png" alt=""></span>
+      <span class="cs-dot sm"></span>
+      <span class="cs-tile lg"><img src="logos/moj.png" alt=""></span>
+      <span class="cs-dot"></span>
+    </span>
+    <span class="cs-logos" style="left:77.639%;top:calc(448 * var(--k))">
+      <span class="cs-dot sm"></span>
+      <span class="cs-tile lg"><img src="logos/vyapar.png" alt=""></span>
+      <span class="cs-dot sm"></span>
+      <span class="cs-tile sm"><img src="logos/glance.png" alt=""></span>
+    </span>
+  </div>
+
+  <div class="cs-head rv">
+    <div class="cs-tagwrap">
+      <span class="cs-tag">Case study</span>
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+    <h2 class="cs-h">Deep Dives</h2>
+    <p class="cs-sub">The latest stories, ideas, and shifts worth paying attention to.</p>
+  </div>
+
+  <div class="cs-deck" id="csDeck">
+      <article class="cs-card on" data-i="0">
+        <div class="cs-cardL">
+          <div>
+            <div class="cs-brand">Curious<em>Jr</em></div>
+            <h3 class="cs-title">Seekho reached 1M+ users in 12 months.</h3>
+            <p class="cs-copy">We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.</p>
+          </div>
+          <div class="cs-stats">
+            <span class="cs-band cs-band-a"></span>
+            <span class="cs-band cs-band-b"></span>
+            <span class="cs-fig cs-fig-a"><b>4.2x</b><span>ROAS improvement</span></span>
+            <span class="cs-fig cs-fig-b"><b>&minus;65%</b><span>Acquisition cost</span></span>
+          </div>
+        </div>
+        <span class="cs-shot"><img src="selected/c.png" alt="" loading="lazy" width="326" height="336"></span>
+      </article>
+      <article class="cs-card" data-i="1">
+        <div class="cs-cardL">
+          <div>
+            <div class="cs-brand">Helium</div>
+            <h3 class="cs-title">Helium sold 500 units a day within a month of launch.</h3>
+            <p class="cs-copy">We found the audience before the spend did, then scaled only the creative that was already earning its place.</p>
+          </div>
+          <div class="cs-stats">
+            <span class="cs-band cs-band-a"></span>
+            <span class="cs-band cs-band-b"></span>
+            <span class="cs-fig cs-fig-a"><b>500/day</b><span>Units sold</span></span>
+            <span class="cs-fig cs-fig-b"><b>4 Months</b><span>To Series A</span></span>
+          </div>
+        </div>
+        <span class="cs-shot"><img src="selected/a.png" alt="" loading="lazy" width="326" height="336"></span>
+      </article>
+      <article class="cs-card" data-i="2">
+        <div class="cs-cardL">
+          <div>
+            <div class="cs-brand">Vyapar</div>
+            <h3 class="cs-title">Vyapar grew 3&times; revenue in eight months.</h3>
+            <p class="cs-copy">We turned a billing tool into a name small businesses pass along to each other unprompted.</p>
+          </div>
+          <div class="cs-stats">
+            <span class="cs-band cs-band-a"></span>
+            <span class="cs-band cs-band-b"></span>
+            <span class="cs-fig cs-fig-a"><b>3x</b><span>Revenue growth</span></span>
+            <span class="cs-fig cs-fig-b"><b>8 Months</b><span>Time to scale</span></span>
+          </div>
+        </div>
+        <span class="cs-shot"><img src="selected/b.png" alt="" loading="lazy" width="326" height="336"></span>
+      </article>
+  </div>
+
+  <div class="cs-nav">
+    <button class="prev" type="button" id="csPrev" aria-label="Previous case study"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 16h20M19 9l7 7-7 7" fill="none" stroke="#3A3A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="next" type="button" id="csNext" aria-label="Next case study"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 16h20M19 9l7 7-7 7" fill="none" stroke="#3A3A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</section>
+
+<!-- ══ FOUNDERS ══ -->
+<section class="fo" id="people">
+  <div class="fo-in">
+    <div class="fo-head rv">
+      <div class="fo-tagwrap">
+        <span class="fo-tag">Founders</span>
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <h2 class="fo-h">The people behind this</h2>
+      <p class="fo-sub">The latest stories, ideas, and shifts worth paying attention to.</p>
+    </div>
+
+    <div class="fo-body rv">
+      <div class="fo-shot" role="img" aria-label="Aditya and Anushank, founders of Vidrow"></div>
+
+      <div class="fo-col">
+        <div class="fo-lead">
+          <div class="fo-lead-t">
+            <h3 class="fo-statement">You'll be working with people who've seen this before.</h3>
+            <p class="fo-copy">Aditya and Anushank started Vidrow because they were frustrated with how agencies talked to founders — like vendors, not partners. They come from IIT Kanpur. So does most of the team. They think in systems, not campaigns. They measure in fundraises, not impressions.</p>
+          </div>
+          <a class="fo-pill" href="#people">Meet the full team →</a>
+        </div>
+
+        <div class="fo-stats">
+          <div class="fo-step">
+          <div class="fo-stat">
+            <b>90% raise next<br>round</b>
+            <p>of Vidrow clients raise their next round while actively engaged with us.</p>
+          </div>
+          </div>
+          <div class="fo-step">
+          <div class="fo-stat">
+            <b>IIT KANPUR<br>FOUNDERS + TEAM</b>
+            <p>Founders + core team with a pedigree that sets Vidrow apart from traditional agencies.</p>
+          </div>
+          </div>
+          <div class="fo-step">
+          <div class="fo-stat">
+            <b>Forbes<br>30 under 30 | ASIA</b>
+            <p>Recognition that signals our founders are building with people who’ve been noticed</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INSIDE THE PARTNERSHIP ══ -->
+<section class="pr" id="partnership">
+  <div class="pr-in">
+
+    <div class="pr-top rv">
+      <div class="pr-head">
+        <div class="pr-tagwrap">
+          <span class="pr-tag">Inside the partnership</span>
+          <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </div>
+        <h2 class="pr-h">This is what a real growth partnership looks like.</h2>
+      </div>
+      <div class="pr-filters" role="group" aria-label="Filter partners by industry">
+          <button class="pr-filter" data-cat="all" aria-pressed="true"><span class="pr-filter-n">10</span><span class="pr-filter-l">All</span></button>
+          <button class="pr-filter" data-cat="edtech" aria-pressed="false"><span class="pr-filter-n">01</span><span class="pr-filter-l">Ed Tech</span></button>
+          <button class="pr-filter" data-cat="smb" aria-pressed="false"><span class="pr-filter-n">02</span><span class="pr-filter-l">SMB Tech</span></button>
+          <button class="pr-filter" data-cat="consumer" aria-pressed="false"><span class="pr-filter-n">05</span><span class="pr-filter-l">Consumer Tech</span></button>
+      </div>
+    </div>
+
+    <div class="pr-stage" id="prStage">
+      <svg class="pr-web" viewBox="0 0 1440 860" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path class="hex" d="M1120.0,430.0 L920.0,776.4 L520.0,776.4 L320.0,430.0 L520.0,83.6 L920.0,83.6 Z"/>
+        <line class="spoke" x1="720" y1="430" x2="1120.0" y2="430.0"/><line class="spoke" x1="720" y1="430" x2="920.0" y2="776.4"/><line class="spoke" x1="720" y1="430" x2="520.0" y2="776.4"/><line class="spoke" x1="720" y1="430" x2="320.0" y2="430.0"/><line class="spoke" x1="720" y1="430" x2="520.0" y2="83.6"/><line class="spoke" x1="720" y1="430" x2="920.0" y2="83.6"/>
+        <path class="ring" d="M825.0,430.0 L772.5,520.9 L667.5,520.9 L615.0,430.0 L667.5,339.1 L772.5,339.1 Z"/>
+        <text x="720.0" y="339.1" transform="rotate(0 720.0 339.1)">PRE-SEED</text><text x="798.8" y="384.5" transform="rotate(60 798.8 384.5)">SEED</text><text x="798.8" y="475.5" transform="rotate(-60 798.8 475.5)">SERIES A</text><text x="720.0" y="520.9" transform="rotate(0 720.0 520.9)">SERIES B</text><text x="641.2" y="475.5" transform="rotate(60 641.2 475.5)">SERIES C</text><text x="641.2" y="384.5" transform="rotate(-60 641.2 384.5)">SERIES D+</text>
+      </svg>
+        <a class="pr-node" href="#work" data-cat="smb" style="--x:60;--y:-300" aria-label="Vyapar"><img src="logos/vyapar.png" alt="Vyapar" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="consumer" style="--x:-60;--y:-250" aria-label="Moj"><img src="logos/moj.png" alt="Moj" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="edtech" style="--x:-205;--y:-190" aria-label="GoCodeo"><img src="logos/gocodeo.png" alt="GoCodeo" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="consumer" style="--x:214;--y:-175" aria-label="ShareChat"><img src="logos/sharechat.png" alt="ShareChat" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="retail" style="--x:-292;--y:-40" aria-label="Apnamart"><img src="logos/apnamart.png" alt="Apnamart" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="retail" style="--x:298;--y:-30" aria-label="Ivy Homes"><img src="logos/ivy-homes.png" alt="Ivy Homes" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="consumer" style="--x:-240;--y:130" aria-label="Streamefy"><img src="logos/streamefy.png" alt="Streamefy" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="consumer" style="--x:235;--y:140" aria-label="Sync Monster"><img src="logos/sync-monster.png" alt="Sync Monster" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="consumer" style="--x:-110;--y:270" aria-label="Visual Dub"><img src="logos/visual-dub.png" alt="Visual Dub" loading="lazy"></a>
+        <a class="pr-node" href="#work" data-cat="smb" style="--x:120;--y:285" aria-label="Glance"><img src="logos/glance.png" alt="Glance" loading="lazy"></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ NEWS ══ -->
+<section class="news" id="news">
+  <div class="news-in">
+    <div class="news-head rv">
+      <div class="news-tagwrap">
+        <span class="news-tag">News</span>
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <h2 class="news-h">Trends worth knowing</h2>
+      <p class="news-sub">The latest stories, ideas, and shifts worth paying attention to.</p>
+    </div>
+
+    <div class="news-grid rv">
+      <a class="news-card" href="#news" style="--img:url('News images/1.png')">
+        <span class="news-shot" aria-hidden="true"></span>
+        <span class="news-panel" aria-hidden="true"></span>
+        <span class="news-step" aria-hidden="true"></span>
+        <span class="news-bar" aria-hidden="true"></span>
+        <h3 class="news-title">B2B buyers are doing more research before talking to sales</h3>
+        <span class="news-read">Read article <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.167 10h11.666M10.417 4.167 16.25 10l-5.833 5.833" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="news-card" href="#news" style="--img:url('News images/2.png')">
+        <span class="news-shot" aria-hidden="true"></span>
+        <span class="news-panel" aria-hidden="true"></span>
+        <span class="news-step" aria-hidden="true"></span>
+        <span class="news-bar" aria-hidden="true"></span>
+        <h3 class="news-title">AI Search Is Becoming the New Discovery Layer</h3>
+        <span class="news-read">Read article <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.167 10h11.666M10.417 4.167 16.25 10l-5.833 5.833" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="news-card" href="#news" style="--img:url('News images/3.png')">
+        <span class="news-shot" aria-hidden="true"></span>
+        <span class="news-panel" aria-hidden="true"></span>
+        <span class="news-step" aria-hidden="true"></span>
+        <span class="news-bar" aria-hidden="true"></span>
+        <h3 class="news-title">Google Is Rebuilding Ads for the AI Era</h3>
+        <span class="news-read">Read article <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.167 10h11.666M10.417 4.167 16.25 10l-5.833 5.833" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="vfoot vfoot--v2" id="contact">
+  <div class="vfoot__copy">
+    <h2 class="vfoot__title">Ready for your next growth stage?</h2>
+    <div class="vfoot__ctaWrap">
+      <a class="vfoot__cta" href="#contact">
+        <span class="vfoot__ctaLabel">Click to grow</span>
+        <span class="vfoot__ctaIcon">
+          <span class="vfoot__ctaMark">
+            <i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i>
+            <i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i>
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="vfoot__well">
+    <!-- 33 pieces: every connected run of one shade in the design file -->
+      <span class="vfoot__piece" style="--x:10;--y:1;--w:2;--h:4;--fall:19.80;--at:0ms;--dur:659ms;--uat:3471ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:1;--y:2"></i><i style="--x:0;--y:3"></i><i style="--x:1;--y:3"></i></span></span>
+      <span class="vfoot__piece" style="--x:1;--y:2;--w:2;--h:3;--fall:19.80;--at:84ms;--dur:659ms;--uat:3533ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:1;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:30;--y:3;--w:3;--h:2;--fall:19.80;--at:168ms;--dur:659ms;--uat:3539ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:2;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:18;--y:3;--w:3;--h:2;--fall:19.80;--at:251ms;--dur:659ms;--uat:3545ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:3;--y:2;--w:2;--h:3;--fall:19.80;--at:335ms;--dur:659ms;--uat:3565ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:24;--y:3;--w:3;--h:2;--fall:19.80;--at:419ms;--dur:659ms;--uat:3588ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:33;--y:3;--w:2;--h:2;--fall:19.80;--at:502ms;--dur:659ms;--uat:3606ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:16;--y:3;--w:2;--h:2;--fall:19.80;--at:586ms;--dur:659ms;--uat:3624ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:6;--y:1;--w:2;--h:4;--fall:19.80;--at:670ms;--dur:659ms;--uat:3627ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:0;--y:3"></i></span></span>
+      <span class="vfoot__piece" style="--x:28;--y:3;--w:3;--h:2;--fall:19.80;--at:754ms;--dur:659ms;--uat:3695ms;--c:var(--shade-d)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:12;--y:3;--w:2;--h:2;--fall:19.80;--at:838ms;--dur:659ms;--uat:3697ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:22;--y:3;--w:3;--h:2;--fall:19.80;--at:921ms;--dur:659ms;--uat:3699ms;--c:var(--shade-d)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:7;--y:3;--w:2;--h:2;--fall:19.80;--at:1005ms;--dur:659ms;--uat:3742ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:28;--y:2;--w:3;--h:2;--fall:18.80;--at:1089ms;--dur:643ms;--uat:3489ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:0;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:8;--y:1;--w:1;--h:3;--fall:18.80;--at:1172ms;--dur:643ms;--uat:3532ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:0;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:0;--y:0;--w:2;--h:4;--fall:18.80;--at:1256ms;--dur:643ms;--uat:3557ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:0;--y:3"></i></span></span>
+      <span class="vfoot__piece" style="--x:2;--y:1;--w:1;--h:3;--fall:18.80;--at:1340ms;--dur:643ms;--uat:3573ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:0;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:13;--y:2;--w:2;--h:2;--fall:18.80;--at:1424ms;--dur:643ms;--uat:3652ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:22;--y:2;--w:2;--h:2;--fall:18.80;--at:1508ms;--dur:643ms;--uat:3705ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:16;--y:0;--w:2;--h:4;--fall:18.80;--at:1591ms;--dur:643ms;--uat:3728ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:1;--y:2"></i><i style="--x:1;--y:3"></i></span></span>
+      <span class="vfoot__piece" style="--x:25;--y:0;--w:2;--h:3;--fall:17.80;--at:1675ms;--dur:625ms;--uat:3487ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:1;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:30;--y:0;--w:3;--h:3;--fall:17.80;--at:1759ms;--dur:625ms;--uat:3524ms;--c:var(--shade-d)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:2;--y:1"></i><i style="--x:2;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:18;--y:1;--w:3;--h:2;--fall:17.80;--at:1842ms;--dur:625ms;--uat:3554ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:33;--y:0;--w:2;--h:3;--fall:17.80;--at:1926ms;--dur:625ms;--uat:3587ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:0;--y:2"></i><i style="--x:1;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:13;--y:1;--w:2;--h:2;--fall:17.80;--at:2010ms;--dur:625ms;--uat:3597ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:28;--y:0;--w:4;--h:3;--fall:17.80;--at:2094ms;--dur:625ms;--uat:3719ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:3;--y:1"></i><i style="--x:3;--y:2"></i></span></span>
+      <span class="vfoot__piece" style="--x:22;--y:0;--w:2;--h:2;--fall:16.80;--at:2178ms;--dur:607ms;--uat:3517ms;--c:var(--shade-a)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:11;--y:1;--w:2;--h:1;--fall:16.80;--at:2261ms;--dur:607ms;--uat:3574ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i></span></span>
+      <span class="vfoot__piece" style="--x:23;--y:0;--w:3;--h:2;--fall:16.80;--at:2345ms;--dur:607ms;--uat:3601ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:3;--y:0;--w:2;--h:2;--fall:16.80;--at:2429ms;--dur:607ms;--uat:3708ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:0;--y:1"></i><i style="--x:1;--y:1"></i></span></span>
+      <span class="vfoot__piece" style="--x:6;--y:0;--w:3;--h:1;--fall:15.80;--at:2512ms;--dur:589ms;--uat:3483ms;--c:var(--shade-c)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i></span></span>
+      <span class="vfoot__piece" style="--x:18;--y:0;--w:3;--h:1;--fall:15.80;--at:2596ms;--dur:589ms;--uat:3622ms;--c:var(--shade-d)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i></span></span>
+      <span class="vfoot__piece" style="--x:10;--y:0;--w:4;--h:1;--fall:15.80;--at:2680ms;--dur:589ms;--uat:3713ms;--c:var(--shade-b)"><span class="vfoot__pieceIn"><i style="--x:0;--y:0"></i><i style="--x:1;--y:0"></i><i style="--x:2;--y:0"></i><i style="--x:3;--y:0"></i></span></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── the levers: one cube, six pieces ──────────────────────────
+     Cell coordinates and fills are lifted straight from Cube.svg, so
+     the assembled block is the artwork exactly — including the 4px
+     daylight the file leaves between pieces. --------------------- */
+
+  var CUBE_W = 404;                       // 4 x 4 of 100-unit cells, plus the seams
+  var CUBE_PX = 280;                      // how wide the assembled block sits on screen
+  var PIECES = [
+    { lever: "Performance", copy: "Scientific media buying across Meta, Google &amp; niche networks.",
+      cells: [[-1.4,-1.4,100,100,"#F5F25D"],[98.6,-1.4,100,100,"#F5F25D"],[-1.4,98.6,100,100,"#FFE41C"],[98.6,98.6,100,100,"#FEF7AD"]] },
+    { lever: "Brand", copy: "Developing narratives that stick in the modern consumer’s mind.",
+      cells: [[201.2,-1.6,100,100,"#F5F25D"],[301.2,-1.6,100,100,"#F5F25D"],[201.2,98.4,100,100,"#FFE41C"]] },
+    { lever: "Celebrity", copy: "High-impact influencer and celebrity collaborations that convert.",
+      cells: [[302.0,100.3,100,100,"#947AF0"],[202.0,200.3,100,100,"#7253E1"],[302.0,200.3,100,100,"#8B6FEE"]] },
+    { lever: "Social", copy: "Organic &amp; community growth strategies for sustained engagement.",
+      cells: [[-1.8,200.9,100,100,"#7253E1"],[98.2,200.9,100,100,"#947AF0"]] },
+    { lever: "AdOps", copy: "Full-stack technical measurement and funnel optimization.",
+      cells: [[-1.1,301.7,100,100,"#F5F25D"],[98.9,301.7,100,100,"#FEF7AD"]] },
+    { lever: "AI", copy: "Automated creative testing and predictive growth modeling.",
+      cells: [[201.1,301.7,100,100,"#7253E1"],[301.1,301.7,100,100,"#947AF0"]] }
+  ];
+
+  var levTrack = document.getElementById("levTrack");
+  var levStage = document.getElementById("levStage");
+  var levCubes = document.getElementById("levCubes");
+  var levSec   = document.getElementById("levers");
+  var levA  = document.querySelector(".lev-a");
+  var levB  = document.querySelector(".lev-b");
+  var levHy = document.querySelector(".lev-hy");
+  var levEyebrow = document.getElementById("levEyebrow");
+
+  function colHTML(pc) {
+    return '<div class="lev-col"><span class="lev-slot" aria-hidden="true"></span>' +
+           '<h3>' + pc.lever + '</h3><p>' + pc.copy + '</p></div>';
+  }
+  document.getElementById("levRowTop").innerHTML = PIECES.slice(0, 3).map(colHTML).join("");
+  document.getElementById("levRowBot").innerHTML = PIECES.slice(3).map(colHTML).join("");
+
+  var levCols  = [].slice.call(document.querySelectorAll(".lev-col"));
+  var levSlots = [].slice.call(document.querySelectorAll(".lev-slot"));
+
+  var CELLS = [];
+  PIECES.forEach(function (pc, pi) {
+    pc.minX = Math.min.apply(null, pc.cells.map(function (c) { return c[0]; }));
+    pc.minY = Math.min.apply(null, pc.cells.map(function (c) { return c[1]; }));
+    pc.h    = Math.max.apply(null, pc.cells.map(function (c) { return c[1] + c[3]; })) - pc.minY;
+    pc.cells.forEach(function (c) { CELLS.push({ pi: pi, x: c[0], y: c[1], w: c[2], h: c[3], fill: c[4] }); });
+  });
+
+  levCubes.innerHTML = CELLS.map(function (c) {
+    return '<span class="lev-cell" style="width:' + c.w + 'px;height:' + c.h +
+           'px;background:' + c.fill + '"></span>';
+  }).join("");
+  CELLS.forEach(function (c, i) { c.el = levCubes.children[i]; });
+  levSec.classList.add("js-lev");
+
+  function seg(x, a, b) { return Math.min(1, Math.max(0, (x - a) / (b - a))); }
+  function easeInOut(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  var L = null;
+
+  function measureLevers() {
+    levA.style.transform = levB.style.transform = levHy.style.transform = "";
+    levCols.forEach(function (c) { c.style.transform = ""; });
+
+    var sr = levStage.getBoundingClientRect();
+    var split = window.innerWidth >= 900;
+    var aR = levA.getBoundingClientRect(), bR = levB.getBoundingClientRect(), hR = levHy.getBoundingClientRect();
+    // the slot fixes the resting size: Brand spans 203x300 units, so an
+    // 80x120 slot lands it exactly, and squares every cell up at 40x40
+    var ex = 80 / 200, ey = 80 / 200;
+    // each row is only as tall as its own tallest piece, so short pieces
+    // don't leave a band of dead space above them
+    [[0, 3], [3, 6]].forEach(function (rng) {
+      var tallest = 0;
+      for (var i = rng[0]; i < rng[1]; i++) tallest = Math.max(tallest, PIECES[i].h);
+      for (i = rng[0]; i < rng[1]; i++) levSlots[i].style.height = (tallest * ey) + "px";
+    });
+    var sR = levSlots[0].getBoundingClientRect();
+
+    var fit = (sr.width * .94 - aR.width - bR.width) / (1.18 * CUBE_W);
+    var kx = split ? Math.max(ex * 1.2, Math.min(CUBE_PX / CUBE_W, fit))
+                   : Math.max(ex * 1.15, Math.min(CUBE_PX / CUBE_W, sr.width / 760));
+    var ky = kx;                           // the block is square
+
+    var gap = CUBE_W * kx * 1.18;
+    var Sx = sr.width / 2, head = null, cx, cy;
+
+    if (split) {
+      var total = aR.width + gap + bR.width, left = Sx - total / 2;
+      cx = left + aR.width + gap / 2;
+      cy = (aR.top - sr.top) + aR.height / 2;
+      head = {
+        a:  left + aR.width / 2 - (aR.left - sr.left + aR.width / 2),
+        b:  left + aR.width + gap + bR.width / 2 - (bR.left - sr.left + bR.width / 2),
+        hy: cx - (hR.left - sr.left + hR.width / 2)
+      };
+    } else {
+      cx = Sx; cy = (aR.top - sr.top) + aR.height / 2;
+    }
+
+    var ox = cx - CUBE_W * kx / 2, oy = cy - CUBE_W * ky / 2;
+
+    L = { split: split, kx: kx, ky: ky, ex: ex, ey: ey, head: head,
+      anchors: PIECES.map(function (pc, i) {
+        var slot = levSlots[i].getBoundingClientRect();
+        return {
+          from: [ox + pc.minX * kx, oy + pc.minY * ky],
+          to:   [slot.left - sr.left, slot.top - sr.top + (slot.height - pc.h * ey)]
+        };
+      }),
+      cells: CELLS.map(function (c) {
+        var pc = PIECES[c.pi];
+        return { el: c.el, pi: c.pi, dx: c.x - pc.minX, dy: c.y - pc.minY };
+      })
+    };
+  }
+
+  function renderLevers(p) {
+    if (!L) return;
+
+    var hj = easeInOut(seg(p, .06, .80));
+    if (L.split) {
+      levA.style.transform  = "translateX(" + L.head.a  * (1 - hj) + "px)";
+      levB.style.transform  = "translateX(" + L.head.b  * (1 - hj) + "px)";
+      levHy.style.transform = "translateX(" + L.head.hy * (1 - hj) + "px)";
+      levHy.style.opacity   = seg(hj, .62, 1);
+    }
+
+    var an = PIECES.map(function (pc, i) {
+      var t  = seg(p, .05 + i * .085, .46 + i * .085);
+      var tx = easeInOut(seg(t, 0, .6));
+      var ty = easeInOut(seg(t, .5, 1));
+      var e  = easeInOut(t);
+      var a  = L.anchors[i];
+      return { x: lerp(a.from[0], a.to[0], tx), y: lerp(a.from[1], a.to[1], ty),
+               sx: lerp(L.kx, L.ex, e), sy: lerp(L.ky, L.ey, e) };
+    });
+
+    L.cells.forEach(function (c) {
+      var a = an[c.pi];
+      c.el.style.transform = "translate(" + (a.x + c.dx * a.sx) + "px," +
+                                            (a.y + c.dy * a.sy) + "px) scale(" + a.sx + "," + a.sy + ")";
+    });
+
+    levEyebrow.style.opacity = easeOut(seg(p, .26, .52));
+    levCols.forEach(function (col, i) {
+      var t = easeOut(seg(p, .24 + i * .085, .46 + i * .085));
+      col.style.opacity = t;
+      col.style.transform = "translateY(" + (1 - t) * 14 + "px)";
+    });
+  }
+
+  var levTicking = false;
+  function onLevScroll() {
+    if (levTicking) return;
+    levTicking = true;
+    requestAnimationFrame(function () {
+      levTicking = false;
+      if (!levTrack.classList.contains("scroll-on")) return;
+      var r = levTrack.getBoundingClientRect(), span = r.height - window.innerHeight;
+      renderLevers(span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1);
+    });
+  }
+
+  function setupLevers() {
+    var scrolls = !reduce && window.innerWidth >= 900;
+    levTrack.classList.toggle("scroll-on", scrolls);
+    measureLevers();
+    if (scrolls) onLevScroll(); else renderLevers(1);
+  }
+
+  setupLevers();
+  window.addEventListener("scroll", onLevScroll, { passive: true });
+  window.addEventListener("resize", setupLevers);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setupLevers);
+
+  /* ── selected work: filter by industry ────────────────────────── */
+  var swGrid = document.getElementById("swGrid");
+  if (swGrid) {
+    var swItems = [].slice.call(swGrid.children);
+    var swBtns  = [].slice.call(document.querySelectorAll(".sw-filter"));
+    swBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var cat = btn.dataset.cat;
+        swBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        swItems.forEach(function (it) { it.hidden = !(cat === "all" || it.dataset.cat === cat); });
+      });
+    });
+  }
+
+  /* ── selected work: the photo travels inside a still frame ─────── */
+  if (swGrid) {
+    if (!reduce) {
+      var swShots = [].slice.call(swGrid.querySelectorAll(".sw-shot"));
+      var swTick = false;
+      var swDrift = function () {
+        if (swTick) return;
+        swTick = true;
+        requestAnimationFrame(function () {
+          swTick = false;
+          var vh = window.innerHeight, mid = vh / 2;
+          swShots.forEach(function (shot) {
+            var r = shot.getBoundingClientRect();
+            if (r.bottom < -200 || r.top > vh + 200) return;
+            var p = ((r.top + r.height / 2) - mid) / (mid + r.height / 2);
+            p = Math.max(-1, Math.min(1, p));
+            var img = shot.querySelector("img");
+            if (img) img.style.setProperty("--py", (p * r.height * 0.09).toFixed(1) + "px");
+          });
+        });
+      };
+      window.addEventListener("scroll", swDrift, { passive: true });
+      window.addEventListener("resize", swDrift);
+      swDrift();
+    }
+  }
+
+  /* ── selected work: lenis-style eased drift, one rate per tile ──── */
+  var swSec = document.getElementById("work");
+  if (swGrid && swSec && !reduce && "requestAnimationFrame" in window) {
+    var swTiles = [].slice.call(swGrid.children);
+    var SW_RATE = [.045, -.022, .034, -.05, .028, -.038];
+    var swCur = swTiles.map(function () { return 0; });
+    var swTgt = swCur.slice();
+    var swRaf = null;
+
+    var swAim = function () {
+      var vh = window.innerHeight, mid = vh / 2;
+      swTiles.forEach(function (t, i) {
+        var r = t.getBoundingClientRect();
+        if (r.bottom < -300 || r.top > vh + 300) return;
+        // -1 below the fold, +1 above it
+        var p = ((r.top + r.height / 2) - mid) / vh;
+        swTgt[i] = -p * vh * SW_RATE[i % SW_RATE.length];
+      });
+    };
+
+    var swStep = function () {
+      swAim();
+      swTiles.forEach(function (t, i) {
+        var d = swTgt[i] - swCur[i];
+        // the lerp is the whole trick: the tile chases the target, never snaps to it
+        swCur[i] += Math.abs(d) > .05 ? d * .085 : d;
+        t.style.setProperty("--ty", swCur[i].toFixed(2) + "px");
+      });
+      swRaf = requestAnimationFrame(swStep);
+    };
+
+    var swRun = function (on) {
+      if (on && swRaf === null) { swRaf = requestAnimationFrame(swStep); }
+      else if (!on && swRaf !== null) { cancelAnimationFrame(swRaf); swRaf = null; }
+    };
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { swRun(e.isIntersecting && window.innerWidth > 1000); });
+      }, { rootMargin: "200px 0px" }).observe(swSec);
+    } else { swRun(window.innerWidth > 1000); }
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth <= 1000) {
+        swRun(false);
+        swTiles.forEach(function (t, i) { swCur[i] = swTgt[i] = 0; t.style.setProperty("--ty", "0px"); });
+      }
+    });
+  }
+
+  /* ── hero: words light on a timer, their block lights with them ─── */
+  var hxWords = [].slice.call(document.querySelectorAll(".hx-w"));
+  var hxSteps = [].slice.call(document.querySelectorAll(".hx-step"));
+  if (hxWords.length && hxSteps.length) {
+    var hxAt = -1;
+    var hxShow = function (i) {
+      hxAt = i;
+      hxWords.forEach(function (w, k) { w.classList.toggle("lit", k === i); });
+      hxSteps.forEach(function (st) { st.classList.toggle("lit", +st.dataset.g === i); });
+    };
+    if (reduce) {
+      hxSteps.forEach(function (st) { st.classList.add("lit"); });
+    } else {
+      var hxStair  = document.querySelector(".hx-stair");
+      var hxIn     = document.querySelector(".hx-in");
+      var hxHero   = document.getElementById("top");
+      var hxTimer  = null;
+      var hxSeen   = 0;
+      var hxHanded = false;      // the hand-off scroll only ever happens once
+      var hxState  = "playing";  // playing -> closed -> away -> playing …
+
+      var hxTick = function () {
+        hxSeen++;
+        if (hxSeen < hxWords.length) { hxShow(hxSeen); return; }
+        // all four have had their turn — close the hero
+        clearInterval(hxTimer);
+        hxTimer = null;
+        hxState = "closed";
+        hxWords.forEach(function (w) { w.classList.remove("lit"); });
+        if (hxIn) hxIn.classList.add("closing");
+        if (hxStair) hxStair.classList.add("closed");
+        if (!hxHanded) {
+          hxHanded = true;
+          setTimeout(function () {
+            var next = document.getElementById("featured");
+            // only take over the scroll if the reader has not moved yet
+            if (next && window.scrollY < 20) {
+              next.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 1100);
+        }
+      };
+
+      var hxOpenT = null;
+      // the words wait for the blocks: 0.75s of travel plus the 0.30s stagger
+      var HX_REOPEN = 1080;
+
+      var hxCycle = function () {
+        hxSeen = 0;
+        hxShow(0);
+        clearInterval(hxTimer);
+        hxTimer = setInterval(hxTick, 1300);
+      };
+
+      var hxStart = function (reopening) {
+        hxState = "playing";
+        hxSeen = 0;
+        clearInterval(hxTimer);
+        hxTimer = null;
+        clearTimeout(hxOpenT);
+        if (hxIn) hxIn.classList.remove("closing");
+        if (hxStair) hxStair.classList.remove("closed");
+        if (!reopening) { hxCycle(); return; }
+        // travel back to the staircase first, unlit, then start from "Marketing"
+        hxWords.forEach(function (w) { w.classList.remove("lit"); });
+        hxSteps.forEach(function (st) { st.classList.remove("lit"); });
+        hxOpenT = setTimeout(hxCycle, HX_REOPEN);
+      };
+
+      hxStart(false);
+
+      /* scrolling back up to the hero runs the close in reverse and
+         starts the words again from "Marketing" */
+      if (hxHero) {
+        var hxWatch = false;
+        var hxScan = function () {
+          if (hxWatch) return;
+          hxWatch = true;
+          requestAnimationFrame(function () {
+            hxWatch = false;
+            var vh = window.innerHeight;
+            var bottom = hxHero.getBoundingClientRect().bottom;
+            if (hxState === "closed" && bottom <= vh * 0.4) { hxState = "away"; return; }
+            if (hxState === "away" && bottom >= vh * 0.75) { hxStart(true); }
+          });
+        };
+        window.addEventListener("scroll", hxScan, { passive: true });
+        window.addEventListener("resize", hxScan);
+      }
+    }
+  }
+
+  /* ── hero: the menu ───────────────────────────────────────────── */
+  var hxMenu = document.getElementById("hxMenu");
+  var hxMenuBtn = document.getElementById("hxMenuBtn");
+  if (hxMenu && hxMenuBtn) {
+    hxMenuBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = hxMenu.classList.toggle("open");
+      hxMenuBtn.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", function (e) {
+      if (!hxMenu.contains(e.target)) {
+        hxMenu.classList.remove("open");
+        hxMenuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        hxMenu.classList.remove("open");
+        hxMenuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  /* ── where you are now: stages open in order, a tetromino per stage ── */
+  var wyTrack = document.getElementById("wyTrack");
+  var wyList  = document.getElementById("wyList");
+  if (wyTrack && wyList) {
+    var wyItems = [].slice.call(wyList.children);
+    var wyCells = [].slice.call(document.querySelectorAll(".wy-cell"));
+    // one tetromino per stage, filling the 4x4 from the bottom up
+    var wyPieces = [[10, 12, 13, 14], [6, 7, 11, 15], [4, 5, 8, 9], [0, 1, 2, 3]];
+    var wyAt = -1;
+
+    var wySet = function (i) {
+      if (i === wyAt) return;
+      wyAt = i;
+      wyItems.forEach(function (it, k) { it.classList.toggle("on", k === i); });
+      var lit = {};
+      wyPieces.forEach(function (pc, k) {
+        if (k <= i) pc.forEach(function (n) { lit[n] = 1; });
+      });
+      wyCells.forEach(function (c, k) { c.classList.toggle("lit", !!lit[k]); });
+    };
+    var wyAll = function () {
+      wyAt = -1;
+      wyItems.forEach(function (it) { it.classList.add("on"); });
+      wyCells.forEach(function (c) { c.classList.add("lit"); });
+    };
+
+    if (reduce || !("requestAnimationFrame" in window)) {
+      wyAll();
+    } else {
+      var wyTick = false;
+      var wyScan = function () {
+        if (wyTick) return;
+        wyTick = true;
+        requestAnimationFrame(function () {
+          wyTick = false;
+          if (window.innerWidth < 900) {
+            wyTrack.classList.remove("scroll-on");
+            wyAll();
+            return;
+          }
+          wyTrack.classList.add("scroll-on");
+          var span = wyTrack.offsetHeight - window.innerHeight;
+          if (span < 80) { wyAll(); return; }
+          var pr = -wyTrack.getBoundingClientRect().top / span;
+          pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
+          wySet(Math.min(wyItems.length - 1, Math.floor(pr * wyItems.length)));
+        });
+      };
+      window.addEventListener("scroll", wyScan, { passive: true });
+      window.addEventListener("resize", wyScan);
+      wyScan();
+    }
+  }
+
+  /* ── partnership: filter the web ────────────────────────────────── */
+  var prStage = document.getElementById("prStage");
+  if (prStage) {
+    var prNodes = [].slice.call(prStage.querySelectorAll(".pr-node"));
+    var prBtns  = [].slice.call(document.querySelectorAll(".pr-filter"));
+    prBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var cat = btn.dataset.cat;
+        prBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        prStage.classList.toggle("filtered", cat !== "all");
+        prNodes.forEach(function (n) { n.classList.toggle("on", n.dataset.cat === cat); });
+      });
+    });
+  }
+
+  /* ── deep dives: one card at a time ─────────────────────────────── */
+  var csDeck = document.getElementById("csDeck");
+  if (csDeck) {
+    var csCards = [].slice.call(csDeck.children);
+    var csAt = 0;
+    var csGo = function (i) {
+      csAt = (i + csCards.length) % csCards.length;
+      csCards.forEach(function (c, k) { c.classList.toggle("on", k === csAt); });
+    };
+    var csPrev = document.getElementById("csPrev");
+    var csNext = document.getElementById("csNext");
+    if (csPrev) csPrev.addEventListener("click", function () { csGo(csAt - 1); });
+    if (csNext) csNext.addEventListener("click", function () { csGo(csAt + 1); });
+  }
+
+  /* ── scroll reveal ────────────────────────────────────────────── */
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -12% 0px" })
+    : { observe: function (el) { el.classList.add("in"); }, unobserve: function () {} };
+  document.querySelectorAll(".rv, .wm").forEach(function (el) { io.observe(el); });
+
+  /* ── featured work: the first row sits open; hover moves it ─────── */
+  var fwRows = [].slice.call(document.querySelectorAll(".fw-row"));
+  if (fwRows.length) {
+    var fwOpen = function (row) {
+      fwRows.forEach(function (r) { r.classList.toggle("is-open", r === row); });
+    };
+    fwOpen(fwRows[0]);
+    fwRows.forEach(function (r) {
+      r.addEventListener("mouseenter", function () { fwOpen(r); });
+      r.addEventListener("focus", function () { fwOpen(r); });
+    });
+    var fwList = document.querySelector(".fw-list");
+    if (fwList) {
+      fwList.addEventListener("mouseleave", function () { fwOpen(fwRows[0]); });
+    }
+  }
+
+  /* ── footer: the assembly plays once, when it comes into view ───── */
+  document.querySelectorAll(".vfoot").forEach(function (el) {
+    if (!("IntersectionObserver" in window)) { el.classList.add("is-playing"); return; }
+    new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-playing");
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 }).observe(el);
+  });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,6232 @@
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Stack Sans Notch";
+  src: url("/font/StackSansNotch-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+:root {
+  --acid: #F5FA5E;
+  --violet: #715BE4;
+  --ink: #0B0B0D;
+  --paper: #FFFFFF;
+  --offwhite: #FBFBF7;
+  --well: #17141F;
+  --mute: #6C6A78;
+  --mute-dark: #8D89A3;
+
+  --display: "Stack Sans Notch", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --cell: clamp(30px, 4.6vw, 62px);
+  --pad: clamp(60px, 8vw, 132px);
+  --gut: clamp(20px, 4.4vw, 64px);
+  --maxw: 1440px;
+  --side: max(20px, 6%);
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  -webkit-text-size-adjust: 100%
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block
+}
+
+a {
+  color: inherit
+}
+
+/* ── type primitives ───────────────────────── */
+.d1,
+.d2,
+.d3 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -.022em;
+  margin: 0
+}
+
+.d1 {
+  font-size: clamp(38px, 6vw, 88px);
+  line-height: .94
+}
+
+.d2 {
+  font-size: clamp(30px, 4.4vw, 62px);
+  line-height: .98
+}
+
+.d3 {
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1.06;
+  letter-spacing: -.015em
+}
+
+.lead {
+  font-size: clamp(16px, 1.28vw, 19px);
+  line-height: 1.45;
+  margin: 0
+}
+
+.body {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0
+}
+
+.nb {
+  display: none
+}
+
+@media (min-width:641px) {
+  .nb {
+    display: inline
+  }
+}
+
+.label {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .185em;
+  margin: 0;
+}
+
+/* ── shared shell ──────────────────────────── */
+.wrap {
+  max-width: none;
+  margin: 0;
+  padding-left: var(--side);
+  padding-right: var(--side)
+}
+
+.sec {
+  padding-top: var(--pad);
+  padding-bottom: var(--pad);
+  position: relative
+}
+
+.f-acid {
+  background: var(--acid);
+  color: var(--ink)
+}
+
+.f-ink {
+  background: var(--ink);
+  color: var(--paper)
+}
+
+.f-paper {
+  background: var(--paper);
+  color: var(--ink)
+}
+
+.f-violet {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+.sec-head {
+  display: grid;
+  gap: 18px;
+  max-width: 900px
+}
+
+.sec-head .label {
+  opacity: .62
+}
+
+.f-ink .sec-head .lead,
+.f-violet .sec-head .lead {
+  color: rgba(255, 255, 255, .74)
+}
+
+.f-acid .sec-head .lead {
+  color: rgba(11, 11, 13, .68)
+}
+
+.f-paper .sec-head .lead {
+  color: var(--mute)
+}
+
+/* ── logo mark: the 6-cell staircase ───────── */
+.mark {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  width: 26px;
+  height: 26px;
+  flex: none
+}
+
+.mark i {
+  background: currentColor;
+  display: block
+}
+
+.mark i:nth-child(4) {
+  grid-column: 1
+}
+
+.mark i:nth-child(6) {
+  grid-column: 1
+}
+
+
+
+/* ── hero ──────────────────────────────────── */
+/* laid out against the 1440 design frame; --k is one design px */
+.hx {
+  position: relative;
+  background: var(--paper);
+  color: #121212;
+  display: flex;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='4' height='4' fill='%23F7F7F7'/%3E%3C/svg%3E");
+}
+
+.hx-in {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px);
+  min-height: 100vh;
+}
+
+/* top bar: mark left, menu right */
+.hx-bar {
+  position: absolute;
+  z-index: 4;
+  transition: opacity .5s ease;
+  left: 6%;
+  right: 6%;
+  top: calc(40 * var(--k));
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between
+}
+
+.hx-logo {
+  display: block;
+  width: calc(72 * var(--k));
+  height: calc(72 * var(--k));
+  text-decoration: none
+}
+
+.hx-logo img {
+  width: 100%;
+  height: 100%;
+  display: block
+}
+
+.hx-contact {
+  display: flex;
+  align-items: stretch;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--body);
+  font-size: calc(13 * var(--k));
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  flex: none
+}
+
+.hx-contact span:first-child {
+  display: flex;
+  align-items: center;
+  padding: calc(14 * var(--k)) calc(18 * var(--k))
+}
+
+.hx-contact-i {
+  width: calc(46 * var(--k));
+  background: var(--ink);
+  border-left: 1px solid rgba(255, 255, 255, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(4 * var(--k))
+}
+
+.hx-contact-i svg {
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+/* the hero -> Featured Work curtain: a fixed, viewport-covering copy of the
+   staircase, independent of scroll and document flow. It plays the close
+   animation, the real page jumps to Featured Work while fully hidden behind
+   it, then it fades away. See HeroCurtain.jsx. */
+.hero-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  transition: opacity .5s ease;
+}
+
+.hero-curtain--fading {
+  opacity: 0;
+}
+
+/* the staircase — full-bleed, steps butt against each other */
+.hx-stair {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none
+}
+
+.hx-step {
+  position: absolute;
+  bottom: 0;
+  background: #F2F2F2;
+  box-shadow: inset 0 0 0 1px var(--paper);
+  transition: top .75s cubic-bezier(.5, 0, .2, 1), clip-path .75s cubic-bezier(.5, 0, .2, 1),
+    background-color .5s ease, box-shadow .5s ease
+}
+
+/* opening again runs the stagger the other way round */
+.hx-s4 {
+  transition-delay: 0s
+}
+
+.hx-s6 {
+  transition-delay: .06s
+}
+
+.hx-s3 {
+  transition-delay: .12s
+}
+
+.hx-s2 {
+  transition-delay: .18s
+}
+
+.hx-s5 {
+  transition-delay: .24s
+}
+
+.hx-s1 {
+  transition-delay: .30s
+}
+
+.hx-step.lit {
+  box-shadow: none
+}
+
+.hx-step.lit.hx-y {
+  background: var(--acid)
+}
+
+.hx-step.lit.hx-v {
+  background: var(--violet)
+}
+
+.hx-s1 {
+  left: 0;
+  width: 51%;
+  top: 88.43%;
+  z-index: 1
+}
+
+.hx-s5 {
+  left: 44%;
+  width: 28%;
+  top: 75.46%;
+  z-index: 1
+}
+
+.hx-s3 {
+  left: 58%;
+  width: 21%;
+  top: 62.96%;
+  z-index: 1
+}
+
+.hx-s6 {
+  left: 72%;
+  width: 7%;
+  top: 50%;
+  z-index: 1
+}
+
+.hx-s2 {
+  left: 51%;
+  width: 13.5%;
+  top: 75.46%;
+  z-index: 2
+}
+
+.hx-s4 {
+  left: 79%;
+  width: 21%;
+  top: 25.93%;
+  z-index: 1;
+  clip-path: polygon(66.7% 0, 100% 0, 100% 100%, 0 100%, 0 21.7%, 33.3% 21.7%, 33.3% 10.9%, 66.7% 10.9%)
+}
+
+/* once all four have shown, the blocks rise and close the hero */
+.hx-stair.closed .hx-step {
+  top: 0;
+  box-shadow: none;
+  transition: top .75s cubic-bezier(.5, 0, .2, 1), background-color .4s ease, clip-path .75s cubic-bezier(.5, 0, .2, 1)
+}
+
+.hx-stair.closed .hx-s1,
+.hx-stair.closed .hx-s5,
+.hx-stair.closed .hx-s3,
+.hx-stair.closed .hx-s6 {
+  background: var(--acid)
+}
+
+.hx-stair.closed .hx-s2,
+.hx-stair.closed .hx-s4 {
+  background: var(--violet)
+}
+
+.hx-stair.closed .hx-s4 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0, 0 0, 0 0)
+}
+
+.hx-stair.closed .hx-s1 {
+  transition-delay: 0s
+}
+
+.hx-stair.closed .hx-s5 {
+  transition-delay: .06s
+}
+
+.hx-stair.closed .hx-s2 {
+  transition-delay: .12s
+}
+
+.hx-stair.closed .hx-s3 {
+  transition-delay: .18s
+}
+
+.hx-stair.closed .hx-s6 {
+  transition-delay: .24s
+}
+
+.hx-stair.closed .hx-s4 {
+  transition-delay: .3s
+}
+
+.hx-stair.closed .hx-step .hx-stat,
+.hx-stair.closed .hx-step .hx-note,
+.hx-stair.closed .hx-step .hx-tag {
+  opacity: 0;
+  transition-delay: 0s
+}
+
+.hx-in.closing .hx-copy,
+.hx-in.closing .hx-bar {
+  opacity: 0;
+  transition: opacity .5s ease
+}
+
+.hx-stat,
+.hx-note,
+.hx-tag {
+  opacity: 0;
+  transition: opacity .38s ease
+}
+
+.hx-step.lit .hx-stat,
+.hx-step.lit .hx-note,
+.hx-step.lit .hx-tag {
+  opacity: 1;
+  transition-delay: .1s
+}
+
+.hx-stat {
+  position: absolute;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: calc(48 * var(--k));
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  white-space: nowrap
+}
+
+.hx-note {
+  position: absolute;
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(16 * var(--k));
+  line-height: 1.2
+}
+
+.hx-tag {
+  position: absolute;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: calc(28 * var(--k));
+  line-height: 1.2
+}
+
+.hx-s1 .hx-stat {
+  left: 41.2%;
+  top: 22%;
+  color: #121212
+}
+
+.hx-s1 .hx-note {
+  left: 71.6%;
+  top: 34%;
+  width: 23.5%;
+  color: #121212
+}
+
+.hx-s2 .hx-stat {
+  left: 9%;
+  top: 66%;
+  color: var(--paper)
+}
+
+.hx-s2 .hx-note {
+  left: 11%;
+  top: 18%;
+  width: 80%;
+  color: var(--paper)
+}
+
+.hx-s3 .hx-tag {
+  right: 14.3%;
+  top: 17.4%;
+  width: 61.9%;
+  text-align: right;
+  color: #121212
+}
+
+.hx-s4 .hx-tag {
+  left: 24.3%;
+  top: 55%;
+  width: 59.5%;
+  color: var(--paper)
+}
+
+/* copy */
+.hx-copy {
+  position: absolute;
+  z-index: 3;
+  transition: opacity .5s ease;
+  left: 6%;
+  top: calc(184 * var(--k));
+  width: calc(748 * var(--k))
+}
+
+.hx-h {
+  font-family: var(--display);
+  font-weight: 400;
+  margin: 0;
+  font-size: calc(64 * var(--k));
+  line-height: 1.5;
+  letter-spacing: calc(-2 * var(--k));
+  color: #121212
+}
+
+.hx-h u {
+  text-decoration: underline;
+  text-decoration-thickness: calc(3 * var(--k));
+  text-underline-offset: calc(9 * var(--k))
+}
+
+.hx-w {
+  position: relative
+}
+
+.hx-w::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: calc(-10 * var(--k));
+  right: calc(-10 * var(--k));
+  top: calc(2 * var(--k));
+  bottom: calc(-2 * var(--k));
+  background: var(--acid);
+  opacity: 0;
+  transition: opacity .24s ease
+}
+
+.hx-w.lit::before {
+  opacity: 1
+}
+
+.hx-sub {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #4C4546;
+  margin: calc(28 * var(--k)) 0 0;
+  max-width: calc(724 * var(--k))
+}
+
+.hx-cta {
+  display: inline-flex;
+  align-items: stretch;
+  text-decoration: none;
+  margin-top: calc(30 * var(--k));
+  background: #121212
+}
+
+.hx-cta-t {
+  display: flex;
+  align-items: center;
+  padding: 0 calc(12 * var(--k));
+  height: calc(40 * var(--k));
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: calc(12 * var(--k));
+  font-weight: 700;
+  letter-spacing: calc(1.2 * var(--k));
+  text-transform: uppercase;
+  white-space: nowrap
+}
+
+.hx-cta-i {
+  flex: none;
+  width: calc(40 * var(--k));
+  height: calc(40 * var(--k));
+  background: var(--acid);
+  display: grid;
+  place-items: center
+}
+
+.hx-cta-i svg {
+  width: calc(40 * var(--k));
+  height: calc(40 * var(--k));
+  display: block
+}
+
+.hx-cta:hover .hx-cta-i {
+  background: var(--paper)
+}
+
+@media (max-width:900px) {
+  .hx {
+    height: auto;
+  }
+
+  .hx-in {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    container-type: normal;
+    padding: 0 0 40px;
+    display: flex;
+    flex-direction: column
+  }
+
+  .hx-bar {
+    order: 0
+  }
+
+  .hx-copy {
+    order: 1
+  }
+
+  .hx-stair {
+    order: 2
+  }
+
+  .hx-s1 {
+    order: 1
+  }
+
+  .hx-s2 {
+    order: 2
+  }
+
+  /* swapped vs. desktop order: on the reference mobile mock the bottom row
+     is violet-left / acid-right, a checkerboard with the top row */
+  .hx-s3 {
+    order: 4
+  }
+
+  .hx-s4 {
+    order: 3
+  }
+
+  .hx-s5,
+  .hx-s6 {
+    display: none !important
+  }
+
+  .hx-step {
+    box-shadow: none
+  }
+
+  .hx-y {
+    background: var(--acid)
+  }
+
+  .hx-v {
+    background: var(--violet)
+  }
+
+  .hx-stat,
+  .hx-note,
+  .hx-tag {
+    opacity: 1
+  }
+
+  .hx-w::before {
+    left: -6px;
+    right: -6px;
+    top: 2px;
+    bottom: 0
+  }
+
+  .hx-bar {
+    position: static;
+    padding: 24px 20px 0
+  }
+
+  .hx-logo {
+    width: 52px;
+    height: 52px
+  }
+
+  .hx-contact span:first-child {
+    padding: 12px 14px
+  }
+
+  .hx-contact-i {
+    width: 40px
+  }
+
+  .hx-copy {
+    position: static;
+    width: auto;
+    padding: 32px 20px 0
+  }
+
+  .hx-h {
+    font-size: 36px;
+    letter-spacing: -1px
+  }
+
+  .hx-h u {
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px
+  }
+
+  .hx-sub {
+    font-size: 14px;
+    max-width: none;
+    margin-top: 18px
+  }
+
+  .hx-cta {
+    margin-top: 24px
+  }
+
+  .hx-cta-t {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 12px;
+    letter-spacing: .1em
+  }
+
+  .hx-cta-i {
+    width: 44px;
+    height: 44px
+  }
+
+  .hx-cta-i svg {
+    width: 44px;
+    height: 44px
+  }
+
+  /* four cards, tiled edge-to-edge as two interlocking L-shaped pairs — each
+     card is the union of a wide half and a narrow half (mirrored top<->bottom
+     between the two cards of a pair), carved with clip-path. The 5x5 grid's
+     odd tracks are the two real columns and the even tracks are the fixed-
+     width gap between them, so a card can span "wide" (both columns) in one
+     half and "narrow" (one column) in the other without a partial border. */
+  .hx-stair {
+    position: static;
+    display: grid;
+    grid-template-columns: 42.4% 8px 13.2% 8px 42.4%;
+    grid-template-rows: repeat(2, minmax(100px, auto)) 10px repeat(2, minmax(100px, auto));
+    gap: 0;
+    padding: 32px 20px 0
+  }
+
+  .hx-step {
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0;
+    min-height: 0;
+    z-index: auto !important
+  }
+
+  .hx-s1 {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 50%, 75% 100%, 0 100%)
+  }
+
+  .hx-s2 {
+    grid-column: 3 / 6;
+    grid-row: 1 / 3;
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%)
+  }
+
+  .hx-s4 {
+    grid-column: 1 / 4;
+    grid-row: 4 / 6;
+    clip-path: polygon(0 0, 75% 0, 75% 50%, 100% 50%, 100% 100%, 0 100%)
+  }
+
+  .hx-s3 {
+    grid-column: 3 / 6;
+    grid-row: 4 / 6;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%, 25% 50%, 0 50%)
+  }
+
+  .hx-stat,
+  .hx-note,
+  .hx-tag {
+    position: absolute;
+    left: 7% !important;
+    right: auto !important;
+    width: auto !important;
+    text-align: left !important
+  }
+
+  .hx-stat {
+    font-size: 32px
+  }
+
+  .hx-note {
+    font-size: 12px;
+    width: 78% !important
+  }
+
+  .hx-tag {
+    font-size: 20px;
+    width: 70% !important
+  }
+
+  /* each card's own text sits inside its wide half — s1's is the top half,
+     s2's and s4's the bottom half, s3's the top half again. These repeat the
+     desktop rules' ".hx-sN .hx-x" specificity so the !importants above don't
+     have to also cover top, and so a plain top/left order can't lose to them. */
+  .hx-s1 .hx-stat {
+    top: 10% !important
+  }
+
+  .hx-s1 .hx-note {
+    top: 30% !important
+  }
+
+  .hx-s2 .hx-stat {
+    top: 58% !important
+  }
+
+  .hx-s2 .hx-note {
+    top: 78% !important
+  }
+
+  .hx-s3 .hx-tag {
+    top: 12% !important;
+    left: 18% !important
+  }
+
+  .hx-s4 .hx-tag {
+    top: 60% !important
+  }
+}
+
+/* ── nav ───────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--acid);
+  color: var(--ink)
+}
+
+.nav-in {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 44px);
+  height: 74px;
+  padding-left: var(--side);
+  padding-right: var(--side)
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+  display: block
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(14px, 2.2vw, 32px);
+  margin-left: auto;
+  align-items: center
+}
+
+.nav-links a {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .185em;
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+  border-bottom-color: var(--ink)
+}
+
+.nav-cta {
+  background: var(--ink);
+  color: var(--acid);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .185em;
+  padding: 13px 20px;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+/* ── hero ──────────────────────────────────── */
+.hero {
+  background: var(--acid);
+  color: var(--ink);
+  padding-top: clamp(48px, 6vw, 86px);
+  padding-bottom: 0;
+  overflow: hidden
+}
+
+.hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.32fr) minmax(0, .68fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: end;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--gut);
+  padding-right: var(--gut)
+}
+
+.hero-copy {
+  padding-bottom: clamp(56px, 7vw, 104px)
+}
+
+.hero h1 {
+  margin: 0 0 clamp(22px, 2.4vw, 32px)
+}
+
+.hero .lead {
+  max-width: 31em;
+  color: rgba(11, 11, 13, .72)
+}
+
+.hero-cta {
+  margin-top: clamp(28px, 3vw, 44px)
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--ink);
+  color: var(--acid);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .185em;
+  padding: 19px 28px;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--body);
+  transition: background .16s ease, color .16s ease, transform .16s ease;
+}
+
+.btn:hover {
+  background: var(--violet);
+  color: var(--paper);
+  transform: translateY(-2px)
+}
+
+.btn-light {
+  background: var(--paper);
+  color: var(--ink)
+}
+
+.btn-light:hover {
+  background: var(--ink);
+  color: var(--acid)
+}
+
+/* hero block composition — the brand's staircase mask, built from cells */
+.hero-art {
+  position: relative;
+  height: calc(var(--cell) * 6);
+  align-self: end;
+  margin-right: calc(var(--gut) * -1)
+}
+
+.hero-art .blk {
+  position: absolute;
+  width: var(--cell);
+  height: var(--cell)
+}
+
+.hero-art .v {
+  background: var(--violet)
+}
+
+.hero-art .k {
+  background: var(--ink)
+}
+
+.hero-art .a {
+  background: var(--acid)
+}
+
+/* ── seam: staircase boundary between fields ─ */
+.seam {
+  display: flex;
+  align-items: flex-end;
+  height: calc(var(--cell) * 1.5);
+  line-height: 0;
+  background: var(--seam-from)
+}
+
+.seam i {
+  flex: 1;
+  display: block;
+  background: var(--seam);
+  height: var(--h, 100%)
+}
+
+/* ── case rail ─────────────────────────────── */
+.rail {
+  display: flex;
+  gap: 0;
+  margin-top: clamp(34px, 4vw, 56px);
+  margin-right: calc(var(--gut) * -1);
+  padding-right: var(--gut);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, .28) transparent;
+}
+
+.rail::-webkit-scrollbar {
+  height: 5px
+}
+
+.rail::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .28)
+}
+
+.case {
+  flex: 0 0 clamp(268px, 25vw, 338px);
+  scroll-snap-align: start;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-right: 0;
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background .18s ease;
+}
+
+.rail .case:last-child {
+  border-right: 1px solid rgba(255, 255, 255, .16)
+}
+
+.case:hover {
+  background: rgba(255, 255, 255, .05)
+}
+
+.case-top {
+  display: flex;
+  align-items: center;
+  gap: 12px
+}
+
+.mono {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -.02em;
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.mono.alt {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+.case-name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase
+}
+
+.case-line {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.16;
+  letter-spacing: -.015em;
+  margin: 0;
+  flex: 1
+}
+
+.case-foot {
+  display: grid;
+  gap: 9px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--mute-dark)
+}
+
+.case-foot .go {
+  color: rgba(255, 255, 255, .72)
+}
+
+.case:hover .case-foot .go {
+  color: var(--acid)
+}
+
+/* ── the well (signature) ──────────────────── */
+.well-sec {
+  background: var(--ink);
+  color: var(--paper)
+}
+
+/* cases and the well share the ink field — don't stack two full section pads */
+.f-ink+.well-sec {
+  padding-top: calc(var(--pad) * .35)
+}
+
+.stagebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: clamp(34px, 4vw, 54px);
+  border: 1px solid rgba(255, 255, 255, .18)
+}
+
+.stagebar button {
+  flex: 1 1 auto;
+  min-width: 118px;
+  background: transparent;
+  color: rgba(255, 255, 255, .62);
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, .18);
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .185em;
+  text-transform: uppercase;
+  padding: 17px 12px;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+
+.stagebar button:last-child {
+  border-right: 0
+}
+
+.stagebar button:hover {
+  color: var(--paper);
+  background: rgba(255, 255, 255, .06)
+}
+
+.stagebar button[aria-selected="true"] {
+  background: var(--acid);
+  color: var(--ink)
+}
+
+.wellgrid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  margin-top: clamp(28px, 3.4vw, 48px);
+}
+
+.board {
+  position: relative;
+  flex: none;
+  width: calc(var(--cell) * 10);
+  height: calc(var(--cell) * 6);
+  background: var(--well);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, .055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, .055) 1px, transparent 1px);
+  background-size: var(--cell) var(--cell);
+  outline: 1px solid rgba(255, 255, 255, .14);
+}
+
+.pc {
+  position: absolute;
+  width: var(--cell);
+  height: var(--cell);
+  border: 2px solid var(--well);
+  animation: drop .3s cubic-bezier(.16, .84, .34, 1) both;
+}
+
+.pc.paid {
+  background: var(--acid)
+}
+
+.pc.audience {
+  background: var(--violet)
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(calc(var(--cell) * -7));
+    opacity: 0
+  }
+
+  60% {
+    opacity: 1
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1
+  }
+}
+
+.pl {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  font-size: clamp(7.5px, .72vw, 10px);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  animation: drop .3s cubic-bezier(.16, .84, .34, 1) both;
+}
+
+.pl.paid {
+  color: var(--ink)
+}
+
+.pl.audience {
+  color: var(--paper)
+}
+
+@keyframes lockflash {
+  0% {
+    background: var(--paper)
+  }
+
+  100% {
+    background: var(--flashback)
+  }
+}
+
+.pc.lock {
+  animation: drop .3s cubic-bezier(.16, .84, .34, 1) both, lockflash .5s ease-out .1s both
+}
+
+.baseline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .185em;
+  text-transform: uppercase;
+  color: var(--acid);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.baseline.on {
+  opacity: 1
+}
+
+.baseline .tick {
+  width: 9px;
+  height: 9px;
+  background: var(--acid);
+  flex: none
+}
+
+.wellcopy {
+  display: grid;
+  gap: 20px;
+  padding-top: 4px
+}
+
+.wellcopy .stage-k {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .185em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin: 0
+}
+
+.wellcopy .body {
+  color: rgba(255, 255, 255, .72);
+  max-width: 44ch
+}
+
+.piecekey {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 20px;
+  padding-top: 2px
+}
+
+.piecekey span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6)
+}
+
+.piecekey i {
+  width: 11px;
+  height: 11px;
+  display: block
+}
+
+.k-paid {
+  background: var(--acid)
+}
+
+.k-audience {
+  background: var(--violet)
+}
+
+.storylink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+  padding: 18px 0;
+  margin-top: 2px;
+  max-width: 44ch;
+}
+
+.storylink .sl-t {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+  flex: 1
+}
+
+.storylink .sl-a {
+  color: var(--acid);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .185em;
+  text-transform: uppercase;
+  white-space: nowrap
+}
+
+.storylink:hover .sl-t {
+  color: var(--acid)
+}
+
+
+/* ── featured work ─────────────────────────── */
+/* laid out against a 1440 design width; --k is one design px, so the whole
+   row scales with its own width instead of breaking at odd viewports */
+.fw {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(56px, 7vw, 100px) 0 120px
+}
+
+.fw-in {
+  width: 100%;
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px)
+}
+
+.fw-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0 6%;
+  margin-bottom: clamp(32px, 4.2vw, 60px)
+}
+
+.fw-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 22px
+}
+
+.fw-tag {
+  position: relative;
+  height: 18px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em;
+  white-space: nowrap
+}
+
+.fw-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: -9px;
+  width: 15px;
+  height: 15px;
+  gap: 1px;
+  transform: rotate(90deg)
+}
+
+.fw-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 3.9vw, 56px);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  color: #1A1C1C;
+  margin: 0
+}
+
+.fw-list {
+  border-top: 1px solid #E4E4E4
+}
+
+.fw-row {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  height: calc(180 * var(--k));
+  background: var(--paper);
+  border-bottom: 1px solid #E4E4E4;
+  transition: height .5s cubic-bezier(.16, .84, .34, 1), background-color .4s ease
+}
+
+.fw-row.is-open,
+.fw-row:focus-visible {
+  height: calc(260 * var(--k));
+  background: #F5F5F5
+}
+
+/* left: logo tile, client, industry */
+.fw-brand {
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--k));
+  z-index: 3;
+  transition: top .5s cubic-bezier(.16, .84, .34, 1), transform .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+.fw-row.is-open .fw-brand,
+.fw-row:focus-visible .fw-brand {
+  top: calc(20 * var(--k));
+  transform: none
+}
+
+.fw-logo {
+  width: calc(72 * var(--k));
+  height: calc(72 * var(--k));
+  flex: none;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  overflow: hidden
+}
+
+.fw-logo img,
+.fw-logo svg {
+  width: calc(44 * var(--k));
+  height: auto;
+  display: block
+}
+
+.fw-logo b {
+  font-family: var(--body);
+  font-size: calc(10 * var(--k));
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: .1em;
+  color: #121212;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 calc(4 * var(--k));
+  overflow-wrap: normal
+}
+
+.fw-id {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--k));
+  padding-top: calc(2 * var(--k))
+}
+
+.fw-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(18 * var(--k));
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.fw-cat {
+  font-family: var(--body);
+  font-size: calc(12 * var(--k));
+  line-height: 1.4;
+  color: #4C4546
+}
+
+/* right: the line + the button. on hover it becomes the acid block, notched bottom-right */
+.fw-say {
+  position: absolute;
+  right: calc(41 * var(--k));
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(416 * var(--k));
+  box-sizing: border-box;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(8 * var(--k));
+  padding: 0;
+  background-color: rgba(245, 250, 94, 0);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 42.07% 100%, 42.07% 100%, 0 100%);
+  transition: right .5s cubic-bezier(.16, .84, .34, 1), top .5s cubic-bezier(.16, .84, .34, 1),
+    transform .5s cubic-bezier(.16, .84, .34, 1), width .5s cubic-bezier(.16, .84, .34, 1),
+    padding .5s cubic-bezier(.16, .84, .34, 1), background-color .4s ease, clip-path .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+.fw-row.is-open .fw-say,
+.fw-row:focus-visible .fw-say {
+  right: 0;
+  top: calc(138 * var(--k));
+  transform: none;
+  width: calc(473 * var(--k));
+  height: calc(122 * var(--k));
+  gap: calc(4 * var(--k));
+  padding: calc(10 * var(--k)) calc(16 * var(--k)) calc(12 * var(--k));
+  background-color: var(--acid);
+  clip-path: polygon(0 0, 100% 0, 100% 57.98%, 42.07% 57.98%, 42.07% 100%, 0 100%)
+}
+
+.fw-line {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(18 * var(--k));
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: #4D4D4D;
+  margin: 0;
+  transition: font-size .5s cubic-bezier(.16, .84, .34, 1), color .3s ease
+}
+
+.fw-row.is-open .fw-line,
+.fw-row:focus-visible .fw-line {
+  font-size: calc(20 * var(--k));
+  line-height: 1.4;
+  font-weight: 500;
+  color: #1A1C1C
+}
+
+.fw-row.is-open .fw-read,
+.fw-row:focus-visible .fw-read {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: .12s
+}
+
+.fw-read {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--k));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  font-family: var(--body);
+  font-size: calc(12 * var(--k));
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: calc(1.2 * var(--k));
+  text-transform: uppercase;
+  color: #121212
+}
+
+.fw-arw {
+  width: calc(26 * var(--k));
+  height: auto;
+  flex: none
+}
+
+/* hover-only layer: founder cut-outs, name plates, the pull quote */
+.fw-extra {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none
+}
+
+.fw-extra>* {
+  opacity: 0;
+  transition: opacity .34s ease, transform .55s cubic-bezier(.16, .84, .34, 1)
+}
+
+.fw-row.is-open .fw-extra>*,
+.fw-row:focus-visible .fw-extra>* {
+  opacity: 1;
+  transform: none
+}
+
+.fw-ph {
+  position: absolute;
+  top: calc(22 * var(--k));
+  width: calc(276 * var(--k));
+  height: calc(238 * var(--k));
+  margin: 0;
+  overflow: hidden;
+  transform: translateY(calc(26 * var(--k)))
+}
+
+.fw-ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block
+}
+
+.fw-ph1 {
+  left: 18.681%;
+  z-index: 1
+}
+
+.fw-ph2 {
+  left: 30.764%;
+  z-index: 2
+}
+
+.fw-plate {
+  position: absolute;
+  top: calc(202 * var(--k));
+  min-width: calc(202 * var(--k));
+  height: calc(58 * var(--k));
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: var(--paper);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(2 * var(--k));
+  padding: calc(12 * var(--k)) calc(10 * var(--k)) calc(8 * var(--k));
+  transform: translateY(calc(14 * var(--k)))
+}
+
+.fw-plate b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(24 * var(--k));
+  line-height: .8;
+  letter-spacing: calc(-1 * var(--k));
+  color: #121212
+}
+
+.fw-plate span {
+  font-family: var(--body);
+  font-size: calc(12 * var(--k));
+  line-height: 1.4;
+  color: #4C4546
+}
+
+.fw-plate1 {
+  left: 18.681%;
+  align-items: flex-start;
+  text-align: left
+}
+
+.fw-plate2 {
+  left: auto;
+  right: 50%;
+  align-items: flex-start;
+  text-align: left
+}
+
+.fw-phSolo {
+  left: 24.722%;
+  z-index: 2
+}
+
+.fw-plateSolo {
+  left: 23.611%;
+  right: auto;
+  align-items: flex-start;
+  text-align: left;
+  z-index: 3
+}
+
+.fw-quote {
+  position: absolute;
+  left: 43.611%;
+  top: 0;
+  width: calc(470 * var(--k));
+  box-sizing: border-box;
+  background: var(--paper);
+  padding: calc(16 * var(--k));
+  margin: 0;
+  /* below .fw-extra (z-index 2), so the founder cut-out still overlaps it */
+  z-index: 0;
+  font-family: var(--body);
+  font-size: calc(16 * var(--k));
+  line-height: 1.4;
+  color: #121212;
+  transform: translateY(calc(-14 * var(--k)));
+  /* it sits outside .fw-extra, so it repeats the reveal and the click
+     transparency that .fw-extra used to hand it */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .34s ease, transform .55s cubic-bezier(.16, .84, .34, 1)
+}
+
+.fw-row.is-open .fw-quote,
+.fw-row:focus-visible .fw-quote {
+  opacity: 1;
+  transform: none
+}
+
+/* mobile-only compact icon shown on a closed row (see the media query
+   below) — desktop keeps the full "read full story" reveal on hover */
+.fw-mini {
+  display: none
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .fw-row,
+  .fw-brand,
+  .fw-say,
+  .fw-line,
+  .fw-extra>* {
+    transition-duration: .01ms
+  }
+}
+
+@media (max-width:900px) {
+  .fw-row {
+    height: auto;
+    --fw-pad-x: clamp(20px, 5vw, 28px);
+    padding: 20px var(--fw-pad-x);
+    border-bottom: 1px solid #E4E4E4
+  }
+
+  /* the photos break out to the full row width (edge to edge) instead of
+     sitting inside the row's own side padding — noticeably bigger, and
+     the two photos touch at the seam instead of leaving a gap */
+  .fw-row.is-open .fw-extra {
+    margin-left: calc(-1 * var(--fw-pad-x));
+    margin-right: calc(-1 * var(--fw-pad-x));
+    width: calc(100% + 2 * var(--fw-pad-x))
+  }
+
+  .fw-row.is-open,
+  .fw-row:focus-visible {
+    height: auto;
+    /* same grey the desktop open row uses, so the white quote card below the
+       acid band reads as a card instead of blending into the row */
+    background: #F5F5F5
+  }
+
+  /* the always-visible header row: logo + name/category on the left, a
+     compact icon on the right — the icon swaps for the full "read full
+     story" button once the row opens */
+  .fw-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px
+  }
+
+  .fw-brand,
+  .fw-row.is-open .fw-brand {
+    position: static;
+    transform: none;
+    gap: 12px
+  }
+
+  .fw-logo {
+    width: 44px;
+    height: 44px
+  }
+
+  .fw-logo img,
+  .fw-logo svg {
+    width: 26px
+  }
+
+  .fw-logo b {
+    font-size: 8px
+  }
+
+  .fw-id {
+    gap: 4px;
+    padding-top: 0
+  }
+
+  .fw-name {
+    font-size: 17px
+  }
+
+  .fw-cat {
+    font-size: 12px
+  }
+
+  .fw-mini {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px
+  }
+
+  .fw-arwMini {
+    width: 20px
+  }
+
+  .fw-row.is-open .fw-mini {
+    display: none
+  }
+
+  /* the whole accordion body is hidden on a closed row — no preview line,
+     just the header — and only appears once tapped open */
+  .fw-extra,
+  .fw-say {
+    display: none
+  }
+
+  /* photos then plates, each pair filling one row edge-to-edge: two 50%
+     items wrap onto their own row automatically, so photos (2) fill row 1
+     and plates (2) wrap to row 2 with no extra markup needed */
+  .fw-row.is-open .fw-extra {
+    display: flex;
+    flex-wrap: wrap;
+    position: static;
+    pointer-events: auto;
+    z-index: auto;
+    margin-top: 16px
+  }
+
+  .fw-row.is-open .fw-extra>* {
+    opacity: 1;
+    transform: none
+  }
+
+  /* the same overlapped pair the desktop row shows: each photo is ~61% of the
+     row and the second is pulled back across the first by ~37% of its own
+     width, so the pair still spans exactly the full width (and so each photo
+     is meaningfully bigger than a plain 50/50 split). left/top are reset
+     because .fw-ph1/.fw-ph2 carry desktop absolute offsets that would apply
+     as relative nudges here, but their z-index is kept so the second photo
+     stays in front — which is what needs position:relative in the first place.
+     Height is whatever the image's own aspect ratio needs at this width; a
+     fixed height + object-fit:cover cropped people's heads/shoulders. */
+  .fw-row.is-open .fw-ph {
+    position: relative;
+    left: 0;
+    top: auto;
+    width: 61.3%;
+    height: auto;
+    transform: none
+  }
+
+  .fw-row.is-open .fw-ph+.fw-ph {
+    margin-left: -22.6%
+  }
+
+  .fw-row.is-open .fw-ph img {
+    height: auto;
+    object-fit: initial
+  }
+
+  .fw-row.is-open .fw-ph.fw-phSolo {
+    width: 100%
+  }
+
+  .fw-row.is-open .fw-plate {
+    /* overlaps the bottom of its photo, same as the desktop hover card,
+       instead of just sitting in flow below it as plain small text.
+       left/right/top are reset because .fw-plate1/.fw-plate2 carry
+       desktop absolute-positioning offsets (e.g. right:50%) that also
+       apply to position:relative and would shove this sideways */
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    /* above both photos, which now carry z-index 1 and 2 to overlap */
+    z-index: 4;
+    width: 50%;
+    min-width: 0;
+    height: auto;
+    transform: none;
+    /* scaled with the photos: the old -42px covered the same share of a
+       smaller photo. Enough to overlap the jacket, not the face */
+    margin-top: -50px;
+    padding: 16px 14px;
+    align-items: center;
+    text-align: center
+  }
+
+  .fw-row.is-open .fw-plate.fw-plateSolo {
+    width: 100%
+  }
+
+  .fw-row.is-open .fw-plate b {
+    font-size: 20px;
+    line-height: 1.15
+  }
+
+  .fw-row.is-open .fw-plate span {
+    font-size: 13px
+  }
+
+  /* acid band then quote card, stacked and staggered against each other: the
+     band runs off the left screen edge, the quote off the right, each 92% of
+     the screen. Both break out of the row's side padding (like the photos do)
+     and are measured against the full row width, not the padded box, so each
+     one truly touches its edge. That offset is the staircase motif here, so
+     the band itself stays a plain rectangle (no notch) as in the design */
+  .fw-row.is-open .fw-say,
+  .fw-row.is-open .fw-quote {
+    width: calc(.92 * (100% + 2 * var(--fw-pad-x)));
+    box-sizing: border-box
+  }
+
+  .fw-row.is-open .fw-say {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    transform: none;
+    height: auto;
+    padding: 18px var(--fw-pad-x);
+    margin: 12px 0 0 calc(-1 * var(--fw-pad-x));
+    background-color: var(--acid);
+    clip-path: none;
+    gap: 10px
+  }
+
+  .fw-row.is-open .fw-quote {
+    position: static;
+    /* auto on the left pushes it right until it meets the screen edge */
+    margin: 10px calc(-1 * var(--fw-pad-x)) 0 auto;
+    padding: 18px var(--fw-pad-x);
+    opacity: 1;
+    transform: none;
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.55
+  }
+
+  .fw-row.is-open .fw-line {
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #1A1C1C
+  }
+
+  .fw-row.is-open .fw-read {
+    opacity: 1;
+    pointer-events: auto;
+    font-size: 12px;
+    letter-spacing: .1em;
+    gap: 10px
+  }
+
+  .fw-row.is-open .fw-arw {
+    width: 22px
+  }
+}
+
+/* ── where you are now ─────────────────────── */
+/* 1440 design frame; --k is one design px (container lives on .wy) */
+.wy {
+  background: var(--paper);
+  color: var(--ink);
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px)
+}
+
+.wy-in {
+  width: 100%;
+  max-width: calc(1440 * var(--k));
+  margin: 0 auto;
+  padding: 0 6%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(40 * var(--k))
+}
+
+.wy-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(18 * var(--k));
+  text-align: center;
+  margin: 0 auto
+}
+
+.wy-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: calc(22 * var(--k))
+}
+
+.wy-tag {
+  position: relative;
+  height: calc(18 * var(--k));
+  box-sizing: border-box;
+  padding: calc(4 * var(--k)) calc(6 * var(--k));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: calc(14 * var(--k));
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  white-space: nowrap
+}
+
+.wy-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: calc(12 * var(--k));
+  height: calc(12 * var(--k));
+  gap: calc(.3 * var(--k));
+  transform: rotate(90deg)
+}
+
+.wy-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(44 * var(--k));
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  color: #1A1C1C;
+  margin: 0;
+  max-width: calc(620 * var(--k))
+}
+
+/* the panel sticks and stays inside the viewport while the stages open */
+.wy-track {
+  position: relative;
+  padding: 0
+}
+
+.wy-track.scroll-on {
+  height: 420vh;
+  padding: 0
+}
+
+.wy-track.scroll-on .wy-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh
+}
+
+.wy-sticky {
+  display: flex;
+  align-items: center
+}
+
+.wy-panel {
+  box-sizing: border-box;
+  width: 100%;
+  background: #1A1A1A;
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: calc(180 * var(--k));
+  padding: calc(40 * var(--k));
+  /* the expanded card's tab now runs 80px past the visible copy, so the
+     panel needs that much extra room or the trailing collapsed items get
+     cramped against its bottom edge */
+  height: calc(560 * var(--k) + 80px);
+  overflow: hidden
+}
+
+.wy-left {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column
+}
+
+/* the stages: always in order, the live one opens in place */
+.wy-item {
+  border-bottom: 1px solid #2F2F2F;
+  padding: calc(14 * var(--k)) 0
+}
+
+.wy-title {
+  font-family: var(--body);
+  font-weight: 400;
+  margin: 0;
+  color: #7C7C82;
+  font-size: calc(18 * var(--k));
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  transition: color .35s ease, font-size .45s cubic-bezier(.16, .84, .34, 1), font-weight .3s ease
+}
+
+.wy-item.on .wy-title {
+  color: var(--paper);
+  font-size: calc(26 * var(--k));
+  font-weight: 600
+}
+
+.wy-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+.wy-item.on .wy-body {
+  grid-template-rows: 1fr
+}
+
+.wy-body>div {
+  overflow: hidden
+}
+
+.wy-bodyIn {
+  position: relative;
+  padding-top: calc(14 * var(--k));
+  opacity: 0;
+  transform: translateY(calc(10 * var(--k)));
+  transition: opacity .4s ease, transform .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+.wy-item.on .wy-bodyIn {
+  opacity: 1;
+  transform: none;
+  transition-delay: .14s
+}
+
+.wy-copy {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(14 * var(--k));
+  line-height: 1.35;
+  color: #BEBEBE;
+  margin: 0 0 calc(20 * var(--k));
+  max-width: calc(560 * var(--k))
+}
+
+.wy-cardwrap {
+  position: relative
+}
+
+/* the active stage's title + copy, raised above the stat card as its own
+   light notched card — desktop only, see the .wy-lead rules further down */
+.wy-lead {
+  display: none
+}
+
+.wy-card {
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .3);
+  padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(20 * var(--k));
+  display: flex;
+  flex-direction: column;
+  gap: calc(18 * var(--k))
+}
+
+.wy-stat {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: calc(30 * var(--k));
+  line-height: 1.3;
+  color: var(--paper)
+}
+
+.wy-quote {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(14 * var(--k));
+  line-height: 1.3;
+  color: rgba(255, 255, 255, .72);
+  margin: calc(4 * var(--k)) 0 0
+}
+
+@media (min-width:901px) {
+  .wy-item.on .wy-title {
+    display: none
+  }
+
+  .wy-item.on .wy-lead {
+    display: block;
+    background: #F0F0F0;
+    /* the bottom padding is fixed to the same height as the notch cut below
+       it, so that zone is always empty padding and the copy text — which
+       can run 2 or 3 lines depending on the stage — never reaches into it
+       and gets clipped */
+    padding: calc(28 * var(--k)) calc(32 * var(--k)) 80px;
+    margin-bottom: 0;
+    /* the brand's two-step staircase cut: a small step right under the
+       title, then a deep step near the bottom leaving a narrow strip —
+       the persisting left tab's length is however tall this bottom
+       padding is, since the stat card is pinned to this box's own
+       measured bottom edge (see WhereYouAreNow.jsx) */
+    clip-path: polygon(0 0, 100% 0,
+        100% calc(90 * var(--k)),
+        calc(100% - 40 * var(--k)) calc(90 * var(--k)),
+        calc(100% - 40 * var(--k)) calc(100% - 80px),
+        calc(24 * var(--k)) calc(100% - 80px),
+        calc(24 * var(--k)) 100%,
+        0 100%)
+  }
+
+  .wy-leadTitle {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: calc(34 * var(--k));
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    color: #0A0A0A;
+    margin: 0 0 calc(14 * var(--k))
+  }
+
+  .wy-lead .wy-copy {
+    color: #333;
+    max-width: 46ch;
+    margin-bottom: 0;
+    padding-bottom: calc(24 * var(--k))
+  }
+
+  /* the stat card is pinned in place rather than following normal flow —
+     its top offset is set inline (WhereYouAreNow.jsx measures the lead
+     card's actual rendered height, since copy runs 2 or 3 lines depending
+     on the stage) so it always sits flush under the lead card regardless */
+  .wy-item.on .wy-cardwrap {
+    position: absolute;
+    /* the tab is calc(24 * var(--k)) wide (see .wy-lead's clip-path) — this
+       sits exactly 10px clear of its right edge */
+    left: calc(24 * var(--k) + 10px);
+    right: 0
+  }
+}
+
+.wy-read {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  background: var(--paper);
+  height: calc(38 * var(--k));
+  padding-left: calc(12 * var(--k));
+  text-decoration: none;
+  color: #121212;
+  font-family: var(--body);
+  font-size: calc(12 * var(--k));
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: calc(1.2 * var(--k));
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background .18s ease, color .18s ease
+}
+
+.wy-read:hover {
+  background: #121212;
+  color: var(--paper)
+}
+
+.wy-mark {
+  flex: none;
+  width: calc(38 * var(--k));
+  height: calc(38 * var(--k));
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(3, calc(5 * var(--k)));
+  grid-template-rows: repeat(3, calc(5 * var(--k)));
+  gap: calc(1 * var(--k))
+}
+
+.wy-mark i {
+  grid-column: calc(var(--x) + 1);
+  grid-row: calc(var(--y) + 1);
+  background: var(--violet)
+}
+
+.wy-client {
+  position: absolute;
+  right: calc(24 * var(--k));
+  bottom: calc(20 * var(--k));
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: calc(22 * var(--k));
+  letter-spacing: -.01em;
+  color: var(--paper)
+}
+
+/* the board: one tetromino lands per stage */
+.wy-boardwrap {
+  flex: 0 0 calc(420 * var(--k));
+  align-self: center;
+  display: grid;
+  place-items: center
+}
+
+.wy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, calc(64 * var(--k)));
+  grid-auto-rows: calc(64 * var(--k));
+  gap: calc(4 * var(--k))
+}
+
+.wy-cell {
+  background: #2D2D2D;
+  transform: translateY(calc(-14 * var(--k))) scale(.86);
+  opacity: .55;
+  transition: background .45s ease, transform .55s cubic-bezier(.16, .84, .34, 1), opacity .45s ease
+}
+
+.wy-cell.lit {
+  background: #715BE4;
+  transform: none;
+  opacity: 1
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .wy-cell {
+    transform: none;
+    opacity: 1
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .sw-item {
+    transform: none
+  }
+}
+
+/* mobile/no-scroll stages open per-item via .on (see isOn() in
+   WhereYouAreNow.jsx) — .wy-item.on already drives .wy-body/.wy-bodyIn/
+   .wy-title open above, so nothing extra is needed here */
+
+@media (max-width:900px) {
+  .wy {
+    --k: 1px
+  }
+
+  .wy-in {
+    max-width: none;
+    padding: 0 20px 56px;
+    gap: 36px
+  }
+
+  .wy-track,
+  .wy-track.scroll-on {
+    padding: 0;
+    height: auto
+  }
+
+  .wy-sticky {
+    display: block
+  }
+
+  .wy-h {
+    font-size: clamp(28px, 7vw, 40px);
+    max-width: none
+  }
+
+  .wy-panel {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px;
+    gap: 28px;
+    height: auto
+  }
+
+  .wy-left {
+    gap: 0;
+    width: 100%;
+    counter-reset: wystage
+  }
+
+  .wy-boardwrap {
+    display: none
+  }
+
+  .wy-item {
+    counter-increment: wystage;
+    padding: 22px 0
+  }
+
+  .wy-title {
+    cursor: pointer
+  }
+
+  .wy-title::before {
+    content: counter(wystage, decimal-leading-zero) "  ";
+    color: inherit;
+    opacity: .55
+  }
+
+  /* the open stage reads as a headline, not a numbered list entry */
+  .wy-item.on .wy-title::before {
+    content: none
+  }
+
+  .wy-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    width: min(100%, 264px)
+  }
+
+  .wy-cell {
+    aspect-ratio: 1
+  }
+
+  /* the copy paragraph lives inside .wy-lead, which is desktop-only — show
+     just that paragraph on mobile (the heading it also carries would
+     duplicate .wy-title, so that stays hidden) */
+  .wy-lead {
+    display: block;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+    clip-path: none
+  }
+
+  .wy-leadTitle {
+    display: none
+  }
+
+  .wy-lead .wy-copy {
+    margin-bottom: calc(20 * var(--k))
+  }
+
+  /* the stat card becomes a light card (matching the desktop lead card's
+     look) instead of a bordered outline on the dark panel */
+  .wy-card {
+    background: #F0F0F0;
+    border: none;
+    clip-path: none;
+    padding: 24px
+  }
+
+  .wy-stat {
+    color: #0A0A0A;
+    font-size: 26px
+  }
+
+  .wy-quote {
+    color: #333
+  }
+
+  .wy-client {
+    display: block;
+    position: static;
+    width: auto;
+    height: auto;
+    place-items: start;
+    margin-top: 24px;
+    font-size: 18px
+  }
+}
+
+/* ── the levers: one cube, six pieces ──────── */
+.lev {
+  background: var(--paper);
+  color: var(--ink)
+}
+
+.lev-track {
+  position: relative
+}
+
+.lev-track.scroll-on {
+  height: 340vh
+}
+
+.lev-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(56px, 7vw, 100px) var(--side);
+}
+
+.lev-track.scroll-on .lev-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden
+}
+
+.lev-mid {
+  position: relative;
+  z-index: 2
+}
+
+.lev-eyebrow {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 clamp(16px, 1.8vw, 26px)
+}
+
+.lev-eyebrow-t {
+  position: relative;
+  background: var(--acid);
+  color: var(--ink);
+  padding: 4px 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.lev-eyebrow .mark {
+  position: absolute;
+  left: 100%;
+  top: -9px;
+  width: 15px;
+  height: 15px;
+  gap: 1px
+}
+
+.lev-h {
+  font-family: var(--display);
+  font-weight: 400;
+  margin: 0;
+  font-size: 48px;
+  line-height: 1.06;
+  letter-spacing: -.02em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.lev-a,
+.lev-b,
+.lev-hy {
+  display: inline-block;
+  will-change: transform
+}
+
+.lev-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 300px));
+  justify-content: space-between;
+  gap: clamp(16px, 2vw, 34px);
+  position: relative;
+  z-index: 0
+}
+
+.lev-col {
+  display: grid;
+  gap: 0;
+  align-content: start;
+  will-change: transform, opacity
+}
+
+.lev-slot {
+  display: block;
+  width: var(--slotW);
+  height: var(--slotH);
+  --slotW: 80px;
+  --slotH: 120px
+}
+
+.lev-col h3 {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  margin: 28px 0 0;
+}
+
+.lev-col p {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: #5A5A62;
+  max-width: 36ch;
+  margin: 8px 0 0
+}
+
+.lev-cubes {
+  display: none
+}
+
+.js-lev .lev-cubes {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1
+}
+
+.lev-cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform
+}
+
+@media (max-width:900px) {
+  .lev-h {
+    font-size: clamp(28px, 6.2vw, 40px);
+    white-space: normal
+  }
+
+  .lev-stage {
+    justify-content: center;
+    gap: clamp(40px, 9vw, 64px)
+  }
+
+  /* mobile keeps the same two-row shape as desktop (3 across, top row /
+     bottom row) — just the icon + label, no copy, so it stays legible at
+     this width */
+  .lev-col p {
+    display: none
+  }
+
+  .lev-col h3 {
+    margin-top: 12px
+  }
+
+  /* the bottom row (Social/AdOps/AI) sat right under the heading with no
+     breathing room — nudge it down away from .lev-mid */
+  #levRowBot {
+    margin-top: 32px
+  }
+}
+
+@media (max-width:640px) {
+  .lev-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 12px
+  }
+
+  .lev-slot {
+    --slotW: 48px;
+    --slotH: 72px
+  }
+
+  .lev-col h3 {
+    font-size: 11px;
+    letter-spacing: .02em
+  }
+}
+
+/* ── selected work ─────────────────────────── */
+.sw {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(56px, 7vw, 100px) var(--side);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(32px, 4.2vw, 60px)
+}
+
+.sw-in {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: inherit
+}
+
+.sw-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap
+}
+
+.sw-headL {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px
+}
+
+.sw-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 22px
+}
+
+.sw-tag {
+  position: relative;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em;
+  white-space: nowrap
+}
+
+.sw-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: -9px;
+  width: 15px;
+  height: 15px;
+  gap: 1px;
+  transform: rotate(90deg);
+  color: var(--ink)
+}
+
+.sw-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 110%;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  margin: 0
+}
+
+.sw-titleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px
+}
+
+/* desktop keeps this on one line; only the mobile heading breaks after
+   "Selected" to match the reference's two-line layout */
+.sw-hBreak {
+  display: none
+}
+
+/* desktop doesn't show this — "view all" is a mobile-only shortcut since
+   the grid there already shows every item without needing to filter down */
+.sw-viewAll {
+  display: none
+}
+
+.sw-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px
+}
+
+.sw-filter {
+  position: relative;
+  height: 38px;
+  padding: 0 18px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #F2F2F2;
+  border: 0;
+  border-radius: 2px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1;
+  color: #4D4D4D;
+  transition: background .16s ease, color .16s ease
+}
+
+.sw-filter:hover {
+  background: #E6E6E6;
+  color: var(--ink)
+}
+
+.sw-filter[aria-pressed="true"] {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+/* the active pill carries a small block tab, like the brand mark */
+.sw-filter[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -12px;
+  width: 12px;
+  height: 12px;
+  background: var(--violet)
+}
+
+/* a 12-column field; each tile sits where it likes on it */
+.sw-field {
+  position: relative
+}
+
+.sw-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(20px, 2.2vw, 32px);
+  row-gap: clamp(60px, 7vw, 110px);
+  position: relative
+}
+
+.sw-item {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transform: translate3d(0, var(--ty, 0px), 0);
+  will-change: transform
+}
+
+.sw-item[hidden] {
+  display: none
+}
+
+.sw-shot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ar, 16/10);
+  overflow: hidden;
+  background: #EDEDED
+}
+
+.sw-shot img {
+  position: absolute;
+  left: 0;
+  top: -10%;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  transform: translate3d(0, var(--py, 0px), 0);
+  scale: var(--ps, 1);
+  transition: scale .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+.sw-item:hover .sw-shot img {
+  --ps: 1.04
+}
+
+.sw-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px
+}
+
+.sw-client {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #4D4D4D
+}
+
+.sw-title {
+  font-family: var(--display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--ink)
+}
+
+@media (max-width:1000px) {
+  .sw-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 52px
+  }
+
+  .sw-item {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    margin-top: 0 !important;
+    transform: none;
+    --ty: 0px
+  }
+
+  .sw-item:nth-child(2n) {
+    margin-top: 52px !important
+  }
+}
+
+@media (max-width:640px) {
+  .sw-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px
+  }
+
+  .sw-item:nth-child(2n) {
+    margin-top: 0 !important
+  }
+
+  /* full image, no crop/parallax/hover-zoom — those are desktop-hover
+     flourishes that don't translate to touch and were cropping the shot
+     to a fixed aspect ratio instead of showing it whole */
+  .sw-shot {
+    aspect-ratio: auto;
+    height: auto;
+    background: none
+  }
+
+  .sw-shot img {
+    position: static;
+    top: auto;
+    height: auto;
+    object-fit: initial;
+    transform: none !important
+  }
+
+  .sw-item:hover .sw-shot img {
+    --ps: 1
+  }
+
+  .sw-h {
+    font-size: clamp(28px, 7vw, 40px)
+  }
+
+  .sw-hBreak {
+    display: block
+  }
+
+  .sw-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px
+  }
+
+  .sw-headL {
+    width: 100%
+  }
+
+  .sw-titleRow {
+    width: 100%;
+    justify-content: space-between
+  }
+
+  .sw-viewAll {
+    display: inline-flex;
+    flex: none;
+    margin-top: 8px;
+    font-family: var(--body);
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap
+  }
+
+  /* one scrollable row instead of wrapping onto multiple lines — bleeds
+     to the section's own edges so the row can actually scroll past them */
+  .sw-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--side));
+    padding: 0 var(--side)
+  }
+
+  .sw-filters::-webkit-scrollbar {
+    display: none
+  }
+
+  .sw-filter {
+    flex: none;
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px
+  }
+}
+
+/* ── deep dive ─────────────────────────────── */
+/* 1440 x 800 design frame; --k is one design px */
+.cs {
+  position: relative;
+  background: #F6F6EF;
+  color: var(--ink);
+  overflow: hidden;
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px);
+  height: calc(960 * var(--k))
+}
+
+.cs-head {
+  position: absolute;
+  z-index: 3;
+  left: calc(50% - 490 * var(--k));
+  top: calc(80 * var(--k));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--k));
+  width: calc(980 * var(--k))
+}
+
+.cs-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: calc(22 * var(--k))
+}
+
+.cs-tag {
+  position: relative;
+  height: calc(18 * var(--k));
+  box-sizing: border-box;
+  padding: calc(4 * var(--k)) calc(6 * var(--k));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: calc(14 * var(--k));
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+  text-transform: uppercase
+}
+
+.cs-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: calc(12 * var(--k));
+  height: calc(12 * var(--k));
+  gap: calc(.3 * var(--k));
+  transform: rotate(90deg)
+}
+
+.cs-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(48 * var(--k));
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: #1A1C1C;
+  margin: calc(10 * var(--k)) 0 0
+}
+
+.cs-sub {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #3D3D3D;
+  margin: calc(12 * var(--k)) 0 0
+}
+
+/* the deck */
+.cs-deck {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: calc(283 * var(--k));
+  transform: translateX(-50%);
+  width: calc(1000 * var(--k));
+  height: calc(360 * var(--k))
+}
+
+.cs-card {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: calc(20 * var(--k));
+  padding: calc(12 * var(--k));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease
+}
+
+.cs-card.on {
+  opacity: 1;
+  pointer-events: auto
+}
+
+.cs-cardL {
+  flex: none;
+  width: calc(516 * var(--k));
+  height: calc(336 * var(--k));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+.cs-brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: calc(22 * var(--k));
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: #121212
+}
+
+.cs-brand em {
+  font-style: normal;
+  color: #E8622A
+}
+
+.cs-title {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: calc(28 * var(--k));
+  line-height: 1.2;
+  letter-spacing: calc(-.48 * var(--k));
+  color: #1A1C1C;
+  margin: calc(24 * var(--k)) 0 0
+}
+
+.cs-copy {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(14 * var(--k));
+  line-height: 1.2;
+  color: #4C4546;
+  margin: calc(8 * var(--k)) 0 0
+}
+
+/* the two stepped stat blocks */
+.cs-stats {
+  position: relative;
+  width: calc(516 * var(--k));
+  height: calc(112 * var(--k))
+}
+
+.cs-band {
+  position: absolute;
+  top: 0;
+  height: 100%
+}
+
+.cs-band-a {
+  left: 0;
+  width: calc(350 * var(--k));
+  background: rgba(245, 250, 94, .45);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 58.3% 50%, 58.3% 100%, 0 100%)
+}
+
+.cs-band-b {
+  left: calc(204 * var(--k));
+  width: calc(312 * var(--k));
+  background: rgba(113, 91, 228, .26);
+  clip-path: polygon(46.8% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 46.8% 50%)
+}
+
+.cs-fig {
+  position: absolute;
+  height: calc(80 * var(--k));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+.cs-fig b {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: calc(32 * var(--k));
+  line-height: 1.2;
+  color: #181818
+}
+
+.cs-fig span {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: calc(12 * var(--k));
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #181818;
+  white-space: nowrap
+}
+
+.cs-fig-a {
+  left: calc(16 * var(--k));
+  top: calc(16 * var(--k));
+  width: calc(223 * var(--k));
+  align-items: flex-start
+}
+
+.cs-fig-b {
+  right: calc(16 * var(--k));
+  left: auto;
+  top: calc(16 * var(--k));
+  width: calc(197 * var(--k));
+  align-items: flex-end;
+  text-align: right
+}
+
+.cs-shot {
+  flex: none;
+  width: calc(440 * var(--k));
+  height: calc(336 * var(--k));
+  overflow: hidden
+}
+
+.cs-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block
+}
+
+/* the tetris wall of client logos — each piece picks its own case study */
+.cs-lgwrap {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: calc(700 * var(--k));
+  transform: translateX(-50%);
+  max-width: 100%;
+  overflow-x: auto
+}
+
+.cs-loggrid {
+  --cell: calc(58 * var(--k));
+  --rowh: calc(58 * var(--k));
+  --tgap: calc(4 * var(--k));
+  display: grid;
+  grid-template-columns: repeat(16, var(--cell));
+  grid-template-rows: repeat(2, var(--rowh));
+  gap: var(--tgap)
+}
+
+/* Each piece is clipped to its own tetromino, and clip-path can't carry a
+   border — so the outline is the button's background showing through a 1px
+   inset copy of the same shape. */
+.cs-logtile {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: #DEDEDA;
+  cursor: pointer;
+  transition: background .18s ease
+}
+
+.cs-logtile-fill {
+  position: absolute;
+  inset: 1px;
+  background: var(--paper);
+  transition: background .18s ease
+}
+
+.cs-logtile img {
+  position: absolute;
+  height: var(--rowh);
+  padding: calc(10 * var(--k));
+  box-sizing: border-box;
+  object-fit: contain;
+  display: block
+}
+
+.cs-logtile:hover {
+  background: #B9B9B2
+}
+
+.cs-logtile.on {
+  background: #E4E8A0
+}
+
+.cs-logtile.on .cs-logtile-fill {
+  background: #FBFDC6
+}
+
+/* mobile-only deck stepper — desktop picks a study from the wall instead
+   (see the media query below) */
+.cs-nav {
+  display: none
+}
+
+/* the quiet furniture behind it all */
+.cs-deco {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none
+}
+
+.cs-blk {
+  position: absolute;
+  width: calc(72 * var(--k));
+  height: calc(72 * var(--k));
+  background: var(--paper)
+}
+
+.cs-logos {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--k));
+  height: calc(54 * var(--k))
+}
+
+.cs-dot {
+  width: calc(10 * var(--k));
+  height: calc(10 * var(--k));
+  background: #C7BCFF;
+  flex: none
+}
+
+.cs-dot.sm {
+  width: calc(4 * var(--k));
+  height: calc(4 * var(--k))
+}
+
+.cs-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: #F3F3F3;
+  padding: calc(2 * var(--k));
+  flex: none
+}
+
+.cs-tile.lg {
+  width: calc(106 * var(--k));
+  height: calc(54 * var(--k))
+}
+
+.cs-tile.sm {
+  width: calc(53 * var(--k));
+  height: calc(27 * var(--k));
+  background: rgba(245, 250, 94, .3)
+}
+
+.cs-tile img {
+  position: relative;
+  z-index: 1;
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  opacity: .55;
+  filter: grayscale(1)
+}
+
+@media (max-width:900px) {
+  .cs {
+    height: auto;
+    --k: 1px;
+    padding: 56px 20px
+  }
+
+  .cs-head {
+    position: static;
+    width: auto;
+    transform: none;
+    text-align: left;
+    align-items: flex-start
+  }
+
+  .cs-h {
+    font-size: clamp(28px, 7vw, 40px)
+  }
+
+  .cs-deck {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: 100%;
+    height: auto;
+    margin-top: 32px
+  }
+
+  .cs-card {
+    position: relative;
+    inset: auto;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    display: none;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 24px
+  }
+
+  .cs-card.on {
+    display: flex
+  }
+
+  .cs-cardL,
+  .cs-shot {
+    width: 100%;
+    height: auto
+  }
+
+  .cs-shot {
+    order: -1;
+    aspect-ratio: 326 / 230;
+    margin-bottom: 20px
+  }
+
+  .cs-brand {
+    font-size: 28px
+  }
+
+  .cs-title {
+    font-size: 20px;
+    margin-top: 20px
+  }
+
+  .cs-copy {
+    font-size: 12px;
+    margin-top: 12px
+  }
+
+  .cs-stats {
+    position: relative;
+    width: 100%;
+    height: 148px;
+    margin-top: 28px
+  }
+
+  .cs-band-a,
+  .cs-band-b {
+    width: 50%;
+    clip-path: none
+  }
+
+  .cs-band-a {
+    left: 0
+  }
+
+  .cs-band-b {
+    left: 50%
+  }
+
+  .cs-fig-a,
+  .cs-fig-b {
+    width: calc(50% - 32px);
+    height: 96px
+  }
+
+  .cs-fig b {
+    font-size: 40px
+  }
+
+  .cs-fig span {
+    font-size: 13px;
+    white-space: normal
+  }
+
+  .cs-deco {
+    display: none
+  }
+
+  /* the pieces only interlock at their designed 16-column width, so rather
+     than scroll the wall sideways on a phone the deck gets plain arrows */
+  .cs-lgwrap {
+    display: none
+  }
+
+  .cs-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px
+  }
+
+  .cs-nav button {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid #E4E4E4;
+    background: var(--paper);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .16s ease, border-color .16s ease
+  }
+
+  .cs-nav button:active {
+    background: #121212;
+    border-color: #121212
+  }
+
+  .cs-nav svg {
+    width: 26px;
+    height: 26px;
+    display: block
+  }
+
+  .cs-nav button:active svg path {
+    stroke: var(--paper)
+  }
+
+  .cs-nav .prev svg {
+    transform: scaleX(-1)
+  }
+}
+
+/* ── founders ──────────────────────────────── */
+.fo {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(56px, 7vw, 100px) var(--side);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(32px, 4.2vw, 60px)
+}
+
+.fo-in {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: inherit
+}
+
+.fo-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: min(578px, 100%)
+}
+
+.fo-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 22px
+}
+
+.fo-tag {
+  position: relative;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em
+}
+
+.fo-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  gap: 1px;
+  transform: rotate(90deg)
+}
+
+.fo-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 110%;
+  letter-spacing: -.025em;
+  color: #1A1C1C;
+  margin: 0;
+  align-self: stretch
+}
+
+.fo-sub {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -.48px;
+  color: #3D3D3D;
+  margin: 0;
+  align-self: stretch
+}
+
+.fo-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(32px, 8.6vw, 124px);
+  width: 100%
+}
+
+.fo-shot {
+  flex: none;
+  width: 412px;
+  max-width: 42%;
+  aspect-ratio: 412/515;
+  border-radius: 4px;
+  overflow: hidden;
+  /* the mobile art is ~27% transparent by design, so this colour is what
+     shows through its cut-out blocks — it has to be the page white, not a
+     grey placeholder tint (the desktop art is fully opaque, so it's unaffected) */
+  background: var(--paper) url("/founders.png") center top/cover no-repeat
+}
+
+.fo-col {
+  flex: 1;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px
+}
+
+.fo-lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px
+}
+
+.fo-lead-t {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px
+}
+
+.fo-statement {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: clamp(28px, 3.34vw, 48px);
+  line-height: 100%;
+  letter-spacing: -1px;
+  color: #0A0A0A;
+  margin: 0
+}
+
+.fo-copy {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #333;
+  margin: 0
+}
+
+.fo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  color: #181818;
+  text-decoration: none;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: uppercase
+}
+
+.fo-pill-i {
+  width: 26px;
+  height: 26px;
+  flex: none
+}
+
+/* three steps climbing left to right, all standing on one base.
+   The wrapper carries the step as padding, so the boxes grow upward and
+   the row still sizes itself to whichever cell needs the most room. */
+.fo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch
+}
+
+.fo-step {
+  display: flex;
+  align-items: flex-end;
+  min-width: 0
+}
+
+.fo-step:nth-child(1) {
+  padding-top: 72px
+}
+
+.fo-step:nth-child(2) {
+  padding-top: 36px
+}
+
+.fo-step+.fo-step {
+  margin-left: -1px
+}
+
+.fo-stat {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 20px;
+  border: 1px solid #AEAEAE
+}
+
+.fo-stat b {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 120%;
+  color: #181818
+}
+
+.fo-stat p {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: #181818;
+  margin: 0
+}
+
+@media (max-width:900px) {
+  .fo-body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px
+  }
+
+  .fo-shot {
+    width: 100%;
+    max-width: 100%;
+    /* the desktop crop (aspect-ratio 412/515, portrait) doesn't match this
+       image's own shape — matching the aspect-ratio to its real pixel
+       dimensions means cover has nothing to crop, so the whole photo shows */
+    aspect-ratio: 730 / 486;
+    background-image: url("/founders-mobile-img.png");
+    background-size: cover
+  }
+
+  .fo-h {
+    font-size: clamp(28px, 6.2vw, 40px)
+  }
+
+  .fo-statement {
+    font-size: 20px
+  }
+
+  .fo-copy {
+    font-size: 12px
+  }
+
+  .fo-sub {
+    font-size: 17px
+  }
+}
+
+@media (max-width:900px) {
+  .fo-step:nth-child(1) {
+    padding-top: 48px
+  }
+
+  .fo-step:nth-child(2) {
+    padding-top: 24px
+  }
+}
+
+@media (max-width:640px) {
+  .fo-lead-t {
+    gap: 18px
+  }
+
+  .fo-stats {
+    /* breaks out of .fo's own side padding to run edge-to-edge */
+    width: calc(100% + 2 * var(--side));
+    margin-left: calc(-1 * var(--side));
+    margin-right: calc(-1 * var(--side));
+    /* .fo-col is a flex column with a 24px gap, which stacks on top of this
+       margin — 56 + 24 lands the gap under the button at the 80px asked for */
+    margin-top: 56px
+  }
+
+  .fo-step {
+    padding-top: 0 !important;
+    margin-left: 0 !important
+  }
+
+  .fo-stat {
+    height: 100%;
+    padding: 16px;
+    gap: 10px;
+    border: none;
+    border-radius: 0
+  }
+
+  .fo-stat b {
+    font-size: 16px;
+    line-height: 1.2
+  }
+
+  .fo-stat p {
+    font-size: 13px;
+    line-height: 1.25
+  }
+
+  /* reordered so the plain callouts (Forbes, IIT Kanpur) lead and the
+     headline stat (90%) — the only one that keeps its description —
+     lands last, highlighted */
+  .fo-step:nth-child(1) {
+    order: 3
+  }
+
+  .fo-step:nth-child(2) {
+    order: 2
+  }
+
+  .fo-step:nth-child(3) {
+    order: 1
+  }
+
+  /* only the two plain callouts are boxed; the acid 90% block carries its own
+     colour and stays borderless. The middle one drops its left border so the
+     edge it shares with its neighbour stays a single hairline */
+  .fo-step:nth-child(3) .fo-stat {
+    border: 1px solid #AEAEAE
+  }
+
+  .fo-step:nth-child(2) .fo-stat {
+    border: 1px solid #AEAEAE;
+    border-left: 0
+  }
+
+  .fo-step:nth-child(2) .fo-stat p,
+  .fo-step:nth-child(3) .fo-stat p {
+    display: none
+  }
+
+  .fo-step:nth-child(1) .fo-stat {
+    background: var(--acid)
+  }
+}
+
+/* ── inside the partnership: the hex web ───── */
+/* 1440 x 1180 design frame; --k is one design px */
+.pr {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px);
+  padding: calc(80 * var(--k)) 6% calc(60 * var(--k))
+}
+
+.pr-in {
+  width: 100%;
+  position: relative
+}
+
+.pr-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(32 * var(--k));
+  flex-wrap: wrap
+}
+
+.pr-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(6 * var(--k))
+}
+
+.pr-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: calc(22 * var(--k))
+}
+
+.pr-tag {
+  position: relative;
+  height: calc(18 * var(--k));
+  box-sizing: border-box;
+  padding: calc(4 * var(--k)) calc(6 * var(--k));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: calc(14 * var(--k));
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  white-space: nowrap
+}
+
+.pr-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: calc(12 * var(--k));
+  height: calc(12 * var(--k));
+  gap: calc(.3 * var(--k));
+  transform: rotate(90deg)
+}
+
+.pr-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(48 * var(--k));
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  color: #1A1C1C;
+  margin: calc(10 * var(--k)) 0 0;
+  max-width: calc(620 * var(--k))
+}
+
+.pr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8 * var(--k));
+  padding-top: 0
+}
+
+.pr-filter {
+  display: inline-flex;
+  align-items: stretch;
+  height: calc(38 * var(--k));
+  padding: 0;
+  cursor: pointer;
+  background: var(--paper);
+  border: 1px solid #EAEAEA;
+  font-family: var(--body);
+  font-size: calc(15 * var(--k));
+  line-height: 1;
+  color: #1A1C1C;
+  transition: border-color .16s ease
+}
+
+.pr-filter span {
+  display: flex;
+  align-items: center;
+  padding: 0 calc(12 * var(--k))
+}
+
+.pr-filter-n {
+  background: #F2F2F2;
+  font-variant-numeric: tabular-nums;
+  color: #5A5A62
+}
+
+.pr-filter:hover {
+  border-color: #C9C9C9
+}
+
+.pr-filter[aria-pressed="true"] {
+  border-color: var(--acid)
+}
+
+.pr-filter[aria-pressed="true"] .pr-filter-n {
+  background: var(--acid);
+  color: #1A1C1C
+}
+
+.pr-filter[aria-pressed="true"] .pr-filter-l {
+  background: #FBFDD2
+}
+
+/* the web */
+.pr-stage {
+  position: relative;
+  width: 100%;
+  /* taller than the original 1440/860 frame — the outer hex was widened
+     to fully enclose the spread-out logo nodes without touching the inner
+     yellow ring; --s stays width-based so this only adds height */
+  aspect-ratio: 1440 / 1120;
+  margin-top: calc(20 * var(--k));
+  overflow: hidden;
+  container-type: inline-size;
+  --s: .0694444cqw
+}
+
+.pr-web {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%
+}
+
+.pr-web .hex {
+  fill: none;
+  stroke: #E6E6E6;
+  stroke-width: 1.2
+}
+
+.pr-web .spoke {
+  stroke: #EDEDED;
+  stroke-width: 1.2
+}
+
+.pr-web .ring {
+  fill: none;
+  stroke: var(--acid);
+  stroke-width: 40;
+  stroke-linejoin: miter
+}
+
+.pr-web text {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .02em;
+  fill: #1A1C1C;
+  text-anchor: middle;
+  dominant-baseline: middle
+}
+
+.pr-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + var(--x) * var(--s)), calc(-50% + var(--y) * var(--s)));
+  width: calc(120 * var(--s));
+  height: calc(52 * var(--s));
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  transition: opacity .3s ease
+}
+
+.pr-node img {
+  max-width: calc(130 * var(--s));
+  max-height: calc(48 * var(--s));
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block
+}
+
+.pr-stage.filtered .pr-node {
+  opacity: .16
+}
+
+.pr-stage.filtered .pr-node.on {
+  opacity: 1
+}
+
+@media (max-width:1000px) {
+  .pr {
+    --k: min(.1cqw, 1px);
+    padding: 56px 20px
+  }
+
+  .pr-h {
+    font-size: clamp(28px, 6vw, 40px);
+    max-width: none
+  }
+
+  /* --k shrinks to well under 1px at this width (it's a fraction of the
+     stage's own cqw, not the viewport), which made this unreadably tiny —
+     fixed px sidesteps that the way .pr-h already does above */
+  .pr-tagwrap {
+    height: 24px
+  }
+
+  .pr-tag {
+    height: 22px;
+    padding: 4px 8px;
+    font-size: 14px
+  }
+
+  .pr-tagwrap .mark {
+    width: 14px;
+    height: 14px
+  }
+
+  .pr-filters {
+    padding-top: 16px;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto
+  }
+
+  .pr-filter {
+    height: auto;
+    flex: none;
+    border: none;
+    border-radius: 0;
+    background: #F2F2F2;
+    font-size: 15px
+  }
+
+  .pr-filter .pr-filter-n {
+    display: none
+  }
+
+  .pr-filter-l {
+    padding: 12px 18px !important;
+    background: none;
+    white-space: nowrap
+  }
+
+  .pr-filter[aria-pressed="true"] {
+    background: var(--acid)
+  }
+
+  .pr-filter[aria-pressed="true"] .pr-filter-l {
+    background: none;
+    font-weight: 600
+  }
+
+  /* The whole web scales off the stage's own width (--s is 1/1440 of it), so
+     the only way to enlarge the hex and the logos together — without the
+     nodes drifting off the hex — is to widen the stage itself. At the
+     section's width the logos are unreadable on a phone, so the stage runs
+     wider than the screen and its empty corners hang off the sides; the hex
+     is only 83% of the frame, so it still fits. .pr already clips, so this
+     costs no horizontal scrolling. */
+  .pr-stage {
+    width: 106vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    /* the base rule's margin-top is a --k multiple, and --k is a fraction of
+       a pixel at this width (same issue the tag/heading overrides above work
+       around) — fixed px instead */
+    margin-top: 40px
+  }
+}
+
+/* the hex web keeps its shape at every width — its --s unit is a fraction of
+   the stage's own container width (cqw), so it scales down fluidly rather
+   than needing to switch to a different layout on small screens */
+
+/* ── news ──────────────────────────────────── */
+.news {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(56px, 7vw, 100px) var(--side);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(32px, 4.2vw, 60px)
+}
+
+.news-in {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: inherit
+}
+
+/* heading on the left, the row's arrows parked at the far right */
+.news-topbar {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px
+}
+
+.news-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: min(578px, 100%)
+}
+
+.news-nav {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.news-nav button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #E4E4E4;
+  padding: 0;
+  cursor: pointer;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  transition: background .16s ease, border-color .16s ease
+}
+
+.news-nav button:hover {
+  background: #121212;
+  border-color: #121212
+}
+
+.news-nav svg {
+  width: 26px;
+  height: 26px;
+  display: block
+}
+
+.news-nav button:hover svg path {
+  stroke: var(--paper)
+}
+
+.news-nav .prev svg {
+  transform: rotate(180deg)
+}
+
+.news-rail {
+  width: 100%
+}
+
+.news-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 22px
+}
+
+.news-tag {
+  position: relative;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.news-tagwrap .mark {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  gap: 1px;
+  transform: rotate(90deg)
+}
+
+.news-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 110%;
+  letter-spacing: -.025em;
+  text-transform: capitalize;
+  color: #1A1C1C;
+  margin: 0;
+}
+
+.news-sub {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -.48px;
+  color: #3D3D3D;
+  margin: 0;
+}
+
+/* five cards at the design's own card width won't fit a screen, so .news-rail
+   is a window onto a wider row that the header arrows slide one card at a
+   time. It slides by transform, not by scrolling — a scroll animation here
+   gets reverted by Lenis and by snap. */
+.news-rail {
+  overflow: hidden
+}
+
+.news-grid {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  padding-top: 14px;
+  will-change: transform;
+  transition: transform .5s cubic-bezier(.22, .61, .36, 1)
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .news-grid {
+    transition: none
+  }
+}
+
+.news-card {
+  position: relative;
+  flex: 0 0 calc((100% - 60px) / 3);
+  aspect-ratio: 412/515;
+  overflow: visible;
+  background: var(--paper);
+  container-type: inline-size;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* drop a photo in with --img: url("…") on the card */
+.news-shot {
+  position: absolute;
+  inset: 0;
+  background: #E8E6E0 var(--img, none) center/cover no-repeat
+}
+
+.news-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 11.65%;
+  background: var(--acid)
+}
+
+.news-step {
+  position: absolute;
+  left: 60.194%;
+  top: 80.669%;
+  width: 39.806%;
+  height: 7.767%;
+  background: var(--acid)
+}
+
+.news-panel {
+  position: absolute;
+  left: 0;
+  top: 51.769%;
+  width: 60.194%;
+  height: 29.126%;
+  background: var(--paper)
+}
+
+.news-title {
+  position: absolute;
+  left: 4.854cqw;
+  top: 55.653%;
+  width: 48.544cqw;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 6.31cqw;
+  line-height: 112%;
+  letter-spacing: -.03em;
+  color: #000;
+}
+
+.news-read {
+  position: absolute;
+  left: 5.097cqw;
+  top: 92.276%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 3.883cqw;
+  line-height: 120%;
+  letter-spacing: -.48px;
+  color: #000;
+}
+
+.news-read svg {
+  width: 4.854cqw;
+  height: 4.854cqw;
+  flex: none;
+  display: block
+}
+
+.news-card:hover .news-read svg {
+  transform: translateX(4px)
+}
+
+.news-read svg {
+  transition: transform .18s cubic-bezier(.16, .84, .34, 1)
+}
+
+@media (max-width:1199px) {
+  .news-card {
+    flex-basis: calc((100% - 30px) / 2)
+  }
+}
+
+@media (max-width:759px) {
+  .news-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px
+  }
+
+  /* no arrows on a phone — the row is swiped instead, so scrolling goes back
+     to the browser and the JS leaves the track's transform alone */
+  .news-nav {
+    display: none
+  }
+
+  .news-rail {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    /* the row runs to both screen edges, so a card can sit flush left while
+       the next one peeks in from the right. Width is explicit rather than
+       the usual negative-margin-on-an-auto-width breakout: .news-in sets
+       align-items: flex-start, so a stretched auto width (which the trick
+       relies on to fill container-minus-margins) never applies here — it
+       shrink-wraps to content instead, and the base rule's plain `width:
+       100%` pins it back to the pre-breakout container width either way */
+    width: calc(100% + 2 * var(--side));
+    margin: 0 calc(var(--side) * -1);
+    padding: 0 var(--side)
+  }
+
+  .news-rail::-webkit-scrollbar {
+    display: none
+  }
+
+  .news-grid {
+    gap: 16px;
+    padding: 14px 0 8px;
+    transform: none !important;
+    transition: none;
+    will-change: auto
+  }
+
+  .news-card {
+    flex-basis: 78%;
+    scroll-snap-align: start
+  }
+
+  .news-h {
+    font-size: clamp(28px, 7vw, 40px)
+  }
+
+  .news-sub {
+    font-size: 17px
+  }
+}
+
+/* ── final cta ─────────────────────────────── */
+.endcta {
+  display: grid;
+  gap: clamp(28px, 3vw, 44px);
+  justify-items: start
+}
+
+.endcta h2 {
+  max-width: 14ch
+}
+
+
+/* ── footer ────────────────────────────────── */
+/* V2 assembly: 33 pieces fall in, build the wordmark, flatten to one yellow.
+   Every piece carries its own --x/--y/--w/--h grid slot and --at/--dur/--uat
+   timing in the markup, so retiming one piece is a one-line change. */
+.vfoot {
+  --shade-a: #F5FA5E;
+  /* the colour everything flattens to */
+  --shade-b: #E2E84A;
+  --shade-c: #FAFCC9;
+  /* pale */
+  --shade-d: #C9D06B;
+  /* olive */
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(56px, 7vw, 100px) var(--side);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 6vw, 90px)
+}
+
+.vfoot__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(24px, 3vw, 40px)
+}
+
+.vfoot__title {
+  font-family: var(--display);
+  font-weight: 400;
+  margin: 0;
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+  max-width: 16ch
+}
+
+.vfoot__ctaWrap {
+  display: flex
+}
+
+.vfoot__cta {
+  display: inline-flex;
+  align-items: stretch;
+  text-decoration: none;
+  background: var(--paper)
+}
+
+.vfoot__ctaLabel {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  color: #121212;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap
+}
+
+.vfoot__ctaIcon {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  background: var(--acid);
+  display: grid;
+  place-items: center
+}
+
+.vfoot__ctaMark {
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  grid-template-rows: repeat(3, 6px);
+  gap: 1px
+}
+
+.vfoot__ctaMark i {
+  grid-column: calc(var(--x) + 1);
+  grid-row: calc(var(--y) + 1);
+  background: var(--violet)
+}
+
+.vfoot__cta:hover .vfoot__ctaIcon {
+  background: var(--paper)
+}
+
+/* the well sits at the bottom of a taller, clipped runway — the extra
+   headroom above it (7 row-heights, vs. the well's own 5) is where pieces
+   are visibly falling from, but it's still solid footer background the
+   whole way, so nothing ever pokes out above the footer into the section
+   above it */
+.vfoot__wellWrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 35 / 12;
+  /* collapses to just the well's own 5-row height once the wordmark is
+     formed (see Footer.jsx) — the well is pinned to the bottom of this box,
+     so shrinking it slides the wordmark up to close the gap under the CTA */
+  transition: height .8s cubic-bezier(.16, .84, .34, 1)
+}
+
+/* below 640px the word regroups onto two lines ("VID" / "ROW") on a 19x11
+   grid instead of one 35x5 row — see FOOTER_PIECES_MOBILE */
+.vfoot__wellWrap.is-2line {
+  aspect-ratio: 19 / 18
+}
+
+/* the well: 35 x 5 cells, pieces sit on it by grid slot */
+.vfoot__well {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(35, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  aspect-ratio: 35 / 5
+}
+
+.vfoot__well.is-2line {
+  grid-template-columns: repeat(19, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  aspect-ratio: 19 / 11
+}
+
+.vfoot__piece {
+  grid-column: calc(var(--x) + 1) / span var(--w);
+  grid-row: calc(var(--y) + 1) / span var(--h);
+  /* the runway above the well is 7 row-heights tall (see .vfoot__wellWrap);
+     as a fraction of this piece's own height (--h rows) that's 700%/--h —
+     enough travel to read as a real fall, always clipped by the wrap above */
+  transform: translateY(calc(700% / var(--h) * -1));
+  /* invisible until it's actually falling — a piece parked in its start
+     position before the trigger reads as "stuck", not "about to fall", so
+     nothing is shown at all until it starts dropping */
+  opacity: 0;
+  /* a plain transition, kicked off by a JS timer per piece (see Footer.jsx)
+     rather than a long CSS animation-delay — a multi-second delay before a
+     short burst is exactly what some browsers deprioritize on a throttled
+     timeline, skipping straight to the end state instead of painting the
+     drop. A transition started fresh by a real setTimeout callback doesn't
+     have that problem */
+  transition: transform var(--dur, .6s) cubic-bezier(.34, 1.56, .64, 1),
+    opacity .2s ease
+}
+
+.vfoot__piece--fallen {
+  transform: translateY(0);
+  opacity: 1
+}
+
+.vfoot__pieceIn {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(var(--w), 1fr);
+  grid-template-rows: repeat(var(--h), 1fr)
+}
+
+.vfoot__pieceIn i {
+  grid-column: calc(var(--x) + 1);
+  grid-row: calc(var(--y) + 1);
+  background: var(--c);
+  transition: background .32s linear
+}
+
+.vfoot__piece--fallen .vfoot__pieceIn i {
+  background: var(--shade-a)
+}
+
+/* pre-placed pieces: already sitting in their final spot, already flattened —
+   only the remaining pieces fall when the section scrolls into view */
+.vfoot__piece--pre {
+  transform: translateY(0);
+  opacity: 1
+}
+
+.vfoot__piece--pre .vfoot__pieceIn i {
+  background: var(--shade-a)
+}
+
+/* safety net: is-revealed only lands well after every piece's fall should
+   have finished (see REVEAL_DELAY in Footer.jsx) — if a piece's timer or
+   transition ever fails to land for any reason, the word must still end up
+   complete rather than staying invisible forever */
+.vfoot.is-revealed .vfoot__piece {
+  opacity: 1 !important;
+  transform: translateY(0) !important
+}
+
+.vfoot.is-revealed .vfoot__pieceIn i {
+  background: var(--shade-a) !important
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .vfoot__piece {
+    transform: none;
+    opacity: 1;
+    transition: none
+  }
+
+  .vfoot__pieceIn i {
+    background: var(--shade-a);
+    transition: none
+  }
+}
+
+@media (max-width:640px) {
+  .vfoot {
+    gap: 36px
+  }
+
+  .vfoot__title {
+    font-size: 32px
+  }
+}
+
+/* the nav/legal panel below the wordmark: collapsed to nothing until the
+   fall finishes, then it grows the footer's own height and slides/fades up
+   into place — see REVEAL_DELAY in Footer.jsx for the timing */
+.vfoot__bottomOuter {
+  display: grid;
+  grid-template-rows: 0fr;
+  /* cancels out the flex `gap` on .vfoot while collapsed, so there's no
+     stray blank space reserved below the wordmark before the reveal */
+  margin-top: clamp(-90px, -6vw, -48px);
+  transition: grid-template-rows .7s cubic-bezier(.16, .84, .34, 1),
+    margin-top .7s cubic-bezier(.16, .84, .34, 1)
+}
+
+.vfoot.is-revealed .vfoot__bottomOuter {
+  grid-template-rows: 1fr;
+  margin-top: 0
+}
+
+.vfoot__bottomIn {
+  overflow: hidden
+}
+
+.vfoot__bottom {
+  padding-top: clamp(32px, 4vw, 56px);
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .5s ease .12s, transform .6s cubic-bezier(.16, .84, .34, 1) .12s
+}
+
+.vfoot.is-revealed .vfoot__bottom {
+  opacity: 1;
+  transform: none
+}
+
+.vfoot__bottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 64px);
+  flex-wrap: wrap
+}
+
+.vfoot__tagline {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 16px;
+  color: rgba(255, 255, 255, .72);
+  max-width: 20ch
+}
+
+.vfoot__cols {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 32px)
+}
+
+.vfoot__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px
+}
+
+.vfoot__colHead {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--paper)
+}
+
+.vfoot__colHead .wy-mark {
+  width: 14px;
+  height: 14px;
+  grid-template-columns: repeat(3, 4px);
+  grid-template-rows: repeat(3, 4px);
+  gap: .5px
+}
+
+.vfoot__links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 40px)
+}
+
+.vfoot__links a {
+  color: rgba(255, 255, 255, .6);
+  text-decoration: none;
+  font-family: var(--body);
+  font-size: 14px;
+  white-space: nowrap;
+  transition: color .18s ease
+}
+
+.vfoot__links a:hover {
+  color: var(--paper)
+}
+
+.vfoot__legal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(32px, 5vw, 56px);
+  font-family: var(--body);
+  font-size: 13px;
+  color: rgba(255, 255, 255, .5)
+}
+
+.vfoot__legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px
+}
+
+.vfoot__legal a:hover {
+  color: var(--paper)
+}
+
+.vfoot__dot {
+  color: rgba(255, 255, 255, .3)
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .vfoot__bottom {
+    opacity: 1;
+    transform: none;
+    transition: none
+  }
+}
+
+@media (max-width:640px) {
+  .vfoot__bottomRow {
+    flex-direction: column;
+    gap: 32px
+  }
+}
+
+/* ── reveal ────────────────────────────────── */
+.rv {
+  opacity: 0;
+  transform: translateY(calc(var(--cell) * .5))
+}
+
+.rv.in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.16, .84, .34, 1)
+}
+
+/* ── focus ─────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+.rail:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px
+}
+
+.f-violet a:focus-visible,
+.f-violet button:focus-visible,
+.f-ink a:focus-visible,
+.f-ink button:focus-visible,
+.f-ink .rail:focus-visible,
+.well-sec a:focus-visible,
+.well-sec button:focus-visible {
+  outline-color: var(--acid)
+}
+
+/* ── responsive ────────────────────────────── */
+@media (max-width:1080px) {
+  .levers {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .workgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .feed {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+@media (max-width:900px) {
+  .hero-in {
+    grid-template-columns: 1fr;
+    align-items: start
+  }
+
+  .hero-copy {
+    padding-bottom: clamp(30px, 5vw, 48px)
+  }
+
+  .hero-art {
+    margin-left: calc(var(--gut) * -1);
+    height: calc(var(--cell) * 5.2)
+  }
+
+  .wellgrid {
+    grid-template-columns: 1fr
+  }
+
+  .dive {
+    grid-template-columns: 1fr;
+    align-items: start
+  }
+
+  .people {
+    grid-template-columns: 1fr
+  }
+
+  .nav-links {
+    display: none
+  }
+
+  .nav-cta {
+    margin-left: auto
+  }
+}
+
+@media (max-width:640px) {
+  :root {
+    --cell: clamp(28px, 8.4vw, 38px)
+  }
+
+  .levers,
+  .workgrid,
+  .feed {
+    grid-template-columns: 1fr
+  }
+
+  .board {
+    width: calc(var(--cell) * 10)
+  }
+
+  .stagebar {
+    flex-wrap: wrap
+  }
+
+  .stagebar button {
+    flex: 1 1 44%;
+    border-bottom: 1px solid rgba(255, 255, 255, .18)
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: .001ms !important
+  }
+
+  .rv {
+    opacity: 1;
+    transform: none
+  }
+
+  .gl,
+  .connect-tab {
+    transform: none
+  }
+}
+
+/* ── case study detail page ───────────────────────────── */
+.csp {
+  background: var(--paper);
+  color: var(--ink);
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px);
+  padding-bottom: clamp(56px, 7vw, 100px)
+}
+
+.csp-in {
+  padding: 0 58px 0 182px
+}
+
+.csp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: clamp(24px, 3.5vw, 48px) 58px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+  box-sizing: border-box
+}
+
+
+.csp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(28px, 4vw, 44px)
+}
+
+.csp-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  margin: 0;
+  max-width: 16ch
+}
+
+.csp-note {
+  flex: none;
+  width: min(320px, 32%);
+  border-left: 2px solid var(--acid);
+  padding-left: 16px;
+  margin: 6px 0 0;
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5A5A62
+}
+
+.csp-banner {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: clamp(20px, 3vw, 32px)
+}
+
+.csp-banner img {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+.csp-meta {
+  display: flex;
+  gap: clamp(32px, 6vw, 72px);
+  padding-top: clamp(20px, 3vw, 28px);
+  border-top: 1px solid #EAEAEA
+}
+
+.csp-metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px
+}
+
+.csp-metaLabel {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #8A8A92
+}
+
+.csp-metaValue {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -.01em
+}
+
+.csp-aoc {
+  padding-top: clamp(56px, 7vw, 96px)
+}
+
+.csp-aoc-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(48px, 6vw, 80px)
+}
+
+.csp-aoc-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  margin: 0;
+  max-width: 22ch
+}
+
+.csp-aoc-copy {
+  flex: none;
+  width: min(360px, 34%);
+  margin: 6px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #4C4546
+}
+
+.csp-aoc-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 56px)
+}
+
+.csp-aoc-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.csp-aoc-colHead {
+  position: relative;
+  width: 100%;
+  height: 96px;
+  margin-bottom: 20px
+}
+
+.csp-aoc-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 46px;
+  background: rgba(113, 91, 228, .16);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 15px
+}
+
+.csp-aoc-tag {
+  position: absolute;
+  left: 44px;
+  top: 40px;
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 16px;
+  background: rgba(245, 250, 94, .55);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap
+}
+
+.csp-aoc-desc {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4C4546;
+  max-width: 30ch
+}
+
+@media (max-width:760px) {
+  .csp-aoc-head {
+    flex-direction: column
+  }
+
+  .csp-aoc-copy {
+    width: 100%
+  }
+
+  .csp-aoc-cols {
+    grid-template-columns: 1fr;
+    gap: 32px
+  }
+}
+
+@media (max-width:760px) {
+  .csp-head {
+    flex-direction: column
+  }
+
+  .csp-h {
+    max-width: none;
+    font-size: clamp(26px, 7vw, 34px)
+  }
+
+  .csp-note {
+    width: 100%;
+    padding-left: 14px
+  }
+
+  .csp-meta {
+    gap: 28px;
+    flex-wrap: wrap
+  }
+}
+
+.csp-mid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-eyebrow2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: #8A8A92;
+  margin-bottom: 16px
+}
+
+.csp-eyebrow2 b {
+  color: var(--ink);
+  font-weight: 700
+}
+
+.csp-eyebrow2-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--violet);
+  flex: none
+}
+
+.csp-eyebrow2-sep {
+  color: #C7C7CE
+}
+
+.csp-mid-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  margin: 0 0 20px
+}
+
+.csp-mid-copy {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4C4546;
+  max-width: 40ch;
+  margin: 0
+}
+
+.csp-mid-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+  flex: none
+}
+
+.csp-statCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px
+}
+
+.csp-statGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 90px);
+  grid-template-rows: repeat(var(--rows), 90px);
+  gap: 2px;
+  background: var(--paper)
+}
+
+.csp-statGrid--sm .csp-cell {
+  background: #FBFDC6
+}
+
+.csp-statGrid--lg .csp-cell {
+  background: var(--acid)
+}
+
+.csp-statVal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 32px;
+  pointer-events: none
+}
+
+.csp-statLabel {
+  font-family: var(--body);
+  font-size: 15px;
+  color: #9A9AA2
+}
+
+@media (max-width:900px) {
+  .csp-mid {
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .csp-mid-right {
+    width: 100%;
+    justify-content: flex-start
+  }
+}
+
+@media (max-width:480px) {
+  .csp-statGrid {
+    grid-template-columns: repeat(2, 64px);
+    grid-template-rows: repeat(var(--rows), 64px)
+  }
+
+  .csp-statVal {
+    height: 64px;
+    font-size: 24px
+  }
+}
+
+.csp-how {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(32px, 5vw, 72px);
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-how-left {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 620px
+}
+
+.csp-how-right {
+  flex: none;
+  width: min(560px, 42%);
+  align-self: flex-start
+}
+
+.csp-how-right img {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+.csp-how-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin: 0 0 20px
+}
+
+.csp-how-h em {
+  font-style: normal;
+  color: var(--violet)
+}
+
+.csp-how-copy {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4C4546;
+  max-width: 52ch;
+  margin: 0 0 40px
+}
+
+.csp-howBlock {
+  padding: 24px 0
+}
+
+.csp-howTag {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(245, 250, 94, .55);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 16px
+}
+
+.csp-howSub {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -.01em;
+  margin: 0 0 10px
+}
+
+.csp-howDesc {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4C4546;
+  max-width: 48ch;
+  margin: 0
+}
+
+.csp-howDiv {
+  border: 0;
+  border-top: 1px solid #EAEAEA;
+  margin: 0
+}
+
+.csp-howNote {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 24px 0 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--ink)
+}
+
+@media (max-width:900px) {
+  .csp-how {
+    flex-direction: column
+  }
+
+  .csp-how-left {
+    max-width: none
+  }
+
+  .csp-how-right {
+    width: 100%;
+    order: -1
+  }
+}
+
+.csp-hooks {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-hooks-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 0 0 clamp(48px, 6vw, 72px)
+}
+
+.csp-hooks-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px
+}
+
+.csp-hooks-pin {
+  position: absolute;
+  left: 25%;
+  top: -46px;
+  width: 44px;
+  height: 44px;
+  background: var(--ink);
+  border-radius: 50% 50% 50% 4px;
+  transform: translateX(-50%) rotate(45deg);
+  display: grid;
+  place-items: center;
+  z-index: 1
+}
+
+.csp-hooks-pinDot {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: #6FA84A;
+  color: #fff;
+  border-radius: 50%;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 13px;
+  transform: rotate(-45deg)
+}
+
+.csp-hookCard {
+  position: relative;
+  background: #F5F5F5;
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  padding: 28px 24px 32px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column
+}
+
+.csp-hookNum {
+  font-family: var(--body);
+  font-size: 14px;
+  color: #6C6A78;
+  margin-bottom: auto;
+  padding-bottom: 60px
+}
+
+.csp-hookTitle {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  white-space: pre-line;
+  margin: 0 0 40px
+}
+
+.csp-hookDesc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5A5A62;
+  margin: 0
+}
+
+@media (max-width:900px) {
+  .csp-hooks-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px
+  }
+
+  .csp-hooks-pin {
+    display: none
+  }
+
+  .csp-hookCard {
+    min-height: auto
+  }
+}
+
+@media (max-width:520px) {
+  .csp-hooks-row {
+    grid-template-columns: 1fr
+  }
+}
+
+.csp-celeb {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-celeb-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 0 0 20px
+}
+
+.csp-celeb-h em {
+  font-style: normal;
+  color: var(--violet)
+}
+
+.csp-celeb-copy {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4C4546;
+  max-width: 60ch;
+  margin: 0 0 48px
+}
+
+.csp-celeb-body {
+  display: flex;
+  gap: clamp(32px, 5vw, 64px);
+  margin-bottom: clamp(56px, 6vw, 80px)
+}
+
+.csp-celeb-points {
+  flex: 1 1 340px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px
+}
+
+.csp-celebPoint-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px
+}
+
+.csp-celebBars {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: none
+}
+
+.csp-celebPoint-h h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+  letter-spacing: -.01em;
+  margin: 0
+}
+
+.csp-celebPoint p {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5A5A62;
+  max-width: 34ch;
+  margin: 0
+}
+
+.csp-quoteCard {
+  position: relative;
+  flex: 1 1 420px;
+  background: rgba(245, 250, 94, .45);
+  padding: 32px 36px 32px 176px
+}
+
+.csp-quoteCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 140px;
+  height: 100px;
+  background: var(--paper);
+  z-index: 0
+}
+
+.csp-quoteMark {
+  position: absolute;
+  left: 24px;
+  top: 22px;
+  display: block;
+  width: 87px;
+  height: 67px;
+  z-index: 1
+}
+
+.csp-quoteEyebrow {
+  display: block;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6C6A78;
+  margin: 0 0 16px
+}
+
+.csp-quoteText {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  margin: 0 0 16px
+}
+
+.csp-quoteSub {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5A5A62;
+  margin: 0
+}
+
+.csp-celebStats {
+  display: flex;
+  gap: clamp(40px, 6vw, 96px);
+  flex-wrap: wrap
+}
+
+.csp-celebStat {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.csp-celebStatGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 110px);
+  gap: 2px;
+  background: var(--paper)
+}
+
+.csp-celebStatGrid--violet {
+  grid-template-rows: repeat(2, 110px)
+}
+
+.csp-celebStatGrid--yellow {
+  grid-template-rows: 110px
+}
+
+.csp-celebStatGrid--violet .csp-cell {
+  background: #C7BCFF
+}
+
+.csp-celebStatGrid--yellow .csp-cell {
+  background: #FBFDC6
+}
+
+.csp-cell--mid {
+  grid-column: 2
+}
+
+.csp-celebStatVal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 30px;
+  white-space: nowrap;
+  pointer-events: none
+}
+
+.csp-celebStatLabel {
+  font-family: var(--body);
+  font-size: 15px;
+  color: #9A9AA2
+}
+
+@media (max-width:900px) {
+  .csp-celeb-body {
+    flex-direction: column
+  }
+
+  .csp-quoteWrap {
+    margin-top: 40px
+  }
+}
+
+@media (max-width:480px) {
+  .csp-celebStatGrid {
+    grid-template-columns: repeat(3, 80px)
+  }
+
+  .csp-celebStatGrid--violet {
+    grid-template-rows: repeat(2, 80px)
+  }
+
+  .csp-celebStatGrid--yellow {
+    grid-template-rows: 80px
+  }
+
+  .csp-celebStatVal {
+    height: 80px;
+    font-size: 20px
+  }
+}
+
+.csp-cac {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-cac-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: 28px
+}
+
+.csp-cac-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 16px 0 0
+}
+
+.csp-cac-h em {
+  font-style: normal;
+  color: var(--violet)
+}
+
+.csp-cac-copy {
+  flex: none;
+  width: min(340px, 34%);
+  margin: 8px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4C4546
+}
+
+.csp-cac-caption {
+  display: block;
+  font-family: var(--body);
+  font-size: 14px;
+  color: #9A9AA2;
+  margin-bottom: 24px
+}
+
+.csp-cacChart {
+  position: relative;
+  width: 100%
+}
+
+.csp-cacChart svg {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+.csp-cacGrid {
+  stroke: #EFEFEF;
+  stroke-width: 1
+}
+
+.csp-cacAxis {
+  stroke: #E2E2E2;
+  stroke-width: 1
+}
+
+.csp-cacLine {
+  fill: none;
+  stroke-width: 3
+}
+
+.csp-cacLine--dark {
+  stroke: #3A3A3A
+}
+
+.csp-cacLine--violet {
+  stroke: var(--violet)
+}
+
+.csp-cacDot--dark {
+  fill: #3A3A3A
+}
+
+.csp-cacDot--violet {
+  fill: var(--violet)
+}
+
+.csp-cacVal {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 28px;
+  white-space: nowrap
+}
+
+.csp-cacVal--start {
+  left: 3.4%;
+  top: 62%;
+  color: var(--ink)
+}
+
+.csp-cacVal--darkEnd {
+  left: 96.6%;
+  top: 15%;
+  color: var(--ink)
+}
+
+.csp-cacVal--violetEnd {
+  left: 96.6%;
+  top: 56%;
+  color: var(--violet)
+}
+
+.csp-cacAxisLabels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-family: var(--body);
+  font-size: 18px;
+  color: #9A9AA2
+}
+
+.csp-cacLegend {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 40px 0 0
+}
+
+.csp-cacLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 15px;
+  color: #3A3A3A
+}
+
+.csp-cacSwatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  flex: none
+}
+
+.csp-cacSwatch--violet {
+  background: var(--violet)
+}
+
+.csp-cacSwatch--dark {
+  background: #3A3A3A
+}
+
+@media (max-width:900px) {
+  .csp-cac-head {
+    flex-direction: column
+  }
+
+  .csp-cac-copy {
+    width: 100%
+  }
+
+  .csp-cacVal {
+    font-size: 20px
+  }
+}
+
+.csp-reel {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-reel-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 16px 0 clamp(40px, 5vw, 64px)
+}
+
+.csp-reel-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px)
+}
+
+.csp-reel-row--4 {
+  grid-template-columns: repeat(4, 1fr)
+}
+
+.csp-reelCard {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  display: block
+}
+
+.csp-reelPlaceholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #E7E7E7, #CFCFCF)
+}
+
+.csp-reelPlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  z-index: 1
+}
+
+.csp-reelPlay span {
+  width: 14px;
+  height: 14px;
+  background: var(--ink)
+}
+
+.csp-reelLabel {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1;
+  background: var(--acid);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 10px
+}
+
+@media (max-width:760px) {
+  .csp-reel-row {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto
+  }
+}
+
+.csp-more {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-more-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vw, 64px)
+}
+
+.csp-more-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -.02em;
+  margin: 0
+}
+
+.csp-more-cta {
+  display: flex;
+  align-items: stretch;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  flex: none
+}
+
+.csp-more-cta span:first-child {
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  white-space: nowrap
+}
+
+.csp-more-ctaIcon {
+  width: 34px;
+  background: var(--acid);
+  display: grid;
+  place-items: center
+}
+
+.csp-more-ctaIcon::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: var(--ink);
+  transform: skew(-10deg, -10deg)
+}
+
+.csp-more-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px
+}
+
+.csp-moreCard {
+  display: block;
+  border: 1px solid #EAEAEA;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink)
+}
+
+.csp-moreShot {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 24px
+}
+
+.csp-moreShot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+.csp-moreBrand {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -.02em;
+  margin-bottom: 16px
+}
+
+.csp-moreBrand em {
+  font-style: normal;
+  color: #E8622A
+}
+
+.csp-moreStat {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 36px;
+  letter-spacing: -.01em;
+  margin-bottom: 16px
+}
+
+.csp-moreStat b {
+  font-weight: 700
+}
+
+.csp-moreDesc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4C4546;
+  margin: 0 0 24px
+}
+
+.csp-moreRead {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline
+}
+
+.csp-moreArrow {
+  width: 18px;
+  height: 18px
+}
+
+@media (max-width:900px) {
+  .csp-more-head {
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .csp-more-row {
+    grid-template-columns: 1fr
+  }
+}
