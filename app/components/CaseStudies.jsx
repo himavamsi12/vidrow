@@ -135,6 +135,15 @@ export default function CaseStudies() {
                 </div>
                 <h3 className="cs-title">{c.title}</h3>
                 <p className="cs-copy">{c.copy}</p>
+                <a className="cs-pill" href="/case-study/platinumrx">
+                  <span>Read case study</span>
+                  <svg className="cs-pill-i" viewBox="0 0 40 40" aria-hidden="true">
+                    <path
+                      fill="var(--violet)"
+                      d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z"
+                    />
+                  </svg>
+                </a>
               </div>
               <div className="cs-stats">
                 <span className="cs-band cs-band-a" />

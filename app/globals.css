@@ -264,7 +264,7 @@ a {
   background: var(--paper);
   box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   transition: opacity .5s ease, transform .35s cubic-bezier(.16, .84, .34, 1)
 }
@@ -277,8 +277,8 @@ html.nav-hidden .hx-bar {
 
 .hx-logo {
   display: block;
-  width: calc(56 * var(--k));
-  height: calc(56 * var(--k));
+  width: calc(46 * var(--k));
+  height: calc(46 * var(--k));
   text-decoration: none
 }
 
@@ -592,10 +592,39 @@ html.nav-hidden .hx-bar {
   clip-path: polygon(66.7% 0, 100% 0, 100% 100%, 0 100%, 0 21.7%, 33.3% 21.7%, 33.3% 10.9%, 66.7% 10.9%)
 }
 
-/* once all four have shown, the blocks rise and close the hero */
+/* the hero's own resting staircase overlaps its steps' footprints on
+   purpose, for the 3D look (step s5 e.g. runs under s1 and s2 both). The
+   curtain plays the same six steps as a genuine cover-the-screen wipe
+   instead — each one growing tall independently as it closes — and in any
+   region two steps' footprints overlap, whichever sits on top swallows the
+   other's leading edge as it rises, reading as one step merging into its
+   neighbour rather than a clean straight rise. Scoped to just the curtain's
+   own copy, each step here gets an exclusive horizontal slice instead, so
+   nothing ever grows behind — or gets grown over by — another step. */
+.hero-curtain .hx-s1 {
+  width: 44%
+}
+
+.hero-curtain .hx-s5 {
+  width: 7%
+}
+
+.hero-curtain .hx-s2 {
+  width: 7%
+}
+
+.hero-curtain .hx-s3 {
+  width: 14%
+}
+
+/* once all four have shown, the blocks rise and close the hero. The 1px
+   paper-colored seam (see the base .hx-step box-shadow) stays on through the
+   whole rise instead of clearing immediately — without it, two same-colored
+   steps sitting edge to edge (both step bars are yellow, or both violet)
+   read as one shape merging together rather than two straight bars, since
+   there's nothing marking where one stops and the next starts. */
 .hx-stair.closed .hx-step {
   top: 0;
-  box-shadow: none;
   transition: top .75s cubic-bezier(.5, 0, .2, 1), background-color .4s ease, clip-path .75s cubic-bezier(.5, 0, .2, 1)
 }
 
@@ -747,7 +776,7 @@ html.nav-hidden .hx-bar {
   font-family: var(--display);
   font-weight: 400;
   margin: 0;
-  font-size: min(calc(64 * var(--k)), 48px);
+  font-size: min(calc(64 * var(--k)), 64px);
   line-height: 1.5;
   letter-spacing: calc(-2 * var(--k));
   color: #121212
@@ -786,15 +815,15 @@ html.nav-hidden .hx-bar {
   font-size: 18px;
   line-height: 1.4;
   color: #4C4546;
-  margin: calc(28 * var(--k)) 0 0;
-  max-width: calc(724 * var(--k))
+  margin: calc(12 * var(--k)) 0 0;
+  max-width: calc(620 * var(--k))
 }
 
 .hx-cta {
   display: inline-flex;
   align-items: stretch;
   text-decoration: none;
-  margin-top: calc(30 * var(--k));
+  margin-top: calc(44 * var(--k));
   background: #121212
 }
 
@@ -2611,15 +2640,11 @@ html.nav-hidden .hx-bar {
 
 .wy-cell {
   background: #2D2D2D;
-  transform: translateY(calc(-14 * var(--k))) scale(.86);
-  opacity: .55;
-  transition: background .45s ease, transform .55s cubic-bezier(.16, .84, .34, 1), opacity .45s ease
+  transition: background .45s ease
 }
 
 .wy-cell.lit {
-  background: #715BE4;
-  transform: none;
-  opacity: 1
+  background: #715BE4
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -2748,6 +2773,17 @@ html.nav-hidden .hx-bar {
 
   .wy-quote {
     color: #333
+  }
+
+  /* the card itself goes light on mobile (see .wy-card above) — the read
+     link was still the desktop's white-on-dark color, invisible against it */
+  .wy-read {
+    color: #0A0A0A
+  }
+
+  .wy-mark {
+    width: 18px;
+    height: 18px
   }
 
   .wy-client {
@@ -2925,7 +2961,7 @@ html.nav-hidden .hx-bar {
   }
 
   .lev-col h3 {
-    margin-top: 12px
+    margin-top: 18px
   }
 
   /* the bottom row (Social/AdOps/AI) sat right under the heading with no
@@ -2948,7 +2984,11 @@ html.nav-hidden .hx-bar {
 
   .lev-col h3 {
     font-size: 11px;
-    letter-spacing: .02em
+    letter-spacing: .02em;
+    /* the falling-piece icon above this can render a touch taller than its
+       declared --slotH at this width — extra margin keeps the label clear
+       of it even then, rather than just matching the slot exactly */
+    margin-top: 22px
   }
 }
 
@@ -3130,8 +3170,8 @@ html.nav-hidden .hx-bar {
 
 .sw-shot img.sw-brandTag {
   position: absolute;
-  left: 16px;
-  top: 16px;
+  left: 0;
+  top: 0;
   width: auto;
   height: clamp(28px, 2.4vw, 36px);
   object-fit: contain;
@@ -3254,13 +3294,20 @@ html.nav-hidden .hx-bar {
   }
 
   /* one scrollable row instead of wrapping onto multiple lines — bleeds
-     to the section's own edges so the row can actually scroll past them */
+     to the section's own edges so the row can actually scroll past them.
+     width:100% is required, not just align-items:stretch on the parent —
+     without an explicit width this flex item sizes to its (nowrap, so
+     very wide) content instead of the stretched size, and the whole page
+     gains horizontal scroll instead of just this row. */
   .sw-filters {
+    width: calc(100% + 2 * var(--side));
+    max-width: calc(100% + 2 * var(--side));
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
     margin: 0 calc(-1 * var(--side));
-    padding: 0 var(--side)
+    padding: 0 var(--side);
+    box-sizing: border-box
   }
 
   .sw-filters::-webkit-scrollbar {
@@ -3425,6 +3472,27 @@ html.nav-hidden .hx-bar {
   line-height: 1.2;
   color: #4C4546;
   margin: calc(8 * var(--k)) 0 0
+}
+
+.cs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--k));
+  margin: calc(20 * var(--k)) 0 calc(24 * var(--k));
+  background: none;
+  color: #181818;
+  text-decoration: none;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: calc(13 * var(--k));
+  letter-spacing: .02em;
+  text-transform: uppercase
+}
+
+.cs-pill-i {
+  width: calc(16 * var(--k));
+  height: calc(16 * var(--k));
+  flex: none
 }
 
 /* the two stepped stat blocks */
@@ -4254,53 +4322,40 @@ html.nav-hidden .hx-bar {
 }
 
 .pr-filter {
-  display: inline-flex;
-  align-items: stretch;
+  position: relative;
   height: calc(38 * var(--k));
-  padding: 0;
+  padding: 0 calc(18 * var(--k));
+  box-sizing: border-box;
   cursor: pointer;
-  background: var(--paper);
-  border: 1px solid #EAEAEA;
+  background: #F2F2F2;
+  border: 0;
+  border-radius: 2px;
   font-family: var(--body);
   font-size: calc(15 * var(--k));
   line-height: 1;
-  color: #1A1C1C;
-  transition: border-color .16s ease
-}
-
-.pr-filter span {
-  display: flex;
-  align-items: center;
-  padding: 0 calc(12 * var(--k))
-}
-
-.pr-filter-n {
-  background: #F2F2F2;
-  font-variant-numeric: tabular-nums;
-  color: #5A5A62
+  color: #4D4D4D;
+  transition: background .16s ease, color .16s ease
 }
 
 .pr-filter:hover {
-  border-color: #C9C9C9
+  background: #E6E6E6;
+  color: var(--ink)
 }
 
 .pr-filter[aria-pressed="true"] {
-  border-color: var(--acid)
-}
-
-.pr-filter[aria-pressed="true"] .pr-filter-n {
   background: var(--acid);
-  color: #1A1C1C
-}
-
-.pr-filter[aria-pressed="true"] .pr-filter-l {
-  background: #FBFDD2
+  color: #000
 }
 
 /* the web */
 .pr-stage {
   position: relative;
-  width: 100%;
+  /* --s (and so the whole hex + every logo) scales off this element's own
+     width via cqw — narrower than 100% just renders the same web smaller,
+     centered, rather than needing a separate scale-down of every node */
+  width: 82%;
+  margin-left: auto;
+  margin-right: auto;
   /* taller than the original 1440/860 frame — the outer hex was widened
      to fully enclose the spread-out logo nodes without touching the inner
      yellow ring; --s stays width-based so this only adds height */
@@ -4415,28 +4470,12 @@ html.nav-hidden .hx-bar {
   .pr-filter {
     height: auto;
     flex: none;
-    border: none;
-    border-radius: 0;
-    background: #F2F2F2;
+    padding: 12px 18px;
+    white-space: nowrap;
     font-size: 15px
   }
 
-  .pr-filter .pr-filter-n {
-    display: none
-  }
-
-  .pr-filter-l {
-    padding: 12px 18px !important;
-    background: none;
-    white-space: nowrap
-  }
-
   .pr-filter[aria-pressed="true"] {
-    background: var(--acid)
-  }
-
-  .pr-filter[aria-pressed="true"] .pr-filter-l {
-    background: none;
     font-weight: 600
   }
 
@@ -4448,8 +4487,9 @@ html.nav-hidden .hx-bar {
      is only 83% of the frame, so it still fits. .pr already clips, so this
      costs no horizontal scrolling. */
   .pr-stage {
-    width: 106vw;
+    width: 140vw;
     margin-left: 50%;
+    margin-right: 0;
     transform: translateX(-50%);
     /* the base rule's margin-top is a --k multiple, and --k is a fraction of
        a pixel at this width (same issue the tag/heading overrides above work
@@ -4805,10 +4845,10 @@ html.nav-hidden .hx-bar {
   overflow: hidden;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(56px, 7vw, 100px) var(--side) clamp(28px, 3.5vw, 50px);
+  padding: clamp(40px, 5.5vw, 76px) var(--side) clamp(20px, 2.8vw, 38px);
   display: flex;
   flex-direction: column;
-  gap: clamp(48px, 6vw, 90px)
+  gap: clamp(32px, 4.5vw, 64px)
 }
 
 .vfoot__copy {
@@ -5129,8 +5169,26 @@ html.nav-hidden .hx-bar {
 
 @media (max-width:640px) {
   .vfoot__bottomRow {
-    flex-direction: column;
-    gap: 32px
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px
+  }
+
+  .vfoot__tagline {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 11px;
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
+  .vfoot__legal {
+    flex: none;
+    gap: 4px;
+    font-size: 10px;
+    white-space: nowrap
   }
 }
 
@@ -5571,13 +5629,13 @@ button:focus-visible,
   font-size: 40px;
   line-height: 1.15;
   letter-spacing: -.01em;
-  margin: 0;
+  margin: 16px 0 0;
   max-width: 22ch
 }
 
 .csp-aoc-copy {
   flex: none;
-  width: min(360px, 34%);
+  width: min(560px, 44%);
   margin: 6px 0 0;
   font-family: var(--body);
   font-size: 14px;
@@ -6810,7 +6868,7 @@ button:focus-visible,
   text-decoration: underline
 }
 
-.csp-moreArrow {
+.csp-moreRead svg {
   width: 18px;
   height: 18px
 }

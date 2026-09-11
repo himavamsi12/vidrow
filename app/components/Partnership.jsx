@@ -28,8 +28,7 @@ export default function Partnership() {
                 aria-pressed={activeCat === f.cat}
                 onClick={() => setActiveCat(f.cat)}
               >
-                <span className="pr-filter-n">{f.n}</span>
-                <span className="pr-filter-l">{f.label}</span>
+                {f.label}
               </button>
             ))}
           </div>

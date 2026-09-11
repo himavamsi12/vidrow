@@ -135,11 +135,19 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in">
         <section className="csp-aoc" id="csp-sec-aoc">
           <div className="csp-aoc-head">
-            <h2 className="csp-aoc-h">
-              The audience.
-              <br />
-              The Objective. The contraint.
-            </h2>
+            <div>
+              <div className="csp-eyebrow2">
+                <span className="csp-eyebrow2-dot" aria-hidden="true" />
+                <b>01</b>
+                <span className="csp-eyebrow2-sep">·</span>
+                THE PROBLEM
+              </div>
+              <h2 className="csp-aoc-h">
+                The audience.
+                <br />
+                The Objective. The contraint.
+              </h2>
+            </div>
             <p className="csp-aoc-copy">
               Vidrow joined PlatinumRx with one goal: reach more chronic medicine users and make
               PlatinumRx their go-to app for monthly medicines. The challenge was to turn its

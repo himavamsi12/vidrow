@@ -46,4 +46,28 @@ export const FEATURED_WORK = [
       "What stood out about Vidrow was how they connected strategy, storytelling, and design into one clear brand experience.",
     line: "Away AI had a team of 20 experienced marketers before they even raised seed",
   },
+  {
+    id: "away-ai-2",
+    logo: { type: "svg" },
+    name: "Away AI",
+    category: "Quick Com",
+    solo: true,
+    photos: [{ src: "/work/Sukesh Away AI.png", cls: "fw-ph fw-phSolo" }],
+    plates: [{ name: "Sukesh Shetty", role: "Co-founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
+    quote:
+      "What stood out about Vidrow was how they connected strategy, storytelling, and design into one clear brand experience.",
+    line: "Away AI had a team of 20 experienced marketers before they even raised seed",
+  },
+  {
+    id: "away-ai-3",
+    logo: { type: "svg" },
+    name: "Away AI",
+    category: "Quick Com",
+    solo: true,
+    photos: [{ src: "/work/Sukesh Away AI.png", cls: "fw-ph fw-phSolo" }],
+    plates: [{ name: "Sukesh Shetty", role: "Co-founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
+    quote:
+      "What stood out about Vidrow was how they connected strategy, storytelling, and design into one clear brand experience.",
+    line: "Away AI had a team of 20 experienced marketers before they even raised seed",
+  },
 ];
