@@ -50,6 +50,47 @@ export default function SiteNav({ logoHref = "/" }) {
     };
   }, [open]);
 
+  // sticky nav: hides on a deliberate scroll down, reappears on any scroll
+  // up (even a small one) — a toggled class on <html> rather than component
+  // state, so .hx-bar (and any other nav wrapper that opts in) can just
+  // style off it in CSS without this component knowing which page it's on.
+  // Never hides while the mobile menu is open or near the very top.
+  useEffect(() => {
+    if (open) return;
+    let lastY = window.scrollY;
+    let ticking = false;
+    const DELTA = 6; // ignores sub-pixel/jitter scroll noise
+    const NEAR_TOP = 40; // always show once back near the page top
+
+    const setHidden = (hidden) => {
+      document.documentElement.classList.toggle("nav-hidden", hidden);
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = Math.max(0, window.scrollY);
+        const delta = y - lastY;
+        if (y <= NEAR_TOP) {
+          setHidden(false);
+        } else if (delta > DELTA) {
+          setHidden(true);
+        } else if (delta < -DELTA) {
+          setHidden(false);
+        }
+        lastY = y;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      setHidden(false);
+    };
+  }, [open]);
+
   const close = () => setOpen(false);
 
   return (

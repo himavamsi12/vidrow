@@ -255,15 +255,24 @@ a {
 
 /* top bar: mark left, menu right */
 .hx-bar {
-  position: absolute;
-  z-index: 4;
-  transition: opacity .5s ease;
-  left: 6%;
-  right: 6%;
-  top: calc(20 * var(--k));
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: calc(20 * var(--k)) 6%;
+  background: var(--paper);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
   display: flex;
   align-items: flex-start;
-  justify-content: space-between
+  justify-content: space-between;
+  transition: opacity .5s ease, transform .35s cubic-bezier(.16, .84, .34, 1)
+}
+
+/* hidden on a deliberate scroll down, shown again on any scroll up — see
+   the scroll listener in SiteNav.jsx, which toggles this on <html> */
+html.nav-hidden .hx-bar {
+  transform: translateY(-100%)
 }
 
 .hx-logo {
@@ -841,7 +850,10 @@ a {
     height: auto;
     min-height: 0;
     container-type: normal;
-    padding: 0 0 40px;
+    /* .hx-bar is fixed now (out of flow), so this reserves the space it
+       would otherwise have taken, keeping the headline from starting out
+       hidden underneath it */
+    padding: 82px 0 40px;
     display: flex;
     flex-direction: column
   }
@@ -907,8 +919,8 @@ a {
   }
 
   .hx-bar {
-    position: static;
-    padding: 24px 20px 0
+    position: fixed;
+    padding: 20px 20px
   }
 
   .hx-logo {
