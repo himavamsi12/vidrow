@@ -1,18 +1,10 @@
-const CELLS = [
-  [0, 0],
-  [1, 0],
-  [2, 0],
-  [1, 1],
-  [2, 1],
-  [2, 2],
-];
-
 export default function WyMark() {
   return (
-    <span className="wy-mark" aria-hidden="true">
-      {CELLS.map(([x, y], i) => (
-        <i key={i} style={{ "--x": x, "--y": y }} />
-      ))}
-    </span>
+    <svg className="wy-mark" viewBox="0 0 40 40" aria-hidden="true">
+      <path
+        fill="#715BE4"
+        d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z"
+      />
+    </svg>
   );
 }

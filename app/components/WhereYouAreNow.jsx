@@ -17,6 +17,7 @@ export default function WhereYouAreNow() {
   const bodyInRefs = useRef([]);
   const leadRefs = useRef([]);
   const cardwrapRefs = useRef([]);
+  const notchRefs = useRef([]);
 
   // the stat card is position:absolute (so it sits pinned exactly where the
   // design wants it, near the light card's tab, rather than just flowing
@@ -34,8 +35,10 @@ export default function WhereYouAreNow() {
         STAGES.forEach((_, i) => {
           const cardwrap = cardwrapRefs.current[i];
           const bodyIn = bodyInRefs.current[i];
+          const notch = notchRefs.current[i];
           if (cardwrap) cardwrap.style.top = "";
           if (bodyIn) bodyIn.style.minHeight = "";
+          if (notch) notch.style.display = "";
         });
         return;
       }
@@ -43,19 +46,48 @@ export default function WhereYouAreNow() {
         const lead = leadRefs.current[i];
         const cardwrap = cardwrapRefs.current[i];
         const bodyIn = bodyInRefs.current[i];
+        const notch = notchRefs.current[i];
         if (!lead || !cardwrap || !bodyIn) return;
-        // the light card's own bottom padding (must match .wy-lead's
-        // padding-bottom in globals.css) is what makes its left tab run on
-        // past the visible text — the stat card should sit just under the
-        // text's own edge, not the tab's full length, so the tab peeks out
-        // behind it rather than pushing it down with a huge gap
+        // the light card's own bottom padding is its left tab's length —
+        // reset to the baseline before measuring, since a previous call
+        // may have already stretched it (see below), which would otherwise
+        // throw off this measurement on resize/re-runs
         const leadTabLength = 80;
+        lead.style.setProperty("--wy-tab", `${leadTabLength}px`);
         const leadTop = lead.offsetTop;
+        // the stat card should sit just under the text's own edge, not the
+        // tab's full length, so the tab peeks out behind it rather than
+        // pushing it down with a huge gap
         const textEdge = leadTop + lead.offsetHeight - leadTabLength;
-        const cardTop = textEdge + 10;
+        const cardTop = textEdge;
         cardwrap.style.top = `${cardTop}px`;
-        const tabBottom = leadTop + lead.offsetHeight;
-        bodyIn.style.minHeight = `${Math.max(tabBottom, cardTop + cardwrap.offsetHeight)}px`;
+        // stretch the tab to match the stat card's own rendered height, so
+        // the white strip runs the card's full height instead of just the
+        // baseline peek — card height is intrinsic (content-driven), so
+        // this doesn't feed back into cardTop above
+        const cardHeight = cardwrap.offsetHeight;
+        lead.style.setProperty("--wy-tab", `${cardHeight}px`);
+        bodyIn.style.minHeight = `${cardTop + cardHeight}px`;
+
+        // caps the notch .wy-lead's clip-path cuts out of its own top-right
+        // corner with a matching border, so the stat card's border-right
+        // reads as one continuous line up to that step instead of stopping
+        // short of it. The shallow step sits calc(90 * var(--k)) down from
+        // the lead card's own top — read via the card's padding (also a
+        // calc(N * var(--k)) length) since --k itself isn't resolvable in JS
+        const card = cardwrap.querySelector(".wy-card");
+        if (card && notch) {
+          const kPx = parseFloat(getComputedStyle(card).paddingLeft) / 24;
+          const shallowStepY = leadTop + 90 * kPx;
+          const notchHeight = cardTop - shallowStepY;
+          if (notchHeight > 0) {
+            notch.style.display = "block";
+            notch.style.top = `${shallowStepY}px`;
+            notch.style.height = `${notchHeight}px`;
+          } else {
+            notch.style.display = "none";
+          }
+        }
       });
     };
     place();
@@ -177,6 +209,13 @@ export default function WhereYouAreNow() {
                             <h3 className="wy-leadTitle">{s.title}</h3>
                             <p className="wy-copy">{s.copy}</p>
                           </div>
+                          <div
+                            className="wy-notch"
+                            aria-hidden="true"
+                            ref={(el) => {
+                              notchRefs.current[i] = el;
+                            }}
+                          />
                           <div
                             className="wy-cardwrap"
                             ref={(el) => {

@@ -33,14 +33,10 @@ export default function Founders() {
               <a className="fo-pill" href="#people">
                 <span>Meet the full team</span>
                 <svg className="fo-pill-i" viewBox="0 0 40 40" aria-hidden="true">
-                  <g fill="var(--violet)">
-                    <rect x="10" y="10" width="6" height="6" />
-                    <rect x="17" y="10" width="6" height="6" />
-                    <rect x="24" y="10" width="6" height="6" />
-                    <rect x="17" y="17" width="6" height="6" />
-                    <rect x="24" y="17" width="6" height="6" />
-                    <rect x="24" y="24" width="6" height="6" />
-                  </g>
+                  <path
+                    fill="var(--violet)"
+                    d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z"
+                  />
                 </svg>
               </a>
             </div>

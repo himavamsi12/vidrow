@@ -1,6 +1,9 @@
-import ReadArrow from "../../components/ReadArrow";
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
+import CspHooksRow from "../../components/CspHooksRow";
+import CspReelRow from "../../components/CspReelRow";
+import CspMoreRow from "../../components/CspMoreRow";
+import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
   title: "PlatinumRx — Case Study | Vidrow",
@@ -12,16 +15,19 @@ const AOC = [
   {
     n: "01",
     title: "The Audience",
+    head: "The monthly refill",
     desc: "Diabetes, BP, thyroid and cardiac patients — people who buy the same medicine every month, for years.",
   },
   {
     n: "02",
     title: "The Objective",
+    head: "Win them onto the app",
     desc: "Acquire that patient, move them onto the app, and become the default place they reorder.",
   },
   {
     n: "03",
     title: "The Constraint",
+    head: "CAC that holds",
     desc: "All of it while the spend scaled. Volume bought by paying more per customer is a bill, not growth.",
   },
 ];
@@ -85,7 +91,9 @@ export default function PlatinumRxCaseStudy() {
         <SiteNav logoHref="/" />
       </header>
 
-      <div className="csp-in">
+      <CspSectionNav />
+
+      <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
             3x in 3 Months June to
@@ -100,9 +108,12 @@ export default function PlatinumRxCaseStudy() {
 
         <div className="csp-banner">
           <img
-            src="/casestudy%20images/platinum-rtx.png"
+            src="/casestudy%20images/hero-image.png"
             alt="PlatinumRx: Healthcare App — Start Your Monthly Savings Journey"
           />
+          <span className="csp-bannerTag">
+            <img src="/casestudy%20images/platinumrx-lockup.png" alt="Vidrow x PlatinumRx" />
+          </span>
         </div>
 
         <div className="csp-meta">
@@ -122,7 +133,7 @@ export default function PlatinumRxCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-aoc">
+        <section className="csp-aoc" id="csp-sec-aoc">
           <div className="csp-aoc-head">
             <h2 className="csp-aoc-h">
               The audience.
@@ -144,15 +155,20 @@ export default function PlatinumRxCaseStudy() {
                   <span className="csp-aoc-num">{item.n}</span>
                   <span className="csp-aoc-tag">{item.title}</span>
                 </div>
+                <h3 className="csp-aoc-title">{item.head}</h3>
                 <p className="csp-aoc-desc">{item.desc}</p>
               </div>
             ))}
           </div>
+
+          <p className="csp-aoc-note">
+            Acquire one badly and you carry that cost through every refill that follows.
+          </p>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-mid">
+        <section className="csp-mid" id="csp-sec-mid">
           <div className="csp-mid-left">
             <div className="csp-eyebrow2">
               <span className="csp-eyebrow2-dot" aria-hidden="true" />
@@ -197,8 +213,8 @@ export default function PlatinumRxCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-how">
-          <div className="csp-how-left">
+        <section className="csp-how" id="csp-sec-how">
+          <div className="csp-how-top">
             <div className="csp-eyebrow2">
               <span className="csp-eyebrow2-dot" aria-hidden="true" />
               <b>03</b>
@@ -206,75 +222,64 @@ export default function PlatinumRxCaseStudy() {
               HOW WE DID IT
             </div>
             <h2 className="csp-how-h">
-              Nobody searches
+              Nobody searches for a substitute.
               <br />
-              for a substitute.
-              <br />
-              You have to
-              <br />
-              <em>earn the switch.</em>
+              You have to <em>earn the switch.</em>
             </h2>
             <p className="csp-how-copy">
               A chronic patient has taken the same brand for years, on a doctor&apos;s word.
               Changing that is a trust decision, not a price one. So we built two engines and
               pointed both at the same number.
             </p>
-
-            <div className="csp-howBlock">
-              <span className="csp-howTag">Performance Ads</span>
-              <h3 className="csp-howSub">One objection per ad</h3>
-              <p className="csp-howDesc">
-                Hinglish and regional scripts, batched weekly, each shot in three hooks. Every
-                hook had to earn its budget in a test campaign before it went near the scale
-                campaigns.
-              </p>
-            </div>
-            <hr className="csp-howDiv" />
-
-            <div className="csp-howBlock">
-              <span className="csp-howTag">Celebrity Performance</span>
-              <h3 className="csp-howSub">Borrowed credibility</h3>
-              <p className="csp-howDesc">
-                A known face, written into the same script formats and run through the same
-                conversion campaigns as everything else.
-              </p>
-            </div>
-            <hr className="csp-howDiv" />
-
-            <p className="csp-howNote">No awareness budget. Both engines answered to the same CAC.</p>
           </div>
 
-          <div className="csp-how-right">
-            <img src="/casestudy%20images/image.png" alt="They Saw It — PlatinumRx spokesperson" />
+          <div className="csp-how-row">
+            <div className="csp-how-left">
+              <div className="csp-howBlock">
+                <span className="csp-howTag">Performance Ads</span>
+                <h3 className="csp-howSub">One objection per ad</h3>
+                <p className="csp-howDesc">
+                  Hinglish and regional scripts, batched weekly, each shot in three hooks. Every
+                  hook had to earn its budget in a test campaign before it went near the scale
+                  campaigns.
+                </p>
+              </div>
+              <hr className="csp-howDiv" />
+
+              <div className="csp-howBlock">
+                <span className="csp-howTag">Celebrity Performance</span>
+                <h3 className="csp-howSub">Borrowed credibility</h3>
+                <p className="csp-howDesc">
+                  A known face, written into the same script formats and run through the same
+                  conversion campaigns as everything else.
+                </p>
+              </div>
+              <hr className="csp-howDiv" />
+
+              <p className="csp-howNote">No awareness budget. Both engines answered to the same CAC.</p>
+            </div>
+
+            <div className="csp-how-right">
+              <img src="/casestudy%20images/image.png" alt="They Saw It — PlatinumRx spokesperson" />
+            </div>
           </div>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-hooks">
+        <section className="csp-hooks" id="csp-sec-hooks">
           <h2 className="csp-hooks-h">
             Every hook had to
             <br />
             earn its budget.
           </h2>
 
-          <div className="csp-hooks-row">
-            <span className="csp-hooks-pin" aria-hidden="true">
-              <span className="csp-hooks-pinDot">S</span>
-            </span>
-            {HOOKS.map((h) => (
-              <div className="csp-hookCard" key={h.n}>
-                <span className="csp-hookNum">{h.n}</span>
-                <h3 className="csp-hookTitle">{h.title}</h3>
-                <p className="csp-hookDesc">{h.desc}</p>
-              </div>
-            ))}
-          </div>
+          <CspHooksRow hooks={HOOKS} />
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-celeb">
+        <section className="csp-celeb" id="csp-sec-celeb">
           <h2 className="csp-celeb-h">
             A stranger&apos;s cheaper medicine is a risk.
             <br />
@@ -299,44 +304,43 @@ export default function PlatinumRxCaseStudy() {
               ))}
             </div>
 
-            <div className="csp-quoteCard">
+            <div className="csp-quoteWrap">
               <img className="csp-quoteMark" src="/casestudy%20images/quote-mark.svg" alt="" aria-hidden="true" />
-              <span className="csp-quoteEyebrow">Campaign positioning</span>
-              <p className="csp-quoteText">
-                Celebrity was not the expensive option here. It was the one that worked hardest.
-              </p>
-              <p className="csp-quoteSub">
-                Meta charged us less to show it — the auction rewards what people watch.
-              </p>
+              <div className="csp-quoteCard">
+                <div className="csp-quoteInner">
+                  <span className="csp-quoteEyebrow">Campaign positioning</span>
+                  <p className="csp-quoteText">
+                    Celebrity was not the expensive option here. It was the one that worked hardest.
+                  </p>
+                  <p className="csp-quoteSub">
+                    Meta charged us less to show it — the auction rewards what people watch.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="csp-celebStats">
-            <div className="csp-celebStat">
-              <div className="csp-celebStatGrid csp-celebStatGrid--violet">
-                <span className="csp-celebStatVal">~16% below</span>
-                <span className="csp-cell" />
-                <span className="csp-cell" />
-                <span className="csp-cell" />
-                <span className="csp-cell csp-cell--mid" />
+            <div className="csp-celebStatBlock csp-celebStatBlock--yellow">
+              <span className="csp-celebStatVal">~16%</span>
+              <div className="csp-celebStatRow">
+                <span className="csp-celebStatVal">below</span>
+                <span className="csp-celebStatLabel">Every other producer&apos;s video</span>
               </div>
-              <span className="csp-celebStatLabel">Every other producer&apos;s video</span>
             </div>
-            <div className="csp-celebStat">
-              <div className="csp-celebStatGrid csp-celebStatGrid--yellow">
-                <span className="csp-celebStatVal">~33% below</span>
-                <span className="csp-cell" />
-                <span className="csp-cell" />
-                <span className="csp-cell" />
+            <div className="csp-celebStatBlock csp-celebStatBlock--violet">
+              <span className="csp-celebStatVal">~33%</span>
+              <div className="csp-celebStatRow">
+                <span className="csp-celebStatVal">below</span>
+                <span className="csp-celebStatLabel">Cost per impression</span>
               </div>
-              <span className="csp-celebStatLabel">Cost per impression</span>
             </div>
           </div>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-cac">
+        <section className="csp-cac" id="csp-sec-cac">
           <div className="csp-cac-head">
             <div className="csp-cac-headL">
               <div className="csp-eyebrow2">
@@ -348,9 +352,7 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-cac-h">
                 Volume is easy.
                 <br />
-                Volume at a <em>stable</em>
-                <br />
-                <em>CAC</em> is the job.
+                Volume at a <em>stable CAC</em> is the job.
               </h2>
             </div>
             <p className="csp-cac-copy">
@@ -360,31 +362,58 @@ export default function PlatinumRxCaseStudy() {
             </p>
           </div>
 
-          <span className="csp-cac-caption">Cost per new customer (July = 100)</span>
+          <div className="csp-cac-plot">
+            <div className="csp-cac-plotL">
+              <span className="csp-cac-caption">Cost per new customer (July = 100)</span>
 
-          <div className="csp-cacChart">
-            <svg viewBox="0 0 1160 420" preserveAspectRatio="none" aria-hidden="true">
-              <line className="csp-cacGrid" x1="0" y1="80" x2="1160" y2="80" />
-              <line className="csp-cacGrid" x1="0" y1="180" x2="1160" y2="180" />
-              <line className="csp-cacGrid" x1="0" y1="280" x2="1160" y2="280" />
-              <line className="csp-cacAxis" x1="0" y1="380" x2="1160" y2="380" />
+              <div className="csp-cacChart">
+                <svg viewBox="0 0 1160 420" preserveAspectRatio="none" aria-hidden="true">
+                  <line className="csp-cacGrid" x1="0" y1="80" x2="1160" y2="80" />
+                  <line className="csp-cacGrid" x1="0" y1="180" x2="1160" y2="180" />
+                  <line className="csp-cacGrid" x1="0" y1="280" x2="1160" y2="280" />
+                  <line className="csp-cacAxis" x1="0" y1="380" x2="1160" y2="380" />
 
-              <line className="csp-cacLine csp-cacLine--dark" x1="40" y1="280" x2="1120" y2="80" />
-              <line className="csp-cacLine csp-cacLine--violet" x1="40" y1="280" x2="1120" y2="253" />
+                  <line className="csp-cacLine csp-cacLine--dark" x1="40" y1="280" x2="1120" y2="80" />
+                  <line className="csp-cacLine csp-cacLine--violet" x1="40" y1="280" x2="1120" y2="253" />
 
-              <circle className="csp-cacDot csp-cacDot--dark" cx="40" cy="280" r="9" />
-              <circle className="csp-cacDot csp-cacDot--dark" cx="1120" cy="80" r="9" />
-              <circle className="csp-cacDot csp-cacDot--violet" cx="1120" cy="253" r="9" />
-            </svg>
+                  <circle className="csp-cacDot csp-cacDot--dark" cx="40" cy="280" r="9" />
+                  <circle className="csp-cacDot csp-cacDot--dark" cx="1120" cy="80" r="9" />
+                  <circle className="csp-cacDot csp-cacDot--violet" cx="1120" cy="253" r="9" />
 
-            <span className="csp-cacVal csp-cacVal--start">100</span>
-            <span className="csp-cacVal csp-cacVal--darkEnd">135</span>
-            <span className="csp-cacVal csp-cacVal--violetEnd">106</span>
+                  {/* real SVG text, not an HTML overlay positioned by percentage —
+                      its gap above each dot is in the same coordinate space as the
+                      dot itself, so it scales exactly with the chart at every
+                      width instead of drifting close enough to overlap on narrow
+                      screens */}
+                  <text className="csp-cacVal csp-cacVal--start" x="40" y="242" textAnchor="middle">
+                    100
+                  </text>
+                  <text className="csp-cacVal csp-cacVal--darkEnd" x="1120" y="42" textAnchor="middle">
+                    135
+                  </text>
+                  <text className="csp-cacVal csp-cacVal--violetEnd" x="1120" y="215" textAnchor="middle">
+                    106
+                  </text>
+                </svg>
 
-            <div className="csp-cacAxisLabels">
-              <span>July = 100</span>
-              <span>As spend scaled</span>
+                <div className="csp-cacAxisLabels">
+                  <span>July = 100</span>
+                  <span>As spend scaled</span>
+                </div>
+              </div>
             </div>
+
+            <aside className="csp-cacCard">
+              <span className="csp-cacCard-val">92%</span>
+              <div className="csp-cacCard-foot">
+                <b>Of new chronic customers</b>
+                <span>
+                  Acquired on a creative
+                  <br />
+                  Vidrow built
+                </span>
+              </div>
+            </aside>
           </div>
 
           <div className="csp-cacLegend">
@@ -403,7 +432,7 @@ export default function PlatinumRxCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-reel">
+        <section className="csp-reel" id="csp-sec-reel1">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
             <b>06</b>
@@ -416,22 +445,12 @@ export default function PlatinumRxCaseStudy() {
             for PlatinumRx.
           </h2>
 
-          <div className="csp-reel-row">
-            {CELEB_ADS.map((ad) => (
-              <div className="csp-reelCard" key={ad.label}>
-                <span className="csp-reelPlaceholder" aria-hidden="true" />
-                <span className="csp-reelPlay" aria-hidden="true">
-                  <span />
-                </span>
-                <span className="csp-reelLabel">{ad.label}</span>
-              </div>
-            ))}
-          </div>
+          <CspReelRow ads={CELEB_ADS} />
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-reel">
+        <section className="csp-reel" id="csp-sec-reel2">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
             <b>07</b>
@@ -444,53 +463,17 @@ export default function PlatinumRxCaseStudy() {
             for PlatinumRx.
           </h2>
 
-          <div className="csp-reel-row csp-reel-row--4">
-            {PERF_ADS.map((ad) => (
-              <div className="csp-reelCard" key={ad.label}>
-                <span className="csp-reelPlaceholder" aria-hidden="true" />
-                <span className="csp-reelPlay" aria-hidden="true">
-                  <span />
-                </span>
-                <span className="csp-reelLabel">{ad.label}</span>
-              </div>
-            ))}
-          </div>
+          <CspReelRow ads={PERF_ADS} four />
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-more">
+        <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
             <h2 className="csp-more-h">More founder journeys.</h2>
-            <a className="csp-more-cta" href="/#deepdive">
-              <span>See all case studies</span>
-              <span className="csp-more-ctaIcon" aria-hidden="true" />
-            </a>
           </div>
 
-          <div className="csp-more-row">
-            {MORE_STORIES.map((i) => (
-              <a className="csp-moreCard" href="/#deepdive" key={i}>
-                <span className="csp-moreShot">
-                  <img src="/selected/c.png" alt="" loading="lazy" />
-                </span>
-                <span className="csp-moreBrand">
-                  Curious<em>Jr</em>
-                </span>
-                <span className="csp-moreStat">
-                  <b>10x</b> ROI
-                </span>
-                <p className="csp-moreDesc">
-                  We rebuilt the acquisition funnel from the ground up, focusing on regional
-                  influencers and hyper-local performance creatives.
-                </p>
-                <span className="csp-moreRead">
-                  Read full story
-                  <ReadArrow className="csp-moreArrow" />
-                </span>
-              </a>
-            ))}
-          </div>
+          <CspMoreRow stories={MORE_STORIES} />
         </section>
       </div>
     </main>

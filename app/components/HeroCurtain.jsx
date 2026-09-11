@@ -8,7 +8,7 @@ import { useLenis } from "lenis/react";
 // then the curtain dissolving to reveal it
 const CLOSE_MS = 1100; // matches the staggered CSS close transition
 const HOLD_MS = 150;
-const FADE_MS = 500;
+const FADE_MS = 200; // matches .hero-curtain--fading's opacity transition
 
 /**
  * A fixed, viewport-covering overlay that plays the hero's staircase-close
@@ -47,6 +47,17 @@ export default function HeroCurtain() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || window.innerWidth <= 900) return;
+
+    // a page load that already targets a section (e.g. a nav link from the
+    // case study page landing on /#partnership) means the user never saw
+    // the hero to begin with — the jump SmoothScrolling performs to get
+    // there is not the "user scrolled past the hero" gesture this curtain
+    // exists for, and the onScroll fallback below must not mistake it for
+    // one. Scrolling back up near the top still re-arms it normally, same
+    // as it does mid-session.
+    if (window.location.hash) {
+      firedRef.current = true;
+    }
 
     let touchStartY = 0;
 
@@ -122,11 +133,22 @@ export default function HeroCurtain() {
       if (armed && window.scrollY > 0) trigger();
     };
 
+    // a click on any in-page hash link (nav, footer, "read full story", …)
+    // is a deliberate jump to a specific section, not the "scrolling past
+    // the hero" gesture this curtain exists for — the resulting scroll
+    // must not be mistaken for that by the onScroll fallback below, or the
+    // link's own destination gets hijacked and replaced with Featured Work
+    const onClickCapture = (e) => {
+      const link = e.target.closest?.('a[href*="#"]');
+      if (link) firedRef.current = true;
+    };
+
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("click", onClickCapture, true);
 
     return () => {
       clearTimeout(armTimer);
@@ -135,6 +157,7 @@ export default function HeroCurtain() {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("click", onClickCapture, true);
       document.body.style.overflow = "";
     };
   }, [lenis]);

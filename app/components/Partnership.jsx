@@ -37,20 +37,20 @@ export default function Partnership() {
 
         <div className={`pr-stage${filtered ? " filtered" : ""}`}>
           <svg className="pr-web" viewBox="0 0 1440 1120" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path className="hex" d="M1320.0,560.0 L1020.0,20.0 L420.0,20.0 L120.0,560.0 L420.0,1100.0 L1020.0,1100.0 Z" />
-            <line className="spoke" x1="720" y1="560" x2="1320.0" y2="560.0" />
-            <line className="spoke" x1="720" y1="560" x2="1020.0" y2="1100.0" />
-            <line className="spoke" x1="720" y1="560" x2="420.0" y2="1100.0" />
-            <line className="spoke" x1="720" y1="560" x2="120.0" y2="560.0" />
-            <line className="spoke" x1="720" y1="560" x2="420.0" y2="20.0" />
-            <line className="spoke" x1="720" y1="560" x2="1020.0" y2="20.0" />
-            <path className="ring" d="M882.75,560.0 L801.4,700.9 L638.6,700.9 L557.25,560.0 L638.6,419.1 L801.4,419.1 Z" />
-            <text x="720.0" y="419.1" transform="rotate(0 720.0 419.1)">PRE-SEED</text>
-            <text x="842.1" y="489.5" transform="rotate(60 842.1 489.5)">SEED</text>
-            <text x="842.1" y="630.5" transform="rotate(-60 842.1 630.5)">SERIES A</text>
-            <text x="720.0" y="700.9" transform="rotate(0 720.0 700.9)">SERIES B</text>
-            <text x="597.9" y="630.5" transform="rotate(60 597.9 630.5)">SERIES C</text>
-            <text x="597.9" y="489.5" transform="rotate(-60 597.9 489.5)">SERIES D+</text>
+            <path className="hex" d="M1260.0,560.0 L990.0,74.0 L450.0,74.0 L180.0,560.0 L450.0,1046.0 L990.0,1046.0 Z" />
+            <line className="spoke" x1="720" y1="560" x2="1260.0" y2="560.0" />
+            <line className="spoke" x1="720" y1="560" x2="990.0" y2="1046.0" />
+            <line className="spoke" x1="720" y1="560" x2="450.0" y2="1046.0" />
+            <line className="spoke" x1="720" y1="560" x2="180.0" y2="560.0" />
+            <line className="spoke" x1="720" y1="560" x2="450.0" y2="74.0" />
+            <line className="spoke" x1="720" y1="560" x2="990.0" y2="74.0" />
+            <path className="ring" d="M825.8,560.0 L772.9,651.6 L667.1,651.6 L614.2,560.0 L667.1,468.4 L772.9,468.4 Z" />
+            <text x="720.0" y="468.4" transform="rotate(0 720.0 468.4)">PRE-SEED</text>
+            <text x="799.4" y="514.2" transform="rotate(60 799.4 514.2)">SEED</text>
+            <text x="799.4" y="605.8" transform="rotate(-60 799.4 605.8)">SERIES A</text>
+            <text x="720.0" y="651.6" transform="rotate(0 720.0 651.6)">SERIES B</text>
+            <text x="640.6" y="605.8" transform="rotate(60 640.6 605.8)">SERIES C</text>
+            <text x="640.6" y="514.2" transform="rotate(-60 640.6 514.2)">SERIES D+</text>
           </svg>
           {PR_NODES.map((node, i) => (
             <a

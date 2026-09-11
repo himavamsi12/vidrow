@@ -8,37 +8,46 @@ import { CASE_STUDIES } from "../data/caseStudies";
 const AUTOPLAY_MS = 4000;
 
 // the wall is a 16 x 2 cell grid; these turn cell counts into lengths along
-// it, accounting for the gap that sits between every pair of cells
-const edge = (n) => `calc(${n} * (var(--cell) + var(--tgap)))`; // left edge of cell n
-const run = (n) => `calc(${n} * var(--cell) + ${n - 1} * var(--tgap))`; // width of n cells
-const ROW_A = "var(--rowh)"; // bottom of the top row
-const ROW_B = "calc(var(--rowh) + var(--tgap))"; // top of the bottom row
+// it, accounting for the gap that sits between every pair of cells. Each
+// takes an inward px offset `d` (0 for the tile's own outline, 1 for the
+// fill drawn inside it) so the border shows as a 1px rim of the tile's own
+// background peeking out from under the fill.
+const edge = (n, d = 0) => `calc(${n} * (var(--cell) + var(--tgap)) + ${d}px)`; // left edge of cell n, nudged right by d
+const run = (n, d = 0) => `calc(${n} * var(--cell) + ${n - 1} * var(--tgap) - ${d}px)`; // right edge of an n-cell run, nudged left by d
+const rowA = (d = 0) => `calc(var(--rowh) - ${d}px)`; // bottom of the top row, nudged up by d
+const rowB = (d = 0) => `calc(var(--rowh) + var(--tgap) + ${d}px)`; // top of the bottom row, nudged down by d
+const top0 = (d = 0) => `${d}px`; // the wall's own top, nudged down by d
+const bottom100 = (d = 0) => `calc(100% - ${d}px)`; // the wall's own bottom, nudged up by d
 
 // A piece is the union of its top run and its bottom run, joined through the
 // gap band wherever the two overlap — traced clockwise from the top-left.
-function pieceClip({ top, bottom }, start) {
+// `d` insets every edge inward by that many px along its own normal (rather
+// than shifting the whole shape diagonally), which is what makes the fill
+// polygon (d=1) recede correctly from concave/reflex corners — a step-shaped
+// tile's shoulder — and not just its convex outer corners.
+function pieceClip({ top, bottom }, start, d = 0) {
   const bS = bottom[0] - start;
   const bE = bottom[1] - start + 1;
   if (!top) {
-    return `polygon(${edge(bS)} ${ROW_B}, ${run(bE)} ${ROW_B}, ${run(bE)} 100%, ${edge(bS)} 100%)`;
+    return `polygon(${edge(bS, d)} ${rowB(d)}, ${run(bE, d)} ${rowB(d)}, ${run(bE, d)} ${bottom100(d)}, ${edge(bS, d)} ${bottom100(d)})`;
   }
   const tS = top[0] - start;
   const tE = top[1] - start + 1;
   const oS = Math.max(tS, bS);
   const oE = Math.min(tE, bE);
   return `polygon(
-    ${edge(tS)} 0,
-    ${run(tE)} 0,
-    ${run(tE)} ${ROW_A},
-    ${run(oE)} ${ROW_A},
-    ${run(oE)} ${ROW_B},
-    ${run(bE)} ${ROW_B},
-    ${run(bE)} 100%,
-    ${edge(bS)} 100%,
-    ${edge(bS)} ${ROW_B},
-    ${edge(oS)} ${ROW_B},
-    ${edge(oS)} ${ROW_A},
-    ${edge(tS)} ${ROW_A}
+    ${edge(tS, d)} ${top0(d)},
+    ${run(tE, d)} ${top0(d)},
+    ${run(tE, d)} ${rowA(d)},
+    ${run(oE, d)} ${rowA(d)},
+    ${run(oE, d)} ${rowB(d)},
+    ${run(bE, d)} ${rowB(d)},
+    ${run(bE, d)} ${bottom100(d)},
+    ${edge(bS, d)} ${bottom100(d)},
+    ${edge(bS, d)} ${rowB(d)},
+    ${edge(oS, d)} ${rowB(d)},
+    ${edge(oS, d)} ${rowA(d)},
+    ${edge(tS, d)} ${rowA(d)}
   )`;
 }
 
@@ -163,6 +172,7 @@ export default function CaseStudies() {
             const start = Math.min(top ? top[0] : Infinity, bottom[0]);
             const end = Math.max(top ? top[1] : -Infinity, bottom[1]);
             const clipPath = pieceClip(c.tile, start);
+            const fillClipPath = pieceClip(c.tile, start, 1);
             const lit = logo === "top" ? top : bottom;
 
             return (
@@ -175,14 +185,14 @@ export default function CaseStudies() {
                 style={{ gridColumn: `${start} / ${end + 1}`, gridRow: "1 / span 2", clipPath }}
                 onClick={() => pick(i)}
               >
-                <span className="cs-logtile-fill" style={{ clipPath }} aria-hidden="true" />
+                <span className="cs-logtile-fill" style={{ clipPath: fillClipPath }} aria-hidden="true" />
                 <img
                   src={c.logo}
                   alt={c.logoAlt}
                   style={{
                     left: edge(lit[0] - start),
                     width: run(lit[1] - lit[0] + 1),
-                    top: logo === "top" ? 0 : ROW_B,
+                    top: logo === "top" ? 0 : rowB(),
                   }}
                 />
               </button>

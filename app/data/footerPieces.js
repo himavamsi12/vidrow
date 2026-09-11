@@ -1,8 +1,10 @@
 // One entry per connected run of a single shade in the footer wordmark artwork.
 // x/y/w/h/fall position and size the piece on the 35x5 well grid; at/dur/uat time its fall
 // and flatten-to-yellow animation; cells are the inner tile coordinates within its own w x h box.
-// `pre: true` pieces sit in their final spot from first paint (already flattened) — only the
-// remaining pieces fall when the footer scrolls into view, so the wordmark finishes forming.
+// `pre: true` pieces are already resting in their final spot on first paint — in their own
+// shade, not yet flattened — so the wordmark reads as half-built by default. Only the
+// remaining (un-flattened, still airborne) pieces fall when the footer scrolls into view; every
+// piece, pre-placed or fallen, flattens to one yellow together at its own --uat.
 export const FOOTER_PIECES = [
   { x: 10, y: 1, w: 2, h: 4, fall: 19.8, at: 0, dur: 659, uat: 3471, shade: "b", pre: true, cells: [[0,0], [0,1], [1,1], [0,2], [1,2], [0,3], [1,3]] },
   { x: 1, y: 2, w: 2, h: 3, fall: 19.8, at: 84, dur: 659, uat: 3533, shade: "c", pre: true, cells: [[0,0], [0,1], [0,2], [1,2]] },

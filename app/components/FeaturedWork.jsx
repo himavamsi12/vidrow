@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import ReadArrow from "./ReadArrow";
@@ -20,6 +20,11 @@ const canHover = () =>
 
 export default function FeaturedWork() {
   const [openIndex, setOpenIndex] = useState(0);
+  // on touch, focus (from tapping the <a>) fires before click and already
+  // opens the row, so a plain "is it open yet?" check in onClick can't tell
+  // a row's very first tap from a deliberate second one — this remembers
+  // whether the row was already open before the tap that's about to focus it
+  const wasOpenRef = useRef(true);
 
   return (
     <section className="fw" id="featured">
@@ -46,16 +51,15 @@ export default function FeaturedWork() {
               onMouseEnter={() => {
                 if (canHover()) setOpenIndex(i);
               }}
-              onFocus={() => setOpenIndex(i)}
+              onFocus={() => {
+                wasOpenRef.current = openIndex === i;
+                setOpenIndex(i);
+              }}
               onClick={(e) => {
                 if (!canHover()) {
-                  // on touch, tapping the row only expands it — the case
-                  // study is reached deliberately, through "read full story"
-                  // inside the open row. (Tapping an <a> fires focus before
-                  // click, and focus already opened the row, so an
-                  // "is it open yet?" test would let the very first tap
-                  // through to the link.)
-                  if (!item.href || !e.target.closest(".fw-read")) e.preventDefault();
+                  // on touch, the row's first tap only expands it; a second,
+                  // deliberate tap on an already-open row follows the link
+                  if (!item.href || !wasOpenRef.current) e.preventDefault();
                   setOpenIndex(i);
                   return;
                 }
@@ -106,9 +110,6 @@ export default function FeaturedWork() {
 
               <span className="fw-say">
                 <span className="fw-line">{item.line}</span>
-                <span className="fw-read">
-                  Read full story <ReadArrow />
-                </span>
               </span>
 
               {/* sibling of .fw-say rather than a child of .fw-extra so mobile

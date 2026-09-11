@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masai &times; Vidrow case study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   Masai case study
+   The rail on the left is the page's progress:
+   thirteen tetrominoes land as you read down,
+   the last one completes the column.
+   Laid out against a 1548 design frame; --k is
+   one design px.
+   ───────────────────────────────────────────── */
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Medium.ttf") format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"Stack Sans Notch";src:url("font/StackSansNotch-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+
+:root{
+  --acid:#F5FA5E; --acid-mid:#F5F97A; --acid-soft:#F8FBC6;
+  --shade-b:#E2E84A; --shade-c:#FAFCC9; --shade-d:#C9D06B;
+  --violet:#715BE4; --vio-soft:#DEDAF6;
+  --ink:#121212; --text:#1A1C1C; --body-c:#4C4546; --mute:#8A8A8A; --line:#E3E3E3;
+  --well:#F2F2F2; --paper:#FFFFFF; --dark:#121212;
+  --display:"Stack Sans Notch","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--body);overflow-x:hidden}
+img{max-width:100%;display:block}
+
+/* clip, not hidden: the dark band bleeds wide without adding scroll, and sticky still works */
+.cs{container-type:inline-size;--k:min(calc(100cqw / 1548), 1.12px);overflow-x:clip}
+
+/* page grid: the rail rides in the left gutter, the story runs beside it */
+.page{position:relative;display:grid;grid-template-columns:calc(65 * var(--k)) minmax(0,1fr);
+  column-gap:calc(76 * var(--k));padding:0 calc(39 * var(--k)) 0 calc(56 * var(--k))}
+
+/* ── rail ──────────────────────────────────── */
+.rail{position:sticky;top:calc(50 * var(--k));align-self:start;z-index:5;
+  display:flex;flex-direction:column;gap:calc(6 * var(--k));padding-bottom:calc(40 * var(--k));
+  transition:color 300ms ease}
+.rail-count{display:flex;align-items:center;gap:calc(7 * var(--k));
+  font-size:calc(17 * var(--k));line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.rail-count i{display:block;width:1px;height:calc(20 * var(--k));background:currentColor}
+.rail-name{font-size:calc(14 * var(--k));line-height:1.3;color:var(--mute)}
+.well{position:relative;width:100%;aspect-ratio:65 / 565;margin-top:calc(10 * var(--k));
+  background:var(--well);overflow:hidden;transition:background-color 300ms ease}
+.well.thud{animation:thud 260ms cubic-bezier(.3,0,.5,1)}
+@keyframes thud{0%{transform:none}35%{transform:translateY(3px)}100%{transform:none}}
+.piece{position:absolute;inset:0;pointer-events:none;
+  transform:translate3d(0,var(--from,-120%),0);
+  transition:transform 380ms cubic-bezier(.55,0,1,.45)}
+.piece.in{transform:none;transition:transform 560ms cubic-bezier(.55,.02,.95,.5)}
+.piece i{position:absolute;display:block;background:var(--c);transition:background-color 420ms ease}
+.well.done .piece i{background:var(--acid)}
+/* over the dark section the rail flips so it stays legible */
+.rail.on-dark .rail-count{color:var(--paper)}
+.rail.on-dark .rail-name{color:#9A9A9A}
+.rail.on-dark .well{background:#2A2A2A}
+
+/* ── shared ────────────────────────────────── */
+.sec{position:relative;padding:calc(56 * var(--k)) 0 calc(96 * var(--k))}
+.eyebrow{display:flex;align-items:center;gap:calc(8 * var(--k));margin:0 0 calc(18 * var(--k));
+  font-size:calc(12 * var(--k));line-height:1;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.eyebrow::before{content:"";width:calc(9 * var(--k));height:calc(9 * var(--k));background:var(--violet);
+  margin-right:calc(4 * var(--k))}
+.eyebrow b{font-weight:700;color:var(--ink);letter-spacing:.08em}
+.h2{font-family:var(--display);font-weight:400;font-size:calc(46 * var(--k));line-height:1.12;
+  letter-spacing:-.035em;color:var(--ink);margin:0}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) calc(576 * var(--k));gap:calc(60 * var(--k));
+  align-items:start}
+.intro p{font-size:calc(15 * var(--k));line-height:1.6;color:var(--body-c);margin:0}
+.pull{display:flex;gap:calc(18 * var(--k));align-items:stretch;margin:calc(40 * var(--k)) 0 0;
+  font-size:calc(17 * var(--k));font-weight:600;line-height:1.4;color:var(--ink)}
+.pull::before{content:"";flex:none;width:calc(3 * var(--k));background:var(--ink)}
+
+/* reveal */
+.rv{opacity:0;transform:translate3d(0,calc(20 * var(--k)),0);
+  transition:opacity 480ms ease,transform 560ms cubic-bezier(.16,.84,.34,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ── 1 · hero ──────────────────────────────── */
+.hero{padding-top:calc(50 * var(--k))}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) calc(345 * var(--k));gap:calc(60 * var(--k));
+  align-items:start}
+.hero h1{font-family:var(--display);font-weight:400;font-size:calc(56 * var(--k));line-height:1.12;
+  letter-spacing:-.04em;color:var(--ink);margin:0;max-width:calc(700 * var(--k))}
+.hero-note{display:flex;gap:calc(18 * var(--k));margin-top:calc(12 * var(--k));
+  font-size:calc(13 * var(--k));line-height:1.6;color:var(--body-c)}
+.hero-note::before{content:"";flex:none;width:calc(3 * var(--k));background:var(--acid)}
+.hero-shot{position:relative;margin-top:calc(84 * var(--k));aspect-ratio:1312 / 522;
+  background:#F7F7F7;overflow:hidden}
+.hero-shot img{width:100%;height:100%;object-fit:cover}
+.hero-shot .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  font-size:calc(13 * var(--k));letter-spacing:.14em;text-transform:uppercase;color:#A8A8A8}
+.hero-shot.has-img .ph{display:none}
+/* the notch: a white block bitten out of the banner, carrying both marks */
+.hero-tile{position:absolute;left:0;top:0;width:17%;height:19%;background:var(--paper);z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:calc(14 * var(--k))}
+.hero-tile .vmark{display:grid;grid-template-columns:repeat(3,calc(9 * var(--k)));
+  grid-template-rows:repeat(3,calc(9 * var(--k)));gap:calc(1 * var(--k))}
+.hero-tile .vmark i{background:var(--ink)}
+.hero-tile .vmark i:nth-child(n){grid-column:var(--x);grid-row:var(--y)}
+.hero-tile .sep{width:1px;height:calc(30 * var(--k));background:var(--ink)}
+.hero-tile .masai{font-family:var(--body);font-weight:700;font-size:calc(24 * var(--k));
+  letter-spacing:-.02em;color:var(--ink)}
+.hero-tile .masai em{font-style:normal;color:#E2231A}
+.hero-ads{display:flex;align-items:baseline;gap:calc(10 * var(--k));margin-top:calc(26 * var(--k))}
+.hero-ads b{font-family:var(--display);font-weight:400;font-size:calc(22 * var(--k));color:var(--ink)}
+.hero-ads span{font-size:calc(13 * var(--k));color:#6B6B6B}
+.hero-facts{display:flex;gap:calc(72 * var(--k));margin-top:calc(26 * var(--k));
+  padding-top:calc(28 * var(--k));border-top:1px solid var(--line)}
+.hero-facts small{display:block;font-size:calc(15 * var(--k));color:#6B6B6B;margin-bottom:calc(14 * var(--k))}
+.hero-facts b{font-family:var(--display);font-weight:400;font-size:calc(26 * var(--k));color:var(--ink)}
+
+/* ── 2 · setup ─────────────────────────────── */
+.setup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:calc(40 * var(--k));
+  margin-top:calc(72 * var(--k))}
+.stat{--d:0ms}
+.stat .no{display:grid;place-items:center;width:calc(50 * var(--k));height:calc(50 * var(--k));
+  background:var(--vio-soft);font-family:var(--display);font-size:calc(20 * var(--k));color:var(--ink)}
+.stat .tag{display:inline-flex;align-items:center;height:calc(44 * var(--k));margin-left:calc(50 * var(--k));
+  padding:0 calc(13 * var(--k));background:var(--acid-soft);
+  font-family:var(--display);font-size:calc(20 * var(--k));color:var(--ink)}
+.stat .body{padding-left:calc(50 * var(--k));margin-top:calc(18 * var(--k))}
+.stat h3{font-family:var(--display);font-weight:400;font-size:calc(25 * var(--k));margin:0;color:var(--ink)}
+.stat p{font-size:calc(16 * var(--k));line-height:1.5;color:var(--body-c);margin:calc(10 * var(--k)) 0 0}
+/* each stat steps in: the number, then the tag drops beside it, then the copy */
+.stat .no,.stat .tag,.stat .body{opacity:0;transform:translate3d(0,calc(-14 * var(--k)),0);
+  transition:opacity 360ms ease,transform 460ms cubic-bezier(.16,.84,.34,1)}
+.stat .no{transition-delay:var(--d)}
+.stat .tag{transition-delay:calc(var(--d) + 110ms)}
+.stat .body{transition-delay:calc(var(--d) + 220ms)}
+.setup-grid.in .stat .no,.setup-grid.in .stat .tag,.setup-grid.in .stat .body{opacity:1;transform:none}
+
+/* ── 3 · growth ────────────────────────────── */
+.growth{display:grid;grid-template-columns:minmax(0,1fr) calc(559 * var(--k));gap:calc(60 * var(--k));
+  align-items:end}
+.growth p{font-size:calc(15 * var(--k));line-height:1.6;color:var(--body-c);margin:calc(58 * var(--k)) 0 0;
+  max-width:calc(575 * var(--k))}
+.bars{display:flex;align-items:flex-end;justify-content:space-between;margin-right:calc(144 * var(--k))}
+.bar{display:flex;flex-direction:column;align-items:flex-start;gap:calc(10 * var(--k))}
+.stack{position:relative;width:calc(155 * var(--k));display:grid;grid-template-columns:1fr 1fr;
+  grid-auto-rows:calc(77 * var(--k));gap:1px;background:var(--paper)}
+.stack i{background:var(--acid-mid);opacity:0;transform:translate3d(0,calc(-40 * var(--k)),0);
+  transition:opacity 260ms ease,transform 420ms cubic-bezier(.55,.02,.95,.5)}
+.stack.one i{background:var(--acid-soft)}
+.stack.one{grid-template-columns:1fr}
+.bars.in .stack i{opacity:1;transform:none}
+.stack b{position:absolute;left:0;right:0;top:calc(10 * var(--k));text-align:center;z-index:2;
+  font-family:var(--display);font-weight:400;font-size:calc(48 * var(--k));line-height:1.2;color:var(--ink);
+  opacity:0;transition:opacity 300ms ease}
+.bars.in .stack b{opacity:1;transition-delay:var(--bd,0ms)}
+.bar small{font-size:calc(20 * var(--k));color:#A0A0A0}
+
+/* ── 4 · creative strategy ─────────────────── */
+.flow{position:relative;margin-top:calc(40 * var(--k));aspect-ratio:1312 / 300}
+.flow svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.flow svg path,.flow svg line{fill:none;stroke:#9B9B9B;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.flow svg .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 900ms cubic-bezier(.45,0,.2,1) var(--d,0ms)}
+.flow.in svg .draw{stroke-dashoffset:0}
+.fbox{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;
+  padding:0 calc(11 * var(--k));opacity:0;transform:translate3d(0,calc(10 * var(--k)),0);
+  transition:opacity 360ms ease var(--d,0ms),transform 460ms cubic-bezier(.16,.84,.34,1) var(--d,0ms)}
+.flow.in .fbox{opacity:1;transform:none}
+.fbox.a{background:var(--acid-soft)}
+.fbox.v{background:var(--vio-soft);justify-content:flex-start;padding-top:calc(12 * var(--k))}
+.fbox h4{font-family:var(--display);font-weight:400;font-size:calc(26 * var(--k));line-height:1.15;
+  margin:0;color:var(--ink);letter-spacing:-.01em}
+.fbox p{font-size:calc(13 * var(--k));line-height:1.4;color:var(--body-c);margin:calc(14 * var(--k)) 0 0}
+.flow .note{position:absolute;font-size:calc(14.5 * var(--k));color:#A0A0A0;white-space:nowrap;
+  transform:translateX(-50%);opacity:0;transition:opacity 400ms ease var(--d,0ms)}
+.flow.in .note{opacity:1}
+.flow .arrow{fill:#9B9B9B;stroke:none}
+
+/* ── 5 · what we won (dark) ────────────────── */
+.won{color:var(--paper)}
+.won::before{content:"";position:absolute;top:0;bottom:0;left:-100vw;right:-100vw;background:var(--dark);z-index:-1}
+.won .h2{color:var(--paper)}
+.won .eyebrow{color:#A2A2A2}
+.won .eyebrow b{color:var(--paper)}
+.won .intro p{color:#E0E0E0;align-self:end}
+.won-grid{display:grid;grid-template-columns:minmax(0,1fr) calc(576 * var(--k));gap:calc(60 * var(--k));
+  margin-top:calc(64 * var(--k))}
+.won-label{font-size:calc(13 * var(--k));letter-spacing:.12em;text-transform:uppercase;color:#D0D0D0;
+  margin:0 0 calc(18 * var(--k))}
+.shares{display:grid;grid-template-columns:repeat(2,calc(270 * var(--k)));
+  grid-auto-rows:calc(217 * var(--k));gap:calc(13 * var(--k))}
+.share{display:flex;flex-direction:column;justify-content:space-between;padding:calc(24 * var(--k)) calc(26 * var(--k));
+  color:var(--ink);opacity:0;transform:translate3d(0,calc(-30 * var(--k)),0);
+  transition:opacity 320ms ease var(--d,0ms),transform 520ms cubic-bezier(.55,.02,.95,.5) var(--d,0ms)}
+.shares.in .share{opacity:1;transform:none}
+.share b{font-family:var(--display);font-weight:400;font-size:calc(28 * var(--k))}
+.share span{font-size:calc(15 * var(--k))}
+.share.s1{background:#F4F4F4}
+.share.s2{background:var(--acid-soft);--d:140ms}
+.share.s3{background:var(--acid-mid);--d:280ms}
+.matters{position:relative;width:calc(500 * var(--k));aspect-ratio:500 / 306;
+  opacity:0;transform:translate3d(0,calc(16 * var(--k)),0);
+  transition:opacity 420ms ease 380ms,transform 520ms cubic-bezier(.16,.84,.34,1) 380ms}
+.won-grid.in .matters{opacity:1;transform:none}
+.matters svg{position:absolute;inset:0;width:100%;height:100%}
+.matters svg path{fill:var(--paper);stroke:#CFCFCF;stroke-width:1;vector-effect:non-scaling-stroke}
+.matters .big{position:absolute;left:calc(27 * var(--k));top:calc(30 * var(--k));
+  font-family:var(--display);font-weight:400;font-size:calc(50 * var(--k));line-height:1;color:var(--ink)}
+.matters .cap{position:absolute;left:calc(27 * var(--k));top:calc(103 * var(--k));
+  font-size:calc(15 * var(--k));color:var(--ink)}
+.matters .mnote{position:absolute;left:calc(27 * var(--k));right:calc(40 * var(--k));top:calc(196 * var(--k));
+  display:flex;gap:calc(18 * var(--k));font-size:calc(13 * var(--k));line-height:1.6;color:#6B6B6B}
+.matters .mnote::before{content:"";flex:none;width:calc(3 * var(--k));background:var(--acid)}
+
+/* ── 6 · scale ─────────────────────────────── */
+.scale-grid{display:grid;grid-template-columns:minmax(0,1fr) calc(270 * var(--k));gap:calc(58 * var(--k));
+  margin-top:calc(46 * var(--k));align-items:start}
+.chart-cap{font-size:calc(14.5 * var(--k));color:#8A8A8A;margin:0 0 calc(18 * var(--k))}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid line{stroke:#E6E6E6;stroke-width:1;vector-effect:non-scaling-stroke}
+.chart .axis{stroke:#CFCFCF}
+.chart text{font-family:var(--body);fill:#8A8A8A;font-size:20px}
+.chart .ln{fill:none;stroke-width:5;stroke-linejoin:round;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1400ms cubic-bezier(.45,0,.2,1) var(--d,0ms)}
+.chart.in .ln{stroke-dashoffset:0}
+.chart .ln.v{stroke:var(--violet)}
+.chart .ln.r{stroke:#454043}
+.chart .end{opacity:0;transition:opacity 300ms ease calc(var(--d,0ms) + 1300ms)}
+.chart.in .end{opacity:1}
+.chart .end.v{fill:var(--violet)}
+.chart .end.r{fill:#454043}
+.chart .endtxt.v{fill:var(--violet);font-size:24px}
+.chart .endtxt.r{fill:#454043;font-size:24px}
+.legend{display:flex;gap:calc(30 * var(--k));margin-top:calc(40 * var(--k));font-size:calc(15 * var(--k));color:#4A4A4A}
+.legend span{display:flex;align-items:center;gap:calc(9 * var(--k))}
+.legend span::before{content:"";width:calc(13 * var(--k));height:calc(13 * var(--k));background:var(--c)}
+.top5{box-sizing:border-box;border:1px solid #BDBDBD;height:calc(462 * var(--k));
+  padding:calc(24 * var(--k)) calc(27 * var(--k));display:flex;flex-direction:column;justify-content:space-between}
+.top5 b{font-family:var(--body);font-weight:500;font-size:calc(42 * var(--k));line-height:1;color:var(--violet)}
+.top5 p{margin:0;font-size:calc(15 * var(--k));line-height:1.45;color:var(--ink)}
+.top5 p strong{display:block;font-size:calc(17 * var(--k));font-weight:600}
+
+/* ── close ─────────────────────────────────── */
+.close{padding:calc(120 * var(--k)) 0 calc(140 * var(--k));text-align:left}
+.close h2{font-family:var(--display);font-weight:400;font-size:calc(46 * var(--k));letter-spacing:-.035em;margin:0;color:var(--ink)}
+.close a{display:inline-flex;align-items:center;margin-top:calc(28 * var(--k));background:var(--ink);
+  color:var(--paper);text-decoration:none;font-size:calc(12 * var(--k));font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding-left:calc(14 * var(--k))}
+.close a i{display:grid;place-items:center;width:calc(40 * var(--k));height:calc(40 * var(--k));
+  background:var(--acid);margin-left:calc(14 * var(--k))}
+.close a i::after{content:"";width:calc(12 * var(--k));height:calc(12 * var(--k));background:var(--violet)}
+
+/* ── small screens ─────────────────────────── */
+@media (max-width:900px){
+  .cs{--k:1px}
+  .page{grid-template-columns:44px minmax(0,1fr);column-gap:18px;padding:0 18px 0 14px}
+  .rail-count{font-size:13px}
+  .rail-name{font-size:11px}
+  .intro,.hero-top,.growth,.won-grid,.scale-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .hero h1{font-size:clamp(30px,8vw,40px)}
+  .h2{font-size:clamp(28px,7.4vw,38px)}
+  .hero-facts{flex-wrap:wrap;gap:24px 40px}
+  .setup-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 20px}
+  .bars{justify-content:flex-start;gap:40px}
+  .flow{aspect-ratio:auto;display:flex;flex-direction:column;gap:10px}
+  .flow svg,.flow .note{display:none}
+  .fbox{position:static !important;width:auto !important;height:auto !important;min-height:52px;padding:12px}
+  .shares{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:160px}
+  .matters{width:100%}
+  .top5{height:auto;gap:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv,.stat .no,.stat .tag,.stat .body,.stack i,.stack b,.fbox,.flow .note,.share,.matters,.chart .end{
+    opacity:1;transform:none;transition:none}
+  .flow svg .draw,.chart .ln{stroke-dashoffset:0;transition:none}
+  .piece,.piece.in,.piece i{transition:none}
+  .well.thud{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="cs">
+<div class="page">
+
+  <!-- the progress rail: one piece per section -->
+  <aside class="rail" id="rail" aria-label="Case study progress">
+    <div class="rail-count"><span>01</span><i></i><span>13</span></div>
+    <div class="rail-name">Masai</div>
+    <div class="well" id="well" aria-hidden="true"></div>
+  </aside>
+
+  <main>
+
+    <!-- 1 · hero -->
+    <section class="sec hero" data-step>
+      <div class="hero-top">
+        <h1 class="rv">Spends Scaled 5x in 6 Months. At a Sustained CAC.</h1>
+        <p class="hero-note rv">Masai's performance came from influencer marketing on Instagram, Twitter and LinkedIn. It did not scale, and growth stagnated. The job: scale performance marketing with cost per booking under control — and creative costs low.</p>
+      </div>
+
+      <div class="hero-shot rv" id="heroShot">
+        <img src="masai/hero.png" alt="Masai: India's fastest growing career school" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()">
+        <div class="ph">Masai hero banner &middot; add masai/hero.png</div>
+        <div class="hero-tile">
+          <span class="vmark" aria-hidden="true">
+            <i style="--x:1;--y:1"></i><i style="--x:2;--y:1"></i><i style="--x:3;--y:1"></i>
+            <i style="--x:2;--y:2"></i><i style="--x:3;--y:2"></i><i style="--x:3;--y:3"></i>
+          </span>
+          <span class="sep"></span>
+          <span class="masai">masai<em>.</em></span>
+        </div>
+      </div>
+
+      <div class="hero-ads rv"><b>~306 ads</b><span>one tile each — every ad we shipped into the account across the six months, each with multiple hooks.</span></div>
+
+      <div class="hero-facts rv">
+        <div><small>CLIENT</small><b>Masai</b></div>
+        <div><small>Timeline</small><b>Jan - Jun 2026</b></div>
+        <div><small>Result</small><b>5x spend, CAC held</b></div>
+      </div>
+    </section>
+
+    <!-- 2 · the setup -->
+    <section class="sec" data-step>
+      <div class="intro">
+        <div class="rv">
+          <p class="eyebrow"><b>01</b>&nbsp;·&nbsp;The setup</p>
+          <h2 class="h2">Total Vidrow Output</h2>
+        </div>
+        <p class="rv">Masai runs online tech courses. Nobody buys one off an ad — they book a paid slot for Masai's entrance test first, so every ad in this account is bought and judged on test bookings. Masai already ran a large Meta engine with creative arriving from several sources, and Meta funds whatever performs.</p>
+      </div>
+
+      <div class="setup-grid" id="setupGrid">
+        <div class="stat" style="--d:0ms"><div class="no">01</div><div class="tag">Window</div>
+          <div class="body"><h3>6 Months</h3><p>January to June 2026, judged continuously.</p></div></div>
+        <div class="stat" style="--d:150ms"><div class="no">02</div><div class="tag">Scope</div>
+          <div class="body"><h3>9 Programmes</h3><p>AI &amp; ML, product management, analytics, MBA and more.</p></div></div>
+        <div class="stat" style="--d:300ms"><div class="no">03</div><div class="tag">Reach</div>
+          <div class="body"><h3>3 Languages</h3><p>Hindi-English, Tamil and Telugu.</p></div></div>
+        <div class="stat" style="--d:450ms"><div class="no">04</div><div class="tag">Output</div>
+          <div class="body"><h3>~306 Ads made</h3><p>Each shipped with multiple hooks into the account across the six months.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 3 · the growth -->
+    <section class="sec" data-step>
+      <div class="growth">
+        <div class="rv">
+          <p class="eyebrow"><b>02</b>&nbsp;·&nbsp;The growth</p>
+          <h2 class="h2">Spends scaled 5x<br>in six months.</h2>
+          <p>December was the last month before we took the creative over. Since then we've scaled Masai to nearly five times while sustaining the CAC — and not one month has dropped back below where we started.</p>
+        </div>
+        <div class="bars" id="bars">
+          <div class="bar"><div class="stack one" style="--bd:200ms"><i></i><b>1X</b></div><small>Dec 2025</small></div>
+          <div class="bar"><div class="stack five" id="five" style="--bd:1100ms"><b>5X</b></div><small>July 2026</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · creative strategy -->
+    <section class="sec" data-step>
+      <div class="intro">
+        <div class="rv">
+          <p class="eyebrow"><b>01</b>&nbsp;·&nbsp;How we do it</p>
+          <h2 class="h2">Our Creative Strategy</h2>
+        </div>
+        <p class="rv">Three sources feed the batch, the right creator carries it, and every concept ships with three different hooks as three separate ads. Meta decides which of them survive — and that answer sets the next batch.</p>
+      </div>
+
+      <div class="flow" id="flow">
+        <svg viewBox="0 0 1312 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="arrow" d="M0,0 L8,4 L0,8 z" style="stroke:none;fill:#9B9B9B"/>
+            </marker>
+          </defs>
+          <!-- three sources merge -->
+          <path class="draw" pathLength="1" style="--d:250ms" d="M270,26 H312 V174 H270"/>
+          <path class="draw" pathLength="1" style="--d:250ms" d="M270,100 H312"/>
+          <path class="draw" pathLength="1" style="--d:450ms" marker-end="url(#ah)" d="M312,100 H345"/>
+          <!-- creator to hook -->
+          <path class="draw" pathLength="1" style="--d:650ms" marker-end="url(#ah)" d="M619,100 H641"/>
+          <!-- hook splits -->
+          <path class="draw" pathLength="1" style="--d:850ms" d="M915,100 H945"/>
+          <path class="draw" pathLength="1" style="--d:950ms" marker-end="url(#ah)" d="M945,100 V26 H984"/>
+          <path class="draw" pathLength="1" style="--d:950ms" marker-end="url(#ah)" d="M945,100 V174 H984"/>
+          <!-- winners loop back into the batch -->
+          <path class="draw" pathLength="1" style="--d:1250ms" marker-end="url(#ah)" d="M1150,200 V256 H146 V204"/>
+        </svg>
+
+        <div class="fbox a" style="left:0;top:0;width:20.6%;height:17.3%;--d:0ms"><h4>Instagram trends</h4></div>
+        <div class="fbox a" style="left:0;top:24.7%;width:20.6%;height:17.3%;--d:80ms"><h4>New concepts</h4></div>
+        <div class="fbox a" style="left:0;top:49.3%;width:20.6%;height:17.3%;--d:160ms"><h4>Double down</h4></div>
+        <div class="fbox v" style="left:26.6%;top:15.3%;width:20.6%;height:35.7%;--d:500ms"><h4>Right Creator</h4><p>We keep the creators who convert and drop the ones who do not.</p></div>
+        <div class="fbox v" style="left:49.2%;top:15.3%;width:20.6%;height:35.7%;--d:700ms"><h4>Hook</h4><p>Every concept goes out with three different hooks, each as its own ad.</p></div>
+        <div class="fbox a" style="left:75.3%;top:0;width:24.7%;height:17.3%;--d:1000ms;align-items:center"><h4>Did not work &rarr; Discard</h4></div>
+        <div class="fbox a" style="left:75.3%;top:49.3%;width:24.7%;height:17.3%;--d:1000ms;align-items:center"><h4>Worked &rarr; Double down</h4></div>
+        <span class="note" style="left:87.65%;top:30%;--d:1000ms">Meta decides which</span>
+        <span class="note" style="left:47.8%;top:92%;--d:1500ms">every result — win or loss — goes straight back into next week's batch</span>
+      </div>
+
+      <p class="pull rv">36% of our ads with a real budget beat the account's average cost — against 27% of everything else running.</p>
+    </section>
+
+    <!-- 5 · what we won -->
+    <section class="sec won" data-step data-dark>
+      <div class="intro">
+        <div class="rv">
+          <p class="eyebrow"><b>01</b>&nbsp;·&nbsp;What we won</p>
+          <h2 class="h2">Vidrow ads<br>vs others.</h2>
+        </div>
+        <p class="rv">Meta was never told to favour our ads. It moved the money there because they converted — and it moved more of it than the share of ads we made.</p>
+      </div>
+
+      <div class="won-grid" id="wonGrid">
+        <div>
+          <p class="won-label">Our share of the spends</p>
+          <div class="shares" id="shares">
+            <div class="share s1"><b>52%</b><span>of all the ads that ran</span></div>
+            <div class="share s2"><b>55%</b><span>of all the test bookings</span></div>
+            <div class="share s3"><b>56%</b><span>of all the money spent</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="won-label">Why that matters</p>
+          <div class="matters">
+            <svg viewBox="0 0 500 306" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0.5,0.5 H249.5 V138.5 H499.5 V305.5 H0.5 Z"/>
+            </svg>
+            <span class="big">&minus;27%</span>
+            <span class="cap">Lower cost per test booking</span>
+            <p class="mnote">We made just over half the ads — and took a bigger share of the bookings and a bigger share of the budget than that.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · scale -->
+    <section class="sec" data-step>
+      <div class="intro">
+        <div class="rv">
+          <p class="eyebrow"><b>01</b>&nbsp;·&nbsp;Scale</p>
+          <h2 class="h2">Our ads carried the<br>account's biggest bets.</h2>
+        </div>
+        <p class="rv" style="align-self:end">Line up every ad in the account by the budget it carried and add them up one at a time. Our ads are ahead of the rest at the top, in the middle and at the bottom.</p>
+      </div>
+
+      <div class="scale-grid">
+        <div class="chart" id="chart">
+          <p class="chart-cap">Share of the account's budget, added up ad by ad</p>
+          <svg viewBox="0 0 1000 470" aria-label="Cumulative share of budget: Vidrow ads 56%, rest of account 45%">
+            <g class="grid" id="chartGrid"></g>
+            <g id="chartAxis"></g>
+            <path class="ln r" id="lnR" pathLength="1" style="--d:250ms"/>
+            <path class="ln v" id="lnV" pathLength="1" style="--d:0ms"/>
+            <circle class="end r" id="endR" r="9" style="--d:250ms"/>
+            <circle class="end v" id="endV" r="9" style="--d:0ms"/>
+            <text class="end endtxt v" id="txtV" text-anchor="end" style="--d:0ms">56%</text>
+            <text class="end endtxt r" id="txtR" text-anchor="end" style="--d:250ms">45%</text>
+          </svg>
+          <div class="legend"><span style="--c:var(--violet)">Vidrow ads</span><span style="--c:#454043">Rest of account</span></div>
+        </div>
+        <div class="top5 rv">
+          <b>4 of 5</b>
+          <p><strong>Top spending ads</strong>were Vidrow ads.</p>
+        </div>
+      </div>
+
+      <p class="pull rv">Reading left to right: the biggest single ad, then the biggest five, and so on to all of them. The Vidrow line never drops below the rest — so this is not one runaway winner flattering an average.</p>
+    </section>
+
+    <section class="close">
+      <h2 class="rv">Ready for your next growth stage?</h2>
+      <a class="rv" href="index.html#contact">Click to grow<i></i></a>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── rail: thirteen tetrominoes tile a 2 x 26 well. they're laid in bottom-up
+        blocks (an O, an L/J pair, a pair of I's) so every piece lands on pieces
+        that are already down; one drops for every thirteenth of the page read ── */
+  var ROWS = 26;
+  var SHADES = ["var(--acid)", "var(--shade-d)", "var(--shade-b)", "var(--shade-c)"];
+  var BLOCKS = ["O", "LJ", "II", "O", "JL", "O", "II", "LJ"];
+  var PIECES = [], row = 0;
+  var add = function (cells) { PIECES.push({ c: SHADES[PIECES.length % SHADES.length], cells: cells }); };
+  BLOCKS.forEach(function (b) {
+    var r = row;
+    if (b === "O")  { add([[0,r],[1,r],[0,r+1],[1,r+1]]); row += 2; }
+    if (b === "LJ") { add([[0,r],[0,r+1],[0,r+2],[1,r]]); add([[1,r+1],[1,r+2],[1,r+3],[0,r+3]]); row += 4; }
+    if (b === "JL") { add([[1,r],[1,r+1],[1,r+2],[0,r]]); add([[0,r+1],[0,r+2],[0,r+3],[1,r+3]]); row += 4; }
+    if (b === "II") { add([[0,r],[0,r+1],[0,r+2],[0,r+3]]); add([[1,r],[1,r+1],[1,r+2],[1,r+3]]); row += 4; }
+  });
+  var GAP = 4, well = document.getElementById("well"), owner = {};
+  PIECES.forEach(function (p, n) { p.cells.forEach(function (c) { owner[c[0] + "," + c[1]] = n; }); });
+  var edge = function (n, c, r) { var k = owner[c + "," + r]; return k !== undefined && k !== n ? GAP / 2 : 0; };
+  var pieceEls = PIECES.map(function (p, n) {
+    var el = document.createElement("div"), low = ROWS - 1;
+    el.className = "piece";
+    el.style.setProperty("--c", p.c);
+    p.cells.forEach(function (cell) {
+      var c = cell[0], r = cell[1];
+      var gl = edge(n, c - 1, r), gr = edge(n, c + 1, r), gt = edge(n, c, r + 1), gb = edge(n, c, r - 1);
+      var i = document.createElement("i");
+      i.style.left = "calc(" + (c * 50) + "% + " + gl + "px)";
+      i.style.width = "calc(50% - " + (gl + gr) + "px)";
+      i.style.top = "calc(" + ((ROWS - 1 - r) / ROWS * 100) + "% + " + gt + "px)";
+      i.style.height = "calc(" + (100 / ROWS) + "% - " + (gt + gb) + "px)";
+      el.appendChild(i);
+      low = Math.min(low, r);
+    });
+    el.style.setProperty("--from", "-" + (((ROWS - low) / ROWS) * 100 + 3).toFixed(2) + "%");
+    well.appendChild(el);
+    return el;
+  });
+
+  var rail = document.getElementById("rail");
+  var steps = [].slice.call(document.querySelectorAll("[data-step]"));
+  var dark = document.querySelector("[data-dark]");
+  var landed = -1;
+  var tick = function () {
+    var vh = window.innerHeight || 800;
+    /* thirteen equal beats of scroll from the top of the page to the bottom */
+    var travel = document.documentElement.scrollHeight - vh;
+    var p = travel > 0 ? window.scrollY / travel : 1;
+    var n = Math.min(PIECES.length, Math.floor(p * PIECES.length + 0.001));
+    if (window.scrollY + vh >= document.documentElement.scrollHeight - 4) n = PIECES.length;
+    if (n !== landed) {
+      var up = n > landed;
+      landed = n;
+      pieceEls.forEach(function (el, i) { el.classList.toggle("in", i < n); });
+      well.classList.toggle("done", n === PIECES.length);
+      if (up && n > 0 && !reduce) {
+        setTimeout(function () { well.classList.remove("thud"); void well.offsetWidth; well.classList.add("thud"); }, 540);
+      }
+    }
+    /* flip the rail while the dark section is behind it */
+    if (dark) {
+      var r = dark.getBoundingClientRect(), mid = rail.getBoundingClientRect();
+      var y = mid.top + mid.height / 2;
+      rail.classList.toggle("on-dark", y > r.top && y < r.bottom);
+    }
+  };
+  var pending = false;
+  window.addEventListener("scroll", function () {
+    if (pending) return; pending = true;
+    requestAnimationFrame(function () { pending = false; tick(); });
+  }, { passive: true });
+  window.addEventListener("resize", tick);
+
+  /* ── growth: the 5X bar is built cell by cell, bottom up ── */
+  var five = document.getElementById("five");
+  if (five) {
+    for (var k = 0; k < 10; k++) {
+      var cell = document.createElement("i");
+      /* bottom row first: delay grows as the stack rises */
+      var row = 4 - Math.floor(k / 2);
+      cell.style.gridRow = String(row + 1);
+      cell.style.gridColumn = String((k % 2) + 1);
+      cell.style.transitionDelay = (300 + Math.floor(k / 2) * 150 + (k % 2) * 60) + "ms";
+      five.insertBefore(cell, five.firstChild);
+    }
+  }
+
+  /* ── chart: cumulative share of budget, ad by ad ── */
+  var X = [1, 5, 10, 25, 50, 100, 200, 400, "all"];
+  /* read off the supplied chart image; replace with the exact series when available */
+  var V = [4, 12, 18, 28, 36.5, 45, 51, 54.5, 56];
+  var R = [2.3, 9, 14, 22, 29.5, 36.5, 41.5, 44, 45];
+  var L = 110, Rt = 960, T = 20, B = 400, MAX = 60;
+  var px = function (i) { return L + (Rt - L) * i / (X.length - 1); };
+  var py = function (v) { return B - (B - T) * v / MAX; };
+  var ns = "http://www.w3.org/2000/svg";
+  var mk = function (tag, attrs, parent) {
+    var e = document.createElementNS(ns, tag);
+    for (var a in attrs) e.setAttribute(a, attrs[a]);
+    parent.appendChild(e); return e;
+  };
+  var grid = document.getElementById("chartGrid"), axis = document.getElementById("chartAxis");
+  if (grid) {
+    for (var g = 0; g <= 60; g += 10) {
+      mk("line", { x1: L, x2: Rt, y1: py(g), y2: py(g), "class": g === 0 ? "axis" : "" }, grid);
+      mk("text", { x: L - 20, y: py(g) + 7, "text-anchor": "end" }, axis).textContent = g + "%";
+    }
+    X.forEach(function (x, i) { mk("text", { x: px(i), y: B + 44, "text-anchor": "middle" }, axis).textContent = x; });
+    var d = function (arr) { return arr.map(function (v, i) { return (i ? "L" : "M") + px(i) + "," + py(v); }).join(" "); };
+    document.getElementById("lnV").setAttribute("d", d(V));
+    document.getElementById("lnR").setAttribute("d", d(R));
+    var last = X.length - 1;
+    ["V", "R"].forEach(function (s) {
+      var arr = s === "V" ? V : R, c = document.getElementById("end" + s), t = document.getElementById("txt" + s);
+      c.setAttribute("cx", px(last)); c.setAttribute("cy", py(arr[last]));
+      t.setAttribute("x", px(last) - 20); t.setAttribute("y", s === "V" ? py(arr[last]) - 26 : py(arr[last]) + 44);
+    });
+  }
+
+  /* ── reveals ── */
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -14% 0px" }) : { observe: function (el) { el.classList.add("in"); }, unobserve: function () {} };
+  document.querySelectorAll(".rv, #setupGrid, #bars, #flow, #shares, #wonGrid, #chart").forEach(function (el) { io.observe(el); });
+
+  tick();
+})();
+</script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import WyMark from "./WyMark";
 import { FOOTER_PIECES, FOOTER_PIECES_MOBILE } from "../data/footerPieces";
 
 const CTA_CELLS = [
@@ -13,21 +12,10 @@ const CTA_CELLS = [
   [2, 2],
 ];
 
-// the last piece lands at --at 2680ms + --dur 589ms, and its own flatten
-// (--uat 3713ms + 320ms) runs after that — this is when the whole sequence
-// is actually done, not just when the last piece stops moving
-const REVEAL_DELAY = 4100;
-
-const SERVICES = [
-  "Brand Marketing",
-  "Social Media",
-  "Celebrity Marketing",
-  "AdOps & Acc",
-  "AI for Marketing",
-  "Performance Marketing",
-];
-
-const EXPLORE = ["About Us", "Work", "Case Studies"];
+// the last piece to flatten starts at --uat 3742ms and takes .5s — this is
+// when the whole sequence is actually done, not just when the last piece
+// stops falling
+const REVEAL_DELAY = 4260;
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -97,6 +85,22 @@ export default function Footer() {
         return;
       }
       timers.push(setTimeout(() => el.classList.add("vfoot__piece--fallen"), p.at));
+    });
+    return () => timers.forEach(clearTimeout);
+  }, [playing, pieces]);
+
+  // the flatten-to-yellow is timed off its own --uat, independent of the
+  // fall/seat above — every piece lands in its own shade first, and only
+  // once the whole wordmark has assembled does it flatten to one yellow
+  useEffect(() => {
+    if (!playing) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const timers = [];
+    pieces.forEach((p, i) => {
+      const el = pieceRefs.current[i];
+      if (!el) return;
+      timers.push(setTimeout(() => el.classList.add("vfoot__piece--flat"), p.uat));
     });
     return () => timers.forEach(clearTimeout);
   }, [playing, pieces]);
@@ -180,6 +184,7 @@ export default function Footer() {
                 "--y": p.y,
                 "--w": p.w,
                 "--h": p.h,
+                "--fall": p.fall,
                 "--dur": p.dur + "ms",
                 "--c": `var(--shade-${p.shade})`,
               }}
@@ -200,47 +205,17 @@ export default function Footer() {
             <div className="vfoot__bottomRow">
               <p className="vfoot__tagline">We turn attention into impact.</p>
 
-              <div className="vfoot__cols">
-                <div className="vfoot__col">
-                  <div className="vfoot__colHead">
-                    Services
-                    <WyMark />
-                  </div>
-                  <div className="vfoot__links">
-                    {SERVICES.map((label) => (
-                      <a href="#contact" key={label}>
-                        {label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="vfoot__col">
-                  <div className="vfoot__colHead">
-                    Explore
-                    <WyMark />
-                  </div>
-                  <div className="vfoot__links">
-                    {EXPLORE.map((label) => (
-                      <a href="#contact" key={label}>
-                        {label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+              <div className="vfoot__legal">
+                <span>© 2026 Vidrow</span>
+                <span className="vfoot__dot" aria-hidden="true">
+                  ·
+                </span>
+                <a href="#contact">Privacy</a>
+                <span className="vfoot__dot" aria-hidden="true">
+                  ·
+                </span>
+                <a href="#contact">Terms</a>
               </div>
-            </div>
-
-            <div className="vfoot__legal">
-              <span>© 2026 Vidrow</span>
-              <span className="vfoot__dot" aria-hidden="true">
-                ·
-              </span>
-              <a href="#contact">Privacy</a>
-              <span className="vfoot__dot" aria-hidden="true">
-                ·
-              </span>
-              <a href="#contact">Terms</a>
             </div>
           </div>
         </div>

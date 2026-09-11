@@ -260,7 +260,7 @@ a {
   transition: opacity .5s ease;
   left: 6%;
   right: 6%;
-  top: calc(40 * var(--k));
+  top: calc(20 * var(--k));
   display: flex;
   align-items: flex-start;
   justify-content: space-between
@@ -268,8 +268,8 @@ a {
 
 .hx-logo {
   display: block;
-  width: calc(72 * var(--k));
-  height: calc(72 * var(--k));
+  width: calc(56 * var(--k));
+  height: calc(56 * var(--k));
   text-decoration: none
 }
 
@@ -279,6 +279,31 @@ a {
   display: block
 }
 
+.hx-right {
+  display: flex;
+  align-items: center;
+  gap: calc(40 * var(--k))
+}
+
+.hx-links {
+  display: flex;
+  align-items: center;
+  gap: calc(28 * var(--k))
+}
+
+.hx-links a {
+  font-family: var(--body);
+  font-size: calc(15 * var(--k));
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap
+}
+
+.hx-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px
+}
+
 .hx-contact {
   display: flex;
   align-items: stretch;
@@ -286,7 +311,7 @@ a {
   color: var(--paper);
   text-decoration: none;
   font-family: var(--body);
-  font-size: calc(13 * var(--k));
+  font-size: calc(11 * var(--k));
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -296,23 +321,154 @@ a {
 .hx-contact span:first-child {
   display: flex;
   align-items: center;
-  padding: calc(14 * var(--k)) calc(18 * var(--k))
+  padding: calc(11 * var(--k)) calc(14 * var(--k))
 }
 
 .hx-contact-i {
-  width: calc(46 * var(--k));
+  width: calc(38 * var(--k));
   background: var(--ink);
   border-left: 1px solid rgba(255, 255, 255, .25);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(4 * var(--k))
+  padding: calc(3 * var(--k));
+  transition: background-color .25s ease
 }
 
 .hx-contact-i svg {
   display: block;
   width: 100%;
   height: 100%
+}
+
+.hx-contact-i svg g {
+  transition: fill .25s ease
+}
+
+.hx-contact:hover .hx-contact-i {
+  background: var(--acid)
+}
+
+.hx-contact:hover .hx-contact-i svg g {
+  fill: var(--violet)
+}
+
+/* mobile nav trigger — hidden on desktop, shown in its place below 900px
+   (see the media query below); animates into an X when the menu is open */
+.hx-burger {
+  display: none;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer
+}
+
+.hx-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform .25s ease, opacity .2s ease
+}
+
+.hx-burger.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg)
+}
+
+.hx-burger.is-open span:nth-child(2) {
+  opacity: 0
+}
+
+.hx-burger.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg)
+}
+
+/* the mobile menu: a full-screen panel carrying the same links + contact
+   button as the desktop bar. Always laid out (so the open transition can
+   animate), just invisible/inert until .is-open */
+.hx-mobileMenu {
+  display: none
+}
+
+@media (max-width:900px) {
+  .hx-contact--bar {
+    display: none
+  }
+
+  .hx-burger {
+    display: flex;
+    /* stays above the full-screen menu it opens (z-index 50) so it's still
+       there, in the same corner, to tap closed — it's already morphed into
+       an X by .is-open, so this doubles as the menu's own close button */
+    position: relative;
+    z-index: 60
+  }
+
+  .hx-mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--paper);
+    padding: 100px 24px 40px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-16px);
+    transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s
+  }
+
+  .hx-mobileMenu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity .25s ease, transform .25s ease
+  }
+
+  .hx-mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 24px
+  }
+
+  .hx-mobileLinks a {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    text-decoration: none
+  }
+
+  /* .hx-contact's own sizing is all calc(_ * var(--k)), where --k comes
+     from the hero/case-study section's container query width — fine on
+     desktop, but that container is only as wide as the phone screen here,
+     so --k (and the button) shrinks down to near-nothing. Fixed px instead,
+     sized to actually read as a real button. */
+  .hx-mobileMenu .hx-contact {
+    align-self: flex-start;
+    font-size: 14px
+  }
+
+  .hx-mobileMenu .hx-contact span:first-child {
+    padding: 16px 20px
+  }
+
+  .hx-mobileMenu .hx-contact-i {
+    width: 52px;
+    padding: 6px
+  }
 }
 
 /* the hero -> Featured Work curtain: a fixed, viewport-covering copy of the
@@ -323,7 +479,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 999;
-  transition: opacity .5s ease;
+  transition: opacity .2s ease;
 }
 
 .hero-curtain--fading {
@@ -582,7 +738,7 @@ a {
   font-family: var(--display);
   font-weight: 400;
   margin: 0;
-  font-size: calc(64 * var(--k));
+  font-size: min(calc(64 * var(--k)), 48px);
   line-height: 1.5;
   letter-spacing: calc(-2 * var(--k));
   color: #121212
@@ -653,7 +809,8 @@ a {
   height: calc(40 * var(--k));
   background: var(--acid);
   display: grid;
-  place-items: center
+  place-items: center;
+  transition: background-color .25s ease
 }
 
 .hx-cta-i svg {
@@ -662,8 +819,16 @@ a {
   display: block
 }
 
+.hx-cta-i svg g {
+  transition: fill .25s ease
+}
+
 .hx-cta:hover .hx-cta-i {
-  background: var(--paper)
+  background: var(--violet)
+}
+
+.hx-cta:hover .hx-cta-i svg g {
+  fill: var(--acid)
 }
 
 @media (max-width:900px) {
@@ -747,16 +912,23 @@ a {
   }
 
   .hx-logo {
-    width: 52px;
-    height: 52px
+    width: 42px;
+    height: 42px
+  }
+
+  /* the link row needs real desktop width to sit alongside the button
+     without crowding the logo — mobile folds both into the hamburger menu
+     instead (see .hx-mobileMenu) */
+  .hx-links {
+    display: none
   }
 
   .hx-contact span:first-child {
-    padding: 12px 14px
+    padding: 10px 12px
   }
 
   .hx-contact-i {
-    width: 40px
+    width: 34px
   }
 
   .hx-copy {
@@ -870,21 +1042,25 @@ a {
   }
 
   /* each card's own text sits inside its wide half — s1's is the top half,
-     s2's and s4's the bottom half, s3's the top half again */
-  .hx-s1,
-  .hx-s3 {
+     s2's and s4's the bottom half, s3's the bottom half too */
+  .hx-s1 {
     justify-content: flex-start;
     padding-top: 14px
   }
 
-  .hx-s2,
+  .hx-s3,
   .hx-s4 {
     justify-content: flex-end;
     padding-bottom: 14px
   }
 
+  .hx-s2 {
+    justify-content: flex-start;
+    padding-top: 14px
+  }
+
   .hx-s3 {
-    padding-left: 28%
+    padding-left: 33%
   }
 
   /* s2's notch cuts away its own left edge in the half its text can spill
@@ -1509,18 +1685,21 @@ a {
 
 .fw-tagwrap .mark {
   position: absolute;
-  left: 100%;
-  top: -9px;
+  /* pulled left so its near two-thirds sit on top of the tag and only the
+     rightmost column runs past its edge */
+  left: calc(100% - 10px);
+  top: 0;
   width: 15px;
   height: 15px;
   gap: 1px;
-  transform: rotate(90deg)
+  /* mirrored so the staircase tapers toward the tag instead of away from it */
+  transform: scaleX(-1)
 }
 
 .fw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 3.9vw, 56px);
+  font-size: clamp(32px, 3.9vw, 40px);
   line-height: 1.2;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -1645,14 +1824,14 @@ a {
 .fw-row.is-open .fw-say,
 .fw-row:focus-visible .fw-say {
   right: 0;
-  top: calc(138 * var(--k));
+  top: 0;
   transform: none;
   width: calc(473 * var(--k));
   height: calc(122 * var(--k));
   gap: calc(4 * var(--k));
   padding: calc(10 * var(--k)) calc(16 * var(--k)) calc(12 * var(--k));
   background-color: var(--acid);
-  clip-path: polygon(0 0, 100% 0, 100% 57.98%, 42.07% 57.98%, 42.07% 100%, 0 100%)
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
 }
 
 .fw-line {
@@ -1672,29 +1851,6 @@ a {
   line-height: 1.4;
   font-weight: 500;
   color: #1A1C1C
-}
-
-.fw-row.is-open .fw-read,
-.fw-row:focus-visible .fw-read {
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: .12s
-}
-
-.fw-read {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(10 * var(--k));
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-  font-family: var(--body);
-  font-size: calc(12 * var(--k));
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: calc(1.2 * var(--k));
-  text-transform: uppercase;
-  color: #121212
 }
 
 .fw-arw {
@@ -1810,9 +1966,9 @@ a {
 
 .fw-quote {
   position: absolute;
-  left: 43.611%;
-  top: 0;
-  width: calc(470 * var(--k));
+  right: 0;
+  bottom: 0;
+  width: calc(473 * var(--k));
   box-sizing: border-box;
   background: var(--paper);
   padding: calc(16 * var(--k));
@@ -1823,7 +1979,7 @@ a {
   font-size: calc(16 * var(--k));
   line-height: 1.4;
   color: #121212;
-  transform: translateY(calc(-14 * var(--k)));
+  transform: translateY(calc(-10 * var(--k)));
   /* it sits outside .fw-extra, so it repeats the reveal and the click
      transparency that .fw-extra used to hand it */
   opacity: 0;
@@ -2075,14 +2231,6 @@ a {
     color: #1A1C1C
   }
 
-  .fw-row.is-open .fw-read {
-    opacity: 1;
-    pointer-events: auto;
-    font-size: 12px;
-    letter-spacing: .1em;
-    gap: 10px
-  }
-
   .fw-row.is-open .fw-arw {
     width: 22px
   }
@@ -2145,18 +2293,18 @@ a {
 
 .wy-tagwrap .mark {
   position: absolute;
-  left: 100%;
+  left: calc(100% - 8 * var(--k));
   top: 0;
   width: calc(12 * var(--k));
   height: calc(12 * var(--k));
   gap: calc(.3 * var(--k));
-  transform: rotate(90deg)
+  transform: scaleX(-1)
 }
 
 .wy-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: calc(44 * var(--k));
+  font-size: min(calc(44 * var(--k)), 40px);
   line-height: 1.2;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -2274,6 +2422,15 @@ a {
   position: relative
 }
 
+/* caps the notch the light card's clip-path cuts out of its top-right
+   corner (desktop only — see .wy-item.on .wy-lead's clip-path and the
+   height this is given in WhereYouAreNow.jsx) so the stat card's border
+   reads as one continuous line running up to that step instead of
+   stopping short of it */
+.wy-notch {
+  display: none
+}
+
 /* the active stage's title + copy, raised above the stat card as its own
    light notched card — desktop only, see the .wy-lead rules further down */
 .wy-lead {
@@ -2283,7 +2440,8 @@ a {
 .wy-card {
   box-sizing: border-box;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, .3);
+  border-right: 1px solid rgba(255, 255, 255, .3);
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
   padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(20 * var(--k));
   display: flex;
   flex-direction: column;
@@ -2316,29 +2474,31 @@ a {
   .wy-item.on .wy-lead {
     display: block;
     background: #F0F0F0;
-    /* the bottom padding is fixed to the same height as the notch cut below
-       it, so that zone is always empty padding and the copy text — which
-       can run 2 or 3 lines depending on the stage — never reaches into it
-       and gets clipped */
-    padding: calc(28 * var(--k)) calc(32 * var(--k)) 80px;
+    /* the bottom padding is the left tab's length — WhereYouAreNow.jsx
+       stretches it (via --wy-tab) to match the stat card's own rendered
+       height, so the tab runs the card's full height instead of just
+       peeking out from behind its top */
+    padding: calc(28 * var(--k)) calc(32 * var(--k)) var(--wy-tab, 80px);
     margin-bottom: 0;
     /* the brand's two-step staircase cut: a small step right under the
-       title, then a deep step near the bottom leaving a narrow strip —
-       the persisting left tab's length is however tall this bottom
-       padding is, since the stat card is pinned to this box's own
-       measured bottom edge (see WhereYouAreNow.jsx) */
+       title, then a deep step leaving the narrow left tab — the stat
+       card is pinned to this box's own measured bottom edge (see
+       WhereYouAreNow.jsx). The notch this carves out of the top-right
+       corner is capped with its own border (.wy-notch, positioned in
+       WhereYouAreNow.jsx) so the stat card's border reads as one
+       continuous line up to this step */
     clip-path: polygon(0 0, 100% 0,
         100% calc(90 * var(--k)),
         calc(100% - 40 * var(--k)) calc(90 * var(--k)),
-        calc(100% - 40 * var(--k)) calc(100% - 80px),
-        calc(24 * var(--k)) calc(100% - 80px),
+        calc(100% - 40 * var(--k)) calc(100% - var(--wy-tab, 80px)),
+        calc(24 * var(--k)) calc(100% - var(--wy-tab, 80px)),
         calc(24 * var(--k)) 100%,
         0 100%)
   }
 
   .wy-leadTitle {
-    font-family: var(--display);
-    font-weight: 500;
+    font-family: var(--body);
+    font-weight: 700;
     font-size: calc(34 * var(--k));
     line-height: 1.1;
     letter-spacing: -.01em;
@@ -2359,10 +2519,25 @@ a {
      on the stage) so it always sits flush under the lead card regardless */
   .wy-item.on .wy-cardwrap {
     position: absolute;
-    /* the tab is calc(24 * var(--k)) wide (see .wy-lead's clip-path) — this
-       sits exactly 10px clear of its right edge */
-    left: calc(24 * var(--k) + 10px);
+    /* flush against the tab's right edge (see .wy-lead's clip-path) so the
+       lead card and the stat card touch with no gap or sliver between them */
+    left: calc(24 * var(--k));
     right: 0
+  }
+
+  /* the notch cap: a plain top+right border over the corner the lead
+     card's clip-path cuts away, sized in WhereYouAreNow.jsx (its height
+     depends on the lead card's actual rendered text) so it joins the stat
+     card's own border-right into one unbroken line */
+  .wy-item.on .wy-notch {
+    display: block;
+    position: absolute;
+    right: 0;
+    width: calc(40 * var(--k));
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, .3);
+    border-right: 1px solid rgba(255, 255, 255, .3);
+    pointer-events: none
   }
 }
 
@@ -2370,11 +2545,10 @@ a {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  background: var(--paper);
-  height: calc(38 * var(--k));
-  padding-left: calc(12 * var(--k));
+  gap: calc(10 * var(--k));
+  background: transparent;
   text-decoration: none;
-  color: #121212;
+  color: var(--paper);
   font-family: var(--body);
   font-size: calc(12 * var(--k));
   font-weight: 700;
@@ -2382,29 +2556,18 @@ a {
   letter-spacing: calc(1.2 * var(--k));
   text-transform: uppercase;
   white-space: nowrap;
-  transition: background .18s ease, color .18s ease
+  transition: opacity .18s ease
 }
 
 .wy-read:hover {
-  background: #121212;
-  color: var(--paper)
+  opacity: .7
 }
 
 .wy-mark {
   flex: none;
-  width: calc(38 * var(--k));
-  height: calc(38 * var(--k));
-  display: grid;
-  place-content: center;
-  grid-template-columns: repeat(3, calc(5 * var(--k)));
-  grid-template-rows: repeat(3, calc(5 * var(--k)));
-  gap: calc(1 * var(--k))
-}
-
-.wy-mark i {
-  grid-column: calc(var(--x) + 1);
-  grid-row: calc(var(--y) + 1);
-  background: var(--violet)
+  width: calc(26 * var(--k));
+  height: calc(26 * var(--k));
+  display: block
 }
 
 .wy-client {
@@ -2640,18 +2803,22 @@ a {
 
 .lev-eyebrow .mark {
   position: absolute;
-  left: 100%;
-  top: -9px;
+  left: calc(100% - 10px);
+  /* unlike the other sections' tags, this one has no taller wrapper box to
+     hang the icon from (.lev-eyebrow-t is the tag itself) — offset up by
+     that same 4px (22px wrapper − 18px tag) so it lands the same way */
+  top: -4px;
   width: 15px;
   height: 15px;
-  gap: 1px
+  gap: 1px;
+  transform: scaleX(-1)
 }
 
 .lev-h {
   font-family: var(--display);
   font-weight: 400;
   margin: 0;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 1.06;
   letter-spacing: -.02em;
   text-align: center;
@@ -2833,19 +3000,19 @@ a {
 
 .sw-tagwrap .mark {
   position: absolute;
-  left: 100%;
-  top: -9px;
+  left: calc(100% - 10px);
+  top: 0;
   width: 15px;
   height: 15px;
   gap: 1px;
-  transform: rotate(90deg);
+  transform: scaleX(-1);
   color: var(--ink)
 }
 
 .sw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 110%;
   letter-spacing: -.025em;
   color: var(--ink);
@@ -2898,31 +3065,19 @@ a {
 }
 
 .sw-filter[aria-pressed="true"] {
-  background: var(--violet);
-  color: var(--paper)
+  background: var(--acid);
+  color: #000
 }
 
-/* the active pill carries a small block tab, like the brand mark */
-.sw-filter[aria-pressed="true"]::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: -12px;
-  width: 12px;
-  height: 12px;
-  background: var(--violet)
-}
-
-/* a 12-column field; each tile sits where it likes on it */
 .sw-field {
   position: relative
 }
 
 .sw-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: clamp(20px, 2.2vw, 32px);
-  row-gap: clamp(60px, 7vw, 110px);
+  row-gap: clamp(40px, 4.5vw, 64px);
   position: relative
 }
 
@@ -2930,9 +3085,7 @@ a {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: inherit;
-  transform: translate3d(0, var(--ty, 0px), 0);
-  will-change: transform
+  color: inherit
 }
 
 .sw-item[hidden] {
@@ -2950,13 +3103,11 @@ a {
 .sw-shot img {
   position: absolute;
   left: 0;
-  top: -10%;
+  top: 0;
   width: 100%;
-  height: 120%;
+  height: 100%;
   object-fit: cover;
   display: block;
-  will-change: transform;
-  transform: translate3d(0, var(--py, 0px), 0);
   scale: var(--ps, 1);
   transition: scale .5s cubic-bezier(.16, .84, .34, 1)
 }
@@ -2965,10 +3116,26 @@ a {
   --ps: 1.04
 }
 
+.sw-shot img.sw-brandTag {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: clamp(28px, 2.4vw, 36px);
+  object-fit: contain;
+  background: var(--paper);
+  padding: 6px 10px;
+  transform: none;
+  scale: 1;
+  transition: none
+}
+
 .sw-meta {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: 16px
 }
 
@@ -2978,7 +3145,8 @@ a {
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: #4D4D4D
+  color: #4D4D4D;
+  white-space: nowrap
 }
 
 .sw-title {
@@ -2999,9 +3167,7 @@ a {
   .sw-item {
     grid-column: auto !important;
     grid-row: auto !important;
-    margin-top: 0 !important;
-    transform: none;
-    --ty: 0px
+    margin-top: 0 !important
   }
 
   .sw-item:nth-child(2n) {
@@ -3150,18 +3316,18 @@ a {
 
 .cs-tagwrap .mark {
   position: absolute;
-  left: 100%;
+  left: calc(100% - 8 * var(--k));
   top: 0;
   width: calc(12 * var(--k));
   height: calc(12 * var(--k));
   gap: calc(.3 * var(--k));
-  transform: rotate(90deg)
+  transform: scaleX(-1)
 }
 
 .cs-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: calc(48 * var(--k));
+  font-size: min(calc(48 * var(--k)), 40px);
   line-height: 1.1;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -3354,8 +3520,10 @@ a {
 }
 
 /* Each piece is clipped to its own tetromino, and clip-path can't carry a
-   border — so the outline is the button's background showing through a 1px
-   inset copy of the same shape. */
+   border — so the outline is the button's background showing through a
+   separately-computed, 1px-eroded copy of the same shape (see the `d` param
+   on pieceClip in CaseStudies.jsx; a plain inset box only insets correctly
+   at convex corners and misses concave ones like a T-piece's shoulder). */
 .cs-logtile {
   position: relative;
   min-width: 0;
@@ -3368,7 +3536,7 @@ a {
 
 .cs-logtile-fill {
   position: absolute;
-  inset: 1px;
+  inset: 0;
   background: var(--paper);
   transition: background .18s ease
 }
@@ -3674,18 +3842,18 @@ a {
 
 .fo-tagwrap .mark {
   position: absolute;
-  left: 100%;
+  left: calc(100% - 8px);
   top: 0;
   width: 12px;
   height: 12px;
   gap: 1px;
-  transform: rotate(90deg)
+  transform: scaleX(-1)
 }
 
 .fo-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 110%;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -3783,8 +3951,8 @@ a {
 }
 
 .fo-pill-i {
-  width: 26px;
-  height: 26px;
+  width: 16px;
+  height: 16px;
   flex: none
 }
 
@@ -3800,7 +3968,29 @@ a {
 .fo-step {
   display: flex;
   align-items: flex-end;
-  min-width: 0
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.16, .84, .34, 1)
+}
+
+/* each step block eases in on its own, staggered left to right, once the
+   section's own Reveal (.fo-body) has scrolled into view */
+.fo-body.in .fo-step {
+  opacity: 1;
+  transform: none
+}
+
+.fo-body.in .fo-step:nth-child(1) {
+  transition-delay: .05s
+}
+
+.fo-body.in .fo-step:nth-child(2) {
+  transition-delay: .2s
+}
+
+.fo-body.in .fo-step:nth-child(3) {
+  transition-delay: .35s
 }
 
 .fo-step:nth-child(1) {
@@ -4025,18 +4215,18 @@ a {
 
 .pr-tagwrap .mark {
   position: absolute;
-  left: 100%;
+  left: calc(100% - 8 * var(--k));
   top: 0;
   width: calc(12 * var(--k));
   height: calc(12 * var(--k));
   gap: calc(.3 * var(--k));
-  transform: rotate(90deg)
+  transform: scaleX(-1)
 }
 
 .pr-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: calc(48 * var(--k));
+  font-size: min(calc(48 * var(--k)), 40px);
   line-height: 1.15;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -4130,14 +4320,14 @@ a {
 .pr-web .ring {
   fill: none;
   stroke: var(--acid);
-  stroke-width: 40;
+  stroke-width: 26;
   stroke-linejoin: miter
 }
 
 .pr-web text {
   font-family: var(--body);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 9px;
   letter-spacing: .02em;
   fill: #1A1C1C;
   text-anchor: middle;
@@ -4363,18 +4553,18 @@ a {
 
 .news-tagwrap .mark {
   position: absolute;
-  left: 100%;
+  left: calc(100% - 8px);
   top: 0;
   width: 12px;
   height: 12px;
   gap: 1px;
-  transform: rotate(90deg)
+  transform: scaleX(-1)
 }
 
 .news-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 110%;
   letter-spacing: -.025em;
   text-transform: capitalize;
@@ -4491,8 +4681,8 @@ a {
 }
 
 .news-read svg {
-  width: 4.854cqw;
-  height: 4.854cqw;
+  width: 3.2cqw;
+  height: 3.2cqw;
   flex: none;
   display: block
 }
@@ -4591,9 +4781,19 @@ a {
   /* pale */
   --shade-d: #C9D06B;
   /* olive */
+  /* straight from footerv2.css: a pure gravity ease-in for the fall (no
+     overshoot/bounce), and a settle ease for the landing squash + flatten */
+  --ease-fall: cubic-bezier(.55, .085, .68, .53);
+  --ease-seat: cubic-bezier(.215, .61, .355, 1);
+  position: relative;
+  /* pieces fall from well above the well itself — up past the CTA, into the
+     title's own space — so the clip that keeps them from poking out above
+     the footer into the section before it has to live here, not on the
+     small box around the well (see .vfoot__wellWrap) */
+  overflow: hidden;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(56px, 7vw, 100px) var(--side);
+  padding: clamp(56px, 7vw, 100px) var(--side) clamp(28px, 3.5vw, 50px);
   display: flex;
   flex-direction: column;
   gap: clamp(48px, 6vw, 90px)
@@ -4648,7 +4848,8 @@ a {
   height: 44px;
   background: var(--acid);
   display: grid;
-  place-items: center
+  place-items: center;
+  transition: background-color .25s ease
 }
 
 .vfoot__ctaMark {
@@ -4661,22 +4862,27 @@ a {
 .vfoot__ctaMark i {
   grid-column: calc(var(--x) + 1);
   grid-row: calc(var(--y) + 1);
-  background: var(--violet)
+  background: var(--violet);
+  transition: background-color .25s ease
 }
 
 .vfoot__cta:hover .vfoot__ctaIcon {
-  background: var(--paper)
+  background: var(--violet)
 }
 
-/* the well sits at the bottom of a taller, clipped runway — the extra
-   headroom above it (7 row-heights, vs. the well's own 5) is where pieces
-   are visibly falling from, but it's still solid footer background the
-   whole way, so nothing ever pokes out above the footer into the section
-   above it */
+.vfoot__cta:hover .vfoot__ctaMark i {
+  background: var(--acid)
+}
+
+/* the well sits at the bottom of this box — its own aspect-ratio just
+   reserves the empty gap under the CTA before the word has fallen in. It
+   isn't what clips the fall (that's .vfoot itself, see above): each piece's
+   own --fall carries it well above this box, up past the CTA and into the
+   title's own space, and overflow stays visible here so that isn't cut off
+   early. */
 .vfoot__wellWrap {
   position: relative;
-  overflow: hidden;
-  aspect-ratio: 35 / 12;
+  aspect-ratio: 35 / 10;
   /* collapses to just the well's own 5-row height once the wordmark is
      formed (see Footer.jsx) — the well is pinned to the bottom of this box,
      so shrinking it slides the wordmark up to close the gap under the CTA */
@@ -4686,7 +4892,7 @@ a {
 /* below 640px the word regroups onto two lines ("VID" / "ROW") on a 19x11
    grid instead of one 35x5 row — see FOOTER_PIECES_MOBILE */
 .vfoot__wellWrap.is-2line {
-  aspect-ratio: 19 / 18
+  aspect-ratio: 19 / 15
 }
 
 /* the well: 35 x 5 cells, pieces sit on it by grid slot */
@@ -4710,10 +4916,12 @@ a {
 .vfoot__piece {
   grid-column: calc(var(--x) + 1) / span var(--w);
   grid-row: calc(var(--y) + 1) / span var(--h);
-  /* the runway above the well is 7 row-heights tall (see .vfoot__wellWrap);
-     as a fraction of this piece's own height (--h rows) that's 700%/--h —
-     enough travel to read as a real fall, always clipped by the wrap above */
-  transform: translateY(calc(700% / var(--h) * -1));
+  /* --fall is this piece's own travel distance in multiples of its own
+     height (--h rows) — tuned per piece so, despite --h varying piece to
+     piece, every piece's fall reads as starting from roughly the same
+     height near the top of the footer, by the title. Clipped by .vfoot
+     itself, not this box, so the travel can run that long. */
+  transform: translateY(calc(-100% * var(--fall) / var(--h)));
   /* invisible until it's actually falling — a piece parked in its start
      position before the trigger reads as "stuck", not "about to fall", so
      nothing is shown at all until it starts dropping */
@@ -4724,7 +4932,8 @@ a {
      timeline, skipping straight to the end state instead of painting the
      drop. A transition started fresh by a real setTimeout callback doesn't
      have that problem */
-  transition: transform var(--dur, .6s) cubic-bezier(.34, 1.56, .64, 1),
+  /* pure gravity ease-in, no overshoot — matches footerv2.css's vf2-fall */
+  transition: transform var(--dur, .6s) var(--ease-fall),
     opacity .2s ease
 }
 
@@ -4738,38 +4947,59 @@ a {
   width: 100%;
   height: 100%;
   grid-template-columns: repeat(var(--w), 1fr);
-  grid-template-rows: repeat(var(--h), 1fr)
+  grid-template-rows: repeat(var(--h), 1fr);
+  transform-origin: 50% 100%;
+  /* the landing squash (vf2-seat): held flat until the piece's own fall
+     finishes, then a short settle — timed off the same --dur so it always
+     starts exactly when the piece lands, whichever piece it is */
+  transform: scaleY(.86);
+  transition: transform 130ms var(--ease-seat)
+}
+
+.vfoot__piece--fallen .vfoot__pieceIn {
+  transition-delay: var(--dur, .6s);
+  transform: scaleY(1)
+}
+
+/* pre-placed pieces: already resting in their final spot on first paint, in
+   their own shade — no fall or seat to play, they just sit there until their
+   own --uat flattens them along with everything else */
+.vfoot__piece--pre {
+  transform: translateY(0);
+  opacity: 1;
+  transition: none
+}
+
+.vfoot__piece--pre .vfoot__pieceIn {
+  transform: scaleY(1);
+  transition: none
 }
 
 .vfoot__pieceIn i {
   grid-column: calc(var(--x) + 1);
   grid-row: calc(var(--y) + 1);
   background: var(--c);
-  transition: background .32s linear
+  /* flatten is its own timer (see Footer.jsx), independent of the fall/seat —
+     every piece lands in its own shade and only turns yellow once the whole
+     wordmark is assembled, matching footerv2.css's vf2-flatten */
+  transition: background .5s var(--ease-seat)
 }
 
-.vfoot__piece--fallen .vfoot__pieceIn i {
+.vfoot__piece--flat .vfoot__pieceIn i {
   background: var(--shade-a)
 }
 
-/* pre-placed pieces: already sitting in their final spot, already flattened —
-   only the remaining pieces fall when the section scrolls into view */
-.vfoot__piece--pre {
-  transform: translateY(0);
-  opacity: 1
-}
-
-.vfoot__piece--pre .vfoot__pieceIn i {
-  background: var(--shade-a)
-}
-
-/* safety net: is-revealed only lands well after every piece's fall should
-   have finished (see REVEAL_DELAY in Footer.jsx) — if a piece's timer or
-   transition ever fails to land for any reason, the word must still end up
-   complete rather than staying invisible forever */
+/* safety net: is-revealed only lands well after every piece's fall and
+   flatten should have finished (see REVEAL_DELAY in Footer.jsx) — if a
+   piece's timer or transition ever fails to land for any reason, the word
+   must still end up complete rather than staying invisible or unflattened */
 .vfoot.is-revealed .vfoot__piece {
   opacity: 1 !important;
   transform: translateY(0) !important
+}
+
+.vfoot.is-revealed .vfoot__pieceIn {
+  transform: scaleY(1) !important
 }
 
 .vfoot.is-revealed .vfoot__pieceIn i {
@@ -4780,6 +5010,11 @@ a {
   .vfoot__piece {
     transform: none;
     opacity: 1;
+    transition: none
+  }
+
+  .vfoot__pieceIn {
+    transform: none;
     transition: none
   }
 
@@ -4823,7 +5058,6 @@ a {
 
 .vfoot__bottom {
   padding-top: clamp(32px, 4vw, 56px);
-  border-top: 1px solid rgba(255, 255, 255, .12);
   opacity: 0;
   transform: translateY(28px);
   transition: opacity .5s ease .12s, transform .6s cubic-bezier(.16, .84, .34, 1) .12s
@@ -4837,7 +5071,7 @@ a {
 .vfoot__bottomRow {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(24px, 4vw, 64px);
   flex-wrap: wrap
 }
@@ -4850,63 +5084,10 @@ a {
   max-width: 20ch
 }
 
-.vfoot__cols {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 3vw, 32px)
-}
-
-.vfoot__col {
-  display: flex;
-  flex-direction: column;
-  gap: 14px
-}
-
-.vfoot__colHead {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--paper)
-}
-
-.vfoot__colHead .wy-mark {
-  width: 14px;
-  height: 14px;
-  grid-template-columns: repeat(3, 4px);
-  grid-template-rows: repeat(3, 4px);
-  gap: .5px
-}
-
-.vfoot__links {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: clamp(16px, 3vw, 40px)
-}
-
-.vfoot__links a {
-  color: rgba(255, 255, 255, .6);
-  text-decoration: none;
-  font-family: var(--body);
-  font-size: 14px;
-  white-space: nowrap;
-  transition: color .18s ease
-}
-
-.vfoot__links a:hover {
-  color: var(--paper)
-}
-
 .vfoot__legal {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: clamp(32px, 5vw, 56px);
   font-family: var(--body);
   font-size: 13px;
   color: rgba(255, 255, 255, .5)
@@ -5063,6 +5244,11 @@ button:focus-visible,
     transform: none
   }
 
+  .fo-step {
+    opacity: 1;
+    transform: none
+  }
+
   .gl,
   .connect-tab {
     transform: none
@@ -5071,6 +5257,7 @@ button:focus-visible,
 
 /* ── case study detail page ───────────────────────────── */
 .csp {
+  position: relative;
   background: var(--paper);
   color: var(--ink);
   container-type: inline-size;
@@ -5078,8 +5265,160 @@ button:focus-visible,
   padding-bottom: clamp(56px, 7vw, 100px)
 }
 
+/* left padding = the rail's own left offset (58px) + its width (80px) + a
+   70px gap to the content — so the gap stays exactly 70px if either of
+   those ever changes */
 .csp-in {
-  padding: 0 58px 0 182px
+  padding: 0 58px 0 208px
+}
+
+/* zero-height so it never pushes the sections below it down — it only ever
+   needs to sit at this x, sticking within .csp's own height, so the panel
+   underneath (position: absolute) rides along at whatever y this sticks to.
+   (A real height + matching negative margin-bottom looks like the more
+   "native" fix, but negative margins are folded into the same box browsers
+   use to decide when a sticky element runs out of room to stick in, so it
+   silently breaks the release calc it's meant to fix — measured releasing
+   ~350px too late, well into the footer. Back to JS for this one.) */
+.csp-sideNav {
+  position: sticky;
+  top: 140px;
+  height: 0;
+  z-index: 5
+}
+
+/* once the track no longer fits between the stick line and the bottom of
+   .csp, CspSectionNav switches this to a plain absolute box pinned at the
+   exact spot the sticky one would have reached — its `top` (set inline,
+   computed once at the moment of the switch, then left alone) is relative
+   to .csp's own box, the same positioning context sticky was already using.
+   From there it's ordinary absolutely-positioned content again, scrolling
+   with the rest of the page at zero lag — no transition needed, and no
+   further per-frame recompute either, both of which would just add a
+   trailing lag behind the real scroll instead of a clean 1:1 stop. */
+.csp-sideNav.is-docked {
+  position: absolute
+}
+
+.csp-sideNav-inner {
+  position: absolute;
+  left: 58px;
+  top: 0;
+  /* narrower than the 124px gutter it sits in, so there's clear air between
+     the track's right edge and the section content starting at 182px */
+  width: 80px
+}
+
+.csp-sideNav-index {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -.01em;
+  color: var(--ink)
+}
+
+.csp-sideNav-sep {
+  color: #C7C7C7;
+  font-weight: 300
+}
+
+.csp-sideNav-label {
+  margin-top: 4px;
+  font-family: var(--body);
+  font-size: 13px;
+  color: #8A8A92
+}
+
+/* ── well: a real 2 x 20 tetris well, ported from case-masai.html ──────
+   Ten pieces (five L/J/I tetromino pairs) tile it bottom-up, one landing per
+   section instead of Masai's even fraction of total scroll. Built once in
+   JS (CspSectionNav.jsx) as plain <div class="csp-sideNav-piece"><i>...</i>
+   </div> nodes with computed inline left/width/top/height per cell — that's
+   what makes the pieces interlock with a real pixel gap between different
+   pieces' cells but none within a piece's own cells, which a CSS-only
+   layout can't express. */
+.csp-sideNav-well {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 65 / 435;
+  margin-top: 20px;
+  background: #E5E5E5;
+  overflow: hidden;
+  transition: background-color .3s ease
+}
+
+.csp-sideNav-well.thud {
+  animation: csp-sideNav-thud 260ms cubic-bezier(.3, 0, .5, 1)
+}
+
+@keyframes csp-sideNav-thud {
+  0% { transform: none }
+  35% { transform: translateY(3px) }
+  100% { transform: none }
+}
+
+.csp-sideNav-piece {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translate3d(0, var(--from, -120%), 0);
+  transition: transform .38s cubic-bezier(.55, 0, 1, .45)
+}
+
+.csp-sideNav-piece.in {
+  transform: none;
+  transition: transform .56s cubic-bezier(.55, .02, .95, .5)
+}
+
+.csp-sideNav-piece i {
+  position: absolute;
+  display: block;
+  background: var(--c);
+  transition: background-color .42s ease
+}
+
+/* over the dark section the rail flips so it stays legible */
+.csp-sideNav-rail {
+  transition: color .3s ease
+}
+
+.csp-sideNav-rail.on-dark .csp-sideNav-index {
+  color: var(--paper)
+}
+
+.csp-sideNav-rail.on-dark .csp-sideNav-label {
+  color: #9A9A9A
+}
+
+.csp-sideNav-rail.on-dark .csp-sideNav-well {
+  background: #2A2A2A
+}
+
+@media (max-width:900px) {
+  .csp-sideNav {
+    display: none
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csp-sideNav-piece,
+  .csp-sideNav-piece.in,
+  .csp-sideNav-piece i {
+    transition: none
+  }
+
+  .csp-sideNav-well.thud {
+    animation: none
+  }
+}
+
+/* each top-level section on the case study page is wrapped in its own
+   .csp-in — this is the gap between one section and the next */
+.csp-in + .csp-in {
+  margin-top: 140px
 }
 
 .csp-nav {
@@ -5090,6 +5429,15 @@ button:focus-visible,
   padding: clamp(24px, 3.5vw, 48px) 58px;
   margin-bottom: clamp(40px, 6vw, 72px);
   box-sizing: border-box
+}
+
+/* the 58px side padding is sized for desktop — on a phone screen it pushes
+   the logo and the hamburger/close icon in from the edges much further
+   than .hx-bar's own mobile padding does, throwing off their alignment */
+@media (max-width:900px) {
+  .csp-nav {
+    padding: 24px 20px
+  }
 }
 
 
@@ -5104,11 +5452,13 @@ button:focus-visible,
 .csp-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(28px, 3.6vw, 44px);
+  font-size: clamp(28px, 3.6vw, 48px);
   line-height: 1.12;
   letter-spacing: -.02em;
   margin: 0;
-  max-width: 16ch
+  /* wide enough for the longer of the two authored lines, so the only break
+     is the <br /> in the markup */
+  max-width: 28ch
 }
 
 .csp-note {
@@ -5124,6 +5474,7 @@ button:focus-visible,
 }
 
 .csp-banner {
+  position: relative;
   width: 100%;
   overflow: hidden;
   margin-bottom: clamp(20px, 3vw, 32px)
@@ -5133,6 +5484,32 @@ button:focus-visible,
   display: block;
   width: 100%;
   height: auto
+}
+
+/* the co-brand plate sits in the banner's top-left corner, sized off the
+   banner so it keeps its proportions as the image scales */
+.csp-bannerTag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16.5%;
+  aspect-ratio: 320 / 140;
+  background: #fff;
+  display: grid;
+  place-items: center
+}
+
+.csp-bannerTag img {
+  width: 78%;
+  height: auto
+}
+
+@media (max-width:760px) {
+  .csp-bannerTag {
+    width: 87px;
+    aspect-ratio: auto;
+    height: 27px
+  }
 }
 
 .csp-meta {
@@ -5179,7 +5556,7 @@ button:focus-visible,
 .csp-aoc-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 56px;
+  font-size: 40px;
   line-height: 1.15;
   letter-spacing: -.01em;
   margin: 0;
@@ -5233,8 +5610,8 @@ button:focus-visible,
 
 .csp-aoc-tag {
   position: absolute;
-  left: 44px;
-  top: 40px;
+  left: 60px;
+  top: 46px;
   width: max-content;
   display: inline-flex;
   align-items: center;
@@ -5247,13 +5624,36 @@ button:focus-visible,
   white-space: nowrap
 }
 
+.csp-aoc-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #1A1C1C;
+  /* lines up with the yellow tag's own left edge, not the number badge's —
+     the badge sits outside the column's text, the tag marks where it starts */
+  margin: 0 0 10px 60px
+}
+
 .csp-aoc-desc {
-  margin: 0;
+  margin: 0 0 0 60px;
   font-family: var(--body);
   font-size: 15px;
   line-height: 1.5;
   color: #4C4546;
   max-width: 30ch
+}
+
+.csp-aoc-note {
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding-left: 16px;
+  border-left: 3px solid #1A1C1C;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #1A1C1C
 }
 
 @media (max-width:760px) {
@@ -5269,16 +5669,24 @@ button:focus-visible,
     grid-template-columns: 1fr;
     gap: 32px
   }
+
+  .csp-aoc-note {
+    font-size: 15px
+  }
 }
 
 @media (max-width:760px) {
+  .csp-in {
+    padding: 0 var(--side)
+  }
+
   .csp-head {
     flex-direction: column
   }
 
   .csp-h {
     max-width: none;
-    font-size: clamp(26px, 7vw, 34px)
+    font-size: 36px
   }
 
   .csp-note {
@@ -5289,6 +5697,14 @@ button:focus-visible,
   .csp-meta {
     gap: 28px;
     flex-wrap: wrap
+  }
+
+  .csp-metaLabel {
+    font-size: 10px
+  }
+
+  .csp-metaValue {
+    font-size: 12px
   }
 }
 
@@ -5331,7 +5747,7 @@ button:focus-visible,
 .csp-mid-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 56px;
+  font-size: 40px;
   line-height: 1.1;
   letter-spacing: -.02em;
   margin: 0 0 20px
@@ -5423,10 +5839,22 @@ button:focus-visible,
 }
 
 .csp-how {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+/* eyebrow/heading/copy run full width above the row, so the image below
+   only has to line up with where the "Performance Ads" column starts —
+   not with the heading above it */
+.csp-how-top {
+  max-width: 620px;
+  margin-bottom: clamp(32px, 4vw, 48px)
+}
+
+.csp-how-row {
   display: flex;
   align-items: flex-start;
-  gap: clamp(32px, 5vw, 72px);
-  padding-bottom: clamp(56px, 7vw, 96px)
+  justify-content: space-between;
+  gap: clamp(32px, 5vw, 72px)
 }
 
 .csp-how-left {
@@ -5450,7 +5878,7 @@ button:focus-visible,
 .csp-how-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.18;
   letter-spacing: -.02em;
   margin: 0 0 20px
@@ -5522,7 +5950,11 @@ button:focus-visible,
 }
 
 @media (max-width:900px) {
-  .csp-how {
+  .csp-how-top {
+    max-width: none
+  }
+
+  .csp-how-row {
     flex-direction: column
   }
 
@@ -5543,7 +5975,7 @@ button:focus-visible,
 .csp-hooks-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.15;
   letter-spacing: -.02em;
   margin: 0 0 clamp(48px, 6vw, 72px)
@@ -5556,38 +5988,11 @@ button:focus-visible,
   gap: 20px
 }
 
-.csp-hooks-pin {
-  position: absolute;
-  left: 25%;
-  top: -46px;
-  width: 44px;
-  height: 44px;
-  background: var(--ink);
-  border-radius: 50% 50% 50% 4px;
-  transform: translateX(-50%) rotate(45deg);
-  display: grid;
-  place-items: center;
-  z-index: 1
-}
-
-.csp-hooks-pinDot {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  background: #6FA84A;
-  color: #fff;
-  border-radius: 50%;
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: 13px;
-  transform: rotate(-45deg)
-}
-
 .csp-hookCard {
   position: relative;
   background: #F5F5F5;
-  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  /* a rectangular step cut from the top-right corner, not a chamfer */
+  clip-path: polygon(0 0, calc(100% - 44px) 0, calc(100% - 44px) 44px, 100% 44px, 100% 100%, 0 100%);
   padding: 28px 24px 32px;
   min-height: 300px;
   display: flex;
@@ -5626,31 +6031,97 @@ button:focus-visible,
     gap: 16px
   }
 
-  .csp-hooks-pin {
-    display: none
-  }
-
   .csp-hookCard {
     min-height: auto
   }
 }
 
+.csp-hooks-nav {
+  display: none
+}
+
+/* below 520px the grid becomes a horizontally-scrolling strip — one card
+   filling most of the viewport with the next peeking in at the edge — and
+   the grid's own gap becomes the scroll strip's card-to-card gap */
 @media (max-width:520px) {
   .csp-hooks-row {
-    grid-template-columns: 1fr
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: calc(100% + 2 * var(--side));
+    margin: 0 calc(var(--side) * -1);
+    padding: 0 var(--side)
+  }
+
+  .csp-hooks-row::-webkit-scrollbar {
+    display: none
+  }
+
+  .csp-hookCard {
+    flex: 0 0 82%;
+    scroll-snap-align: start
+  }
+
+  .csp-hooks-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px
+  }
+
+  .csp-hooks-navBtn {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    background: #EDEDED;
+    cursor: pointer;
+    display: grid;
+    place-items: center
+  }
+
+  .csp-hooks-navBtn--next {
+    background: var(--acid)
+  }
+
+  .csp-hooks-navBtn svg {
+    width: 22px;
+    height: 22px;
+    display: block
+  }
+
+  .csp-hooks-navBtn--prev svg {
+    transform: scaleX(-1)
   }
 }
 
+/* the whole section runs edge to edge (see .csp-in:has(.csp-celeb) below),
+   so it needs its own top padding to match the bottom */
 .csp-celeb {
-  padding-bottom: clamp(56px, 7vw, 96px)
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  /* shared by .csp-celeb-body and .csp-celebStats below, so the quote card
+     and the violet block — both column 2 — start at the exact same x
+     regardless of how wide the points column or the yellow block are */
+  --celebCol1: 520px;
+  --celebColGap: clamp(32px, 5vw, 64px)
+}
+
+.csp-in:has(.csp-celeb) {
+  background: #0B0B0D;
+  color: var(--paper)
 }
 
 .csp-celeb-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.15;
   letter-spacing: -.02em;
+  color: var(--paper);
   margin: 0 0 20px
 }
 
@@ -5663,19 +6134,19 @@ button:focus-visible,
   font-family: var(--body);
   font-size: 15px;
   line-height: 1.6;
-  color: #4C4546;
+  color: #A8A6AD;
   max-width: 60ch;
   margin: 0 0 48px
 }
 
 .csp-celeb-body {
-  display: flex;
-  gap: clamp(32px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: var(--celebCol1) 1fr;
+  gap: var(--celebColGap);
   margin-bottom: clamp(56px, 6vw, 80px)
 }
 
 .csp-celeb-points {
-  flex: 1 1 340px;
   max-width: 380px;
   display: flex;
   flex-direction: column;
@@ -5701,6 +6172,7 @@ button:focus-visible,
   font-weight: 400;
   font-size: 19px;
   letter-spacing: -.01em;
+  color: var(--paper);
   margin: 0
 }
 
@@ -5708,37 +6180,54 @@ button:focus-visible,
   font-family: var(--body);
   font-size: 14px;
   line-height: 1.55;
-  color: #5A5A62;
+  color: #A8A6AD;
   max-width: 34ch;
   margin: 0
 }
 
-.csp-quoteCard {
+/* the quote mark has to be a sibling the card's own clip-path can't touch:
+   clip-path clips its whole subtree, so an icon positioned "inside" the
+   card's notch would just get clipped away along with that corner. Instead
+   the mark sits underneath, in a wrapper the same size as the card, and
+   shows through the notch precisely because the card excludes that area
+   from its own paint. */
+.csp-quoteWrap {
   position: relative;
-  flex: 1 1 420px;
-  background: rgba(245, 250, 94, .45);
-  padding: 32px 36px 32px 176px
-}
-
-.csp-quoteCard::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 140px;
-  height: 100px;
-  background: var(--paper);
-  z-index: 0
+  min-width: 0
 }
 
 .csp-quoteMark {
   position: absolute;
-  left: 24px;
-  top: 22px;
-  display: block;
-  width: 87px;
-  height: 67px;
-  z-index: 1
+  left: 0;
+  top: 0;
+  width: 22%;
+  height: 53%;
+  box-sizing: border-box;
+  padding: 24px;
+  object-fit: contain
+}
+
+.csp-quoteCard {
+  position: relative;
+  /* solid, not translucent — the translucent version was tuned for a paper
+     background and reads as murky olive over black */
+  background: #FBFDC6;
+  /* fixed, not content-driven: the card's size used to be padding-top +
+     content + padding-bottom, so every attempt to move the content up by
+     shrinking padding-top also shrank the card. Content is now absolutely
+     positioned (below) and out of flow entirely, so the card needs its own
+     explicit size instead of collapsing to nothing. */
+  height: 400px;
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 53%, 22% 53%)
+}
+
+.csp-quoteInner {
+  position: absolute;
+  /* x >= the notch's own right edge (22%), so this is clear of the cut
+     corner at any vertical position — free to pin to the top */
+  left: calc(22% + 16px);
+  right: 36px;
+  top: 32px
 }
 
 .csp-quoteEyebrow {
@@ -5758,6 +6247,8 @@ button:focus-visible,
   font-size: 26px;
   line-height: 1.3;
   letter-spacing: -.01em;
+  color: #1A1C1C;
+  max-width: min(620px, 92%);
   margin: 0 0 16px
 }
 
@@ -5766,99 +6257,103 @@ button:focus-visible,
   font-size: 14px;
   line-height: 1.5;
   color: #5A5A62;
+  max-width: min(620px, 92%);
   margin: 0
 }
 
 .csp-celebStats {
-  display: flex;
-  gap: clamp(40px, 6vw, 96px);
-  flex-wrap: wrap
-}
-
-.csp-celebStat {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* two equal columns across the same track the quote card spans, so the row
+     starts where the points column starts and the violet block's right edge
+     lands exactly on the quote card's right edge above it */
+  grid-template-columns: 1fr 1fr;
+  /* not --celebColGap: the two blocks sit almost shoulder to shoulder, so the
+     pair reads as one interlocking tetris shape rather than two cards */
   gap: 16px
 }
 
-.csp-celebStatGrid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 110px);
-  gap: 2px;
-  background: var(--paper)
+/* the label sits inside the block now — on its actual fill colour, in the
+   "below" row — not in the notch (that's still just a small tetris-style
+   corner nick, same as the reference) and not outside the block either. */
+.csp-celebStatBlock {
+  width: 100%;
+  height: 208px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 32px;
+  gap: 12px
 }
 
-.csp-celebStatGrid--violet {
-  grid-template-rows: repeat(2, 110px)
+/* the label doesn't sit right next to the figure — it starts about two fifths
+   across the block, so the gap is a share of the block rather than a fixed
+   step the figure's own width would shift around */
+.csp-celebStatRow {
+  display: flex;
+  align-items: baseline;
+  gap: 23.5%
 }
 
-.csp-celebStatGrid--yellow {
-  grid-template-rows: 110px
+.csp-celebStatBlock--violet .csp-celebStatRow {
+  gap: 32%
 }
 
-.csp-celebStatGrid--violet .csp-cell {
-  background: #C7BCFF
+/* notch cut from the bottom-right — text anchors to the top, the half the
+   shape keeps in full */
+.csp-celebStatBlock--yellow {
+  background: #FBFDC6;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 88% 50%, 88% 100%, 0 100%);
+  justify-content: flex-start;
+  padding-top: 28px
 }
 
-.csp-celebStatGrid--yellow .csp-cell {
-  background: #FBFDC6
-}
-
-.csp-cell--mid {
-  grid-column: 2
+/* mirrored: notch cut from the top-left, so text anchors to the bottom.
+   Its two lines are taller than the bottom half alone, so — same as the
+   yellow block — they spill past the halfway line into the other half.
+   That's safe for yellow (its overflow runs toward the side the shape
+   keeps), but here the excluded side IS the left, where left-aligned text
+   starts; padding-left clears the notch (12% of 520px = ~62px) so the
+   spill lands past it instead of getting clipped by it. */
+.csp-celebStatBlock--violet {
+  background: #C7BCFF;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 12% 50%);
+  justify-content: flex-end;
+  padding-left: 19.4%;
+  padding-bottom: 52px
 }
 
 .csp-celebStatVal {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: var(--display);
   font-weight: 400;
-  font-size: 30px;
-  white-space: nowrap;
-  pointer-events: none
+  font-size: 40px;
+  line-height: 1.15;
+  color: #1A1C1C
 }
 
 .csp-celebStatLabel {
   font-family: var(--body);
   font-size: 15px;
-  color: #9A9AA2
+  line-height: 1.35;
+  color: #6C6A78;
+  max-width: 140px
 }
 
 @media (max-width:900px) {
   .csp-celeb-body {
-    flex-direction: column
+    grid-template-columns: 1fr
   }
 
   .csp-quoteWrap {
     margin-top: 40px
   }
-}
 
-@media (max-width:480px) {
-  .csp-celebStatGrid {
-    grid-template-columns: repeat(3, 80px)
-  }
-
-  .csp-celebStatGrid--violet {
-    grid-template-rows: repeat(2, 80px)
-  }
-
-  .csp-celebStatGrid--yellow {
-    grid-template-rows: 80px
-  }
-
-  .csp-celebStatVal {
-    height: 80px;
-    font-size: 20px
+  .csp-celebStats {
+    grid-template-columns: 1fr;
+    gap: 40px
   }
 }
+
 
 .csp-cac {
   padding-bottom: clamp(56px, 7vw, 96px)
@@ -5875,7 +6370,7 @@ button:focus-visible,
 .csp-cac-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.15;
   letter-spacing: -.02em;
   margin: 16px 0 0
@@ -5888,7 +6383,7 @@ button:focus-visible,
 
 .csp-cac-copy {
   flex: none;
-  width: min(340px, 34%);
+  width: min(540px, 42%);
   margin: 8px 0 0;
   font-family: var(--body);
   font-size: 14px;
@@ -5902,6 +6397,54 @@ button:focus-visible,
   font-size: 14px;
   color: #9A9AA2;
   margin-bottom: 24px
+}
+
+/* chart on the left, the single headline figure boxed off to its right; the
+   legend below sits under the pair, not under the chart alone */
+.csp-cac-plot {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(40px, 7vw, 92px)
+}
+
+.csp-cac-plotL {
+  flex: 1 1 auto;
+  min-width: 0
+}
+
+.csp-cacCard {
+  flex: none;
+  width: 258px;
+  box-sizing: border-box;
+  border: 1px solid #E2E2E6;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px
+}
+
+.csp-cacCard-val {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--violet)
+}
+
+.csp-cacCard-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: #4C4546
+}
+
+.csp-cacCard-foot b {
+  font-weight: 600;
+  color: var(--ink)
 }
 
 .csp-cacChart {
@@ -5946,31 +6489,26 @@ button:focus-visible,
   fill: var(--violet)
 }
 
+/* real SVG text now (see page.js) — its position and gap above the dot are
+   set directly in the chart's own viewBox coordinates, so they scale with
+   the chart at every width instead of a separately-scaled HTML overlay
+   drifting out of sync with it on narrow screens */
 .csp-cacVal {
-  position: absolute;
-  transform: translate(-50%, -100%);
   font-family: var(--display);
   font-weight: 400;
-  font-size: 28px;
-  white-space: nowrap
+  font-size: 34px
 }
 
 .csp-cacVal--start {
-  left: 3.4%;
-  top: 62%;
-  color: var(--ink)
+  fill: var(--ink)
 }
 
 .csp-cacVal--darkEnd {
-  left: 96.6%;
-  top: 15%;
-  color: var(--ink)
+  fill: var(--ink)
 }
 
 .csp-cacVal--violetEnd {
-  left: 96.6%;
-  top: 56%;
-  color: var(--violet)
+  fill: var(--violet)
 }
 
 .csp-cacAxisLabels {
@@ -6023,8 +6561,13 @@ button:focus-visible,
     width: 100%
   }
 
-  .csp-cacVal {
-    font-size: 20px
+  .csp-cac-plot {
+    flex-direction: column;
+    gap: 32px
+  }
+
+  .csp-cacCard {
+    width: 100%
   }
 }
 
@@ -6035,7 +6578,7 @@ button:focus-visible,
 .csp-reel-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.15;
   letter-spacing: -.02em;
   margin: 16px 0 clamp(40px, 5vw, 64px)
@@ -6097,13 +6640,70 @@ button:focus-visible,
   padding: 6px 10px
 }
 
+.csp-reel-nav {
+  display: none
+}
+
+/* on mobile the grid becomes a horizontally-scrolling strip — one card
+   filling almost the full width with the next peeking in at the edge,
+   stepped by the arrows below — same pattern as the hooks carousel */
 @media (max-width:760px) {
   .csp-reel-row {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 0 auto
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: calc(100% + 2 * var(--side));
+    margin: 0 calc(var(--side) * -1);
+    padding: 0 var(--side);
+    max-width: none;
+    gap: 16px
+  }
+
+  .csp-reel-row::-webkit-scrollbar {
+    display: none
+  }
+
+  .csp-reelCard {
+    flex: 0 0 88%;
+    scroll-snap-align: start
+  }
+
+  .csp-reel-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px
+  }
+
+  .csp-reel-navBtn {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    background: #EDEDED;
+    cursor: pointer;
+    display: grid;
+    place-items: center
+  }
+
+  .csp-reel-navBtn--next {
+    background: var(--acid)
+  }
+
+  .csp-reel-navBtn svg {
+    width: 22px;
+    height: 22px;
+    display: block
+  }
+
+  .csp-reel-navBtn--prev svg {
+    transform: scaleX(-1)
   }
 }
+
 
 .csp-more {
   padding-bottom: clamp(56px, 7vw, 96px)
@@ -6120,45 +6720,9 @@ button:focus-visible,
 .csp-more-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 40px);
   letter-spacing: -.02em;
   margin: 0
-}
-
-.csp-more-cta {
-  display: flex;
-  align-items: stretch;
-  background: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
-  font-family: var(--body);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  flex: none
-}
-
-.csp-more-cta span:first-child {
-  display: flex;
-  align-items: center;
-  padding: 0 18px;
-  white-space: nowrap
-}
-
-.csp-more-ctaIcon {
-  width: 34px;
-  background: var(--acid);
-  display: grid;
-  place-items: center
-}
-
-.csp-more-ctaIcon::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  background: var(--ink);
-  transform: skew(-10deg, -10deg)
 }
 
 .csp-more-row {
@@ -6247,5 +6811,166 @@ button:focus-visible,
 
   .csp-more-row {
     grid-template-columns: 1fr
+  }
+}
+
+.csp-more-nav {
+  display: none
+}
+
+/* on mobile the grid becomes a horizontally-scrolling strip — one card
+   filling almost the full width with the next peeking in at the edge,
+   stepped by the arrows below — same pattern as the reel/hooks carousels */
+@media (max-width:760px) {
+  .csp-more-row {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: calc(100% + 2 * var(--side));
+    margin: 0 calc(var(--side) * -1);
+    padding: 0 var(--side);
+    gap: 16px
+  }
+
+  .csp-more-row::-webkit-scrollbar {
+    display: none
+  }
+
+  .csp-moreCard {
+    flex: 0 0 88%;
+    scroll-snap-align: start;
+    box-sizing: border-box
+  }
+
+  .csp-more-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px
+  }
+
+  .csp-more-navBtn {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    background: #EDEDED;
+    cursor: pointer;
+    display: grid;
+    place-items: center
+  }
+
+  .csp-more-navBtn--next {
+    background: var(--acid)
+  }
+
+  .csp-more-navBtn svg {
+    width: 22px;
+    height: 22px;
+    display: block
+  }
+
+  .csp-more-navBtn--prev svg {
+    transform: scaleX(-1)
+  }
+}
+
+/* every case-study section heading below the hero shares one mobile size;
+   placed last so it wins over each section's own desktop-first rule */
+@media (max-width:760px) {
+  .csp-aoc-h,
+  .csp-mid-h,
+  .csp-how-h,
+  .csp-hooks-h,
+  .csp-celeb-h,
+  .csp-cac-h,
+  .csp-reel-h,
+  .csp-more-h {
+    font-size: 28px
+  }
+
+  .csp-in + .csp-in {
+    margin-top: 80px
+  }
+
+  /* the desktop notch (a flat % of a fixed 400px card) doesn't fit a phone —
+     content wraps into far more vertical space than the card is tall, so the
+     card here is content-driven (auto height) with a small, fixed-px notch
+     instead of a % one; a % notch height against an auto card height would
+     chase its own tail (see the .csp-quoteCard comment above) */
+  .csp-quoteCard {
+    height: auto;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%, 0 72px, 30% 72px)
+  }
+
+  /* static and pushed below the notch entirely (not just past its right
+     edge): a static child still inherits the card's clip-path, so any part
+     of it inside the excluded top-left box — even past the notch's own
+     right edge but above its bottom edge — would be invisible */
+  .csp-quoteInner {
+    position: static;
+    padding: 92px 24px 28px
+  }
+
+  .csp-quoteMark {
+    width: 30%;
+    height: 72px;
+    padding: 14px
+  }
+
+  .csp-quoteEyebrow {
+    font-size: 12px;
+    margin-bottom: 12px
+  }
+
+  .csp-quoteText {
+    font-size: 18px;
+    max-width: none;
+    margin-bottom: 12px
+  }
+
+  .csp-quoteSub {
+    font-size: 14px;
+    max-width: none
+  }
+
+  /* "~16%" and "below" read as one figure, not two stacked lines — .csp-
+     celebStatRow is display:contents so its own children ("below" and the
+     label) join the block's flex row directly, alongside "~16%", instead of
+     nesting a second row inside the first */
+  .csp-celebStatBlock {
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* the desktop --violet variant sets justify-content: flex-end to push
+       content to the bottom of a tall column; in a mobile row that axis is
+       horizontal, so left unchecked it shoves the text against the block's
+       right edge instead */
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 8px 10px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-right: 24px
+  }
+
+  .csp-celebStatRow {
+    display: contents
+  }
+
+  .csp-celebStatVal {
+    font-size: 22px
+  }
+
+  .csp-celebStatLabel {
+    flex-basis: 100%;
+    max-width: none
+  }
+
+  .csp-celebStatBlock--violet {
+    justify-content: flex-start
   }
 }
