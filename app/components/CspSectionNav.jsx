@@ -21,9 +21,13 @@ const DEFAULT_SECTIONS = [
 const SHADES = ["#F5FA5E", "#715BE4"];
 const BLOCK_PATTERN = ["LJ", "II", "JL", "LJ", "II"];
 const GAP = 4;
-// px height of one row at the rail's 65px width — keeps cells the same size
-// however many rows the well ends up with
+// px height of one row at the rail's 65px width. Rows keep this size on a
+// short page, but on a long one (many sections) they shrink so the whole
+// well never grows past WELL_MAX — a taller rail has to un-stick sooner to
+// end where the content ends, so a page with lots of sections would see it
+// stop following several sections early
 const ROW_H = 21.75;
+const WELL_MAX = 382;
 
 // two-piece 4-row blocks for each pair of sections, plus a one-piece 2-row
 // "O" block when the count is odd
@@ -48,6 +52,7 @@ const STICK_TOP = 140;
 export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSectionIds = DEFAULT_DARK_SECTION_IDS }) {
   const BLOCKS = wellBlocks(sections.length);
   const ROWS = BLOCKS.reduce((n, b) => n + (b === "O" ? 2 : 4), 0);
+  const rowH = Math.min(ROW_H, WELL_MAX / ROWS);
   const [active, setActive] = useState(0);
   // null while plain CSS `position: sticky` is doing the job; a px value
   // once the nav has to be pinned in place instead (see the effect below)
@@ -262,7 +267,7 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
         <div
           className="csp-sideNav-well"
           ref={wellRef}
-          style={{ aspectRatio: `65 / ${ROWS * ROW_H}` }}
+          style={{ aspectRatio: `65 / ${ROWS * rowH}` }}
         />
       </div>
     </div>

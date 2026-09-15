@@ -620,6 +620,51 @@ html.nav-hidden .hx-bar {
   width: 14%
 }
 
+/* the hero's own s4 is one stepped piece (its clip-path cuts a staircase
+   into its top), and closing morphs that into a single flat block. On the
+   curtain it's three separate bars instead, one per column of that
+   staircase, at the same heights the clip-path gives them (s4 spans
+   25.93%..100% of the height; its columns start 21.7% / 10.9% / 0 down) */
+.hero-curtain .hx-s4a,
+.hero-curtain .hx-s4b,
+.hero-curtain .hx-s4c {
+  width: 7%;
+  z-index: 1
+}
+
+.hero-curtain .hx-s4a {
+  left: 79%;
+  top: 42%
+}
+
+.hero-curtain .hx-s4b {
+  left: 86%;
+  top: 34%
+}
+
+.hero-curtain .hx-s4c {
+  left: 93%;
+  top: 25.93%
+}
+
+.hero-curtain .hx-stair.closed .hx-s4a,
+.hero-curtain .hx-stair.closed .hx-s4b,
+.hero-curtain .hx-stair.closed .hx-s4c {
+  top: 0;
+  background: var(--violet)
+}
+
+/* no stagger on the curtain: with each bar starting at a different height
+   and a different delay, the eased tops overtake one another near the end
+   and neighbouring bars look like they melt together. One shared timing
+   keeps every bar's top in the same proportion the whole way, so the
+   staircase simply travels straight up until it's flat against the top */
+.hero-curtain .hx-step,
+.hero-curtain .hx-stair.closed .hx-step {
+  transition: top .8s cubic-bezier(.65, 0, .35, 1), background-color .4s ease;
+  transition-delay: 0s
+}
+
 /* once all four have shown, the blocks rise and close the hero. The 1px
    paper-colored seam (see the base .hx-step box-shadow) stays on through the
    whole rise instead of clearing immediately — without it, two same-colored
@@ -1959,9 +2004,15 @@ html.nav-hidden .hx-bar {
 
 /* a tightly-framed cut-out (face fills the frame) scaled down a touch,
    anchored to the bottom so the shoulders still meet the row's edge */
+/* this cut-out's head sits right at the top of its file, so it's allowed to
+   spill past the frame instead of having its hair cropped */
+.fw-ph.fw-phShrink {
+  overflow: visible
+}
+
 .fw-ph.fw-phShrink img {
-  /* only slightly smaller than the frame, still sitting on the bottom edge
-     so there's no gap under the shoulders */
+  /* scaled from the bottom edge, so the shoulders still meet the row's
+     bottom with no gap while the head sits a little smaller */
   transform: scale(.94);
   transform-origin: center bottom
 }
@@ -7243,17 +7294,19 @@ button:focus-visible,
   margin: 0
 }
 
-.csp-focus .csp-quoteCard {
-  height: 250px
-}
+/* desktop only — on phones the shared .csp-quoteCard mobile rules (auto
+   height, a fixed-px notch, content pushed below it) have to win, or the
+   text runs up into the cut corner */
+@media (min-width:761px) {
+  .csp-focus .csp-quoteCard {
+    height: 250px;
+    /* the notch is 60% of the card's height in this design, not the shared 53% */
+    clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 60%, 22% 60%)
+  }
 
-/* the notch is 60% of the card's height in this design, not the shared 53% */
-.csp-focus .csp-quoteCard {
-  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 60%, 22% 60%)
-}
-
-.csp-focus .csp-quoteMark {
-  height: 60%
+  .csp-focus .csp-quoteMark {
+    height: 60%
+  }
 }
 
 /* the design sets this line in the body face, not the display one */
@@ -7263,6 +7316,12 @@ button:focus-visible,
   font-size: 28px;
   line-height: 1.25;
   letter-spacing: -.01em
+}
+
+@media (max-width:760px) {
+  .csp-focus .csp-quoteText {
+    font-size: 20px
+  }
 }
 
 @media (max-width:900px) {

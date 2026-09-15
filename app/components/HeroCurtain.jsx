@@ -172,7 +172,11 @@ export default function HeroCurtain() {
         <div className="hx-step hx-s1 hx-y" />
         <div className="hx-step hx-s3 hx-y" />
         <div className="hx-step hx-s2 hx-v" />
-        <div className="hx-step hx-s4 hx-v" />
+        {/* the hero's s4 is one stepped shape; on the curtain it's split
+            into its three columns so each rises as its own bar */}
+        <div className="hx-step hx-s4a hx-v" />
+        <div className="hx-step hx-s4b hx-v" />
+        <div className="hx-step hx-s4c hx-v" />
       </div>
     </div>
   );

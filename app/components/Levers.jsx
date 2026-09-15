@@ -198,6 +198,7 @@ export default function Levers() {
     }
 
     let levTicking = false;
+    let lastProgress = null;
     function onLevScroll() {
       if (levTicking) return;
       levTicking = true;
@@ -206,7 +207,12 @@ export default function Levers() {
         if (!levTrack.classList.contains("scroll-on")) return;
         const r = levTrack.getBoundingClientRect();
         const span = r.height - window.innerHeight;
-        renderLevers(span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1);
+        const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+        // progress clamps to 0/1 whenever the track is off-screen, so this
+        // skips re-writing every piece's styles on each frame elsewhere
+        if (p === lastProgress) return;
+        lastProgress = p;
+        renderLevers(p);
       });
     }
 
@@ -219,6 +225,7 @@ export default function Levers() {
       const scrolls = !reduce;
       levTrack.classList.toggle("scroll-on", scrolls);
       measureLevers();
+      lastProgress = null;
       if (scrolls) onLevScroll();
       else renderLevers(1);
     }

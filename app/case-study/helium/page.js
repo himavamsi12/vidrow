@@ -443,10 +443,8 @@ export default function HeliumCaseStudy() {
                 <span className="csp-eyebrow2-sep">·</span>
                 BRAND PERFORMANCE
               </div>
-              <h2 className="csp-aoc-h">
-                Brand ads are traditionally run on
-                <br />
-                Awareness, we ran ours on Conversion!
+              <h2 className="csp-aoc-h" style={{ textWrap: "balance" }}>
+                Brand ads are traditionally run on Awareness, we ran ours on Conversion!
               </h2>
             </div>
             <p className="csp-aoc-copy">

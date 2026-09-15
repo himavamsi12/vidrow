@@ -17,7 +17,7 @@ const CTA_CELLS = [
 // stops falling
 const REVEAL_DELAY = 4260;
 
-export default function Footer() {
+export default function Footer({ hideCta = false }) {
   const footerRef = useRef(null);
   const wellRef = useRef(null);
   const wellWrapRef = useRef(null);
@@ -150,10 +150,13 @@ export default function Footer() {
 
   return (
     <footer
-      className={`vfoot vfoot--v2${playing ? " is-playing" : ""}${revealed ? " is-revealed" : ""}`}
+      className={`vfoot vfoot--v2${playing ? " is-playing" : ""}${revealed ? " is-revealed" : ""}${hideCta ? " vfoot--noCta" : ""}`}
       id="contact"
       ref={footerRef}
     >
+      {/* the contact page is already the destination the CTA points to, so
+          it drops the heading + button (see app/contact/page.js) */}
+      {!hideCta && (
       <div className="vfoot__copy">
         <h2 className="vfoot__title">Ready for your next growth stage?</h2>
         <div className="vfoot__ctaWrap">
@@ -169,6 +172,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
+      )}
 
       <div className={`vfoot__wellWrap${mobile ? " is-2line" : ""}`} ref={wellWrapRef}>
         <div className={`vfoot__well${mobile ? " is-2line" : ""}`} ref={wellRef}>

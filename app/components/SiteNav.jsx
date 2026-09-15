@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 
 // links always point back at the homepage's own sections — from the case
 // study page that's a real navigation, from the homepage itself the browser
@@ -39,6 +40,19 @@ function ContactButton({ className = "hx-contact", onClick }) {
 // carrying the same options, plus its own contact button.
 export default function SiteNav({ logoHref = "/" }) {
   const [open, setOpen] = useState(false);
+  const lenis = useLenis();
+
+  // on the homepage itself, scroll to the section without writing the #hash
+  // into the URL — otherwise a reload would land back on that section
+  // instead of the hero
+  const goToSection = (e, href) => {
+    if (window.location.pathname !== "/") return;
+    const target = document.getElementById(href.split("#")[1]);
+    if (!target) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(target);
+    else target.scrollIntoView({ behavior: "smooth" });
+  };
 
   // the menu is a full-screen overlay, so lock the page behind it while open
   useEffect(() => {
@@ -102,7 +116,7 @@ export default function SiteNav({ logoHref = "/" }) {
       <div className="hx-right">
         <nav className="hx-links" aria-label="Primary">
           {NAV_LINKS.map((link) => (
-            <a key={link.label} href={link.href}>
+            <a key={link.label} href={link.href} onClick={(e) => goToSection(e, link.href)}>
               {link.label}
             </a>
           ))}
@@ -127,7 +141,14 @@ export default function SiteNav({ logoHref = "/" }) {
       <div className={`hx-mobileMenu${open ? " is-open" : ""}`} id="hx-mobile-menu">
         <nav className="hx-mobileLinks" aria-label="Primary">
           {NAV_LINKS.map((link) => (
-            <a key={link.label} href={link.href} onClick={close}>
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={(e) => {
+                close();
+                goToSection(e, link.href);
+              }}
+            >
               {link.label}
             </a>
           ))}

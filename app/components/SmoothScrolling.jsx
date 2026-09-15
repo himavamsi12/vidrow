@@ -1,6 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
+
+const LENIS_OPTIONS = {
+  lerp: 0.08,
+  smoothWheel: true,
+  wheelMultiplier: 1,
+  touchMultiplier: 1.5,
+};
 
 export default function SmoothScrolling({ children }) {
   const lenisRef = useRef(null);
@@ -28,6 +36,8 @@ export default function SmoothScrolling({ children }) {
         const lenis = lenisRef.current?.lenis;
         if (lenis) lenis.scrollTo(target, { immediate: true });
         else target.scrollIntoView();
+        // drop the hash once landed, so a reload starts back at the hero
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
       }, 0);
       return;
     }
@@ -36,7 +46,7 @@ export default function SmoothScrolling({ children }) {
   }, []);
 
   return (
-    <ReactLenis root ref={lenisRef}>
+    <ReactLenis root options={LENIS_OPTIONS} ref={lenisRef}>
       {children}
     </ReactLenis>
   );
