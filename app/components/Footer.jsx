@@ -12,10 +12,14 @@ const CTA_CELLS = [
   [2, 2],
 ];
 
+// the piece data's first drop is scheduled ~1.7s in; the whole timeline is
+// shifted back by that lead so the fall starts the moment the well is seen
+const LEAD = Math.min(...FOOTER_PIECES.filter((p) => !p.pre).map((p) => p.at));
+
 // the last piece to flatten starts at --uat 3742ms and takes .5s — this is
 // when the whole sequence is actually done, not just when the last piece
 // stops falling
-const REVEAL_DELAY = 4260;
+const REVEAL_DELAY = 4260 - LEAD;
 
 export default function Footer({ hideCta = false }) {
   const footerRef = useRef(null);
@@ -59,7 +63,7 @@ export default function Footer({ hideCta = false }) {
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.1 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -84,7 +88,7 @@ export default function Footer({ hideCta = false }) {
         el.classList.add("vfoot__piece--fallen");
         return;
       }
-      timers.push(setTimeout(() => el.classList.add("vfoot__piece--fallen"), p.at));
+      timers.push(setTimeout(() => el.classList.add("vfoot__piece--fallen"), p.at - LEAD));
     });
     return () => timers.forEach(clearTimeout);
   }, [playing, pieces]);
@@ -100,7 +104,7 @@ export default function Footer({ hideCta = false }) {
     pieces.forEach((p, i) => {
       const el = pieceRefs.current[i];
       if (!el) return;
-      timers.push(setTimeout(() => el.classList.add("vfoot__piece--flat"), p.uat));
+      timers.push(setTimeout(() => el.classList.add("vfoot__piece--flat"), Math.max(0, p.uat - LEAD)));
     });
     return () => timers.forEach(clearTimeout);
   }, [playing, pieces]);

@@ -123,6 +123,7 @@ export default function HeroCurtain() {
       armed = true;
     }, 400);
     const onScroll = () => {
+      if (document.documentElement.dataset.navScrolling) return;
       // scrolling back up into the hero re-arms the curtain, so scrolling
       // down through it again replays the same reveal instead of doing
       // nothing the second time
@@ -167,16 +168,11 @@ export default function HeroCurtain() {
   return (
     <div className={`hero-curtain${fading ? " hero-curtain--fading" : ""}`} aria-hidden="true">
       <div className={`hx-stair${closed ? " closed" : ""}`}>
-        <div className="hx-step hx-s5 hx-y" />
-        <div className="hx-step hx-s6 hx-y" />
-        <div className="hx-step hx-s1 hx-y" />
-        <div className="hx-step hx-s3 hx-y" />
-        <div className="hx-step hx-s2 hx-v" />
-        {/* the hero's s4 is one stepped shape; on the curtain it's split
-            into its three columns so each rises as its own bar */}
-        <div className="hx-step hx-s4a hx-v" />
-        <div className="hx-step hx-s4b hx-v" />
-        <div className="hx-step hx-s4c hx-v" />
+        {/* just the hero's four staircase blocks, each rising straight up */}
+        <div className="hx-step hc-b1 hx-y" />
+        <div className="hx-step hc-b2 hx-v" />
+        <div className="hx-step hc-b3 hx-y" />
+        <div className="hx-step hc-b4 hx-v" />
       </div>
     </div>
   );

@@ -50,8 +50,24 @@ export default function SiteNav({ logoHref = "/" }) {
     const target = document.getElementById(href.split("#")[1]);
     if (!target) return;
     e.preventDefault();
-    if (lenis) lenis.scrollTo(target);
-    else target.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      // a fixed-duration eased glide — Lenis's default lerp covers most of a
+      // multi-thousand-px trip in the first few frames, which reads as a jump
+      const distance = Math.abs(target.getBoundingClientRect().top);
+      // flagged so HeroCurtain doesn't read this glide leaving the hero as
+      // the user scrolling past it
+      const root = document.documentElement;
+      root.dataset.navScrolling = "1";
+      const done = () => delete root.dataset.navScrolling;
+      lenis.scrollTo(target, {
+        duration: Math.min(2.2, Math.max(1, distance / 3000)),
+        easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+        onComplete: done,
+      });
+      setTimeout(done, 2600);
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   // the menu is a full-screen overlay, so lock the page behind it while open

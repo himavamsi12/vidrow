@@ -595,74 +595,34 @@ html.nav-hidden .hx-bar {
   clip-path: polygon(66.7% 0, 100% 0, 100% 100%, 0 100%, 0 21.7%, 33.3% 21.7%, 33.3% 10.9%, 66.7% 10.9%)
 }
 
-/* the hero's own resting staircase overlaps its steps' footprints on
-   purpose, for the 3D look (step s5 e.g. runs under s1 and s2 both). The
-   curtain plays the same six steps as a genuine cover-the-screen wipe
-   instead — each one growing tall independently as it closes — and in any
-   region two steps' footprints overlap, whichever sits on top swallows the
-   other's leading edge as it rises, reading as one step merging into its
-   neighbour rather than a clean straight rise. Scoped to just the curtain's
-   own copy, each step here gets an exclusive horizontal slice instead, so
-   nothing ever grows behind — or gets grown over by — another step. */
-.hero-curtain .hx-s1 {
-  width: 44%
-}
+/* the curtain is only the hero's four staircase blocks, laid side by side
+   in the slices they visibly occupy (0-51%, 51-64.5%, 64.5-79%, 79-100%),
+   each starting at its own step height. No stagger and one shared timing,
+   so every bar travels straight up together and they reach the top as one
+   flat edge. The hero's own .hx-sN rules don't apply here. */
+.hero-curtain .hc-b1 { left: 0; width: 51%; top: 88.43% }
+.hero-curtain .hc-b2 { left: 51%; width: 13.5%; top: 75.46% }
+.hero-curtain .hc-b3 { left: 64.5%; width: 14.5%; top: 62.96% }
+.hero-curtain .hc-b4 { left: 79%; width: 21%; top: 25.93% }
 
-.hero-curtain .hx-s5 {
-  width: 7%
-}
-
-.hero-curtain .hx-s2 {
-  width: 7%
-}
-
-.hero-curtain .hx-s3 {
-  width: 14%
-}
-
-/* the hero's own s4 is one stepped piece (its clip-path cuts a staircase
-   into its top), and closing morphs that into a single flat block. On the
-   curtain it's three separate bars instead, one per column of that
-   staircase, at the same heights the clip-path gives them (s4 spans
-   25.93%..100% of the height; its columns start 21.7% / 10.9% / 0 down) */
-.hero-curtain .hx-s4a,
-.hero-curtain .hx-s4b,
-.hero-curtain .hx-s4c {
-  width: 7%;
-  z-index: 1
-}
-
-.hero-curtain .hx-s4a {
-  left: 79%;
-  top: 42%
-}
-
-.hero-curtain .hx-s4b {
-  left: 86%;
-  top: 34%
-}
-
-.hero-curtain .hx-s4c {
-  left: 93%;
-  top: 25.93%
-}
-
-.hero-curtain .hx-stair.closed .hx-s4a,
-.hero-curtain .hx-stair.closed .hx-s4b,
-.hero-curtain .hx-stair.closed .hx-s4c {
-  top: 0;
-  background: var(--violet)
-}
-
-/* no stagger on the curtain: with each bar starting at a different height
-   and a different delay, the eased tops overtake one another near the end
-   and neighbouring bars look like they melt together. One shared timing
-   keeps every bar's top in the same proportion the whole way, so the
-   staircase simply travels straight up until it's flat against the top */
 .hero-curtain .hx-step,
 .hero-curtain .hx-stair.closed .hx-step {
   transition: top .8s cubic-bezier(.65, 0, .35, 1), background-color .4s ease;
   transition-delay: 0s
+}
+
+.hero-curtain .hx-stair.closed .hx-step {
+  top: 0
+}
+
+.hero-curtain .hx-stair.closed .hc-b1,
+.hero-curtain .hx-stair.closed .hc-b3 {
+  background: var(--acid)
+}
+
+.hero-curtain .hx-stair.closed .hc-b2,
+.hero-curtain .hx-stair.closed .hc-b4 {
+  background: var(--violet)
 }
 
 /* once all four have shown, the blocks rise and close the hero. The 1px
@@ -2011,9 +1971,22 @@ html.nav-hidden .hx-bar {
 }
 
 .fw-ph.fw-phShrink img {
-  /* scaled from the bottom edge, so the shoulders still meet the row's
-     bottom with no gap while the head sits a little smaller */
-  transform: scale(.94);
+  /* the whole cut-out, never cropped: cover would cut the shoulders off
+     the bottom of this squarer file, so it's fitted and seated on the
+     row's bottom edge instead */
+  object-fit: contain;
+  object-position: center bottom
+}
+
+/* the opposite case: a loosely-framed cut-out (lots of space above the
+   head, person small in the file) grown from the bottom edge so the head
+   matches its neighbour's height, allowed to spill past the frame's top */
+.fw-ph.fw-phGrow {
+  overflow: visible
+}
+
+.fw-ph.fw-phGrow img {
+  transform: scale(1.05);
   transform-origin: center bottom
 }
 

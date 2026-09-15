@@ -54,7 +54,7 @@ export const FEATURED_WORK = [
     category: "masaischool.com",
     photos: [
       { src: "/featured%20works/Prateek%20Shukla.png", cls: "fw-ph1" },
-      { src: "/featured%20works/Ankit%20Agrawal.png", cls: "fw-ph2" },
+      { src: "/featured%20works/Ankit%20Agrawal.png", cls: "fw-ph2 fw-phGrow" },
     ],
     plates: [
       { name: "Prateek Shukla", role: "Co-founder & CEO", cls: "fw-plate1" },
