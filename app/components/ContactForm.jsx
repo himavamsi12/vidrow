@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CornerArrow } from "./ContactIcons";
+import { submitContact } from "../contact/actions";
 
 const REQUIREMENTS = [
   "Performance marketing",
@@ -16,17 +17,35 @@ const INITIAL = {
   phone: "",
   requirement: "",
   message: "",
+  website: "",
 };
 
 export default function ContactForm() {
   const [form, setForm] = useState(INITIAL);
   const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("sent");
+    if (status === "sending") return;
+    setStatus("sending");
+    setError("");
+
+    try {
+      const res = await submitContact(form);
+      if (res.ok) {
+        setStatus("sent");
+        setForm(INITIAL);
+      } else {
+        setStatus("idle");
+        setError(res.error);
+      }
+    } catch {
+      setStatus("idle");
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -92,8 +111,28 @@ export default function ContactForm() {
         />
       </label>
 
-      <button type="submit" className="contact-submit">
-        <span className="contact-submit-label">{status === "sent" ? "SENT" : "SUBMIT"}</span>
+      {/* honeypot: hidden from people, left empty by them; bots fill it */}
+      <input
+        type="text"
+        name="website"
+        className="sr-only"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={form.website}
+        onChange={update("website")}
+      />
+
+      {error && (
+        <p className="contact-form-error" role="alert">
+          {error}
+        </p>
+      )}
+
+      <button type="submit" className="contact-submit" disabled={status === "sending"}>
+        <span className="contact-submit-label">
+          {status === "sending" ? "SENDING…" : status === "sent" ? "SENT" : "SUBMIT"}
+        </span>
         <span className="contact-submit-icon">
           <CornerArrow />
         </span>

@@ -5425,7 +5425,7 @@ html.nav-hidden .hx-bar {
 
 .vfoot.is-revealed .vfoot__bottomOuter {
   grid-template-rows: 1fr;
-  margin-top: 0
+  margin-top: clamp(-40px, -2.8vw, -20px)
 }
 
 .vfoot__bottomIn {
@@ -5433,7 +5433,7 @@ html.nav-hidden .hx-bar {
 }
 
 .vfoot__bottom {
-  padding-top: clamp(32px, 4vw, 56px);
+  padding-top: clamp(16px, 1.6vw, 24px);
   opacity: 0;
   transform: translateY(28px);
   transition: opacity .5s ease .12s, transform .6s cubic-bezier(.16, .84, .34, 1) .12s
@@ -5457,7 +5457,7 @@ html.nav-hidden .hx-bar {
   font-family: var(--body);
   font-size: 16px;
   color: rgba(255, 255, 255, .72);
-  max-width: 20ch
+  white-space: nowrap
 }
 
 .vfoot__legal {
@@ -9274,4 +9274,9 @@ button:focus-visible,
     width: 34px;
     height: 34px
   }
+}
+.contact-form-error {
+  margin: 0;
+  font-size: 14px;
+  color: #D93025
 }
