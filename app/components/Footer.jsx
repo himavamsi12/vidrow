@@ -157,7 +157,7 @@ export default function Footer() {
       <div className="vfoot__copy">
         <h2 className="vfoot__title">Ready for your next growth stage?</h2>
         <div className="vfoot__ctaWrap">
-          <a className="vfoot__cta" href="#contact">
+          <a className="vfoot__cta" href="/contact">
             <span className="vfoot__ctaLabel">Click to grow</span>
             <span className="vfoot__ctaIcon">
               <span className="vfoot__ctaMark">

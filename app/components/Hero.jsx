@@ -76,7 +76,7 @@ export default function Hero() {
             We work alongside founders to turn marketing into a clearer, faster and more repeatable
             path to growth.
           </p>
-          <a className="hx-cta" href="#contact">
+          <a className="hx-cta" href="/contact">
             <span className="hx-cta-t">Click to grow</span>
             <span className="hx-cta-i" aria-hidden="true">
               <svg viewBox="0 0 40 40" aria-hidden="true">

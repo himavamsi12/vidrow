@@ -14,7 +14,7 @@ const NAV_LINKS = [
 
 function ContactButton({ className = "hx-contact", onClick }) {
   return (
-    <a className={className} href="#contact" onClick={onClick}>
+    <a className={className} href="/contact" onClick={onClick}>
       <span>Contact us</span>
       <span className="hx-contact-i" aria-hidden="true">
         <svg viewBox="0 0 40 40" aria-hidden="true">

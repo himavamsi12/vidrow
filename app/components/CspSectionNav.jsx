@@ -3,11 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 // One entry per top-level section on the page, in document order — the id
-// must match the id given to that section below. There are 10, so the well
-// is built from 5 two-piece tetromino blocks (an L/J pair, an I pair, a J/L
-// pair, an L/J pair, an I pair) — 10 pieces landing bottom-up, one per
-// section, ported from case-masai.html's rail.
-const SECTIONS = [
+// must match the id given to that section. The well gets exactly one piece
+// per section (see wellBlocks), so it's full once the last section is reached.
+const DEFAULT_SECTIONS = [
   { id: "csp-sec-hero", label: "Overview" },
   { id: "csp-sec-aoc", label: "The Audience" },
   { id: "csp-sec-mid", label: "Where It Landed" },
@@ -20,20 +18,36 @@ const SECTIONS = [
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
-const ROWS = 20;
 const SHADES = ["#F5FA5E", "#715BE4"];
-const BLOCKS = ["LJ", "II", "JL", "LJ", "II"];
+const BLOCK_PATTERN = ["LJ", "II", "JL", "LJ", "II"];
 const GAP = 4;
+// px height of one row at the rail's 65px width — keeps cells the same size
+// however many rows the well ends up with
+const ROW_H = 21.75;
 
-// the well itself sits behind a section with a dark background (the
-// celebrity-ads section) — the rail flips light-on-dark while it's there
-const DARK_SECTION_ID = "csp-sec-celeb";
+// two-piece 4-row blocks for each pair of sections, plus a one-piece 2-row
+// "O" block when the count is odd
+function wellBlocks(count) {
+  const blocks = Array.from(
+    { length: Math.floor(count / 2) },
+    (_, i) => BLOCK_PATTERN[i % BLOCK_PATTERN.length]
+  );
+  if (count % 2) blocks.push("O");
+  return blocks;
+}
+
+// the rail flips light-on-dark while it's over a section with a dark
+// background — the celebrity-ads section by default; a page with its dark
+// panel(s) elsewhere passes their ids in `darkSectionIds`
+const DEFAULT_DARK_SECTION_IDS = ["csp-sec-celeb"];
 
 // how far from the top of the viewport the nav sticks — must match
 // .csp-sideNav's own `top` in globals.css
 const STICK_TOP = 140;
 
-export default function CspSectionNav() {
+export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSectionIds = DEFAULT_DARK_SECTION_IDS }) {
+  const BLOCKS = wellBlocks(sections.length);
+  const ROWS = BLOCKS.reduce((n, b) => n + (b === "O" ? 2 : 4), 0);
   const [active, setActive] = useState(0);
   // null while plain CSS `position: sticky` is doing the job; a px value
   // once the nav has to be pinned in place instead (see the effect below)
@@ -122,13 +136,16 @@ export default function CspSectionNav() {
     });
 
     pieceElsRef.current = pieceEls;
-  }, []);
+    landedRef.current = -1;
+  }, [sections.length]);
 
   useEffect(() => {
-    const els = SECTIONS.map((s) => document.getElementById(s.id)).filter(Boolean);
+    const els = sections.map((s) => document.getElementById(s.id)).filter(Boolean);
     if (!els.length) return;
 
-    const dark = document.getElementById(DARK_SECTION_ID)?.closest(".csp-in");
+    const darks = darkSectionIds
+      .map((id) => document.getElementById(id)?.closest(".csp-in"))
+      .filter(Boolean);
 
     // the section is "current" once its top has crossed a line near the top
     // of the viewport — the last one to have crossed it wins
@@ -142,11 +159,14 @@ export default function CspSectionNav() {
 
       // flip the rail while the dark section is behind it
       const rail = railRef.current;
-      if (dark && rail) {
-        const r = dark.getBoundingClientRect();
+      if (rail) {
         const mid = rail.getBoundingClientRect();
         const y = mid.top + mid.height / 2;
-        rail.classList.toggle("on-dark", y > r.top && y < r.bottom);
+        const over = darks.some((d) => {
+          const r = d.getBoundingClientRect();
+          return y > r.top && y < r.bottom;
+        });
+        rail.classList.toggle("on-dark", over);
       }
     };
 
@@ -197,13 +217,18 @@ export default function CspSectionNav() {
   useEffect(() => {
     const main = navRef.current?.closest(".csp");
     const inner = railRef.current;
+    const last = document.getElementById(sections[sections.length - 1]?.id);
     if (!main || !inner) return;
 
+    // stop where the last section's content ends, not at the bottom of
+    // .csp, whose bottom padding would carry the rail on past the content
     const onScroll = () => {
       const mainRect = main.getBoundingClientRect();
-      const spaceBelowStick = mainRect.bottom - STICK_TOP;
-      if (spaceBelowStick < inner.offsetHeight) {
-        setDockTop(main.offsetHeight - inner.offsetHeight);
+      const stopBottom = last
+        ? last.getBoundingClientRect().bottom - parseFloat(getComputedStyle(last).paddingBottom)
+        : mainRect.bottom;
+      if (stopBottom - STICK_TOP < inner.offsetHeight) {
+        setDockTop(stopBottom - mainRect.top - inner.offsetHeight);
       } else {
         setDockTop(null);
       }
@@ -218,7 +243,7 @@ export default function CspSectionNav() {
     };
   }, []);
 
-  const total = SECTIONS.length;
+  const total = sections.length;
 
   return (
     <div
@@ -233,8 +258,12 @@ export default function CspSectionNav() {
           <span className="csp-sideNav-sep">|</span>
           {String(total).padStart(2, "0")}
         </div>
-        <div className="csp-sideNav-label">{SECTIONS[active].label}</div>
-        <div className="csp-sideNav-well" ref={wellRef} />
+        <div className="csp-sideNav-label">{sections[active]?.label}</div>
+        <div
+          className="csp-sideNav-well"
+          ref={wellRef}
+          style={{ aspectRatio: `65 / ${ROWS * ROW_H}` }}
+        />
       </div>
     </div>
   );

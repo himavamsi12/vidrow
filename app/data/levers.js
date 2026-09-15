@@ -6,8 +6,8 @@ export const CUBE_PX = 280; // how wide the assembled block sits on screen
 
 export const PIECES = [
   {
-    lever: "Performance",
-    copy: "Scientific media buying across Meta, Google & niche networks.",
+    lever: "Performance Creatives",
+    copy: "Access Vidrow's high-velocity ads creative engine, trained on 1000Cr+ of ad spends, delivering the highest win rate across the industry.",
     cells: [
       [-1.4, -1.4, 100, 100, "#F5F25D"],
       [98.6, -1.4, 100, 100, "#F5F25D"],
@@ -16,8 +16,8 @@ export const PIECES = [
     ],
   },
   {
-    lever: "Brand",
-    copy: "Developing narratives that stick in the modern consumer’s mind.",
+    lever: "Brand Marketing",
+    copy: "Create celebrity-led brand marketing campaigns, built for virality and conceptualised for standing out.",
     cells: [
       [201.2, -1.6, 100, 100, "#F5F25D"],
       [301.2, -1.6, 100, 100, "#F5F25D"],
@@ -25,8 +25,8 @@ export const PIECES = [
     ],
   },
   {
-    lever: "Celebrity",
-    copy: "High-impact influencer and celebrity collaborations that convert.",
+    lever: "Celebrity Performance Creatives",
+    copy: "Unlock 200+ tested celebrity faces for conversion-led campaigns to 3X your user acquisition.",
     cells: [
       [302.0, 100.3, 100, 100, "#947AF0"],
       [202.0, 200.3, 100, 100, "#7253E1"],
@@ -34,24 +34,24 @@ export const PIECES = [
     ],
   },
   {
-    lever: "Social",
-    copy: "Organic & community growth strategies for sustained engagement.",
+    lever: "Social Media Marketing",
+    copy: "Build your niche, go viral and introduce a layer of social media validation through Vidrow's social media retainers.",
     cells: [
       [-1.8, 200.9, 100, 100, "#7253E1"],
       [98.2, 200.9, 100, 100, "#947AF0"],
     ],
   },
   {
-    lever: "AdOps",
-    copy: "Full-stack technical measurement and funnel optimization.",
+    lever: "Ads Account Management",
+    copy: "Bring best practices in Google and Meta ads management with Vidrow's data and tech driven approach.",
     cells: [
       [-1.1, 301.7, 100, 100, "#F5F25D"],
       [98.9, 301.7, 100, 100, "#FEF7AD"],
     ],
   },
   {
-    lever: "AI",
-    copy: "Automated creative testing and predictive growth modeling.",
+    lever: "AI for Marketing",
+    copy: "Plug and play with Vidrow's proprietary AI video ads tool, 'Double Down', built for scaling your winning ads at lower cost and faster TAT.",
     cells: [
       [201.1, 301.7, 100, 100, "#7253E1"],
       [301.1, 301.7, 100, 100, "#947AF0"],

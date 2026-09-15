@@ -23,7 +23,7 @@ export default function Levers() {
   const cubesRef = useRef(null);
   const sectionRef = useRef(null);
   const aRef = useRef(null);
-  const bRef = useRef(null);
+  const bRef = useRef(null)
   const hyRef = useRef(null);
   const eyebrowRef = useRef(null);
   const midRef = useRef(null);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import ReadArrow from "./ReadArrow";
@@ -20,11 +20,31 @@ const canHover = () =>
 
 export default function FeaturedWork() {
   const [openIndex, setOpenIndex] = useState(0);
+  // which card's full testimonial is showing in the slide-in panel — null
+  // when it's closed
+  const [panelItem, setPanelItem] = useState(null);
   // on touch, focus (from tapping the <a>) fires before click and already
   // opens the row, so a plain "is it open yet?" check in onClick can't tell
   // a row's very first tap from a deliberate second one — this remembers
   // whether the row was already open before the tap that's about to focus it
   const wasOpenRef = useRef(true);
+
+  // Escape closes the panel, and the page can't scroll behind it while
+  // it's open — same two behaviors the mobile nav's own full-screen panel
+  // uses
+  useEffect(() => {
+    if (!panelItem) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setPanelItem(null);
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [panelItem]);
 
   return (
     <section className="fw" id="featured">
@@ -72,7 +92,9 @@ export default function FeaturedWork() {
               <span className="fw-top">
                 <span className="fw-brand">
                   <span className="fw-logo">
-                    {item.logo.type === "text" ? (
+                    {item.logo.type === "image" ? (
+                      <img className="fw-logoTile" src={item.logo.src} alt={item.logo.alt} />
+                    ) : item.logo.type === "text" ? (
                       <b>{item.logo.value}</b>
                     ) : (
                       <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -85,7 +107,7 @@ export default function FeaturedWork() {
                   </span>
                   <span className="fw-id">
                     <span className="fw-name">{item.name}</span>
-                    <span className="fw-cat">{item.category}</span>
+                    {item.category && <span className="fw-cat">{item.category}</span>}
                   </span>
                 </span>
 
@@ -103,7 +125,7 @@ export default function FeaturedWork() {
                 {item.plates.map((p) => (
                   <span className={`fw-plate ${p.cls}`} key={p.name}>
                     <b>{p.name}</b>
-                    <span>{p.role}</span>
+                    {p.role && <span>{p.role}</span>}
                   </span>
                 ))}
               </div>
@@ -115,12 +137,86 @@ export default function FeaturedWork() {
               {/* sibling of .fw-say rather than a child of .fw-extra so mobile
                   can stack it after the acid band; on desktop it still lands in
                   the same place, since .fw-extra is just inset:0 on the row */}
-              <p className="fw-quote" aria-hidden="true">
-                &ldquo; {item.quote} &rdquo;
-              </p>
+              <div className="fw-quote">
+                <p className="fw-quoteText">&ldquo; {item.quote} &rdquo;</p>
+                <button
+                  type="button"
+                  className="fw-readCase"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setPanelItem(item);
+                  }}
+                >
+                  <span>Read case study</span>
+                  <svg viewBox="0 0 40 40" aria-hidden="true">
+                    <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                  </svg>
+                </button>
+              </div>
             </a>
           ))}
         </Reveal>
+      </div>
+
+      <div
+        className={`fw-panelOverlay${panelItem ? " is-open" : ""}`}
+        onClick={() => setPanelItem(null)}
+        aria-hidden={!panelItem}
+      >
+        <aside
+          className="fw-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-label={panelItem ? `${panelItem.plates.map((p) => p.name).join(" & ")} on ${panelItem.name}` : undefined}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button type="button" className="fw-panelClose" aria-label="Close" onClick={() => setPanelItem(null)}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M5 5l14 14M19 5 5 19"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          {panelItem && (
+            <>
+              <svg className="fw-panelMark" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#0B0B0D"
+                  d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM17 17h7v7h-7z"
+                />
+              </svg>
+              <p className="fw-panelQuote" data-lenis-prevent>
+                {panelItem.quote}
+              </p>
+
+              {/* founders along the bottom edge: a pair overlaps left/right,
+                  a single founder sits bottom-right — same cut-out + white
+                  name plate as the row itself */}
+              <div className={`fw-panelPeople${panelItem.photos.length > 1 ? " is-pair" : " is-solo"}`}>
+                {panelItem.photos.map((ph, i) => (
+                  <img
+                    className={`fw-panelPh fw-panelPh${i + 1}`}
+                    src={ph.src}
+                    alt=""
+                    key={ph.src}
+                  />
+                ))}
+                {panelItem.plates.map((pl, i) => (
+                  <span className={`fw-panelPlate fw-panelPlate${i + 1}`} key={pl.name}>
+                    <b>{pl.name}</b>
+                    {pl.role && <span>{pl.role}</span>}
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+        </aside>
       </div>
     </section>
   );

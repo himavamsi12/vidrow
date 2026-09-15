@@ -47,6 +47,8 @@
 }
 
 :root {
+  --btn-dur: .45s;
+  --btn-ease: cubic-bezier(.22, .61, .36, 1);
   --acid: #F5FA5E;
   --violet: #715BE4;
   --ink: #0B0B0D;
@@ -324,7 +326,8 @@ html.nav-hidden .hx-bar {
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
-  flex: none
+  flex: none;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
 }
 
 .hx-contact span:first-child {
@@ -341,7 +344,7 @@ html.nav-hidden .hx-bar {
   align-items: center;
   justify-content: center;
   padding: calc(3 * var(--k));
-  transition: background-color .25s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .hx-contact-i svg {
@@ -351,7 +354,7 @@ html.nav-hidden .hx-bar {
 }
 
 .hx-contact-i svg g {
-  transition: fill .25s ease
+  transition: fill var(--btn-dur) var(--btn-ease)
 }
 
 .hx-contact:hover .hx-contact-i {
@@ -848,7 +851,7 @@ html.nav-hidden .hx-bar {
   background: var(--acid);
   display: grid;
   place-items: center;
-  transition: background-color .25s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .hx-cta-i svg {
@@ -858,7 +861,7 @@ html.nav-hidden .hx-bar {
 }
 
 .hx-cta-i svg g {
-  transition: fill .25s ease
+  transition: fill var(--btn-dur) var(--btn-ease)
 }
 
 .hx-cta:hover .hx-cta-i {
@@ -1187,6 +1190,7 @@ html.nav-hidden .hx-bar {
   text-decoration: none;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
+  transition: border-color var(--btn-dur) var(--btn-ease);
 }
 
 .nav-links a:hover {
@@ -1203,6 +1207,7 @@ html.nav-hidden .hx-bar {
   letter-spacing: .185em;
   padding: 13px 20px;
   white-space: nowrap;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease);
 }
 
 .nav-cta:hover {
@@ -1262,7 +1267,7 @@ html.nav-hidden .hx-bar {
   border: 0;
   cursor: pointer;
   font-family: var(--body);
-  transition: background .16s ease, color .16s ease, transform .16s ease;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease), transform var(--btn-dur) var(--btn-ease);
 }
 
 .btn:hover {
@@ -1356,7 +1361,7 @@ html.nav-hidden .hx-bar {
   gap: 14px;
   text-decoration: none;
   color: inherit;
-  transition: background .18s ease;
+  transition: background-color var(--btn-dur) var(--btn-ease);
 }
 
 .rail .case:last-child {
@@ -1460,7 +1465,7 @@ html.nav-hidden .hx-bar {
   text-transform: uppercase;
   padding: 17px 12px;
   cursor: pointer;
-  transition: background .16s ease, color .16s ease;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease);
 }
 
 .stagebar button:last-child {
@@ -1670,6 +1675,10 @@ html.nav-hidden .hx-bar {
   white-space: nowrap
 }
 
+.storylink .sl-t {
+  transition: color var(--btn-dur) var(--btn-ease)
+}
+
 .storylink:hover .sl-t {
   color: var(--acid)
 }
@@ -1805,6 +1814,15 @@ html.nav-hidden .hx-bar {
   display: block
 }
 
+/* the supplied logo files are full square tiles (white ground, mark
+   already padded inside), so they fill the box rather than sitting at the
+   44px an svg mark gets */
+.fw-logo img.fw-logoTile {
+  width: 100%;
+  height: 100%;
+  object-fit: contain
+}
+
 .fw-logo b {
   font-family: var(--body);
   font-size: calc(10 * var(--k));
@@ -1933,7 +1951,19 @@ html.nav-hidden .hx-bar {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* founder cut-outs come in slightly different aspect ratios — when cover
+     has to crop, lose the bottom of the shirt rather than the top of a head */
+  object-position: center top;
   display: block
+}
+
+/* a tightly-framed cut-out (face fills the frame) scaled down a touch,
+   anchored to the bottom so the shoulders still meet the row's edge */
+.fw-ph.fw-phShrink img {
+  /* only slightly smaller than the frame, still sitting on the bottom edge
+     so there's no gap under the shoulders */
+  transform: scale(.94);
+  transform-origin: center bottom
 }
 
 .fw-ph1 {
@@ -2016,10 +2046,10 @@ html.nav-hidden .hx-bar {
   margin: 0;
   /* below .fw-extra (z-index 2), so the founder cut-out still overlaps it */
   z-index: 0;
-  font-family: var(--body);
-  font-size: calc(16 * var(--k));
-  line-height: 1.4;
-  color: #121212;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(10 * var(--k));
   transform: translateY(calc(-10 * var(--k)));
   /* it sits outside .fw-extra, so it repeats the reveal and the click
      transparency that .fw-extra used to hand it */
@@ -2028,16 +2058,261 @@ html.nav-hidden .hx-bar {
   transition: opacity .34s ease, transform .55s cubic-bezier(.16, .84, .34, 1)
 }
 
+.fw-quoteText {
+  margin: 0;
+  font-family: var(--body);
+  font-size: calc(16 * var(--k));
+  line-height: 1.4;
+  color: #121212;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden
+}
+
+.fw-readCase {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--k));
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--body);
+  font-size: calc(11 * var(--k));
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: color var(--btn-dur) var(--btn-ease)
+}
+
+.fw-readCase svg {
+  width: calc(16 * var(--k));
+  height: calc(16 * var(--k));
+  flex: none
+}
+
+.fw-readCase:hover {
+  color: var(--violet)
+}
+
 .fw-row.is-open .fw-quote,
 .fw-row:focus-visible .fw-quote {
   opacity: 1;
-  transform: none
+  transform: none;
+  pointer-events: auto
 }
 
 /* mobile-only compact icon shown on a closed row (see the media query
    below) — desktop keeps the full "read full story" reveal on hover */
 .fw-mini {
   display: none
+}
+
+/* ── full-testimonial slide-in panel ─────────
+   a dark scrim over the page, with a solid black panel sliding in from the
+   right — opened from a card's "Read case study" button */
+.fw-panelOverlay {
+  position: fixed;
+  inset: 0;
+  /* above the sticky site nav (1000) and its mobile menu */
+  z-index: 1100;
+  background: rgba(11, 11, 13, .45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility 0s linear .35s
+}
+
+.fw-panelOverlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .35s ease
+}
+
+.fw-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(560px, 90vw);
+  box-sizing: border-box;
+  background: #F4F4F4;
+  color: var(--ink);
+  /* no bottom padding: the founders' cut-outs sit flush on the bottom edge */
+  padding: clamp(40px, 6vw, 72px) clamp(28px, 5vw, 56px) 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .45s cubic-bezier(.16, .84, .34, 1)
+}
+
+.fw-panelOverlay.is-open .fw-panel {
+  transform: none
+}
+
+.fw-panelClose {
+  position: absolute;
+  top: clamp(16px, 2.5vw, 24px);
+  right: clamp(16px, 2.5vw, 24px);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: var(--acid);
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
+}
+
+.fw-panelClose svg {
+  width: 16px;
+  height: 16px
+}
+
+.fw-panelClose:hover {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+/* the brand's small step mark, hung just above and left of the quote */
+.fw-panelMark {
+  flex: none;
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 0 4px -28px
+}
+
+.fw-panelQuote {
+  /* the quote is what scrolls when a testimonial runs longer than the
+     screen, so the founders below always stay pinned in view */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0 0 32px;
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.45;
+  color: #4C4546;
+  /* testimonials carry their paragraph breaks as \n in the data */
+  white-space: pre-line
+}
+
+.fw-panelPeople {
+  position: relative;
+  flex: none;
+  /* pushed to the bottom of the panel, and bled out past its side padding
+     so the cut-outs and plates meet the panel's own edges */
+  margin: auto calc(-1 * clamp(28px, 5vw, 56px)) 0;
+  aspect-ratio: 940 / 560;
+  /* never taller than ~40% of the screen, so a long quote still gets room */
+  max-height: 40vh
+}
+
+.fw-panelPh {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  /* fills its slot's height and keeps its proportions, so when the block is
+     capped short the cut-out shrinks rather than spilling up over the quote */
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom
+}
+
+.fw-panelPlate {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 24px 12px
+}
+
+.fw-panelPlate b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 3.4vw, 32px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: #121212;
+  white-space: nowrap
+}
+
+.fw-panelPlate span {
+  font-family: var(--body);
+  font-size: clamp(12px, 1.6vw, 15px);
+  color: #4C4546
+}
+
+/* a pair: overlapping cut-outs spanning the panel, the left founder's plate
+   on the left edge (right-aligned text) and the right founder's plate
+   starting past the middle */
+.fw-panelPeople.is-pair .fw-panelPh1 {
+  left: 0;
+  width: 62%;
+  z-index: 1;
+  object-position: left bottom
+}
+
+.fw-panelPeople.is-pair .fw-panelPh2 {
+  right: 0;
+  width: 58%;
+  z-index: 2;
+  object-position: right bottom
+}
+
+.fw-panelPeople.is-pair .fw-panelPlate1 {
+  left: 0;
+  width: 43%;
+  align-items: flex-end;
+  text-align: right
+}
+
+.fw-panelPeople.is-pair .fw-panelPlate2 {
+  left: 57%;
+  width: 43%;
+  align-items: flex-start;
+  text-align: left
+}
+
+/* a single founder: cut-out bottom-right, plate overlapping its lower-left */
+.fw-panelPeople.is-solo .fw-panelPh1 {
+  right: 0;
+  width: 52%;
+  object-position: right bottom
+}
+
+.fw-panelPeople.is-solo .fw-panelPlate1 {
+  right: 18.5%;
+  width: auto;
+  min-width: 46%;
+  align-items: flex-end;
+  text-align: right
+}
+
+@media (max-width:640px) {
+  .fw-panel {
+    width: 100%
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .fw-panelOverlay,
+  .fw-panel {
+    transition-duration: .01ms
+  }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -2261,8 +2536,22 @@ html.nav-hidden .hx-bar {
     opacity: 1;
     transform: none;
     background: var(--paper);
+    gap: 10px
+  }
+
+  .fw-row.is-open .fw-quoteText {
     font-size: 15px;
     line-height: 1.55
+  }
+
+  .fw-row.is-open .fw-readCase {
+    font-size: 11px;
+    gap: 10px
+  }
+
+  .fw-row.is-open .fw-readCase svg {
+    width: 16px;
+    height: 16px
   }
 
   .fw-row.is-open .fw-line {
@@ -2384,10 +2673,12 @@ html.nav-hidden .hx-bar {
   align-items: center;
   gap: calc(180 * var(--k));
   padding: calc(40 * var(--k));
-  /* the expanded card's tab now runs 80px past the visible copy, so the
-     panel needs that much extra room or the trailing collapsed items get
-     cramped against its bottom edge */
-  height: calc(560 * var(--k) + 80px);
+  /* sized for the longest stage's two-paragraph copy (not the shortest),
+     so no stage pushes the collapsed titles above/below it out past the
+     panel's clipped edges. Kept fixed rather than auto so the box doesn't
+     jump in height as the stages swap. The extra 80px is the expanded
+     card's tab running past the visible copy */
+  height: calc(700 * var(--k) + 80px);
   overflow: hidden
 }
 
@@ -2456,7 +2747,9 @@ html.nav-hidden .hx-bar {
   line-height: 1.35;
   color: #BEBEBE;
   margin: 0 0 calc(20 * var(--k));
-  max-width: calc(560 * var(--k))
+  max-width: calc(560 * var(--k));
+  /* a stage's copy can carry a second paragraph as \n\n in the data */
+  white-space: pre-line
 }
 
 .wy-cardwrap {
@@ -2549,7 +2842,10 @@ html.nav-hidden .hx-bar {
 
   .wy-lead .wy-copy {
     color: #333;
-    max-width: 46ch;
+    /* run the full card width, clearing the 40px notch the clip-path cuts
+       down its right side (the card's own right padding is only 32px) */
+    max-width: none;
+    padding-right: 32px;
     margin-bottom: 0;
     padding-bottom: calc(24 * var(--k))
   }
@@ -2597,7 +2893,7 @@ html.nav-hidden .hx-bar {
   letter-spacing: calc(1.2 * var(--k));
   text-transform: uppercase;
   white-space: nowrap;
-  transition: opacity .18s ease
+  transition: opacity var(--btn-dur) var(--btn-ease)
 }
 
 .wy-read:hover {
@@ -2882,7 +3178,7 @@ html.nav-hidden .hx-bar {
 
 .lev-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 300px));
+  grid-template-columns: repeat(3, minmax(0, 320px));
   justify-content: space-between;
   gap: clamp(16px, 2vw, 34px);
   position: relative;
@@ -3108,7 +3404,7 @@ html.nav-hidden .hx-bar {
   font-size: 15px;
   line-height: 1;
   color: #4D4D4D;
-  transition: background .16s ease, color .16s ease
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
 }
 
 .sw-filter:hover {
@@ -3611,14 +3907,14 @@ html.nav-hidden .hx-bar {
   border: 0;
   background: #DEDEDA;
   cursor: pointer;
-  transition: background .18s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .cs-logtile-fill {
   position: absolute;
   inset: 0;
   background: var(--paper);
-  transition: background .18s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .cs-logtile img {
@@ -3847,7 +4143,7 @@ html.nav-hidden .hx-bar {
     cursor: pointer;
     display: grid;
     place-items: center;
-    transition: background .16s ease, border-color .16s ease
+    transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
   }
 
   .cs-nav button:active {
@@ -4334,7 +4630,7 @@ html.nav-hidden .hx-bar {
   font-size: calc(15 * var(--k));
   line-height: 1;
   color: #4D4D4D;
-  transition: background .16s ease, color .16s ease
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
 }
 
 .pr-filter:hover {
@@ -4554,12 +4850,16 @@ html.nav-hidden .hx-bar {
   background: var(--paper);
   display: grid;
   place-items: center;
-  transition: background .16s ease, border-color .16s ease
+  transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
 }
 
 .news-nav button:hover {
   background: #121212;
   border-color: #121212
+}
+
+.news-nav svg path {
+  transition: stroke var(--btn-dur) var(--btn-ease)
 }
 
 .news-nav svg {
@@ -4744,7 +5044,7 @@ html.nav-hidden .hx-bar {
 }
 
 .news-read svg {
-  transition: transform .18s cubic-bezier(.16, .84, .34, 1)
+  transition: transform var(--btn-dur) var(--btn-ease)
 }
 
 @media (max-width:1199px) {
@@ -4901,7 +5201,7 @@ html.nav-hidden .hx-bar {
   background: var(--acid);
   display: grid;
   place-items: center;
-  transition: background-color .25s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .vfoot__ctaMark {
@@ -4915,7 +5215,7 @@ html.nav-hidden .hx-bar {
   grid-column: calc(var(--x) + 1);
   grid-row: calc(var(--y) + 1);
   background: var(--violet);
-  transition: background-color .25s ease
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .vfoot__cta:hover .vfoot__ctaIcon {
@@ -5574,12 +5874,53 @@ button:focus-visible,
   height: auto
 }
 
+/* a lockup built from parts (mark | rule | wordmark) rather than one image */
+.csp-bannerTag .csp-lockup {
+  display: flex;
+  align-items: center;
+  gap: 8%;
+  width: 70%
+}
+
+.csp-lockup svg {
+  flex: none;
+  width: 16%;
+  height: auto
+}
+
+.csp-lockup i {
+  flex: none;
+  align-self: stretch;
+  width: 1px;
+  background: #0B0B0D
+}
+
+.csp-bannerTag .csp-lockup img {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  height: auto
+}
+
 @media (max-width:760px) {
   .csp-bannerTag {
     width: 87px;
     aspect-ratio: auto;
     height: 27px
   }
+}
+
+.csp-bannerCaption {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5A5A62;
+  margin: 0 0 clamp(16px, 2.4vw, 24px)
+}
+
+.csp-bannerCaption b {
+  color: var(--ink);
+  font-weight: 600
 }
 
 .csp-meta {
@@ -5647,6 +5988,10 @@ button:focus-visible,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(24px, 4vw, 56px)
+}
+
+.csp-aoc-cols--4 {
+  grid-template-columns: repeat(4, 1fr)
 }
 
 .csp-aoc-col {
@@ -5762,6 +6107,10 @@ button:focus-visible,
   .csp-note {
     width: 100%;
     padding-left: 14px
+  }
+
+  .csp-bannerCaption {
+    font-size: 13px
   }
 
   .csp-meta {
@@ -6019,6 +6368,240 @@ button:focus-visible,
   border-left: 3px solid var(--ink)
 }
 
+/* ── creative-strategy flow diagram ──────────
+   a small set of connector cells sit between real HTML boxes in one grid
+   row, each with its own edge-to-edge SVG (stretched, so only orthogonal
+   lines are safe in it) plus fixed-size arrowhead triangles that sit
+   outside that stretch so they never distort */
+.csp-flow {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-flow-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(40px, 5vw, 56px)
+}
+
+.csp-flow-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 16px 0 0
+}
+
+.csp-flow-copy {
+  flex: none;
+  width: min(460px, 42%);
+  margin: 6px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4C4546
+}
+
+.csp-flow-diagram {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.05fr) 44px minmax(190px, 1.15fr) 40px minmax(190px, 1.15fr) 44px minmax(210px, 1.25fr);
+  align-items: center
+}
+
+.csp-flow-stack,
+.csp-flow-outcomes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  height: 100%
+}
+
+.csp-flow-outcomes {
+  align-items: flex-end;
+  text-align: right
+}
+
+.csp-flow-box {
+  font-family: var(--body)
+}
+
+.csp-flow-box--yellow {
+  background: rgba(245, 250, 94, .55);
+  padding: 20px 22px;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink)
+}
+
+.csp-flow-box--outcome {
+  font-size: 18px;
+  width: 100%
+}
+
+.csp-flow-box--violet {
+  background: rgba(113, 91, 228, .14);
+  padding: 24px 24px
+}
+
+.csp-flow-box--violet h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -.01em;
+  margin: 0 0 8px
+}
+
+.csp-flow-box--violet p {
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5A5A62;
+  margin: 0
+}
+
+.csp-flow-connector {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 150px
+}
+
+.csp-flow-connector svg {
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+.csp-flow-connector path {
+  fill: none;
+  stroke: #D3D3D8;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke
+}
+
+.csp-flow-arrowhead {
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #9A9AA2
+}
+
+.csp-flow-metaLabel {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--body);
+  font-size: 13px;
+  color: #9A9AA2
+}
+
+.csp-flow-loop {
+  position: relative;
+  margin-bottom: clamp(28px, 4vw, 40px)
+}
+
+.csp-flow-loop svg {
+  display: block;
+  width: 100%;
+  height: 90px
+}
+
+.csp-flow-loop path {
+  fill: none;
+  stroke: #D3D3D8;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke
+}
+
+.csp-flow-loop .csp-flow-arrowhead {
+  right: auto;
+  top: 0;
+  left: 10.5%;
+  transform: translate(-50%, 0);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #9A9AA2;
+  border-top: 0
+}
+
+.csp-flow-loopLabel {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  font-family: var(--body);
+  font-size: 14px;
+  color: #9A9AA2
+}
+
+@media (max-width:900px) {
+  .csp-flow-top {
+    flex-direction: column
+  }
+
+  .csp-flow-copy {
+    width: 100%
+  }
+
+  .csp-flow-diagram {
+    grid-template-columns: 1fr;
+    gap: 20px
+  }
+
+  .csp-flow-connector,
+  .csp-flow-connector svg {
+    display: none
+  }
+
+  .csp-flow-outcomes {
+    align-items: flex-start;
+    text-align: left
+  }
+
+  .csp-flow-loop svg {
+    display: none
+  }
+
+  .csp-flow-loop .csp-flow-arrowhead {
+    display: none
+  }
+}
+
+/* Helium's customer-journey variant: the image rides up level with the
+   heading, and the touchpoint tags use the display face */
+.csp-journey .csp-how-row {
+  align-items: flex-start
+}
+
+.csp-journey .csp-howTag {
+  height: 46px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -.01em
+}
+
+.csp-journey .csp-howBlock {
+  padding: 32px 0
+}
+
+.csp-journey .csp-howDesc {
+  font-size: 18px;
+  line-height: 1.35;
+  max-width: 34ch
+}
+
+.csp-journey .csp-how-top {
+  margin-bottom: 24px
+}
+
 @media (max-width:900px) {
   .csp-how-top {
     max-width: none
@@ -6049,6 +6632,764 @@ button:focus-visible,
   line-height: 1.15;
   letter-spacing: -.02em;
   margin: 0 0 clamp(48px, 6vw, 72px)
+}
+
+/* a head row whose right-hand copy is set flush right, as in the Helium
+   brand/performance sections */
+.csp-headRight .csp-aoc-copy {
+  text-align: right
+}
+
+/* the headings here are authored as two lines */
+.csp-headRight .csp-aoc-h {
+  max-width: none
+}
+
+/* ── "social" (Helium) ────────────────────────
+   positions lifted from the design as % of the band's box: block 1 top-left,
+   block 2 dropped a step and tucked under block 1's right end, block 3 back
+   up top on the right, overlapping block 2's right end — all one colour, so
+   they read as a single stepped shape */
+.csp-socialBand {
+  position: relative;
+  aspect-ratio: 1067 / 252;
+  margin-top: clamp(8px, 1vw, 16px)
+}
+
+/* the middle label hangs below the band's box, so the section reserves
+   room for it before the next section's gap starts */
+.csp-social {
+  padding-bottom: clamp(40px, 4vw, 56px)
+}
+
+.csp-socialBlock {
+  position: absolute;
+  background: #FAFCC6;
+  display: grid;
+  place-items: center
+}
+
+.csp-socialBlock span {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4.6vw, 64px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: #1A1C1C
+}
+
+.csp-socialBlock1 {
+  left: 0;
+  top: 0;
+  width: 29.6%;
+  height: 37.3%
+}
+
+.csp-socialBlock2 {
+  left: 22.9%;
+  top: 37.3%;
+  width: 43.3%;
+  height: 41.3%
+}
+
+.csp-socialBlock3 {
+  left: 59.7%;
+  top: 2.4%;
+  width: 40.3%;
+  height: 37.3%
+}
+
+.csp-socialLabel {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--body);
+  font-size: clamp(12px, 1.15vw, 15px);
+  line-height: 1.45;
+  color: #4C4546
+}
+
+.csp-socialLabel1 {
+  left: 3.8%;
+  top: 40.5%
+}
+
+.csp-socialLabel2 {
+  left: 40.2%;
+  top: 84%
+}
+
+.csp-socialLabel3 {
+  left: 74.2%;
+  top: 42.5%
+}
+
+@media (max-width:900px) {
+  .csp-socialBand {
+    aspect-ratio: auto;
+    display: grid;
+    gap: 8px
+  }
+
+  .csp-socialBlock,
+  .csp-socialLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    max-width: none
+  }
+
+  .csp-socialBlock {
+    padding: 28px 16px
+  }
+
+  .csp-socialBlock1 { order: 1 }
+  .csp-socialLabel1 { order: 2; margin-bottom: 16px }
+  .csp-socialBlock2 { order: 3 }
+  .csp-socialLabel2 { order: 4; margin-bottom: 16px }
+  .csp-socialBlock3 { order: 5 }
+  .csp-socialLabel3 { order: 6 }
+}
+
+/* ── "the reviews" (Helium) ───────────────────
+   dark edge-to-edge panel; the review thumbnail carries a creator tag with
+   the brand's small step on its top-left, and the right column ends on a
+   pale yellow pull line */
+.csp-in:has(.csp-reviews) {
+  background: #1A1A1A;
+  color: var(--paper)
+}
+
+.csp-reviews {
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-reviews .csp-eyebrow2 {
+  color: #A8A6AD
+}
+
+.csp-reviews .csp-eyebrow2 b,
+.csp-reviews .csp-aoc-h {
+  color: var(--paper)
+}
+
+.csp-reviews .csp-aoc-copy {
+  color: #D6D6DA;
+  max-width: 36ch
+}
+
+.csp-reviews-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 56px);
+  align-items: start
+}
+
+.csp-reviewShot {
+  position: relative;
+  margin: 0
+}
+
+.csp-reviewShot img {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+.csp-reviewTag {
+  position: absolute;
+  left: 39%;
+  top: 41%;
+  width: 32%;
+  aspect-ratio: 182 / 83;
+  box-sizing: border-box;
+  background: #FAFCC6;
+  /* a small square on the top-left, then the label box stepping down and
+     right from it (all as fractions of this tag's own box) */
+  clip-path: polygon(0 0, 23% 0, 23% 31%, 100% 31%, 100% 100%, 15% 100%, 15% 46%, 0 46%);
+  /* the tag is its own size container, so its children can inset
+     themselves in cqw of the tag's width — the tag is 45.6cqw tall, the step
+     ends 14.1cqw down and 15cqw in */
+  container-type: inline-size;
+  display: block;
+  padding: 0;
+  white-space: nowrap
+}
+
+.csp-reviewTag b {
+  display: block;
+  margin: 19cqw 0 0 21cqw;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 9cqw;
+  line-height: 1.15;
+  color: var(--ink)
+}
+
+.csp-reviewTag span {
+  display: block;
+  margin: 1.5cqw 0 0 21cqw;
+  font-family: var(--body);
+  font-size: 6.2cqw;
+  color: #4C4546
+}
+
+.csp-reviews-copy p {
+  margin: 0 0 clamp(24px, 3vw, 40px);
+  font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.45;
+  color: #E4E4E8;
+  max-width: 48ch
+}
+
+.csp-reviews-copy .csp-reviews-note {
+  margin: 0;
+  max-width: none;
+  background: #FAFCC6;
+  padding: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.3;
+  color: var(--ink)
+}
+
+@media (max-width:900px) {
+  .csp-reviews-body {
+    grid-template-columns: 1fr
+  }
+}
+
+/* ── "brand performance" staircase (Helium) ───
+   geometry lifted from the design: three body blocks a third of the row
+   wide, each stepping down by one body height; blocks 2 and 3 carry a small
+   tab on their top-left that tucks over the previous block's bottom-right
+   corner (the tab is part of the block's own clip-path, so the overlap reads
+   as one interlocking piece, not two stacked rectangles) */
+.csp-stairs {
+  position: relative;
+  aspect-ratio: 722 / 259
+}
+
+.csp-stair {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(18px, 2.2vw, 28px) clamp(16px, 2vw, 24px)
+}
+
+.csp-stair1 {
+  left: 0;
+  top: 0;
+  width: 33.33%;
+  height: 41.3%;
+  background: #FAFCC6;
+  z-index: 1
+}
+
+.csp-stair2,
+.csp-stair3 {
+  width: 37.62%;
+  height: 41.7%;
+  /* body starts 11.4% in (past the tab) and 29.6% down (below it) */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 11.4% 100%, 11.4% 29.6%, 0 29.6%);
+  /* padding %s resolve against the row's width, not the block's: the tab is
+     4.29% of the row wide and 4.43% of the row's width tall */
+  padding-left: calc(4.29% + clamp(16px, 2vw, 24px));
+  padding-top: calc(4.43% + clamp(18px, 2.2vw, 28px))
+}
+
+.csp-stair2 {
+  left: 29.04%;
+  top: 28.96%;
+  background: #C9C0F5;
+  z-index: 2
+}
+
+.csp-stair3 {
+  left: 62.38%;
+  top: 58.3%;
+  background: #FAFCC6;
+  z-index: 3
+}
+
+.csp-stairVal {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 46px);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--ink)
+}
+
+.csp-stairLabel {
+  font-family: var(--body);
+  font-size: clamp(12px, 1.1vw, 15px);
+  color: #333
+}
+
+/* ── "performance ads" (Helium) ───────────────
+   audience cards with a small step notched out of the top-right corner, then
+   two stat blocks that interlock across the gap: the yellow one notched at
+   its bottom-right, the violet one at its top-left */
+.csp-segs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 32px)
+}
+
+.csp-seg {
+  background: #F4F4F4;
+  clip-path: polygon(0 0, calc(100% - 34px) 0, calc(100% - 34px) 34px, 100% 34px, 100% 100%, 0 100%);
+  padding: 24px 24px 32px;
+  display: flex;
+  flex-direction: column
+}
+
+.csp-segEyebrow {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #1A1C1C;
+  margin: 0 0 clamp(40px, 5vw, 64px)
+}
+
+.csp-segTitle {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(18px, 1.7vw, 24px);
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 0 0 10px
+}
+
+.csp-segDesc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.45;
+  color: #4C4546;
+  max-width: 34ch;
+  margin: 0
+}
+
+.csp-padStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(48px, 6vw, 80px)
+}
+
+.csp-padStat {
+  box-sizing: border-box;
+  min-height: clamp(150px, 15vw, 180px);
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(24px, 5vw, 80px);
+  padding: 28px 40px
+}
+
+.csp-padStat--yellow {
+  background: #FAFCC6;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 88% 60%, 88% 100%, 0 100%)
+}
+
+.csp-padStat--violet {
+  background: #E7E2FB;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 40%, 12% 40%);
+  padding-left: calc(12% + 28px)
+}
+
+.csp-padStatVal {
+  flex: none;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.3;
+  letter-spacing: -.02em;
+  color: var(--ink)
+}
+
+.csp-padStatLabel {
+  font-family: var(--body);
+  font-size: 14px;
+  color: #333;
+  padding-bottom: 10px
+}
+
+@media (max-width:900px) {
+  .csp-headRight .csp-aoc-copy {
+    text-align: left
+  }
+
+  .csp-stairs {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0
+  }
+
+  /* too narrow for three full-width steps with interlocking tabs, so the
+     blocks just step down and across as plain rectangles */
+  .csp-stair {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 70%;
+    height: 130px
+  }
+
+  .csp-stair2,
+  .csp-stair3 {
+    width: 70%;
+    height: 130px;
+    clip-path: none;
+    padding-left: clamp(16px, 2vw, 24px);
+    padding-top: clamp(18px, 2.2vw, 28px)
+  }
+
+  .csp-stair2 {
+    margin-left: 15%
+  }
+
+  .csp-stair3 {
+    margin-left: 30%
+  }
+
+  .csp-segs,
+  .csp-padStats {
+    grid-template-columns: 1fr
+  }
+}
+
+/* ── "one reason each" coverflow (Helium) ──────
+   a dark edge-to-edge panel (same trick as .csp-celeb) with the active film
+   still flat in the middle and its neighbours angled away at the sides */
+.csp-in:has(.csp-films) {
+  background: #1A1A1A;
+  color: var(--paper);
+  overflow: hidden
+}
+
+.csp-films {
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-films-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(40px, 5vw, 72px)
+}
+
+.csp-films .csp-eyebrow2 {
+  color: #A8A6AD
+}
+
+.csp-films .csp-eyebrow2 b {
+  color: var(--paper)
+}
+
+.csp-films .csp-eyebrow2-dot {
+  background: #FBFDC6
+}
+
+.csp-films-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 44px);
+  letter-spacing: -.02em;
+  color: var(--paper)
+}
+
+.csp-cover {
+  position: relative;
+  /* the centre slide is 48% of the row wide at the images' ~1.94:1 ratio,
+     so the row is 1.94 / .48 times as wide as it is tall */
+  aspect-ratio: 4.04 / 1;
+  perspective: 1400px;
+  outline: none
+}
+
+.csp-coverSlide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 48%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform .7s cubic-bezier(.16, .84, .34, 1), opacity .5s ease, filter .5s ease;
+  will-change: transform
+}
+
+.csp-coverSlide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none
+}
+
+.csp-coverSlide.is-center {
+  z-index: 3;
+  cursor: default;
+  transform: translateX(-50%)
+}
+
+.csp-coverSlide.is-left,
+.csp-coverSlide.is-right {
+  z-index: 2;
+  filter: brightness(.85)
+}
+
+.csp-coverSlide.is-left {
+  transform: translateX(-157%) rotateY(28deg) scale(.9)
+}
+
+.csp-coverSlide.is-right {
+  transform: translateX(57%) rotateY(-28deg) scale(.9)
+}
+
+.csp-coverSlide.is-away {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(.7)
+}
+
+@media (max-width:760px) {
+  .csp-cover {
+    aspect-ratio: 2.49 / 1
+  }
+
+  .csp-coverSlide {
+    width: 78%
+  }
+
+  .csp-coverSlide.is-left {
+    transform: translateX(-148%) rotateY(28deg) scale(.9)
+  }
+
+  .csp-coverSlide.is-right {
+    transform: translateX(48%) rotateY(-28deg) scale(.9)
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .csp-coverSlide {
+    transition-duration: .01ms
+  }
+}
+
+/* ── "the focus" (Helium) ─────────────────────
+   points on the left, the notched yellow quote card (shared .csp-quote*
+   rules) sitting low on the right, on a white page rather than .csp-celeb's
+   dark panel */
+.csp-focus-head {
+  margin-bottom: clamp(40px, 5vw, 64px)
+}
+
+.csp-focus-body {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  justify-content: space-between;
+  align-items: end;
+  gap: clamp(32px, 6vw, 96px)
+}
+
+.csp-focus-points {
+  display: flex;
+  flex-direction: column;
+  gap: 36px
+}
+
+.csp-focusPoint-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px
+}
+
+.csp-focusPoint-h svg {
+  flex: none;
+  width: 14px;
+  height: 14px
+}
+
+.csp-focusPoint-h h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 0
+}
+
+.csp-focusPoint p {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: #4C4546;
+  max-width: 36ch;
+  margin: 0
+}
+
+.csp-focus .csp-quoteCard {
+  height: 250px
+}
+
+/* the notch is 60% of the card's height in this design, not the shared 53% */
+.csp-focus .csp-quoteCard {
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 60%, 22% 60%)
+}
+
+.csp-focus .csp-quoteMark {
+  height: 60%
+}
+
+/* the design sets this line in the body face, not the display one */
+.csp-focus .csp-quoteText {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -.01em
+}
+
+@media (max-width:900px) {
+  .csp-focus-body {
+    grid-template-columns: 1fr
+  }
+}
+
+/* ── "five reasons survived" (Helium) ─────────
+   the headline centred, the five reasons pinned around it at the design's
+   own percentage positions; stacks into a plain list on narrow screens */
+.csp-reasons {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  aspect-ratio: 830 / 560
+}
+
+.csp-reasons-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #4C4546
+}
+
+.csp-reason {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 24%
+}
+
+.csp-reason-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(113, 91, 228, .16);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink)
+}
+
+.csp-reason-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  background: rgba(245, 250, 94, .55);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 17px;
+  white-space: nowrap;
+  color: var(--ink)
+}
+
+.csp-reason-desc {
+  margin: 16px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: #4C4546;
+  max-width: 24ch
+}
+
+@media (max-width:900px) {
+  .csp-reasons {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px
+  }
+
+  .csp-reasons-h {
+    position: static;
+    transform: none;
+    text-align: left;
+    order: -1
+  }
+
+  .csp-reason {
+    position: static;
+    max-width: none
+  }
+}
+
+/* heading on the left with its one-line copy sitting level with the
+   heading's last line on the right */
+.csp-hooks-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(48px, 6vw, 72px)
+}
+
+.csp-hooks-head .csp-hooks-h {
+  margin: 0
+}
+
+.csp-hooks-copy {
+  margin: 0 0 6px;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4C4546
+}
+
+@media (max-width:900px) {
+  .csp-hooks-head {
+    flex-direction: column;
+    align-items: flex-start
+  }
 }
 
 .csp-hooks-row {
@@ -6092,7 +7433,10 @@ button:focus-visible,
   font-size: 14px;
   line-height: 1.5;
   color: #5A5A62;
-  margin: 0
+  margin: 0;
+  /* always reserves two lines, so a card whose line wraps doesn't push its
+     title higher than its neighbours' */
+  min-height: 3em
 }
 
 @media (max-width:900px) {
@@ -6150,7 +7494,8 @@ button:focus-visible,
     background: #EDEDED;
     cursor: pointer;
     display: grid;
-    place-items: center
+    place-items: center;
+    transition: background-color var(--btn-dur) var(--btn-ease), transform var(--btn-dur) var(--btn-ease)
   }
 
   .csp-hooks-navBtn--next {
@@ -6424,6 +7769,205 @@ button:focus-visible,
   }
 }
 
+/* ── "vs others" stat comparison, dark ───────
+   sits on the same edge-to-edge dark panel as .csp-celeb (see
+   .csp-in:has(.csp-celeb) above) — the eyebrow number needs its own
+   light-on-dark override since .csp-eyebrow2 b defaults to --ink */
+.csp-won .csp-eyebrow2 b {
+  color: var(--paper)
+}
+
+.csp-won .csp-celeb-h {
+  margin: 16px 0 0;
+  max-width: 12ch
+}
+
+/* one grid for both rows — heading/copy and left-block/right-block — so
+   the copy paragraph and "why that matters" column share the exact same
+   left edge (grid column 2) instead of drifting apart the way two
+   independent flex rows would */
+.csp-won-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
+  column-gap: clamp(48px, 10vw, 180px);
+  row-gap: clamp(48px, 6vw, 72px);
+  align-items: start
+}
+
+.csp-won-layout .csp-celeb-h {
+  grid-column: 1;
+  grid-row: 1
+}
+
+.csp-won-copy {
+  grid-column: 2;
+  grid-row: 1;
+  max-width: 420px;
+  margin: 6px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #A8A6AD
+}
+
+.csp-won-left {
+  grid-column: 1;
+  grid-row: 2;
+  min-width: 0
+}
+
+.csp-won-right {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  max-width: 480px
+}
+
+.csp-won-label {
+  display: block;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #8A8A92;
+  margin-bottom: 16px
+}
+
+.csp-won-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 10px
+}
+
+.csp-won-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.csp-won-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 170px;
+  padding: 24px
+}
+
+.csp-won-card--gray {
+  background: #F2F2F2;
+  color: var(--ink)
+}
+
+.csp-won-card--pale {
+  background: #FAFCAE;
+  color: var(--ink)
+}
+
+.csp-won-card--acid {
+  background: var(--acid);
+  color: var(--ink)
+}
+
+.csp-won-val {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -.01em
+}
+
+.csp-won-cardLabel {
+  font-family: var(--body);
+  font-size: 13px;
+  color: #5A5A62
+}
+
+/* one continuous white silhouette (an L-tetromino, matching the brand's
+   staircase piece motif elsewhere on the page) rather than two overlapping
+   cards — clip-path cuts the notch, and since clip-path can't carry a
+   border, an inset box-shadow traces the same clipped outline instead */
+/* percentages throughout (not fixed px) so the notch keeps its shape —
+   just scaled down — at every width instead of flattening into a plain
+   rectangle on mobile */
+.csp-won-stack {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 460 / 330;
+  background: var(--paper);
+  clip-path: polygon(0 0, 63% 0, 63% 45.5%, 100% 45.5%, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15)
+}
+
+.csp-won-statCard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 63%;
+  height: 45.5%;
+  padding: 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4%;
+  overflow: hidden
+}
+
+.csp-won-statVal {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 9cqw, 44px);
+  letter-spacing: -.02em;
+  color: var(--ink)
+}
+
+.csp-won-statLabel {
+  display: block;
+  font-family: var(--body);
+  font-size: clamp(11px, 3.2cqw, 14px);
+  color: #5A5A62
+}
+
+.csp-won-note {
+  position: absolute;
+  left: 0;
+  top: 45.5%;
+  width: 100%;
+  height: 54.5%;
+  display: flex;
+  align-items: center;
+  padding: 4% 7% 4% 12%
+}
+
+.csp-won-note p {
+  margin: 0;
+  padding-left: 5%;
+  border-left: 3px solid var(--acid);
+  font-family: var(--body);
+  font-size: clamp(11px, 3.2cqw, 14px);
+  line-height: 1.55;
+  color: #4C4546
+}
+
+@media (max-width:900px) {
+  .csp-won-layout {
+    grid-template-columns: 1fr
+  }
+
+  .csp-won-layout .csp-celeb-h,
+  .csp-won-copy,
+  .csp-won-left,
+  .csp-won-right {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch
+  }
+
+}
+
 
 .csp-cac {
   padding-bottom: clamp(56px, 7vw, 96px)
@@ -6591,6 +8135,73 @@ button:focus-visible,
   color: #9A9AA2
 }
 
+/* ── "biggest bets" cumulative-share chart ───
+   a second curved chart, sharing .csp-cac's outer framing (head/plot/card/
+   legend/note) but with its own axis-labeled SVG, since it plots nine
+   points on both axes instead of a straight two-point line */
+.csp-scaleChart {
+  position: relative;
+  width: 100%
+}
+
+.csp-scaleChart svg {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+.csp-scaleGrid {
+  stroke: #EFEFEF;
+  stroke-width: 1
+}
+
+.csp-scaleAxis {
+  stroke: #D8D8DC;
+  stroke-width: 1
+}
+
+.csp-scaleYLabel,
+.csp-scaleXLabel {
+  font-family: var(--body);
+  font-size: 20px;
+  fill: #9A9AA2
+}
+
+.csp-scaleLine {
+  fill: none;
+  stroke-width: 3
+}
+
+.csp-scaleLine--dark {
+  stroke: #3A3A3A
+}
+
+.csp-scaleLine--violet {
+  stroke: var(--violet)
+}
+
+.csp-scaleDot--dark {
+  fill: #3A3A3A
+}
+
+.csp-scaleDot--violet {
+  fill: var(--violet)
+}
+
+.csp-scaleVal {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 30px
+}
+
+.csp-scaleVal--dark {
+  fill: var(--ink)
+}
+
+.csp-scaleVal--violet {
+  fill: var(--violet)
+}
+
 .csp-cacLegend {
   display: flex;
   align-items: center;
@@ -6638,6 +8249,123 @@ button:focus-visible,
 
   .csp-cacCard {
     width: 100%
+  }
+}
+
+/* ── "biggest gains" programme table ─────────
+   AREA | PROGRAMME | VS. REST | WHAT IT MEANS, one grid row per line so
+   all four columns stay in lockstep down the table */
+.csp-prog {
+  padding-bottom: clamp(56px, 7vw, 96px)
+}
+
+.csp-prog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(48px, 6vw, 72px)
+}
+
+.csp-prog-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin: 16px 0 0
+}
+
+.csp-prog-copy {
+  flex: none;
+  width: min(420px, 42%);
+  margin: 8px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4C4546
+}
+
+.csp-prog-table {
+  display: flex;
+  flex-direction: column
+}
+
+.csp-prog-row {
+  display: grid;
+  grid-template-columns: 90px minmax(180px, 260px) 100px minmax(220px, 420px);
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+  padding: 24px 0;
+  border-bottom: 1px solid #EAEAEA
+}
+
+.csp-prog-row--head {
+  padding: 0 0 12px
+}
+
+.csp-prog-th {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #9A9AA2
+}
+
+.csp-prog-area {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #4C4546
+}
+
+.csp-prog-programme {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink)
+}
+
+.csp-prog-val {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: -.01em;
+  color: var(--violet)
+}
+
+.csp-prog-desc {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4C4546
+}
+
+@media (max-width:900px) {
+  .csp-prog-head {
+    flex-direction: column
+  }
+
+  .csp-prog-copy {
+    width: 100%
+  }
+
+  .csp-prog-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 20px 0
+  }
+
+  .csp-prog-row--head {
+    display: none
+  }
+
+  .csp-prog-val {
+    font-size: 26px
   }
 }
 
@@ -6756,7 +8484,8 @@ button:focus-visible,
     background: #EDEDED;
     cursor: pointer;
     display: grid;
-    place-items: center
+    place-items: center;
+    transition: background-color var(--btn-dur) var(--btn-ease), transform var(--btn-dur) var(--btn-ease)
   }
 
   .csp-reel-navBtn--next {
@@ -6795,6 +8524,55 @@ button:focus-visible,
   margin: 0
 }
 
+/* same two-part shape as the nav's Contact Us button, colors swapped —
+   the icon square is acid with a violet mark, since here it sits on a
+   black label instead of a dark nav bar */
+.csp-more-cta {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  text-decoration: none
+}
+
+.csp-more-cta-label {
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap
+}
+
+.csp-more-cta-i {
+  flex: none;
+  width: 40px;
+  background: var(--acid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  transition: background-color .25s ease
+}
+
+.csp-more-cta-i svg {
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+.csp-more-cta:hover .csp-more-cta-i {
+  background: var(--violet)
+}
+
+.csp-more-cta:hover .csp-more-cta-i svg path {
+  fill: var(--acid)
+}
+
 .csp-more-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6816,6 +8594,12 @@ button:focus-visible,
   margin-bottom: 24px
 }
 
+/* real recommendation stills come in 3:2, not the placeholder's square
+   crop */
+.csp-moreShot--wide {
+  aspect-ratio: 3 / 2
+}
+
 .csp-moreShot img {
   display: block;
   width: 100%;
@@ -6835,6 +8619,16 @@ button:focus-visible,
 .csp-moreBrand em {
   font-style: normal;
   color: #E8622A
+}
+
+.csp-moreBrand--img {
+  height: 26px
+}
+
+.csp-moreBrand--img img {
+  display: block;
+  height: 100%;
+  width: auto
 }
 
 .csp-moreStat {
@@ -6915,11 +8709,22 @@ button:focus-visible,
     box-sizing: border-box
   }
 
+  .csp-more-cta--desktop {
+    display: none
+  }
+
   .csp-more-nav {
     display: flex;
-    justify-content: flex-end;
+    align-items: stretch;
+    justify-content: space-between;
     gap: 10px;
     margin-top: 24px
+  }
+
+  .csp-more-navBtns {
+    display: flex;
+    gap: 10px;
+    flex: none
   }
 
   .csp-more-navBtn {
@@ -6930,7 +8735,8 @@ button:focus-visible,
     background: #EDEDED;
     cursor: pointer;
     display: grid;
-    place-items: center
+    place-items: center;
+    transition: background-color var(--btn-dur) var(--btn-ease), transform var(--btn-dur) var(--btn-ease)
   }
 
   .csp-more-navBtn--next {
@@ -7042,5 +8848,398 @@ button:focus-visible,
 
   .csp-celebStatBlock--violet {
     justify-content: flex-start
+  }
+}
+
+/* ── contact page ──────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0
+}
+
+.contact {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  container-type: inline-size;
+  --k: min(.0694444cqw, 1.111px);
+  padding-top: clamp(104px, 13vw, 148px);
+  padding-bottom: clamp(120px, 14vw, 200px)
+}
+
+.contact-head {
+  max-width: 640px;
+  margin-bottom: clamp(40px, 5vw, 64px)
+}
+
+.contact-head .d1 {
+  font-size: clamp(34px, 4.6vw, 60px);
+  margin-bottom: 18px
+}
+
+.contact-sub {
+  color: var(--mute)
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 40px);
+  align-items: start
+}
+
+.contact-cards {
+  display: grid;
+  gap: clamp(18px, 2vw, 24px)
+}
+
+.contact-card {
+  --notch-w: 96px;
+  --notch-h: 64px;
+  position: relative;
+  display: block;
+  min-height: clamp(150px, 15vw, 190px);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform .25s var(--btn-ease);
+}
+
+.contact-card:hover {
+  transform: translateY(-3px)
+}
+
+.contact-card-fill {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    0 var(--notch-h),
+    var(--notch-w) var(--notch-h),
+    var(--notch-w) 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+.contact-card--acid .contact-card-fill {
+  background: #FBFDBF
+}
+
+.contact-card--violet .contact-card-fill {
+  background: #DFDAF9
+}
+
+.contact-card-icon {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: var(--notch-w);
+  height: var(--notch-h);
+  display: grid;
+  place-items: center
+}
+
+.contact-card-icon svg {
+  display: block;
+  color: var(--ink)
+}
+
+.contact-card-body {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  right: 90px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px
+}
+
+.contact-card-body b {
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600
+}
+
+.contact-card-body span {
+  font-size: 14px;
+  color: rgba(11, 11, 13, .68)
+}
+
+.contact-card-arrow {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center
+}
+
+.contact-card-arrow svg {
+  width: 44px;
+  height: 44px
+}
+
+.contact-form {
+  background: #F8F8F8;
+  padding: 38px 27px 36px;
+  display: flex;
+  flex-direction: column
+}
+
+.contact-form-h {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: #141414;
+  margin: 0 0 18px
+}
+
+.contact-field {
+  position: relative;
+  display: block;
+  border-bottom: 1px solid #DCDCDC
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  display: block;
+  width: 100%;
+  height: 88px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  outline: none;
+  font-family: var(--body);
+  font-size: 15px;
+  color: var(--ink);
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: #9A9A9A;
+  opacity: 1
+}
+
+.contact-field select {
+  padding-right: 48px;
+  cursor: pointer
+}
+
+.contact-field select:invalid {
+  color: #9A9A9A
+}
+
+.contact-field-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  color: var(--ink);
+  pointer-events: none
+}
+
+.contact-field--area textarea {
+  height: 160px;
+  padding-top: 32px
+}
+
+.contact-submit {
+  margin-top: 36px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #111111;
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  cursor: pointer
+}
+
+.contact-submit-label {
+  display: flex;
+  align-items: center;
+  padding-left: 14px
+}
+
+.contact-submit-icon {
+  width: 44px;
+  background: var(--acid);
+  color: var(--violet);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
+}
+
+.contact-submit:hover .contact-submit-icon {
+  background: var(--violet);
+  color: var(--acid)
+}
+
+.contact-submit-icon svg {
+  width: 40px;
+  height: 40px
+}
+
+@media (max-width:900px) {
+  .contact-grid {
+    grid-template-columns: 1fr
+  }
+}
+
+@media (max-width:640px) {
+  .contact {
+    padding-top: 128px;
+    padding-bottom: 0
+  }
+
+  .contact-in {
+    padding: 0 15px
+  }
+
+  .contact-head {
+    margin-bottom: 18px
+  }
+
+  .contact-head .d1 {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -.03em;
+    margin-bottom: 14px
+  }
+
+  .contact-sub {
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 240px;
+    color: #3A3A3A
+  }
+
+  .contact-grid {
+    gap: 22px
+  }
+
+  .contact-cards {
+    gap: 16px
+  }
+
+  .contact-card {
+    min-height: 97px;
+    --notch-w: 40px;
+    --notch-h: 30px
+  }
+
+  .contact-card-icon svg {
+    width: 16px;
+    height: 16px
+  }
+
+  .contact-card-body {
+    left: 17px;
+    right: 56px;
+    bottom: 17px;
+    gap: 3px
+  }
+
+  .contact-card-body b {
+    font-family: var(--body);
+    font-size: 15px;
+    font-weight: 500
+  }
+
+  .contact-card-body span {
+    font-size: 13px
+  }
+
+  .contact-card-arrow {
+    right: 12px;
+    bottom: 13px;
+    width: 26px;
+    height: 26px
+  }
+
+  .contact-card-arrow svg {
+    width: 24px;
+    height: 24px
+  }
+
+  .contact-form {
+    margin: 0 -15px;
+    padding: 30px 22px 40px
+  }
+
+  .contact-form-h {
+    font-size: 22px;
+    margin-bottom: 12px
+  }
+
+  .contact-field input,
+  .contact-field select {
+    height: 75px;
+    padding: 0 9px;
+    font-size: 13px
+  }
+
+  .contact-field select {
+    padding-right: 40px
+  }
+
+  .contact-field-chevron {
+    right: 8px
+  }
+
+  .contact-field--area textarea {
+    height: 136px;
+    padding: 28px 9px 0;
+    font-size: 13px
+  }
+
+  .contact-submit {
+    margin-top: 30px;
+    height: 36px;
+    font-size: 11px
+  }
+
+  .contact-submit-label {
+    padding-left: 11px
+  }
+
+  .contact-submit-icon {
+    width: 37px
+  }
+
+  .contact-submit-icon svg {
+    width: 34px;
+    height: 34px
   }
 }
