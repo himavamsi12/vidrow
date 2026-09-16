@@ -92,13 +92,15 @@ export default function Hero() {
 
         <div className="hx-copy">
           <h1 className="hx-h">
-            <u className={`hx-w${wordLit(0) ? " lit" : ""}`} {...hoverProps(0)}>Marketing</u>{" "}
-            <u className={`hx-w${wordLit(1) ? " lit" : ""}`} {...hoverProps(1)}>Partner</u>
+            {/* each word highlights in the colour of the staircase block it
+                lights: words 0 and 2 are the acid steps, 1 and 3 the violet */}
+            <u className={`hx-w hx-w-y${wordLit(0) ? " lit" : ""}`} {...hoverProps(0)}>Marketing</u>{" "}
+            <u className={`hx-w hx-w-v${wordLit(1) ? " lit" : ""}`} {...hoverProps(1)}>Partner</u>
             {" "}
             behind
             <br />
-            Fastest <u className={`hx-w${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
-            <u className={`hx-w${wordLit(3) ? " lit" : ""}`} {...hoverProps(3)}>Startups.</u>
+            Fastest <u className={`hx-w hx-w-y${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
+            <u className={`hx-w hx-w-v${wordLit(3) ? " lit" : ""}`} {...hoverProps(3)}>Startups.</u>
           </h1>
           <p className="hx-sub">
             We work alongside founders to turn marketing into a clearer, faster and more repeatable

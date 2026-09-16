@@ -1,223 +1,184 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
-import ReadArrow from "./ReadArrow";
 import { FEATURED_WORK } from "../data/featuredWork";
 
-// hover should only open a row on devices that actually have hover (mouse/
-// trackpad) — on touch, the same mouseenter fires right before the tap's
-// click, so relying on it makes opening feel accidental/inconsistent
-// instead of a deliberate tap. The hover media feature alone isn't a
-// reliable enough signal (some emulated/hybrid environments report
-// hover:hover at narrow widths), so it's paired with the same 900px
-// breakpoint the rest of the mobile layout switches on
-const canHover = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(hover: hover)").matches &&
-  window.innerWidth > 900;
+// the small step mark that opens each testimonial
+function QuoteMark() {
+  return (
+    <svg className="fw2-mark" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="#0B0B0D"
+        d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM0 8.5h7v7H0zM8.5 8.5h7v7h-7zM0 17h7v7H0z"
+      />
+    </svg>
+  );
+}
 
+/**
+ * Featured work: one full-screen acid card per company, each a tetris
+ * arrangement of white blocks — brand, headline, founder cut-out with its
+ * name plates, and the full testimonial down the right. The cards are
+ * sticky, so scrolling stacks each new one over the last rather than
+ * scrolling them past each other.
+ */
 export default function FeaturedWork() {
-  const [openIndex, setOpenIndex] = useState(0);
-  // which card's full testimonial is showing in the slide-in panel — null
-  // when it's closed
-  const [panelItem, setPanelItem] = useState(null);
-  // Escape closes the panel, and the page can't scroll behind it while
-  // it's open — same two behaviors the mobile nav's own full-screen panel
-  // uses
+  const stackRef = useRef(null);
+
+  // drive each card's --p (0..1) from how far the next card has risen over
+  // it, so the stack has real depth — the card underneath sinks back and
+  // dims as the one above lands on it — instead of cards simply covering
+  // one another. Written straight from a rAF-throttled scroll listener
+  // rather than a CSS transition, so it tracks the scroll exactly.
   useEffect(() => {
-    if (!panelItem) return;
-    const onKey = (e) => {
-      if (e.key === "Escape") setPanelItem(null);
+    const stack = stackRef.current;
+    if (!stack) return;
+    const cards = [...stack.querySelectorAll(".fw2-card")];
+    if (!cards.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const vh = window.innerHeight;
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        // 0 while the next card is still below the fold, 1 once it has
+        // covered this one completely
+        const p = next ? Math.min(Math.max(1 - next.getBoundingClientRect().top / vh, 0), 1) : 0;
+        card.style.setProperty("--p", p.toFixed(3));
+      });
     };
-    document.addEventListener("keydown", onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
-  }, [panelItem]);
+  }, []);
+
+  // the longest testimonials (Apnamart's, say) run past their panel. Rather
+  // than letting one card scroll while the rest don't, each quote's type is
+  // stepped down until it fits its own panel — the shorter ones keep the
+  // design's size untouched.
+  useEffect(() => {
+    const stack = stackRef.current;
+    if (!stack) return;
+    const quotes = [...stack.querySelectorAll(".fw2-quoteText")];
+
+    const fit = () => {
+      quotes.forEach((q) => {
+        q.style.fontSize = "";
+        const start = parseFloat(getComputedStyle(q).fontSize);
+        let size = start;
+        // 12px is the floor: below that the quote stops being readable and
+        // the panel is better off scrolling than shrinking further
+        while (q.scrollHeight > q.clientHeight + 1 && size > 12) {
+          size -= 0.5;
+          q.style.fontSize = `${size}px`;
+        }
+      });
+    };
+
+    // the name plate sizes to its own name, so the role plate's offset is
+    // measured per card rather than fixed in CSS
+    const placeRoles = () => {
+      [...stack.querySelectorAll(".fw2-card")].forEach((card) => {
+        const plate = card.querySelector(".fw2-plate");
+        const role = card.querySelector(".fw2-role");
+        if (!plate || !role) return;
+        // layout widths, not rects: a stacked card can be mid-scale, which
+        // would skew a measured rect
+        const w = card.offsetWidth;
+        if (!w) return;
+        const right = plate.offsetLeft + plate.offsetWidth;
+        role.style.setProperty("--role-left", `${((right / w) * 100).toFixed(2)}%`);
+      });
+    };
+
+    const run = () => {
+      fit();
+      placeRoles();
+    };
+
+    run();
+    window.addEventListener("resize", run);
+    // re-run once webfonts land, since they change the wrapping
+    document.fonts?.ready.then(run).catch(() => {});
+    return () => window.removeEventListener("resize", run);
+  }, []);
 
   return (
-    <section className="fw" id="featured">
-      <div className="fw-in">
-        <Reveal className="fw-head">
-          <div className="fw-tagwrap">
-            <span className="fw-tag">Featured work</span>
-            <Mark />
-          </div>
-          <h2 className="fw-h">Featured Work</h2>
-        </Reveal>
+    <section className="fw2" id="featured">
+      <Reveal className="fw2-head">
+        <div className="fw2-tagwrap">
+          <span className="fw2-tag">Featured work</span>
+          <Mark />
+        </div>
+        <h2 className="fw2-h">Featured Work</h2>
+      </Reveal>
 
-        <Reveal
-          className="fw-list"
-          onMouseLeave={() => {
-            if (canHover()) setOpenIndex(0);
-          }}
-        >
-          {FEATURED_WORK.map((item, i) => (
-            <div
-              key={item.id}
-              className={`fw-row${openIndex === i ? " is-open" : ""}`}
-              // the rows don't link out any more — a click (or tap) only
-              // expands the row, and the testimonial's own "Read more"
-              // button is what opens anything
-              role="button"
-              tabIndex={0}
-              aria-expanded={openIndex === i}
-              onMouseEnter={() => {
-                if (canHover()) setOpenIndex(i);
-              }}
-              onFocus={() => setOpenIndex(i)}
-              onClick={() => setOpenIndex(i)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setOpenIndex(i);
-                }
-              }}
-            >
-              <span className="fw-top">
-                <span className="fw-brand">
-                  <span className="fw-logo">
-                    {item.logo.type === "image" ? (
-                      <img className="fw-logoTile" src={item.logo.src} alt={item.logo.alt} />
-                    ) : item.logo.type === "text" ? (
-                      <b>{item.logo.value}</b>
-                    ) : (
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path
-                          fill="#121212"
-                          d="M7.6 24.4 20.2 11.8h-8.9V7h17.1v17.1h-4.8v-8.9L11 26.8z"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                  <span className="fw-id">
-                    <span className="fw-name">{item.name}</span>
-                    {item.category && <span className="fw-cat">{item.category}</span>}
-                  </span>
-                </span>
+      <div className="fw2-stack" ref={stackRef}>
+        {FEATURED_WORK.map((item) => {
+          const founder = item.plates[0];
+          const photo = item.photos[0];
+          // testimonials carry their paragraph breaks as blank lines
+          const paras = item.quote.split(/\n{2,}/);
 
-                <span className="fw-mini" aria-hidden="true">
-                  <ReadArrow className="fw-arw fw-arwMini" />
-                </span>
-              </span>
-
-              <div className="fw-extra" aria-hidden="true">
-                {item.photos.map((p) => (
-                  <figure className={`fw-ph ${p.cls}`} key={p.src}>
-                    <img src={p.src} alt="" loading="lazy" width="276" height="238" />
-                  </figure>
-                ))}
-                {item.plates.map((p) => (
-                  <span className={`fw-plate ${p.cls}`} key={p.name}>
-                    <b>{p.name}</b>
-                    {p.role && <span>{p.role}</span>}
-                  </span>
-                ))}
-              </div>
-
-              <span className="fw-say">
-                <span className="fw-line">{item.line}</span>
-              </span>
-
-              {/* sibling of .fw-say rather than a child of .fw-extra so mobile
-                  can stack it after the acid band; on desktop it still lands in
-                  the same place, since .fw-extra is just inset:0 on the row */}
-              <div className="fw-quote">
-                <p className="fw-quoteText">&ldquo; {item.quote} &rdquo;</p>
-                <button
-                  type="button"
-                  className="fw-readCase"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setPanelItem(item);
-                  }}
-                >
-                  <span>Read more</span>
-                  <svg viewBox="0 0 40 40" aria-hidden="true">
-                    <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          ))}
-        </Reveal>
-      </div>
-
-      <div
-        className={`fw-panelOverlay${panelItem ? " is-open" : ""}`}
-        onClick={() => setPanelItem(null)}
-        aria-hidden={!panelItem}
-      >
-        <aside
-          className="fw-panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label={panelItem ? `${panelItem.plates.map((p) => p.name).join(" & ")} on ${panelItem.name}` : undefined}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button type="button" className="fw-panelClose" aria-label="Close" onClick={() => setPanelItem(null)}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M5 5l14 14M19 5 5 19"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-
-          {panelItem && (
-            <>
-              <div className="fw-panelHead">
-                <span className="fw-panelLogo">
-                  {panelItem.logo.type === "image" ? (
-                    <img src={panelItem.logo.src} alt={panelItem.logo.alt} />
+          return (
+            <article className="fw2-card" key={item.id}>
+              {/* top-left: logo over the company name and category */}
+              <div className="fw2-brand">
+                <span className="fw2-logo">
+                  {item.logo.type === "image" ? (
+                    <img src={item.logo.src} alt={item.logo.alt} />
                   ) : (
-                    <b>{panelItem.logo.alt}</b>
+                    <b>{item.logo.value || item.logo.alt}</b>
                   )}
                 </span>
-                <span className="fw-panelNames">
-                  <b>{panelItem.name}</b>
-                  <span>{panelItem.category}</span>
+                <span className="fw2-names">
+                  <b>{item.name}</b>
+                  <span>{item.category}</span>
                 </span>
               </div>
 
-              <div className="fw-panelBody" data-lenis-prevent>
-                <svg className="fw-panelMark" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#0B0B0D"
-                    d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM0 8.5h7v7H0zM8.5 8.5h7v7h-7zM0 17h7v7H0z"
-                  />
-                </svg>
+              <div className="fw2-headline">
+                <h3>{item.line}</h3>
+              </div>
 
-                <p className="fw-panelQuote">{panelItem.quote}</p>
+              {/* the white block that squares off the top right edge */}
+              <span className="fw2-chip" aria-hidden="true" />
 
-                <svg className="fw-panelMark fw-panelMark--end" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#0B0B0D"
-                    d="M17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM0 17h7v7H0zM8.5 17h7v7h-7zM17 17h7v7h-7z"
-                  />
-                </svg>
+              <figure className="fw2-photo">
+                <img src={photo.src} alt="" loading="lazy" />
+              </figure>
 
-                {/* the quote is one founder's words, so only the first
-                    founder is credited here even when the row shows a pair */}
-                <div className="fw-panelBy">
-                  <p className="fw-panelByOne">
-                    <b>{panelItem.plates[0].name}</b>
-                    {panelItem.plates[0].role && <i>{panelItem.plates[0].role}</i>}
-                  </p>
+              <span className="fw2-plate">{founder.name}</span>
+              {founder.role && <span className="fw2-role">{founder.role}</span>}
+
+              {/* the quote panel and the two steps that notch into its left */}
+              <span className="fw2-step fw2-step1" aria-hidden="true" />
+              <span className="fw2-step fw2-step2" aria-hidden="true" />
+              <span className="fw2-step fw2-step3" aria-hidden="true" />
+              <div className="fw2-quote">
+                <QuoteMark />
+                <div className="fw2-quoteText" data-lenis-prevent>
+                  {paras.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
                 </div>
               </div>
-            </>
-          )}
-        </aside>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

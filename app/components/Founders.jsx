@@ -11,7 +11,6 @@ export default function Founders() {
             <Mark />
           </div>
           <h2 className="fo-h">The people behind this</h2>
-          <p className="fo-sub">The latest stories, ideas, and shifts worth paying attention to.</p>
         </Reveal>
 
         <Reveal className="fo-body">
@@ -21,13 +20,15 @@ export default function Founders() {
             <div className="fo-lead">
               <div className="fo-lead-t">
                 <h3 className="fo-statement">
-                  You&apos;ll be working with people who&apos;ve seen this before.
+                  You&apos;ll be working with people who&apos;ve seen this before
                 </h3>
                 <p className="fo-copy">
-                  Aditya and Anushank started Vidrow because they were frustrated with how agencies
-                  talked to founders — like vendors, not partners. They come from IIT Kanpur. So does
-                  most of the team. They think in systems, not campaigns. They measure in fundraises,
-                  not impressions.
+                  Aditya and Anushank started Vidrow because they were frustrated with how
+                  traditional marketing agencies never understood what founders need. Startups scale
+                  differently than legacy brands, just being creative doesn&apos;t cut it, an
+                  engineering mindset is required. They come from IIT Kanpur. So does most of the
+                  team. They think in systems, not creative outburst. They measure in fundraises, not
+                  impressions.
                 </p>
               </div>
               <a className="fo-pill" href="#people">
@@ -41,7 +42,10 @@ export default function Founders() {
               </a>
             </div>
 
-            <div className="fo-stats">
+            {/* its own Reveal, not the section's: .fo-body starts at the top
+                of the photo, so watching that played the steps while they
+                were still below the fold */}
+            <Reveal className="fo-stats">
               <div className="fo-step">
                 <div className="fo-stat">
                   <b>
@@ -49,7 +53,7 @@ export default function Founders() {
                     <br />
                     round
                   </b>
-                  <p>of Vidrow clients raise their next round while actively engaged with us.</p>
+                  <p>90% of Vidrow-backed startups close their next round ahead of time.</p>
                 </div>
               </div>
               <div className="fo-step">
@@ -60,7 +64,7 @@ export default function Founders() {
                     FOUNDERS + TEAM
                   </b>
                   <p>
-                    Founders + core team with a pedigree that sets Vidrow apart from traditional
+                    Engineers turned marketers — a pedigree that sets Vidrow apart from traditional
                     agencies.
                   </p>
                 </div>
@@ -72,10 +76,10 @@ export default function Founders() {
                     <br />
                     30 under 30 | ASIA
                   </b>
-                  <p>Recognition that signals our founders are building with people who’ve been noticed</p>
+                  <p>Recognition that signals our founders are building a playbook worth noticing.</p>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </Reveal>
       </div>
