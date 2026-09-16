@@ -128,14 +128,23 @@ export default function Footer({ hideCta = false }) {
   // up to close the gap under the CTA — right as the nav panel below fades
   // in. Both ends of the height change are measured and set explicitly, so
   // there's a real px-to-px transition rather than an unanimatable jump
-  // from an aspect-ratio-derived "auto" height
+  // from an aspect-ratio-derived "auto" height.
+  //
+  // the footer's height is pinned to what it measures before anything
+  // animates, so collapsing the runway slides the wordmark (and the legal
+  // row under it) up inside a box that never changes size — the title and
+  // CTA above never move, and the page below never shifts
   useEffect(() => {
     if (!revealed) return;
     const wrap = wellWrapRef.current;
-    if (!wrap) return;
+    const footer = footerRef.current;
+    if (!wrap || !footer) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const rect = wrap.getBoundingClientRect();
-    const collapsedHeight = mobile ? (rect.width * 11) / 19 : (rect.width * 5) / 35;
+    // the well's own height: the floor the runway can't collapse past
+    const wellHeight = mobile ? (rect.width * 11) / 19 : (rect.width * 5) / 35;
+    footer.style.minHeight = `${footer.getBoundingClientRect().height}px`;
+    const collapsedHeight = wellHeight;
     if (reduce) {
       wrap.style.height = `${collapsedHeight}px`;
       return;

@@ -16,21 +16,25 @@ export const PIECES = [
     ],
   },
   {
+    // purple J: a nub top-left of a 3-tall column, filling the cube's
+    // top-right corner
     lever: "Brand Marketing",
     copy: "Create celebrity-led brand marketing campaigns, built for virality and conceptualised for standing out.",
     cells: [
-      [201.2, -1.6, 100, 100, "#F5F25D"],
-      [301.2, -1.6, 100, 100, "#F5F25D"],
-      [201.2, 98.4, 100, 100, "#FFE41C"],
+      [201.2, -1.6, 100, 100, "#947AF0"],
+      [301.2, -1.6, 100, 100, "#7253E1"],
+      [301.2, 98.4, 100, 100, "#8B6FEE"],
+      [301.2, 198.4, 100, 100, "#947AF0"],
     ],
   },
   {
+    // yellow L: one cell up top, two under it running left
     lever: "Celebrity Performance Creatives",
     copy: "Unlock 200+ tested celebrity faces for conversion-led campaigns to 3X your user acquisition.",
     cells: [
-      [302.0, 100.3, 100, 100, "#947AF0"],
-      [202.0, 200.3, 100, 100, "#7253E1"],
-      [302.0, 200.3, 100, 100, "#8B6FEE"],
+      [202.0, 100.3, 100, 100, "#F5F25D"],
+      [102.0, 200.3, 100, 100, "#FFE41C"],
+      [202.0, 200.3, 100, 100, "#FEF7AD"],
     ],
   },
   {
@@ -38,23 +42,20 @@ export const PIECES = [
     copy: "Build your niche, go viral and introduce a layer of social media validation through Vidrow's social media retainers.",
     cells: [
       [-1.8, 200.9, 100, 100, "#7253E1"],
-      [98.2, 200.9, 100, 100, "#947AF0"],
+      [-1.8, 300.9, 100, 100, "#947AF0"],
     ],
   },
   {
     lever: "Ads Account Management",
     copy: "Bring best practices in Google and Meta ads management with Vidrow's data and tech driven approach.",
     cells: [
-      [-1.1, 301.7, 100, 100, "#F5F25D"],
-      [98.9, 301.7, 100, 100, "#FEF7AD"],
+      [101.1, 301.7, 100, 100, "#F5F25D"],
+      [201.1, 301.7, 100, 100, "#FEF7AD"],
     ],
   },
   {
     lever: "AI for Marketing",
     copy: "Plug and play with Vidrow's proprietary AI video ads tool, 'Double Down', built for scaling your winning ads at lower cost and faster TAT.",
-    cells: [
-      [201.1, 301.7, 100, 100, "#7253E1"],
-      [301.1, 301.7, 100, 100, "#947AF0"],
-    ],
+    cells: [[301.1, 301.7, 100, 100, "#7253E1"]],
   },
 ];

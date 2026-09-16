@@ -10,7 +10,9 @@ const NAV_LINKS = [
   { label: "Works", href: "/#featured" },
   { label: "Case study", href: "/#deepdive" },
   { label: "Partnership", href: "/#partnership" },
-  { label: "Founders", href: "/#people" },
+  // the founders section is hidden for now (see app/page.js), so this link
+  // has nothing to scroll to — restore both together
+  // { label: "Founders", href: "/#people" },
 ];
 
 function ContactButton({ className = "hx-contact", onClick }) {

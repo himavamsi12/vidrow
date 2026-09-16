@@ -7,6 +7,9 @@ const WORD_COUNT = 4;
 
 export default function Hero() {
   const [activeWord, setActiveWord] = useState(0);
+  // the word the pointer is on, which takes over from the autoplay while
+  // it's there — hovering a word lights its own block in the staircase
+  const [hoverWord, setHoverWord] = useState(null);
   const [reduceStepsLit, setReduceStepsLit] = useState(false);
 
   // ── Autoplay text and block highlights ──
@@ -17,15 +20,31 @@ export default function Hero() {
       return;
     }
 
+    // paused while a word is hovered, so the cycle doesn't move on under
+    // the pointer; it picks up again from that word on leaving
+    if (hoverWord !== null) return;
+
     const interval = setInterval(() => {
       setActiveWord((prev) => (prev + 1) % WORD_COUNT);
     }, 1500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hoverWord]);
 
-  const isLit = (g) => reduceStepsLit || g === activeWord;
-  const wordLit = (i) => !reduceStepsLit && i === activeWord;
+  const shown = hoverWord ?? activeWord;
+  const isLit = (g) => (reduceStepsLit && hoverWord === null) || g === shown;
+  const wordLit = (i) => (!reduceStepsLit || hoverWord !== null) && i === shown;
+
+  // hovering a word also leaves the cycle there once the pointer goes
+  const hoverProps = (i) => ({
+    onMouseEnter: () => setHoverWord(i),
+    onMouseLeave: () =>
+      setHoverWord((h) => {
+        if (h !== i) return h;
+        setActiveWord(i);
+        return null;
+      }),
+  });
 
   return (
     <header className="hx" id="top">
@@ -65,12 +84,13 @@ export default function Hero() {
 
         <div className="hx-copy">
           <h1 className="hx-h">
-            <u className={`hx-w${wordLit(0) ? " lit" : ""}`}>Marketing</u>{" "}
-            <u className={`hx-w${wordLit(1) ? " lit" : ""}`}>Partner</u>
-            &nbsp; behind
+            <u className={`hx-w${wordLit(0) ? " lit" : ""}`} {...hoverProps(0)}>Marketing</u>{" "}
+            <u className={`hx-w${wordLit(1) ? " lit" : ""}`} {...hoverProps(1)}>Partner</u>
+            {" "}
+            behind
             <br />
-            Fastest <u className={`hx-w${wordLit(2) ? " lit" : ""}`}>Growing</u>{" "}
-            <u className={`hx-w${wordLit(3) ? " lit" : ""}`}>Startups.</u>
+            Fastest <u className={`hx-w${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
+            <u className={`hx-w${wordLit(3) ? " lit" : ""}`} {...hoverProps(3)}>Startups.</u>
           </h1>
           <p className="hx-sub">
             We work alongside founders to turn marketing into a clearer, faster and more repeatable

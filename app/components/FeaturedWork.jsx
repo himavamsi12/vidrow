@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import ReadArrow from "./ReadArrow";
@@ -23,12 +23,6 @@ export default function FeaturedWork() {
   // which card's full testimonial is showing in the slide-in panel — null
   // when it's closed
   const [panelItem, setPanelItem] = useState(null);
-  // on touch, focus (from tapping the <a>) fires before click and already
-  // opens the row, so a plain "is it open yet?" check in onClick can't tell
-  // a row's very first tap from a deliberate second one — this remembers
-  // whether the row was already open before the tap that's about to focus it
-  const wasOpenRef = useRef(true);
-
   // Escape closes the panel, and the page can't scroll behind it while
   // it's open — same two behaviors the mobile nav's own full-screen panel
   // uses
@@ -64,29 +58,25 @@ export default function FeaturedWork() {
           }}
         >
           {FEATURED_WORK.map((item, i) => (
-            <a
+            <div
               key={item.id}
               className={`fw-row${openIndex === i ? " is-open" : ""}`}
-              href={item.href || "#featured"}
+              // the rows don't link out any more — a click (or tap) only
+              // expands the row, and the testimonial's own "Read more"
+              // button is what opens anything
+              role="button"
+              tabIndex={0}
+              aria-expanded={openIndex === i}
               onMouseEnter={() => {
                 if (canHover()) setOpenIndex(i);
               }}
-              onFocus={() => {
-                wasOpenRef.current = openIndex === i;
-                setOpenIndex(i);
-              }}
-              onClick={(e) => {
-                if (!canHover()) {
-                  // on touch, the row's first tap only expands it; a second,
-                  // deliberate tap on an already-open row follows the link
-                  if (!item.href || !wasOpenRef.current) e.preventDefault();
+              onFocus={() => setOpenIndex(i)}
+              onClick={() => setOpenIndex(i)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
                   setOpenIndex(i);
-                  return;
                 }
-                // with a pointer, hover has already opened the row — only a
-                // deliberate second click follows the link
-                if (openIndex !== i || !item.href) e.preventDefault();
-                setOpenIndex(i);
               }}
             >
               <span className="fw-top">
@@ -154,7 +144,7 @@ export default function FeaturedWork() {
                   </svg>
                 </button>
               </div>
-            </a>
+            </div>
           ))}
         </Reveal>
       </div>
@@ -185,34 +175,45 @@ export default function FeaturedWork() {
 
           {panelItem && (
             <>
-              <svg className="fw-panelMark" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="#0B0B0D"
-                  d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM17 17h7v7h-7z"
-                />
-              </svg>
-              <p className="fw-panelQuote" data-lenis-prevent>
-                {panelItem.quote}
-              </p>
+              <div className="fw-panelHead">
+                <span className="fw-panelLogo">
+                  {panelItem.logo.type === "image" ? (
+                    <img src={panelItem.logo.src} alt={panelItem.logo.alt} />
+                  ) : (
+                    <b>{panelItem.logo.alt}</b>
+                  )}
+                </span>
+                <span className="fw-panelNames">
+                  <b>{panelItem.name}</b>
+                  <span>{panelItem.category}</span>
+                </span>
+              </div>
 
-              {/* founders along the bottom edge: a pair overlaps left/right,
-                  a single founder sits bottom-right — same cut-out + white
-                  name plate as the row itself */}
-              <div className={`fw-panelPeople${panelItem.photos.length > 1 ? " is-pair" : " is-solo"}`}>
-                {panelItem.photos.map((ph, i) => (
-                  <img
-                    className={`fw-panelPh fw-panelPh${i + 1}`}
-                    src={ph.src}
-                    alt=""
-                    key={ph.src}
+              <div className="fw-panelBody" data-lenis-prevent>
+                <svg className="fw-panelMark" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="#0B0B0D"
+                    d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM0 8.5h7v7H0zM8.5 8.5h7v7h-7zM0 17h7v7H0z"
                   />
-                ))}
-                {panelItem.plates.map((pl, i) => (
-                  <span className={`fw-panelPlate fw-panelPlate${i + 1}`} key={pl.name}>
-                    <b>{pl.name}</b>
-                    {pl.role && <span>{pl.role}</span>}
-                  </span>
-                ))}
+                </svg>
+
+                <p className="fw-panelQuote">{panelItem.quote}</p>
+
+                <svg className="fw-panelMark fw-panelMark--end" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="#0B0B0D"
+                    d="M17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM0 17h7v7H0zM8.5 17h7v7h-7zM17 17h7v7h-7z"
+                  />
+                </svg>
+
+                {/* the quote is one founder's words, so only the first
+                    founder is credited here even when the row shows a pair */}
+                <div className="fw-panelBy">
+                  <p className="fw-panelByOne">
+                    <b>{panelItem.plates[0].name}</b>
+                    {panelItem.plates[0].role && <i>{panelItem.plates[0].role}</i>}
+                  </p>
+                </div>
               </div>
             </>
           )}
