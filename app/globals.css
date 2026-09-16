@@ -677,7 +677,6 @@ html.nav-hidden .hx-bar {
 }
 
 .hx-stair.closed .hx-step .hx-stat,
-.hx-stair.closed .hx-step .hx-note,
 .hx-stair.closed .hx-step .hx-tag {
   opacity: 0;
   transition-delay: 0s
@@ -690,14 +689,12 @@ html.nav-hidden .hx-bar {
 }
 
 .hx-stat,
-.hx-note,
 .hx-tag {
   opacity: 0;
   transition: opacity .38s ease
 }
 
 .hx-step.lit .hx-stat,
-.hx-step.lit .hx-note,
 .hx-step.lit .hx-tag {
   opacity: 1;
   transition-delay: .1s
@@ -713,14 +710,6 @@ html.nav-hidden .hx-bar {
   white-space: nowrap
 }
 
-.hx-note {
-  position: absolute;
-  font-family: var(--body);
-  font-weight: 400;
-  font-size: calc(16 * var(--k));
-  line-height: 1.2
-}
-
 .hx-tag {
   position: absolute;
   font-family: var(--display);
@@ -729,26 +718,19 @@ html.nav-hidden .hx-bar {
   line-height: 1.2
 }
 
+/* the long line starts near the bar's left edge, where the short stat it
+   replaced could afford to sit centred */
 .hx-s1 .hx-stat {
-  left: 41.2%;
+  left: 8%;
   top: 22%;
+  /* smaller than the other blocks' display size: this one is a full line,
+     not a short stat */
+  font-size: calc(36 * var(--k));
   color: #121212
 }
 
-.hx-s1 .hx-note {
-  left: 71.6%;
-  top: 34%;
-  width: 23.5%;
-  color: #121212
-}
-
-.hx-s2 .hx-stat {
-  left: 9%;
-  top: 66%;
-  color: var(--paper)
-}
-
-.hx-s2 .hx-note {
+/* s2 carries a tag now, in the same spot its stat used to sit */
+.hx-s2 .hx-tag {
   left: 11%;
   top: 18%;
   width: 80%;
@@ -945,7 +927,6 @@ html.nav-hidden .hx-bar {
   }
 
   .hx-stat,
-  .hx-note,
   .hx-tag {
     opacity: 1
   }
@@ -1122,12 +1103,7 @@ html.nav-hidden .hx-bar {
     padding-left: 30%
   }
 
-  .hx-s2 .hx-note {
-    width: 65% !important
-  }
-
   .hx-stat,
-  .hx-note,
   .hx-tag {
     position: static !important;
     left: auto !important;
@@ -1138,12 +1114,6 @@ html.nav-hidden .hx-bar {
 
   .hx-stat {
     font-size: 32px
-  }
-
-  .hx-note {
-    font-size: 12px;
-    width: 78% !important;
-    margin-top: 6px
   }
 
   .hx-tag {

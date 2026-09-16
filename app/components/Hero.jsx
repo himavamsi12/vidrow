@@ -57,27 +57,35 @@ export default function Hero() {
           <div className={`hx-step hx-s5 hx-y${isLit(0) ? " lit" : ""}`} />
           <div className={`hx-step hx-s6 hx-y${isLit(2) ? " lit" : ""}`} />
           <div className={`hx-step hx-s1 hx-y${isLit(0) ? " lit" : ""}`}>
-            <span className="hx-stat">2x - 10x</span>
-            <span className="hx-note">Increase in ad spends without CAC increase</span>
+            <span className="hx-stat">Brand. Performance. Social.</span>
           </div>
           <div className={`hx-step hx-s3 hx-y${isLit(2) ? " lit" : ""}`}>
             <span className="hx-tag">
-              REPEATABLE
+              REACH
               <br />
-              GROWTH
+              YOUR
               <br />
-              ENGINE
+              FUNDRAISE
+              <br />
+              GOALS 2X
+              <br />
+              FASTER
             </span>
           </div>
           <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
-            <span className="hx-stat">5x - 10x</span>
-            <span className="hx-note">Increase in ad spends without CAC increase</span>
+            <span className="hx-tag">
+              SEED to
+              <br />
+              SERIES D
+              <br />
+              PLAYBOOK
+            </span>
           </div>
           <div className={`hx-step hx-s4 hx-v${isLit(3) ? " lit" : ""}`}>
             <span className="hx-tag">
-              SPEED THAT
+              Working with
               <br />
-              COMPOUNDS
+              50+ startups
             </span>
           </div>
         </div>
