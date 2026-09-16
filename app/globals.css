@@ -2924,11 +2924,12 @@ html.nav-hidden .hx-bar {
   letter-spacing: calc(1.2 * var(--k));
   text-transform: uppercase;
   white-space: nowrap;
-  transition: opacity var(--btn-dur) var(--btn-ease)
+  transition: color var(--btn-dur) var(--btn-ease)
 }
 
-.wy-read:hover {
-  opacity: .7
+.wy-read:hover,
+.wy-read:focus-visible {
+  color: var(--violet)
 }
 
 .wy-mark {
@@ -3807,7 +3808,9 @@ html.nav-hidden .hx-bar {
   display: inline-flex;
   align-items: center;
   gap: calc(10 * var(--k));
-  margin: calc(40 * var(--k)) 0 calc(24 * var(--k));
+  /* trimmed from 40 so a two-line title still clears the full-height band
+     (see .cs-stats) instead of squashing it */
+  margin: calc(24 * var(--k)) 0 calc(24 * var(--k));
   background: none;
   color: #181818;
   text-decoration: none;
@@ -3834,7 +3837,11 @@ html.nav-hidden .hx-bar {
 .cs-stats {
   position: relative;
   width: calc(516 * var(--k));
-  height: calc(112 * var(--k))
+  height: calc(112 * var(--k));
+  /* never squeezed by a card whose title runs to two lines — the band is
+     the same height on every card, and the slack a shorter title leaves is
+     spread above it instead */
+  flex: none
 }
 
 .cs-band {
@@ -3859,7 +3866,9 @@ html.nav-hidden .hx-bar {
 
 .cs-fig {
   position: absolute;
-  height: calc(80 * var(--k));
+  /* the label is pinned to this box's bottom edge, so the box stops short
+     of the band to leave the label breathing room above it */
+  height: calc(68 * var(--k));
   display: flex;
   flex-direction: column;
   justify-content: space-between
@@ -4145,7 +4154,7 @@ html.nav-hidden .hx-bar {
   .cs-fig-a,
   .cs-fig-b {
     width: calc(50% - 32px);
-    height: 96px
+    height: 84px
   }
 
   .cs-fig b {
@@ -5074,6 +5083,13 @@ html.nav-hidden .hx-bar {
   line-height: 120%;
   letter-spacing: -.48px;
   color: #000;
+  transition: color var(--btn-dur) var(--btn-ease)
+}
+
+/* same as the other sections' read links: purple on hover */
+.news-card:hover .news-read,
+.news-card:focus-visible .news-read {
+  color: var(--violet)
 }
 
 .news-read svg {
@@ -5083,7 +5099,8 @@ html.nav-hidden .hx-bar {
   display: block
 }
 
-.news-card:hover .news-read svg {
+.news-card:hover .news-read svg,
+.news-card:focus-visible .news-read svg {
   transform: translateX(4px)
 }
 
