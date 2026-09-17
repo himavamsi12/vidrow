@@ -5,10 +5,10 @@ import { useLenis } from "lenis/react";
 
 // timings for the three acts: the staircase growing to cover the screen,
 // a short hold while the page jumps to Featured Work behind it (invisible),
-// then the curtain dissolving to reveal it
-const CLOSE_MS = 1100; // matches the staggered CSS close transition
-const HOLD_MS = 150;
-const FADE_MS = 200; // matches .hero-curtain--fading's opacity transition
+// then the curtain lifting off upward to reveal it
+const CLOSE_MS = 750; // the bars' .65s rise plus a small settle
+const HOLD_MS = 100;
+const FADE_MS = 600; // matches .hero-curtain's lift-off transform transition
 
 /**
  * A fixed, viewport-covering overlay that plays the hero's staircase-close

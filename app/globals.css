@@ -491,11 +491,14 @@ html.nav-hidden .hx-bar {
   position: fixed;
   inset: 0;
   z-index: 999;
-  transition: opacity .2s ease;
+  will-change: transform;
+  transition: transform .6s cubic-bezier(.76, 0, .24, 1);
 }
 
+/* exit: the whole curtain lifts off upward, uncovering Featured Work from
+   the bottom edge up, instead of dissolving in place */
 .hero-curtain--fading {
-  opacity: 0;
+  transform: translateY(-100%);
 }
 
 /* desktop-only reveal: mobile scrolls from the hero into the page normally,
@@ -608,19 +611,25 @@ html.nav-hidden .hx-bar {
    each starting at its own step height. No stagger and one shared timing,
    so every bar travels straight up together and they reach the top as one
    flat edge. The hero's own .hx-sN rules don't apply here. */
-.hero-curtain .hc-b1 { left: 0; width: 51%; top: 88.43% }
-.hero-curtain .hc-b2 { left: 51%; width: 13.5%; top: 75.46% }
-.hero-curtain .hc-b3 { left: 64.5%; width: 14.5%; top: 62.96% }
-.hero-curtain .hc-b4 { left: 79%; width: 21%; top: 25.93% }
+/* each bar is full height and scaled down from its bottom edge to its step
+   height — rising via transform (GPU) instead of animating `top` keeps the
+   motion smooth, with no per-frame layout */
+.hero-curtain .hc-b1 { left: 0; width: 51%; transform: scaleY(.1157) }
+.hero-curtain .hc-b2 { left: 51%; width: 13.5%; transform: scaleY(.2454) }
+.hero-curtain .hc-b3 { left: 64.5%; width: 14.5%; transform: scaleY(.3704) }
+.hero-curtain .hc-b4 { left: 79%; width: 21%; transform: scaleY(.7407) }
 
 .hero-curtain .hx-step,
 .hero-curtain .hx-stair.closed .hx-step {
-  transition: top .8s cubic-bezier(.65, 0, .35, 1), background-color .4s ease;
+  top: 0;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transition: transform .65s cubic-bezier(.76, 0, .24, 1), background-color .35s ease;
   transition-delay: 0s
 }
 
 .hero-curtain .hx-stair.closed .hx-step {
-  top: 0
+  transform: none
 }
 
 .hero-curtain .hx-stair.closed .hc-b1,
