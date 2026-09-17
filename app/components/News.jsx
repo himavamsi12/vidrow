@@ -62,6 +62,18 @@ export default function News() {
 
   const page = (dir) => setAt((i) => place(i + dir));
 
+  // the phone rail is a real overflow scroller (no transform), so its own
+  // arrows scroll it one card at a time instead of paging the track
+  const swipe = (dir) => {
+    const track = trackRef.current;
+    const rail = track?.parentElement;
+    if (!rail) return;
+    const cards = [...track.children];
+    const step =
+      cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
+    rail.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   // keep the row aligned as the breakpoint (and so cards-per-view) changes
   useEffect(() => {
     setAt((i) => place(i));
@@ -85,13 +97,20 @@ export default function News() {
             </p>
           </Reveal>
 
-          <div className="news-nav">
-            <button className="prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
-              <NavArrow />
-            </button>
-            <button className="next" type="button" aria-label="Next articles" onClick={() => page(1)}>
-              <NavArrow />
-            </button>
+          <div className="news-navWrap">
+            <div className="news-nav">
+              <button className="prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
+                <NavArrow />
+              </button>
+              <button className="next" type="button" aria-label="Next articles" onClick={() => page(1)}>
+                <NavArrow />
+              </button>
+            </div>
+            <div className="news-index" aria-hidden="true">
+              {String(at + 1).padStart(2, "0")}
+              <span className="news-index-sep">/</span>
+              {String(NEWS_ITEMS.length).padStart(2, "0")}
+            </div>
           </div>
         </div>
 
@@ -119,6 +138,17 @@ export default function News() {
             ))}
           </div>
         </Reveal>
+
+        {/* mobile only: the topbar has no room for the arrows at this width,
+            so they sit under the cards and drive the rail's own scroll */}
+        <div className="news-nav news-nav--mobile">
+          <button className="prev" type="button" aria-label="Previous articles" onClick={() => swipe(-1)}>
+            <NavArrow />
+          </button>
+          <button className="next" type="button" aria-label="Next articles" onClick={() => swipe(1)}>
+            <NavArrow />
+          </button>
+        </div>
       </div>
     </section>
   );

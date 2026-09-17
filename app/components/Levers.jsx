@@ -75,8 +75,11 @@ export default function Levers() {
       const aR = levA.getBoundingClientRect();
       const bR = levB.getBoundingClientRect();
       const hR = levHy.getBoundingClientRect();
-      const ex = 80 / 200;
-      const ey = 80 / 200;
+      // the size each piece settles at in its column: a touch smaller on
+      // mobile, where the three columns are narrow and the pieces were
+      // crowding their own labels
+      const ex = split ? 80 / 200 : 62 / 200;
+      const ey = ex;
 
       [[0, 3], [3, 6]].forEach((rng) => {
         let tallest = 0;

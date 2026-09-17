@@ -5,6 +5,11 @@
 // wall its interlocking shape. `top`/`bottom` are inclusive [start, end]
 // column numbers (a piece may have only one of them), and `logo` says which
 // half carries the logo; the other half is the piece's empty step.
+//
+// img is filler art, not each brand's actual creative (it never was — these
+// were already generic Vyapar/PlatinumRx photos before) — cycled across the
+// photos in /public/selected so nothing 404s. Swap in real per-case-study
+// images when they exist.
 export const CASE_STUDIES = [
   {
     brand: "Curious",
@@ -16,7 +21,7 @@ export const CASE_STUDIES = [
     copy: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
     figA: { value: "4.2x", label: "ROAS improvement" },
     figB: { value: "−65%", label: "Acquisition cost" },
-    img: "/selected/c.png",
+    img: "/selected/1.png",
   },
   {
     brand: "Glance",
@@ -27,7 +32,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "3.6x", label: "Engagement rate" },
     figB: { value: "−38%", label: "Cost per install" },
-    img: "/selected/a.png",
+    img: "/selected/2.png",
   },
   {
     brand: "Maxim",
@@ -38,7 +43,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "2.9x", label: "Booking growth" },
     figB: { value: "−31%", label: "Acquisition cost" },
-    img: "/selected/b.png",
+    img: "/selected/3.png",
   },
   {
     brand: "Good",
@@ -50,7 +55,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "5.1x", label: "Repeat app opens" },
     figB: { value: "+58%", label: "Score checks/user" },
-    img: "/selected/c.png",
+    img: "/selected/4.png",
   },
   {
     brand: "Oright",
@@ -61,7 +66,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "3.4x", label: "Repeat order rate" },
     figB: { value: "−28%", label: "Churn" },
-    img: "/selected/a.png",
+    img: "/selected/5.png",
   },
   {
     brand: "Chhota Stock",
@@ -72,7 +77,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "6.2x", label: "Organic sign-ups" },
     figB: { value: "−45%", label: "Cost per install" },
-    img: "/selected/b.png",
+    img: "/selected/6.png",
   },
   {
     brand: "PW Talk",
@@ -83,7 +88,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "4.5x", label: "Learner retention" },
     figB: { value: "−40%", label: "Acquisition cost" },
-    img: "/selected/c.png",
+    img: "/selected/1.png",
   },
   {
     brand: "NestAway",
@@ -94,7 +99,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "3.1x", label: "Qualified leads" },
     figB: { value: "−26%", label: "Cost per lead" },
-    img: "/selected/a.png",
+    img: "/selected/2.png",
   },
   {
     brand: "Sahamati",
@@ -105,7 +110,7 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "2.7x", label: "Activation rate" },
     figB: { value: "+63%", label: "Brand awareness lift" },
-    img: "/selected/b.png",
+    img: "/selected/3.png",
   },
   {
     brand: "Algonomy",
@@ -116,6 +121,6 @@ export const CASE_STUDIES = [
     copy: "Add the real story here — what the brief was, what changed, and what the numbers did once it shipped.",
     figA: { value: "4.3x", label: "Pipeline growth" },
     figB: { value: "−33%", label: "Sales cycle length" },
-    img: "/selected/c.png",
+    img: "/selected/4.png",
   },
 ];

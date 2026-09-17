@@ -60,25 +60,30 @@ export default function Hero() {
             <span className="hx-stat">Brand. Performance. Social.</span>
           </div>
           <div className={`hx-step hx-s3 hx-y${isLit(2) ? " lit" : ""}`}>
-            <span className="hx-tag">
-              REACH
+            <span className="hx-tag hx-tag--s3">
+              {/* desktop keeps five short lines; mobile regroups the same
+                  words into three (with a smaller mobile font, see the
+                  900px block) so the block doesn't run so tall */}
+              Reach
+              <br className="hx-br-d" />
+              <span className="hx-br-m"> </span>
+              your
               <br />
-              YOUR
+              fundraise
               <br />
-              FUNDRAISE
-              <br />
-              GOALS 2X
-              <br />
-              FASTER
+              goals 2x
+              <br className="hx-br-d" />
+              <span className="hx-br-m"> </span>
+              faster
             </span>
           </div>
           <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
             <span className="hx-tag">
-              SEED to
+              Seed to
               <br />
-              SERIES D
+              Series D
               <br />
-              PLAYBOOK
+              playbook
             </span>
           </div>
           <div className={`hx-step hx-s4 hx-v${isLit(3) ? " lit" : ""}`}>
@@ -96,10 +101,14 @@ export default function Hero() {
                 lights: words 0 and 2 are the acid steps, 1 and 3 the violet */}
             <u className={`hx-w hx-w-y${wordLit(0) ? " lit" : ""}`} {...hoverProps(0)}>Marketing</u>{" "}
             <u className={`hx-w hx-w-v${wordLit(1) ? " lit" : ""}`} {...hoverProps(1)}>Partner</u>
-            {" "}
+            {/* mobile folds the headline into three lines of its own:
+                Marketing Partner / behind Fastest / Growing Startups. */}
+            <br className="hx-br-m" />{" "}
             behind
-            <br />
-            Fastest <u className={`hx-w hx-w-y${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
+            <br className="hx-br-d" />
+            {" "}Fastest
+            <br className="hx-br-m" />{" "}
+            <u className={`hx-w hx-w-y${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
             <u className={`hx-w hx-w-v${wordLit(3) ? " lit" : ""}`} {...hoverProps(3)}>Startups.</u>
           </h1>
           <p className="hx-sub">

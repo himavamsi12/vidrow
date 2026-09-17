@@ -498,6 +498,14 @@ html.nav-hidden .hx-bar {
   opacity: 0;
 }
 
+/* desktop-only reveal: mobile scrolls from the hero into the page normally,
+   so the curtain never paints there even if something mounts it */
+@media (max-width:900px) {
+  .hero-curtain {
+    display: none
+  }
+}
+
 /* the staircase — full-bleed, steps butt against each other */
 .hx-stair {
   position: absolute;
@@ -770,6 +778,12 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
+/* the headline breaks in different places per breakpoint — desktop keeps the
+   two-line split, mobile uses three lines of its own (see the 900px block) */
+.hx-br-m {
+  display: none
+}
+
 .hx-h u {
   text-decoration: underline;
   text-decoration-thickness: calc(3 * var(--k));
@@ -943,6 +957,7 @@ html.nav-hidden .hx-bar {
     opacity: 1
   }
 
+
   .hx-w::before {
     left: -6px;
     right: -6px;
@@ -982,8 +997,17 @@ html.nav-hidden .hx-bar {
   }
 
   .hx-h {
-    font-size: 36px;
+    font-size: 34px;
+    line-height: 1.32;
     letter-spacing: -1px
+  }
+
+  .hx-br-d {
+    display: none
+  }
+
+  .hx-br-m {
+    display: inline
   }
 
   .hx-h u {
@@ -1027,15 +1051,27 @@ html.nav-hidden .hx-bar {
   .hx-stair {
     position: static;
     display: grid;
-    grid-template-columns: 42.4% 8px 13.2% 8px 42.4%;
-    /* track 2 (s2's wide bottom half) and track 4 (s3's wide top half) each
-       need more room than the others: their text is taller than the shared
-       64px min, so it spills into the neighbouring track. That's harmless
-       when it spills toward the side the shape keeps (s1 and s4 both do
-       this safely), but s2's spillover goes toward the side its own shape
-       cuts away, clipping the start of "5x - 10x" — so its track has to be
-       tall enough that no spillover happens at all */
-    grid-template-rows: minmax(64px, auto) minmax(88px, auto) 10px minmax(86px, auto) minmax(64px, auto);
+    /* one gap value for every seam in the block: the column gutter, the row
+       gutter, and — via --tstep — the seam inside each notch. The notch is a
+       length rather than a percentage so the clip-path calc below lands on
+       the grid line exactly, whatever the card ends up measuring */
+    --tg: 8px;
+    --tnotch: clamp(44px, 15vw, 64px);
+    --tstep: calc(var(--tnotch) + var(--tg));
+    /* inner inset for every label */
+    --tpad: 12px;
+    /* the staircase seam turns a corner at the half-way mark, so the two
+       cards of a pair cannot both step at 50% — that puts the wide card's
+       underside flush against the other's topside and the horizontal run of
+       the seam closes up. Whichever card is wide ABOVE stops half a gap
+       early, the one wide BELOW starts half a gap late */
+    --tup: calc(50% - var(--tg) / 2);
+    --tdn: calc(50% + var(--tg) / 2);
+    grid-template-columns: 1fr var(--tg) var(--tnotch) var(--tg) 1fr;
+    /* 1fr rather than auto so both rows take the height of the taller one —
+       the four pieces read as one block, as in the reference, instead of the
+       row with the five-line label standing taller than the other */
+    grid-template-rows: 1fr var(--tg) 1fr;
     gap: 0;
     padding: 32px 20px 0
   }
@@ -1047,32 +1083,39 @@ html.nav-hidden .hx-bar {
     width: auto !important;
     height: auto !important;
     padding: 0;
+    /* height is left to the tallest label in the row — both cards of a row
+       stretch to it, so the two halves of their shared seam still line up.
+       Nothing here reserves a whole half per label: a label is free to run
+       past the 50% step, because what keeps it clear of the notch is its
+       width (see the padding rules below), not the card being tall enough
+       to hold it above the step. That is what lets these sit at roughly
+       half their own width, as the reference does */
     min-height: 0;
     z-index: auto !important
   }
 
   .hx-s1 {
     grid-column: 1 / 4;
-    grid-row: 1 / 3;
-    clip-path: polygon(0 0, 100% 0, 100% 50%, 75% 50%, 75% 100%, 0 100%)
+    grid-row: 1;
+    clip-path: polygon(0 0, 100% 0, 100% var(--tup), calc(100% - var(--tstep)) var(--tup), calc(100% - var(--tstep)) 100%, 0 100%)
   }
 
   .hx-s2 {
     grid-column: 3 / 6;
-    grid-row: 1 / 3;
-    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%)
+    grid-row: 1;
+    clip-path: polygon(var(--tstep) 0, 100% 0, 100% 100%, 0 100%, 0 var(--tdn), var(--tstep) var(--tdn))
   }
 
   .hx-s4 {
     grid-column: 1 / 4;
-    grid-row: 4 / 6;
-    clip-path: polygon(0 0, 75% 0, 75% 50%, 100% 50%, 100% 100%, 0 100%)
+    grid-row: 3;
+    clip-path: polygon(0 0, calc(100% - var(--tstep)) 0, calc(100% - var(--tstep)) var(--tdn), 100% var(--tdn), 100% 100%, 0 100%)
   }
 
   .hx-s3 {
     grid-column: 3 / 6;
-    grid-row: 4 / 6;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%, 25% 50%, 0 50%)
+    grid-row: 3;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--tstep) 100%, var(--tstep) var(--tup), 0 var(--tup))
   }
 
   /* text stacks in normal flow now, not absolute % offsets — those assumed
@@ -1082,37 +1125,36 @@ html.nav-hidden .hx-bar {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-left: 7%
+    padding-left: var(--tpad);
+    padding-right: var(--tpad)
   }
 
-  /* each card's own text sits inside its wide half — s1's is the top half,
-     s2's and s4's the bottom half, s3's the bottom half too */
-  .hx-s1 {
+  /* each label anchors to the flush end of its own card — s1 and s2 to the
+     top, s3 and s4 to the bottom */
+  .hx-s1,
+  .hx-s2 {
     justify-content: flex-start;
-    padding-top: 14px
+    padding-top: var(--tpad)
   }
 
   .hx-s3,
   .hx-s4 {
     justify-content: flex-end;
-    padding-bottom: 14px
+    padding-bottom: var(--tpad)
   }
 
-  .hx-s2 {
-    justify-content: flex-start;
-    padding-top: 14px
-  }
-
+  /* every label is held inside the width of its card's NARROW half, on
+     whichever side the notch cuts back — s2 and s3 are cut on the left, s1
+     and s4 on the right. That is what lets a label cross the 50% step
+     without being clipped, and so what lets the cards be short. */
+  .hx-s2,
   .hx-s3 {
-    padding-left: 33%
+    padding-left: calc(var(--tstep) + var(--tpad))
   }
 
-  /* s2's notch cuts away its own left edge in the half its text can spill
-     into (unlike s1/s4, where a spill lands on the side the shape keeps) —
-     so its text is pushed right of that cut instead of relying on the row
-     being tall enough to never spill at all */
-  .hx-s2 {
-    padding-left: 30%
+  .hx-s1,
+  .hx-s4 {
+    padding-right: var(--tstep)
   }
 
   .hx-stat,
@@ -1127,13 +1169,32 @@ html.nav-hidden .hx-bar {
     text-align: left !important
   }
 
-  .hx-stat {
-    font-size: 20px
+  /* all four labels read as one set here: same size, same wrapping, and the
+     full width of the text column their card's padding leaves them.
+     .hx-stat keeps a nowrap on desktop, where its block is wide enough for
+     the whole line — on mobile that ran it off the edge, so it wraps like
+     the tags do */
+  .hx-stat,
+  .hx-tag {
+    /* scales with the card, which is a fraction of the viewport — a fixed
+       size would leave the longest single word ("Performance.",
+       "FUNDRAISE") wider than the narrow half on a small phone */
+    font-size: clamp(16px, 4.2vw, 19px);
+    /* tighter than the desktop 1.2 — these are short stacked labels, and it
+       is what brings the piece down to about half its width */
+    line-height: 1.1;
+    white-space: normal !important;
+    /* last-resort guard for a viewport narrow enough that even the smallest
+       size leaves a word too wide: break it rather than let it be clipped */
+    overflow-wrap: break-word
   }
 
-  .hx-tag {
-    font-size: 20px;
-    width: 70% !important
+  /* this card's own copy is the longest of the four — even at the smallest
+     size above, its 85px-wide column can't fit two of these words on a
+     line, so it gets a further reduction to actually land the 3-line
+     grouping (the compound selector outweighs the shared rule above) */
+  .hx-tag.hx-tag--s3 {
+    font-size: 12px
   }
 }
 
@@ -1679,10 +1740,23 @@ html.nav-hidden .hx-bar {
 /* ── featured work ─────────────────────────── */
 /* laid out against a 1440 design width; --k is one design px, so the whole
    row scales with its own width instead of breaking at odd viewports */
+/* the expanding-row layout is the mobile one now — desktop gets the stacked
+   cards in .fw2 instead (both are rendered, one is hidden per breakpoint) */
 .fw {
+  display: none;
   background: var(--paper);
   color: var(--ink);
   padding: clamp(56px, 7vw, 100px) 0 120px
+}
+
+@media (max-width:900px) {
+  .fw {
+    display: block
+  }
+
+  .fw2 {
+    display: none
+  }
 }
 
 .fw-in {
@@ -2628,7 +2702,7 @@ html.nav-hidden .hx-bar {
   container-type: inline-size;
   overflow: hidden;
   height: 100vh;
-  background: #FDFEDC;
+  background: var(--acid);
   color: #121212;
   /* --p is how far the next card has climbed over this one (0..1), written
      by FeaturedWork.jsx on scroll: the card sinks back and dims as it goes,
@@ -2655,7 +2729,12 @@ html.nav-hidden .hx-bar {
   left: 0;
   top: 0;
   width: 17.5%;
-  height: 23%;
+  /* a fixed height rather than a share of the card (100vh, so it used to
+     grow or shrink with the viewport's own height) — the logo and name
+     inside it size off this box in %, so a wandering height meant the logo
+     read bigger or smaller than intended depending on how tall the screen
+     happened to be */
+  height: 172px;
   background: var(--paper)
 }
 
@@ -2718,12 +2797,14 @@ html.nav-hidden .hx-bar {
   left: 17.5%;
   top: 13%;
   width: 36%;
-  min-height: 14.6%;
+  /* height comes from the text plus the padding below, not a fixed share of
+     the card — a min-height here was forcing a tall box that just centred
+     a short line inside deep top/bottom bands */
   box-sizing: border-box;
   display: flex;
   align-items: center;
   background: var(--paper);
-  padding: 1.6cqw 2cqw
+  padding: 32px
 }
 
 .fw2-headline h3 {
@@ -2736,14 +2817,14 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
-/* square, not a slab: the card is far wider than it is tall, so these are
-   sized by width with aspect-ratio rather than matching % on both axes */
+/* set in from the card's top/right edges rather than flush against them,
+   so it reads as a floating chip instead of a corner notch */
 .fw2-chip {
   position: absolute;
-  left: 85.5%;
+  right: 8%;
   top: 0;
-  width: 9%;
-  aspect-ratio: 1;
+  width: 100px;
+  height: 100px;
   background: var(--paper)
 }
 
@@ -2780,13 +2861,14 @@ html.nav-hidden .hx-bar {
    rather than leaving a gap */
 .fw2-plate {
   left: 8.75%;
-  top: 74%;
+  /* smaller and set lower than before, clear of the founder photo's face */
+  top: 79%;
   /* the box hugs the name instead of wrapping it: a long one (Shashank
      Shekhar) widens the plate rather than running onto a second line */
   width: auto;
-  min-width: 16.5%;
-  max-width: 34%;
-  height: 10.3%;
+  min-width: 14%;
+  max-width: 30%;
+  height: 9%;
   padding: 0 2cqw;
   white-space: nowrap;
   font-family: var(--display);
@@ -2798,10 +2880,11 @@ html.nav-hidden .hx-bar {
 
 .fw2-role {
   /* pinned to the name plate's right edge, which JS measures per card */
-  left: var(--role-left, 25.25%);
-  top: 84.3%;
-  width: 16.5%;
-  height: 10.3%;
+  left: var(--role-left, 22.75%);
+  /* the plate's own new top + height, so the two still meet with no gap */
+  top: 88%;
+  width: 14%;
+  height: 9%;
   justify-content: center;
   font-family: var(--body);
   font-size: 24px;
@@ -2873,7 +2956,7 @@ html.nav-hidden .hx-bar {
 /* the size lives on the scroller, so FeaturedWork.jsx can step one card's
    whole quote down when it would otherwise run past its panel */
 .fw2-quoteText {
-  font-size: 1.05cqw
+  font-size: 16px
 }
 
 .fw2-quoteText p {
@@ -2940,7 +3023,7 @@ html.nav-hidden .hx-bar {
   }
 
   .fw2-headline {
-    padding: 16px;
+    padding: 32px;
     margin-bottom: 16px
   }
 
@@ -2987,7 +3070,12 @@ html.nav-hidden .hx-bar {
   background: var(--paper);
   color: var(--ink);
   container-type: inline-size;
-  --k: min(.0694444cqw, 1.111px)
+  --k: min(.0694444cqw, 1.111px);
+  /* lives outside .wy-track (below), not on .wy-head — .wy-head sits inside
+     the sticky/scroll-jacked box, so padding there would inflate that box's
+     own content height and push the scroll-progress start point down with
+     it, making the sticky animation appear to begin already mid-way in */
+  padding-top: clamp(120px, 14vw, 240px)
 }
 
 .wy-in {
@@ -3008,8 +3096,6 @@ html.nav-hidden .hx-bar {
   align-items: center;
   gap: calc(18 * var(--k));
   text-align: center;
-  /* clears the featured work card that sits right above this section */
-  padding-top: clamp(48px, 6vw, 96px);
   margin: 0 auto
 }
 
@@ -3416,7 +3502,7 @@ html.nav-hidden .hx-bar {
   .wy-panel {
     flex-direction: column;
     align-items: stretch;
-    padding: 24px;
+    padding: 20px 20px 0;
     gap: 28px;
     height: auto
   }
@@ -3433,22 +3519,41 @@ html.nav-hidden .hx-bar {
 
   .wy-item {
     counter-increment: wystage;
-    padding: 22px 0
+    padding: 20px 0
+  }
+
+  /* the open stage keeps its rule on mobile — it closes off the stat
+     block before the numbered list continues */
+  .wy-item.on {
+    padding: 0 0 48px;
+    border-bottom-color: #2F2F2F
   }
 
   .wy-title {
-    cursor: pointer
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    font-family: var(--body);
+    font-size: 20px;
+    color: var(--paper)
   }
 
   .wy-title::before {
-    content: counter(wystage, decimal-leading-zero) "  ";
-    color: inherit;
-    opacity: .55
+    content: counter(wystage, decimal-leading-zero);
+    flex: none;
+    margin-right: 10px;
+    font-family: var(--body);
+    font-size: 14px;
+    color: inherit
   }
 
-  /* the open stage reads as a headline, not a numbered list entry */
-  .wy-item.on .wy-title::before {
-    content: none
+  /* the open stage's title moves into the light notched card below */
+  .wy-item.on .wy-title {
+    display: none
+  }
+
+  .wy-bodyIn {
+    padding-top: 0
   }
 
   .wy-grid {
@@ -3461,62 +3566,77 @@ html.nav-hidden .hx-bar {
     aspect-ratio: 1
   }
 
-  /* the copy paragraph lives inside .wy-lead, which is desktop-only — show
-     just that paragraph on mobile (the heading it also carries would
-     duplicate .wy-title, so that stays hidden) */
+  /* the same light staircase card as desktop, in flow: a shallow step cut
+     out of the bottom-right corner, then a narrow left tab running down
+     beside the stat block */
   .wy-lead {
     display: block;
-    background: transparent;
-    padding: 0;
+    background: #F0F0F0;
+    padding: 20px 24px 68px;
     margin-bottom: 0;
-    clip-path: none
+    clip-path: polygon(0 0, 100% 0,
+        100% calc(100% - 68px),
+        calc(100% - 22px) calc(100% - 68px),
+        calc(100% - 22px) calc(100% - 40px),
+        22px calc(100% - 40px),
+        22px 100%,
+        0 100%)
   }
 
   .wy-leadTitle {
-    display: none
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: #0A0A0A;
+    margin: 0 0 12px
   }
 
   .wy-lead .wy-copy {
-    margin-bottom: calc(20 * var(--k))
+    color: #333;
+    max-width: none;
+    margin-bottom: 0
   }
 
-  /* the stat card becomes a light card (matching the desktop lead card's
-     look) instead of a bordered outline on the dark panel */
+  /* the stat block tucks up beside the lead card's left tab */
+  .wy-cardwrap {
+    margin: -40px 0 0 22px
+  }
+
   .wy-card {
-    background: #F0F0F0;
+    background: transparent;
     border: none;
     clip-path: none;
-    padding: 24px
+    padding: 20px 24px 0;
+    gap: 44px
   }
 
   .wy-stat {
-    color: #0A0A0A;
+    color: var(--paper);
+    font-weight: 500;
     font-size: 26px
   }
 
   .wy-quote {
-    color: #333
+    color: #9A9A9A;
+    line-height: 1.45;
+    margin-top: 14px
   }
 
-  /* the card itself goes light on mobile (see .wy-card above) — the read
-     link was still the desktop's white-on-dark color, invisible against it */
   .wy-read {
-    color: #0A0A0A
+    color: var(--paper);
+    margin-left: 12px
   }
 
   .wy-mark {
-    width: 18px;
-    height: 18px
+    width: 16px;
+    height: 16px;
+    margin-left: 8px
   }
 
   .wy-client {
-    display: block;
-    position: static;
-    width: auto;
-    height: auto;
-    place-items: start;
-    margin-top: 24px;
-    font-size: 18px
+    display: none
   }
 }
 
@@ -3673,7 +3793,7 @@ html.nav-hidden .hx-bar {
 
   .lev-stage {
     justify-content: center;
-    gap: clamp(40px, 9vw, 64px)
+    gap: clamp(64px, 14vw, 104px)
   }
 
   /* mobile keeps the same two-row shape as desktop (3 across, top row /
@@ -3690,7 +3810,13 @@ html.nav-hidden .hx-bar {
   /* the bottom row (Social/AdOps/AI) sat right under the heading with no
      breathing room — nudge it down away from .lev-mid */
   #levRowBot {
-    margin-top: 32px
+    margin-top: 44px
+  }
+
+  /* and the same clearance above the heading, so it sits centred between
+     the two rows rather than close under the top one's labels */
+  #levRowTop {
+    margin-bottom: 12px
   }
 }
 
@@ -3701,8 +3827,8 @@ html.nav-hidden .hx-bar {
   }
 
   .lev-slot {
-    --slotW: 48px;
-    --slotH: 72px
+    --slotW: 40px;
+    --slotH: 58px
   }
 
   .lev-col h3 {
@@ -4525,6 +4651,10 @@ html.nav-hidden .hx-bar {
     margin-top: 12px
   }
 
+  .cs-pill {
+    margin-top: 32px
+  }
+
   .cs-stats {
     position: relative;
     width: 100%;
@@ -4532,28 +4662,41 @@ html.nav-hidden .hx-bar {
     margin-top: 28px
   }
 
-  .cs-band-a,
-  .cs-band-b {
-    width: 50%;
-    clip-path: none
-  }
-
+  /* same interlocking step as desktop, in percentages of the box instead of
+     the desktop's fixed calc(Npx * --k) — the box itself is width:100% here
+     (a fraction of the card, not a fixed 516px), so the split and each
+     band's own clip-path (already a ratio of ITS OWN box) scale with it
+     instead of overflowing a narrow phone the way the fixed widths would */
   .cs-band-a {
-    left: 0
+    left: 0;
+    width: 67.8%;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 58.3% 50%, 58.3% 100%, 0 100%)
   }
 
   .cs-band-b {
-    left: 50%
+    left: 39.5%;
+    width: 60.5%;
+    clip-path: polygon(46.8% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 46.8% 50%)
   }
 
   .cs-fig-a,
   .cs-fig-b {
-    width: calc(50% - 32px);
     height: 84px
   }
 
+  .cs-fig-a {
+    left: 16px;
+    width: calc(67.8% - 32px)
+  }
+
+  .cs-fig-b {
+    right: 16px;
+    left: auto;
+    width: calc(39.5% - 16px)
+  }
+
   .cs-fig b {
-    font-size: 40px
+    font-size: 24px
   }
 
   .cs-fig span {
@@ -5297,11 +5440,37 @@ html.nav-hidden .hx-bar {
   width: min(578px, 100%)
 }
 
+.news-navWrap {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px
+}
+
 .news-nav {
   flex: none;
   display: flex;
   align-items: center;
   gap: 8px
+}
+
+/* the "01 / 05" counter under the desktop arrows — tracks the leftmost
+   visible card, same digit style as the case-study rail's own index */
+.news-index {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -.01em;
+  color: var(--ink)
+}
+
+.news-index-sep {
+  color: #C7C7C7;
+  font-weight: 300
 }
 
 .news-nav button {
@@ -5337,6 +5506,11 @@ html.nav-hidden .hx-bar {
 
 .news-nav .prev svg {
   transform: rotate(180deg)
+}
+
+/* the under-the-cards pair is mobile's only nav (see the 759px block) */
+.news-nav--mobile {
+  display: none
 }
 
 .news-rail {
@@ -5534,10 +5708,23 @@ html.nav-hidden .hx-bar {
     gap: 20px
   }
 
-  /* no arrows on a phone — the row is swiped instead, so scrolling goes back
-     to the browser and the JS leaves the track's transform alone */
-  .news-nav {
+  /* the row is still swipeable — the JS leaves the track's transform alone
+     here — but the arrows (and their counter) move out of the topbar to
+     under the cards, where there's room for them at this width */
+  .news-topbar .news-navWrap {
     display: none
+  }
+
+  .news-nav--mobile {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px
+  }
+
+  .news-nav--mobile button {
+    width: 44px;
+    height: 44px
   }
 
   .news-rail {
@@ -5580,6 +5767,19 @@ html.nav-hidden .hx-bar {
 
   .news-sub {
     font-size: 17px
+  }
+
+  /* the card is only ~78% of a phone's width, so the container-relative
+     sizes that read well on desktop come out too small here */
+  .news-read {
+    font-size: 4.9cqw;
+    gap: 6px;
+    letter-spacing: -.2px
+  }
+
+  .news-read svg {
+    width: 4cqw;
+    height: 4cqw
   }
 }
 
@@ -5626,8 +5826,7 @@ html.nav-hidden .hx-bar {
      through collapses on reveal and the footer simply gets shorter, so the
      wordmark and the legal row rise into the freed space and nothing below
      the title is ever pushed down the page */
-  justify-content: flex-start;
-  gap: clamp(24px, 3vw, 40px)
+  justify-content: flex-start
 }
 
 .vfoot__copy {
@@ -5713,6 +5912,9 @@ html.nav-hidden .hx-bar {
    early. */
 .vfoot__wellWrap {
   position: relative;
+  /* more room above the wordmark than the old uniform .vfoot gap gave it,
+     so it doesn't crowd the CTA above */
+  margin-top: clamp(40px, 6vw, 88px);
   /* the wordmark's own 5 rows plus a short runway above it. The footer's
      height is pinned, so whatever the runway gives up on collapse is left
      as empty space at the bottom — keep the runway small */
@@ -5721,12 +5923,6 @@ html.nav-hidden .hx-bar {
      formed (see Footer.jsx) — the well is pinned to the bottom of this box,
      so shrinking it slides the wordmark up to close the gap under the CTA */
   transition: height .8s cubic-bezier(.16, .84, .34, 1)
-}
-
-/* below 640px the word regroups onto two lines ("VID" / "ROW") on a 19x11
-   grid instead of one 35x5 row — see FOOTER_PIECES_MOBILE */
-.vfoot__wellWrap.is-2line {
-  aspect-ratio: 19 / 15
 }
 
 /* the well: 35 x 5 cells, pieces sit on it by grid slot */
@@ -5739,12 +5935,6 @@ html.nav-hidden .hx-bar {
   grid-template-columns: repeat(35, 1fr);
   grid-template-rows: repeat(5, 1fr);
   aspect-ratio: 35 / 5
-}
-
-.vfoot__well.is-2line {
-  grid-template-columns: repeat(19, 1fr);
-  grid-template-rows: repeat(11, 1fr);
-  aspect-ratio: 19 / 11
 }
 
 .vfoot__piece {
@@ -5884,7 +6074,11 @@ html.nav-hidden .hx-bar {
    opening it never adds height and nothing below the title ever moves down */
 .vfoot__bottomOuter {
   display: grid;
-  grid-template-rows: 1fr
+  grid-template-rows: 1fr;
+  /* the footer's height is pinned (see Footer.jsx) so the well's collapse
+     leaves real leftover space inside the box — push this row down into it
+     instead of leaving it stranded below the legal row */
+  margin-top: auto
 }
 
 .vfoot__bottomIn {
@@ -5892,7 +6086,8 @@ html.nav-hidden .hx-bar {
 }
 
 .vfoot__bottom {
-  padding-top: clamp(20px, 2.2vw, 32px);
+  /* a real gap under the wordmark before the tagline/legal row */
+  padding-top: clamp(28px, 4vw, 56px);
   opacity: 0;
   transform: translateY(28px);
   transition: opacity .5s ease .12s, transform .6s cubic-bezier(.16, .84, .34, 1) .12s

@@ -117,7 +117,7 @@ export default function FeaturedWork() {
   }, []);
 
   return (
-    <section className="fw2" id="featured">
+    <section className="fw2">
       <Reveal className="fw2-head">
         <div className="fw2-tagwrap">
           <span className="fw2-tag">Featured work</span>

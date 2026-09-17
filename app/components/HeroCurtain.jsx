@@ -46,7 +46,14 @@ export default function HeroCurtain() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || window.innerWidth <= 900) return;
+    if (reduce) return;
+
+    // the curtain is a desktop-only reveal. The width is checked again when
+    // the gesture actually fires rather than only here, so a window that
+    // becomes narrow after load (or a device that reports its width late)
+    // can't leave the listeners armed and play it on mobile
+    const desktop = () => window.innerWidth > 900;
+    if (!desktop()) return;
 
     // a page load that already targets a section (e.g. a nav link from the
     // case study page landing on /#partnership) means the user never saw
@@ -62,7 +69,7 @@ export default function HeroCurtain() {
     let touchStartY = 0;
 
     const trigger = () => {
-      if (firedRef.current) return;
+      if (firedRef.current || !desktop()) return;
       firedRef.current = true;
 
       lenis?.stop();

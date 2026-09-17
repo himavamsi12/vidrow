@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import HeroCurtain from "./components/HeroCurtain";
 import FeaturedWork from "./components/FeaturedWork";
+import FeaturedWorkMobile from "./components/FeaturedWorkMobile";
 import WhereYouAreNow from "./components/WhereYouAreNow";
 import Levers from "./components/Levers";
 import SelectedWork from "./components/SelectedWork";
@@ -15,13 +16,18 @@ export default function Home() {
     <>
       <Hero />
       <HeroCurtain />
-      <FeaturedWork />
+      {/* two Featured Work layouts share the one anchor: the stacked cards on
+          desktop, the original expanding rows on mobile (swapped in CSS) */}
+      <div id="featured">
+        <FeaturedWork />
+        <FeaturedWorkMobile />
+      </div>
       <WhereYouAreNow />
       <Levers />
       <SelectedWork />
-      <CaseStudies />
       <Founders />
       <Partnership />
+      <CaseStudies />
       <News />
       <Footer />
     </>

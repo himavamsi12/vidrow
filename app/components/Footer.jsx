@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FOOTER_PIECES, FOOTER_PIECES_MOBILE } from "../data/footerPieces";
+import { FOOTER_PIECES } from "../data/footerPieces";
 
 const CTA_CELLS = [
   [0, 0],
@@ -28,20 +28,11 @@ export default function Footer({ hideCta = false }) {
   const pieceRefs = useRef([]);
   const [playing, setPlaying] = useState(false);
   const [revealed, setRevealed] = useState(false);
-  const [mobile, setMobile] = useState(false);
 
-  // the 35x5 single-row wordmark reads fine wide, but wraps to nothing on
-  // narrow screens — below 640px it's regrouped onto a 19x11 two-line grid
-  // ("VID" / "ROW") instead, see FOOTER_PIECES_MOBILE
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width:640px)");
-    const update = () => setMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  const pieces = mobile ? FOOTER_PIECES_MOBILE : FOOTER_PIECES;
+  // the 35x5 single-row wordmark at every width — narrow screens used to
+  // regroup it onto a 19x11 two-line grid ("VID" / "ROW", FOOTER_PIECES_MOBILE),
+  // but the word is meant to read as one line
+  const pieces = FOOTER_PIECES;
 
   // watch the block well itself, not the whole footer — the footer's title
   // and CTA sit well above the well, so observing the footer fired this
@@ -142,7 +133,7 @@ export default function Footer({ hideCta = false }) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const rect = wrap.getBoundingClientRect();
     // the well's own height: the floor the runway can't collapse past
-    const wellHeight = mobile ? (rect.width * 11) / 19 : (rect.width * 5) / 35;
+    const wellHeight = (rect.width * 5) / 35;
     footer.style.minHeight = `${footer.getBoundingClientRect().height}px`;
     const collapsedHeight = wellHeight;
     if (reduce) {
@@ -159,7 +150,7 @@ export default function Footer({ hideCta = false }) {
       wrap.style.height = `${collapsedHeight}px`;
     }, 20);
     return () => clearTimeout(t);
-  }, [revealed, mobile]);
+  }, [revealed]);
 
   return (
     <footer
@@ -187,8 +178,8 @@ export default function Footer({ hideCta = false }) {
       </div>
       )}
 
-      <div className={`vfoot__wellWrap${mobile ? " is-2line" : ""}`} ref={wellWrapRef}>
-        <div className={`vfoot__well${mobile ? " is-2line" : ""}`} ref={wellRef}>
+      <div className="vfoot__wellWrap" ref={wellWrapRef}>
+        <div className="vfoot__well" ref={wellRef}>
           {pieces.map((p, i) => (
             <span
               className={`vfoot__piece${p.pre ? " vfoot__piece--pre" : ""}`}
