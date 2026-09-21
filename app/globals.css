@@ -728,7 +728,7 @@ html.nav-hidden .hx-bar {
 
 .hx-num {
   font-weight: 600;
-  font-size: 48px;
+  font-size: 56px;
   line-height: 1.05;
   letter-spacing: -.02em;
   margin: 0 0 calc(12 * var(--k))
@@ -740,7 +740,7 @@ html.nav-hidden .hx-bar {
 
 .hx-cap {
   font-weight: 400;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1.2;
   white-space: nowrap
 }
@@ -749,18 +749,6 @@ html.nav-hidden .hx-bar {
   left: 10.6%;
   top: 36%;
   color: #121212
-}
-
-/* the "12+ Yrs" stat leads the set, so it runs a size up (desktop only —
-   mobile scales every label down together) */
-@media (min-width:901px) {
-  .hx-s1 .hx-num {
-    font-size: 56px
-  }
-
-  .hx-s1 .hx-cap {
-    font-size: 24px
-  }
 }
 
 .hx-s2 .hx-tag {
