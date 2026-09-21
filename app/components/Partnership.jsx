@@ -3,7 +3,32 @@
 import { useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
-import { PR_FILTERS, PR_NODES } from "../data/partnership";
+import { PR_FILTERS, PR_NODES, PR_STAGES } from "../data/partnership";
+
+// the hexagon, in the stage's 1440×1120 frame: a yellow band between the
+// outer and inner outline, the six funding stages printed along it, and
+// thin spokes from a small centre hexagon out to the band's inner corners
+const OUTER = "M1260,560 L990,1027.7 L450,1027.7 L180,560 L450,92.3 L990,92.3 Z";
+const INNER = "M1221.4,560 L970.7,994.2 L469.3,994.2 L218.6,560 L469.3,125.8 L970.7,125.8 Z";
+const CORE = "M747,560 L733.5,583.4 L706.5,583.4 L693,560 L706.5,536.6 L733.5,536.6 Z";
+const CORNERS = [
+  [1221.4, 560],
+  [970.7, 994.2],
+  [469.3, 994.2],
+  [218.6, 560],
+  [469.3, 125.8],
+  [970.7, 125.8],
+];
+// each stage label sits midway across the band on its edge, turned to run
+// along it — clockwise from the top edge, matching PR_STAGES
+const LABELS = [
+  [720, 109.1, 0],
+  [1110.5, 334.5, 60],
+  [1110.5, 785.5, -60],
+  [720, 1010.9, 0],
+  [329.5, 785.5, 60],
+  [329.5, 334.5, -60],
+];
 
 export default function Partnership() {
   const [activeCat, setActiveCat] = useState("all");
@@ -18,7 +43,10 @@ export default function Partnership() {
               <span className="pr-tag">Inside the partnership</span>
               <Mark />
             </div>
-            <h2 className="pr-h">This is what a real growth partnership looks like.</h2>
+            <h2 className="pr-h">
+              A playbook that works <br />
+              across industries
+            </h2>
           </div>
           <div className="pr-filters" role="group" aria-label="Filter partners by industry">
             {PR_FILTERS.map((f) => (
@@ -35,21 +63,20 @@ export default function Partnership() {
         </Reveal>
 
         <div className={`pr-stage${filtered ? " filtered" : ""}`}>
-          <svg className="pr-web" viewBox="0 0 1440 1120" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <path className="hex" d="M1260.0,560.0 L990.0,74.0 L450.0,74.0 L180.0,560.0 L450.0,1046.0 L990.0,1046.0 Z" />
-            <line className="spoke" x1="720" y1="560" x2="1260.0" y2="560.0" />
-            <line className="spoke" x1="720" y1="560" x2="990.0" y2="1046.0" />
-            <line className="spoke" x1="720" y1="560" x2="450.0" y2="1046.0" />
-            <line className="spoke" x1="720" y1="560" x2="180.0" y2="560.0" />
-            <line className="spoke" x1="720" y1="560" x2="450.0" y2="74.0" />
-            <line className="spoke" x1="720" y1="560" x2="990.0" y2="74.0" />
-            <path className="ring" d="M825.8,560.0 L772.9,651.6 L667.1,651.6 L614.2,560.0 L667.1,468.4 L772.9,468.4 Z" />
-            <text x="720.0" y="468.4" transform="rotate(0 720.0 468.4)">PRE-SEED</text>
-            <text x="799.4" y="514.2" transform="rotate(60 799.4 514.2)">SEED</text>
-            <text x="799.4" y="605.8" transform="rotate(-60 799.4 605.8)">SERIES A</text>
-            <text x="720.0" y="651.6" transform="rotate(0 720.0 651.6)">SERIES B</text>
-            <text x="640.6" y="605.8" transform="rotate(60 640.6 605.8)">SERIES C</text>
-            <text x="640.6" y="514.2" transform="rotate(-60 640.6 514.2)">SERIES D+</text>
+          <svg className="pr-web" viewBox="0 0 1440 1120" aria-hidden="true">
+            <path className="band" d={`${OUTER} ${INNER}`} fillRule="evenodd" />
+            {CORNERS.map(([x, y], i) => (
+              <line key={i} className="spoke" x1="720" y1="560" x2={x} y2={y} />
+            ))}
+            <path className="core" d={CORE} />
+            {PR_STAGES.map((stage, i) => {
+              const [x, y, r] = LABELS[i];
+              return (
+                <text key={stage} x={x} y={y} transform={`rotate(${r} ${x} ${y})`}>
+                  {stage}
+                </text>
+              );
+            })}
           </svg>
           {PR_NODES.map((node, i) => (
             <a
@@ -57,7 +84,7 @@ export default function Partnership() {
               className={`pr-node${activeCat === node.cat ? " on" : ""}`}
               href="#work"
               data-cat={node.cat}
-              style={{ "--x": node.x, "--y": node.y }}
+              style={{ "--x": node.x, "--y": node.y, "--w": node.w, "--h": node.h }}
               aria-label={node.label}
             >
               <img src={node.logo} alt={node.label} loading="lazy" />

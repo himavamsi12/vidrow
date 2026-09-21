@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
@@ -67,12 +68,16 @@ function Ground() {
  */
 export default function FeaturedWork() {
   const stackRef = useRef(null);
+  const updateRef = useRef(null);
+  // run the layout pass inside Lenis's own frame, straight after it moves
+  // the page, so the cards never trail the smooth scroll by a frame
+  useLenis(() => updateRef.current?.());
 
   // an accordion driven straight off the scroll position, with the card
   // going away and the card coming in moving as one: while an open card
   // scrolls up under the sticky heading, the row after it grows into the
-  // full card — starting as that row reaches the middle of the screen, done
-  // just as the open card's bottom meets the heading. The open
+  // full card — starting as that row rises past 70% of the way down the
+  // screen, done just as the open card's bottom meets the heading. The open
   // card stays joined to the one opening below it the whole way, so
   // there's never a gap between them, and it shrinks back slightly as it
   // goes, so it reads as sinking away behind the heading.
@@ -105,15 +110,18 @@ export default function FeaturedWork() {
       let top = stackRect.top;
       cards.forEach((card, i) => {
         // the first card is the one on show as the section arrives; each
-        // later one starts opening as its row's centre reaches the middle
-        // of the screen, and is fully open as its top reaches the heading —
-        // the moment the card above it has gone under completely
+        // later one starts opening as its row's centre rises past 70% of
+        // the way down the screen, and is fully open as its top reaches the
+        // heading — the moment the card above it has gone under completely.
+        // The long run and the ease in and out keep the growth gentle
+        // rather than a sudden spring open.
         let o = 1;
         if (i > 0) {
           const docTop = stackTop + i * full;
-          const start = docTop - (window.innerHeight / 2 - row / 2);
+          const start = docTop - (window.innerHeight * 0.7 - row / 2);
           const end = docTop - headH;
-          o = Math.min(Math.max((window.scrollY - start) / Math.max(end - start, 1), 0), 1);
+          const t = Math.min(Math.max((window.scrollY - start) / Math.max(end - start, 1), 0), 1);
+          o = t * t * (3 - 2 * t);
         }
         const h = row + (full - row) * o;
         card.style.height = `${h}px`;
@@ -130,12 +138,14 @@ export default function FeaturedWork() {
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    updateRef.current = update;
 
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      updateRef.current = null;
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       cards.forEach((card) => {

@@ -76,7 +76,7 @@ export default function Hero() {
           </div>
           <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
             <span className="hx-tag">
-              <span className="hx-cap">Seed to</span>
+              <span className="hx-cap hx-cap--bold">Seed to</span>
               <strong className="hx-num hx-num--s2">Series D</strong>
               <span className="hx-cap">Playbook</span>
             </span>
@@ -117,14 +117,8 @@ export default function Hero() {
             <span className="hx-cta-t">Click to grow</span>
             <span className="hx-cta-i" aria-hidden="true">
               <svg viewBox="0 0 40 40" aria-hidden="true">
-                <g fill="#715BE4">
-                  <rect x="10" y="10" width="6" height="6" />
-                  <rect x="17" y="10" width="6" height="6" />
-                  <rect x="24" y="10" width="6" height="6" />
-                  <rect x="17" y="17" width="6" height="6" />
-                  <rect x="24" y="17" width="6" height="6" />
-                  <rect x="24" y="24" width="6" height="6" />
-                </g>
+                {/* the same solid step mark as Where You Are Now's "Read full story" */}
+                <path fill="#715BE4" d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />
               </svg>
             </span>
           </a>

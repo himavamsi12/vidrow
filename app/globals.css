@@ -793,6 +793,15 @@ html.nav-hidden .hx-bar {
   white-space: nowrap
 }
 
+/* "Seed to" reads as part of the "Series D" figure, so it's set exactly
+   like it */
+.hx-cap--bold {
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -.02em
+}
+
 .hx-s1 .hx-stat {
   left: 10.6%;
   top: 36%;
@@ -1243,6 +1252,12 @@ html.nav-hidden .hx-bar {
     font-size: clamp(13px, 3.6vw, 15px);
     line-height: 1.2;
     white-space: normal
+  }
+
+  /* matches the figure's own size here too */
+  .hx-cap--bold {
+    font-size: clamp(20px, 6.2vw, 26px);
+    line-height: 1.1
   }
 
   /* this card's own copy is the longest of the four — even at the smallest
@@ -2746,6 +2761,19 @@ html.nav-hidden .hx-bar {
   padding: 4px 8px
 }
 
+/* the mark overlaps the tag's top-right corner, mirrored, the same way the
+   Selected Work tag wears it */
+.fw2-tagwrap .mark {
+  position: absolute;
+  left: calc(100% - 10px);
+  top: -6px;
+  width: 15px;
+  height: 15px;
+  gap: 1px;
+  transform: scaleX(-1);
+  color: var(--ink)
+}
+
 .fw2-h {
   font-family: var(--display);
   font-weight: 400;
@@ -2756,12 +2784,10 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
-/* the rules above the first card and under the last one live on the list
-   itself, so they hold whether the end card is a row or opening */
+/* the rule above the first card; every card draws its own under itself */
 .fw2-stack {
   position: relative;
-  border-top: 1px solid #E4E4E4;
-  border-bottom: 1px solid #E4E4E4
+  border-top: 1px solid #E4E4E4
 }
 
 /* a card's height runs from its row to the full card, set by
@@ -2781,6 +2807,20 @@ html.nav-hidden .hx-bar {
   transform-origin: 50% 100%
 }
 
+/* the divider under every card, drawn over both the row and the full card
+   so it holds whether the card is collapsed, opening or open */
+.fw2-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 1px;
+  background: #E4E4E4;
+  pointer-events: none
+}
+
 /* collapsed: a plain white list row — logo, headline, the quote's opening */
 .fw2-row {
   position: absolute;
@@ -2789,7 +2829,6 @@ html.nav-hidden .hx-bar {
   top: 0;
   height: var(--row);
   box-sizing: border-box;
-  border-bottom: 1px solid #E4E4E4;
   display: grid;
   grid-template-columns: 17% 34% 1fr;
   align-items: center;
@@ -2799,8 +2838,8 @@ html.nav-hidden .hx-bar {
   background: var(--paper);
   pointer-events: none;
   /* sits over the top of the (always solid) full card and fades off it
-     over the first third of the opening */
-  opacity: calc(1 - var(--o) * 3)
+     over the first half of the opening */
+  opacity: calc(1 - var(--o) * 2)
 }
 
 .fw2-rowLogo {
@@ -3024,7 +3063,7 @@ html.nav-hidden .hx-bar {
 .fw2-by {
   display: flex;
   flex-direction: column;
-  gap: calc(8 * var(--k))
+  gap: calc(2 * var(--k))
 }
 
 .fw2-by b {
@@ -3039,6 +3078,7 @@ html.nav-hidden .hx-bar {
 .fw2-by span {
   font-family: var(--body);
   font-size: calc(15 * var(--k));
+  line-height: 1.2;
   color: #4C4546
 }
 
@@ -3889,7 +3929,7 @@ html.nav-hidden .hx-bar {
   height: 15px;
   gap: 1px;
   transform: scaleX(-1);
-  color: var(--paper)
+  color: var(--violet)
 }
 
 .sw-h {
@@ -5146,11 +5186,12 @@ html.nav-hidden .hx-bar {
   position: relative
 }
 
+/* heading on the left, the filters aligned to its last line on the right */
 .pr-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: calc(32 * var(--k));
   flex-wrap: wrap
 }
@@ -5200,12 +5241,11 @@ html.nav-hidden .hx-bar {
 .pr-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: min(calc(48 * var(--k)), 40px);
+  font-size: min(calc(48 * var(--k)), 48px);
   line-height: 1.15;
-  letter-spacing: -.025em;
+  letter-spacing: -.03em;
   color: #1A1C1C;
-  margin: calc(10 * var(--k)) 0 0;
-  max-width: calc(620 * var(--k))
+  margin: calc(10 * var(--k)) 0 0
 }
 
 .pr-filters {
@@ -5217,15 +5257,15 @@ html.nav-hidden .hx-bar {
 
 .pr-filter {
   position: relative;
-  height: calc(38 * var(--k));
-  padding: 0 calc(18 * var(--k));
+  height: calc(36 * var(--k));
+  padding: 0 calc(11 * var(--k));
   box-sizing: border-box;
   cursor: pointer;
   background: #F2F2F2;
   border: 0;
   border-radius: 2px;
   font-family: var(--body);
-  font-size: calc(15 * var(--k));
+  font-size: calc(14 * var(--k));
   line-height: 1;
   color: #4D4D4D;
   transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
@@ -5241,20 +5281,20 @@ html.nav-hidden .hx-bar {
   color: #000
 }
 
-/* the web */
+/* the hexagon: its geometry lives in Partnership.jsx in the stage's own
+   1440×1120 frame, and --s is one unit of that frame, so every logo tile
+   (sized and placed in the same units) scales with it. The hexagon spans
+   1080 of the frame's 1440 units, so a 1284px stage draws it at the
+   design's 963 × 833px — narrower screens scale the whole stage down. It's
+   centred off the section's middle so it can run wider than the padded
+   content column. */
 .pr-stage {
   position: relative;
-  /* --s (and so the whole hex + every logo) scales off this element's own
-     width via cqw — narrower than 100% just renders the same web smaller,
-     centered, rather than needing a separate scale-down of every node */
-  width: 82%;
-  margin-left: auto;
-  margin-right: auto;
-  /* taller than the original 1440/860 frame — the outer hex was widened
-     to fully enclose the spread-out logo nodes without touching the inner
-     yellow ring; --s stays width-based so this only adds height */
+  width: min(1284px, 100vw);
+  margin-left: 50%;
+  transform: translateX(-50%);
   aspect-ratio: 1440 / 1120;
-  margin-top: calc(20 * var(--k));
+  margin-top: calc(56 * var(--k));
   overflow: hidden;
   container-type: inline-size;
   --s: .0694444cqw
@@ -5267,41 +5307,42 @@ html.nav-hidden .hx-bar {
   height: 100%
 }
 
-.pr-web .hex {
-  fill: none;
-  stroke: #E6E6E6;
-  stroke-width: 1.2
+.pr-web .band {
+  fill: var(--acid);
+  stroke: #E3E36A;
+  stroke-width: 1
 }
 
 .pr-web .spoke {
-  stroke: #EDEDED;
+  stroke: #DCDCDC;
   stroke-width: 1.2
 }
 
-.pr-web .ring {
-  fill: none;
-  stroke: var(--acid);
-  stroke-width: 26;
-  stroke-linejoin: miter
+.pr-web .core {
+  fill: var(--paper);
+  stroke: #DCDCDC;
+  stroke-width: 1.2
 }
 
 .pr-web text {
   font-family: var(--body);
   font-weight: 700;
-  font-size: 9px;
+  font-size: 18px;
   letter-spacing: .02em;
-  fill: #1A1C1C;
+  fill: #121212;
   text-anchor: middle;
-  dominant-baseline: middle
+  dominant-baseline: central
 }
 
+/* the logo files carry their own thin frames, so each is shown as-is at
+   its tile's size */
 .pr-node {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(calc(-50% + var(--x) * var(--s)), calc(-50% + var(--y) * var(--s)));
-  width: calc(120 * var(--s));
-  height: calc(52 * var(--s));
+  width: calc(var(--w) * var(--s));
+  height: calc(var(--h) * var(--s));
   box-sizing: border-box;
   display: grid;
   place-items: center;
@@ -5309,10 +5350,8 @@ html.nav-hidden .hx-bar {
 }
 
 .pr-node img {
-  max-width: calc(130 * var(--s));
-  max-height: calc(48 * var(--s));
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block
 }
