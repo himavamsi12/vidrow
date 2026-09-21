@@ -808,8 +808,10 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
+/* starts clear of the hook notch in this bar's bottom-left corner (which
+   ends at 14.45%), so "Playbook" doesn't sit on its edge */
 .hx-s2 .hx-tag {
-  left: 9.7%;
+  left: 19%;
   top: 14.5%;
   color: var(--paper)
 }
@@ -5307,10 +5309,13 @@ html.nav-hidden .hx-bar {
   height: 100%
 }
 
+.pr-web .hit {
+  fill: transparent
+}
+
 .pr-web .band {
   fill: var(--acid);
-  stroke: #E3E36A;
-  stroke-width: 1
+  transition: fill .3s ease
 }
 
 .pr-web .spoke {
@@ -5331,7 +5336,50 @@ html.nav-hidden .hx-bar {
   letter-spacing: .02em;
   fill: #121212;
   text-anchor: middle;
-  dominant-baseline: central
+  dominant-baseline: central;
+  pointer-events: none;
+  transition: fill .3s ease
+}
+
+.pr-web .band,
+.pr-web .spoke,
+.pr-web .core {
+  pointer-events: none
+}
+
+/* hovering a segment: everything else greys back, and the segment itself is
+   redrawn on top (.lift) as a raised white wedge with its yellow band and
+   dark label */
+.pr-stage.seg-hover .pr-web .band {
+  fill: #E2E2E2
+}
+
+.pr-stage.seg-hover .pr-web text {
+  fill: #9A9A9A
+}
+
+.pr-web .lift {
+  pointer-events: none;
+  filter: drop-shadow(0 18px 36px rgba(18, 18, 18, .14));
+  animation: pr-lift .3s ease both
+}
+
+.pr-web .lift-face {
+  fill: var(--paper)
+}
+
+.pr-stage.seg-hover .pr-web .lift .band.on {
+  fill: var(--acid)
+}
+
+.pr-stage.seg-hover .pr-web .lift text.on {
+  fill: #121212
+}
+
+@keyframes pr-lift {
+  from {
+    opacity: 0
+  }
 }
 
 /* the logo files carry their own thin frames, so each is shown as-is at
@@ -5362,6 +5410,16 @@ html.nav-hidden .hx-bar {
 
 .pr-stage.filtered .pr-node.on {
   opacity: 1
+}
+
+/* hovering a segment: the logos outside it go grey */
+.pr-node {
+  transition: opacity .3s ease, filter .3s ease
+}
+
+.pr-stage.seg-hover .pr-node:not(.lit) {
+  filter: grayscale(1);
+  opacity: .5
 }
 
 @media (max-width:1000px) {
