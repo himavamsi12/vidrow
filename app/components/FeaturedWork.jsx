@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useLenis } from "lenis/react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
@@ -62,123 +61,71 @@ function Ground() {
 /**
  * Featured work: one acid card per company, each a tetris
  * arrangement of white blocks — logo, founder cut-out, headline, and the
- * full testimonial with its author down the right. The cards rest as a
- * list of collapsed rows, and each one opens into its full card as it
- * scrolls up into view.
+ * full testimonial with its author down the right. The heading sticks at
+ * the top of the section; each card rests as its row and grows into the
+ * full card while the one above it sinks away under the heading.
  */
 export default function FeaturedWork() {
   const stackRef = useRef(null);
-  const lenis = useLenis();
-  const lenisRef = useRef(null);
-  lenisRef.current = lenis;
 
-  // an accordion with one card open at a time. Scrolling down, a row that
-  // reaches the middle of the screen opens there — growing downward from
-  // where it is — while the card above it collapses back to its row. That
-  // collapse would drag the opening card up the screen, so for as long as
-  // the transition runs the scroll position is moved by exactly the height
-  // the cards above give back, and the opening card stays where it was.
-  // Scrolling back up runs the same thing in reverse (the card reopening
-  // above grows down from its own top, so nothing needs holding there).
+  // an accordion driven straight off the scroll position, with the card
+  // going away and the card coming in moving as one: while an open card
+  // scrolls up under the sticky heading, the row after it grows into the
+  // full card — starting as that row reaches the middle of the screen, done
+  // just as the open card's bottom meets the heading. The open
+  // card stays joined to the one opening below it the whole way, so
+  // there's never a gap between them, and it shrinks back slightly as it
+  // goes, so it reads as sinking away behind the heading.
+  //
+  // Each card's opening range is worked out from the document layout with
+  // every card above it already open, so it depends only on scrollY —
+  // never on where the cards happen to sit mid-growth — and so can't feed
+  // back on itself. Heights only ever change below the heading, so nothing
+  // above the card opening moves.
   useEffect(() => {
     const stack = stackRef.current;
     if (!stack) return;
     const cards = [...stack.querySelectorAll(".fw2-card")];
     if (!cards.length) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    // move the page by dy without disturbing a smooth scroll in progress:
-    // Lenis eases toward a target, so the target, the eased value and the
-    // animation's own endpoints all shift together and the glide carries on
-    const shiftScroll = (dy) => {
-      const l = lenisRef.current;
-      if (l && l.isScrolling === "smooth") {
-        l.animatedScroll += dy;
-        l.targetScroll += dy;
-        if (l.animate) {
-          l.animate.value += dy;
-          l.animate.from += dy;
-          l.animate.to += dy;
-        }
-        l.setScroll(l.animatedScroll);
-      } else {
-        window.scrollTo({ top: window.scrollY + dy, behavior: "instant" });
-      }
-    };
-
-    // hold the page still against the height changes of `held` (the cards
-    // above the one opening) until their transition has finished
-    let holdFrame = 0;
-    // while holding, <html data-scroll-hold> tells SiteNav the page is moving
-    // itself, so it doesn't read the shift up as the user scrolling up
-    const root = document.documentElement;
-    const release = () => delete root.dataset.scrollHold;
-    const hold = (held) => {
-      cancelAnimationFrame(holdFrame);
-      if (!held.length) return release();
-      root.dataset.scrollHold = "1";
-      let prev = held.map((c) => c.offsetHeight);
-      const until = performance.now() + 1100; // the 1s height transition
-      const step = (now) => {
-        const heights = held.map((c) => c.offsetHeight);
-        const dy = heights.reduce((sum, h, i) => sum + h - prev[i], 0);
-        prev = heights;
-        if (dy) shiftScroll(dy);
-        // one frame of grace after the last shift, so its scroll event is
-        // still covered
-        holdFrame = requestAnimationFrame(now < until ? step : release);
-      };
-      holdFrame = requestAnimationFrame(step);
-    };
-
-    let active = -1;
-    const setActive = (next, held) => {
-      if (next === active) return;
-      if (active !== -1) cards[active].classList.remove("is-open");
-      if (next !== -1) cards[next].classList.add("is-open");
-      active = next;
-      hold(held);
-    };
+    const head = stack.parentElement.querySelector(".fw2-head");
 
     let frame = 0;
     const update = () => {
       frame = 0;
-      const mid = window.innerHeight / 2;
       const row = cards[0].querySelector(".fw2-row").offsetHeight;
       const full = cards[0].querySelector(".fw2-full").offsetHeight;
-      // every card's top as it will be once settled (only the active card
-      // full height), not read off the page — mid-transition the heights
-      // are still in flight and would make the next row look centred too
-      const base = stack.getBoundingClientRect().top;
-      const top = (i) => base + i * row + (active !== -1 && i > active ? full - row : 0);
-      const reached = (i) => top(i) + row / 2 < mid;
-
-      // arriving with every card closed (e.g. the hero curtain dropping the
-      // page onto this section with a couple of rows already past the
-      // middle): the first card that qualifies opens, not a later one
-      if (active === -1) {
-        const j = cards.findIndex((_, i) => reached(i) && top(i) + full > mid);
-        if (j !== -1) setActive(j, []);
-        return;
-      }
-
-      // scrolling down: the lowest row below the open card that has reached
-      // the middle takes over, and everything above it is held still
-      for (let j = cards.length - 1; j > active; j--) {
-        if (reached(j) && top(j) + full > mid) {
-          setActive(j, cards.slice(0, j));
-          return;
+      const stackRect = stack.getBoundingClientRect();
+      const stackTop = stackRect.top + window.scrollY;
+      // the heading's height is where it sticks to, and so where the cards
+      // go under it
+      const headH = head ? head.offsetHeight : 0;
+      const hinge = head ? head.getBoundingClientRect().bottom : 0;
+      // each card's layout top on screen, summed from the heights set here
+      let top = stackRect.top;
+      cards.forEach((card, i) => {
+        // the first card is the one on show as the section arrives; each
+        // later one starts opening as its row's centre reaches the middle
+        // of the screen, and is fully open as its top reaches the heading —
+        // the moment the card above it has gone under completely
+        let o = 1;
+        if (i > 0) {
+          const docTop = stackTop + i * full;
+          const start = docTop - (window.innerHeight / 2 - row / 2);
+          const end = docTop - headH;
+          o = Math.min(Math.max((window.scrollY - start) / Math.max(end - start, 1), 0), 1);
         }
-      }
-      // scrolling back up: the open card's row has dropped below the
-      // middle, so the nearest row above that is still past it reopens.
-      // Scrolling on past the last card leaves it open — closing it there
-      // would pull its row back up across the middle and reopen it, over
-      // and over.
-      if (active === -1 || reached(active)) return;
-      let j = active - 1;
-      while (j >= 0 && !reached(j)) j--;
-      setActive(j >= 0 && top(j) + full > mid ? j : -1, []);
+        const h = row + (full - row) * o;
+        card.style.height = `${h}px`;
+        card.style.setProperty("--o", o.toFixed(3));
+
+        // passing under the heading: shrink back about the bottom edge, so
+        // it stays joined to the card opening below
+        const past = Math.min(Math.max(hinge - top, 0), h);
+        const c = past / h;
+        card.style.transform = c > 0 ? `scale(${(1 - 0.06 * c).toFixed(4)})` : "";
+        top += h;
+      });
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -189,11 +136,13 @@ export default function FeaturedWork() {
     window.addEventListener("resize", onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
-      cancelAnimationFrame(holdFrame);
-      release();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      cards.forEach((card) => card.classList.remove("is-open"));
+      cards.forEach((card) => {
+        card.style.height = "";
+        card.style.transform = "";
+        card.style.removeProperty("--o");
+      });
     };
   }, []);
 

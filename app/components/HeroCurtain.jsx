@@ -10,6 +10,7 @@ const CLOSE_MS = 750; // the bars' .65s rise plus a small settle
 const HOLD_MS = 100;
 const FADE_MS = 600; // matches .hero-curtain's lift-off transform transition
 const TAG_GAP = 24; // px left above the Featured Work tag once revealed
+const RISE_MS = 1400; // #featured.is-rising's slide-up: its delays plus the 1s slide
 
 /**
  * A fixed, viewport-covering overlay that plays the hero's staircase-close
@@ -104,6 +105,16 @@ export default function HeroCurtain() {
 
         setTimeout(() => {
           setFading(true);
+          // as the curtain lifts, Featured Work slides up into place under
+          // it rather than just being uncovered. The class is dropped once
+          // the slide is done so it replays on the next reveal and leaves
+          // no transform on the section afterwards.
+          if (section) {
+            section.classList.remove("is-rising");
+            void section.offsetWidth;
+            section.classList.add("is-rising");
+            setTimeout(() => section.classList.remove("is-rising"), RISE_MS);
+          }
           setTimeout(() => {
             document.body.style.overflow = "";
             lenis?.start();
@@ -189,6 +200,13 @@ export default function HeroCurtain() {
     >
       <div className={`hx-stair${closed ? " closed" : ""}`}>
         {/* just the hero's four staircase blocks, each rising straight up from its step */}
+        {/* a white copy of the four bars underneath, without the seams cut
+            in, so the gaps between the bars read as white instead of
+            showing the hero behind the curtain */}
+        <div className="hx-step hc-b1 hc-back" />
+        <div className="hx-step hc-b2 hc-back" />
+        <div className="hx-step hc-b3 hc-back" />
+        <div className="hx-step hc-b4 hc-back" />
         <div className="hx-step hc-b1 hx-y" />
         <div className="hx-step hc-b2 hx-v" />
         <div className="hx-step hc-b3 hx-y" />

@@ -509,6 +509,32 @@ html.nav-hidden .hx-bar {
   transform: translateY(-100%);
 }
 
+/* as the curtain lifts off, Featured Work's content slides up into place
+   beneath it (class added and removed by HeroCurtain.jsx). It waits until
+   the curtain is mostly clear, so the motion is actually seen rather than
+   spent behind it, and moves the content rather than the section so the
+   section's own white ground stays put — nothing above it peeks in at the
+   top while it travels. */
+#featured.is-rising .fw2 > * {
+  animation: featured-rise 1s cubic-bezier(.2, .7, .2, 1) .25s both
+}
+
+#featured.is-rising .fw2 > .fw2-stack {
+  animation-delay: .33s
+}
+
+@keyframes featured-rise {
+  from {
+    opacity: 0;
+    transform: translateY(160px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
 /* desktop-only reveal: mobile scrolls from the hero into the page normally,
    so the curtain never paints there even if something mounts it */
 @media (max-width:900px) {
@@ -661,6 +687,22 @@ html.nav-hidden .hx-bar {
   clip-path: polygon(0 0, 66.34% 0, 66.34% 0, 100% 0, 100% 100%, 66.34% 100%, 66.34% 73.2%, 33.27% 73.2%, 33.27% 67.84%, 0 67.84%)
 }
 
+/* the white backing under the bars: the same shapes rising on the same
+   timing, but with the seams left out (every edge that's pulled in by
+   --hc-gap above sits back on its neighbour here), so each gap is backed in
+   white only as high as the bars around it have risen */
+.hero-curtain .hx-stair.closed .hc-back.hc-b1 {
+  clip-path: polygon(0 0, 91.94% 0, 91.94% 0, 91.94% 0, 91.94% 89.6%, 100% 89.6%, 100% 100%, 0 100%)
+}
+
+.hero-curtain .hx-stair.closed .hc-back.hc-b2 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14.19% 100%, 14.19% 89.6%, 0 89.6%)
+}
+
+.hero-curtain .hx-stair.closed .hc-back.hc-b3 {
+  clip-path: polygon(0 0, 53.63% 0, 53.63% 67.84%, 76.51% 67.84%, 76.51% 73.2%, 100% 73.2%, 100% 100%, 0 100%)
+}
+
 /* the bottom hooks keep a hairline gap to the bar beneath; once the rise
    has finished and the page jumps to Featured Work, a paper backdrop keeps
    those hairlines white instead of leaking the page through */
@@ -677,6 +719,12 @@ html.nav-hidden .hx-bar {
 .hero-curtain .hx-stair.closed .hc-b2,
 .hero-curtain .hx-stair.closed .hc-b4 {
   background: var(--violet)
+}
+
+/* (after the colour rules above, which it has to win over) */
+.hero-curtain .hx-stair .hx-step.hc-back {
+  background: var(--paper);
+  box-shadow: none
 }
 
 /* once all four have shown, the blocks rise and close the hero. The 1px
@@ -2668,12 +2716,18 @@ html.nav-hidden .hx-bar {
   background: var(--paper)
 }
 
+/* the heading sticks at the top for the whole section, layered over the
+   cards so each one scrolls away underneath it */
 .fw2-head {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding: clamp(56px, 7vw, 110px) var(--side) clamp(32px, 4.2vw, 60px)
+  padding: clamp(28px, 3vw, 44px) var(--side) clamp(20px, 2vw, 28px)
 }
 
 .fw2-tagwrap {
@@ -2702,27 +2756,29 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
+/* the rules above the first card and under the last one live on the list
+   itself, so they hold whether the end card is a row or opening */
 .fw2-stack {
   position: relative;
-  border-top: 1px solid #E4E4E4
+  border-top: 1px solid #E4E4E4;
+  border-bottom: 1px solid #E4E4E4
 }
 
-/* a card is its collapsed row until FeaturedWork.jsx marks it .is-open
-   (its row reached the middle of the screen), then it grows to the full
-   card; when the next card opens it collapses back to its row */
+/* a card's height runs from its row to the full card, set by
+   FeaturedWork.jsx from the scroll position along with --o (0..1), how open
+   it is. It defaults to full and open, for before the script runs and for
+   reduced motion. Going under the sticky heading the script also shrinks it
+   back about its bottom edge, so it stays joined to the card opening below
+   it. */
 .fw2-card {
   --row: clamp(112px, 9.72vw, 150px);
   --full: clamp(640px, 44.444vw, 100vh);
+  --o: 1;
   position: relative;
   overflow: hidden;
-  height: var(--row);
-  background: var(--paper);
+  height: var(--full);
   color: #121212;
-  transition: height 1s cubic-bezier(.22, 1, .36, 1)
-}
-
-.fw2-card.is-open {
-  height: var(--full)
+  transform-origin: 50% 100%
 }
 
 /* collapsed: a plain white list row — logo, headline, the quote's opening */
@@ -2739,15 +2795,12 @@ html.nav-hidden .hx-bar {
   align-items: center;
   padding: 0 var(--side);
   column-gap: 2%;
+  z-index: 1;
+  background: var(--paper);
   pointer-events: none;
-  /* closing: the row comes back as the collapse finishes */
-  transition: opacity .35s ease .6s
-}
-
-/* opening: the row clears first, before the card shows */
-.fw2-card.is-open .fw2-row {
-  opacity: 0;
-  transition: opacity .2s ease
+  /* sits over the top of the (always solid) full card and fades off it
+     over the first third of the opening */
+  opacity: calc(1 - var(--o) * 3)
 }
 
 .fw2-rowLogo {
@@ -2797,8 +2850,8 @@ html.nav-hidden .hx-bar {
   overflow: hidden
 }
 
-/* open: the full card, always laid out at its full height and uncovered by
-   the card's own growing height */
+/* open: the full card, always laid out at its full height and uncovered as
+   the card grows */
 .fw2-full {
   position: absolute;
   left: 0;
@@ -2806,30 +2859,13 @@ html.nav-hidden .hx-bar {
   top: 0;
   height: var(--full);
   container-type: size;
-  background: var(--acid);
-  opacity: 0;
-  /* closing: the card stays visible while it collapses, then hands over
-     to the row */
-  transition: opacity .35s ease .6s
-}
-
-.fw2-card.is-open .fw2-full {
-  opacity: 1;
-  transition: opacity .45s ease .15s
+  background: var(--acid)
 }
 
 /* reduced motion: every card simply sits open */
 @media (prefers-reduced-motion:reduce) {
-  .fw2-card {
-    height: var(--full)
-  }
-
   .fw2-row {
     display: none
-  }
-
-  .fw2-full {
-    opacity: 1
   }
 }
 
@@ -2913,7 +2949,9 @@ html.nav-hidden .hx-bar {
   width: 25%;
   bottom: 0;
   box-sizing: border-box;
-  padding: 0 0 0 3.6%;
+  /* same inset as the page (--side), so the headline lines up with the
+     logo above and the section's "Featured Work" heading */
+  padding: 0 0 0 var(--side);
   display: flex;
   align-items: center;
   margin: 0;
