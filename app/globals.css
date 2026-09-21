@@ -65,7 +65,15 @@
   --pad: clamp(60px, 8vw, 132px);
   --gut: clamp(20px, 4.4vw, 64px);
   --maxw: 1440px;
-  --side: max(20px, 6%);
+  /* the page's left/right inset: every section's content, the nav and the
+     featured-work cards all line up on it */
+  --side: clamp(52px, 6vw, 140px);
+}
+
+@media (max-width:640px) {
+  :root {
+    --side: 20px
+  }
 }
 
 * {
@@ -262,7 +270,7 @@ a {
   left: 0;
   right: 0;
   top: 0;
-  padding: calc(20 * var(--k)) 6%;
+  padding: calc(20 * var(--k)) var(--side);
   background: var(--paper);
   box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
   display: flex;
@@ -531,24 +539,16 @@ html.nav-hidden .hx-bar {
   transition-delay: 0s
 }
 
-.hx-s6 {
-  transition-delay: .06s
-}
-
 .hx-s3 {
-  transition-delay: .12s
+  transition-delay: .1s
 }
 
 .hx-s2 {
-  transition-delay: .18s
-}
-
-.hx-s5 {
-  transition-delay: .24s
+  transition-delay: .2s
 }
 
 .hx-s1 {
-  transition-delay: .30s
+  transition-delay: .3s
 }
 
 .hx-step.lit {
@@ -563,73 +563,104 @@ html.nav-hidden .hx-bar {
   background: var(--violet)
 }
 
+/* four interlocking tetris pieces, each one box carved by clip-path so it
+   hooks under / over its neighbours. The white seams between pieces are part
+   of the polygons, so the boxes overlap freely. */
 .hx-s1 {
   left: 0;
-  width: 51%;
-  top: 88.43%;
-  z-index: 1
-}
-
-.hx-s5 {
-  left: 44%;
-  width: 28%;
-  top: 75.46%;
-  z-index: 1
-}
-
-.hx-s3 {
-  left: 58%;
-  width: 21%;
-  top: 62.96%;
-  z-index: 1
-}
-
-.hx-s6 {
-  left: 72%;
-  width: 7%;
-  top: 50%;
-  z-index: 1
+  width: 35.35%;
+  top: 74.56%;
+  clip-path: polygon(0 19.81%, 67.19% 19.81%, 67.19% 0, 90.52% 0, 90.52% 61.32%, 100% 61.32%, 100% 100%, 0 100%)
 }
 
 .hx-s2 {
-  left: 51%;
-  width: 13.5%;
-  top: 75.46%;
-  z-index: 2
+  left: 32.5%;
+  width: 22.15%;
+  top: 69.36%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14.45% 100%, 14.45% 66.06%, 0 66.06%)
+}
+
+.hx-s3 {
+  left: 55.05%;
+  width: 35.8%;
+  top: 52.88%;
+  clip-path: polygon(0 0, 52.65% 0, 52.65% 33.62%, 76.4% 33.62%, 76.4% 44.82%, 100% 44.82%, 100% 100%, 0 100%)
 }
 
 .hx-s4 {
-  left: 79%;
-  width: 21%;
-  top: 25.93%;
-  z-index: 1;
-  clip-path: polygon(66.7% 0, 100% 0, 100% 100%, 0 100%, 0 21.7%, 33.3% 21.7%, 33.3% 10.9%, 66.7% 10.9%)
+  left: 74.3%;
+  width: 25.7%;
+  top: 31.36%;
+  clip-path: polygon(0 8.04%, 66.34% 8.04%, 66.34% 0, 100% 0, 100% 100%, 66.34% 100%, 66.34% 60.96%, 33.27% 60.96%, 33.27% 53.15%, 0 53.15%)
 }
 
-/* the curtain is only the hero's four staircase blocks, laid side by side
-   in the slices they visibly occupy (0-51%, 51-64.5%, 64.5-79%, 79-100%),
-   each starting at its own step height. No stagger and one shared timing,
-   so every bar travels straight up together and they reach the top as one
-   flat edge. The hero's own .hx-sN rules don't apply here. */
-/* each bar is full height and scaled down from its bottom edge to its step
-   height — rising via transform (GPU) instead of animating `top` keeps the
-   motion smooth, with no per-frame layout */
-.hero-curtain .hc-b1 { left: 0; width: 51%; transform: scaleY(.1157) }
-.hero-curtain .hc-b2 { left: 51%; width: 13.5%; transform: scaleY(.2454) }
-.hero-curtain .hc-b3 { left: 64.5%; width: 14.5%; transform: scaleY(.3704) }
-.hero-curtain .hc-b4 { left: 79%; width: 21%; transform: scaleY(.7407) }
+/* the curtain is only the hero's four staircase pieces. Each bar spans the
+   full viewport height and is shaped purely by clip-path, with the hero
+   piece's polygon converted into viewport coordinates so it starts as a
+   pixel match. Closing moves only the top-edge points up to 0 — the bottom
+   interlocks stay exactly where they are — so every bar rises straight up
+   from its own step, like a curtain, and nothing grows downward. One shared
+   timing, no stagger, so they all reach the top together. The hero's own
+   .hx-sN rules don't apply here. */
+.hero-curtain .hc-b1 {
+  left: 0;
+  width: 35.35%;
+  clip-path: polygon(0 79.6%, 67.19% 79.6%, 67.19% 74.56%, 90.52% 74.56%, 90.52% 90.16%, 100% 90.16%, 100% 100%, 0 100%)
+}
+
+.hero-curtain .hc-b2 {
+  left: 32.5%;
+  width: 22.55%;
+  clip-path: polygon(0 69.36%, 98.23% 69.36%, 98.23% 100%, 14.19% 100%, 14.19% 89.6%, 0 89.6%)
+}
+
+.hero-curtain .hc-b3 {
+  left: 55.05%;
+  width: 35.8%;
+  clip-path: polygon(0 52.88%, 52.65% 52.88%, 52.65% 68.72%, 76.4% 68.72%, 76.4% 74%, 100% 74%, 100% 100%, 0 100%)
+}
+
+.hero-curtain .hc-b4 {
+  left: 74.3%;
+  width: 25.7%;
+  clip-path: polygon(0 36.88%, 66.34% 36.88%, 66.34% 31.36%, 100% 31.36%, 100% 100%, 66.34% 100%, 66.34% 73.2%, 33.27% 73.2%, 33.27% 67.84%, 0 67.84%)
+}
 
 .hero-curtain .hx-step,
 .hero-curtain .hx-stair.closed .hx-step {
   top: 0;
-  transform-origin: 50% 100%;
-  will-change: transform;
-  transition: transform .65s cubic-bezier(.76, 0, .24, 1), background-color .35s ease;
+  will-change: clip-path;
+  transition: clip-path .65s cubic-bezier(.76, 0, .24, 1), background-color .35s ease;
   transition-delay: 0s
 }
 
-.hero-curtain .hx-stair.closed .hx-step {
-  transform: none
+/* rising: every top edge travels up to 0, and the gaps that open upward
+   (b1's hook notch, b3's steps, the seam at b2's right edge) close sideways
+   as they go, so nothing behind the curtain ever shows through a seam. The
+   notches that open downward (b2's and b4's bottom-left hooks) are left
+   alone here so no bar grows downward during the rise. */
+.hero-curtain .hx-stair.closed .hc-b1 {
+  clip-path: polygon(0 0, 67.19% 0, 67.19% 0, 100% 0, 100% 90.16%, 100% 90.16%, 100% 100%, 0 100%)
+}
+
+.hero-curtain .hx-stair.closed .hc-b2 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14.19% 100%, 14.19% 89.6%, 0 89.6%)
+}
+
+.hero-curtain .hx-stair.closed .hc-b3 {
+  clip-path: polygon(0 0, 52.65% 0, 52.65% 0, 76.4% 0, 76.4% 0, 100% 0, 100% 100%, 0 100%)
+}
+
+.hero-curtain .hx-stair.closed .hc-b4 {
+  clip-path: polygon(0 0, 66.34% 0, 66.34% 0, 100% 0, 100% 100%, 66.34% 100%, 66.34% 73.2%, 33.27% 73.2%, 33.27% 67.84%, 0 67.84%)
+}
+
+/* the bottom hooks keep a hairline gap to the bar beneath; once the rise
+   has finished and the page jumps to Featured Work, a paper backdrop keeps
+   those hairlines white instead of leaking the page through */
+.hero-curtain.is-closed {
+  background: var(--paper);
+  transition: transform .6s cubic-bezier(.76, 0, .24, 1), background-color 0s linear .65s
 }
 
 .hero-curtain .hx-stair.closed .hc-b1,
@@ -653,45 +684,6 @@ html.nav-hidden .hx-bar {
   transition: top .75s cubic-bezier(.5, 0, .2, 1), background-color .4s ease, clip-path .75s cubic-bezier(.5, 0, .2, 1)
 }
 
-.hx-stair.closed .hx-s1,
-.hx-stair.closed .hx-s5,
-.hx-stair.closed .hx-s3,
-.hx-stair.closed .hx-s6 {
-  background: var(--acid)
-}
-
-.hx-stair.closed .hx-s2,
-.hx-stair.closed .hx-s4 {
-  background: var(--violet)
-}
-
-.hx-stair.closed .hx-s4 {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0, 0 0, 0 0)
-}
-
-.hx-stair.closed .hx-s1 {
-  transition-delay: 0s
-}
-
-.hx-stair.closed .hx-s5 {
-  transition-delay: .06s
-}
-
-.hx-stair.closed .hx-s2 {
-  transition-delay: .12s
-}
-
-.hx-stair.closed .hx-s3 {
-  transition-delay: .18s
-}
-
-.hx-stair.closed .hx-s6 {
-  transition-delay: .24s
-}
-
-.hx-stair.closed .hx-s4 {
-  transition-delay: .3s
-}
 
 .hx-stair.closed .hx-step .hx-stat,
 .hx-stair.closed .hx-step .hx-tag {
@@ -717,53 +709,69 @@ html.nav-hidden .hx-bar {
   transition-delay: .1s
 }
 
-/* every label in the staircase reads as one set: same face, same size —
-   Inter at 600, since that's the heaviest weight the family is loaded at */
+/* every label in the staircase reads as one set: same face, same layout —
+   a bold headline number/phrase (.hx-num) with a lighter caption underneath
+   (.hx-cap), both Inter, stacked as a flex column */
 .hx-stat,
 .hx-tag {
   position: absolute;
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: calc(28 * var(--k));
-  line-height: 1.2
+  display: flex;
+  flex-direction: column;
+  font-family: var(--body)
 }
 
-.hx-stat {
-  letter-spacing: -.01em;
+.hx-num {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin: 0 0 calc(12 * var(--k))
+}
+
+.hx-num--s2 {
+  margin: calc(2 * var(--k)) 0 calc(6 * var(--k))
+}
+
+.hx-cap {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
   white-space: nowrap
 }
 
-/* the long line starts near the bar's left edge, where the short stat it
-   replaced could afford to sit centred */
-/* centred in its own block, rather than sitting in from its left edge */
 .hx-s1 .hx-stat {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  left: 10.6%;
+  top: 36%;
   color: #121212
 }
 
-/* s2 carries a tag now, in the same spot its stat used to sit */
+/* the "12+ Yrs" stat leads the set, so it runs a size up (desktop only —
+   mobile scales every label down together) */
+@media (min-width:901px) {
+  .hx-s1 .hx-num {
+    font-size: 56px
+  }
+
+  .hx-s1 .hx-cap {
+    font-size: 24px
+  }
+}
+
 .hx-s2 .hx-tag {
-  left: 11%;
-  top: 18%;
-  width: 80%;
+  left: 9.7%;
+  top: 14.5%;
   color: var(--paper)
 }
 
 .hx-s3 .hx-tag {
-  right: 14.3%;
-  top: 17.4%;
-  width: 61.9%;
-  text-align: right;
+  left: 6.1%;
+  top: 12%;
   color: #121212
 }
 
 .hx-s4 .hx-tag {
-  left: 24.3%;
-  top: 55%;
-  width: 59.5%;
+  left: 8.6%;
+  top: 18%;
   color: var(--paper)
 }
 
@@ -772,7 +780,7 @@ html.nav-hidden .hx-bar {
   position: absolute;
   z-index: 3;
   transition: opacity .5s ease;
-  left: 6%;
+  left: var(--side);
   top: calc(184 * var(--k));
   width: calc(748 * var(--k))
 }
@@ -942,11 +950,6 @@ html.nav-hidden .hx-bar {
 
   .hx-s4 {
     order: 3
-  }
-
-  .hx-s5,
-  .hx-s6 {
-    display: none !important
   }
 
   .hx-step {
@@ -1178,32 +1181,38 @@ html.nav-hidden .hx-bar {
     text-align: left !important
   }
 
-  /* all four labels read as one set here: same size, same wrapping, and the
-     full width of the text column their card's padding leaves them.
-     .hx-stat keeps a nowrap on desktop, where its block is wide enough for
-     the whole line — on mobile that ran it off the edge, so it wraps like
-     the tags do */
+  /* all four labels read as one set here: a bold headline (.hx-num) over a
+     lighter caption (.hx-cap), both scaled to the card rather than the
+     desktop's container-query --k (unavailable once .hx-in drops its
+     container-type above) */
   .hx-stat,
   .hx-tag {
-    /* scales with the card, which is a fraction of the viewport — a fixed
-       size would leave the longest single word ("Performance.",
-       "FUNDRAISE") wider than the narrow half on a small phone */
-    font-size: clamp(16px, 4.2vw, 19px);
-    /* tighter than the desktop 1.2 — these are short stacked labels, and it
-       is what brings the piece down to about half its width */
-    line-height: 1.1;
     white-space: normal !important;
-    /* last-resort guard for a viewport narrow enough that even the smallest
-       size leaves a word too wide: break it rather than let it be clipped */
     overflow-wrap: break-word
   }
 
+  .hx-num {
+    font-size: clamp(20px, 6.2vw, 26px);
+    line-height: 1.1;
+    margin: 0 0 4px !important
+  }
+
+  .hx-cap {
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.2;
+    white-space: normal
+  }
+
   /* this card's own copy is the longest of the four — even at the smallest
-     size above, its 85px-wide column can't fit two of these words on a
-     line, so it gets a further reduction to actually land the 3-line
-     grouping (the compound selector outweighs the shared rule above) */
-  .hx-tag.hx-tag--s3 {
-    font-size: 12px
+     sizes above, its 85px-wide column can't fit two of these words on a
+     line, so it gets a further reduction to actually land the grouping
+     (the compound selector outweighs the shared rule above) */
+  .hx-tag--s3 .hx-num {
+    font-size: clamp(17px, 5.2vw, 21px)
+  }
+
+  .hx-tag--s3 .hx-cap {
+    font-size: clamp(11px, 3.2vw, 13px)
   }
 }
 
@@ -2670,7 +2679,7 @@ html.nav-hidden .hx-bar {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding: clamp(56px, 7vw, 110px) 6% clamp(32px, 4.2vw, 60px)
+  padding: clamp(56px, 7vw, 110px) var(--side) clamp(32px, 4.2vw, 60px)
 }
 
 .fw2-tagwrap {
@@ -2699,151 +2708,196 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
-/* the stack: every card sticks at the top of the viewport, so the next one
-   scrolls up over the one before it instead of pushing it away */
 .fw2-stack {
-  position: relative
+  position: relative;
+  border-top: 1px solid #E4E4E4
 }
 
+/* a card is its collapsed row until FeaturedWork.jsx marks it .is-open
+   (its row reached the middle of the screen), then it grows to the full
+   card; when the next card opens it collapses back to its row */
 .fw2-card {
-  position: sticky;
-  top: 0;
-  container-type: inline-size;
+  --row: clamp(112px, 9.72vw, 150px);
+  --full: clamp(640px, 44.444vw, 100vh);
+  position: relative;
   overflow: hidden;
-  height: 100vh;
-  background: var(--acid);
+  height: var(--row);
+  background: var(--paper);
   color: #121212;
-  /* --p is how far the next card has climbed over this one (0..1), written
-     by FeaturedWork.jsx on scroll: the card sinks back and dims as it goes,
-     so the stack reads as cards landing on top rather than sliding past */
-  --p: 0;
-  transform: scale(calc(1 - .07 * var(--p))) translateY(calc(-2% * var(--p)));
-  transform-origin: 50% 0;
-  filter: brightness(calc(1 - .18 * var(--p)));
-  border-radius: calc(18px * var(--p));
-  box-shadow: 0 calc(-30px * var(--p)) calc(60px * var(--p)) rgba(11, 11, 13, calc(.18 * var(--p)))
+  transition: height 1s cubic-bezier(.22, 1, .36, 1)
 }
 
+.fw2-card.is-open {
+  height: var(--full)
+}
+
+/* collapsed: a plain white list row — logo, headline, the quote's opening */
+.fw2-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--row);
+  box-sizing: border-box;
+  border-bottom: 1px solid #E4E4E4;
+  display: grid;
+  grid-template-columns: 17% 34% 1fr;
+  align-items: center;
+  padding: 0 var(--side);
+  column-gap: 2%;
+  pointer-events: none;
+  /* closing: the row comes back as the collapse finishes */
+  transition: opacity .35s ease .6s
+}
+
+/* opening: the row clears first, before the card shows */
+.fw2-card.is-open .fw2-row {
+  opacity: 0;
+  transition: opacity .2s ease
+}
+
+.fw2-rowLogo {
+  width: clamp(56px, 5.6vw, 88px);
+  height: clamp(56px, 5.6vw, 88px);
+  display: grid;
+  place-items: center
+}
+
+/* --trim is the share of each logo file that's blank padding on its left,
+   pulled back so the wordmark itself starts on --side */
+.fw2-rowLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  translate: calc(var(--trim, 0) * -100%) 0;
+  scale: var(--lscale, 1);
+  /* grows from the wordmark's own left edge, so it stays on --side */
+  transform-origin: calc(var(--trim, 0) * 100%) 50%;
+  mix-blend-mode: multiply
+}
+
+.fw2-rowLogo b {
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: .1em;
+  text-transform: uppercase
+}
+
+.fw2-rowLine {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(15px, 1.25vw, 20px);
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.fw2-rowSay {
+  font-family: var(--body);
+  font-size: clamp(14px, 1.18vw, 18px);
+  line-height: 1.45;
+  color: #4C4546;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden
+}
+
+/* open: the full card, always laid out at its full height and uncovered by
+   the card's own growing height */
+.fw2-full {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--full);
+  container-type: size;
+  background: var(--acid);
+  opacity: 0;
+  /* closing: the card stays visible while it collapses, then hands over
+     to the row */
+  transition: opacity .35s ease .6s
+}
+
+.fw2-card.is-open .fw2-full {
+  opacity: 1;
+  transition: opacity .45s ease .15s
+}
+
+/* reduced motion: every card simply sits open */
 @media (prefers-reduced-motion:reduce) {
   .fw2-card {
-    transform: none;
-    filter: none
+    height: var(--full)
+  }
+
+  .fw2-row {
+    display: none
+  }
+
+  .fw2-full {
+    opacity: 1
   }
 }
 
-/* brand block: a plain rectangle in the card's top-left corner, with the
-   headline bar starting at its right edge and hanging lower */
-.fw2-brand {
+/* everything is placed in the design's own coordinates: left/width as a
+   share of 1440, top/height as a share of 640. --k is one design px for
+   type and small fixed sizes — the smaller of the two axes' scales, so text
+   never outgrows its block when the card is squatter than the design
+   (between 900 and 1440 wide, where the height holds at 640) */
+.fw2-frame {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 17.5%;
-  /* a fixed height rather than a share of the card (100vh, so it used to
-     grow or shrink with the viewport's own height) — the logo and name
-     inside it size off this box in %, so a wandering height meant the logo
-     read bigger or smaller than intended depending on how tall the screen
-     happened to be */
-  height: 172px;
-  background: var(--paper)
+  inset: 0;
+  --k: min(.069444cqw, .15625cqh)
 }
 
-/* the logo files are square with a lot of padding baked in, so the box has
-   to be generous for the mark itself to read at any size */
+.fw2-ground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: var(--paper)
+}
+
+/* the logo files are square with padding baked in, so the box is larger
+   than the wordmark itself */
 .fw2-logo {
   position: absolute;
-  left: 15%;
-  top: 7%;
-  display: block;
-  width: 74%;
-  height: 48%
+  left: var(--side);
+  top: 0;
+  width: 11.5%;
+  height: 17.34%;
+  display: flex;
+  align-items: center
 }
 
 .fw2-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  object-position: left center
+  object-position: left center;
+  translate: calc(var(--trim, 0) * -100%) 0;
+  scale: var(--lscale, 1);
+  /* grows from the wordmark's own left edge, so it stays on --side */
+  transform-origin: calc(var(--trim, 0) * 100%) 50%;
+  mix-blend-mode: multiply
 }
 
 .fw2-logo b {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 1.3cqw;
+  font-size: calc(22 * var(--k));
   letter-spacing: .12em;
   text-transform: uppercase
-}
-
-.fw2-names {
-  position: absolute;
-  left: 15%;
-  top: 56%;
-  right: 12%;
-  display: flex;
-  flex-direction: column;
-  gap: .2cqw
-}
-
-.fw2-names b {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.36cqw;
-  line-height: 1.15;
-  /* the longest name (Helium Smart Air) stays on one line rather than
-     wrapping inside the narrow brand block */
-  white-space: nowrap;
-  letter-spacing: -.01em;
-  color: #121212
-}
-
-.fw2-names span {
-  font-family: var(--body);
-  font-size: 1.1cqw;
-  color: #4C4546
-}
-
-.fw2-headline {
-  position: absolute;
-  left: 17.5%;
-  top: 13%;
-  width: 36%;
-  /* height comes from the text plus the padding below, not a fixed share of
-     the card — a min-height here was forcing a tall box that just centred
-     a short line inside deep top/bottom bands */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  background: var(--paper);
-  padding: 32px
-}
-
-.fw2-headline h3 {
-  margin: 0;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 1.25;
-  letter-spacing: -.02em;
-  color: #121212
-}
-
-/* set in from the card's top/right edges rather than flush against them,
-   so it reads as a floating chip instead of a corner notch */
-.fw2-chip {
-  position: absolute;
-  right: 8%;
-  top: 0;
-  width: 100px;
-  height: 100px;
-  background: var(--paper)
 }
 
 /* the founder cut-out, standing on the card's bottom edge */
 .fw2-photo {
   position: absolute;
-  left: 9%;
+  left: 12.15%;
+  top: 20.3%;
+  width: 41%;
   bottom: 0;
-  width: 38%;
-  height: 78%;
   margin: 0
 }
 
@@ -2855,222 +2909,105 @@ html.nav-hidden .hx-bar {
   display: block
 }
 
-.fw2-plate,
-.fw2-role {
+/* the bottom-left white block is the headline's own box rather than part
+   of the ground, so it covers the photo's shoulder like the design does */
+.fw2-headline {
   position: absolute;
   z-index: 2;
+  left: 0;
+  top: 86.25%;
+  width: 25%;
+  bottom: 0;
   box-sizing: border-box;
-  background: var(--paper);
+  padding: 0 0 0 3.6%;
   display: flex;
-  align-items: center
-}
-
-/* the two plates interlock like one tetris piece: the role starts at the
-   name plate's right edge and hangs half a plate lower, so their edges meet
-   rather than leaving a gap */
-.fw2-plate {
-  left: 8.75%;
-  /* smaller and set lower than before, clear of the founder photo's face */
-  top: 79%;
-  /* the box hugs the name instead of wrapping it: a long one (Shashank
-     Shekhar) widens the plate rather than running onto a second line */
-  width: auto;
-  min-width: 14%;
-  max-width: 30%;
-  height: 9%;
-  padding: 0 2cqw;
-  white-space: nowrap;
+  align-items: center;
+  margin: 0;
+  background: var(--paper);
   font-family: var(--display);
   font-weight: 400;
-  font-size: 28px;
+  font-size: 24px;
+  line-height: 1.4;
   letter-spacing: -.02em;
   color: #121212
 }
 
-.fw2-role {
-  /* pinned to the name plate's right edge, which JS measures per card */
-  left: var(--role-left, 22.75%);
-  /* the plate's own new top + height, so the two still meet with no gap */
-  top: 88%;
-  width: 14%;
-  height: 9%;
-  justify-content: center;
-  font-family: var(--body);
-  font-size: 24px;
-  color: #4C4546
-}
-
-/* the quote panel, with two white steps notched into its left edge */
-.fw2-quote {
+.fw2-chip {
   position: absolute;
-  left: 71.5%;
-  top: 20.6%;
-  right: 0;
-  bottom: 0;
-  box-sizing: border-box;
-  background: var(--paper);
-  /* the left padding is the gutter the step mark hangs in, so the quote's
-     own text starts clear of it */
-  padding: 2cqw 2.4cqw 2.4cqw 3.6cqw;
+  left: 53.68%;
+  top: 6.4%;
+  width: 5.49%;
+  height: 12.5%;
   display: flex;
-  flex-direction: column;
-  gap: 1cqw
-}
-
-.fw2-step {
-  position: absolute;
-  background: var(--paper)
-}
-
-/* one block juts up and left of the panel's top corner, and two more
-   staircase down and left off its bottom corner */
-.fw2-step1 {
-  left: 67%;
-  top: 17.5%;
-  width: 4.5%;
-  aspect-ratio: 1
-}
-
-.fw2-step2 {
-  left: 67%;
-  top: 83%;
-  width: 4.5%;
-  height: 8.6%
-}
-
-.fw2-step3 {
-  left: 62.5%;
-  top: 91.6%;
-  width: 9%;
-  height: 8.4%
+  align-items: center;
+  justify-content: center
 }
 
 .fw2-mark {
-  position: absolute;
-  left: 1.1cqw;
-  top: 1.5cqw;
-  width: 1.25cqw;
-  height: 1.25cqw;
+  width: calc(24 * var(--k));
+  height: calc(24 * var(--k));
   display: block
 }
 
-.fw2-quoteText {
-  min-height: 0;
-  /* clears the mark hanging above-left of the first line */
-  padding-top: 1.4cqw;
-  overflow-y: auto;
-  overscroll-behavior: contain
+/* the testimonial, with its author pinned to the foot of the panel */
+.fw2-quote {
+  position: absolute;
+  left: 61.46%;
+  top: 15%;
+  right: 6.9%;
+  bottom: 6.25%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(28 * var(--k))
 }
 
 /* the size lives on the scroller, so FeaturedWork.jsx can step one card's
    whole quote down when it would otherwise run past its panel */
 .fw2-quoteText {
-  font-size: 16px
+  flex: 1;
+  min-height: 0;
+  /* not a scroll box: the wheel over the quote scrolls the page like
+     anywhere else, and FeaturedWork.jsx shrinks the type to fit instead */
+  overflow: hidden;
+  font-size: 18px
 }
 
 .fw2-quoteText p {
-  margin: 0 0 1.1em;
+  margin: 0 0 1.4em;
   font-family: var(--body);
   font-size: inherit;
-  line-height: 1.5;
+  line-height: 1.375;
   color: #4C4546
+}
+
+.fw2-quoteText p:first-child {
+  font-weight: 600;
+  color: #333
 }
 
 .fw2-quoteText p:last-child {
   margin-bottom: 0
 }
 
-/* under 900px the tetris grid gives way to a plain stacked card — the
-   pieces would be far too small to read at phone width */
-@media (max-width:900px) {
-  .fw2-card {
-    position: static;
-    height: auto;
-    padding: 24px;
-    box-sizing: border-box
-  }
+.fw2-by {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--k))
+}
 
-  .fw2-brand,
-  .fw2-headline,
-  .fw2-chip,
-  .fw2-photo,
-  .fw2-plate,
-  .fw2-role,
-  .fw2-step,
-  .fw2-quote {
-    position: static;
-    width: auto;
-    height: auto;
-    inset: auto;
-    clip-path: none
-  }
+.fw2-by b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(28 * var(--k));
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: #121212
+}
 
-  .fw2-chip,
-  .fw2-step {
-    display: none
-  }
-
-  .fw2-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    margin-bottom: 16px
-  }
-
-  .fw2-logo {
-    width: 48px;
-    height: 32px
-  }
-
-  .fw2-names b {
-    font-size: 17px
-  }
-
-  .fw2-names span {
-    font-size: 13px
-  }
-
-  .fw2-headline {
-    padding: 32px;
-    margin-bottom: 16px
-  }
-
-  .fw2-headline h3 {
-    font-size: 22px
-  }
-
-  .fw2-photo {
-    height: 300px;
-    margin-bottom: 12px
-  }
-
-  .fw2-plate {
-    padding: 10px 16px;
-    font-size: 24px
-  }
-
-  .fw2-role {
-    padding: 8px 16px;
-    justify-content: flex-start;
-    font-size: 14px;
-    margin-bottom: 16px
-  }
-
-  .fw2-quote {
-    padding: 18px
-  }
-
-  .fw2-mark {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 10px
-  }
-
-  .fw2-quoteText p {
-    font-size: 15px;
-    margin-bottom: 14px
-  }
+.fw2-by span {
+  font-family: var(--body);
+  font-size: calc(15 * var(--k));
+  color: #4C4546
 }
 
 /* ── where you are now ─────────────────────── */
@@ -3462,7 +3399,11 @@ html.nav-hidden .hx-bar {
 }
 
 .wy-cell.lit {
-  background: #715BE4
+  background: var(--wy-shade, #715BE4)
+}
+
+.wy-cell--y.lit {
+  background: var(--wy-shade, var(--acid))
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -3852,8 +3793,8 @@ html.nav-hidden .hx-bar {
 
 /* ── selected work ─────────────────────────── */
 .sw {
-  background: var(--paper);
-  color: var(--ink);
+  background: #1B1B1B;
+  color: var(--paper);
   padding: clamp(56px, 7vw, 100px) var(--side);
   display: flex;
   flex-direction: column;
@@ -3916,16 +3857,16 @@ html.nav-hidden .hx-bar {
   height: 15px;
   gap: 1px;
   transform: scaleX(-1);
-  color: var(--ink)
+  color: var(--paper)
 }
 
 .sw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 40px;
+  font-size: clamp(40px, 3.6vw, 56px);
   line-height: 110%;
   letter-spacing: -.025em;
-  color: var(--ink);
+  color: var(--paper);
   margin: 0
 }
 
@@ -3959,58 +3900,79 @@ html.nav-hidden .hx-bar {
   padding: 0 18px;
   box-sizing: border-box;
   cursor: pointer;
-  background: #F2F2F2;
-  border: 0;
+  background: #262626;
+  border: 1px solid #3A3A3A;
   border-radius: 2px;
   font-family: var(--body);
   font-size: 15px;
   line-height: 1;
-  color: #4D4D4D;
+  color: #C9C9C9;
   transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
 }
 
 .sw-filter:hover {
-  background: #E6E6E6;
-  color: var(--ink)
+  background: #313131;
+  color: var(--paper)
 }
 
 .sw-filter[aria-pressed="true"] {
   background: var(--acid);
+  border-color: var(--acid);
   color: #000
 }
 
+/* bento: each group of six is one block, measured off the design —
+     1 1 2 2
+     3 4 4 5
+     6 6 6 5
+   four uneven columns, rows one shared height */
 .sw-field {
-  position: relative
+  position: relative;
+  container-type: inline-size
 }
 
 .sw-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(20px, 2.2vw, 32px);
-  row-gap: clamp(40px, 4.5vw, 64px);
-  position: relative
-}
-
-.sw-item {
   display: flex;
   flex-direction: column;
+  gap: clamp(12px, 2.3cqw, 32px)
+}
+
+.sw-group {
+  display: grid;
+  grid-template-columns: 212fr 89fr 139fr 203fr;
+  grid-auto-rows: 25.8cqw;
+  grid-template-areas:
+    "a a b b"
+    "c d d e"
+    "f f f e";
+  gap: clamp(12px, 2.3cqw, 32px)
+}
+
+.sw-item:nth-child(1) { grid-area: a }
+.sw-item:nth-child(2) { grid-area: b }
+.sw-item:nth-child(3) { grid-area: c }
+.sw-item:nth-child(4) { grid-area: d }
+.sw-item:nth-child(5) { grid-area: e }
+.sw-item:nth-child(6) { grid-area: f }
+
+.sw-item {
+  min-width: 0;
+  container-type: inline-size;
+  display: block;
   text-decoration: none;
   color: inherit
 }
 
-.sw-item[hidden] {
-  display: none
-}
-
 .sw-shot {
   position: relative;
+  display: block;
   width: 100%;
-  aspect-ratio: var(--ar, 16/10);
+  height: 100%;
   overflow: hidden;
-  background: #EDEDED
+  background: #262626
 }
 
-.sw-shot img {
+.sw-shot > img {
   position: absolute;
   left: 0;
   top: 0;
@@ -4022,98 +3984,87 @@ html.nav-hidden .hx-bar {
   transition: scale .5s cubic-bezier(.16, .84, .34, 1)
 }
 
-.sw-item:hover .sw-shot img {
+.sw-item:hover .sw-shot > img {
   --ps: 1.04
 }
 
-.sw-shot img.sw-brandTag {
+/* hover: the tile floods acid with the logo over "title —— client" */
+.sw-over {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: auto;
-  height: clamp(28px, 2.4vw, 36px);
-  object-fit: contain;
-  background: var(--paper);
-  padding: 6px 10px;
-  transform: none;
-  scale: 1;
-  transition: none
-}
-
-.sw-meta {
+  inset: 0;
   display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 4cqw, 24px);
+  padding: 0 clamp(16px, 5cqw, 40px);
+  background: var(--acid);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(14px, 3.7cqw, 22px);
+  line-height: 1.2;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .3s ease
 }
 
-.sw-client {
-  font-family: var(--body);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #4D4D4D;
+.sw-item:hover .sw-over,
+.sw-item:focus-visible .sw-over {
+  opacity: 1
+}
+
+.sw-logo {
+  display: block;
+  height: calc(var(--ls, 1) * clamp(20px, 6cqw, 36px));
+  width: auto;
+  max-width: 60%;
+  object-fit: contain;
+  /* drops the white backgrounds some logo files carry */
+  mix-blend-mode: multiply
+}
+
+.sw-overLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px clamp(10px, 3cqw, 24px)
+}
+
+.sw-overLine > span {
   white-space: nowrap
 }
 
-.sw-title {
-  font-family: var(--display);
-  font-size: clamp(18px, 1.5vw, 22px);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -.02em;
-  color: var(--ink)
-}
-
-@media (max-width:1000px) {
-  .sw-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 52px
-  }
-
-  .sw-item {
-    grid-column: auto !important;
-    grid-row: auto !important;
-    margin-top: 0 !important
-  }
-
-  .sw-item:nth-child(2n) {
-    margin-top: 52px !important
-  }
+.sw-dash {
+  width: clamp(24px, 7cqw, 64px);
+  height: 1px;
+  background: currentColor
 }
 
 @media (max-width:640px) {
-  .sw-grid {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 40px
+  /* one tile per row, each shown whole at its own proportions */
+  .sw-group {
+    display: flex;
+    flex-direction: column
   }
 
-  .sw-item:nth-child(2n) {
-    margin-top: 0 !important
-  }
-
-  /* full image, no crop/parallax/hover-zoom — those are desktop-hover
-     flourishes that don't translate to touch and were cropping the shot
-     to a fixed aspect ratio instead of showing it whole */
   .sw-shot {
-    aspect-ratio: auto;
     height: auto;
     background: none
   }
 
-  .sw-shot img {
+  .sw-shot > img {
     position: static;
-    top: auto;
     height: auto;
-    object-fit: initial;
-    transform: none !important
+    object-fit: initial
   }
 
-  .sw-item:hover .sw-shot img {
+  .sw-item:hover .sw-shot > img {
     --ps: 1
+  }
+
+  .sw-over {
+    display: none
   }
 
   .sw-h {
@@ -4145,7 +4096,7 @@ html.nav-hidden .hx-bar {
     margin-top: 8px;
     font-family: var(--body);
     font-size: 14px;
-    color: var(--ink);
+    color: var(--paper);
     text-decoration: underline;
     text-underline-offset: 3px;
     white-space: nowrap

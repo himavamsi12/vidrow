@@ -9,6 +9,7 @@ import { useLenis } from "lenis/react";
 const CLOSE_MS = 750; // the bars' .65s rise plus a small settle
 const HOLD_MS = 100;
 const FADE_MS = 600; // matches .hero-curtain's lift-off transform transition
+const TAG_GAP = 24; // px left above the Featured Work tag once revealed
 
 /**
  * A fixed, viewport-covering overlay that plays the hero's staircase-close
@@ -80,14 +81,23 @@ export default function HeroCurtain() {
         // fully covered now — jump the real page to Featured Work while it
         // can't be seen. Lenis is stopped, so `force: true` is required —
         // without it, scrollTo is a no-op while stopped.
-        const next = document.getElementById("featured");
-        if (next) {
+        // it lands with the "Featured work" tag just under the top edge,
+        // rather than at the section's own top, which would leave its full
+        // top padding showing above the heading. Measured from the heading's
+        // padding, not the tag's rect — the heading is still offset by its
+        // not-yet-played fade-up at this point.
+        const section = document.getElementById("featured");
+        const head = section?.querySelector(".fw2-head");
+        if (section) {
+          const pad = head ? parseFloat(getComputedStyle(head).paddingTop) : 0;
+          const top =
+            section.getBoundingClientRect().top + window.scrollY + Math.max(pad - TAG_GAP, 0);
           if (lenis) {
-            lenis.scrollTo(next, { immediate: true, force: true });
+            lenis.scrollTo(top, { immediate: true, force: true });
           } else {
             const prevBehavior = document.documentElement.style.scrollBehavior;
             document.documentElement.style.scrollBehavior = "auto";
-            next.scrollIntoView({ block: "start" });
+            window.scrollTo(0, top);
             document.documentElement.style.scrollBehavior = prevBehavior;
           }
         }
@@ -173,9 +183,12 @@ export default function HeroCurtain() {
   if (!mounted) return null;
 
   return (
-    <div className={`hero-curtain${fading ? " hero-curtain--fading" : ""}`} aria-hidden="true">
+    <div
+      className={`hero-curtain${closed ? " is-closed" : ""}${fading ? " hero-curtain--fading" : ""}`}
+      aria-hidden="true"
+    >
       <div className={`hx-stair${closed ? " closed" : ""}`}>
-        {/* just the hero's four staircase blocks, each rising straight up */}
+        {/* just the hero's four staircase blocks, each rising straight up from its step */}
         <div className="hx-step hc-b1 hx-y" />
         <div className="hx-step hc-b2 hx-v" />
         <div className="hx-step hc-b3 hx-y" />

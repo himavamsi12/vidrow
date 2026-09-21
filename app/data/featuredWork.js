@@ -1,7 +1,7 @@
 export const FEATURED_WORK = [
   {
     id: "helium",
-    logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium" },
+    logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4 },
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
@@ -19,7 +19,7 @@ export const FEATURED_WORK = [
   {
     id: "platinum-rx",
     href: "/case-study/platinumrx",
-    logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx" },
+    logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx", trim: 0.25 },
     name: "Platinum RX",
     category: "Consumer Health",
     photos: [
@@ -36,7 +36,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "inkpen-labs",
-    logo: { type: "image", src: "/featured%20works/inkpen%20labs.png", alt: "Inkpen Labs" },
+    logo: { type: "image", src: "/featured%20works/inkpen%20labs.png", alt: "Inkpen Labs", trim: 0.069 },
     name: "Inkpen Labs",
     category: "inkpenlabs.com",
     solo: true,
@@ -49,7 +49,7 @@ export const FEATURED_WORK = [
   {
     id: "masai-school",
     href: "/case-study/masai",
-    logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School" },
+    logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School", trim: 0.049 },
     name: "Masai School",
     category: "masaischool.com",
     photos: [
@@ -66,7 +66,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "grexa-ai",
-    logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI" },
+    logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI", trim: 0.042 },
     name: "Grexa AI",
     category: "grexa.ai",
     solo: true,
@@ -78,7 +78,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "apnamart",
-    logo: { type: "image", src: "/featured%20works/apnamart.png", alt: "Apnamart" },
+    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "Apnamart", scale: 0.75 },
     name: "Apnamart",
     category: "apnamart.in",
     solo: true,

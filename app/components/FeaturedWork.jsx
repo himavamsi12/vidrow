@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
@@ -17,21 +18,68 @@ function QuoteMark() {
   );
 }
 
+// the white tetris ground of every card, measured off the 1440×640 design.
+// Drawn as one SVG stretched over the card, so the pieces butt together
+// with no hairline seams at any width.
+const GROUND = [
+  [0, 0, 224, 111], // brand block
+  [362, 72, 194, 97],
+  [246, 131, 310, 38],
+  [246, 169, 194, 59],
+  [440, 180, 54, 48],
+  [494, 206, 97, 22],
+  [300, 228, 291, 27],
+  [615, 158, 98, 119],
+  [300, 255, 413, 22],
+  [397, 277, 316, 26],
+  [322, 303, 194, 96],
+  [576, 303, 137, 48],
+  [576, 351, 98, 97],
+  [0, 362, 86, 96],
+  [0, 458, 172, 62],
+  [0, 520, 258, 32],
+  [773, 41, 79, 80], // quote-mark chip
+  [852, 56, 588, 584], // quote panel
+  [662, 552, 190, 88], // step off the panel's bottom-left
+];
+
+function Ground() {
+  return (
+    <svg
+      className="fw2-ground"
+      viewBox="0 0 1440 640"
+      preserveAspectRatio="none"
+      shapeRendering="crispEdges"
+      aria-hidden="true"
+    >
+      {GROUND.map(([x, y, w, h], i) => (
+        <rect key={i} x={x} y={y} width={w} height={h} />
+      ))}
+    </svg>
+  );
+}
+
 /**
- * Featured work: one full-screen acid card per company, each a tetris
- * arrangement of white blocks — brand, headline, founder cut-out with its
- * name plates, and the full testimonial down the right. The cards are
- * sticky, so scrolling stacks each new one over the last rather than
- * scrolling them past each other.
+ * Featured work: one acid card per company, each a tetris
+ * arrangement of white blocks — logo, founder cut-out, headline, and the
+ * full testimonial with its author down the right. The cards rest as a
+ * list of collapsed rows, and each one opens into its full card as it
+ * scrolls up into view.
  */
 export default function FeaturedWork() {
   const stackRef = useRef(null);
+  const lenis = useLenis();
+  const lenisRef = useRef(null);
+  lenisRef.current = lenis;
 
-  // drive each card's --p (0..1) from how far the next card has risen over
-  // it, so the stack has real depth — the card underneath sinks back and
-  // dims as the one above lands on it — instead of cards simply covering
-  // one another. Written straight from a rAF-throttled scroll listener
-  // rather than a CSS transition, so it tracks the scroll exactly.
+  // an accordion with one card open at a time. Scrolling down, a row that
+  // reaches the middle of the screen opens there — growing downward from
+  // where it is — while the card above it collapses back to its row. That
+  // collapse would drag the opening card up the screen, so for as long as
+  // the transition runs the scroll position is moved by exactly the height
+  // the cards above give back, and the opening card stays where it was.
+  // Scrolling back up runs the same thing in reverse (the card reopening
+  // above grows down from its own top, so nothing needs holding there).
   useEffect(() => {
     const stack = stackRef.current;
     if (!stack) return;
@@ -39,17 +87,91 @@ export default function FeaturedWork() {
     if (!cards.length) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // move the page by dy without disturbing a smooth scroll in progress:
+    // Lenis eases toward a target, so the target, the eased value and the
+    // animation's own endpoints all shift together and the glide carries on
+    const shiftScroll = (dy) => {
+      const l = lenisRef.current;
+      if (l && l.isScrolling === "smooth") {
+        l.animatedScroll += dy;
+        l.targetScroll += dy;
+        if (l.animate) {
+          l.animate.value += dy;
+          l.animate.from += dy;
+          l.animate.to += dy;
+        }
+        l.setScroll(l.animatedScroll);
+      } else {
+        window.scrollTo({ top: window.scrollY + dy, behavior: "instant" });
+      }
+    };
+
+    // hold the page still against the height changes of `held` (the cards
+    // above the one opening) until their transition has finished
+    let holdFrame = 0;
+    const hold = (held) => {
+      cancelAnimationFrame(holdFrame);
+      if (!held.length) return;
+      let prev = held.map((c) => c.offsetHeight);
+      const until = performance.now() + 1100; // the 1s height transition
+      const step = (now) => {
+        const heights = held.map((c) => c.offsetHeight);
+        const dy = heights.reduce((sum, h, i) => sum + h - prev[i], 0);
+        prev = heights;
+        if (dy) shiftScroll(dy);
+        if (now < until) holdFrame = requestAnimationFrame(step);
+      };
+      holdFrame = requestAnimationFrame(step);
+    };
+
+    let active = -1;
+    const setActive = (next, held) => {
+      if (next === active) return;
+      if (active !== -1) cards[active].classList.remove("is-open");
+      if (next !== -1) cards[next].classList.add("is-open");
+      active = next;
+      hold(held);
+    };
+
     let frame = 0;
     const update = () => {
       frame = 0;
-      const vh = window.innerHeight;
-      cards.forEach((card, i) => {
-        const next = cards[i + 1];
-        // 0 while the next card is still below the fold, 1 once it has
-        // covered this one completely
-        const p = next ? Math.min(Math.max(1 - next.getBoundingClientRect().top / vh, 0), 1) : 0;
-        card.style.setProperty("--p", p.toFixed(3));
-      });
+      const mid = window.innerHeight / 2;
+      const row = cards[0].querySelector(".fw2-row").offsetHeight;
+      const full = cards[0].querySelector(".fw2-full").offsetHeight;
+      // every card's top as it will be once settled (only the active card
+      // full height), not read off the page — mid-transition the heights
+      // are still in flight and would make the next row look centred too
+      const base = stack.getBoundingClientRect().top;
+      const top = (i) => base + i * row + (active !== -1 && i > active ? full - row : 0);
+      const reached = (i) => top(i) + row / 2 < mid;
+
+      // arriving with every card closed (e.g. the hero curtain dropping the
+      // page onto this section with a couple of rows already past the
+      // middle): the first card that qualifies opens, not a later one
+      if (active === -1) {
+        const j = cards.findIndex((_, i) => reached(i) && top(i) + full > mid);
+        if (j !== -1) setActive(j, []);
+        return;
+      }
+
+      // scrolling down: the lowest row below the open card that has reached
+      // the middle takes over, and everything above it is held still
+      for (let j = cards.length - 1; j > active; j--) {
+        if (reached(j) && top(j) + full > mid) {
+          setActive(j, cards.slice(0, j));
+          return;
+        }
+      }
+      // scrolling back up: the open card's row has dropped below the
+      // middle, so the nearest row above that is still past it reopens.
+      // Scrolling on past the last card leaves it open — closing it there
+      // would pull its row back up across the middle and reopen it, over
+      // and over.
+      if (active === -1 || reached(active)) return;
+      let j = active - 1;
+      while (j >= 0 && !reached(j)) j--;
+      setActive(j >= 0 && top(j) + full > mid ? j : -1, []);
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -60,8 +182,10 @@ export default function FeaturedWork() {
     window.addEventListener("resize", onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      cancelAnimationFrame(holdFrame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      cards.forEach((card) => card.classList.remove("is-open"));
     };
   }, []);
 
@@ -80,7 +204,7 @@ export default function FeaturedWork() {
         const start = parseFloat(getComputedStyle(q).fontSize);
         let size = start;
         // 12px is the floor: below that the quote stops being readable and
-        // the panel is better off scrolling than shrinking further
+        // it stops there rather than shrinking further
         while (q.scrollHeight > q.clientHeight + 1 && size > 12) {
           size -= 0.5;
           q.style.fontSize = `${size}px`;
@@ -88,32 +212,11 @@ export default function FeaturedWork() {
       });
     };
 
-    // the name plate sizes to its own name, so the role plate's offset is
-    // measured per card rather than fixed in CSS
-    const placeRoles = () => {
-      [...stack.querySelectorAll(".fw2-card")].forEach((card) => {
-        const plate = card.querySelector(".fw2-plate");
-        const role = card.querySelector(".fw2-role");
-        if (!plate || !role) return;
-        // layout widths, not rects: a stacked card can be mid-scale, which
-        // would skew a measured rect
-        const w = card.offsetWidth;
-        if (!w) return;
-        const right = plate.offsetLeft + plate.offsetWidth;
-        role.style.setProperty("--role-left", `${((right / w) * 100).toFixed(2)}%`);
-      });
-    };
-
-    const run = () => {
-      fit();
-      placeRoles();
-    };
-
-    run();
-    window.addEventListener("resize", run);
+    fit();
+    window.addEventListener("resize", fit);
     // re-run once webfonts land, since they change the wrapping
-    document.fonts?.ready.then(run).catch(() => {});
-    return () => window.removeEventListener("resize", run);
+    document.fonts?.ready.then(fit).catch(() => {});
+    return () => window.removeEventListener("resize", fit);
   }, []);
 
   return (
@@ -135,45 +238,52 @@ export default function FeaturedWork() {
 
           return (
             <article className="fw2-card" key={item.id}>
-              {/* top-left: logo over the company name and category */}
-              <div className="fw2-brand">
-                <span className="fw2-logo">
+              {/* collapsed: one list row — logo, headline, the quote's opening */}
+              <div className="fw2-row" aria-hidden="true">
+                <span className="fw2-rowLogo" style={{ "--trim": item.logo.trim, "--lscale": item.logo.scale }}>
                   {item.logo.type === "image" ? (
-                    <img src={item.logo.src} alt={item.logo.alt} />
+                    <img src={item.logo.src} alt="" />
                   ) : (
                     <b>{item.logo.value || item.logo.alt}</b>
                   )}
                 </span>
-                <span className="fw2-names">
-                  <b>{item.name}</b>
-                  <span>{item.category}</span>
-                </span>
+                <span className="fw2-rowLine">{item.line}</span>
+                <span className="fw2-rowSay">{paras[0]}</span>
               </div>
 
-              <div className="fw2-headline">
-                <h3>{item.line}</h3>
-              </div>
+              <div className="fw2-full">
+                <div className="fw2-frame">
+                  <Ground />
 
-              {/* the white block that squares off the top right edge */}
-              <span className="fw2-chip" aria-hidden="true" />
+                  <span className="fw2-logo" style={{ "--trim": item.logo.trim, "--lscale": item.logo.scale }}>
+                    {item.logo.type === "image" ? (
+                      <img src={item.logo.src} alt={item.logo.alt} />
+                    ) : (
+                      <b>{item.logo.value || item.logo.alt}</b>
+                    )}
+                  </span>
 
-              <figure className="fw2-photo">
-                <img src={photo.src} alt="" loading="lazy" />
-              </figure>
+                  <figure className="fw2-photo">
+                    <img src={photo.src} alt="" loading="lazy" />
+                  </figure>
 
-              <span className="fw2-plate">{founder.name}</span>
-              {founder.role && <span className="fw2-role">{founder.role}</span>}
+                  <h3 className="fw2-headline">{item.line}</h3>
 
-              {/* the quote panel and the two steps that notch into its left */}
-              <span className="fw2-step fw2-step1" aria-hidden="true" />
-              <span className="fw2-step fw2-step2" aria-hidden="true" />
-              <span className="fw2-step fw2-step3" aria-hidden="true" />
-              <div className="fw2-quote">
-                <QuoteMark />
-                <div className="fw2-quoteText" data-lenis-prevent>
-                  {paras.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
+                  <span className="fw2-chip">
+                    <QuoteMark />
+                  </span>
+
+                  <div className="fw2-quote">
+                    <div className="fw2-quoteText">
+                      {paras.map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+                    <div className="fw2-by">
+                      <b>{founder.name}</b>
+                      {founder.role && <span>{founder.role}</span>}
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>

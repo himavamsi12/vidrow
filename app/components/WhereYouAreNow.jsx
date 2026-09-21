@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
-import { STAGES, STAGE_PIECES } from "../data/stages";
+import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
 
 const CELL_COUNT = 16;
+const ACID_CELLS = new Set(STAGE_PIECES.filter((p) => p.acid).flatMap((p) => p.cells));
 
 export default function WhereYouAreNow() {
   const trackRef = useRef(null);
@@ -155,7 +156,7 @@ export default function WhereYouAreNow() {
   const isLit = (cellIndex) => {
     if (allOn) return true;
     if (active < 0) return false;
-    return STAGE_PIECES.slice(0, active + 1).some((piece) => piece.includes(cellIndex));
+    return STAGE_PIECES.slice(0, active + 1).some((piece) => piece.cells.includes(cellIndex));
   };
 
   return (
@@ -242,7 +243,11 @@ export default function WhereYouAreNow() {
               <div className="wy-boardwrap" aria-hidden="true">
                 <div className="wy-grid">
                   {Array.from({ length: CELL_COUNT }).map((_, k) => (
-                    <span key={k} className={`wy-cell${isLit(k) ? " lit" : ""}`} />
+                    <span
+                      key={k}
+                      className={`wy-cell${ACID_CELLS.has(k) ? " wy-cell--y" : ""}${isLit(k) ? " lit" : ""}`}
+                      style={{ "--wy-shade": CELL_SHADES[k] }}
+                    />
                   ))}
                 </div>
               </div>

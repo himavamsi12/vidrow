@@ -31,10 +31,23 @@ export const STAGES = [
   },
 ];
 
-// one tetromino per stage, filling the 4x4 board from the bottom up
+// one piece per stage, filling the 4x4 board from the bottom up into:
+//   Y V V V
+//   Y Y V V
+//   V V Y V
+//   V V Y Y
 export const STAGE_PIECES = [
-  [10, 12, 13, 14],
-  [6, 7, 11, 15],
-  [4, 5, 8, 9],
-  [0, 1, 2, 3],
+  { cells: [8, 9, 12, 13], acid: false },
+  { cells: [10, 14, 15], acid: true },
+  { cells: [0, 4, 5], acid: true },
+  { cells: [1, 2, 3, 6, 7, 11], acid: false },
+];
+
+// per-cell shade once lit, so the board reads as a mosaic of tints rather
+// than two flat colours — indexed like the board, row by row
+export const CELL_SHADES = [
+  "#F7F97A", "#6F57D9", "#8573E6", "#6F57D9",
+  "#FBE556", "#FCF6B4", "#6F57D9", "#8573E6",
+  "#6F57D9", "#6F57D9", "#FBE556", "#6F57D9",
+  "#6F57D9", "#8573E6", "#F7F97A", "#FCF6B4",
 ];

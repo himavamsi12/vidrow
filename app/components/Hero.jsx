@@ -54,43 +54,41 @@ export default function Hero() {
         </div>
 
         <div className="hx-stair" aria-hidden="true">
-          <div className={`hx-step hx-s5 hx-y${isLit(0) ? " lit" : ""}`} />
-          <div className={`hx-step hx-s6 hx-y${isLit(2) ? " lit" : ""}`} />
           <div className={`hx-step hx-s1 hx-y${isLit(0) ? " lit" : ""}`}>
-            <span className="hx-stat">Brand. Performance. Social.</span>
+            <span className="hx-stat">
+              <strong className="hx-num">12+ Yrs</strong>
+              <span className="hx-cap">Brand&nbsp;|&nbsp;Performance&nbsp;|&nbsp;Social</span>
+            </span>
           </div>
           <div className={`hx-step hx-s3 hx-y${isLit(2) ? " lit" : ""}`}>
             <span className="hx-tag hx-tag--s3">
-              {/* desktop keeps five short lines; mobile regroups the same
-                  words into three (with a smaller mobile font, see the
-                  900px block) so the block doesn't run so tall */}
-              Reach
-              <br className="hx-br-d" />
-              <span className="hx-br-m"> </span>
-              your
-              <br />
-              fundraise
-              <br />
-              goals 2x
-              <br className="hx-br-d" />
-              <span className="hx-br-m"> </span>
-              faster
+              <strong className="hx-num">
+                2x
+                <br />
+                Faster
+              </strong>
+              <span className="hx-cap">
+                Reach Your
+                <br />
+                Fundraiser Goals
+              </span>
             </span>
           </div>
           <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
             <span className="hx-tag">
-              Seed to
-              <br />
-              Series D
-              <br />
-              playbook
+              <span className="hx-cap">Seed to</span>
+              <strong className="hx-num hx-num--s2">Series D</strong>
+              <span className="hx-cap">Playbook</span>
             </span>
           </div>
           <div className={`hx-step hx-s4 hx-v${isLit(3) ? " lit" : ""}`}>
             <span className="hx-tag">
-              Working with
-              <br />
-              50+ startups
+              <strong className="hx-num">50+</strong>
+              <span className="hx-cap">
+                Startups worked
+                <br />
+                with so far
+              </span>
             </span>
           </div>
         </div>

@@ -5,8 +5,17 @@ import Mark from "./Mark";
 import Reveal from "./Reveal";
 import { SW_FILTERS, SW_ITEMS } from "../data/selectedWork";
 
+// deal the filtered items into groups of six; each group fills one bento
+// block (two across the top, then two + a wide tile beside a tall one)
+function toGroups(items) {
+  const groups = [];
+  for (let at = 0; at < items.length; at += 6) groups.push(items.slice(at, at + 6));
+  return groups;
+}
+
 export default function SelectedWork() {
-  const [activeCat, setActiveCat] = useState("all");
+  const [activeCat, setActiveCat] = useState(SW_FILTERS[0].cat);
+  const groups = toGroups(SW_ITEMS.filter((item) => item.cats.includes(activeCat)));
 
   return (
     <section className="sw" id="work">
@@ -19,7 +28,7 @@ export default function SelectedWork() {
             </div>
             <div className="sw-titleRow">
               <h2 className="sw-h">
-                Our Selected
+                Our Selected{" "}
                 <br className="sw-hBreak" />
                 Works
               </h2>
@@ -28,7 +37,7 @@ export default function SelectedWork() {
               </a>
             </div>
           </div>
-          <div className="sw-filters" role="group" aria-label="Filter work by industry">
+          <div className="sw-filters" role="group" aria-label="Filter work by service">
             {SW_FILTERS.map((f) => (
               <button
                 key={f.cat}
@@ -44,32 +53,35 @@ export default function SelectedWork() {
 
         <div className="sw-field">
           <div className="sw-grid">
-            {SW_ITEMS.map((item, i) => (
-              <a
-                key={item.title + i}
-                className="sw-item"
-                href="#work"
-                data-cat={item.cat}
-                hidden={activeCat !== "all" && item.cat !== activeCat}
-                style={{ "--ar": item.ar }}
-              >
-                <span className="sw-shot">
-                  <img
-                    src={item.img}
-                    alt={item.alt}
-                    loading="lazy"
-                    width="492"
-                    height="298"
-                  />
-                  {item.tag && (
-                    <img className="sw-brandTag" src={item.tag} alt="" aria-hidden="true" />
-                  )}
-                </span>
-                <span className="sw-meta">
-                  <span className="sw-title">{item.title}</span>
-                  <span className="sw-client">{item.credit}</span>
-                </span>
-              </a>
+            {groups.map((group, g) => (
+              <div className="sw-group" key={g}>
+                {group.map((item, i) => (
+                  <a key={item.img + i} className="sw-item" href="#work">
+                    <span className="sw-shot">
+                      <img
+                        src={item.img}
+                        alt={item.alt}
+                        loading="lazy"
+                        style={item.pos ? { objectPosition: item.pos } : undefined}
+                      />
+                      <span className="sw-over">
+                        <img
+                          className="sw-logo"
+                          src={item.logo}
+                          alt=""
+                          aria-hidden="true"
+                          style={item.logoScale ? { "--ls": item.logoScale } : undefined}
+                        />
+                        <span className="sw-overLine">
+                          <span>{item.title}</span>
+                          <span className="sw-dash" aria-hidden="true" />
+                          <span>{item.client}</span>
+                        </span>
+                      </span>
+                    </span>
+                  </a>
+                ))}
+              </div>
             ))}
           </div>
         </div>
