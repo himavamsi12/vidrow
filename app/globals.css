@@ -634,21 +634,27 @@ html.nav-hidden .hx-bar {
   transition-delay: 0s
 }
 
-/* rising: every top edge travels up to 0, and the gaps that open upward
-   (b1's hook notch, b3's steps, the seam at b2's right edge) close sideways
-   as they go, so nothing behind the curtain ever shows through a seam. The
-   notches that open downward (b2's and b4's bottom-left hooks) are left
-   alone here so no bar grows downward during the rise. */
+/* rising: every top edge travels up to 0 and each bar keeps a thin white
+   seam (--hc-gap) to its neighbours the whole way up, so the four pieces
+   still read as separate tetris blocks. Later bars sit on top of earlier
+   ones, so each seam is cut from the bar underneath: b1 steps in under b2's
+   hook, b2 pulls in from b3, and b3 steps in under b4's two hooks. The
+   points stay one-for-one with the resting polygons above so the rise
+   interpolates straight from the hero's shape. */
+.hero-curtain {
+  --hc-gap: clamp(4px, .35vw, 8px)
+}
+
 .hero-curtain .hx-stair.closed .hc-b1 {
-  clip-path: polygon(0 0, 67.19% 0, 67.19% 0, 100% 0, 100% 90.16%, 100% 90.16%, 100% 100%, 0 100%)
+  clip-path: polygon(0 0, calc(91.94% - var(--hc-gap)) 0, calc(91.94% - var(--hc-gap)) 0, calc(91.94% - var(--hc-gap)) 0, calc(91.94% - var(--hc-gap)) 89.6%, 100% 89.6%, 100% 100%, 0 100%)
 }
 
 .hero-curtain .hx-stair.closed .hc-b2 {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 14.19% 100%, 14.19% 89.6%, 0 89.6%)
+  clip-path: polygon(0 0, calc(100% - var(--hc-gap)) 0, calc(100% - var(--hc-gap)) 100%, 14.19% 100%, 14.19% calc(89.6% - var(--hc-gap)), 0 calc(89.6% - var(--hc-gap)))
 }
 
 .hero-curtain .hx-stair.closed .hc-b3 {
-  clip-path: polygon(0 0, 52.65% 0, 52.65% 0, 76.4% 0, 76.4% 0, 100% 0, 100% 100%, 0 100%)
+  clip-path: polygon(0 0, calc(53.63% - var(--hc-gap)) 0, calc(53.63% - var(--hc-gap)) calc(67.84% + var(--hc-gap)), calc(76.51% - var(--hc-gap)) calc(67.84% + var(--hc-gap)), calc(76.51% - var(--hc-gap)) calc(73.2% + var(--hc-gap)), 100% calc(73.2% + var(--hc-gap)), 100% 100%, 0 100%)
 }
 
 .hero-curtain .hx-stair.closed .hc-b4 {

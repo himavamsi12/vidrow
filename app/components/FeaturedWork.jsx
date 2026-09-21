@@ -109,9 +109,14 @@ export default function FeaturedWork() {
     // hold the page still against the height changes of `held` (the cards
     // above the one opening) until their transition has finished
     let holdFrame = 0;
+    // while holding, <html data-scroll-hold> tells SiteNav the page is moving
+    // itself, so it doesn't read the shift up as the user scrolling up
+    const root = document.documentElement;
+    const release = () => delete root.dataset.scrollHold;
     const hold = (held) => {
       cancelAnimationFrame(holdFrame);
-      if (!held.length) return;
+      if (!held.length) return release();
+      root.dataset.scrollHold = "1";
       let prev = held.map((c) => c.offsetHeight);
       const until = performance.now() + 1100; // the 1s height transition
       const step = (now) => {
@@ -119,7 +124,9 @@ export default function FeaturedWork() {
         const dy = heights.reduce((sum, h, i) => sum + h - prev[i], 0);
         prev = heights;
         if (dy) shiftScroll(dy);
-        if (now < until) holdFrame = requestAnimationFrame(step);
+        // one frame of grace after the last shift, so its scroll event is
+        // still covered
+        holdFrame = requestAnimationFrame(now < until ? step : release);
       };
       holdFrame = requestAnimationFrame(step);
     };
@@ -183,6 +190,7 @@ export default function FeaturedWork() {
     return () => {
       if (frame) cancelAnimationFrame(frame);
       cancelAnimationFrame(holdFrame);
+      release();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       cards.forEach((card) => card.classList.remove("is-open"));
