@@ -2088,19 +2088,6 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
-/* a small white step off the caption's right edge, cut into the photo's
-   bottom corner — it joins the caption box to the white under the card, so
-   the two read as one tetris piece (the photo ends at 96cqw) */
-.fw-top::after {
-  content: "";
-  position: absolute;
-  left: 90cqw;
-  bottom: 0;
-  width: 6cqw;
-  height: 8cqw;
-  background: var(--paper)
-}
-
 /* the acid frame: a bar down the left and along most of the foot, a short
    one across the top-left, and a separate bar down the right edge */
 .fw-quote {
