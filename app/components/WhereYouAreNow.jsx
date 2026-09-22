@@ -15,9 +15,6 @@ export default function WhereYouAreNow() {
   const [allOn, setAllOn] = useState(false);
   const [scrollOn, setScrollOn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(0);
-  // whether the mobile pin is on — it switches the panel to its one-card,
-  // step-bar layout
-  const [mobilePinned, setMobilePinned] = useState(false);
   const bodyInRefs = useRef([]);
   const leadRefs = useRef([]);
   const cardwrapRefs = useRef([]);
@@ -155,12 +152,10 @@ export default function WhereYouAreNow() {
   }, []);
 
   // mobile: the section pins while it's scrolled through, and each stretch
-  // of that scroll swaps in the next stage, the way desktop steps through
-  // them. While pinned, the panel shows only the open stage's card under a
-  // row of four step bars (the closed titles are folded away, see .m-pin
-  // in globals.css), so it's one card tall and fits the screen. The pin is
-  // placed for the tallest of the four cards, so it holds still as they
-  // swap; a ResizeObserver re-places it if the layout changes.
+  // of that scroll opens the next stage (closing the one before), the way
+  // desktop steps through them. The pinned block is sized from its own
+  // rendered height, which changes as stages open and close, so a
+  // ResizeObserver keeps the track and the pin's offset in step with it.
   useEffect(() => {
     const track = trackRef.current;
     const sticky = stickyRef.current;
@@ -170,7 +165,6 @@ export default function WhereYouAreNow() {
 
     const clear = () => {
       pinRef.current = null;
-      setMobilePinned(false);
       track.style.height = "";
       sticky.style.position = "";
       sticky.style.top = "";
@@ -181,21 +175,14 @@ export default function WhereYouAreNow() {
         clear();
         return;
       }
-      setMobilePinned(true);
       const vh = window.innerHeight;
-      // the height with the tallest card open: the closed stages' cards
-      // still lay out at full size inside their collapsed rows
-      const openCard = sticky.querySelector(".wy-item.on .wy-bodyIn");
-      const tallest = Math.max(
-        0,
-        ...[...sticky.querySelectorAll(".wy-bodyIn")].map((el) => el.offsetHeight)
-      );
-      const h = sticky.offsetHeight - (openCard ? openCard.offsetHeight : 0) + tallest;
+      const h = sticky.offsetHeight;
       // half a screen of scrolling per stage
       const span = Math.round(vh * 0.5 * n);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section
-      // heading scrolls away first and the card's top is never cut off
+      // heading scrolls away first and the open card is never cut off at
+      // the top (only the closed titles under it can run off the bottom)
       const panel = sticky.querySelector(".wy-panel");
       const panelTop = panel
         ? panel.getBoundingClientRect().top - sticky.getBoundingClientRect().top
@@ -263,7 +250,7 @@ export default function WhereYouAreNow() {
   };
 
   return (
-    <section className={`wy${mobilePinned ? " m-pin" : ""}`} id="stage">
+    <section className="wy" id="stage">
       <div className={`wy-track${scrollOn ? " scroll-on" : ""}`} ref={trackRef}>
         <div className="wy-sticky" ref={stickyRef}>
           <div className="wy-in">
@@ -279,20 +266,6 @@ export default function WhereYouAreNow() {
             </Reveal>
 
             <div className="wy-panel">
-              {/* mobile's pinned layout only: one bar per stage, filled up
-                  to the open one; a tap jumps to that stage */}
-              <div className="wy-steps">
-                {STAGES.map((s, i) => (
-                  <button
-                    key={s.title}
-                    type="button"
-                    className={`wy-stepBar${i <= mobileOpen ? " on" : ""}`}
-                    aria-label={s.title}
-                    aria-current={i === mobileOpen ? "step" : undefined}
-                    onClick={() => openStage(i)}
-                  />
-                ))}
-              </div>
               <div className="wy-left">
                 {STAGES.map((s, i) => (
                   <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>

@@ -2946,11 +2946,6 @@ html.nav-hidden .hx-bar {
   color: var(--paper)
 }
 
-/* mobile's step bars (see the .m-pin rules in the 900px block) */
-.wy-steps {
-  display: none
-}
-
 /* the board: one tetromino lands per stage */
 .wy-boardwrap {
   flex: 0 0 calc(420 * var(--k));
@@ -3162,58 +3157,70 @@ html.nav-hidden .hx-bar {
     line-height: 1
   }
 
-  /* pinned (see WhereYouAreNow.jsx): only the open stage's card shows, under
-     the step bars. The closed stages fold down to nothing — they stay in the
-     layout, collapsed, so their cards can still be measured for the pin */
-  .wy.m-pin .wy-title {
-    display: none
+  /* compact: the section pins with every stage title in view plus the open
+     card, so the whole panel has to fit a phone screen. Everything above
+     is tightened here, in one place, rather than rule by rule */
+  .wy-panel {
+    padding: 12px 16px 0
   }
 
-  .wy.m-pin .wy-item {
-    padding: 0;
-    border: 0
+  .wy-item {
+    padding: 12px 0
   }
 
-  .wy.m-pin .wy-item.on {
-    padding: 0 0 20px
+  .wy-item.on {
+    padding: 4px 0 16px
   }
 
-  /* cards swap in place rather than growing and shrinking; the card's own
-     fade (.wy-bodyIn) carries the change */
-  .wy.m-pin .wy-body {
-    transition: none
+  .wy-title {
+    font-size: 16px;
+    line-height: 1.25
   }
 
-  .wy.m-pin .wy-steps {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 16px
+  .wy-lead {
+    padding: 14px 16px 52px;
+    clip-path: polygon(0 0, 100% 0,
+        100% calc(100% - 52px),
+        calc(100% - 18px) calc(100% - 52px),
+        calc(100% - 18px) calc(100% - 32px),
+        18px calc(100% - 32px),
+        18px 100%,
+        0 100%)
   }
 
-  .wy-stepBar {
-    flex: 1;
-    height: 20px;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    position: relative
+  .wy-leadTitle {
+    font-size: 17px;
+    margin: 0 0 6px
   }
 
-  .wy-stepBar::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 3px;
-    transform: translateY(-50%);
-    background: #3A3A3A;
-    transition: background-color .3s ease
+  .wy-lead .wy-copy {
+    font-size: 12.5px;
+    line-height: 1.4
   }
 
-  .wy-stepBar.on::before {
-    background: var(--acid)
+  .wy-cardwrap {
+    margin: -32px 0 0 18px
+  }
+
+  .wy-card {
+    padding: 14px 16px 16px;
+    gap: 12px
+  }
+
+  .wy-stat {
+    font-size: 21px
+  }
+
+  .wy-quote {
+    font-size: 12.5px;
+    line-height: 1.4;
+    margin-top: 6px
+  }
+
+  .wy-client {
+    right: 16px;
+    bottom: 16px;
+    font-size: 15px
   }
 }
 
@@ -3221,7 +3228,7 @@ html.nav-hidden .hx-bar {
    level with the stat figure, where the row is short */
 @media (max-width:379px) {
   .wy-client {
-    top: 30px;
+    top: 20px;
     bottom: auto
   }
 }
@@ -5808,8 +5815,7 @@ button:focus-visible,
    layout can't express. */
 .csp-sideNav-well {
   position: relative;
-  width: 100%;
-  aspect-ratio: 65 / 435;
+  width: 60px;
   margin-top: 20px;
   background: #E5E5E5;
   overflow: hidden;

@@ -267,7 +267,9 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
         <div
           className="csp-sideNav-well"
           ref={wellRef}
-          style={{ aspectRatio: `65 / ${ROWS * rowH}` }}
+          // a thin 60px track, kept at the height it had when it filled the
+          // rail's 80px width (the rows were designed at 65px wide)
+          style={{ height: `${(ROWS * rowH * 80) / 65}px` }}
         />
       </div>
     </div>
