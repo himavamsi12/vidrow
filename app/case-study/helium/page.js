@@ -11,7 +11,7 @@ export const metadata = {
 
 const SECTIONS = [
   { id: "csp-sec-hero", label: "Overview" },
-  { id: "csp-sec-aoc", label: "The Brief" },
+  { id: "csp-sec-results", label: "90 Days" },
   { id: "csp-sec-how", label: "Customer Journey" },
   { id: "csp-sec-hooks", label: "Brand Ads" },
   { id: "csp-sec-reasons", label: "Five Reasons" },
@@ -126,22 +126,13 @@ const JOURNEY = [
   },
 ];
 
-const AOC = [
-  {
-    n: "01",
-    title: "The Temptation",
-    desc: "A low price, and the easiest ad in the category to make.",
-  },
-  {
-    n: "02",
-    title: "The Trap",
-    desc: "Win on price in year one and you are the cheap brand forever.",
-  },
-  {
-    n: "03",
-    title: "The Brief",
-    desc: "Make users want the product. Never the discount.",
-  },
+// the four headline numbers under "What happened in just 90 days?" — the
+// last is the one called out in acid
+const RESULTS = [
+  { val: "2%", label: "of every AC sold online in India" },
+  { val: "3.5%", label: "market share on Amazon" },
+  { val: "500", label: "ACs a day from their own website" },
+  { val: "\u20b940 Cr", label: "revenue scaled in one season", hi: true },
 ];
 
 const HOOKS = [
@@ -195,81 +186,48 @@ export default function HeliumCaseStudy() {
       <CspSectionNav sections={SECTIONS} darkSectionIds={["csp-sec-films", "csp-sec-reviews"]} />
 
       <div className="csp-in" id="csp-sec-hero">
-        <div className="csp-head">
-          <h1 className="csp-h">
-            500 ACs / Day
-            <br />
-            Within 1 Month of Launch
-            <br />
-            All from Website!
-          </h1>
-          <p className="csp-note">
-            A premium AC brand. A 90-day window. One bold question: could the right pieces,
-            assembled correctly, sell 500 units a day, entirely from a website?
+        <div className="csp-hl-head">
+          <div>
+            <h1 className="csp-hl-h">Helium Smart Air</h1>
+            <p className="csp-hl-kicker">Case Study</p>
+          </div>
+          <p className="csp-hl-note">
+            A 0.8 ton AC at &#8377;16,999, sold online, in a category that has not changed in
+            thirty years.
           </p>
         </div>
 
-        <div className="csp-banner">
+        <div className="csp-hl-banner">
           <img
-            src="/casestudy%20images/casestudy-helium/helium%20hero.png"
-            alt="Helium air conditioner"
+            src="/casestudy%20images/casestudy-helium/img-hero.png"
+            alt="Helium Smart Air on an iceberg"
           />
-          {/* no ready-made Vidrow x Helium lockup file, so it's assembled here:
-              the step mark, a rule, then Helium's own wordmark */}
-          <span className="csp-bannerTag">
-            <span className="csp-lockup" aria-label="Vidrow x Helium">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="#0B0B0D"
-                  d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM17 17h7v7h-7z"
-                />
-              </svg>
-              <i aria-hidden="true" />
-              <img src="/casestudy%20images/casestudy-recommendations/helium-logo.png" alt="" />
-            </span>
-          </span>
         </div>
 
-        <div className="csp-meta">
-          <div className="csp-metaItem">
-            <span className="csp-metaLabel">Client</span>
-            <span className="csp-metaValue">Helium Air</span>
-          </div>
-          <div className="csp-metaItem">
-            <span className="csp-metaLabel">Timeline</span>
-            <span className="csp-metaValue">90 Days</span>
-          </div>
-          <div className="csp-metaItem">
-            <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">500 ACs / Day</span>
-          </div>
+        <div className="csp-hl-meta">
+          <span>Helium Smart Air Case Study</span>
+          <span>90 Days</span>
         </div>
       </div>
 
       <div className="csp-in">
-        <section className="csp-aoc" id="csp-sec-aoc">
-          <div className="csp-aoc-head">
-            <h2 className="csp-aoc-h">
-              The temptation.
-              <br />
-              The trap. The brief.
-            </h2>
-            <p className="csp-aoc-copy">
-              Helium Air came to Vidrow with a 0.8-ton AC priced at &#8377;16,999 in a highly
-              competitive, established category. The challenge: make the brand feel aspirational
-              and credible without competing on discounts or low pricing, while scaling
-              performance during the peak summer season.
-            </p>
+        <section className="csp-hl-results" id="csp-sec-results">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>01</b>
+            Helium Smart Air Case Study
           </div>
+          <h2 className="csp-hl-rh">What happened in just 90 days?</h2>
+          <p className="csp-hl-rsub">
+            A brand that did not exist in March. These are the numbers it was doing by the end of
+            the season.
+          </p>
 
-          <div className="csp-aoc-cols">
-            {AOC.map((item) => (
-              <div className="csp-aoc-col" key={item.n}>
-                <div className="csp-aoc-colHead">
-                  <span className="csp-aoc-num">{item.n}</span>
-                  <span className="csp-aoc-tag">{item.title}</span>
-                </div>
-                <p className="csp-aoc-desc">{item.desc}</p>
+          <div className="csp-hl-stats">
+            {RESULTS.map((r) => (
+              <div className={`csp-hl-stat${r.hi ? " hi" : ""}`} key={r.val}>
+                <b>{r.val}</b>
+                <span>{r.label}</span>
               </div>
             ))}
           </div>
