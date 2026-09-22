@@ -19,9 +19,6 @@ export default function WhereYouAreNow() {
   const leadRefs = useRef([]);
   const cardwrapRefs = useRef([]);
   const notchRefs = useRef([]);
-  const stickyRef = useRef(null);
-  // the mobile pin's current geometry, kept for the title taps (see openStage)
-  const pinRef = useRef(null);
 
   // the stat card is position:absolute (so it sits pinned exactly where the
   // design wants it, near the light card's tab, rather than just flowing
@@ -114,8 +111,8 @@ export default function WhereYouAreNow() {
       requestAnimationFrame(() => {
         ticking = false;
         if (window.innerWidth < 900) {
-          // mobile runs its own pinned scroll (see the effect below), which
-          // opens one stage at a time through mobileOpen — so this must NOT
+          // mobile opens its stages on its own scroll (see the effect
+          // below, through mobileOpen) — so this must NOT
           // force every stage open the way the true reduced-motion/no-rAF
           // fallback below does
           setScrollOn(false);
@@ -151,97 +148,69 @@ export default function WhereYouAreNow() {
     };
   }, []);
 
-  // mobile: the section pins while it's scrolled through, and each stretch
-  // of that scroll opens the next stage (closing the one before), the way
-  // desktop steps through them. The pinned block is sized from its own
-  // rendered height, which changes as stages open and close, so a
-  // ResizeObserver keeps the track and the pin's offset in step with it.
+  // mobile: like the mobile Featured Work cards, nothing pins — each stage
+  // opens as it scrolls up past 70% of the way down the screen and stays
+  // open below the ones before it, so a long card is never cut off.
+  // mobileOpen is the last open stage; everything up to it is open. Each
+  // stage's position is worked out from the first stage's with every stage
+  // above it fully open (the state it opens into), not read live — a stage
+  // mid-way through its open transition hasn't pushed the ones below down
+  // yet, and reading that would open them too early.
+  const itemRefs = useRef([]);
   useEffect(() => {
-    const track = trackRef.current;
-    const sticky = stickyRef.current;
-    if (!track || !sticky) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const n = STAGES.length;
-
-    const clear = () => {
-      pinRef.current = null;
-      track.style.height = "";
-      sticky.style.position = "";
-      sticky.style.top = "";
-    };
-
-    const layout = () => {
-      if (reduce || window.innerWidth >= 900) {
-        clear();
-        return;
-      }
-      const vh = window.innerHeight;
-      const h = sticky.offsetHeight;
-      // half a screen of scrolling per stage
-      const span = Math.round(vh * 0.5 * n);
-      // centred when it fits. When it doesn't, it's bottom-aligned — but
-      // never pinned higher than the dark panel's own top, so the section
-      // heading scrolls away first and the open card is never cut off at
-      // the top (only the closed titles under it can run off the bottom)
-      const panel = sticky.querySelector(".wy-panel");
-      const panelTop = panel
-        ? panel.getBoundingClientRect().top - sticky.getBoundingClientRect().top
-        : 0;
-      const top = h <= vh ? Math.round((vh - h) / 2) : Math.round(Math.max(vh - h, -panelTop));
-      pinRef.current = { span, top };
-      sticky.style.position = "sticky";
-      sticky.style.top = `${top}px`;
-      track.style.height = `${h + span}px`;
-    };
-
-    // one rect read per scroll event; setMobileOpen bails out on its own
-    // when the stage hasn't changed, so this needs no rAF throttle
     const onScroll = () => {
-      const pin = pinRef.current;
-      if (!pin) return;
-      let pr = (pin.top - track.getBoundingClientRect().top) / pin.span;
-      pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
-      setMobileOpen(Math.min(n - 1, Math.floor(pr * n)));
+      if (reduce || window.innerWidth >= 900) return;
+      const items = itemRefs.current;
+      const first = items[0];
+      if (!first) return;
+      // the first stage is always open, so its box gives the open spacing
+      const cs = getComputedStyle(first);
+      const extra =
+        parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderBottomWidth);
+      const line = window.innerHeight * 0.7;
+      let top = first.getBoundingClientRect().top;
+      let last = 0;
+      for (let i = 1; i < items.length; i++) {
+        const above = items[i - 1]?.querySelector(".wy-bodyIn");
+        if (!items[i] || !above) break;
+        top += above.offsetHeight + extra;
+        if (top >= line) break;
+        last = i;
+      }
+      setMobileOpen(last);
     };
-
-    const onResize = () => {
-      layout();
-      onScroll();
-    };
-
-    const ro = new ResizeObserver(layout);
-    ro.observe(sticky);
-    layout();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onScroll);
     return () => {
-      ro.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      clear();
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
-  // a tapped title scrolls to its own stretch of the pinned scroll rather
-  // than opening directly, so the scroll position and the open stage agree
+  // a tapped title scrolls its stage up to where it opens on its own, so
+  // the scroll position and the open stages agree
   const openStage = (i) => {
-    const pin = pinRef.current;
-    if (!pin) {
-      setMobileOpen(i);
-      return;
+    const items = itemRefs.current;
+    const first = items[0];
+    if (!first) return;
+    const cs = getComputedStyle(first);
+    const extra =
+      parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderBottomWidth);
+    // where this stage sits once every stage above it is open
+    let top = first.getBoundingClientRect().top + window.scrollY;
+    for (let j = 0; j < i; j++) {
+      const body = items[j]?.querySelector(".wy-bodyIn");
+      if (body) top += body.offsetHeight + extra;
     }
-    const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: trackTop - pin.top + (pin.span * (i + 0.5)) / STAGES.length,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: top - window.innerHeight * 0.4, behavior: "smooth" });
   };
 
   const isOn = (i) => {
     if (allOn) return true;
     if (scrollOn) return i === active;
-    return i === mobileOpen;
+    return i <= mobileOpen;
   };
   const isLit = (cellIndex) => {
     if (allOn) return true;
@@ -252,7 +221,7 @@ export default function WhereYouAreNow() {
   return (
     <section className="wy" id="stage">
       <div className={`wy-track${scrollOn ? " scroll-on" : ""}`} ref={trackRef}>
-        <div className="wy-sticky" ref={stickyRef}>
+        <div className="wy-sticky">
           <div className="wy-in">
             <Reveal className="wy-head">
               <div className="wy-tagwrap">
@@ -268,7 +237,13 @@ export default function WhereYouAreNow() {
             <div className="wy-panel">
               <div className="wy-left">
                 {STAGES.map((s, i) => (
-                  <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
+                  <article
+                    className={`wy-item${isOn(i) ? " on" : ""}`}
+                    key={s.title}
+                    ref={(el) => {
+                      itemRefs.current[i] = el;
+                    }}
+                  >
                     <h3
                       className="wy-title"
                       onClick={() => {

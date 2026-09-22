@@ -99,14 +99,15 @@ body {
 /* every section is capped at 1720 (--maxw) and centred — past that the
    screen shows the page's white either side. The hero isn't capped: its
    dotted ground and staircase run edge to edge, and only its copy
-   (.hx-copy) holds to the centred frame. */
+   (.hx-copy) holds to the centred frame. Deep Dives (.cs) isn't capped
+   either, so its card and logo loops run the full screen width; its
+   heading is centred on its own. */
 #featured,
 .wy,
 .lev,
 .sw,
 .fo,
 .pr,
-.cs,
 .news,
 .vfoot {
   max-width: var(--maxw);
@@ -2173,6 +2174,9 @@ html.nav-hidden .hx-bar {
   top: 0;
   z-index: 20;
   background: var(--paper);
+  /* white out to the screen's edges too, so the cards' acid (which runs
+     past the 1720 cap) slides under it cleanly */
+  border-image: conic-gradient(var(--paper) 0 0) fill 0 / / 0 100vmax;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -2234,7 +2238,10 @@ html.nav-hidden .hx-bar {
   --full: clamp(640px, 44.444vw, 100vh);
   --o: 1;
   position: relative;
-  overflow: hidden;
+  /* clipped top and bottom to its current height, but free sideways so the
+     full card's acid can run past the 1720 cap on wide screens (see
+     .fw2-full::before) */
+  overflow: visible clip;
   height: var(--full);
   color: #121212
 }
@@ -2331,6 +2338,42 @@ html.nav-hidden .hx-bar {
   height: var(--full);
   container-type: size;
   background: var(--acid)
+}
+
+/* past the 1720 cap, the whole gap either side of a card is acid, with
+   the white tetris pieces that meet the card's edges carrying on out into
+   it as smaller steps: on the left the logo block and the bottom
+   staircase, on the right the quote panel. */
+.fw2-full::before,
+.fw2-full::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* exactly the white gap beside the 1720 cap — never past the screen's
+     edge, so it adds nothing to the page's width */
+  width: max(0px, (100vw - 100%) / 2);
+  pointer-events: none;
+  background-color: var(--acid);
+  background-repeat: no-repeat;
+  /* the extension art is drawn on the 640-tall design, so sizing it to the
+     card's height keeps its steps in scale with the card's own */
+  background-size: auto 100%;
+  /* fades with the card's opening, so a collapsed row never has acid
+     beside it */
+  opacity: var(--o)
+}
+
+.fw2-full::before {
+  right: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='304' y='0' width='96' height='111'/%3E%3Crect x='208' y='0' width='96' height='56'/%3E%3Crect x='304' y='458' width='96' height='182'/%3E%3Crect x='208' y='552' width='96' height='88'/%3E%3Crect x='112' y='600' width='96' height='40'/%3E%3C/svg%3E");
+  background-position: right top
+}
+
+.fw2-full::after {
+  left: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='0' y='56' width='96' height='584'/%3E%3Crect x='96' y='360' width='96' height='280'/%3E%3Crect x='192' y='500' width='96' height='140'/%3E%3Crect x='288' y='590' width='112' height='50'/%3E%3C/svg%3E");
+  background-position: left top
 }
 
 /* reduced motion: every card simply sits open */
@@ -3575,7 +3618,9 @@ html.nav-hidden .hx-bar {
   justify-content: center;
   gap: clamp(12px, 4cqw, 24px);
   padding: 0 clamp(16px, 5cqw, 40px);
-  background: var(--acid);
+  /* acid at 85%, so the shot shows through faintly — only the fill is
+     translucent, the logo and line stay solid */
+  background: color-mix(in srgb, var(--acid) 85%, transparent);
   color: var(--ink);
   font-family: var(--body);
   font-size: clamp(14px, 3.7cqw, 22px);
@@ -4535,7 +4580,13 @@ a.cs-card:focus-visible {
 .pr-web .lift {
   pointer-events: none;
   filter: drop-shadow(0 18px 36px rgba(18, 18, 18, .14));
-  animation: pr-lift .3s ease both
+  /* grows out from the hexagon's centre (CENTER in Partnership.jsx), so its
+     band rides up clear of the neighbouring stretches while its tip stays
+     at the centre */
+  transform-box: view-box;
+  transform-origin: 720px 560px;
+  transform: scale(1.1);
+  animation: pr-lift .35s cubic-bezier(.16, .84, .34, 1) both
 }
 
 .pr-web .lift-face {
@@ -4552,7 +4603,8 @@ a.cs-card:focus-visible {
 
 @keyframes pr-lift {
   from {
-    opacity: 0
+    opacity: 0;
+    transform: scale(1)
   }
 }
 

@@ -35,8 +35,10 @@ export default function Founders() {
 
             {/* its own Reveal, not the section's: .fo-body starts at the top
                 of the photo, so watching that played the steps while they
-                were still below the fold */}
-            <Reveal className="fo-stats">
+                were still below the fold. It replays, so the steps climb in
+                every time the section is scrolled down into, not just the
+                first */}
+            <Reveal className="fo-stats" replay>
               <div className="fo-step">
                 <div className="fo-stat">
                   <b>
