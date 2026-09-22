@@ -1225,8 +1225,9 @@ html.nav-hidden .hx-bar {
      the card's left edge; s4's caption runs below its step, so the whole
      label keeps to the narrow part */
   .hx-s2 {
-    padding-left: 12px;
-    padding-right: 8px
+    padding-left: 18px;
+    padding-right: 16px;
+    padding-bottom: 16px
   }
 
   .hx-s4 {
@@ -1291,31 +1292,16 @@ html.nav-hidden .hx-bar {
     display: block
   }
 
-  /* "Seed To" and "Playbook" share the first line, "Playbook" pushed to the
-     right edge; "Series D" drops under "Seed To", stepped in */
-  .hx-s2 .hx-tag {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: baseline
-  }
-
-  .hx-s2 .hx-cap--bold {
-    grid-row: 1;
-    grid-column: 1
-  }
-
+  /* three lines: "Seed To", then "Series D" stepped in under it, then
+     "Playbook" on its own line against the card's right edge */
   .hx-s2 .hx-cap:not(.hx-cap--bold) {
-    grid-row: 1;
-    grid-column: 2;
-    justify-self: end;
-    margin-left: 8px
+    align-self: flex-end;
+    margin: 4px 0 0
   }
 
   /* the shared .hx-num margin above is !important, so the indent has to be
      too */
   .hx-s2 .hx-num {
-    grid-row: 2;
-    grid-column: 1 / -1;
     margin: 0 0 0 calc(1.2 * clamp(22px, 6.6vw, 28px)) !important
   }
 }
@@ -3265,12 +3251,21 @@ html.nav-hidden .hx-bar {
      side with AdOps bottom centre. Right-hand columns right-align both the
      piece's slot and the label; centre ones centre them. */
   .lev-stage {
-    gap: 44px
+    gap: 36px
+  }
+
+  /* extra clearance between the heading block and the pieces ringed above
+     and below it. Margin rather than padding, so Levers.jsx's measured
+     heading box (and the cube's start position under it) stays the same.
+     It scales with the screen's height because the whole ring has to fit
+     in the pinned 100vh stage — short phones get less of it */
+  .lev-mid {
+    margin: clamp(12px, 3svh, 32px) 0
   }
 
   .lev-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 16px
+    gap: 10px 16px
   }
 
   #levRowTop {
@@ -3317,7 +3312,7 @@ html.nav-hidden .hx-bar {
     /* the falling-piece icon above this can render a touch taller than its
        declared --slotH at this width — extra margin keeps the label clear
        of it even then, rather than just matching the slot exactly */
-    margin-top: 22px
+    margin-top: 18px
   }
 }
 
