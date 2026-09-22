@@ -76,7 +76,7 @@ export default function Hero() {
           </div>
           <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
             <span className="hx-tag">
-              <span className="hx-cap hx-cap--bold">Seed to</span>
+              <span className="hx-cap hx-cap--bold">Seed To</span>
               <strong className="hx-num hx-num--s2">Series D</strong>
               <span className="hx-cap">Playbook</span>
             </span>

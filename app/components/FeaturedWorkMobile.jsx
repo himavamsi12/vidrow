@@ -1,229 +1,176 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
-import ReadArrow from "./ReadArrow";
 import { FEATURED_WORK } from "../data/featuredWork";
 
-// hover should only open a row on devices that actually have hover (mouse/
-// trackpad) — on touch, the same mouseenter fires right before the tap's
-// click, so relying on it makes opening feel accidental/inconsistent
-// instead of a deliberate tap. The hover media feature alone isn't a
-// reliable enough signal (some emulated/hybrid environments report
-// hover:hover at narrow widths), so it's paired with the same 900px
-// breakpoint the rest of the mobile layout switches on
-const canHover = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(hover: hover)").matches &&
-  window.innerWidth > 900;
+// the step mark that opens each testimonial, drawn as separate dots
+function StepMark({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M0 0h6v6H0zM9 0h6v6H9zM18 0h6v6h-6zM0 9h6v6H0zM9 9h6v6H9zM0 18h6v6H0z" />
+    </svg>
+  );
+}
+
+// the solid violet step on the right of each row
+function RowMark() {
+  return (
+    <svg className="fw-rowMark" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M0 0H24V24H16V16H8V8H0Z" />
+    </svg>
+  );
+}
 
 /**
- * The mobile Featured Work section: the original expanding rows, kept as-is
- * for narrow screens. Desktop renders the stacked cards in FeaturedWork
- * instead — the two are swapped by CSS at the 900px breakpoint, and the
- * page wraps both in the #featured anchor.
+ * The mobile Featured Work section, playing the same scroll-driven handover
+ * as the desktop cards in FeaturedWork: the heading sticks at the top, each
+ * company rests as its row, and it grows into its full card as it's
+ * scrolled up the screen while the open card above sinks away under the
+ * heading. Desktop and mobile are swapped by CSS at the 900px breakpoint,
+ * and the page wraps both in the #featured anchor.
  */
 export default function FeaturedWorkMobile() {
-  const [openIndex, setOpenIndex] = useState(0);
-  // which card's full testimonial is showing in the slide-in panel — null
-  // when it's closed
-  const [panelItem, setPanelItem] = useState(null);
-  // Escape closes the panel, and the page can't scroll behind it while
-  // it's open — same two behaviors the mobile nav's own full-screen panel
-  // uses
+  const listRef = useRef(null);
+  const updateRef = useRef(null);
+  // run the layout pass inside Lenis's own frame, straight after it moves
+  // the page, so the cards never trail the smooth scroll by a frame
+  useLenis(() => updateRef.current?.());
+
+  // the same model as desktop, except each card's full height is its own
+  // (the testimonials differ in length). Each card starts opening as its
+  // row's centre rises past 70% of the way down the screen and is fully
+  // open as its top reaches the sticky heading — the moment the card above
+  // has gone under. The ranges come from the layout with every card above
+  // already open, so they depend only on scrollY and can't feed back on
+  // themselves; heights only change below the heading, so nothing above
+  // the card opening moves.
   useEffect(() => {
-    if (!panelItem) return;
-    const onKey = (e) => {
-      if (e.key === "Escape") setPanelItem(null);
+    const list = listRef.current;
+    if (!list) return;
+    const items = [...list.querySelectorAll(".fw-item")];
+    if (!items.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const head = list.parentElement.querySelector(".fw-head");
+
+    const clear = () =>
+      items.forEach((item) => {
+        item.style.height = "";
+        item.style.transform = "";
+        item.style.removeProperty("--o");
+      });
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      // hidden on desktop: leave the cards at rest
+      if (!list.offsetParent) return clear();
+      const vh = window.innerHeight;
+      const row = items[0].querySelector(".fw-row").offsetHeight;
+      const fulls = items.map((item) => item.querySelector(".fw-card").offsetHeight);
+      const listRect = list.getBoundingClientRect();
+      const listTop = listRect.top + window.scrollY;
+      const headH = head ? head.offsetHeight : 0;
+      const hinge = head ? head.getBoundingClientRect().bottom : 0;
+
+      let docTop = listTop; // with every card above open
+      let top = listRect.top; // on screen, from the heights set here
+      items.forEach((item, i) => {
+        const full = fulls[i];
+        let o = 1;
+        if (i > 0) {
+          const start = docTop - (vh * 0.7 - row / 2);
+          const end = docTop - headH;
+          const t = Math.min(Math.max((window.scrollY - start) / Math.max(end - start, 1), 0), 1);
+          o = t * t * (3 - 2 * t);
+        }
+        const h = row + (full - row) * o;
+        item.style.height = `${h}px`;
+        item.style.setProperty("--o", o.toFixed(3));
+
+        // passing under the heading: shrink back slightly about the bottom
+        // edge, so it stays joined to the card opening below
+        const past = Math.min(Math.max(hinge - top, 0), h);
+        const c = past / h;
+        item.style.transform = c > 0 ? `scale(${(1 - 0.06 * c).toFixed(4)})` : "";
+
+        docTop += full;
+        top += h;
+      });
     };
-    document.addEventListener("keydown", onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    updateRef.current = update;
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    // images landing change the cards' natural heights
+    window.addEventListener("load", onScroll);
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
+      if (frame) cancelAnimationFrame(frame);
+      updateRef.current = null;
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("load", onScroll);
+      clear();
     };
-  }, [panelItem]);
+  }, []);
 
   return (
     <section className="fw">
-      <div className="fw-in">
-        <Reveal className="fw-head">
-          <div className="fw-tagwrap">
-            <span className="fw-tag">Featured work</span>
-            <Mark />
-          </div>
-          <h2 className="fw-h">Featured Work</h2>
-        </Reveal>
+      <Reveal className="fw-head">
+        <div className="fw-tagwrap">
+          <span className="fw-tag">Featured work</span>
+          <Mark />
+        </div>
+        <h2 className="fw-h">Featured Work</h2>
+      </Reveal>
 
-        <Reveal
-          className="fw-list"
-          onMouseLeave={() => {
-            if (canHover()) setOpenIndex(0);
-          }}
-        >
-          {FEATURED_WORK.map((item, i) => (
-            <div
-              key={item.id}
-              className={`fw-row${openIndex === i ? " is-open" : ""}`}
-              // the rows don't link out any more — a click (or tap) only
-              // expands the row, and the testimonial's own "Read more"
-              // button is what opens anything
-              role="button"
-              tabIndex={0}
-              aria-expanded={openIndex === i}
-              onMouseEnter={() => {
-                if (canHover()) setOpenIndex(i);
-              }}
-              onFocus={() => setOpenIndex(i)}
-              onClick={() => setOpenIndex(i)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setOpenIndex(i);
-                }
-              }}
-            >
-              <span className="fw-top">
-                <span className="fw-brand">
-                  <span className="fw-logo">
-                    {item.logo.type === "image" ? (
-                      <img className="fw-logoTile" src={item.logo.src} alt={item.logo.alt} />
-                    ) : item.logo.type === "text" ? (
-                      <b>{item.logo.value}</b>
-                    ) : (
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path
-                          fill="#121212"
-                          d="M7.6 24.4 20.2 11.8h-8.9V7h17.1v17.1h-4.8v-8.9L11 26.8z"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                  <span className="fw-id">
-                    <span className="fw-name">{item.name}</span>
-                    {item.category && <span className="fw-cat">{item.category}</span>}
-                  </span>
+      <div className="fw-list" ref={listRef}>
+        {FEATURED_WORK.map((item) => {
+          const founder = item.plates[0];
+          // testimonials carry their paragraph breaks as blank lines
+          const paras = item.quote.split(/\n{2,}/);
+
+          return (
+            <article key={item.id} className="fw-item">
+              {/* collapsed: the row, laid over the top of the card and
+                  faded off it as the card opens */}
+              <div className="fw-row" aria-hidden="true">
+                <span className="fw-rowLogo">
+                  <img src={item.logo.src} alt="" />
                 </span>
-
-                <span className="fw-mini" aria-hidden="true">
-                  <ReadArrow className="fw-arw fw-arwMini" />
-                </span>
-              </span>
-
-              <div className="fw-extra" aria-hidden="true">
-                {item.photos.map((p) => (
-                  <figure className={`fw-ph ${p.cls}`} key={p.src}>
-                    <img src={p.src} alt="" loading="lazy" width="276" height="238" />
-                  </figure>
-                ))}
-                {item.plates.map((p) => (
-                  <span className={`fw-plate ${p.cls}`} key={p.name}>
-                    <b>{p.name}</b>
-                    {p.role && <span>{p.role}</span>}
-                  </span>
-                ))}
+                <span className="fw-rowLine">{item.line}</span>
+                <RowMark />
               </div>
 
-              <span className="fw-say">
-                <span className="fw-line">{item.line}</span>
-              </span>
+              <div className="fw-card">
+                <div className="fw-top">
+                  <span className="fw-logo" style={{ "--zoom": item.logo.zoom }}>
+                    <img src={item.logo.src} alt={item.logo.alt} />
+                  </span>
+                  <img className="fw-photo" src={item.photos[0].src} alt="" />
+                  <h3 className="fw-line">{item.line}</h3>
+                </div>
 
-              {/* sibling of .fw-say rather than a child of .fw-extra so mobile
-                  can stack it after the acid band; on desktop it still lands in
-                  the same place, since .fw-extra is just inset:0 on the row */}
-              <div className="fw-quote">
-                <p className="fw-quoteText">&ldquo; {item.quote} &rdquo;</p>
-                <button
-                  type="button"
-                  className="fw-readCase"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setPanelItem(item);
-                  }}
-                >
-                  <span>Read more</span>
-                  <svg viewBox="0 0 40 40" aria-hidden="true">
-                    <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          ))}
-        </Reveal>
-      </div>
-
-      <div
-        className={`fw-panelOverlay${panelItem ? " is-open" : ""}`}
-        onClick={() => setPanelItem(null)}
-        aria-hidden={!panelItem}
-      >
-        <aside
-          className="fw-panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label={panelItem ? `${panelItem.plates.map((p) => p.name).join(" & ")} on ${panelItem.name}` : undefined}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button type="button" className="fw-panelClose" aria-label="Close" onClick={() => setPanelItem(null)}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M5 5l14 14M19 5 5 19"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-
-          {panelItem && (
-            <>
-              <div className="fw-panelHead">
-                <span className="fw-panelLogo">
-                  {panelItem.logo.type === "image" ? (
-                    <img src={panelItem.logo.src} alt={panelItem.logo.alt} />
-                  ) : (
-                    <b>{panelItem.logo.alt}</b>
-                  )}
-                </span>
-                <span className="fw-panelNames">
-                  <b>{panelItem.name}</b>
-                  <span>{panelItem.category}</span>
-                </span>
-              </div>
-
-              <div className="fw-panelBody" data-lenis-prevent>
-                <svg className="fw-panelMark" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#0B0B0D"
-                    d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM0 8.5h7v7H0zM8.5 8.5h7v7h-7zM0 17h7v7H0z"
-                  />
-                </svg>
-
-                <p className="fw-panelQuote">{panelItem.quote}</p>
-
-                <svg className="fw-panelMark fw-panelMark--end" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#0B0B0D"
-                    d="M17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM0 17h7v7H0zM8.5 17h7v7h-7zM17 17h7v7h-7z"
-                  />
-                </svg>
-
-                {/* the quote is one founder's words, so only the first
-                    founder is credited here even when the row shows a pair */}
-                <div className="fw-panelBy">
-                  <p className="fw-panelByOne">
-                    <b>{panelItem.plates[0].name}</b>
-                    {panelItem.plates[0].role && <i>{panelItem.plates[0].role}</i>}
-                  </p>
+                <div className="fw-quote">
+                  <StepMark className="fw-quoteMark" />
+                  {paras.map((p, j) => (
+                    <p key={j}>{p}</p>
+                  ))}
+                  <div className="fw-by">
+                    <b>{founder.name}</b>
+                    {founder.role && <span>{founder.role}</span>}
+                  </div>
                 </div>
               </div>
-            </>
-          )}
-        </aside>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

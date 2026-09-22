@@ -1,7 +1,12 @@
+// logo.zoom: how far the mobile card scales its logo up inside the white
+// corner block. The logo files are squares with the mark taking very
+// different shares of them, so each is worked out from its own mark's
+// bounds — the most the mark can grow while still fitting about 80% of the
+// block's width and height, never cropped.
 export const FEATURED_WORK = [
   {
     id: "helium",
-    logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4 },
+    logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4, zoom: 2.4 },
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
@@ -19,7 +24,7 @@ export const FEATURED_WORK = [
   {
     id: "platinum-rx",
     href: "/case-study/platinumrx",
-    logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx", trim: 0.25 },
+    logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx", trim: 0.25, zoom: 1.6 },
     name: "Platinum RX",
     category: "Consumer Health",
     photos: [
@@ -36,7 +41,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "inkpen-labs",
-    logo: { type: "image", src: "/featured%20works/inkpen%20labs.png", alt: "Inkpen Labs", trim: 0.069 },
+    logo: { type: "image", src: "/featured%20works/inkpen%20labs.png", alt: "Inkpen Labs", trim: 0.069, zoom: 1.2 },
     name: "Inkpen Labs",
     category: "inkpenlabs.com",
     solo: true,
@@ -49,7 +54,7 @@ export const FEATURED_WORK = [
   {
     id: "masai-school",
     href: "/case-study/masai",
-    logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School", trim: 0.049 },
+    logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School", trim: 0.049, zoom: 1.85 },
     name: "Masai School",
     category: "masaischool.com",
     photos: [
@@ -66,7 +71,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "grexa-ai",
-    logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI", trim: 0.042 },
+    logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI", trim: 0.042, zoom: 1.9 },
     name: "Grexa AI",
     category: "grexa.ai",
     solo: true,
@@ -78,7 +83,7 @@ export const FEATURED_WORK = [
   },
   {
     id: "apnamart",
-    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "Apnamart", scale: 0.75 },
+    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "Apnamart", scale: 0.75, zoom: 0.85 },
     name: "Apnamart",
     category: "apnamart.in",
     solo: true,

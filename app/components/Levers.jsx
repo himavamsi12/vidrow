@@ -38,8 +38,9 @@ export default function Levers() {
       const ys = pc.cells.map((c) => c[1]);
       const minX = Math.min(...xs);
       const minY = Math.min(...ys);
+      const w = Math.max(...pc.cells.map((c) => c[0] + c[2])) - minX;
       const h = Math.max(...pc.cells.map((c) => c[1] + c[3])) - minY;
-      return { minX, minY, h };
+      return { minX, minY, w, h };
     });
     const cells = [];
     PIECES.forEach((pc, pi) => {
@@ -85,6 +86,12 @@ export default function Levers() {
         let tallest = 0;
         for (let i = rng[0]; i < rng[1]; i++) tallest = Math.max(tallest, pieceMeta[i].h);
         for (let i = rng[0]; i < rng[1]; i++) levSlots[i].style.height = tallest * ey + "px";
+      });
+      // each slot is exactly as wide as its settled piece, so a column that
+      // centres or right-aligns its slot (the mobile ring layout) lands the
+      // piece centred / flush right too, since pieces fly to the slot's left
+      pieceMeta.forEach((m, i) => {
+        levSlots[i].style.width = m.w * ex + "px";
       });
       const sR = levSlots[0].getBoundingClientRect();
 

@@ -810,10 +810,18 @@ html.nav-hidden .hx-bar {
 
 /* starts clear of the hook notch in this bar's bottom-left corner (which
    ends at 14.45%), so "Playbook" doesn't sit on its edge */
+/* "Seed To" sits at the label's left edge, with "Series D" and "Playbook"
+   stepped in under it to a shared indent */
 .hx-s2 .hx-tag {
-  left: 19%;
+  --indent: 81px;
+  left: 11.5%;
   top: 14.5%;
   color: var(--paper)
+}
+
+.hx-s2 .hx-num,
+.hx-s2 .hx-cap:not(.hx-cap--bold) {
+  margin-left: var(--indent)
 }
 
 .hx-s3 .hx-tag {
@@ -1260,6 +1268,17 @@ html.nav-hidden .hx-bar {
   .hx-cap--bold {
     font-size: clamp(20px, 6.2vw, 26px);
     line-height: 1.1
+  }
+
+  /* the indent keeps the same share of the figure's size as on desktop */
+  .hx-s2 .hx-tag {
+    --indent: calc(1.45 * clamp(20px, 6.2vw, 26px))
+  }
+
+  /* the shared .hx-num margin above is !important, so the indent has to be
+     too */
+  .hx-s2 .hx-num {
+    margin-left: var(--indent) !important
   }
 
   /* this card's own copy is the longest of the four — even at the smallest
@@ -1814,16 +1833,14 @@ html.nav-hidden .hx-bar {
 }
 
 
-/* ── featured work ─────────────────────────── */
-/* laid out against a 1440 design width; --k is one design px, so the whole
-   row scales with its own width instead of breaking at odd viewports */
-/* the expanding-row layout is the mobile one now — desktop gets the stacked
-   cards in .fw2 instead (both are rendered, one is hidden per breakpoint) */
+/* ── featured work (mobile) ───────────────────── */
+/* phones get this accordion in .fw; desktop gets the sticky-heading cards
+   in .fw2 instead (both are rendered, one is hidden per breakpoint) */
 .fw {
   display: none;
   background: var(--paper);
   color: var(--ink);
-  padding: clamp(56px, 7vw, 100px) 0 120px
+  padding: 56px 20px 64px
 }
 
 @media (max-width:900px) {
@@ -1836,892 +1853,242 @@ html.nav-hidden .hx-bar {
   }
 }
 
-.fw-in {
-  width: 100%;
-  container-type: inline-size;
-  --k: min(.0694444cqw, 1.111px)
-}
-
+/* sticks at the top while the cards below open and go under it */
 .fw-head {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  padding: 0 6%;
-  margin-bottom: clamp(32px, 4.2vw, 60px)
+  gap: 10px;
+  padding: 16px 0 20px;
+  margin-bottom: 8px
 }
 
 .fw-tagwrap {
   position: relative;
   display: inline-flex;
   align-items: flex-end;
-  height: 22px
+  gap: 6px
 }
 
 .fw-tag {
-  position: relative;
-  height: 18px;
-  padding: 4px 6px;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   background: var(--acid);
-  color: #000;
   font-family: var(--body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -.03em;
-  white-space: nowrap
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .02em;
+  padding: 4px 8px
 }
 
+/* the mark overlaps the tag's top-right corner, mirrored — same as the
+   desktop tag (.fw2-tagwrap .mark) */
 .fw-tagwrap .mark {
   position: absolute;
-  /* pulled left so its near two-thirds sit on top of the tag and only the
-     rightmost column runs past its edge */
   left: calc(100% - 10px);
-  top: 0;
+  top: -6px;
   width: 15px;
   height: 15px;
   gap: 1px;
-  /* mirrored so the staircase tapers toward the tag instead of away from it */
-  transform: scaleX(-1)
+  transform: scaleX(-1);
+  color: var(--ink)
 }
 
 .fw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(32px, 3.9vw, 40px);
-  line-height: 1.2;
-  letter-spacing: -.025em;
-  color: #1A1C1C;
-  margin: 0
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin: 0;
+  color: #121212
 }
 
-.fw-list {
-  border-top: 1px solid #E4E4E4
+/* each company is its card, with its row laid over the top of it. The
+   item's height (row → the card's full height) and --o (0..1, how open it
+   is) are set from the scroll position by FeaturedWorkMobile.jsx; without
+   the script every card simply sits open. */
+.fw-item {
+  --o: 1;
+  position: relative;
+  overflow: hidden;
+  transform-origin: 50% 100%
 }
 
 .fw-row {
-  position: relative;
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  height: calc(180 * var(--k));
-  background: var(--paper);
-  border-bottom: 1px solid #E4E4E4;
-  transition: height .5s cubic-bezier(.16, .84, .34, 1), background-color .4s ease
-}
-
-.fw-row.is-open,
-.fw-row:focus-visible {
-  height: calc(260 * var(--k));
-  background: #F5F5F5
-}
-
-/* left: logo tile, client, industry */
-.fw-brand {
   position: absolute;
-  left: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: calc(12 * var(--k));
-  z-index: 3;
-  transition: top .5s cubic-bezier(.16, .84, .34, 1), transform .5s cubic-bezier(.16, .84, .34, 1)
-}
-
-.fw-row.is-open .fw-brand,
-.fw-row:focus-visible .fw-brand {
-  top: calc(20 * var(--k));
-  transform: none
-}
-
-.fw-logo {
-  width: calc(72 * var(--k));
-  height: calc(72 * var(--k));
-  flex: none;
-  background: var(--paper);
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  box-sizing: border-box;
   display: grid;
-  place-items: center;
-  overflow: hidden
+  grid-template-columns: 62px 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+  padding: 21px 12px;
+  background: var(--paper);
+  border-bottom: 1px solid #E8E8E8;
+  pointer-events: none;
+  /* fades off the card over the first half of the opening */
+  opacity: calc(1 - var(--o) * 2)
 }
 
-.fw-logo img,
-.fw-logo svg {
-  width: calc(44 * var(--k));
-  height: auto;
-  display: block
+.fw-rowLogo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center
 }
 
-/* the supplied logo files are full square tiles (white ground, mark
-   already padded inside), so they fill the box rather than sitting at the
-   44px an svg mark gets */
-.fw-logo img.fw-logoTile {
+.fw-rowLogo img {
   width: 100%;
   height: 100%;
   object-fit: contain
 }
 
-.fw-logo b {
-  font-family: var(--body);
-  font-size: calc(10 * var(--k));
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: .1em;
-  color: #121212;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 0 calc(4 * var(--k));
-  overflow-wrap: normal
-}
-
-.fw-id {
-  display: flex;
-  flex-direction: column;
-  gap: calc(6 * var(--k));
-  padding-top: calc(2 * var(--k))
-}
-
-.fw-name {
+.fw-rowLine {
   font-family: var(--display);
   font-weight: 400;
-  font-size: calc(18 * var(--k));
-  line-height: 1.2;
+  font-size: 15px;
+  line-height: 1.3;
   letter-spacing: -.01em;
   color: #121212
 }
 
-.fw-cat {
-  font-family: var(--body);
-  font-size: calc(12 * var(--k));
-  line-height: 1.4;
-  color: #4C4546
+.fw-rowMark {
+  width: 16px;
+  height: 16px;
+  fill: var(--violet)
 }
 
-/* right: the line + the button. on hover it becomes the acid block, notched bottom-right */
-.fw-say {
+/* the open card: an acid block with the logo in a white corner, the
+   founder cut-out on the right and the headline plate over its shoulder;
+   then the testimonial in a white panel framed by acid bars. Sizes are in
+   cqw, the card's own width, so it holds its shape at any phone width. */
+.fw-card {
+  container-type: inline-size;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E8E8E8
+}
+
+.fw-top {
+  position: relative;
+  height: 60cqw;
+  background: linear-gradient(var(--acid), var(--acid)) top / 100% 53cqw no-repeat
+}
+
+.fw-logo {
   position: absolute;
-  /* same inset as .fw-brand's left: 6%, so the row is padded evenly */
-  right: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(416 * var(--k));
-  box-sizing: border-box;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: calc(8 * var(--k));
-  padding: 0;
-  background-color: rgba(245, 250, 94, 0);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 42.07% 100%, 42.07% 100%, 0 100%);
-  transition: right .5s cubic-bezier(.16, .84, .34, 1), top .5s cubic-bezier(.16, .84, .34, 1),
-    transform .5s cubic-bezier(.16, .84, .34, 1), width .5s cubic-bezier(.16, .84, .34, 1),
-    padding .5s cubic-bezier(.16, .84, .34, 1), background-color .4s ease, clip-path .5s cubic-bezier(.16, .84, .34, 1)
-}
-
-.fw-row.is-open .fw-say,
-.fw-row:focus-visible .fw-say {
-  right: 6%;
+  left: 0;
   top: 0;
-  transform: none;
-  width: calc(473 * var(--k));
-  /* hugs its text with an even 10px inset all round, instead of a fixed
-     height that centred the line and left deep top/bottom bands */
-  height: auto;
-  gap: calc(4 * var(--k));
-  padding: calc(10 * var(--k));
-  background-color: var(--acid);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+  width: 31cqw;
+  height: 14.5cqw;
+  overflow: hidden;
+  background: var(--paper)
 }
 
-.fw-line {
-  font-family: var(--body);
-  font-weight: 400;
-  font-size: calc(18 * var(--k));
-  line-height: 1.35;
-  letter-spacing: -.01em;
-  color: #4D4D4D;
-  margin: 0;
-  transition: font-size .5s cubic-bezier(.16, .84, .34, 1), color .3s ease
-}
-
-.fw-row.is-open .fw-line,
-.fw-row:focus-visible .fw-line {
-  font-size: calc(20 * var(--k));
-  line-height: 1.4;
-  font-weight: 500;
-  color: #1A1C1C
-}
-
-.fw-arw {
-  width: calc(26 * var(--k));
-  height: auto;
-  flex: none
-}
-
-/* hover-only layer: founder cut-outs, name plates, the pull quote */
-.fw-extra {
+/* the logo files are squares with the mark in the middle and blank
+   padding round it: the whole square fits the block's height, then is
+   scaled up by the logo's own --zoom (see featuredWork.js) so the mark
+   itself fills the block — the blank padding is what gets clipped, never
+   the mark */
+.fw-logo img {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  pointer-events: none
-}
-
-.fw-extra>* {
-  opacity: 0;
-  transition: opacity .34s ease, transform .55s cubic-bezier(.16, .84, .34, 1)
-}
-
-.fw-row.is-open .fw-extra>*,
-.fw-row:focus-visible .fw-extra>* {
-  opacity: 1;
-  transform: none
-}
-
-.fw-ph {
-  position: absolute;
-  top: calc(22 * var(--k));
-  width: calc(276 * var(--k));
-  height: calc(238 * var(--k));
-  margin: 0;
-  overflow: hidden;
-  transform: translateY(calc(26 * var(--k)))
-}
-
-.fw-ph img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* founder cut-outs come in slightly different aspect ratios — when cover
-     has to crop, lose the bottom of the shirt rather than the top of a head */
-  object-position: center top;
-  display: block
+  object-fit: contain;
+  transform: scale(var(--zoom, 1))
 }
 
-/* a tightly-framed cut-out (face fills the frame) scaled down a touch,
-   anchored to the bottom so the shoulders still meet the row's edge */
-/* this cut-out's head sits right at the top of its file, so it's allowed to
-   spill past the frame instead of having its hair cropped */
-.fw-ph.fw-phShrink {
-  overflow: visible
-}
-
-.fw-ph.fw-phShrink img {
-  /* the whole cut-out, never cropped: cover would cut the shoulders off
-     the bottom of this squarer file, so it's fitted and seated on the
-     row's bottom edge instead */
+.fw-photo {
+  position: absolute;
+  right: 4cqw;
+  top: 2.6cqw;
+  width: 60cqw;
+  height: 57.4cqw;
   object-fit: contain;
   object-position: center bottom
 }
 
-/* the opposite case: a loosely-framed cut-out (lots of space above the
-   head, person small in the file) grown from the bottom edge so the head
-   matches its neighbour's height, allowed to spill past the frame's top */
-.fw-ph.fw-phGrow {
-  overflow: visible
-}
-
-.fw-ph.fw-phGrow img {
-  transform: scale(1.05);
-  transform-origin: center bottom
-}
-
-.fw-ph1 {
-  left: 18.681%;
-  z-index: 1
-}
-
-.fw-ph2 {
-  left: 30.764%;
-  z-index: 2
-}
-
-.fw-plate {
+/* wide enough that even the longest headline breaks onto two lines; it
+   grows rather than clips if one ever needs a third */
+.fw-line {
   position: absolute;
-  top: calc(202 * var(--k));
-  min-width: calc(202 * var(--k));
-  height: calc(58 * var(--k));
-  white-space: nowrap;
+  left: 0;
+  top: 41.5cqw;
+  width: 90cqw;
+  min-height: 17cqw;
   box-sizing: border-box;
-  background: var(--paper);
-  z-index: 3;
+  margin: 0;
+  padding: 0 4.5cqw;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: calc(2 * var(--k));
-  padding: calc(12 * var(--k)) calc(10 * var(--k)) calc(8 * var(--k));
-  transform: translateY(calc(14 * var(--k)))
-}
-
-.fw-plate b {
+  align-items: center;
+  background: var(--paper);
   font-family: var(--display);
   font-weight: 400;
-  font-size: calc(24 * var(--k));
-  line-height: .8;
-  letter-spacing: calc(-.5 * var(--k));
+  font-size: 4.9cqw;
+  line-height: 1.25;
+  letter-spacing: -.02em;
   color: #121212
 }
 
-.fw-plate span {
-  font-family: var(--body);
-  font-size: calc(12 * var(--k));
-  line-height: 1.4;
-  color: #4C4546
-}
-
-.fw-plate1 {
-  left: 18.681%;
-  align-items: flex-start;
-  text-align: left
-}
-
-.fw-plate2 {
-  left: auto;
-  right: 50%;
-  align-items: flex-start;
-  text-align: left
-}
-
-.fw-phSolo {
-  left: 24.722%;
-  z-index: 2
-}
-
-.fw-plateSolo {
-  left: 23.611%;
-  right: auto;
-  align-items: flex-start;
-  text-align: left;
-  z-index: 3
-}
-
+/* the acid frame: a bar down the left and along most of the foot, a short
+   one across the top-left, and a separate bar down the right edge */
 .fw-quote {
-  position: absolute;
-  right: 6%;
-  bottom: 0;
-  width: calc(473 * var(--k));
-  box-sizing: border-box;
-  background: var(--paper);
-  padding: calc(16 * var(--k));
-  margin: 0;
-  /* below .fw-extra (z-index 2), so the founder cut-out still overlaps it */
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: calc(10 * var(--k));
-  transform: translateY(calc(-10 * var(--k)));
-  /* it sits outside .fw-extra, so it repeats the reveal and the click
-     transparency that .fw-extra used to hand it */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .34s ease, transform .55s cubic-bezier(.16, .84, .34, 1)
+  position: relative;
+  margin-top: 2cqw;
+  padding: 5cqw 11cqw 7cqw 7cqw;
+  background: linear-gradient(var(--acid), var(--acid)) left bottom / 91% 2cqw no-repeat,
+    linear-gradient(var(--acid), var(--acid)) left top / 2cqw 100% no-repeat,
+    linear-gradient(var(--acid), var(--acid)) left top / 56% 1.6cqw no-repeat,
+    linear-gradient(var(--acid), var(--acid)) right top / 2cqw 100% no-repeat,
+    var(--paper)
 }
 
-.fw-quoteText {
-  margin: 0;
-  font-family: var(--body);
-  font-size: calc(16 * var(--k));
-  line-height: 1.4;
-  color: #121212;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden
-}
-
-.fw-readCase {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: calc(10 * var(--k));
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-family: var(--body);
-  font-size: calc(11 * var(--k));
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink);
-  white-space: nowrap;
-  transition: color var(--btn-dur) var(--btn-ease)
-}
-
-.fw-readCase svg {
-  width: calc(16 * var(--k));
-  height: calc(16 * var(--k));
-  flex: none
-}
-
-.fw-readCase:hover {
-  color: var(--violet)
-}
-
-.fw-row.is-open .fw-quote,
-.fw-row:focus-visible .fw-quote {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto
-}
-
-/* mobile-only compact icon shown on a closed row (see the media query
-   below) — desktop keeps the full "read full story" reveal on hover */
-.fw-mini {
-  display: none
-}
-
-/* ── full-testimonial slide-in panel ─────────
-   a dark scrim over the page, with a solid black panel sliding in from the
-   right — opened from a card's "Read case study" button */
-.fw-panelOverlay {
-  position: fixed;
-  inset: 0;
-  /* above the sticky site nav (1000) and its mobile menu */
-  z-index: 1100;
-  background: rgba(11, 11, 13, .45);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .35s ease, visibility 0s linear .35s
-}
-
-.fw-panelOverlay.is-open {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity .35s ease
-}
-
-.fw-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(560px, 90vw);
-  box-sizing: border-box;
-  background: #F4F4F4;
-  color: var(--ink);
-  padding: clamp(40px, 6vw, 72px) clamp(28px, 5vw, 56px);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  transition: transform .45s cubic-bezier(.16, .84, .34, 1)
-}
-
-.fw-panelOverlay.is-open .fw-panel {
-  transform: none
-}
-
-.fw-panelClose {
-  position: absolute;
-  top: clamp(16px, 2.5vw, 24px);
-  right: clamp(16px, 2.5vw, 24px);
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  border: 0;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
-}
-
-.fw-panelClose svg {
-  width: 16px;
-  height: 16px
-}
-
-.fw-panelClose:hover {
-  background: rgba(11, 11, 13, .07)
-}
-
-/* company header: logo tile, name, category — same pairing as the row */
-.fw-panelHead {
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: 16px
-}
-
-.fw-panelLogo {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 64px;
-  height: 64px;
-  background: var(--paper)
-}
-
-.fw-panelLogo img {
-  max-width: 76%;
-  max-height: 76%;
-  object-fit: contain
-}
-
-.fw-panelLogo b {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 15px
-}
-
-.fw-panelNames {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0
-}
-
-.fw-panelNames b {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(20px, 2.6vw, 26px);
-  line-height: 1.1;
-  letter-spacing: -.02em;
-  color: #121212
-}
-
-.fw-panelNames span {
-  font-family: var(--body);
-  font-size: 15px;
-  color: #4C4546
-}
-
-/* everything under the header scrolls together when a testimonial runs
-   long, so the quote, the closing mark and the founder's name stay in the
-   same order they read in */
-.fw-panelBody {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  margin-top: clamp(28px, 4vw, 44px);
-  padding-bottom: 32px
-}
-
-/* the brand's small step mark, opening the quote above and left of it */
-.fw-panelMark {
+.fw-quoteMark {
   display: block;
-  width: 22px;
-  height: 22px;
-  margin: 0 0 6px
+  width: 16px;
+  height: 16px;
+  fill: #0B0B0D;
+  margin-bottom: 12px
 }
 
-/* and its mirror, closing the quote on the right */
-.fw-panelMark--end {
-  margin: 14px 0 0 auto
-}
-
-.fw-panelQuote {
-  margin: 0 0 0 28px;
+.fw-quote p {
+  margin: 0 0 1.2em;
   font-family: var(--body);
-  font-size: 17px;
-  line-height: 1.5;
-  color: #4C4546;
-  /* testimonials carry their paragraph breaks as \n in the data */
-  white-space: pre-line
+  font-size: 14px;
+  line-height: 1.45;
+  color: #4C4546
 }
 
-.fw-panelBy {
-  margin: clamp(20px, 3vw, 30px) 0 0 28px;
+.fw-quote p:first-of-type {
+  font-weight: 600;
+  color: #333
+}
+
+.fw-by {
   display: flex;
   flex-direction: column;
-  gap: 14px
+  gap: 4px;
+  margin-top: 4px
 }
 
-.fw-panelByOne {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px
-}
-
-.fw-panelByOne b {
+.fw-by b {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(18px, 2.4vw, 22px);
-  line-height: 1.1;
+  font-size: 18px;
   letter-spacing: -.02em;
   color: #121212
 }
 
-.fw-panelByOne i {
+.fw-by span {
   font-family: var(--body);
-  font-style: italic;
-  font-size: 15px;
+  font-size: 12px;
   color: #4C4546
-}
-
-@media (max-width:640px) {
-  .fw-panel {
-    width: 100%
-  }
-}
-
-@media (prefers-reduced-motion:reduce) {
-  .fw-panelOverlay,
-  .fw-panel {
-    transition-duration: .01ms
-  }
-}
-
-@media (prefers-reduced-motion:reduce) {
-
-  .fw-row,
-  .fw-brand,
-  .fw-say,
-  .fw-line,
-  .fw-extra>* {
-    transition-duration: .01ms
-  }
-}
-
-@media (max-width:900px) {
-  .fw-row {
-    height: auto;
-    --fw-pad-x: clamp(20px, 5vw, 28px);
-    padding: 20px var(--fw-pad-x);
-    border-bottom: 1px solid #E4E4E4
-  }
-
-  /* the photos break out to the full row width (edge to edge) instead of
-     sitting inside the row's own side padding — noticeably bigger, and
-     the two photos touch at the seam instead of leaving a gap */
-  .fw-row.is-open .fw-extra {
-    margin-left: calc(-1 * var(--fw-pad-x));
-    margin-right: calc(-1 * var(--fw-pad-x));
-    width: calc(100% + 2 * var(--fw-pad-x))
-  }
-
-  .fw-row.is-open,
-  .fw-row:focus-visible {
-    height: auto;
-    /* same grey the desktop open row uses, so the white quote card below the
-       acid band reads as a card instead of blending into the row */
-    background: #F5F5F5
-  }
-
-  /* the always-visible header row: logo + name/category on the left, a
-     compact icon on the right — the icon swaps for the full "read full
-     story" button once the row opens */
-  .fw-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px
-  }
-
-  .fw-brand,
-  .fw-row.is-open .fw-brand {
-    position: static;
-    transform: none;
-    gap: 12px
-  }
-
-  .fw-logo {
-    width: 44px;
-    height: 44px
-  }
-
-  .fw-logo img,
-  .fw-logo svg {
-    width: 26px
-  }
-
-  .fw-logo b {
-    font-size: 8px
-  }
-
-  .fw-id {
-    gap: 4px;
-    padding-top: 0
-  }
-
-  .fw-name {
-    font-size: 17px
-  }
-
-  .fw-cat {
-    font-size: 12px
-  }
-
-  .fw-mini {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 30px;
-    height: 30px
-  }
-
-  .fw-arwMini {
-    width: 20px
-  }
-
-  .fw-row.is-open .fw-mini {
-    display: none
-  }
-
-  /* the whole accordion body is hidden on a closed row — no preview line,
-     just the header — and only appears once tapped open */
-  .fw-extra,
-  .fw-say {
-    display: none
-  }
-
-  /* photos then plates, each pair filling one row edge-to-edge: two 50%
-     items wrap onto their own row automatically, so photos (2) fill row 1
-     and plates (2) wrap to row 2 with no extra markup needed */
-  .fw-row.is-open .fw-extra {
-    display: flex;
-    flex-wrap: wrap;
-    position: static;
-    pointer-events: auto;
-    z-index: auto;
-    margin-top: 16px
-  }
-
-  .fw-row.is-open .fw-extra>* {
-    opacity: 1;
-    transform: none
-  }
-
-  /* the same overlapped pair the desktop row shows: each photo is ~61% of the
-     row and the second is pulled back across the first by ~37% of its own
-     width, so the pair still spans exactly the full width (and so each photo
-     is meaningfully bigger than a plain 50/50 split). left/top are reset
-     because .fw-ph1/.fw-ph2 carry desktop absolute offsets that would apply
-     as relative nudges here, but their z-index is kept so the second photo
-     stays in front — which is what needs position:relative in the first place.
-     Height is whatever the image's own aspect ratio needs at this width; a
-     fixed height + object-fit:cover cropped people's heads/shoulders. */
-  .fw-row.is-open .fw-ph {
-    position: relative;
-    left: 0;
-    top: auto;
-    width: 61.3%;
-    height: auto;
-    transform: none
-  }
-
-  .fw-row.is-open .fw-ph+.fw-ph {
-    margin-left: -22.6%
-  }
-
-  .fw-row.is-open .fw-ph img {
-    height: auto;
-    object-fit: initial
-  }
-
-  .fw-row.is-open .fw-ph.fw-phSolo {
-    width: 100%
-  }
-
-  .fw-row.is-open .fw-plate {
-    /* overlaps the bottom of its photo, same as the desktop hover card,
-       instead of just sitting in flow below it as plain small text.
-       left/right/top are reset because .fw-plate1/.fw-plate2 carry
-       desktop absolute-positioning offsets (e.g. right:50%) that also
-       apply to position:relative and would shove this sideways */
-    position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
-    /* above both photos, which now carry z-index 1 and 2 to overlap */
-    z-index: 4;
-    width: 50%;
-    min-width: 0;
-    height: auto;
-    transform: none;
-    /* scaled with the photos: the old -42px covered the same share of a
-       smaller photo. Enough to overlap the jacket, not the face */
-    margin-top: -50px;
-    padding: 16px 14px;
-    align-items: center;
-    text-align: center
-  }
-
-  .fw-row.is-open .fw-plate.fw-plateSolo {
-    width: 100%
-  }
-
-  .fw-row.is-open .fw-plate b {
-    font-size: 20px;
-    line-height: 1.15
-  }
-
-  .fw-row.is-open .fw-plate span {
-    font-size: 13px
-  }
-
-  /* acid band then quote card, stacked and staggered against each other: the
-     band runs off the left screen edge, the quote off the right, each 92% of
-     the screen. Both break out of the row's side padding (like the photos do)
-     and are measured against the full row width, not the padded box, so each
-     one truly touches its edge. That offset is the staircase motif here, so
-     the band itself stays a plain rectangle (no notch) as in the design */
-  .fw-row.is-open .fw-say,
-  .fw-row.is-open .fw-quote {
-    width: calc(.92 * (100% + 2 * var(--fw-pad-x)));
-    box-sizing: border-box
-  }
-
-  .fw-row.is-open .fw-say {
-    display: flex;
-    flex-direction: column;
-    position: static;
-    transform: none;
-    height: auto;
-    padding: 18px var(--fw-pad-x);
-    margin: 12px 0 0 calc(-1 * var(--fw-pad-x));
-    background-color: var(--acid);
-    clip-path: none;
-    gap: 10px
-  }
-
-  .fw-row.is-open .fw-quote {
-    position: static;
-    /* auto on the left pushes it right until it meets the screen edge */
-    margin: 10px calc(-1 * var(--fw-pad-x)) 0 auto;
-    padding: 18px var(--fw-pad-x);
-    opacity: 1;
-    transform: none;
-    background: var(--paper);
-    gap: 10px
-  }
-
-  .fw-row.is-open .fw-quoteText {
-    font-size: 15px;
-    line-height: 1.55
-  }
-
-  .fw-row.is-open .fw-readCase {
-    font-size: 11px;
-    gap: 10px
-  }
-
-  .fw-row.is-open .fw-readCase svg {
-    width: 16px;
-    height: 16px
-  }
-
-  .fw-row.is-open .fw-line {
-    font-size: 17px;
-    line-height: 1.35;
-    font-weight: 500;
-    color: #1A1C1C
-  }
-
-  .fw-row.is-open .fw-arw {
-    width: 22px
-  }
 }
 
 /* ── featured work v2: full-screen acid cards that stack on scroll ──
@@ -3845,9 +3212,50 @@ html.nav-hidden .hx-bar {
 }
 
 @media (max-width:640px) {
+  /* phones: the six levers ring the heading — Brand top centre with
+     Performance / Celebrity either side under it, then Social / AI either
+     side with AdOps bottom centre. Right-hand columns right-align both the
+     piece's slot and the label; centre ones centre them. */
+  .lev-stage {
+    gap: 44px
+  }
+
   .lev-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px 12px
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px
+  }
+
+  #levRowTop {
+    grid-template-areas:
+      "b b"
+      "p c";
+    margin-bottom: 0
+  }
+
+  #levRowBot {
+    grid-template-areas:
+      "s ai"
+      "ad ad";
+    margin-top: 0
+  }
+
+  #levRowTop .lev-col:nth-child(1) { grid-area: p }
+  #levRowTop .lev-col:nth-child(2) { grid-area: b }
+  #levRowTop .lev-col:nth-child(3) { grid-area: c }
+  #levRowBot .lev-col:nth-child(1) { grid-area: s }
+  #levRowBot .lev-col:nth-child(2) { grid-area: ad }
+  #levRowBot .lev-col:nth-child(3) { grid-area: ai }
+
+  #levRowTop .lev-col:nth-child(2),
+  #levRowBot .lev-col:nth-child(2) {
+    justify-items: center;
+    text-align: center
+  }
+
+  #levRowTop .lev-col:nth-child(3),
+  #levRowBot .lev-col:nth-child(3) {
+    justify-items: end;
+    text-align: right
   }
 
   .lev-slot {
