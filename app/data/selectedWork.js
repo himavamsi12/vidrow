@@ -33,7 +33,8 @@ export const SW_ITEMS = [
     alt: "Ivy Homes — walking a family through a renovation",
     title: "Ivy Homes Renovation Story",
     client: "Ivy Homes",
-    logo: "/logos/ivy-homes.png",
+    logo: "/selected/logo-ivy-homes.png",
+    logoScale: 1.4,
   },
   {
     cats: ["performance", "adops"],

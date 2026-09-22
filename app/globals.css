@@ -864,6 +864,22 @@ html.nav-hidden .hx-bar {
   margin-left: var(--indent)
 }
 
+/* desktop: "Series D" stays on one line. The label sits further left with a
+   shallower indent, and below 1440 the two bold lines scale down with the
+   screen so the figure still fits the tile (min() keeps 56px at 1440+) */
+@media (min-width:901px) {
+  .hx-s2 .hx-tag {
+    --indent: 48px;
+    left: 6%
+  }
+
+  .hx-s2 .hx-num--s2,
+  .hx-s2 .hx-cap--bold {
+    font-size: min(56px, 3.9vw);
+    white-space: nowrap
+  }
+}
+
 .hx-s3 .hx-tag {
   left: 6.1%;
   top: 12%;
@@ -2675,9 +2691,12 @@ html.nav-hidden .hx-bar {
   height: 100vh
 }
 
+/* `safe`: centred while it fits, but once the pinned block is taller than
+   the screen it lines up from the top instead of overflowing both ways —
+   so the tag and heading stay in view and only the panel's foot runs off */
 .wy-sticky {
   display: flex;
-  align-items: center
+  align-items: safe center
 }
 
 .wy-panel {
@@ -3270,6 +3289,18 @@ html.nav-hidden .hx-bar {
   z-index: 2
 }
 
+/* desktop: the pinned stage spreads its rows over the screen's height, so
+   on a shorter screen the heading ended up flush against both rows. A
+   floor on the gaps keeps it clear of them, paid for out of the stage's
+   own top and bottom padding, which gives way first as the screen shrinks */
+@media (min-width:901px) {
+  .lev-stage {
+    gap: clamp(32px, 5vh, 56px);
+    padding-top: clamp(32px, 6vh, 100px);
+    padding-bottom: clamp(32px, 6vh, 100px)
+  }
+}
+
 .lev-eyebrow {
   display: flex;
   justify-content: center;
@@ -3707,7 +3738,8 @@ html.nav-hidden .hx-bar {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 4cqw, 24px);
+  /* the same space between logo and line on every tile, wide or narrow */
+  gap: 16px;
   padding: 0 clamp(16px, 5cqw, 40px);
   /* acid at 85%, so the shot shows through faintly — only the fill is
      translucent, the logo and line stay solid */
@@ -3758,6 +3790,7 @@ html.nav-hidden .hx-bar {
 
 @media (max-width:640px) {
   .sw-over {
+    gap: 12px;
     font-size: 15px
   }
 }
