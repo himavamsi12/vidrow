@@ -66,8 +66,9 @@
   --gut: clamp(20px, 4.4vw, 64px);
   --maxw: 1720px;
   /* the page's left/right inset: every section's content, the nav and the
-     featured-work cards all line up on it */
-  --side: 52px;
+     featured-work cards all line up on it. 3.611% of the screen — 52px on
+     the 1440 design — stopping growing past the 1720 section cap (62px) */
+  --side: min(3.611vw, 62px);
 }
 
 @media (max-width:640px) {
@@ -2593,7 +2594,7 @@ html.nav-hidden .hx-bar {
   max-width: calc(1440 * var(--k));
   margin: 0 auto;
   /* the dark panel is a boxed card, so it keeps its own wider 6% inset
-     rather than the page's 52px --side */
+     rather than the page's --side */
   padding: 0 6%;
   box-sizing: border-box;
   display: flex;
@@ -3713,7 +3714,9 @@ html.nav-hidden .hx-bar {
   background: color-mix(in srgb, var(--acid) 85%, transparent);
   color: var(--ink);
   font-family: var(--body);
-  font-size: clamp(14px, 3.7cqw, 22px);
+  /* one size on every tile, wide or narrow — not scaled to the tile's own
+     width — so the overlays all read the same */
+  font-size: 18px;
   line-height: 1.2;
   text-align: center;
   opacity: 0;
@@ -3751,6 +3754,12 @@ html.nav-hidden .hx-bar {
   width: clamp(24px, 7cqw, 64px);
   height: 1px;
   background: currentColor
+}
+
+@media (max-width:640px) {
+  .sw-over {
+    font-size: 15px
+  }
 }
 
 @media (max-width:640px) {
@@ -4390,7 +4399,7 @@ a.cs-card:focus-visible {
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
-  color: #181818;
+  color: #5A5A62;
   margin: 0
 }
 
@@ -4496,7 +4505,9 @@ a.cs-card:focus-visible {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.19444px);
-  padding: calc(80 * var(--k)) var(--side) calc(60 * var(--k))
+  /* the deep bottom padding is room for a lifted segment's drop shadow,
+     which spills past the hexagon's own box (see .pr-stage) */
+  padding: calc(80 * var(--k)) var(--side) calc(100 * var(--k))
 }
 
 .pr-in {
@@ -4613,7 +4624,9 @@ a.cs-card:focus-visible {
   transform: translateX(-50%);
   aspect-ratio: 1440 / 1120;
   margin-top: calc(56 * var(--k));
-  overflow: hidden;
+  /* visible, so a lifted segment's shadow isn't cut off flat at the stage's
+     edge — .pr itself still clips, so nothing can scroll sideways */
+  overflow: visible;
   container-type: inline-size;
   --s: .0694444cqw
 }
@@ -4622,7 +4635,8 @@ a.cs-card:focus-visible {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%
+  height: 100%;
+  overflow: visible
 }
 
 .pr-web .hit {

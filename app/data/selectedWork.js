@@ -58,6 +58,6 @@ export const SW_ITEMS = [
     alt: "Vyapar — a shopkeeper in his store",
     title: "Vyapar Shop Owner Story",
     client: "Vyapar",
-    logo: "/logos/vyapar.png",
+    logo: "/selected/logo-apnamart.png",
   },
 ];
