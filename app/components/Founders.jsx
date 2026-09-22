@@ -40,7 +40,7 @@ export default function Founders() {
               <div className="fo-step">
                 <div className="fo-stat">
                   <b>
-                    90% raise next
+                    90% raise next{" "}
                     <br />
                     round
                   </b>
@@ -50,7 +50,7 @@ export default function Founders() {
               <div className="fo-step">
                 <div className="fo-stat">
                   <b>
-                    IIT KANPUR
+                    IIT KANPUR{" "}
                     <br />
                     FOUNDERS + TEAM
                   </b>
@@ -63,7 +63,7 @@ export default function Founders() {
               <div className="fo-step">
                 <div className="fo-stat">
                   <b>
-                    Forbes
+                    Forbes{" "}
                     <br />
                     30 under 30 | ASIA
                   </b>

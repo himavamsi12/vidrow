@@ -270,7 +270,13 @@ export default function Levers() {
           slotRefs.current[index] = el;
         }}
       />
-      <h3>{pc.lever}</h3>
+      {/* mobile breaks every label before its last word, so each reads as
+          two lines ("Social Media / Marketing"); desktop hides the break */}
+      <h3>
+        {pc.lever.slice(0, pc.lever.lastIndexOf(" "))}{" "}
+        <br className="lev-br" />
+        {pc.lever.slice(pc.lever.lastIndexOf(" ") + 1)}
+      </h3>
       <p>{pc.copy}</p>
     </div>
   );

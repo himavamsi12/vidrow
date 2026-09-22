@@ -78,9 +78,8 @@ export default function FeaturedWork() {
   // scrolls up under the sticky heading, the row after it grows into the
   // full card — starting as that row rises past 70% of the way down the
   // screen, done just as the open card's bottom meets the heading. The open
-  // card stays joined to the one opening below it the whole way, so
-  // there's never a gap between them, and it shrinks back slightly as it
-  // goes, so it reads as sinking away behind the heading.
+  // card simply scrolls up under the heading at full size, staying joined
+  // to the one opening below it the whole way.
   //
   // Each card's opening range is worked out from the document layout with
   // every card above it already open, so it depends only on scrollY —
@@ -105,9 +104,6 @@ export default function FeaturedWork() {
       // the heading's height is where it sticks to, and so where the cards
       // go under it
       const headH = head ? head.offsetHeight : 0;
-      const hinge = head ? head.getBoundingClientRect().bottom : 0;
-      // each card's layout top on screen, summed from the heights set here
-      let top = stackRect.top;
       cards.forEach((card, i) => {
         // the first card is the one on show as the section arrives; each
         // later one starts opening as its row's centre rises past 70% of
@@ -126,13 +122,6 @@ export default function FeaturedWork() {
         const h = row + (full - row) * o;
         card.style.height = `${h}px`;
         card.style.setProperty("--o", o.toFixed(3));
-
-        // passing under the heading: shrink back about the bottom edge, so
-        // it stays joined to the card opening below
-        const past = Math.min(Math.max(hinge - top, 0), h);
-        const c = past / h;
-        card.style.transform = c > 0 ? `scale(${(1 - 0.06 * c).toFixed(4)})` : "";
-        top += h;
       });
     };
     const onScroll = () => {
@@ -150,7 +139,6 @@ export default function FeaturedWork() {
       window.removeEventListener("resize", onScroll);
       cards.forEach((card) => {
         card.style.height = "";
-        card.style.transform = "";
         card.style.removeProperty("--o");
       });
     };

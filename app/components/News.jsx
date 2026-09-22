@@ -33,6 +33,9 @@ export default function News() {
   const trackRef = useRef(null);
   // index of the leftmost visible card
   const [at, setAt] = useState(0);
+  // the same, for the phone rail — which is swiped, not paged, so it's
+  // read back from the rail's own scroll position
+  const [railAt, setRailAt] = useState(0);
 
   // On desktop the row is moved by transform rather than by scrolling it: a
   // scroll animation there gets reverted by the snap container and by Lenis,
@@ -73,6 +76,24 @@ export default function News() {
       cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
     rail.scrollBy({ left: dir * step, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const rail = track?.parentElement;
+    if (!rail) return;
+    const onScroll = () => {
+      const cards = track.children;
+      if (cards.length < 2) return;
+      const step = cards[1].offsetLeft - cards[0].offsetLeft;
+      if (!step) return;
+      // the last card can't scroll flush left, so the end of the rail counts
+      // as reaching it
+      const atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
+      setRailAt(atEnd ? cards.length - 1 : Math.round(rail.scrollLeft / step));
+    };
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    return () => rail.removeEventListener("scroll", onScroll);
+  }, []);
 
   // keep the row aligned as the breakpoint (and so cards-per-view) changes
   useEffect(() => {
@@ -145,6 +166,9 @@ export default function News() {
           <button className="prev" type="button" aria-label="Previous articles" onClick={() => swipe(-1)}>
             <NavArrow />
           </button>
+          <span className="news-index--mobile" aria-hidden="true">
+            {String(railAt + 1).padStart(2, "0")}/{String(NEWS_ITEMS.length).padStart(2, "0")}
+          </span>
           <button className="next" type="button" aria-label="Next articles" onClick={() => swipe(1)}>
             <NavArrow />
           </button>
