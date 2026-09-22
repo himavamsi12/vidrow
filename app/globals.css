@@ -2472,7 +2472,9 @@ html.nav-hidden .hx-bar {
   z-index: 2;
   left: 0;
   top: 86.25%;
-  width: 25%;
+  /* wide enough that every headline sits on two lines — never narrower
+     than 470px, so smaller desktops don't wrap it to three */
+  width: max(31%, 470px);
   bottom: 0;
   box-sizing: border-box;
   /* same inset as the page (--side), so the headline lines up with the
