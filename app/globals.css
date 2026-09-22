@@ -2342,8 +2342,9 @@ html.nav-hidden .hx-bar {
 
 /* past the 1720 cap, the whole gap either side of a card is acid, with
    the white tetris pieces that meet the card's edges carrying on out into
-   it as smaller steps: on the left the logo block and the bottom
-   staircase, on the right the quote panel. */
+   it: on the left the logo block steps out (the bottom is plain white),
+   on the right one white strip continues the quote panel and the acid
+   beyond it runs the full height. */
 .fw2-full::before,
 .fw2-full::after {
   content: "";
@@ -2366,14 +2367,25 @@ html.nav-hidden .hx-bar {
 
 .fw2-full::before {
   right: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='304' y='0' width='96' height='111'/%3E%3Crect x='208' y='0' width='96' height='56'/%3E%3Crect x='304' y='458' width='96' height='182'/%3E%3Crect x='208' y='552' width='96' height='88'/%3E%3Crect x='112' y='600' width='96' height='40'/%3E%3C/svg%3E");
-  background-position: right top
+  /* the logo block steps out at the top; below where the card's own left
+     edge turns white (362 of the 640 design) the side is plain white, no
+     extended steps */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='304' y='0' width='96' height='111'/%3E%3Crect x='208' y='0' width='96' height='56'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, var(--acid) 56.5625%, var(--paper) 56.5625%);
+  background-position: right top, 0 0;
+  background-size: auto 100%, 100% 100%
 }
 
 .fw2-full::after {
   left: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='0' y='56' width='96' height='584'/%3E%3Crect x='96' y='360' width='96' height='280'/%3E%3Crect x='192' y='500' width='96' height='140'/%3E%3Crect x='288' y='590' width='112' height='50'/%3E%3C/svg%3E");
-  background-position: left top
+  /* one white strip continues the quote panel; the acid beyond it stops a
+     little short of the card's bottom (590 of the 640 design), white below */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 640' fill='%23fff'%3E%3Crect x='0' y='56' width='96' height='584'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, var(--acid) 92.1875%, var(--paper) 92.1875%);
+  background-position: left top, 0 0;
+  background-size: auto 100%, 100% 100%
 }
 
 /* reduced motion: every card simply sits open */
@@ -2464,8 +2476,9 @@ html.nav-hidden .hx-bar {
   bottom: 0;
   box-sizing: border-box;
   /* same inset as the page (--side), so the headline lines up with the
-     logo above and the section's "Featured Work" heading */
-  padding: 0 0 0 var(--side);
+     logo above and the section's "Featured Work" heading — plus room on
+     the right so the text doesn't run up against the photo */
+  padding: 0 32px 0 var(--side);
   display: flex;
   align-items: center;
   margin: 0;
@@ -2563,7 +2576,9 @@ html.nav-hidden .hx-bar {
   background: var(--paper);
   color: var(--ink);
   container-type: inline-size;
-  --k: min(.0694444cqw, 1.19444px);
+  /* capped at its original 1600-wide scale, not the page's 1720, so the
+     dark panel doesn't grow past its designed size on big screens */
+  --k: min(.0694444cqw, 1.111px);
   /* lives outside .wy-track (below), not on .wy-head — .wy-head sits inside
      the sticky/scroll-jacked box, so padding there would inflate that box's
      own content height and push the scroll-progress start point down with
@@ -2575,7 +2590,9 @@ html.nav-hidden .hx-bar {
   width: 100%;
   max-width: calc(1440 * var(--k));
   margin: 0 auto;
-  padding: 0 var(--side);
+  /* the dark panel is a boxed card, so it keeps its own wider 6% inset
+     rather than the page's 52px --side */
+  padding: 0 6%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -2800,7 +2817,9 @@ html.nav-hidden .hx-bar {
   font-size: calc(14 * var(--k));
   line-height: 1.3;
   color: rgba(255, 255, 255, .72);
-  margin: calc(4 * var(--k)) 0 0
+  margin: calc(4 * var(--k)) 0 0;
+  /* wraps at 70% of the card rather than running its full width */
+  max-width: 70%
 }
 
 @media (min-width:901px) {
@@ -2923,6 +2942,11 @@ html.nav-hidden .hx-bar {
   font-size: calc(22 * var(--k));
   letter-spacing: -.01em;
   color: var(--paper)
+}
+
+/* mobile's step bars (see the .m-pin rules in the 900px block) */
+.wy-steps {
+  display: none
 }
 
 /* the board: one tetromino lands per stage */
@@ -3048,6 +3072,7 @@ html.nav-hidden .hx-bar {
     border: 1px solid #4A4A4A
   }
 
+
   .wy-grid {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 1fr;
@@ -3133,6 +3158,60 @@ html.nav-hidden .hx-bar {
     bottom: 24px;
     font-size: 16px;
     line-height: 1
+  }
+
+  /* pinned (see WhereYouAreNow.jsx): only the open stage's card shows, under
+     the step bars. The closed stages fold down to nothing — they stay in the
+     layout, collapsed, so their cards can still be measured for the pin */
+  .wy.m-pin .wy-title {
+    display: none
+  }
+
+  .wy.m-pin .wy-item {
+    padding: 0;
+    border: 0
+  }
+
+  .wy.m-pin .wy-item.on {
+    padding: 0 0 20px
+  }
+
+  /* cards swap in place rather than growing and shrinking; the card's own
+     fade (.wy-bodyIn) carries the change */
+  .wy.m-pin .wy-body {
+    transition: none
+  }
+
+  .wy.m-pin .wy-steps {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px
+  }
+
+  .wy-stepBar {
+    flex: 1;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    position: relative
+  }
+
+  .wy-stepBar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+    background: #3A3A3A;
+    transition: background-color .3s ease
+  }
+
+  .wy-stepBar.on::before {
+    background: var(--acid)
   }
 }
 
@@ -3680,8 +3759,14 @@ html.nav-hidden .hx-bar {
     --ps: 1
   }
 
-  .sw-over {
-    display: none
+  /* no hover on a phone: the overlay shows on a tap instead (see
+     SelectedWork.jsx), and the sticky hover a tap leaves behind is ignored */
+  .sw-item:hover:not(.is-open) .sw-over {
+    opacity: 0
+  }
+
+  .sw-item.is-open .sw-over {
+    opacity: 1
   }
 
   .sw-h {
@@ -3825,7 +3910,8 @@ html.nav-hidden .hx-bar {
 .cs-rtrack {
   display: flex;
   width: max-content;
-  animation: cs-drift 30s linear infinite
+  /* 3x the length per copy (see REPEAT), so 3x the time at the same speed */
+  animation: cs-drift 90s linear infinite
 }
 
 .cs-row:hover .cs-rtrack,
@@ -3920,7 +4006,7 @@ a.cs-card:focus-visible {
   display: flex;
   width: max-content;
   height: 100%;
-  animation: cs-drift 40s linear infinite
+  animation: cs-drift 120s linear infinite
 }
 
 .cs-set {
@@ -4767,27 +4853,17 @@ a.cs-card:focus-visible {
   flex: none;
   display: flex;
   align-items: center;
-  gap: 8px
+  gap: 24px
 }
 
-/* the "01 / 05" counter under the desktop arrows — tracks the leftmost
-   visible card, same digit style as the case-study rail's own index */
+/* the "01/05" counter between the desktop arrows — tracks the leftmost
+   visible card, styled like the phone's own counter */
 .news-index {
-  /* centred under the pair of arrows, not flush with the right one */
-  align-self: center;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--display);
-  font-weight: 400;
+  font-family: var(--body);
   font-size: 16px;
-  letter-spacing: -.01em;
-  color: var(--ink)
-}
-
-.news-index-sep {
-  color: #C7C7C7;
-  font-weight: 300
+  letter-spacing: .01em;
+  color: #9A9A9A;
+  font-variant-numeric: tabular-nums
 }
 
 .news-nav button {
@@ -4808,6 +4884,7 @@ a.cs-card:focus-visible {
 }
 
 .news-nav svg path {
+  stroke: #121212;
   transition: stroke var(--btn-dur) var(--btn-ease)
 }
 
@@ -4962,7 +5039,13 @@ a.cs-card:focus-visible {
 .news-title {
   position: absolute;
   left: 4.854cqw;
-  top: 62.8%;
+  /* spans the white panel's own height (.news-panel: 58.9%, 22% tall) and
+     centres the text in it, so a three-line title keeps even space above
+     and below instead of running down to the panel's bottom edge */
+  top: 58.9%;
+  height: 22%;
+  display: flex;
+  align-items: center;
   /* the panel's 80% less its 4.854 inset on each side */
   width: 70.3cqw;
   margin: 0;
@@ -5001,15 +5084,6 @@ a.cs-card:focus-visible {
   height: 3.2cqw;
   flex: none;
   display: block
-}
-
-.news-card:hover .news-read svg,
-.news-card:focus-visible .news-read svg {
-  transform: translateX(4px)
-}
-
-.news-read svg {
-  transition: transform var(--btn-dur) var(--btn-ease)
 }
 
 @media (max-width:1199px) {
@@ -5072,7 +5146,10 @@ a.cs-card:focus-visible {
        100%` pins it back to the pre-breakout container width either way */
     width: calc(100% + 2 * var(--side));
     margin: 0 calc(var(--side) * -1);
-    padding: 0 var(--side)
+    padding: 0 var(--side);
+    /* snapping lines a card up with the rail's own edge, not its padding —
+       this moves the snap line in by the same --side the heading sits at */
+    scroll-padding-inline: var(--side)
   }
 
   .news-rail::-webkit-scrollbar {
@@ -5090,6 +5167,14 @@ a.cs-card:focus-visible {
   .news-card {
     flex-basis: 78%;
     scroll-snap-align: start
+  }
+
+  /* the cards overflow the row, so neither the row's nor the rail's end
+     padding is kept past the last card — this spacer (plus the 16px gap
+     before it) leaves the same --side gap at the end as at the start */
+  .news-grid::after {
+    content: "";
+    flex: 0 0 max(0px, calc(var(--side) - 16px))
   }
 
   .news-h {

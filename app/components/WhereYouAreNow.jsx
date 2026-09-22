@@ -15,10 +15,16 @@ export default function WhereYouAreNow() {
   const [allOn, setAllOn] = useState(false);
   const [scrollOn, setScrollOn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(0);
+  // whether the mobile pin is on — it switches the panel to its one-card,
+  // step-bar layout
+  const [mobilePinned, setMobilePinned] = useState(false);
   const bodyInRefs = useRef([]);
   const leadRefs = useRef([]);
   const cardwrapRefs = useRef([]);
   const notchRefs = useRef([]);
+  const stickyRef = useRef(null);
+  // the mobile pin's current geometry, kept for the title taps (see openStage)
+  const pinRef = useRef(null);
 
   // the stat card is position:absolute (so it sits pinned exactly where the
   // design wants it, near the light card's tab, rather than just flowing
@@ -111,8 +117,8 @@ export default function WhereYouAreNow() {
       requestAnimationFrame(() => {
         ticking = false;
         if (window.innerWidth < 900) {
-          // mobile opens its stages on its own scroll (see the effect
-          // below, through mobileOpen) — so this must NOT
+          // mobile runs its own pinned scroll (see the effect below), which
+          // opens one stage at a time through mobileOpen — so this must NOT
           // force every stage open the way the true reduced-motion/no-rAF
           // fallback below does
           setScrollOn(false);
@@ -148,69 +154,107 @@ export default function WhereYouAreNow() {
     };
   }, []);
 
-  // mobile: like the mobile Featured Work cards, nothing pins — each stage
-  // opens as it scrolls up past 70% of the way down the screen and stays
-  // open below the ones before it, so a long card is never cut off.
-  // mobileOpen is the last open stage; everything up to it is open. Each
-  // stage's position is worked out from the first stage's with every stage
-  // above it fully open (the state it opens into), not read live — a stage
-  // mid-way through its open transition hasn't pushed the ones below down
-  // yet, and reading that would open them too early.
-  const itemRefs = useRef([]);
+  // mobile: the section pins while it's scrolled through, and each stretch
+  // of that scroll swaps in the next stage, the way desktop steps through
+  // them. While pinned, the panel shows only the open stage's card under a
+  // row of four step bars (the closed titles are folded away, see .m-pin
+  // in globals.css), so it's one card tall and fits the screen. The pin is
+  // placed for the tallest of the four cards, so it holds still as they
+  // swap; a ResizeObserver re-places it if the layout changes.
   useEffect(() => {
+    const track = trackRef.current;
+    const sticky = stickyRef.current;
+    if (!track || !sticky) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const onScroll = () => {
-      if (reduce || window.innerWidth >= 900) return;
-      const items = itemRefs.current;
-      const first = items[0];
-      if (!first) return;
-      // the first stage is always open, so its box gives the open spacing
-      const cs = getComputedStyle(first);
-      const extra =
-        parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderBottomWidth);
-      const line = window.innerHeight * 0.7;
-      let top = first.getBoundingClientRect().top;
-      let last = 0;
-      for (let i = 1; i < items.length; i++) {
-        const above = items[i - 1]?.querySelector(".wy-bodyIn");
-        if (!items[i] || !above) break;
-        top += above.offsetHeight + extra;
-        if (top >= line) break;
-        last = i;
-      }
-      setMobileOpen(last);
+    const n = STAGES.length;
+
+    const clear = () => {
+      pinRef.current = null;
+      setMobilePinned(false);
+      track.style.height = "";
+      sticky.style.position = "";
+      sticky.style.top = "";
     };
+
+    const layout = () => {
+      if (reduce || window.innerWidth >= 900) {
+        clear();
+        return;
+      }
+      setMobilePinned(true);
+      const vh = window.innerHeight;
+      // the height with the tallest card open: the closed stages' cards
+      // still lay out at full size inside their collapsed rows
+      const openCard = sticky.querySelector(".wy-item.on .wy-bodyIn");
+      const tallest = Math.max(
+        0,
+        ...[...sticky.querySelectorAll(".wy-bodyIn")].map((el) => el.offsetHeight)
+      );
+      const h = sticky.offsetHeight - (openCard ? openCard.offsetHeight : 0) + tallest;
+      // half a screen of scrolling per stage
+      const span = Math.round(vh * 0.5 * n);
+      // centred when it fits. When it doesn't, it's bottom-aligned — but
+      // never pinned higher than the dark panel's own top, so the section
+      // heading scrolls away first and the card's top is never cut off
+      const panel = sticky.querySelector(".wy-panel");
+      const panelTop = panel
+        ? panel.getBoundingClientRect().top - sticky.getBoundingClientRect().top
+        : 0;
+      const top = h <= vh ? Math.round((vh - h) / 2) : Math.round(Math.max(vh - h, -panelTop));
+      pinRef.current = { span, top };
+      sticky.style.position = "sticky";
+      sticky.style.top = `${top}px`;
+      track.style.height = `${h + span}px`;
+    };
+
+    // one rect read per scroll event; setMobileOpen bails out on its own
+    // when the stage hasn't changed, so this needs no rAF throttle
+    const onScroll = () => {
+      const pin = pinRef.current;
+      if (!pin) return;
+      let pr = (pin.top - track.getBoundingClientRect().top) / pin.span;
+      pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
+      setMobileOpen(Math.min(n - 1, Math.floor(pr * n)));
+    };
+
+    const onResize = () => {
+      layout();
+      onScroll();
+    };
+
+    const ro = new ResizeObserver(layout);
+    ro.observe(sticky);
+    layout();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
+      ro.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      clear();
     };
   }, []);
 
-  // a tapped title scrolls its stage up to where it opens on its own, so
-  // the scroll position and the open stages agree
+  // a tapped title scrolls to its own stretch of the pinned scroll rather
+  // than opening directly, so the scroll position and the open stage agree
   const openStage = (i) => {
-    const items = itemRefs.current;
-    const first = items[0];
-    if (!first) return;
-    const cs = getComputedStyle(first);
-    const extra =
-      parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderBottomWidth);
-    // where this stage sits once every stage above it is open
-    let top = first.getBoundingClientRect().top + window.scrollY;
-    for (let j = 0; j < i; j++) {
-      const body = items[j]?.querySelector(".wy-bodyIn");
-      if (body) top += body.offsetHeight + extra;
+    const pin = pinRef.current;
+    if (!pin) {
+      setMobileOpen(i);
+      return;
     }
-    window.scrollTo({ top: top - window.innerHeight * 0.4, behavior: "smooth" });
+    const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: trackTop - pin.top + (pin.span * (i + 0.5)) / STAGES.length,
+      behavior: "smooth",
+    });
   };
 
   const isOn = (i) => {
     if (allOn) return true;
     if (scrollOn) return i === active;
-    return i <= mobileOpen;
+    return i === mobileOpen;
   };
   const isLit = (cellIndex) => {
     if (allOn) return true;
@@ -219,9 +263,9 @@ export default function WhereYouAreNow() {
   };
 
   return (
-    <section className="wy" id="stage">
+    <section className={`wy${mobilePinned ? " m-pin" : ""}`} id="stage">
       <div className={`wy-track${scrollOn ? " scroll-on" : ""}`} ref={trackRef}>
-        <div className="wy-sticky">
+        <div className="wy-sticky" ref={stickyRef}>
           <div className="wy-in">
             <Reveal className="wy-head">
               <div className="wy-tagwrap">
@@ -235,15 +279,23 @@ export default function WhereYouAreNow() {
             </Reveal>
 
             <div className="wy-panel">
+              {/* mobile's pinned layout only: one bar per stage, filled up
+                  to the open one; a tap jumps to that stage */}
+              <div className="wy-steps">
+                {STAGES.map((s, i) => (
+                  <button
+                    key={s.title}
+                    type="button"
+                    className={`wy-stepBar${i <= mobileOpen ? " on" : ""}`}
+                    aria-label={s.title}
+                    aria-current={i === mobileOpen ? "step" : undefined}
+                    onClick={() => openStage(i)}
+                  />
+                ))}
+              </div>
               <div className="wy-left">
                 {STAGES.map((s, i) => (
-                  <article
-                    className={`wy-item${isOn(i) ? " on" : ""}`}
-                    key={s.title}
-                    ref={(el) => {
-                      itemRefs.current[i] = el;
-                    }}
-                  >
+                  <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
                     <h3
                       className="wy-title"
                       onClick={() => {

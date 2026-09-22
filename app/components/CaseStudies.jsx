@@ -37,6 +37,13 @@ const DEEP_DIVES = [
   },
 ];
 
+// each copy of a loop repeats its list this many times, so one copy is
+// always wider than even a very wide screen and the loop never shows a gap
+// before it wraps
+const REPEAT = 3;
+const CARDS = Array.from({ length: REPEAT }, () => DEEP_DIVES).flat();
+const LOGOS = Array.from({ length: REPEAT }, () => CASE_STUDIES).flat();
+
 export default function CaseStudies() {
   return (
     <section className="cs" id="deepdive">
@@ -56,13 +63,16 @@ export default function CaseStudies() {
         <div className="cs-rtrack">
           {[0, 1].map((copy) => (
             <div className="cs-rset" key={copy} aria-hidden={copy === 1 || undefined}>
-              {DEEP_DIVES.map((d, i) => {
+              {CARDS.map((d, i) => {
                 const Tag = d.href ? "a" : "article";
-                const link = d.href ? { href: d.href, tabIndex: copy === 1 ? -1 : undefined } : {};
+                // only the first pass of the first copy is announced and
+                // tabbable; the repeats are there for the loop
+                const repeat = copy === 1 || i >= DEEP_DIVES.length;
+                const link = d.href ? { href: d.href, tabIndex: repeat ? -1 : undefined } : {};
                 return (
                   <Tag key={i} className={`cs-card cs-card-${d.kind}`} {...link}>
                     <h3 className="cs-title">{d.title}</h3>
-                    <img className="cs-logo" src={d.logo} alt={copy === 0 ? d.logoAlt : ""} loading="lazy" />
+                    <img className="cs-logo" src={d.logo} alt={repeat ? "" : d.logoAlt} loading="lazy" />
                     <img className="cs-person" src={d.img} alt="" loading="lazy" />
                   </Tag>
                 );
@@ -78,8 +88,13 @@ export default function CaseStudies() {
         <div className="cs-track">
           {[0, 1].map((copy) => (
             <div className="cs-set" key={copy} aria-hidden={copy === 1 || undefined}>
-              {CASE_STUDIES.map((c) => (
-                <img key={c.logoAlt} src={c.logo} alt={copy === 0 ? c.logoAlt : ""} loading="lazy" />
+              {LOGOS.map((c, i) => (
+                <img
+                  key={i}
+                  src={c.logo}
+                  alt={copy === 0 && i < CASE_STUDIES.length ? c.logoAlt : ""}
+                  loading="lazy"
+                />
               ))}
             </div>
           ))}

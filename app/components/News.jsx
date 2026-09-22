@@ -119,18 +119,18 @@ export default function News() {
           </Reveal>
 
           <div className="news-navWrap">
+            {/* ← 01/05 → — the same arrangement as the phone's pair under
+                the cards */}
             <div className="news-nav">
               <button className="prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
                 <NavArrow />
               </button>
+              <span className="news-index" aria-hidden="true">
+                {String(at + 1).padStart(2, "0")}/{String(NEWS_ITEMS.length).padStart(2, "0")}
+              </span>
               <button className="next" type="button" aria-label="Next articles" onClick={() => page(1)}>
                 <NavArrow />
               </button>
-            </div>
-            <div className="news-index" aria-hidden="true">
-              {String(at + 1).padStart(2, "0")}
-              <span className="news-index-sep">/</span>
-              {String(NEWS_ITEMS.length).padStart(2, "0")}
             </div>
           </div>
         </div>

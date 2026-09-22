@@ -15,6 +15,9 @@ function toGroups(items) {
 
 export default function SelectedWork() {
   const [activeCat, setActiveCat] = useState(SW_FILTERS[0].cat);
+  // phones have no hover, so a tap shows a tile's logo + name overlay (and
+  // a second tap, or a tap on another tile, hides it)
+  const [tapped, setTapped] = useState(null);
   const groups = toGroups(SW_ITEMS.filter((item) => item.cats.includes(activeCat)));
 
   return (
@@ -36,7 +39,10 @@ export default function SelectedWork() {
                 key={f.cat}
                 className="sw-filter"
                 aria-pressed={activeCat === f.cat}
-                onClick={() => setActiveCat(f.cat)}
+                onClick={() => {
+                  setActiveCat(f.cat);
+                  setTapped(null);
+                }}
               >
                 {f.label}
               </button>
@@ -49,7 +55,16 @@ export default function SelectedWork() {
             {groups.map((group, g) => (
               <div className="sw-group" key={g}>
                 {group.map((item, i) => (
-                  <a key={item.img + i} className="sw-item" href="#work">
+                  <a
+                    key={item.img + i}
+                    className={`sw-item${tapped === item.img + i ? " is-open" : ""}`}
+                    href="#work"
+                    onClick={(e) => {
+                      if (!window.matchMedia("(max-width: 640px)").matches) return;
+                      e.preventDefault();
+                      setTapped((t) => (t === item.img + i ? null : item.img + i));
+                    }}
+                  >
                     <span className="sw-shot">
                       <img
                         src={item.img}
