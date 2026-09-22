@@ -67,7 +67,7 @@
   --maxw: 1440px;
   /* the page's left/right inset: every section's content, the nav and the
      featured-work cards all line up on it */
-  --side: clamp(52px, 6vw, 140px);
+  --side: 52px;
 }
 
 @media (max-width:640px) {
@@ -795,6 +795,11 @@ html.nav-hidden .hx-bar {
 
 /* "Seed to" reads as part of the "Series D" figure, so it's set exactly
    like it */
+/* mobile-only variant of a caption; the desktop one is .hx-cap-d */
+.hx-cap-m {
+  display: none
+}
+
 .hx-cap--bold {
   font-weight: 600;
   font-size: 56px;
@@ -1116,34 +1121,30 @@ html.nav-hidden .hx-bar {
   }
 
   /* four cards, tiled edge-to-edge as two interlocking L-shaped pairs — each
-     card is the union of a wide half and a narrow half (mirrored top<->bottom
-     between the two cards of a pair), carved with clip-path. The 5x5 grid's
-     odd tracks are the two real columns and the even tracks are the fixed-
-     width gap between them, so a card can span "wide" (both columns) in one
-     half and "narrow" (one column) in the other without a partial border. */
+     card is the union of a wide part and a narrow part, carved with
+     clip-path. The 5-track grid's odd tracks are the two real columns plus
+     the notch, the even tracks the hairline seam, so a card can span "wide"
+     (column + notch) in one part and "narrow" (column only) in the other.
+     As in the reference, the top pair steps a third of the way down and the
+     bottom pair two thirds down, so the seam runs as one staircase. */
   .hx-stair {
     position: static;
     display: grid;
-    /* one gap value for every seam in the block: the column gutter, the row
-       gutter, and — via --tstep — the seam inside each notch. The notch is a
-       length rather than a percentage so the clip-path calc below lands on
-       the grid line exactly, whatever the card ends up measuring */
-    --tg: 8px;
-    --tnotch: clamp(44px, 15vw, 64px);
+    /* one hairline for every seam: the column gutter, the row gutter and the
+       run inside each notch */
+    --tg: 2px;
+    --tnotch: clamp(44px, 14vw, 64px);
     --tstep: calc(var(--tnotch) + var(--tg));
     /* inner inset for every label */
-    --tpad: 12px;
-    /* the staircase seam turns a corner at the half-way mark, so the two
-       cards of a pair cannot both step at 50% — that puts the wide card's
-       underside flush against the other's topside and the horizontal run of
-       the seam closes up. Whichever card is wide ABOVE stops half a gap
-       early, the one wide BELOW starts half a gap late */
-    --tup: calc(50% - var(--tg) / 2);
-    --tdn: calc(50% + var(--tg) / 2);
+    --tpad: 20px;
+    /* where each pair steps. The card that is wide ABOVE the step stops half
+       a seam early and the one wide BELOW starts half a seam late, so the
+       horizontal run of the seam stays open */
+    --t1-up: calc(34% - var(--tg) / 2);
+    --t1-dn: calc(34% + var(--tg) / 2);
+    --t2-up: calc(66% - var(--tg) / 2);
+    --t2-dn: calc(66% + var(--tg) / 2);
     grid-template-columns: 1fr var(--tg) var(--tnotch) var(--tg) 1fr;
-    /* 1fr rather than auto so both rows take the height of the taller one —
-       the four pieces read as one block, as in the reference, instead of the
-       row with the five-line label standing taller than the other */
     grid-template-rows: 1fr var(--tg) 1fr;
     gap: 0;
     padding: 32px 20px 0
@@ -1155,79 +1156,87 @@ html.nav-hidden .hx-bar {
     top: 0 !important;
     width: auto !important;
     height: auto !important;
-    padding: 0;
-    /* height is left to the tallest label in the row — both cards of a row
-       stretch to it, so the two halves of their shared seam still line up.
-       Nothing here reserves a whole half per label: a label is free to run
-       past the 50% step, because what keeps it clear of the notch is its
-       width (see the padding rules below), not the card being tall enough
-       to hold it above the step. That is what lets these sit at roughly
-       half their own width, as the reference does */
-    min-height: 0;
-    z-index: auto !important
-  }
-
-  .hx-s1 {
-    grid-column: 1 / 4;
-    grid-row: 1;
-    clip-path: polygon(0 0, 100% 0, 100% var(--tup), calc(100% - var(--tstep)) var(--tup), calc(100% - var(--tstep)) 100%, 0 100%)
-  }
-
-  .hx-s2 {
-    grid-column: 3 / 6;
-    grid-row: 1;
-    clip-path: polygon(var(--tstep) 0, 100% 0, 100% 100%, 0 100%, 0 var(--tdn), var(--tstep) var(--tdn))
-  }
-
-  .hx-s4 {
-    grid-column: 1 / 4;
-    grid-row: 3;
-    clip-path: polygon(0 0, calc(100% - var(--tstep)) 0, calc(100% - var(--tstep)) var(--tdn), 100% var(--tdn), 100% 100%, 0 100%)
-  }
-
-  .hx-s3 {
-    grid-column: 3 / 6;
-    grid-row: 3;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--tstep) 100%, var(--tstep) var(--tup), 0 var(--tup))
-  }
-
-  /* text stacks in normal flow now, not absolute % offsets — those assumed
-     a specific card height, which broke the instant the row got shorter.
-     Flow re-centers itself around however tall the text actually is. */
-  .hx-step {
+    /* tall enough that each label clears its card's step — see the
+       per-card anchoring below */
+    min-height: clamp(136px, 40vw, 176px);
+    z-index: auto !important;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding-left: var(--tpad);
-    padding-right: var(--tpad)
+    padding: 0 var(--tpad)
   }
 
-  /* each label anchors to the flush end of its own card — s1 and s2 to the
-     top, s3 and s4 to the bottom */
-  .hx-s1,
+  /* top-left: wide above the step, narrow below */
+  .hx-s1 {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    clip-path: polygon(0 0, 100% 0, 100% var(--t1-up), calc(100% - var(--tstep)) var(--t1-up), calc(100% - var(--tstep)) 100%, 0 100%)
+  }
+
+  /* top-right: narrow above the step, wide below */
   .hx-s2 {
+    grid-column: 3 / 6;
+    grid-row: 1;
+    clip-path: polygon(var(--tstep) 0, 100% 0, 100% 100%, 0 100%, 0 var(--t1-dn), var(--tstep) var(--t1-dn))
+  }
+
+  /* bottom-left: narrow above the step, wide below */
+  .hx-s3 {
+    grid-column: 1 / 4;
+    grid-row: 3;
+    clip-path: polygon(0 0, calc(100% - var(--tstep)) 0, calc(100% - var(--tstep)) var(--t2-dn), 100% var(--t2-dn), 100% 100%, 0 100%)
+  }
+
+  /* bottom-right: wide above the step, narrow below */
+  .hx-s4 {
+    grid-column: 3 / 6;
+    grid-row: 3;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--tstep) 100%, var(--tstep) var(--t2-up), 0 var(--t2-up))
+  }
+
+  /* the reference runs the bottom row violet "2x Faster" / acid "50+" — a
+     checkerboard with the top row — so those two swap colours here. The
+     doubled class matches .hx-step.lit.hx-y and wins on order */
+  .hx-step.hx-s3,
+  .hx-step.lit.hx-s3 {
+    background: var(--violet)
+  }
+
+  .hx-step.hx-s4,
+  .hx-step.lit.hx-s4 {
+    background: var(--acid)
+  }
+
+  /* the left-hand cards read from the top, the right-hand ones sit in their
+     bottom part */
+  .hx-s1,
+  .hx-s3 {
     justify-content: flex-start;
     padding-top: var(--tpad)
   }
 
-  .hx-s3,
+  .hx-s2,
   .hx-s4 {
     justify-content: flex-end;
     padding-bottom: var(--tpad)
   }
 
-  /* every label is held inside the width of its card's NARROW half, on
-     whichever side the notch cuts back — s2 and s3 are cut on the left, s1
-     and s4 on the right. That is what lets a label cross the 50% step
-     without being clipped, and so what lets the cards be short. */
-  .hx-s2,
-  .hx-s3 {
-    padding-left: calc(var(--tstep) + var(--tpad))
+  /* s2's label sits wholly in its wide lower part, so it starts just in from
+     the card's left edge; s4's caption runs below its step, so the whole
+     label keeps to the narrow part */
+  .hx-s2 {
+    padding-left: 12px;
+    padding-right: 8px
   }
 
-  .hx-s1,
   .hx-s4 {
-    padding-right: var(--tstep)
+    padding-left: calc(var(--tstep) + 10px);
+    padding-right: 8px
+  }
+
+  /* keeps the reference's two-line break even on the narrowest phones */
+  .hx-s4 .hx-cap {
+    white-space: nowrap
   }
 
   .hx-stat,
@@ -1239,58 +1248,75 @@ html.nav-hidden .hx-bar {
     /* the desktop rule centres .hx-s1's line with a transform — undone here,
        since these stack in normal flow on mobile */
     transform: none !important;
-    text-align: left !important
-  }
-
-  /* all four labels read as one set here: a bold headline (.hx-num) over a
-     lighter caption (.hx-cap), both scaled to the card rather than the
-     desktop's container-query --k (unavailable once .hx-in drops its
-     container-type above) */
-  .hx-stat,
-  .hx-tag {
+    text-align: left !important;
     white-space: normal !important;
     overflow-wrap: break-word
   }
 
+  .hx-s3 .hx-tag {
+    color: var(--paper)
+  }
+
+  .hx-s4 .hx-tag {
+    color: #121212
+  }
+
+  /* all four labels read as one set: a bold figure over a 12px caption.
+     "Seed To" is set like the figure, so it follows the caption rule */
   .hx-num {
-    font-size: clamp(20px, 6.2vw, 26px);
-    line-height: 1.1;
-    margin: 0 0 4px !important
-  }
-
-  .hx-cap {
-    font-size: clamp(13px, 3.6vw, 15px);
-    line-height: 1.2;
-    white-space: normal
-  }
-
-  /* matches the figure's own size here too */
-  .hx-cap--bold {
-    font-size: clamp(20px, 6.2vw, 26px);
+    font-size: clamp(22px, 6.6vw, 28px);
     line-height: 1.1
   }
 
-  /* the indent keeps the same share of the figure's size as on desktop */
+  .hx-num {
+    margin: 0 0 6px !important
+  }
+
+  .hx-cap {
+    font-size: 12px;
+    line-height: 1.25;
+    white-space: normal
+  }
+
+  .hx-cap--bold {
+    font-size: clamp(22px, 6.6vw, 28px);
+    line-height: 1.1
+  }
+
+  .hx-cap-d {
+    display: none
+  }
+
+  .hx-cap-m {
+    display: block
+  }
+
+  /* "Seed To" and "Playbook" share the first line, "Playbook" pushed to the
+     right edge; "Series D" drops under "Seed To", stepped in */
   .hx-s2 .hx-tag {
-    --indent: calc(1.45 * clamp(20px, 6.2vw, 26px))
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline
+  }
+
+  .hx-s2 .hx-cap--bold {
+    grid-row: 1;
+    grid-column: 1
+  }
+
+  .hx-s2 .hx-cap:not(.hx-cap--bold) {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+    margin-left: 8px
   }
 
   /* the shared .hx-num margin above is !important, so the indent has to be
      too */
   .hx-s2 .hx-num {
-    margin-left: var(--indent) !important
-  }
-
-  /* this card's own copy is the longest of the four — even at the smallest
-     sizes above, its 85px-wide column can't fit two of these words on a
-     line, so it gets a further reduction to actually land the grouping
-     (the compound selector outweighs the shared rule above) */
-  .hx-tag--s3 .hx-num {
-    font-size: clamp(17px, 5.2vw, 21px)
-  }
-
-  .hx-tag--s3 .hx-cap {
-    font-size: clamp(11px, 3.2vw, 13px)
+    grid-row: 2;
+    grid-column: 1 / -1;
+    margin: 0 0 0 calc(1.2 * clamp(22px, 6.6vw, 28px)) !important
   }
 }
 
@@ -2146,7 +2172,7 @@ html.nav-hidden .hx-bar {
 .fw2-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(34px, 5vw, 64px);
+  font-size: 56px;
   line-height: 1.05;
   letter-spacing: -.02em;
   margin: 0;
@@ -2469,7 +2495,7 @@ html.nav-hidden .hx-bar {
   width: 100%;
   max-width: calc(1440 * var(--k));
   margin: 0 auto;
-  padding: 0 6%;
+  padding: 0 var(--side);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -2524,12 +2550,12 @@ html.nav-hidden .hx-bar {
 .wy-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: min(calc(44 * var(--k)), 40px);
+  font-size: 56px;
   line-height: 1.2;
   letter-spacing: -.025em;
   color: #1A1C1C;
   margin: 0;
-  max-width: calc(620 * var(--k))
+  max-width: 880px
 }
 
 /* the panel sticks and stays inside the viewport while the stages open */
@@ -2885,6 +2911,10 @@ html.nav-hidden .hx-bar {
     display: block
   }
 
+  .wy-hBreak {
+    display: none
+  }
+
   .wy-h {
     font-size: clamp(28px, 7vw, 40px);
     max-width: none
@@ -3000,7 +3030,7 @@ html.nav-hidden .hx-bar {
     border: none;
     clip-path: none;
     padding: 20px 24px 0;
-    gap: 44px
+    gap: 20px
   }
 
   .wy-stat {
@@ -3100,7 +3130,7 @@ html.nav-hidden .hx-bar {
   font-family: var(--display);
   font-weight: 400;
   margin: 0;
-  font-size: 40px;
+  font-size: 56px;
   line-height: 1.06;
   letter-spacing: -.02em;
   text-align: center;
@@ -3180,6 +3210,24 @@ html.nav-hidden .hx-bar {
   .lev-h {
     font-size: clamp(28px, 6.2vw, 40px);
     white-space: normal
+  }
+
+  /* "Unlock high / velocity growth." — two lines, no hyphen */
+  .lev-a,
+  .lev-b {
+    display: block
+  }
+
+  .lev-hy {
+    display: none
+  }
+
+  /* the same sentence-case tag as the other mobile sections' eyebrows */
+  .lev-eyebrow-t {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    text-transform: none
   }
 
   .lev-stage {
@@ -3345,7 +3393,7 @@ html.nav-hidden .hx-bar {
 .sw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(40px, 3.6vw, 56px);
+  font-size: 56px;
   line-height: 110%;
   letter-spacing: -.025em;
   color: var(--paper);
@@ -3356,18 +3404,6 @@ html.nav-hidden .hx-bar {
   display: flex;
   align-items: flex-start;
   gap: 16px
-}
-
-/* desktop keeps this on one line; only the mobile heading breaks after
-   "Selected" to match the reference's two-line layout */
-.sw-hBreak {
-  display: none
-}
-
-/* desktop doesn't show this — "view all" is a mobile-only shortcut since
-   the grid there already shows every item without needing to filter down */
-.sw-viewAll {
-  display: none
 }
 
 .sw-filters {
@@ -3553,10 +3589,6 @@ html.nav-hidden .hx-bar {
     font-size: clamp(28px, 7vw, 40px)
   }
 
-  .sw-hBreak {
-    display: block
-  }
-
   .sw-head {
     flex-direction: column;
     align-items: stretch;
@@ -3570,18 +3602,6 @@ html.nav-hidden .hx-bar {
   .sw-titleRow {
     width: 100%;
     justify-content: space-between
-  }
-
-  .sw-viewAll {
-    display: inline-flex;
-    flex: none;
-    margin-top: 8px;
-    font-family: var(--body);
-    font-size: 14px;
-    color: var(--paper);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    white-space: nowrap
   }
 
   /* one scrollable row instead of wrapping onto multiple lines — bleeds
@@ -3614,15 +3634,15 @@ html.nav-hidden .hx-bar {
 }
 
 /* ── deep dive ─────────────────────────────── */
-/* 1440 x 800 design frame; --k is one design px */
+/* 1440 x 760 design frame; --k is one design px */
 .cs {
   position: relative;
-  background: #F6F6EF;
+  background: var(--paper);
   color: var(--ink);
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.111px);
-  height: calc(960 * var(--k))
+  height: calc(760 * var(--k))
 }
 
 .cs-head {
@@ -3677,7 +3697,7 @@ html.nav-hidden .hx-bar {
 .cs-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: min(calc(48 * var(--k)), 40px);
+  font-size: 56px;
   line-height: 1.1;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -3693,506 +3713,218 @@ html.nav-hidden .hx-bar {
   margin: calc(12 * var(--k)) 0 0
 }
 
-/* the deck */
-.cs-deck {
+/* the story cards, looping sideways across the full width */
+.cs-row {
   position: absolute;
   z-index: 2;
-  left: 50%;
-  top: calc(283 * var(--k));
-  transform: translateX(-50%);
-  width: calc(1000 * var(--k));
-  height: calc(360 * var(--k))
-}
-
-.cs-card {
-  position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  /* the same inset as the card's own padding, so the photo sits in an even
-     12px frame on all four sides */
-  gap: calc(12 * var(--k));
-  padding: calc(12 * var(--k));
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .4s ease
-}
-
-.cs-card.on {
-  opacity: 1;
-  pointer-events: auto
-}
-
-.cs-cardL {
-  flex: none;
-  width: calc(516 * var(--k));
-  height: calc(336 * var(--k));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between
-}
-
-.cs-brand {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: calc(22 * var(--k));
-  line-height: 1;
-  letter-spacing: -.02em;
-  color: #121212
-}
-
-.cs-brand em {
-  font-style: normal;
-  color: #E8622A
-}
-
-.cs-title {
-  font-family: var(--body);
-  font-weight: 500;
-  font-size: calc(28 * var(--k));
-  line-height: 1.2;
-  letter-spacing: calc(-.48 * var(--k));
-  color: #1A1C1C;
-  margin: calc(24 * var(--k)) 0 0
-}
-
-.cs-copy {
-  font-family: var(--body);
-  font-weight: 400;
-  font-size: calc(14 * var(--k));
-  line-height: 1.2;
-  color: #4C4546;
-  margin: calc(8 * var(--k)) 0 0
-}
-
-.cs-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(10 * var(--k));
-  /* trimmed from 40 so a two-line title still clears the full-height band
-     (see .cs-stats) instead of squashing it */
-  margin: calc(24 * var(--k)) 0 calc(24 * var(--k));
-  background: none;
-  color: #181818;
-  text-decoration: none;
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: calc(13 * var(--k));
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  transition: color var(--btn-dur) var(--btn-ease)
-}
-
-.cs-pill:hover,
-.cs-pill:focus-visible {
-  color: var(--violet)
-}
-
-.cs-pill-i {
-  width: calc(16 * var(--k));
-  height: calc(16 * var(--k));
-  flex: none
-}
-
-/* the two stepped stat blocks */
-.cs-stats {
-  position: relative;
-  width: calc(516 * var(--k));
-  height: calc(112 * var(--k));
-  /* never squeezed by a card whose title runs to two lines — the band is
-     the same height on every card, and the slack a shorter title leaves is
-     spread above it instead */
-  flex: none
-}
-
-.cs-band {
-  position: absolute;
-  top: 0;
-  height: 100%
-}
-
-.cs-band-a {
   left: 0;
-  width: calc(350 * var(--k));
-  background: rgba(245, 250, 94, .45);
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 58.3% 50%, 58.3% 100%, 0 100%)
-}
-
-.cs-band-b {
-  left: calc(204 * var(--k));
-  width: calc(312 * var(--k));
-  background: rgba(113, 91, 228, .26);
-  clip-path: polygon(46.8% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 46.8% 50%)
-}
-
-.cs-fig {
-  position: absolute;
-  /* the label is pinned to this box's bottom edge, so the box stops short
-     of the band to leave the label breathing room above it */
-  height: calc(68 * var(--k));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between
-}
-
-.cs-fig b {
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: calc(32 * var(--k));
-  line-height: 1.2;
-  color: #181818
-}
-
-.cs-fig span {
-  font-family: var(--body);
-  font-weight: 500;
-  font-size: calc(12 * var(--k));
-  line-height: 1.2;
-  text-transform: uppercase;
-  color: #181818;
-  white-space: nowrap
-}
-
-.cs-fig-a {
-  left: calc(16 * var(--k));
-  top: calc(16 * var(--k));
-  width: calc(223 * var(--k));
-  align-items: flex-start
-}
-
-.cs-fig-b {
-  right: calc(16 * var(--k));
-  left: auto;
-  top: calc(16 * var(--k));
-  width: calc(197 * var(--k));
-  align-items: flex-end;
-  text-align: right
-}
-
-.cs-shot {
-  flex: none;
-  /* takes back the 8px the gap gave up, so the photo still ends flush with
-     the card's right padding */
-  width: calc(448 * var(--k));
-  height: calc(336 * var(--k));
+  right: 0;
+  top: calc(289 * var(--k));
   overflow: hidden
 }
 
-.cs-shot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block
+.cs-rtrack {
+  display: flex;
+  width: max-content;
+  animation: cs-drift 30s linear infinite
 }
 
-/* the tetris wall of client logos — each piece picks its own case study */
-.cs-lgwrap {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  top: calc(700 * var(--k));
-  transform: translateX(-50%);
-  max-width: 100%;
-  overflow-x: auto
+.cs-row:hover .cs-rtrack,
+.cs-row:focus-within .cs-rtrack {
+  animation-play-state: paused
 }
 
-.cs-loggrid {
-  --cell: calc(58 * var(--k));
-  --rowh: calc(58 * var(--k));
-  --tgap: calc(4 * var(--k));
-  display: grid;
-  grid-template-columns: repeat(16, var(--cell));
-  grid-template-rows: repeat(2, var(--rowh));
-  gap: var(--tgap)
+.cs-rset {
+  display: flex;
+  gap: 32px;
+  padding-right: 32px
 }
 
-/* Each piece is clipped to its own tetromino, and clip-path can't carry a
-   border — so the outline is the button's background showing through a
-   separately-computed, 1px-eroded copy of the same shape (see the `d` param
-   on pieceClip in CaseStudies.jsx; a plain inset box only insets correctly
-   at convex corners and misses concave ones like a T-piece's shoulder). */
-.cs-logtile {
+.cs-card {
   position: relative;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  background: #DEDEDA;
-  cursor: pointer;
-  transition: background-color var(--btn-dur) var(--btn-ease)
-}
-
-.cs-logtile-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--paper);
-  transition: background-color var(--btn-dur) var(--btn-ease)
-}
-
-.cs-logtile img {
-  position: absolute;
-  height: var(--rowh);
-  padding: calc(10 * var(--k));
+  flex: none;
+  width: calc(336 * var(--k));
+  height: calc(320 * var(--k));
   box-sizing: border-box;
-  object-fit: contain;
-  display: block
+  border: 1px solid #D9D9D9;
+  background: var(--paper);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--btn-dur) var(--btn-ease)
 }
 
-.cs-logtile:hover {
-  background: #B9B9B2
+a.cs-card:hover,
+a.cs-card:focus-visible {
+  border-color: #9A9A9A
 }
 
-.cs-logtile.on {
-  background: #E4E8A0
-}
-
-.cs-logtile.on .cs-logtile-fill {
-  background: #FBFDC6
-}
-
-/* mobile-only deck stepper — desktop picks a study from the wall instead
-   (see the media query below) */
-.cs-nav {
-  display: none
-}
-
-/* the quiet furniture behind it all */
-.cs-deco {
-  position: absolute;
-  inset: 0;
+.cs-title {
+  position: relative;
   z-index: 1;
-  pointer-events: none
+  margin: 0;
+  padding: calc(22 * var(--k)) calc(24 * var(--k)) 0;
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: calc(21 * var(--k));
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #121212
 }
 
-.cs-blk {
+.cs-logo {
   position: absolute;
-  width: calc(72 * var(--k));
-  height: calc(72 * var(--k));
-  background: var(--paper)
+  z-index: 1;
+  left: calc(24 * var(--k));
+  display: block;
+  height: auto
 }
 
-.cs-logos {
+.cs-card-vy .cs-logo {
+  bottom: calc(24 * var(--k));
+  width: calc(115 * var(--k))
+}
+
+.cs-card-px .cs-logo {
+  bottom: calc(22 * var(--k));
+  width: calc(97 * var(--k))
+}
+
+.cs-person {
   position: absolute;
+  bottom: 0;
+  display: block;
+  height: auto
+}
+
+.cs-card-vy .cs-person {
+  right: 0;
+  width: calc(232 * var(--k))
+}
+
+.cs-card-px .cs-person {
+  right: calc(-12 * var(--k));
+  width: calc(262 * var(--k))
+}
+
+/* the client strip, looping sideways under the cards */
+.cs-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(640 * var(--k));
+  height: calc(48 * var(--k));
+  overflow: hidden
+}
+
+.cs-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: cs-drift 40s linear infinite
+}
+
+.cs-set {
   display: flex;
   align-items: center;
-  gap: calc(16 * var(--k));
-  height: calc(54 * var(--k))
+  gap: calc(38 * var(--k));
+  padding-right: calc(38 * var(--k));
+  height: 100%
 }
 
-.cs-dot {
-  width: calc(10 * var(--k));
-  height: calc(10 * var(--k));
-  background: #C7BCFF;
-  flex: none
-}
-
-.cs-dot.sm {
-  width: calc(4 * var(--k));
-  height: calc(4 * var(--k))
-}
-
-.cs-tile {
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: #F3F3F3;
-  padding: calc(2 * var(--k));
-  flex: none
-}
-
-.cs-tile.lg {
-  width: calc(106 * var(--k));
-  height: calc(54 * var(--k))
-}
-
-.cs-tile.sm {
-  width: calc(53 * var(--k));
-  height: calc(27 * var(--k));
-  background: rgba(245, 250, 94, .3)
-}
-
-.cs-tile img {
-  position: relative;
-  z-index: 1;
-  max-width: 70%;
-  max-height: 70%;
+.cs-set img {
+  display: block;
+  height: calc(24 * var(--k));
+  width: auto;
+  max-width: calc(104 * var(--k));
   object-fit: contain;
-  opacity: .55;
-  filter: grayscale(1)
+  filter: grayscale(1);
+  opacity: .7
+}
+
+@keyframes cs-drift {
+  to {
+    transform: translateX(-50%)
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-track,
+  .cs-rtrack {
+    animation: none
+  }
 }
 
 @media (max-width:900px) {
   .cs {
     height: auto;
     --k: 1px;
-    padding: 56px 20px
+    padding: 56px 0
   }
 
   .cs-head {
     position: static;
     width: auto;
     transform: none;
-    text-align: left;
-    align-items: flex-start
+    padding: 0 20px
   }
 
   .cs-h {
     font-size: clamp(28px, 7vw, 40px)
   }
 
-  .cs-deck {
+  .cs-row {
     position: relative;
-    left: 0;
-    top: 0;
-    transform: none;
-    width: 100%;
-    height: auto;
+    top: auto;
     margin-top: 32px
+  }
+
+  .cs-rset {
+    gap: 16px;
+    padding-right: 16px
   }
 
   .cs-card {
-    position: relative;
-    inset: auto;
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    display: none;
-    opacity: 1;
-    pointer-events: auto;
-    padding: 24px
-  }
-
-  .cs-card.on {
-    display: flex
-  }
-
-  .cs-cardL,
-  .cs-shot {
-    width: 100%;
-    height: auto
-  }
-
-  .cs-shot {
-    order: -1;
-    aspect-ratio: 326 / 230;
-    margin-bottom: 20px
-  }
-
-  .cs-brand {
-    font-size: 28px
+    width: min(300px, 80vw);
+    height: 290px
   }
 
   .cs-title {
-    font-size: 20px;
-    margin-top: 20px
+    font-size: 18px;
+    padding: 20px 20px 0
   }
 
-  .cs-copy {
-    font-size: 12px;
-    margin-top: 12px
+  .cs-logo {
+    left: 20px
   }
 
-  .cs-pill {
-    margin-top: 32px
+  .cs-card-vy .cs-person {
+    width: 176px
   }
 
-  .cs-stats {
+  .cs-card-px .cs-person {
+    right: -10px;
+    width: 200px
+  }
+
+  .cs-card-vy .cs-logo {
+    width: 96px
+  }
+
+  .cs-card-px .cs-logo {
+    width: 84px
+  }
+
+  .cs-strip {
     position: relative;
-    width: 100%;
-    height: 148px;
-    margin-top: 28px
+    top: auto;
+    margin-top: 32px;
+    height: 40px
   }
 
-  /* same interlocking step as desktop, in percentages of the box instead of
-     the desktop's fixed calc(Npx * --k) — the box itself is width:100% here
-     (a fraction of the card, not a fixed 516px), so the split and each
-     band's own clip-path (already a ratio of ITS OWN box) scale with it
-     instead of overflowing a narrow phone the way the fixed widths would */
-  .cs-band-a {
-    left: 0;
-    width: 67.8%;
-    clip-path: polygon(0 0, 100% 0, 100% 50%, 58.3% 50%, 58.3% 100%, 0 100%)
-  }
-
-  .cs-band-b {
-    left: 39.5%;
-    width: 60.5%;
-    clip-path: polygon(46.8% 0, 100% 0, 100% 100%, 0 100%, 0 50%, 46.8% 50%)
-  }
-
-  .cs-fig-a,
-  .cs-fig-b {
-    height: 84px
-  }
-
-  .cs-fig-a {
-    left: 16px;
-    width: calc(67.8% - 32px)
-  }
-
-  .cs-fig-b {
-    right: 16px;
-    left: auto;
-    width: calc(39.5% - 16px)
-  }
-
-  .cs-fig b {
-    font-size: 24px
-  }
-
-  .cs-fig span {
-    font-size: 13px;
-    white-space: normal
-  }
-
-  .cs-deco {
-    display: none
-  }
-
-  /* the pieces only interlock at their designed 16-column width, so rather
-     than scroll the wall sideways on a phone the deck gets plain arrows */
-  .cs-lgwrap {
-    display: none
-  }
-
-  .cs-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 28px
-  }
-
-  .cs-nav button {
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    border: 1px solid #E4E4E4;
-    background: var(--paper);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
-  }
-
-  .cs-nav button:active {
-    background: #121212;
-    border-color: #121212
-  }
-
-  .cs-nav svg {
-    width: 26px;
-    height: 26px;
-    display: block
-  }
-
-  .cs-nav button:active svg path {
-    stroke: var(--paper)
-  }
-
-  .cs-nav .prev svg {
-    transform: scaleX(-1)
+  .cs-set img {
+    height: 20px;
+    max-width: 88px
   }
 }
 
@@ -4259,7 +3991,7 @@ html.nav-hidden .hx-bar {
 .fo-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 40px;
+  font-size: 56px;
   line-height: 110%;
   letter-spacing: -.025em;
   color: #1A1C1C;
@@ -4588,7 +4320,7 @@ html.nav-hidden .hx-bar {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.111px);
-  padding: calc(80 * var(--k)) 6% calc(60 * var(--k))
+  padding: calc(80 * var(--k)) var(--side) calc(60 * var(--k))
 }
 
 .pr-in {
@@ -4651,7 +4383,7 @@ html.nav-hidden .hx-bar {
 .pr-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: min(calc(48 * var(--k)), 48px);
+  font-size: 56px;
   line-height: 1.15;
   letter-spacing: -.03em;
   color: #1A1C1C;
@@ -4955,6 +4687,8 @@ html.nav-hidden .hx-bar {
 /* the "01 / 05" counter under the desktop arrows — tracks the leftmost
    visible card, same digit style as the case-study rail's own index */
 .news-index {
+  /* centred under the pair of arrows, not flush with the right one */
+  align-self: center;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -5050,7 +4784,7 @@ html.nav-hidden .hx-bar {
 .news-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 40px;
+  font-size: 56px;
   line-height: 110%;
   letter-spacing: -.025em;
   text-transform: capitalize;
@@ -5338,7 +5072,7 @@ html.nav-hidden .hx-bar {
   font-family: var(--display);
   font-weight: 400;
   margin: 0;
-  font-size: clamp(30px, 4vw, 56px);
+  font-size: 56px;
   line-height: 1.14;
   letter-spacing: -.025em;
   max-width: 16ch
@@ -9457,4 +9191,20 @@ button:focus-visible,
   margin: 0;
   font-size: 14px;
   color: #D93025
+}
+
+/* every section heading on the phone layout is one size, whatever its
+   section's own mobile rule scales it to on wider screens */
+@media (max-width:640px) {
+  .fw-h,
+  .wy-h,
+  .lev-h,
+  .sw-h,
+  .fo-h,
+  .pr-h,
+  .cs-h,
+  .news-h,
+  .vfoot__title {
+    font-size: 28px
+  }
 }

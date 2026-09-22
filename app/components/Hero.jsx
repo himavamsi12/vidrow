@@ -57,7 +57,15 @@ export default function Hero() {
           <div className={`hx-step hx-s1 hx-y${isLit(0) ? " lit" : ""}`}>
             <span className="hx-stat">
               <strong className="hx-num">12+ Yrs</strong>
-              <span className="hx-cap">Brand&nbsp;|&nbsp;Performance&nbsp;|&nbsp;Social</span>
+              <span className="hx-cap hx-cap-d">Brand&nbsp;|&nbsp;Performance&nbsp;|&nbsp;Social</span>
+              {/* mobile stacks the three one to a line instead */}
+              <span className="hx-cap hx-cap-m">
+                Brand.
+                <br />
+                Performance.
+                <br />
+                Social.
+              </span>
             </span>
           </div>
           <div className={`hx-step hx-s3 hx-y${isLit(2) ? " lit" : ""}`}>

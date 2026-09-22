@@ -169,7 +169,10 @@ export default function WhereYouAreNow() {
                 <span className="wy-tag">Where You Are Now</span>
                 <Mark />
               </div>
-              <h2 className="wy-h">We help founders hit their milestones faster.</h2>
+              <h2 className="wy-h">
+                We help founders hit their <br className="wy-hBreak" />
+                milestones faster.
+              </h2>
             </Reveal>
 
             <div className="wy-panel">

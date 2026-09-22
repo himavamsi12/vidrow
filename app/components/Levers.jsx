@@ -119,21 +119,21 @@ export default function Levers() {
           hy: cx - (hR.left - sr.left + hR.width / 2),
         };
       } else {
-        // on mobile the cube + heading assemble together as one centered
-        // block (cube on top, heading right under it, like the reference).
-        // lev-mid stays in its natural in-flow spot between the two card
-        // rows the whole time — only its start position is faked with a
-        // transform, so once settled there's no leftover reserved gap
+        // on mobile the heading + cube start as one centered block
+        // (eyebrow and heading on top, the cube right under them, like the
+        // reference). lev-mid stays in its natural in-flow spot between the
+        // two card rows the whole time — only its start position is faked
+        // with a transform, so once settled there's no leftover reserved gap
         const midR = levMid.getBoundingClientRect();
         const midTop = midR.top - sr.top;
-        const midGap = 24;
+        const midGap = 40;
         const cubeH = CUBE_W * kx;
-        const total = cubeH + midGap + midR.height;
+        const total = midR.height + midGap + cubeH;
 
+        const startMidTop = sr.height / 2 - total / 2;
         cx = Sx;
-        cy = sr.height / 2 - total / 2 + cubeH / 2;
+        cy = startMidTop + midR.height + midGap + cubeH / 2;
 
-        const startMidTop = cy + cubeH / 2 + midGap;
         midOffset = startMidTop - midTop;
       }
 
@@ -199,7 +199,9 @@ export default function Levers() {
           a.sx + "," + a.sy + ")";
       });
 
-      levEyebrow.style.opacity = easeOut(seg(p, 0.26, 0.52));
+      // mobile shows the eyebrow from the start, as part of the heading
+      // block the cube sits under
+      levEyebrow.style.opacity = L.split ? easeOut(seg(p, 0.26, 0.52)) : 1;
       levCols.forEach((col, i) => {
         const t = easeOut(seg(p, 0.24 + i * 0.085, 0.46 + i * 0.085));
         col.style.opacity = t;

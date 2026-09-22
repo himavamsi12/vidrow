@@ -27,14 +27,7 @@ export default function SelectedWork() {
               <Mark />
             </div>
             <div className="sw-titleRow">
-              <h2 className="sw-h">
-                Our Selected{" "}
-                <br className="sw-hBreak" />
-                Works
-              </h2>
-              <a className="sw-viewAll" href="#work">
-                View all
-              </a>
+              <h2 className="sw-h">Our Selected Works</h2>
             </div>
           </div>
           <div className="sw-filters" role="group" aria-label="Filter work by service">
