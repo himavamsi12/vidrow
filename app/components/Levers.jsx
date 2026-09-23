@@ -79,7 +79,13 @@ export default function Levers() {
       // the size each piece settles at in its column: a touch smaller on
       // mobile, where the three columns are narrow and the pieces were
       // crowding their own labels
-      const ex = split ? 80 / 200 : 62 / 200;
+      //
+      // the pinned stage is exactly one screen tall and clips what doesn't
+      // fit, so on a screen shorter than the 900 this was drawn for the
+      // pieces come down with it — otherwise the bottom row was cut off.
+      // Held above two thirds, below which the pieces stop reading.
+      const hs = split ? Math.min(1, Math.max(0.68, sr.height / 900)) : 1;
+      const ex = (split ? 80 / 200 : 62 / 200) * hs;
       const ey = ex;
 
       [[0, 3], [3, 6]].forEach((rng) => {
@@ -96,8 +102,12 @@ export default function Levers() {
       const sR = levSlots[0].getBoundingClientRect();
 
       const fit = (sr.width * 0.94 - aR.width - bR.width) / (1.18 * CUBE_W);
+      // the assembled cube sits on the heading line between the two rows, so
+      // it answers to the stage's height as well as its width — a third of
+      // the stage is the 280px it's drawn at on a 900-tall screen
+      const fitY = (sr.height * 0.311) / CUBE_W;
       const kx = split
-        ? Math.max(ex * 1.2, Math.min(CUBE_PX / CUBE_W, fit))
+        ? Math.max(ex * 1.2, Math.min(CUBE_PX / CUBE_W, fit, fitY))
         : Math.max(ex * 1.15, Math.min(CUBE_PX / CUBE_W, sr.width / 760));
       const ky = kx;
 

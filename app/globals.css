@@ -1024,6 +1024,41 @@ html.nav-hidden .hx-bar {
   fill: var(--acid)
 }
 
+/* ── the hero scales with the shorter side, not just the width ──
+   The staircase is positioned in percentages, so it always fits the frame;
+   everything in front of it (copy, CTA, step labels) was sized off the width
+   alone, so a short window pushed the steps up under type that hadn't moved.
+   --k now also answers to the height — 1440 x 900 is the design frame, and
+   whichever side is tighter sets the scale — and the last fixed-px sizes in
+   the hero go through it, so the whole thing shrinks as one. */
+@media (min-width:901px) {
+  .hx-in {
+    --k: min(.0694444cqw, .1111vh, 1.19444px)
+  }
+
+  .hx-sub {
+    font-size: min(calc(18 * var(--k)), 18px)
+  }
+
+  .hx-num,
+  .hx-cap--bold {
+    font-size: min(calc(56 * var(--k)), 56px)
+  }
+
+  .hx-cap {
+    font-size: min(calc(24 * var(--k)), 24px)
+  }
+
+  .hx-s2 .hx-tag {
+    --indent: calc(48 * var(--k))
+  }
+
+  .hx-s2 .hx-num--s2,
+  .hx-s2 .hx-cap--bold {
+    font-size: min(calc(56 * var(--k)), 3.9vw)
+  }
+}
+
 @media (max-width:900px) {
   .hx {
     height: auto;
@@ -2106,6 +2141,25 @@ html.nav-hidden .hx-bar {
   color: #121212
 }
 
+/* mobile only: a small white step hanging off the caption box's bottom edge,
+   cut into the photo below it, so the two read as one tetris piece. It hangs
+   off the caption itself (top: 100%) rather than a fixed height down the
+   card — a two-line headline makes that box taller, and a fixed step then
+   ended up hidden behind it. It sits in from the caption's right end
+   because each card's photo ends at its own point, and out at the edge some
+   had nothing to cut into */
+@media (max-width:900px) {
+  .fw-line::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 12cqw;
+    width: 12cqw;
+    height: 5cqw;
+    background: var(--paper)
+  }
+}
+
 /* the acid frame: a bar down the left and along most of the foot, a short
    one across the top-left, and a separate bar down the right edge */
 .fw-quote {
@@ -2240,7 +2294,12 @@ html.nav-hidden .hx-bar {
    reduced motion. */
 .fw2-card {
   --row: clamp(112px, 9.72vw, 150px);
-  --full: clamp(640px, 44.444vw, 100vh);
+  /* the 640px floor is below the 100vh ceiling on a normal screen, but on a
+     short one it wasn't — and a clamp whose floor beats its ceiling returns
+     the floor, so the card stayed 640px tall and hung off the bottom of the
+     screen. Letting the floor fall to the viewport height keeps the card
+     exactly one screen tall instead. */
+  --full: clamp(min(640px, 100vh), 44.444vw, 100vh);
   --o: 1;
   position: relative;
   /* clipped top and bottom to its current height, but free sideways so the
@@ -2504,7 +2563,10 @@ html.nav-hidden .hx-bar {
   background: var(--paper);
   font-family: var(--display);
   font-weight: 400;
-  font-size: 24px;
+  /* its white block is a fixed share of the card's height, so on a card
+     shortened by a short screen a fixed 24px outgrew it — --k already
+     tracks the card's own shorter side */
+  font-size: min(24px, calc(24 * var(--k)));
   line-height: 1.4;
   letter-spacing: -.02em;
   color: #121212
@@ -3255,6 +3317,29 @@ html.nav-hidden .hx-bar {
   }
 }
 
+/* ── the pinned panel fits the screen it's pinned to ──
+   .wy-sticky is exactly 100vh, but the heading and the panel under it were
+   sized off the width alone, so on a short screen they ran past the sticky
+   box — and at the foot of the track, where the pin lets go, that overhang
+   painted straight over the Levers section below. --k now also answers to
+   the height (the panel's own design height is ~900px, heading included),
+   and the two sizes that weren't already going through --k now do, so the
+   whole panel shrinks to fit rather than spilling out of it. */
+@media (min-width:901px) {
+  .wy {
+    --k: min(.0694444cqw, .11vh, 1.111px)
+  }
+
+  .wy-h {
+    font-size: calc(56 * var(--k));
+    max-width: calc(880 * var(--k))
+  }
+
+  .wy-panel {
+    height: calc(690 * var(--k))
+  }
+}
+
 /* ── the levers: one cube, six pieces ──────── */
 .lev {
   background: var(--paper);
@@ -3295,10 +3380,19 @@ html.nav-hidden .hx-bar {
    own top and bottom padding, which gives way first as the screen shrinks */
 @media (min-width:901px) {
   .lev-stage {
-    gap: clamp(32px, 5vh, 56px);
-    padding-top: clamp(32px, 6vh, 100px);
-    padding-bottom: clamp(32px, 6vh, 100px)
+    gap: clamp(24px, 5vh, 56px);
+    padding-top: clamp(20px, 6vh, 100px);
+    padding-bottom: clamp(20px, 6vh, 100px)
   }
+
+  /* once the padding and gaps have given all they can, the stage's own
+     contents have to give too, or the bottom row is cut off by the pinned
+     stage's clip. Each size is its design value at a 900-tall screen and
+     shrinks from there, with a floor so nothing turns illegible. */
+  .lev-h {
+    font-size: clamp(36px, 6.2vh, 56px)
+  }
+
 }
 
 .lev-eyebrow {
@@ -3395,6 +3489,27 @@ html.nav-hidden .hx-bar {
   color: #5A5A62;
   max-width: 36ch;
   margin: 8px 0 0
+}
+
+/* the labels under the pieces give too, on the same terms as the heading
+   above them — the slot itself is sized by Levers.jsx, which scales the
+   settled pieces by the stage's own height (the values here are only what
+   shows before that runs) */
+@media (min-width:901px) {
+  .lev-slot {
+    --slotW: clamp(43px, 8.9vh, 80px);
+    --slotH: clamp(64px, 13.3vh, 120px)
+  }
+
+  .lev-col h3 {
+    margin-top: clamp(10px, 3.1vh, 28px);
+    font-size: clamp(13px, 1.67vh, 15px)
+  }
+
+  .lev-col p {
+    margin-top: clamp(5px, .9vh, 8px);
+    font-size: clamp(13px, 1.67vh, 15px)
+  }
 }
 
 .lev-cubes {
