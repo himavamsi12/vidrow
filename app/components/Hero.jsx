@@ -1,51 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import SiteNav from "./SiteNav";
-
-const WORD_COUNT = 4;
+import {
+  TET_W,
+  TET_H,
+  TET_PIECES,
+  TET_M_W,
+  TET_M_H,
+  TET_M_PIECES,
+  tetPoints,
+} from "./tetrisPieces";
 
 export default function Hero() {
-  const [activeWord, setActiveWord] = useState(0);
-  // the word the pointer is on, which takes over from the autoplay while
-  // it's there — hovering a word lights its own block in the staircase
-  const [hoverWord, setHoverWord] = useState(null);
-  const [reduceStepsLit, setReduceStepsLit] = useState(false);
-
-  // ── Autoplay text and block highlights ──
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setReduceStepsLit(true);
-      return;
-    }
-
-    // paused while a word is hovered, so the cycle doesn't move on under
-    // the pointer; it picks up again from that word on leaving
-    if (hoverWord !== null) return;
-
-    const interval = setInterval(() => {
-      setActiveWord((prev) => (prev + 1) % WORD_COUNT);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, [hoverWord]);
-
-  const shown = hoverWord ?? activeWord;
-  const isLit = (g) => (reduceStepsLit && hoverWord === null) || g === shown;
-  const wordLit = (i) => (!reduceStepsLit || hoverWord !== null) && i === shown;
-
-  // hovering a word also leaves the cycle there once the pointer goes
-  const hoverProps = (i) => ({
-    onMouseEnter: () => setHoverWord(i),
-    onMouseLeave: () =>
-      setHoverWord((h) => {
-        if (h !== i) return h;
-        setActiveWord(i);
-        return null;
-      }),
-  });
-
   return (
     <header className="hx" id="top">
       <div className="hx-in">
@@ -54,7 +20,26 @@ export default function Hero() {
         </div>
 
         <div className="hx-stair" aria-hidden="true">
-          <div className={`hx-step hx-s1 hx-y${isLit(0) ? " lit" : ""}`}>
+          {/* desktop: the tetris skyline, traced from the design mock */}
+          <svg className="hx-tet" viewBox={`0 0 ${TET_W} ${TET_H}`} preserveAspectRatio="xMidYMax meet">
+            {TET_PIECES.map((p, i) => (
+              <polygon key={i} fill={p.fill} points={tetPoints(p.pts)} />
+            ))}
+          </svg>
+          {/* mobile: its own, narrower skyline, traced from the mobile mock */}
+          <svg className="hx-tet-m" viewBox={`0 0 ${TET_M_W} ${TET_M_H}`} preserveAspectRatio="xMidYMax meet">
+            {TET_M_PIECES.map((p, i) => (
+              <polygon
+                key={i}
+                fill={p.fill}
+                stroke="var(--paper)"
+                strokeWidth="3"
+                strokeLinejoin="miter"
+                points={tetPoints(p.pts)}
+              />
+            ))}
+          </svg>
+          <div className="hx-step hx-s1 hx-y">
             <span className="hx-stat">
               <strong className="hx-num">12+ Yrs</strong>
               <span className="hx-cap hx-cap-d">Brand&nbsp;|&nbsp;Performance&nbsp;|&nbsp;Social</span>
@@ -68,7 +53,7 @@ export default function Hero() {
               </span>
             </span>
           </div>
-          <div className={`hx-step hx-s3 hx-y${isLit(2) ? " lit" : ""}`}>
+          <div className="hx-step hx-s3 hx-y">
             <span className="hx-tag hx-tag--s3">
               <strong className="hx-num">
                 2x
@@ -82,14 +67,14 @@ export default function Hero() {
               </span>
             </span>
           </div>
-          <div className={`hx-step hx-s2 hx-v${isLit(1) ? " lit" : ""}`}>
+          <div className="hx-step hx-s2 hx-v">
             <span className="hx-tag">
               <span className="hx-cap hx-cap--bold">Seed To</span>
               <strong className="hx-num hx-num--s2">Series D</strong>
               <span className="hx-cap">Playbook</span>
             </span>
           </div>
-          <div className={`hx-step hx-s4 hx-v${isLit(3) ? " lit" : ""}`}>
+          <div className="hx-step hx-s4 hx-v">
             <span className="hx-tag">
               <strong className="hx-num">50+</strong>
               <span className="hx-cap">
@@ -105,8 +90,8 @@ export default function Hero() {
           <h1 className="hx-h">
             {/* each word highlights in the colour of the staircase block it
                 lights: words 0 and 2 are the acid steps, 1 and 3 the violet */}
-            <u className={`hx-w hx-w-y${wordLit(0) ? " lit" : ""}`} {...hoverProps(0)}>Marketing</u>{" "}
-            <u className={`hx-w hx-w-v${wordLit(1) ? " lit" : ""}`} {...hoverProps(1)}>Partner</u>
+            <u className="hx-w hx-w-y">Marketing</u>{" "}
+            <u className="hx-w hx-w-v">Partner</u>
             {/* mobile folds the headline into three lines of its own:
                 Marketing Partner / behind Fastest / Growing Startups. */}
             <br className="hx-br-m" />{" "}
@@ -114,12 +99,17 @@ export default function Hero() {
             <br className="hx-br-d" />
             {" "}Fastest
             <br className="hx-br-m" />{" "}
-            <u className={`hx-w hx-w-y${wordLit(2) ? " lit" : ""}`} {...hoverProps(2)}>Growing</u>{" "}
-            <u className={`hx-w hx-w-v${wordLit(3) ? " lit" : ""}`} {...hoverProps(3)}>Startups.</u>
+            <u className="hx-w hx-w-y">Growing</u>{" "}
+            <u className="hx-w hx-w-v">Startups.</u>
           </h1>
           <p className="hx-sub">
-            We work alongside founders to turn marketing into a clearer, faster and more repeatable
-            path to growth.
+            <span className="hx-sub-d">
+              We work alongside founders to turn marketing into a clearer, faster and more
+              repeatable path to growth.
+            </span>
+            <span className="hx-sub-m">
+              We help early-stage startups unlock high-velocity growth and hit milestones faster.
+            </span>
           </p>
           <a className="hx-cta" href="/contact">
             <span className="hx-cta-t">Click to grow</span>

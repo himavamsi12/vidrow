@@ -32,7 +32,7 @@ function ReadMark() {
 export default function News() {
   const trackRef = useRef(null);
   // index of the leftmost visible card
-  const [at, setAt] = useState(0);
+  const [, setAt] = useState(0);
   // the same, for the phone rail — which is swiped, not paged, so it's
   // read back from the rail's own scroll position
   const [railAt, setRailAt] = useState(0);
@@ -117,48 +117,42 @@ export default function News() {
               The latest stories, ideas, and shifts worth paying attention to.
             </p>
           </Reveal>
-
-          <div className="news-navWrap">
-            {/* ← 01/05 → — the same arrangement as the phone's pair under
-                the cards */}
-            <div className="news-nav">
-              <button className="prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
-                <NavArrow />
-              </button>
-              <span className="news-index" aria-hidden="true">
-                {String(at + 1).padStart(2, "0")}/{String(NEWS_ITEMS.length).padStart(2, "0")}
-              </span>
-              <button className="next" type="button" aria-label="Next articles" onClick={() => page(1)}>
-                <NavArrow />
-              </button>
-            </div>
-          </div>
         </div>
 
-        <Reveal className="news-rail" as="div">
-          <div className="news-grid" ref={trackRef}>
-            {NEWS_ITEMS.map((item) => (
-              <a
-                className="news-card"
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ "--img": `url('${item.img}')` }}
-                key={item.title}
-              >
-                <span className="news-shot" aria-hidden="true" />
-                <span className="news-panel" aria-hidden="true" />
-                <span className="news-step" aria-hidden="true" />
-                <span className="news-bar" aria-hidden="true" />
-                <h3 className="news-title">{item.title}</h3>
-                <span className="news-read">
-                  Read article
-                  <ReadMark />
-                </span>
-              </a>
-            ))}
-          </div>
-        </Reveal>
+        {/* desktop arrows sit on the row's two edges, centred on the cards */}
+        <div className="news-stage">
+          <button className="news-side news-side--prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
+            <NavArrow />
+          </button>
+          <button className="news-side news-side--next" type="button" aria-label="Next articles" onClick={() => page(1)}>
+            <NavArrow />
+          </button>
+
+          <Reveal className="news-rail" as="div">
+            <div className="news-grid" ref={trackRef}>
+              {NEWS_ITEMS.map((item) => (
+                <a
+                  className="news-card"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ "--img": `url('${item.img}')` }}
+                  key={item.title}
+                >
+                  <span className="news-shot" aria-hidden="true" />
+                  <span className="news-panel" aria-hidden="true" />
+                  <span className="news-step" aria-hidden="true" />
+                  <span className="news-bar" aria-hidden="true" />
+                  <h3 className="news-title">{item.title}</h3>
+                  <span className="news-read">
+                    Read article
+                    <ReadMark />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
         {/* mobile only: the topbar has no room for the arrows at this width,
             so they sit under the cards and drive the rail's own scroll */}

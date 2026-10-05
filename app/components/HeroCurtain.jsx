@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
+import { TET_W, TET_H, TET_PIECES, tetPoints } from "./tetrisPieces";
 
 // timings for the three acts: the staircase growing to cover the screen,
 // a short hold while the page jumps to Featured Work behind it (invisible),
@@ -27,6 +28,9 @@ export default function HeroCurtain() {
   const [mounted, setMounted] = useState(false);
   const [closed, setClosed] = useState(false);
   const [fading, setFading] = useState(false);
+  const svgRef = useRef(null); // polygons are driven straight from the rAF loop, not React state
+  const [vbH, setVbH] = useState(TET_H);
+  const [skyDy, setSkyDy] = useState(0); // where the hero's skyline actually sits, in viewBox units
   const lenis = useLenis();
   const firedRef = useRef(false);
 
@@ -45,6 +49,41 @@ export default function HeroCurtain() {
       if (raf2) cancelAnimationFrame(raf2);
     };
   }, [mounted]);
+
+  // the bars rise on a rAF-driven ease (SVG points can't be CSS-transitioned
+  // everywhere), and the viewBox is sized to the screen so the resting
+  // skyline lands exactly on the hero's
+  useEffect(() => {
+    if (!mounted) return;
+    const de = document.documentElement;
+    setVbH((TET_W * de.clientHeight) / de.clientWidth);
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!closed) return;
+    let raf;
+    const start = performance.now();
+    const dy = skyDy;
+    // far enough that the lowest piece (its top is 353 down the skyline) clears the top of the screen
+    const travel = dy + 353 + 10;
+    const apply = (t) => {
+      const polys = svgRef.current?.children;
+      if (!polys) return;
+      // the paper-coloured backing is drawn first, then the pieces over it
+      TET_PIECES.forEach((p, i) => {
+        const pts = tetPoints(p.pts, dy, t, travel);
+        polys[i]?.setAttribute("points", pts);
+        polys[TET_PIECES.length + i]?.setAttribute("points", pts);
+      });
+    };
+    const tick = (now) => {
+      const k = Math.min((now - start) / 650, 1);
+      apply(k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [closed, vbH, skyDy]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -76,6 +115,15 @@ export default function HeroCurtain() {
 
       lenis?.stop();
       document.body.style.overflow = "hidden";
+      // sized before it mounts, so its first paint is already the screen-sized
+      // skyline rather than one stretched to fit for a frame
+      const de = document.documentElement;
+      const scale = de.clientWidth / TET_W;
+      setVbH(de.clientHeight / scale);
+      // the hero isn't always exactly one screen tall, so line the curtain's
+      // skyline up with where the hero's actually sits on screen
+      const sky = document.querySelector(".hx-tet");
+      setSkyDy(sky ? sky.getBoundingClientRect().top / scale : de.clientHeight / scale - TET_H);
       setMounted(true);
 
       setTimeout(() => {
@@ -198,20 +246,29 @@ export default function HeroCurtain() {
       className={`hero-curtain${closed ? " is-closed" : ""}${fading ? " hero-curtain--fading" : ""}`}
       aria-hidden="true"
     >
-      <div className={`hx-stair${closed ? " closed" : ""}`}>
-        {/* just the hero's four staircase blocks, each rising straight up from its step */}
-        {/* a white copy of the four bars underneath, without the seams cut
-            in, so the gaps between the bars read as white instead of
-            showing the hero behind the curtain */}
-        <div className="hx-step hc-b1 hc-back" />
-        <div className="hx-step hc-b2 hc-back" />
-        <div className="hx-step hc-b3 hc-back" />
-        <div className="hx-step hc-b4 hc-back" />
-        <div className="hx-step hc-b1 hx-y" />
-        <div className="hx-step hc-b2 hx-v" />
-        <div className="hx-step hc-b3 hx-y" />
-        <div className="hx-step hc-b4 hx-v" />
-      </div>
+      <svg
+        ref={svgRef}
+        className="hc-svg"
+        shapeRendering="crispEdges"
+        viewBox={`0 0 ${TET_W} ${vbH}`}
+        preserveAspectRatio="none"
+      >
+        {/* a paper-coloured copy of every piece, thickened past the seams,
+            so the hero's headline doesn't show through the gaps while it rises */}
+        {TET_PIECES.map((p, i) => (
+          <polygon
+            key={`back-${i}`}
+            fill="var(--paper)"
+            stroke="var(--paper)"
+            strokeWidth="10"
+            strokeLinejoin="miter"
+            points={tetPoints(p.pts, skyDy, 0, vbH + 400)}
+          />
+        ))}
+        {TET_PIECES.map((p, i) => (
+          <polygon key={i} fill={p.fill} points={tetPoints(p.pts, skyDy, 0, vbH + 400)} />
+        ))}
+      </svg>
     </div>
   );
 }

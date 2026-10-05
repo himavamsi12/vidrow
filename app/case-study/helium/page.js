@@ -4,6 +4,7 @@ import CspHooksRow from "../../components/CspHooksRow";
 import CspMoreRow from "../../components/CspMoreRow";
 import CspSectionNav from "../../components/CspSectionNav";
 import CspCoverflow from "../../components/CspCoverflow";
+import Mark from "../../components/Mark";
 
 export const metadata = {
   title: "Helium — Case Study | Vidrow",
@@ -12,10 +13,22 @@ export const metadata = {
 const SECTIONS = [
   { id: "csp-sec-hero", label: "Overview" },
   { id: "csp-sec-results", label: "90 Days" },
-  { id: "csp-sec-how", label: "Customer Journey" },
+  { id: "csp-sec-selling", label: "The Product" },
+  { id: "csp-sec-challenge", label: "The Challenge" },
+  { id: "csp-sec-belief", label: "The Belief Gap" },
+  { id: "csp-sec-flip", label: "The Flip" },
+  { id: "csp-sec-brief", label: "The Brief" },
+  { id: "csp-sec-buy", label: "How They Buy" },
+  { id: "csp-sec-under", label: "The Underdog" },
+  { id: "csp-sec-msg", label: "The Message" },
   { id: "csp-sec-hooks", label: "Brand Ads" },
   { id: "csp-sec-reasons", label: "Five Reasons" },
+  { id: "csp-sec-chan", label: "The Channels" },
+  { id: "csp-sec-cast", label: "The Casting" },
   { id: "csp-sec-focus", label: "The Focus" },
+  { id: "csp-sec-founder", label: "The Founder" },
+  { id: "csp-sec-recap", label: "Where We Are" },
+  { id: "csp-sec-ads", label: "Ten Ads" },
   { id: "csp-sec-films", label: "One Reason Each" },
   { id: "csp-sec-bperf", label: "Brand Performance" },
   { id: "csp-sec-pads", label: "Performance Ads" },
@@ -103,28 +116,6 @@ const REASONS = [
   { n: "05", tag: "\u20b930 a day to run", desc: "The cheapest AC to own is the cheapest to run.", x: 72, y: 71 },
 ];
 
-const JOURNEY = [
-  {
-    tag: "Brand Films",
-    desc: "Sumeet Vyas introduced Helium and built the first layer of trust.",
-  },
-  {
-    tag: "Performance Ads",
-    desc: "One sharp reason, while they were still deciding.",
-  },
-  {
-    tag: "The Website",
-    desc: "The same Sumeet Vyas presence made the brand feel familiar and consistent.",
-  },
-  {
-    tag: "Youtube Review",
-    desc: "When they looked for proof, Helium was already present in the reviews they found.",
-  },
-  {
-    tag: "They Buy",
-    desc: "The final step wasn't about convincing. It was about making the decision easy.",
-  },
-];
 
 // the four headline numbers under "What happened in just 90 days?" — the
 // last is the one called out in acid
@@ -134,6 +125,266 @@ const RESULTS = [
   { val: "500", label: "ACs a day from their own website" },
   { val: "\u20b940 Cr", label: "revenue scaled in one season", hi: true },
 ];
+
+// the three Ps that were already fixed before we came in — the fourth,
+// promotion, is the acid banner underneath them
+const FOUR_PS = [
+  {
+    tag: "Product",
+    val: "0.8 ton",
+    desc: "A size the category had never bothered to market.",
+  },
+  {
+    tag: "Price",
+    val: "₹16,999",
+    desc: "Low enough to be read as cheap, which is the danger.",
+  },
+  {
+    tag: "Place",
+    val: "D2C website",
+    desc: "A purchase people had only ever made in a shop or on a marketplace.",
+  },
+];
+
+const CHALLENGES = [
+  "No one bought a ‘cheap’ AC.",
+  "No one bought a 0.8 ton AC.",
+  "No one bought an AC from a D2C website.",
+];
+
+// the same three objections read twice: first as the reason nobody believed
+// (04), then flipped into the line we ran on (05)
+const OBJECTIONS = [
+  {
+    claim: "No one bought a cheap AC",
+    why: "because cheap means bad quality.",
+    flip: "but everyone will buy a great AC at a great price.",
+  },
+  {
+    claim: "No one bought a 0.8 ton AC",
+    why: "because no brand ever marketed one.",
+    flip: "because no one told them 0.8 ton is all they need.",
+  },
+  {
+    claim: "No one bought an AC from a D2C site",
+    why: "because it is an AC, not sunscreen.",
+    flip: "because no one built a buying experience they could trust.",
+  },
+];
+
+const BRIEF_POINTS = [
+  {
+    n: "01",
+    tag: "The temptation",
+    desc: "A low price, and the easiest ad in the category to make.",
+  },
+  {
+    n: "02",
+    tag: "The trap",
+    desc: "Win on price in year one and you are the cheap brand forever.",
+  },
+  {
+    n: "03",
+    tag: "The brief",
+    desc: "Make people want the product. Never the discount.",
+  },
+];
+
+// the five moments a purchase is actually made across — the last one is the
+// only one that ends in money, so it carries the acid quote
+const BUY_STEPS = [
+  {
+    stage: "Discovery",
+    title: "They see the brand",
+    desc: "Scrolling Instagram or YouTube. Not shopping for an AC. The brand finds them.",
+    quote: "“Never heard of this.”",
+  },
+  {
+    stage: "Consideration",
+    title: "They search about it",
+    desc: "First proper look at the product. The question is whether this brand looks real.",
+    quote: "“Is this a serious company?”",
+  },
+  {
+    stage: "Conviction",
+    title: "Convinced about value",
+    desc: "A performance ad makes a single value proposition land. Now there is a reason to want it.",
+    quote: "“Okay, but why this one?”",
+  },
+  {
+    stage: "Validation",
+    title: "They go looking for proof",
+    desc: "YouTube reviews, Instagram profile, in someone else’s words, from people the brand does not pay.",
+    quote: "“Does anyone independent back this?”",
+  },
+  {
+    stage: "Purchase",
+    title: "They order",
+    desc: "Back to the same website, this time with the doubt already dealt with.",
+    quote: "“Fine. Buying it.”",
+    hi: true,
+  },
+];
+
+const INCUMBENTS = ["Voltas", "LG", "Haier", "Daikin"];
+
+const UNDERDOG_MOVES = [
+  {
+    n: "01",
+    title: "Build something they remember.",
+    desc: "A new brand gets one line in someone’s head, if that. It has to be repeatable, and it has to be worth repeating.",
+  },
+  {
+    n: "02",
+    title: "Fix what the category got wrong.",
+    desc: "Every old industry has habits nobody defends. Oversized units. Jargon. Service sold upfront. Free material.",
+  },
+  {
+    n: "03",
+    title: "Then run straight at the giants.",
+    desc: "A new entrant that names the incumbent gets something the incumbent cannot buy: people who want it to win.",
+  },
+];
+
+const UNDERDOG_BRANDS = [
+  {
+    name: "The Whole Truth",
+    vs: "vs legacy protein brands",
+    desc: "Made the ingredient label the entire argument.",
+  },
+  {
+    name: "Mamaearth",
+    vs: "vs personal care giants",
+    desc: "Toxin-free, in a category nobody read the back of.",
+  },
+  {
+    name: "boAt",
+    vs: "vs imported audio",
+    desc: "The aspiration, without the imported price tag.",
+  },
+  {
+    name: "Zerodha",
+    vs: "vs full-service brokers",
+    desc: "Flat fees, against a percentage everyone accepted.",
+  },
+];
+
+// the five messages read across: the habit of the category on one side,
+// where Helium stood on the other
+const MESSAGES = [
+  {
+    n: "01",
+    title: "It is the right size",
+    category: "A 1.5 ton unit pushed as the safe default, into Indian rooms that never needed one.",
+    helium: "0.8 ton, sized for the room. You stop paying to cool air you never use.",
+  },
+  {
+    n: "02",
+    title: "Anti-incumbent",
+    category: "Sold on star ratings, inverter grades and compressor jargon a buyer cannot decode.",
+    helium: "No jargon. The product explained in the words the buyer would use.",
+  },
+  {
+    n: "03",
+    title: "Service you actually need",
+    category: "Annual contracts and extended cover sold upfront, before anything has broken.",
+    helium: "You pay to fix what broke. Nothing sold before it is needed.",
+  },
+  {
+    n: "04",
+    title: "Built for your weather",
+    category: "One national specification. The same machine for a humid coast and a dry desert.",
+    helium: "It adjusts. Mumbai is humid, Jaisalmer is dry, and the AC knows the difference.",
+  },
+  {
+    n: "05",
+    title: "₹30 a day to run",
+    category: "Compete on sticker price and festive discounts. The running cost is your problem.",
+    helium: "The cheapest AC to own is the cheapest to run. ₹30 a day.",
+  },
+];
+
+// the channels split by one rule: could we read what came back from it
+const CHANNELS_IN = [
+  {
+    name: "Instagram Ads",
+    desc: "Cost per click, cost per order, readable in the same week you spent it.",
+  },
+  {
+    name: "Google Ads",
+    desc: "The intent is already there. You see the search, the click and the sale.",
+  },
+  {
+    name: "YouTube Reviews",
+    desc: "Placed with creators, tracked on links. Third-party proof you can still count.",
+  },
+];
+
+const CHANNELS_OUT = [
+  {
+    name: "Billboards",
+    desc: "No way to tie a rupee spent to a rupee that came back.",
+  },
+  {
+    name: "TV ads",
+    desc: "Large minimums, and an answer that arrives a quarter late.",
+  },
+];
+
+// how the casting call was made, as four steps and then the two things a
+// known face actually buys you
+const CASTING = [
+  { n: "01", title: "A known\nface", desc: "The only thing that fixes trust fast." },
+  { n: "02", title: "Budget\ncapped", desc: "Before any name is discussed." },
+  { n: "03", title: "Audience\nsurveyed", desc: "A shortlist, measured." },
+  { n: "04", title: "Sumeet\nVyas", desc: "Survey-picked, not guessed." },
+];
+
+const CASTING_WHY = [
+  {
+    n: "01",
+    tag: "Credibility",
+    desc: "A known person lends the brand belief it has not earned yet.",
+  },
+  {
+    n: "02",
+    tag: "Decent attention",
+    desc: "A recognisable face buys the first three seconds.",
+  },
+];
+
+const FOUNDER_POINTS = [
+  {
+    n: "01",
+    tag: "It cannot be copied",
+    desc: "A hired face is available to anyone with a budget. The person who built the product is not. It made the ads unmistakably ours.",
+  },
+  {
+    n: "02",
+    tag: "It puts someone on the hook",
+    desc: "Putting your own face on a claim means you carry the consequence of it being wrong. Buyers read that, even if they never say it.",
+  },
+  {
+    n: "03",
+    tag: "People back the underdog",
+    desc: "Building in public reads as confidence. For a four-month-old brand, a founder on camera is the cheapest version of it.",
+  },
+];
+
+// the ten performance films — five across, the last one standing alone
+// underneath at full size
+const PERF_ADS = [
+  { src: "/casestudy%20images/casestudy-helium/ad-1.png", alt: "Hi Bata Delta Hai, India" },
+  { src: "/casestudy%20images/casestudy-helium/ad-2.png", alt: "Ab IITians ne banaya hai" },
+  { src: "/casestudy%20images/casestudy-helium/ad-3.png", alt: "Ashish Sharma and Aman Munka" },
+  { src: "/casestudy%20images/casestudy-helium/ad-4.png", alt: "Up to 10 years warranty on compressor" },
+  { src: "/casestudy%20images/casestudy-helium/ad-5.png", alt: "The founder interview cut" },
+];
+
+const PERF_AD_HERO = {
+  src: "/casestudy%20images/casestudy-helium/ad-6.png",
+  alt: "Agar — the closing performance film",
+};
 
 const HOOKS = [
   {
@@ -149,7 +400,7 @@ const HOOKS = [
   {
     n: "03",
     title: "The market\npicked",
-    desc: "We ran the winning communication as per testing.",
+    desc: "We picked the winning message on the test results.",
   },
   {
     n: "04",
@@ -160,20 +411,6 @@ const HOOKS = [
 
 
 
-const CELEB_POINTS = [
-  {
-    title: "Sumeet Vyas",
-    desc: "Survey-picked, not guessed. A known face buys the first three seconds, the hook rate. Nobody hears a message they scrolled past.",
-  },
-  {
-    title: "The founder on camera",
-    desc: "A new brand feels more established when the person behind it steps into the frame.",
-  },
-  {
-    title: "15 days, brief to films",
-    desc: "Summer was already running. Every day in production is demand you never get back.",
-  },
-];
 
 export default function HeliumCaseStudy() {
   return (
@@ -183,7 +420,7 @@ export default function HeliumCaseStudy() {
         <SiteNav logoHref="/" />
       </header>
 
-      <CspSectionNav sections={SECTIONS} darkSectionIds={["csp-sec-films", "csp-sec-reviews"]} />
+      <CspSectionNav sections={SECTIONS} darkSectionIds={["csp-sec-focus", "csp-sec-films"]} />
 
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-hl-head">
@@ -235,63 +472,285 @@ export default function HeliumCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-how csp-journey" id="csp-sec-how">
-          <div className="csp-how-row">
-            <div className="csp-how-left">
-              <div className="csp-how-top">
-                <div className="csp-eyebrow2">
-                  <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                  <b>02</b>
-                  <span className="csp-eyebrow2-sep">·</span>
-                  CUSTOMER JOURNEY
-                </div>
-                <h2 className="csp-how-h">
-                  We engineered the entire
-                  <br />
-                  customer
-                </h2>
-                <p className="csp-how-copy">Five touchpoints. One story. No gap to fall through</p>
+        <section className="csp-ps" id="csp-sec-selling">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>02</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">What was Helium actually selling?</h2>
+          <p className="csp-hl-rsub">
+            A 0.8 ton AC at &#8377;16,999, sold online, in a category that has not changed in
+            thirty years.
+          </p>
+
+          <div className="csp-psCards">
+            {FOUR_PS.map((p) => (
+              <div className="csp-psCard" key={p.tag}>
+                <span className="csp-psTag">{p.tag}</span>
+                <b className="csp-psVal">{p.val}</b>
+                <p className="csp-psDesc">{p.desc}</p>
               </div>
+            ))}
+          </div>
 
-              {JOURNEY.map((step) => (
-                <div key={step.tag}>
-                  <div className="csp-howBlock">
-                    <span className="csp-howTag">{step.tag}</span>
-                    <p className="csp-howDesc">{step.desc}</p>
-                  </div>
-                  <hr className="csp-howDiv" />
-                </div>
-              ))}
-            </div>
-
-            <div className="csp-how-right">
-              <img
-                src="/casestudy%20images/casestudy-helium/founder.png"
-                alt="They saw it: Helium's founder on screen"
-              />
-            </div>
+          <div className="csp-psBanner">
+            <span className="csp-psTag">Promotion</span>
+            <p>
+              Three of the four Ps were already locked. The whole brand had to be won on the
+              fourth.
+            </p>
           </div>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-hooks" id="csp-sec-hooks">
-          <div className="csp-hooks-head">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>03</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                BRAND ADS
-              </div>
-              <h2 className="csp-hooks-h">
-                We built the message
-                <br />
-                before building the ad.
-              </h2>
-            </div>
-            <p className="csp-hooks-copy">A smaller AC isn&apos;t a cheaper AC. It&apos;s a smarter one.</p>
+        <section className="csp-chal" id="csp-sec-challenge">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>03</b>
+            Helium Smart Air Case Study
           </div>
+          <h2 className="csp-hl-rh">Why was it a challenge?</h2>
+
+          <ol className="csp-chalList">
+            {CHALLENGES.map((c, i) => (
+              <li className="csp-chalRow" key={c}>
+                <span className="csp-chalNum">{`0${i + 1}`}</span>
+                <p className="csp-chalText">{c}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-belief" id="csp-sec-belief">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>04</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">But why did no one believe in it?</h2>
+
+          <div className="csp-objList">
+            {OBJECTIONS.map((o) => (
+              <div className="csp-objRow csp-objRow--why" key={o.claim}>
+                <p className="csp-objClaim">{o.claim}</p>
+                <p className="csp-objAnswer">{o.why}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="csp-beliefAsk">So how do you even position it?</p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-flip" id="csp-sec-flip">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>05</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">So we flipped the narrative.</h2>
+
+          <div className="csp-objList">
+            {OBJECTIONS.map((o) => (
+              <div className="csp-objRow csp-objRow--flip" key={o.claim}>
+                <p className="csp-objClaim">{o.claim}</p>
+                <p className="csp-objAnswer">
+                  <mark className="csp-objMark">{o.flip}</mark>
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-brief" id="csp-sec-brief">
+          <div className="csp-brief-head">
+            <div>
+              <div className="csp-hl-eyebrow">
+                <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+                <b>06</b>
+                Helium Smart Air Case Study
+              </div>
+              <h2 className="csp-hl-rh">The Brief</h2>
+            </div>
+            <p className="csp-brief-copy">
+              Helium Air came to us with a 0.8 ton AC priced at &#8377;16,999 in a highly
+              competitive and established category. They had raised $2M in seed funding. The
+              challenge was to make the brand feel aspirational and credible without competing on
+              discounts or low pricing, while scaling revenue through the peak summer season.
+            </p>
+          </div>
+
+          <div className="csp-briefPoints">
+            {BRIEF_POINTS.map((b) => (
+              <div className="csp-briefPoint" key={b.n}>
+                <span className="csp-briefNum">{b.n}</span>
+                <span className="csp-briefTag">{b.tag}</span>
+                <p className="csp-briefDesc">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="csp-briefClock">
+            And the clock: <b>90 days.</b> An Indian AC brand earns its entire year between April
+            and July.
+          </p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-buy" id="csp-sec-buy">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>07</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">How someone actually buys an AC.</h2>
+          <p className="csp-hl-rsub">
+            Nobody decides in one sitting. Five separate moments, spread over days, mostly on a
+            phone.
+          </p>
+
+          <ol className="csp-buySteps">
+            {BUY_STEPS.map((s, i) => (
+              <li className={`csp-buyStep${s.hi ? " hi" : ""}`} key={s.stage}>
+                <span className="csp-buyStage">{s.stage}</span>
+                <span className="csp-buyDot">{i + 1}</span>
+                <h3 className="csp-buyTitle">{s.title}</h3>
+                <p className="csp-buyDesc">{s.desc}</p>
+                <p className="csp-buyQuote">{s.quote}</p>
+              </li>
+            ))}
+          </ol>
+
+          <p className="csp-buyNote">You need to be present everywhere the customer is.</p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-under" id="csp-sec-under">
+          <div className="csp-underChip">
+            Helium Smart Air Case Study
+            <Mark className="csp-underMark" />
+          </div>
+
+          <div className="csp-under-head">
+            <h2 className="csp-under-h">
+              Nobody roots for the giant, so you
+              <br />
+              become the underdog.
+            </h2>
+            <p className="csp-under-copy">
+              The category was decided long before Helium existed. So we did not enter it. We
+              positioned against it.
+            </p>
+          </div>
+
+          <p className="csp-underLabel">The market was already captured</p>
+          <div className="csp-underGiants">
+            {INCUMBENTS.map((b) => (
+              <span className="csp-underGiant" key={b}>
+                {b}
+              </span>
+            ))}
+            <span className="csp-underGiantsNote">and thirty years of being the default answer.</span>
+          </div>
+
+          <div className="csp-underMoves">
+            {UNDERDOG_MOVES.map((m) => (
+              <div className="csp-underMove" key={m.n}>
+                <span className="csp-underNum">{m.n}</span>
+                <span className="csp-underMoveH">{m.title}</span>
+                <p className="csp-underMoveDesc">{m.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="csp-underLabel csp-underLabel--muted">Indian brands built on exactly this</p>
+          <div className="csp-underBrands">
+            {UNDERDOG_BRANDS.map((b) => (
+              <div className="csp-underBrand" key={b.name}>
+                <h3>{b.name}</h3>
+                <span>{b.vs}</span>
+                <p>{b.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* the stepped black band — the notch on each side is cut with a
+            clip-path, inside the same content column as the cards above */}
+        <div className="csp-underBand">
+          <p>
+            &ldquo;Don&rsquo;t pay for <em>Marketing</em>. Pay for <i>Cooling</i>.&rdquo;
+          </p>
+        </div>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-msg" id="csp-sec-msg">
+          <div className="csp-underChip">
+            Helium Smart Air Case Study
+            <Mark className="csp-underMark" />
+          </div>
+
+          <div className="csp-under-head">
+            <h2 className="csp-under-h">
+              How do you communicate
+              <br />
+              the positioning?
+            </h2>
+            <p className="csp-under-copy">
+              None of the five were features. Each one named a habit of the category and put Helium
+              on the other side of it.
+            </p>
+          </div>
+
+          <div className="csp-msgTable">
+            <div className="csp-msgHead">
+              <span className="csp-msgCol">The message</span>
+              <span className="csp-msgCol">What the category does</span>
+              <span className="csp-msgCol csp-msgCol--hi">Where Helium stood instead</span>
+            </div>
+
+            {MESSAGES.map((m) => (
+              <div className="csp-msgRow" key={m.n}>
+                <p className="csp-msgName">
+                  <span className="csp-msgNum">{m.n}</span>
+                  {m.title}
+                </p>
+                <p className="csp-msgCat">{m.category}</p>
+                <p className="csp-msgHelium">{m.helium}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="csp-buyNote">
+            Five messages. Five habits of the category, each one turned into a reason to switch.
+          </p>
+        </section>
+      </div>
+
+
+      <div className="csp-in">
+        <section className="csp-hooks" id="csp-sec-hooks">
+          <div className="csp-underChip">
+            Helium Smart Air Case Study
+            <Mark className="csp-underMark" />
+          </div>
+
+          <h2 className="csp-hooks-h">
+            We built the message before
+            <br />
+            building the ad.
+          </h2>
+          <p className="csp-hooks-copy">A smaller AC isn&apos;t a cheaper AC. It&apos;s a smarter one.</p>
 
           <CspHooksRow hooks={HOOKS} />
         </section>
@@ -315,63 +774,222 @@ export default function HeliumCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-focus" id="csp-sec-focus">
-          <div className="csp-aoc-head csp-focus-head">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>04</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                THE FOCUS
-              </div>
-              <h2 className="csp-aoc-h">
-                The AD can be forgettable.
-                <br />
-                The BRAND can&apos;t.
-              </h2>
-            </div>
-            <p className="csp-aoc-copy">
-              Traditional advertising sells the film. People remember the face, the joke, the
-              line and forget whose product it was. We built every frame the other way round: the
-              only thing you carry out of it is Helium.
+        <section className="csp-chan" id="csp-sec-chan">
+          <div className="csp-underChip">
+            Helium Smart Air Case Study
+            <Mark className="csp-underMark" />
+          </div>
+
+          <div className="csp-under-head">
+            <h2 className="csp-under-h">How do you pick a channel?</h2>
+            <p className="csp-under-copy">
+              One rule. If we could not measure what came back, we did not buy it.
             </p>
           </div>
 
-          <div className="csp-focus-body">
-            <div className="csp-focus-points">
-              {CELEB_POINTS.map((p) => (
-                <div className="csp-focusPoint" key={p.title}>
-                  <div className="csp-focusPoint-h">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        fill="#715BE4"
-                        d="M0 0h7v7H0zM8.5 0h7v7h-7zM17 0h7v7h-7zM8.5 8.5h7v7h-7zM17 8.5h7v7h-7zM17 17h7v7h-7z"
-                      />
-                    </svg>
-                    <h3>{p.title}</h3>
-                  </div>
-                  <p>{p.desc}</p>
+          <div className="csp-chanCols">
+            <div>
+              <p className="csp-underLabel csp-underLabel--muted">What we bought</p>
+              {CHANNELS_IN.map((c) => (
+                <div className="csp-chanCard" key={c.name}>
+                  <h3>{c.name}</h3>
+                  <p>{c.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="csp-quoteWrap">
-              <img className="csp-quoteMark" src="/casestudy%20images/quote-mark.svg" alt="" aria-hidden="true" />
-              <div className="csp-quoteCard">
-                <div className="csp-quoteInner">
-                  <span className="csp-quoteEyebrow">Campaign positioning</span>
-                  <p className="csp-quoteText">
-                    Don&apos;t pay for Marketing.
-                    <br />
-                    Pay for Cooling
-                  </p>
-                  <p className="csp-quoteSub">
-                    People remembered the name Helium. That was the whole job.
-                  </p>
+            <div>
+              <p className="csp-underLabel csp-underLabel--muted">What we did not</p>
+              {CHANNELS_OUT.map((c) => (
+                <div className="csp-chanCard csp-chanCard--out" key={c.name}>
+                  <h3>{c.name}</h3>
+                  <p>{c.desc}</p>
                 </div>
+              ))}
+
+              <div className="csp-chanNote">
+                <span>Not a judgement on the channel</span>
+                <p>
+                  Both work at scale, for brands that can afford to wait. We had ninety days and
+                  one summer.
+                </p>
               </div>
             </div>
           </div>
+
+          <p className="csp-buyNote">
+            An early-stage startup cannot wait months to find out whether something worked.
+          </p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-cast" id="csp-sec-cast">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>08</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">We had a message. We still had no trust.</h2>
+          <p className="csp-castSub">A stranger with a good line is still a stranger.</p>
+
+          <div className="csp-hooks-row csp-castRow">
+            {CASTING.map((c) => (
+              <div className="csp-hookCard" key={c.n}>
+                <span className="csp-hookNum">{c.n}</span>
+                <h3 className="csp-hookTitle">{c.title}</h3>
+                <p className="csp-hookDesc">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="csp-castWhy">
+            {CASTING_WHY.map((w) => (
+              <div className="csp-castPoint" key={w.n}>
+                <span className="csp-underNum">{w.n}</span>
+                <span className="csp-underMoveH">{w.tag}</span>
+                <p className="csp-castPointDesc">{w.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="csp-castQuote">
+            <img
+              src="/casestudy%20images/casestudy-helium/casting-still.png"
+              alt="A superstar endorsement, the option Helium did not take"
+            />
+            <p>
+              &lsquo;Bhai would bring attention, but he would also have taken all our
+              funding&rsquo;
+            </p>
+          </div>
+
+          <p className="csp-buyNote">
+            Casting a known face is a data decision. <em>Not just a taste decision.</em>
+          </p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-focus" id="csp-sec-focus">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>09</b>
+            Helium Smart Air Case Study
+          </div>
+
+          <h2 className="csp-focus-h">
+            The <em>ad</em> can be forgettable.
+            <br />
+            The face can be forgettable.
+            <br />
+            The <i>brand</i> cannot.
+          </h2>
+
+          <p className="csp-focus-copy">
+            Traditional advertising sells the film. People remember the face, the joke, the line
+            &mdash; and forget whose product it was. We built every frame the other way round: the
+            only thing you carry out of it is Helium.
+          </p>
+
+          <div className="csp-focusLine">
+            <span>Campaign &rsaquo; Positioning</span>
+            <p>&ldquo;Don&rsquo;t pay for marketing. Pay for cooling.&rdquo;</p>
+          </div>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-founder" id="csp-sec-founder">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>10</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">We put the founder up front.</h2>
+          <p className="csp-castSub">Nobody else can rent your founder.</p>
+
+          <div className="csp-founderRow">
+            <div className="csp-founderCard">
+              <h3>
+                The Founder
+                <br />
+                on Camera
+              </h3>
+              <p>No fee, no contract, and nobody can outbid you for him.</p>
+            </div>
+
+            {FOUNDER_POINTS.map((f) => (
+              <div className="csp-founderPoint" key={f.n}>
+                <span className="csp-underNum">{f.n}</span>
+                <span className="csp-underMoveH">{f.tag}</span>
+                <p className="csp-castPointDesc">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="csp-buyNote">
+            A celebrity buys attention and trust. <em>A founder buys belief.</em>
+          </p>
+        </section>
+      </div>
+
+      {/* the five moments again, this time with the story's own position
+          marked: everything past consideration is still ahead */}
+      <div className="csp-in">
+        <section className="csp-recap" id="csp-sec-recap">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>11</b>
+            Helium Smart Air Case Study
+          </div>
+
+          <ol className="csp-buySteps csp-recapSteps">
+            {BUY_STEPS.map((s, i) => (
+              <li
+                className={`csp-buyStep${s.hi ? " hi" : ""}${i > 1 ? " ahead" : ""}${
+                  i === 2 ? " here" : ""
+                }`}
+                key={s.stage}
+              >
+                {i === 2 && <span className="csp-recapHere">We&rsquo;re here</span>}
+                <span className="csp-buyStage">{s.stage}</span>
+                <span className="csp-buyDot">{i + 1}</span>
+                <h3 className="csp-buyTitle">{s.title}</h3>
+                <p className="csp-buyDesc">{s.desc}</p>
+                <p className="csp-buyQuote">{s.quote}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-ads" id="csp-sec-ads">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>12</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">
+            Ten ads about nothing but
+            <br />
+            features and value
+          </h2>
+
+          <div className="csp-adsRow">
+            {PERF_ADS.map((a) => (
+              <figure className="csp-adCard" key={a.src}>
+                <img src={a.src} alt={a.alt} />
+                <span className="csp-adPlay" aria-hidden="true" />
+              </figure>
+            ))}
+          </div>
+
+          <figure className="csp-adCard csp-adCard--hero">
+            <img src={PERF_AD_HERO.src} alt={PERF_AD_HERO.alt} />
+            <span className="csp-adPlay" aria-hidden="true" />
+          </figure>
         </section>
       </div>
 
@@ -380,7 +998,7 @@ export default function HeliumCaseStudy() {
           <div className="csp-films-head">
             <div className="csp-eyebrow2">
               <span className="csp-eyebrow2-dot" aria-hidden="true" />
-              <b>05</b>
+              <b>13</b>
               <span className="csp-eyebrow2-sep">·</span>
               THE FIVE BRANDS EACH
             </div>
@@ -397,7 +1015,7 @@ export default function HeliumCaseStudy() {
             <div>
               <div className="csp-eyebrow2">
                 <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>06</b>
+                <b>14</b>
                 <span className="csp-eyebrow2-sep">·</span>
                 BRAND PERFORMANCE
               </div>
@@ -430,7 +1048,7 @@ export default function HeliumCaseStudy() {
             <div>
               <div className="csp-eyebrow2">
                 <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>07</b>
+                <b>15</b>
                 <span className="csp-eyebrow2-sep">·</span>
                 PERFORMANCE ADS
               </div>
@@ -479,53 +1097,51 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-reviews" id="csp-sec-reviews">
-          <div className="csp-aoc-head csp-headRight">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>08</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                THE REVIEWS
-              </div>
-              <h2 className="csp-aoc-h">
-                We built the narrative.
-                <br />
-                The reviews made it credible.
-              </h2>
-            </div>
-            <p className="csp-aoc-copy">
-              An independent validation layer: real reviews, from people we don&apos;t pay.
-            </p>
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>16</b>
+            Helium Smart Air Case Study
           </div>
+          <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
 
           <div className="csp-reviews-body">
-            <figure className="csp-reviewShot">
-              <img
-                src="/casestudy%20images/casestudy-helium/helium%20thumbnail.png"
-                alt="Gadget Masala's YouTube review of the Helium Air 0.8 ton smart AC"
-              />
-              <figcaption className="csp-reviewTag">
-                <b>Gadget Masala</b>
-                <span>YouTube | Creator</span>
-              </figcaption>
-            </figure>
-
             <div className="csp-reviews-copy">
+              <p className="csp-reviews-lead">
+                We seeded &lsquo;organic&rsquo; reviews on YouTube before we even hit the market.
+              </p>
               <p>
                 In April, a buyer had nothing to go on. No ratings to read. Nobody in the building
                 who owned one. Nothing to search.
               </p>
               <p>
                 So we placed the product with two channels this audience already trusts, for
-                hands-on reviews in their own words. Outside our control, which is exactly why it
-                works.
+                hands-on reviews in their own words. Outside our control &mdash; which is exactly
+                why it works.
               </p>
-              <p className="csp-reviews-note">
-                We built the story.
-                <br />
-                Someone else made it believable.
+
+              <div className="csp-reviewStat">
+                <b>186k+</b>
+                <span>
+                  views, all high-intent. This is a review, not content &mdash; views climbed as
+                  sales climbed, which is the correlation.
+                </span>
+              </div>
+
+              <p className="csp-buyNote">
+                We built the story. <em>Someone else made it believable.</em>
               </p>
             </div>
+
+            <figure className="csp-reviewShot">
+              <img
+                src="/casestudy%20images/casestudy-helium/helium%20thumbnail.png"
+                alt="Gadget Masala's YouTube review of the Helium Air 0.8 ton smart AC"
+              />
+              <figcaption>
+                <b>Gadget Masala</b>
+                <span>YouTube Creator</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
       </div>
@@ -536,7 +1152,7 @@ export default function HeliumCaseStudy() {
             <div>
               <div className="csp-eyebrow2">
                 <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>09</b>
+                <b>17</b>
                 <span className="csp-eyebrow2-sep">·</span>
                 SOCIAL
               </div>

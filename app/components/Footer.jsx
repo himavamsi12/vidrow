@@ -162,10 +162,30 @@ export default function Footer({ hideCta = false }) {
           it drops the heading + button (see app/contact/page.js) */}
       {!hideCta && (
       <div className="vfoot__copy">
-        <h2 className="vfoot__title">Ready for your next growth stage?</h2>
+        <h2 className="vfoot__title">
+          Are you building the <br />
+          next unicorn?
+        </h2>
+        <p className="vfoot__sub">
+          We work with a small number of startups at a time. If you&rsquo;re serious about scaling
+          to the next round, we&rsquo;d like to hear from you.
+        </p>
         <div className="vfoot__ctaWrap">
           <a className="vfoot__cta" href="/contact">
-            <span className="vfoot__ctaLabel">Click to grow</span>
+            <span className="vfoot__ctaLabel">
+              <span className="vfoot__d">Get in touch</span>
+              <span className="vfoot__m">Click to grow</span>
+            </span>
+            <span className="vfoot__ctaIcon">
+              <span className="vfoot__ctaMark">
+                {CTA_CELLS.map(([x, y], i) => (
+                  <i key={i} style={{ "--x": x, "--y": y }} />
+                ))}
+              </span>
+            </span>
+          </a>
+          <a className="vfoot__cta vfoot__cta--ghost" href="/#work">
+            <span className="vfoot__ctaLabel">See our work</span>
             <span className="vfoot__ctaIcon">
               <span className="vfoot__ctaMark">
                 {CTA_CELLS.map(([x, y], i) => (
@@ -211,7 +231,18 @@ export default function Footer({ hideCta = false }) {
         <div className="vfoot__bottomIn">
           <div className="vfoot__bottom">
             <div className="vfoot__bottomRow">
-              <p className="vfoot__tagline">We turn attention into impact.</p>
+              <p className="vfoot__tagline">We make ad&rsquo;s that people don&rsquo;t skip</p>
+              {/* mobile swaps the row for two short two-line notes */}
+              <p className="vfoot__mNote">
+                Marketing Partner behind
+                <br />
+                Fastest Growing startups.
+              </p>
+              <p className="vfoot__mNote vfoot__mNote--r">
+                © 2024.
+                <br />
+                All rights reserved.
+              </p>
 
               <div className="vfoot__legal">
                 <span>© 2026 Vidrow</span>

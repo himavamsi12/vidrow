@@ -18,7 +18,10 @@ export const FEATURED_WORK = [
       { name: "Aman Munka", role: "Co-founder & CTO", cls: "fw-plate2" },
     ],
     quote:
-      "We've been working with Vidrow since the launch of our company, and over the past six months they've helped us shape the positioning and launch of Helium as a disruptor in the market.\n\nTheir expertise across brand, performance and social helped us create genuine virality for the product, which got us to product-market fit much faster than we had anticipated.\n\nWhat truly set them apart was their data-driven approach and the engineering mindset they brought to marketing every creative decision came out of live testing rather than opinion, which is something that resonated deeply with us.\n\nThey think brand-first and have consistently given us solutions that are ahead of the curve. We plan to deepen the partnership as we take Helium through its 1-to-10 and 10-to-100 journey.",
+      "**Vidrow has been with us since day one. Over the past six months, they helped us position and launch Helium as a disruptor.**\n\nTheir work across brand, performance and social made Helium go viral and got us to product-market fit faster than we expected. What stood out was their engineering mindset. Every creative decision came from live testing, not opinion.\n\nThey think brand-first and stay ahead of the curve. We\u2019re deepening the partnership as we take Helium from 1 to 10, and 10 to 100.",
+    // the shorter testimonial the mobile card runs; [[…]] marks the lines set darker
+    mobileQuote:
+      "Vidrow has been with us since day one, helping us position and launch Helium as a disruptor. Their work across brand, performance and social drove genuine virality and [[accelerated our path to product-market fit.]]\n\nWhat stood out was their engineering mindset - every creative decision came from live testing, not opinion. [[They think brand-first and stay ahead of the curve.]]\n\nWe’re excited to deepen the partnership as Helium scales.",
     line: "Helium sold 500 ACs a day within a month of launch.",
   },
   {
@@ -32,11 +35,11 @@ export const FEATURED_WORK = [
       { src: "/work/Piyush Platinum.png", cls: "fw-ph2" },
     ],
     plates: [
-      { name: "Ashutosh Pandey", role: "Co-founder & CEO", cls: "fw-plate1" },
+      { name: "Ashutosh Pandey", role: "Founder & CEO", cls: "fw-plate1" },
       { name: "Piyush Kumar", role: "Co-founder & CTO", cls: "fw-plate2" },
     ],
     quote:
-      "Vidrow helped scale our performance marketing in the first three months, built our UGC engine, and ran two celebrity campaigns plus our brand ambassador launch.\n\nThey work with the urgency of an in-house team. Would definitely recommend.",
+      "**Vidrow helped scale our performance marketing in the first three months,** built our UGC engine, and ran two celebrity campaigns plus our brand ambassador launch. They work with the urgency of an in-house team. Would definitely recommend.",
     line: "PlatinumRx crosses 1 million customers",
   },
   {
@@ -48,7 +51,7 @@ export const FEATURED_WORK = [
     photos: [{ src: "/featured%20works/shashank.png", cls: "fw-ph fw-phSolo" }],
     plates: [{ name: "Shashank Shekhar", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
-      "I have been fortunate to witness the entrepreneurial and creative arc of Aditya & Anushank from very close seats over the years and the kind of work they have done with Vidrow has inspired me in many ways.\n\nSo when we needed a thought partner to ship our experiments faster, they were the obvious ones. Over last six months they have helped us test multiple experiments and iterate towards PMF.\n\nThey have brought in an expertise of performance marketing, content creation at scale, user and market research along with very valuable feedback on product.\n\nTheir team is a great balance of science and art, bringing in analytical rigour and creative innovation in the daily execution.",
+      "**I\u2019ve followed Aditya & Anushank\u2019s entrepreneurial and creative journey closely, and the work they\u2019ve built with Vidrow has always inspired me.** So when we needed a thought partner to move faster, they were the obvious choice.\n\nOver the past six months, they\u2019ve helped us test and iterate towards PMF, bringing expertise across performance marketing, content, research, and product. Their team strikes a rare balance of analytical rigor and creative innovation.",
     line: "Inkpen Labs achieved PMF 2X faster",
   },
   {
@@ -66,7 +69,7 @@ export const FEATURED_WORK = [
       { name: "Ankit Agrawal", role: "Co-founder & CTO", cls: "fw-plate2" },
     ],
     quote:
-      "We've been working with Vidrow for the past eight months, and they've been a strong partner to our marketing and growth team at Masai.\n\nThey came in with a deep understanding of our category and helped us significantly strengthen and scale performance marketing as a growth channel.\n\nThis has helped us diversify our acquisition mix, reduce our dependence on influencer-led marketing, and build greater predictability and control into how we allocate and scale marketing spends. What stands out about Vidrow is their data-backed approach to creative, strong understanding of performance marketing, and speed of execution.\n\nI'd recommend them to companies looking for a capable performance marketing partner to complement and accelerate their internal growth efforts.",
+      "**We\u2019ve been working with Vidrow for the past eight months, and they\u2019ve been a strong partner to our marketing and growth team at Masai.** Their deep understanding of our category has helped us strengthen and scale performance marketing, diversify our acquisition mix, and reduce our dependence on influencer-led marketing.\n\nWhat stands out is Vidrow\u2019s data-backed creative approach, strong performance marketing expertise, and speed of execution. They\u2019ve brought greater predictability and control to how we allocate and scale marketing spends. I\u2019d recommend Vidrow to companies looking to complement and accelerate their internal growth efforts.",
     line: "Masai School reaches \u20b9250+ crore in revenue in Edtech",
   },
   {
@@ -76,9 +79,9 @@ export const FEATURED_WORK = [
     category: "grexa.ai",
     solo: true,
     photos: [{ src: "/featured%20works/Narendra%20Agrawal.png", cls: "fw-ph fw-phSolo" }],
-    plates: [{ name: "Narendra Agrawal", role: "Co-founder & CMO", cls: "fw-plate1 fw-plateSolo" }],
+    plates: [{ name: "Narendra Agarwal", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
-      "If you work with a partner across two of your startups, they must be good. Six years. Two startups. Vidrow has been present through both.\n\nFrom 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns for all the categories. We even launched many categories with their campaigns. They weren't an agency we briefed, they were the partners we relied on.\n\nTestbook got acquired. We started Grexa AI. And for our very first marketing activity, the call we made was to Vidrow. That says everything. What sets them apart isn't just the output, it's the thinking behind it. They understand business context, technology and audience really well.\n\nAnd make sure that campaigns achieve their actual goals. Six years in, the partnership has only gotten stronger and will keep growing on in future as well.",
+      "**Six years. Two startups. Vidrow has been with us through both.** From 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns across categories and helping launch new ones. They weren\u2019t just an agency - they were partners we relied on.\n\nWhen we started Grexa AI, Vidrow was our first call for marketing. What sets them apart is their ability to understand the business, technology, and audience - and turn that into campaigns that deliver.\n\nSix years in, the partnership only keeps getting stronger.",
     line: "Grexa crosses 500,000+ business owner network in a year",
   },
   {
@@ -90,7 +93,7 @@ export const FEATURED_WORK = [
     photos: [{ src: "/featured%20works/Abhishek%20Singh.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
     plates: [{ name: "Abhishek Singh", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
-      "We've been working with Vidrow for the past two years, and somewhere along the way they stopped feeling like an agency partner and became an extended team of Apnamart itself. We've trusted them with our deepest challenges, brand positioning, performance ads, offline marketing, but what I've valued more is how far into the details they've been willing to go.\n\nThis has never been a set of broad mandates handed over and reviewed at month-end. They've sat in the room with us on the small decisions, pushed back when they thought we were wrong, and stayed on a problem long after most partners would have called it done. More than projects and retainers, they've been genuine partners in building the Apnamart brand.\n\nTheir understanding of our users, our business and what actually moves it is why we've been comfortable trusting them with all of our marketing. The clearest testament to that: we handed them the hardest challenge we had, rebranding Apnamart, and their detailed approach has given us a new positioning that will drive the next chapter of our growth.\n\nEvery founder wants to spend their time building the business and pushing the product forward, and that's only possible if you can genuinely trust your marketing partner. Vidrow lets you do that.",
-    line: "Apnamart grew its revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
+      "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the Apnamart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding Apnamart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
+    line: "Apnamart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
   },
 ];

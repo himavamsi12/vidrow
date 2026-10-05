@@ -119,10 +119,6 @@ body {
 /* the two dark sections paint their colour out to the screen's edges past
    the cap: a border-image outset draws beyond the box without widening it
    (body's overflow-x clips the excess) */
-.sw {
-  border-image: conic-gradient(#1B1B1B 0 0) fill 0 / / 0 100vmax
-}
-
 .vfoot {
   border-image: conic-gradient(var(--ink) 0 0) fill 0 / / 0 100vmax
 }
@@ -2153,9 +2149,9 @@ html.nav-hidden .hx-bar {
     content: "";
     position: absolute;
     top: 100%;
-    right: 12cqw;
-    width: 12cqw;
-    height: 5cqw;
+    right: 0;
+    width: 18cqw;
+    height: 9cqw;
     background: var(--paper)
   }
 }
@@ -3662,13 +3658,13 @@ html.nav-hidden .hx-bar {
 
 /* ── selected work ─────────────────────────── */
 .sw {
-  background: #1B1B1B;
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   padding: clamp(56px, 7vw, 100px) var(--side);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: clamp(32px, 4.2vw, 60px)
+  gap: clamp(28px, 3.4vw, 48px)
 }
 
 .sw-in {
@@ -3680,11 +3676,9 @@ html.nav-hidden .hx-bar {
 
 .sw-head {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-  flex-wrap: wrap
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(24px, 3vw, 44px)
 }
 
 .sw-headL {
@@ -3732,236 +3726,203 @@ html.nav-hidden .hx-bar {
 .sw-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 56px;
+  font-size: clamp(32px, 5vw, 64px);
   line-height: 110%;
-  letter-spacing: -.025em;
-  color: var(--paper);
+  letter-spacing: -.035em;
+  color: #111;
   margin: 0
 }
 
 .sw-titleRow {
   display: flex;
-  align-items: flex-start;
-  gap: 16px
+  align-items: flex-start
 }
 
 .sw-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px
+  gap: 12px
 }
 
 .sw-filter {
-  position: relative;
-  height: 38px;
-  padding: 0 18px;
+  height: 50px;
+  padding: 0 clamp(14px, 1.1vw, 17px);
   box-sizing: border-box;
   cursor: pointer;
-  background: #262626;
-  border: 1px solid #3A3A3A;
+  background: #EFEFEF;
+  border: 0;
   border-radius: 2px;
   font-family: var(--body);
-  font-size: 15px;
+  font-size: clamp(14px, 1.05vw, 17px);
   line-height: 1;
-  color: #C9C9C9;
-  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
+  color: #333;
+  transition: background-color var(--btn-dur) var(--btn-ease)
 }
 
 .sw-filter:hover {
-  background: #313131;
-  color: var(--paper)
+  background: #E4E4E4
 }
 
 .sw-filter[aria-pressed="true"] {
   background: var(--acid);
-  border-color: var(--acid);
-  color: #000
+  color: #1A1A1A;
+  font-weight: 600
 }
 
-/* bento: each group of six is one block, measured off the design —
-     1 1 2 2
-     3 4 4 5
-     6 6 6 5
-   four uneven columns, rows one shared height */
+/* three cards across; each is a photo over a white caption with a yellow
+   tetris corner. Everything inside scales off the card's own width. */
 .sw-field {
-  position: relative;
-  container-type: inline-size
+  position: relative
 }
 
 .sw-grid {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2.3cqw, 32px)
-}
-
-.sw-group {
   display: grid;
-  grid-template-columns: 212fr 89fr 139fr 203fr;
-  grid-auto-rows: 25.8cqw;
-  grid-template-areas:
-    "a a b b"
-    "c d d e"
-    "f f f e";
-  gap: clamp(12px, 2.3cqw, 32px)
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.9vw, 56px)
 }
-
-.sw-item:nth-child(1) { grid-area: a }
-.sw-item:nth-child(2) { grid-area: b }
-.sw-item:nth-child(3) { grid-area: c }
-.sw-item:nth-child(4) { grid-area: d }
-.sw-item:nth-child(5) { grid-area: e }
-.sw-item:nth-child(6) { grid-area: f }
 
 .sw-item {
+  --cu: 9.4cqw;
   min-width: 0;
   container-type: inline-size;
+  position: relative;
   display: block;
+  background: var(--paper);
+  border: 1px solid #E3E3E3;
   text-decoration: none;
-  color: inherit
+  color: #1A1A1A
 }
 
 .sw-shot {
-  position: relative;
   display: block;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 562 / 385;
   overflow: hidden;
-  background: #262626
+  background: #EFEFEF
 }
 
 .sw-shot > img {
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  scale: var(--ps, 1);
   transition: scale .5s cubic-bezier(.16, .84, .34, 1)
 }
 
 .sw-item:hover .sw-shot > img {
-  --ps: 1.04
+  scale: 1.04
 }
 
-/* hover: the tile floods acid with the logo over "title —— client" */
-.sw-over {
-  position: absolute;
-  inset: 0;
+.sw-body {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* the same space between logo and line on every tile, wide or narrow */
-  gap: 16px;
-  padding: 0 clamp(16px, 5cqw, 40px);
-  /* acid at 85%, so the shot shows through faintly — only the fill is
-     translucent, the logo and line stay solid */
-  background: color-mix(in srgb, var(--acid) 85%, transparent);
-  color: var(--ink);
+  height: 38cqw;
+  box-sizing: border-box;
+  padding: 4.6cqw 6cqw 0
+}
+
+.sw-name {
   font-family: var(--body);
-  /* one size on every tile, wide or narrow — not scaled to the tile's own
-     width — so the overlays all read the same */
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 5.6cqw;
   line-height: 1.2;
-  text-align: center;
-  opacity: 0;
-  transition: opacity .3s ease
+  letter-spacing: -.01em;
+  margin: 0
 }
 
-.sw-item:hover .sw-over,
-.sw-item:focus-visible .sw-over {
-  opacity: 1
+.sw-client {
+  font-family: var(--body);
+  font-size: 3.2cqw;
+  color: #555;
+  margin-top: 1.6cqw
 }
 
-.sw-logo {
-  display: block;
-  height: calc(var(--ls, 1) * clamp(20px, 6cqw, 36px));
-  width: auto;
-  max-width: 60%;
-  object-fit: contain;
-  /* drops the white backgrounds some logo files carry */
-  mix-blend-mode: multiply
-}
-
-.sw-overLine {
-  display: flex;
+.sw-view {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  margin-bottom: 5.2cqw;
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px clamp(10px, 3cqw, 24px)
+  gap: 1.8cqw;
+  font-family: var(--body);
+  font-size: 4.2cqw;
+  line-height: 1;
+  transition: color var(--btn-dur) var(--btn-ease)
 }
 
-.sw-overLine > span {
-  white-space: nowrap
+.sw-view .wy-mark {
+  width: 3.4cqw;
+  height: 3.4cqw
 }
 
-.sw-dash {
-  width: clamp(24px, 7cqw, 64px);
-  height: 1px;
-  background: currentColor
+.sw-item:hover .sw-view {
+  color: var(--violet)
+}
+
+.sw-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  display: block;
+  pointer-events: none
+}
+
+/* the portrait-reel tabs: four narrow cards, so the type and corner scale up */
+.sw-grid--tall {
+  grid-template-columns: repeat(4, minmax(0, 1fr))
+}
+
+.sw-grid--tall .sw-item {
+  --cu: 14.5cqw
+}
+
+.sw-grid--tall .sw-shot {
+  aspect-ratio: 584 / 983
+}
+
+.sw-grid--tall .sw-body {
+  height: 66cqw;
+  padding: 6cqw 7cqw 0
+}
+
+.sw-grid--tall .sw-name {
+  font-size: 9.6cqw
+}
+
+.sw-grid--tall .sw-client {
+  font-size: 6.4cqw;
+  margin-top: 2.4cqw
+}
+
+.sw-grid--tall .sw-view {
+  font-size: 7.6cqw;
+  gap: 3cqw;
+  margin-bottom: 7cqw
+}
+
+.sw-grid--tall .sw-view .wy-mark {
+  width: 6cqw;
+  height: 6cqw
+}
+
+@media (max-width:900px) {
+  .sw-grid,
+  .sw-grid--tall {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
 }
 
 @media (max-width:640px) {
-  .sw-over {
-    gap: 12px;
-    font-size: 15px
-  }
-}
-
-@media (max-width:640px) {
-  /* one tile per row, every one the same size — each image is cropped to
-     fill its frame, since the originals come in all sorts of proportions */
-  .sw-group {
-    display: flex;
-    flex-direction: column
+  .sw-grid,
+  .sw-grid--tall {
+    grid-template-columns: 1fr
   }
 
-  .sw-shot {
-    height: auto;
-    aspect-ratio: 4 / 3
-  }
-
-  .sw-item:hover .sw-shot > img {
-    --ps: 1
-  }
-
-  /* no hover on a phone: the overlay shows on a tap instead (see
-     SelectedWork.jsx), and the sticky hover a tap leaves behind is ignored */
-  .sw-item:hover:not(.is-open) .sw-over {
-    opacity: 0
-  }
-
-  .sw-item.is-open .sw-over {
-    opacity: 1
-  }
-
-  .sw-h {
-    font-size: clamp(28px, 7vw, 40px)
-  }
-
-  .sw-head {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px
-  }
-
-  .sw-headL {
-    width: 100%
-  }
-
-  .sw-titleRow {
-    width: 100%;
-    justify-content: space-between
-  }
-
-  /* one scrollable row instead of wrapping onto multiple lines — bleeds
-     to the section's own edges so the row can actually scroll past them.
-     width:100% is required, not just align-items:stretch on the parent —
-     without an explicit width this flex item sizes to its (nowrap, so
-     very wide) content instead of the stretched size, and the whole page
-     gains horizontal scroll instead of just this row. */
+  /* one scrollable row instead of wrapping — bleeds to the section's edges.
+     width:100% is required, or the row sizes to its nowrap content and the
+     whole page gains horizontal scroll. */
   .sw-filters {
     width: calc(100% + 2 * var(--side));
     max-width: calc(100% + 2 * var(--side));
@@ -3979,9 +3940,7 @@ html.nav-hidden .hx-bar {
 
   .sw-filter {
     flex: none;
-    height: 34px;
-    padding: 0 14px;
-    font-size: 13px
+    height: 40px
   }
 }
 
@@ -3994,14 +3953,14 @@ html.nav-hidden .hx-bar {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.19444px);
-  height: calc(760 * var(--k))
+  height: calc(880 * var(--k))
 }
 
 .cs-head {
   position: absolute;
   z-index: 3;
   left: calc(50% - 490 * var(--k));
-  top: calc(80 * var(--k));
+  top: calc(40 * var(--k));
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -4032,8 +3991,7 @@ html.nav-hidden .hx-bar {
   font-weight: 400;
   line-height: 1.12;
   letter-spacing: -.03em;
-  white-space: nowrap;
-  text-transform: uppercase
+  white-space: nowrap
 }
 
 .cs-tagwrap .mark {
@@ -4065,13 +4023,15 @@ html.nav-hidden .hx-bar {
   margin: calc(12 * var(--k)) 0 0
 }
 
-/* the story cards, looping sideways across the full width */
+/* the story cards, looping sideways across the full width. Each is a
+   coloured panel with a stepped lighter shape behind a cut-out image, its
+   title on top and the brand along the foot; every other card sits lower. */
 .cs-row {
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
-  top: calc(289 * var(--k));
+  top: calc(247 * var(--k));
   overflow: hidden
 }
 
@@ -4089,110 +4049,130 @@ html.nav-hidden .hx-bar {
 
 .cs-rset {
   display: flex;
-  gap: 32px;
-  padding-right: 32px
+  align-items: flex-start;
+  gap: calc(32 * var(--k));
+  padding-right: calc(32 * var(--k))
 }
 
 .cs-card {
   position: relative;
   flex: none;
+  container-type: inline-size;
   width: calc(336 * var(--k));
-  height: calc(320 * var(--k));
-  box-sizing: border-box;
-  border: 1px solid #D9D9D9;
-  background: var(--paper);
+  height: calc(479 * var(--k));
   overflow: hidden;
-  color: inherit;
-  text-decoration: none;
-  transition: border-color var(--btn-dur) var(--btn-ease)
+  border-radius: 2px;
+  color: var(--cs-ink, #fff);
+  background: var(--cs-bg);
+  text-decoration: none
 }
 
-a.cs-card:hover,
-a.cs-card:focus-visible {
-  border-color: #9A9A9A
+/* the lighter stepped shape: wide at the top right, stepping down the left
+   to a foot band that runs under the brand */
+.cs-card:nth-child(even) {
+  margin-top: calc(56 * var(--k))
+}
+
+.cs-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cs-tint);
+  clip-path: polygon(55% 36%, 100% 36%, 100% 100%, 0 100%, 0 88.8%, 34.6% 88.8%,
+      34.6% 62.4%, 41.6% 62.4%, 41.6% 53.4%, 55% 53.4%)
 }
 
 .cs-title {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin: 0;
-  padding: calc(22 * var(--k)) calc(24 * var(--k)) 0;
+  padding: 5.4cqw 7.3cqw 0;
   font-family: var(--body);
   font-weight: 400;
-  font-size: calc(21 * var(--k));
-  line-height: 1.2;
-  letter-spacing: -.01em;
-  color: #121212
-}
-
-.cs-logo {
-  position: absolute;
-  z-index: 1;
-  left: calc(24 * var(--k));
-  display: block;
-  height: auto
-}
-
-.cs-card-vy .cs-logo {
-  bottom: calc(24 * var(--k));
-  width: calc(115 * var(--k))
-}
-
-.cs-card-px .cs-logo {
-  bottom: calc(22 * var(--k));
-  width: calc(97 * var(--k))
+  font-size: 7.3cqw;
+  line-height: 1.07;
+  letter-spacing: -.01em
 }
 
 .cs-person {
   position: absolute;
+  z-index: 1;
+  right: 0;
   bottom: 0;
   display: block;
-  height: auto
+  height: auto;
+  width: var(--cs-w)
 }
 
-.cs-card-vy .cs-person {
-  right: 0;
-  width: calc(232 * var(--k))
-}
-
-.cs-card-px .cs-person {
-  right: calc(-12 * var(--k));
-  width: calc(262 * var(--k))
-}
-
-/* the client strip, looping sideways under the cards */
-.cs-strip {
+.cs-logo {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(640 * var(--k));
-  height: calc(48 * var(--k));
-  overflow: hidden
-}
-
-.cs-track {
-  display: flex;
-  width: max-content;
-  height: 100%;
-  animation: cs-drift 120s linear infinite
-}
-
-.cs-set {
-  display: flex;
-  align-items: center;
-  gap: calc(38 * var(--k));
-  padding-right: calc(38 * var(--k));
-  height: 100%
-}
-
-.cs-set img {
+  z-index: 2;
+  left: 7.3cqw;
+  bottom: 4.6cqw;
   display: block;
-  height: calc(24 * var(--k));
-  width: auto;
-  max-width: calc(104 * var(--k));
-  object-fit: contain;
-  filter: grayscale(1);
-  opacity: .7
+  height: auto;
+  width: var(--cs-lw)
+}
+
+.cs-logo--white {
+  filter: brightness(0) invert(1)
+}
+
+.cs-logo--dark {
+  filter: brightness(0)
+}
+
+.cs-name {
+  position: absolute;
+  z-index: 2;
+  left: 5.2cqw;
+  bottom: 4.6cqw;
+  font-family: var(--body);
+  font-size: 4.2cqw;
+  line-height: 1
+}
+
+.cs-card-he {
+  --cs-bg: linear-gradient(#245A44, #73C0A2);
+  --cs-tint: rgba(255, 255, 255, .13);
+  --cs-w: 100%;
+  --cs-lw: 23cqw
+}
+
+.cs-person {
+  bottom: var(--cs-pb, 0)
+}
+
+.cs-card-cu { --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 66%; --cs-lw: 27cqw }
+.cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 92%; --cs-pb: 14cqw; --cs-lw: 30cqw }
+.cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 90%; --cs-pb: 12cqw; --cs-lw: 17cqw }
+.cs-card-gs { --cs-bg: linear-gradient(#3573BE, #4C8BCB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 72%; --cs-lw: 22cqw }
+.cs-card-se { --cs-bg: linear-gradient(#D44CCB, #9D45CB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 90%; --cs-pb: 12cqw; --cs-lw: 24cqw }
+.cs-card-ng { --cs-bg: linear-gradient(#2B4CB5, #2F59C4); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 92%; --cs-lw: 24cqw }
+
+.cs-card-he .cs-person {
+  bottom: 12cqw
+}
+
+.cs-card-px {
+  --cs-bg: linear-gradient(#CB4E4C, #D05A58);
+  --cs-tint: rgba(255, 255, 255, .17);
+  --cs-w: 68.6%;
+  --cs-lw: 38cqw
+}
+
+.cs-card-st {
+  --cs-bg: #EFE87A;
+  --cs-ink: #111;
+  --cs-tint: #FCF7A8;
+  --cs-w: 73.5%
+}
+
+.cs-card-ma {
+  --cs-bg: linear-gradient(#7B2831, #B2535C);
+  --cs-tint: rgba(255, 255, 255, .14);
+  --cs-w: 67.3%;
+  --cs-lw: 22cqw
 }
 
 @keyframes cs-drift {
@@ -4239,52 +4219,11 @@ a.cs-card:focus-visible {
 
   .cs-card {
     width: min(300px, 80vw);
-    height: 290px
+    height: min(420px, 110vw)
   }
 
-  .cs-title {
-    font-size: 18px;
-    padding: 20px 20px 0
-  }
-
-  .cs-logo {
-    left: 20px
-  }
-
-  .cs-card-vy .cs-person {
-    width: 176px
-  }
-
-  .cs-card-px .cs-person {
-    right: -10px;
-    width: 200px
-  }
-
-  .cs-card-vy .cs-logo {
-    width: 96px
-  }
-
-  .cs-card-px .cs-logo {
-    width: 84px
-  }
-
-  .cs-strip {
-    position: relative;
-    top: auto;
-    margin-top: 32px;
-    height: 40px
-  }
-
-  .cs-set img {
-    height: 20px;
-    max-width: 88px
-  }
-
-  /* the same distance as desktop crosses a much narrower screen, so 40s
-     crawled here — this runs the strip at roughly two and a half times
-     the pace */
-  .cs-track {
-    animation-duration: 16s
+  .cs-card:nth-child(even) {
+    margin-top: 40px
   }
 }
 
@@ -4644,339 +4583,148 @@ a.cs-card:focus-visible {
   }
 }
 
-/* ── inside the partnership: the hex web ───── */
-/* 1440 x 1180 design frame; --k is one design px */
+/* ── inside the partnership: the periodic table ───── */
 .pr {
   position: relative;
   background: var(--paper);
   color: var(--ink);
   overflow: hidden;
-  container-type: inline-size;
-  --k: min(.0694444cqw, 1.19444px);
-  /* the deep bottom padding is room for a lifted segment's drop shadow,
-     which spills past the hexagon's own box (see .pr-stage) */
-  padding: calc(80 * var(--k)) var(--side) calc(100 * var(--k))
+  padding: clamp(56px, 6vw, 88px) var(--side) clamp(56px, 6vw, 96px)
 }
 
 .pr-in {
   width: 100%;
-  position: relative
-}
-
-/* heading on the left, the filters aligned to its last line on the right */
-.pr-top {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: calc(32 * var(--k));
-  flex-wrap: wrap
+  flex-direction: column;
+  gap: clamp(28px, 3.6vw, 52px)
 }
 
+.pr-top,
 .pr-head {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: calc(6 * var(--k))
+  align-items: center;
+  text-align: center;
+  gap: 14px
 }
 
 .pr-tagwrap {
   position: relative;
   display: inline-flex;
   align-items: flex-end;
-  height: calc(22 * var(--k))
+  height: 22px
 }
 
 .pr-tag {
   position: relative;
-  height: calc(18 * var(--k));
-  box-sizing: border-box;
-  padding: calc(4 * var(--k)) calc(6 * var(--k));
+  height: 18px;
+  padding: 0 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: var(--acid);
   color: #000;
   font-family: var(--body);
-  font-size: calc(14 * var(--k));
-  font-weight: 400;
-  line-height: 1.12;
+  font-size: 14px;
+  line-height: 1;
   letter-spacing: -.03em;
   white-space: nowrap
 }
 
 .pr-tagwrap .mark {
   position: absolute;
-  left: calc(100% - 8 * var(--k));
+  left: calc(100% - 8px);
   top: 0;
-  width: calc(12 * var(--k));
-  height: calc(12 * var(--k));
-  gap: calc(.3 * var(--k));
+  width: 12px;
+  height: 12px;
+  gap: .3px;
   transform: scaleX(-1)
 }
 
 .pr-h {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 56px;
-  line-height: 1.15;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.1;
   letter-spacing: -.03em;
-  color: #1A1C1C;
-  margin: calc(10 * var(--k)) 0 0
+  color: #111;
+  margin: 0
 }
 
-.pr-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(8 * var(--k));
-  padding-top: 0
+/* ten columns by six rows of logo tiles, coloured by funding stage; the
+   legend sits in the empty top row. Narrow screens scroll it sideways. */
+.pr-scroll {
+  overflow-x: auto;
+  scrollbar-width: none
 }
 
-.pr-filter {
-  position: relative;
-  height: calc(36 * var(--k));
-  padding: 0 calc(11 * var(--k));
-  box-sizing: border-box;
-  cursor: pointer;
-  background: #F2F2F2;
-  border: 0;
-  border-radius: 2px;
-  font-family: var(--body);
-  font-size: calc(14 * var(--k));
-  line-height: 1;
-  color: #4D4D4D;
-  transition: background-color var(--btn-dur) var(--btn-ease), color var(--btn-dur) var(--btn-ease)
+.pr-scroll::-webkit-scrollbar {
+  display: none
 }
 
-.pr-filter:hover {
-  background: #E6E6E6;
-  color: var(--ink)
+.pr-table {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 4px;
+  min-width: 820px
 }
 
-.pr-filter[aria-pressed="true"] {
-  background: var(--acid);
-  color: #000
-}
-
-/* the hexagon: its geometry lives in Partnership.jsx in the stage's own
-   1440×1120 frame, and --s is one unit of that frame, so every logo tile
-   (sized and placed in the same units) scales with it. The hexagon spans
-   1080 of the frame's 1440 units, so a 1284px stage draws it at the
-   design's 963 × 833px — narrower screens scale the whole stage down. It's
-   centred off the section's middle so it can run wider than the padded
-   content column. */
-.pr-stage {
-  position: relative;
-  width: min(1284px, 100vw);
-  margin-left: 50%;
-  transform: translateX(-50%);
-  aspect-ratio: 1440 / 1120;
-  margin-top: calc(56 * var(--k));
-  /* visible, so a lifted segment's shadow isn't cut off flat at the stage's
-     edge — .pr itself still clips, so nothing can scroll sideways */
-  overflow: visible;
-  container-type: inline-size;
-  --s: .0694444cqw
-}
-
-.pr-web {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible
-}
-
-.pr-web .hit {
-  fill: transparent
-}
-
-.pr-web .band {
-  fill: var(--acid);
-  transition: fill .3s ease
-}
-
-.pr-web .spoke {
-  stroke: #DCDCDC;
-  stroke-width: 1.2
-}
-
-.pr-web .core {
-  fill: var(--paper);
-  stroke: #DCDCDC;
-  stroke-width: 1.2
-}
-
-.pr-web text {
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: .02em;
-  fill: #121212;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-  transition: fill .3s ease
-}
-
-.pr-web .band,
-.pr-web .spoke,
-.pr-web .core {
-  pointer-events: none
-}
-
-/* hovering a segment: everything else greys back, and the segment itself is
-   redrawn on top (.lift) as a raised white wedge with its yellow band and
-   dark label */
-.pr-stage.seg-hover .pr-web .band {
-  fill: #E2E2E2
-}
-
-.pr-stage.seg-hover .pr-web text {
-  fill: #9A9A9A
-}
-
-.pr-web .lift {
-  pointer-events: none;
-  filter: drop-shadow(0 18px 36px rgba(18, 18, 18, .14));
-  /* grows out from the hexagon's centre (CENTER in Partnership.jsx), so its
-     band rides up clear of the neighbouring stretches while its tip stays
-     at the centre */
-  transform-box: view-box;
-  transform-origin: 720px 560px;
-  transform: scale(1.1);
-  animation: pr-lift .35s cubic-bezier(.16, .84, .34, 1) both
-}
-
-.pr-web .lift-face {
-  fill: var(--paper)
-}
-
-.pr-stage.seg-hover .pr-web .lift .band.on {
-  fill: var(--acid)
-}
-
-.pr-stage.seg-hover .pr-web .lift text.on {
-  fill: #121212
-}
-
-@keyframes pr-lift {
-  from {
-    opacity: 0;
-    transform: scale(1)
-  }
-}
-
-/* the logo files carry their own thin frames, so each is shown as-is at
-   its tile's size */
-.pr-node {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(calc(-50% + var(--x) * var(--s)), calc(-50% + var(--y) * var(--s)));
-  width: calc(var(--w) * var(--s));
-  height: calc(var(--h) * var(--s));
-  box-sizing: border-box;
+.pr-tile {
+  grid-column: var(--c);
+  grid-row: var(--r);
+  aspect-ratio: 137 / 99;
   display: grid;
   place-items: center;
-  transition: opacity .3s ease
+  background: var(--bg);
+  transition: transform .25s ease
 }
 
-.pr-node img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.pr-tile img {
+  height: auto;
+  max-width: 92%;
   display: block
 }
 
-.pr-stage.filtered .pr-node {
-  opacity: .16
+.pr-tile:hover {
+  transform: scale(1.04);
+  position: relative;
+  z-index: 1
 }
 
-.pr-stage.filtered .pr-node.on {
-  opacity: 1
+[data-stage="seed"] { --bg: #F5F978 }
+[data-stage="a"] { --bg: #FBF5B4 }
+[data-stage="b"] { --bg: #9482F0 }
+[data-stage="c"] { --bg: #5A41D6 }
+
+.pr-legend {
+  grid-column: 2 / 10;
+  grid-row: 1;
+  align-self: start;
+  justify-self: center;
+  margin-top: 1.6%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 28px;
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: .02em;
+  text-transform: uppercase
 }
 
-/* hovering a segment: the logos outside it go grey */
-.pr-node {
-  transition: opacity .3s ease, filter .3s ease
+.pr-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px
 }
 
-.pr-stage.seg-hover .pr-node:not(.lit) {
-  filter: grayscale(1);
-  opacity: .5
+.pr-legend i {
+  width: 9px;
+  height: 9px;
+  background: var(--bg);
+  display: block
 }
-
-@media (max-width:1000px) {
-  .pr {
-    --k: min(.1cqw, 1px);
-    padding: 56px 20px
-  }
-
-  .pr-h {
-    font-size: clamp(28px, 6vw, 40px);
-    max-width: none
-  }
-
-  /* --k shrinks to well under 1px at this width (it's a fraction of the
-     stage's own cqw, not the viewport), which made this unreadably tiny —
-     fixed px sidesteps that the way .pr-h already does above */
-  .pr-tagwrap {
-    height: 24px
-  }
-
-  .pr-tag {
-    height: 22px;
-    padding: 4px 8px;
-    font-size: 14px
-  }
-
-  .pr-tagwrap .mark {
-    width: 14px;
-    height: 14px
-  }
-
-  .pr-filters {
-    padding-top: 16px;
-    gap: 10px;
-    flex-wrap: nowrap;
-    overflow-x: auto
-  }
-
-  .pr-filter {
-    height: auto;
-    flex: none;
-    padding: 12px 18px;
-    white-space: nowrap;
-    font-size: 15px
-  }
-
-  .pr-filter[aria-pressed="true"] {
-    font-weight: 600
-  }
-
-  /* The whole web scales off the stage's own width (--s is 1/1440 of it), so
-     the only way to enlarge the hex and the logos together — without the
-     nodes drifting off the hex — is to widen the stage itself. At the
-     section's width the logos are unreadable on a phone, so the stage runs
-     wider than the screen and its empty corners hang off the sides; the hex
-     is only 83% of the frame, so it still fits. .pr already clips, so this
-     costs no horizontal scrolling. */
-  .pr-stage {
-    width: 140vw;
-    margin-left: 50%;
-    margin-right: 0;
-    transform: translateX(-50%);
-    /* the base rule's margin-top is a --k multiple, and --k is a fraction of
-       a pixel at this width (same issue the tag/heading overrides above work
-       around) — fixed px instead */
-    margin-top: 40px
-  }
-}
-
-/* the hex web keeps its shape at every width — its --s unit is a fraction of
-   the stage's own container width (cqw), so it scales down fluidly rather
-   than needing to switch to a different layout on small screens */
 
 /* ── news ──────────────────────────────────── */
 .news {
@@ -4997,7 +4745,6 @@ a.cs-card:focus-visible {
   gap: inherit
 }
 
-/* heading on the left, the row's arrows parked at the far right */
 .news-topbar {
   width: 100%;
   display: flex;
@@ -5014,29 +4761,11 @@ a.cs-card:focus-visible {
   width: min(578px, 100%)
 }
 
-.news-navWrap {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px
-}
-
 .news-nav {
   flex: none;
   display: flex;
   align-items: center;
   gap: 24px
-}
-
-/* the "01/05" counter between the desktop arrows — tracks the leftmost
-   visible card, styled like the phone's own counter */
-.news-index {
-  font-family: var(--body);
-  font-size: 16px;
-  letter-spacing: .01em;
-  color: #9A9A9A;
-  font-variant-numeric: tabular-nums
 }
 
 .news-nav button {
@@ -5138,8 +4867,66 @@ a.cs-card:focus-visible {
   margin: 0;
 }
 
+/* the rail plus its two side arrows: each arrow straddles the row's edge,
+   centred on the cards' height (the 7px is half the grid's top padding) */
+.news-stage {
+  position: relative;
+  width: 100%
+}
+
+.news-side {
+  position: absolute;
+  z-index: 2;
+  top: calc(50% + 7px);
+  width: clamp(52px, 4.4vw, 80px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid #CFCFCF;
+  border-radius: 3px;
+  background: var(--paper);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
+}
+
+.news-side--prev {
+  left: 0;
+  transform: translate(-60%, -50%)
+}
+
+.news-side--next {
+  right: 0;
+  transform: translate(60%, -50%)
+}
+
+.news-side svg {
+  width: 42%;
+  height: 42%;
+  display: block
+}
+
+.news-side svg path {
+  stroke: #121212;
+  stroke-width: 2;
+  transition: stroke var(--btn-dur) var(--btn-ease)
+}
+
+.news-side--prev svg {
+  transform: rotate(180deg)
+}
+
+.news-side:hover {
+  background: #121212;
+  border-color: #121212
+}
+
+.news-side:hover svg path {
+  stroke: var(--paper)
+}
+
 /* five cards at the design's own card width won't fit a screen, so .news-rail
-   is a window onto a wider row that the header arrows slide one card at a
+   is a window onto a wider row that the side arrows slide one card at a
    time. It slides by transform, not by scrolling — a scroll animation here
    gets reverted by Lenis and by snap. */
 .news-rail {
@@ -5273,9 +5060,9 @@ a.cs-card:focus-visible {
   }
 
   /* the row is still swipeable — the JS leaves the track's transform alone
-     here — but the arrows (and their counter) move out of the topbar to
-     under the cards, where there's room for them at this width */
-  .news-topbar .news-navWrap {
+     here — and the side arrows give way to the pair (and counter) under
+     the cards */
+  .news-side {
     display: none
   }
 
@@ -6409,6 +6196,1025 @@ button:focus-visible,
   }
 }
 
+/* "What was Helium actually selling?" — the three fixed Ps as cards, with
+   the fourth called out in the acid banner underneath */
+.csp-psCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(32px, 3.6vw, 44px)
+}
+
+.csp-psCard {
+  box-sizing: border-box;
+  padding: 28px 24px 26px;
+  border: 1px solid #DCDCDC;
+  background: #FBFBFB
+}
+
+/* the dark chip label, shared by the cards and the banner */
+.csp-psTag {
+  display: inline-block;
+  padding: 5px 9px;
+  background: #121212;
+  color: #fff;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1
+}
+
+.csp-psVal {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: #121212;
+  margin-top: 20px
+}
+
+.csp-psDesc {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4A4A4A;
+  margin: 18px 0 0
+}
+
+.csp-psBanner {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 32px);
+  padding: 22px clamp(20px, 2.4vw, 28px);
+  margin-top: clamp(24px, 2.6vw, 34px);
+  background: var(--acid)
+}
+
+.csp-psBanner p {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.3vw, 19px);
+  line-height: 1.4;
+  color: #121212
+}
+
+/* "Why was it a challenge?" — three rules, one line each, hairline above
+   every row so the list opens and closes on a line */
+.csp-chalList {
+  list-style: none;
+  margin: clamp(32px, 3.6vw, 44px) 0 0;
+  padding: 0;
+  border-bottom: 1px solid #DCDCDC
+}
+
+.csp-chalRow {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(20px, 2.4vw, 34px);
+  padding: clamp(22px, 2.4vw, 30px) 0;
+  border-top: 1px solid #DCDCDC
+}
+
+.csp-chalNum {
+  flex: none;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: #9A9A9A
+}
+
+.csp-chalText {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #121212
+}
+
+@media (max-width:900px) {
+  .csp-psCards {
+    grid-template-columns: 1fr;
+    gap: 12px
+  }
+
+  .csp-psCard {
+    padding: 22px 18px
+  }
+
+  .csp-psBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px
+  }
+
+  .csp-chalRow {
+    gap: 16px
+  }
+}
+
+/* the objection rows, run twice: once in blush under "why did no one
+   believe in it?" (04), once in lilac under "so we flipped it" (05) */
+.csp-objList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: clamp(32px, 3.6vw, 44px)
+}
+
+.csp-objRow {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(20px, 2vw, 26px) clamp(20px, 2.4vw, 30px)
+}
+
+.csp-objRow--why {
+  background: #FBEFEE
+}
+
+.csp-objRow--flip {
+  background: #EEECFB
+}
+
+.csp-objClaim {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: #6B6B6B
+}
+
+.csp-objAnswer {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.6vw, 23px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #C0433B
+}
+
+/* the flipped line is the one carried out of the section, so it gets the
+   acid highlight sitting tight around the text itself */
+.csp-objMark {
+  background: var(--acid);
+  color: #121212;
+  padding: 2px 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone
+}
+
+.csp-beliefAsk {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #C0433B;
+  margin: clamp(34px, 3.6vw, 48px) 0 0
+}
+
+/* 05 runs edge to edge on its own warm paper, so it carries its own
+   vertical padding the way .csp-celeb does */
+.csp-flip {
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-in:has(.csp-flip) {
+  background: #FCFCF2
+}
+
+@media (max-width:900px) {
+  .csp-objRow {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 18px
+  }
+
+  .csp-objClaim {
+    font-size: 14px
+  }
+}
+
+/* 06 — the brief: heading left, the incoming brief as running copy right */
+.csp-brief-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 64px)
+}
+
+.csp-brief-copy {
+  flex: none;
+  width: min(44%, 470px);
+  margin: 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4A4A4A
+}
+
+.csp-briefPoints {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-briefNum {
+  display: inline-block;
+  padding: 7px 10px;
+  background: #E6E2FA;
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1;
+  color: #121212
+}
+
+/* the label sits indented under its number, highlighted the way the flipped
+   lines in 05 are */
+.csp-briefTag {
+  display: inline-block;
+  margin: 10px 0 0 22px;
+  padding: 5px 9px;
+  background: var(--acid);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.2;
+  color: #121212
+}
+
+.csp-briefDesc {
+  margin: 16px 0 0 22px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.csp-briefClock {
+  margin: clamp(30px, 3.4vw, 44px) 0 0;
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
+  background: #F4F4F4;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4A4A4A
+}
+
+.csp-briefClock b {
+  font-weight: 700;
+  color: #C0433B
+}
+
+/* 07 — the five moments, on the same warm paper as 05 */
+.csp-buy {
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-in:has(.csp-buy) {
+  background: #FCFCF2
+}
+
+.csp-buySteps {
+  list-style: none;
+  margin: clamp(34px, 3.6vw, 48px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px
+}
+
+/* each step's numbered dot trails a rule to the next one, so the five read
+   as one line rather than five columns — the last step ends it */
+.csp-buyStep {
+  display: flex;
+  flex-direction: column;
+  min-width: 0
+}
+
+.csp-buyStage {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--violet)
+}
+
+.csp-buyDot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 12px;
+  border-radius: 50%;
+  background: var(--violet);
+  font-family: var(--body);
+  font-size: 11px;
+  color: #fff
+}
+
+.csp-buyDot::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: calc(100% + 20px);
+  height: 1px;
+  background: #DCDCDC
+}
+
+.csp-buyStep:last-child .csp-buyDot {
+  background: var(--acid);
+  color: #121212
+}
+
+.csp-buyStep:last-child .csp-buyDot::after {
+  display: none
+}
+
+.csp-buyTitle {
+  margin: 16px 0 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.csp-buyDesc {
+  margin: 10px 0 0;
+  font-family: var(--body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #4A4A4A
+}
+
+/* the quotes line up along their own bottom edge whatever the copy above
+   does, so the row of them reads as a band */
+.csp-buyQuote {
+  margin: 18px 0 0;
+  margin-top: auto;
+  padding: 12px 14px;
+  background: #EEECFB;
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #4A4A4A
+}
+
+.csp-buyStep.hi .csp-buyQuote {
+  background: var(--acid);
+  color: #121212
+}
+
+.csp-buyNote {
+  margin: clamp(34px, 3.6vw, 48px) 0 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--violet);
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.4;
+  color: #121212
+}
+
+@media (max-width:900px) {
+  .csp-brief-head {
+    flex-direction: column;
+    gap: 18px
+  }
+
+  .csp-brief-copy {
+    width: auto
+  }
+
+  .csp-briefPoints {
+    grid-template-columns: 1fr;
+    gap: 28px
+  }
+
+  .csp-buySteps {
+    grid-template-columns: 1fr;
+    gap: 28px
+  }
+
+  .csp-buyDot::after {
+    display: none
+  }
+
+  .csp-buyQuote {
+    margin-top: 14px
+  }
+}
+
+/* 08 — the underdog section: no numbered eyebrow, an acid chip with the
+   pixel mark sitting on its top-right corner instead */
+.csp-underChip {
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--acid);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.3;
+  color: #121212
+}
+
+.csp-underMark {
+  position: absolute;
+  left: 100%;
+  bottom: 100%;
+  width: 13px;
+  height: 13px;
+  gap: 1px;
+  margin: 0 0 -3px -7px;
+  color: #121212
+}
+
+.csp-under-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 64px);
+  margin-top: 14px
+}
+
+.csp-under-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: #121212
+}
+
+.csp-under-copy {
+  flex: none;
+  width: min(36%, 380px);
+  margin: clamp(10px, 1.6vw, 26px) 0 0;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4A4A4A
+}
+
+.csp-underLabel {
+  margin: clamp(40px, 4.4vw, 60px) 0 14px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #121212
+}
+
+.csp-underLabel--muted {
+  color: #6B6B6B
+}
+
+/* the incumbents as plain outlined boxes, the note running on from them */
+.csp-underGiants {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 10px
+}
+
+.csp-underGiant {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  padding: 22px 20px;
+  border: 1px solid #DCDCDC;
+  font-family: var(--body);
+  font-size: 16px;
+  color: #6B6B6B
+}
+
+.csp-underGiantsNote {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-family: var(--body);
+  font-size: 16px;
+  color: #9A9A9A
+}
+
+.csp-underMoves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(40px, 4.4vw, 60px)
+}
+
+.csp-underNum {
+  display: inline-block;
+  padding: 8px 11px;
+  background: #E6E2FA;
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1;
+  color: #121212
+}
+
+/* the move's line is indented past its number and highlighted, so the
+   number reads as a tab tucked over the corner of the acid block */
+.csp-underMoveH {
+  display: inline-block;
+  margin: 10px 0 0 24px;
+  padding: 5px 9px;
+  background: #F7F9C4;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.csp-underMoveDesc {
+  margin: 18px 0 0 24px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4A4A4A
+}
+
+.csp-underBrands {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px
+}
+
+.csp-underBrand {
+  padding: 22px 20px 24px;
+  border: 1px solid #E4E4E4
+}
+
+.csp-underBrand h3 {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.2;
+  color: #121212
+}
+
+.csp-underBrand span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--violet)
+}
+
+.csp-underBrand p {
+  margin: 12px 0 0;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #4A4A4A
+}
+
+/* the stepped black band — the two notches are one clip-path, and the bar
+   sits inside the content column like everything above it */
+.csp-underBand {
+  margin: clamp(48px, 5vw, 72px) 0 0;
+  padding: clamp(28px, 3.4vw, 44px) clamp(24px, 4vw, 64px);
+  background: #0B0B0D;
+  clip-path: polygon(
+    7% 0, 95.5% 0, 95.5% 42%, 100% 42%, 100% 100%, 0 100%, 0 42%, 7% 42%
+  )
+}
+
+.csp-underBand p {
+  margin: 0;
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: #fff
+}
+
+.csp-underBand em {
+  font-style: normal;
+  color: #F0685C
+}
+
+.csp-underBand i {
+  font-style: normal;
+  color: var(--acid)
+}
+
+@media (max-width:900px) {
+  .csp-under-head {
+    flex-direction: column;
+    gap: 16px
+  }
+
+  .csp-under-copy {
+    width: auto;
+    margin-top: 0
+  }
+
+  .csp-underGiant {
+    min-width: 0;
+    flex: 1 1 40%;
+    padding: 16px 12px
+  }
+
+  .csp-underGiantsNote {
+    padding-left: 0
+  }
+
+  .csp-underMoves {
+    grid-template-columns: 1fr;
+    gap: 28px
+  }
+
+  .csp-underBrands {
+    grid-template-columns: 1fr;
+    gap: 12px
+  }
+
+  /* the notches need a wide bar to read — on a phone it is just a bar */
+  .csp-underBand {
+    clip-path: none
+  }
+}
+
+/* 09 — the five messages, read across: the habit on the left, where Helium
+   stood on the right. One grid so the three columns stay locked */
+.csp-msgTable {
+  --msgCols: minmax(0, .9fr) minmax(0, 1.3fr) minmax(0, 1.3fr);
+  margin-top: clamp(40px, 4.4vw, 60px)
+}
+
+.csp-msgHead,
+.csp-msgRow {
+  display: grid;
+  grid-template-columns: var(--msgCols);
+  gap: clamp(16px, 1.6vw, 24px)
+}
+
+.csp-msgHead {
+  margin-bottom: 14px
+}
+
+.csp-msgCol {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #6B6B6B
+}
+
+.csp-msgCol--hi {
+  color: var(--violet)
+}
+
+.csp-msgRow + .csp-msgRow {
+  margin-top: 12px
+}
+
+.csp-msgName {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0;
+  padding: clamp(16px, 1.8vw, 22px) 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.csp-msgNum {
+  flex: none;
+  font-family: var(--body);
+  font-size: 12px;
+  color: var(--violet)
+}
+
+.csp-msgCat {
+  margin: 0;
+  padding: clamp(16px, 1.8vw, 22px) clamp(16px, 1.8vw, 22px);
+  background: #F4F4F4;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #6B6B6B
+}
+
+.csp-msgHelium {
+  margin: 0;
+  padding: clamp(16px, 1.8vw, 22px) clamp(16px, 1.8vw, 22px);
+  border: 1px solid var(--violet);
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #121212
+}
+
+@media (max-width:900px) {
+  /* the three columns stop being readable side by side — each message
+     becomes its own stack, the column headers go with it */
+  .csp-msgHead {
+    display: none
+  }
+
+  .csp-msgRow {
+    grid-template-columns: 1fr;
+    gap: 8px
+  }
+
+  .csp-msgRow + .csp-msgRow {
+    margin-top: 28px
+  }
+
+  .csp-msgName {
+    padding: 0 0 4px
+  }
+}
+
+/* the channels, split by whether we could read what came back: violet
+   outlines on the left, flat grey on the right */
+.csp-chanCols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+  margin-top: clamp(40px, 4.4vw, 60px)
+}
+
+.csp-chanCols .csp-underLabel {
+  margin-top: 0
+}
+
+.csp-chanCard {
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
+  border: 1px solid var(--violet)
+}
+
+.csp-chanCard + .csp-chanCard {
+  margin-top: 14px
+}
+
+.csp-chanCard h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(19px, 1.8vw, 25px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--violet)
+}
+
+.csp-chanCard p {
+  margin: 10px 0 0;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #121212
+}
+
+.csp-chanCard--out {
+  border: 0;
+  background: #F4F4F4
+}
+
+.csp-chanCard--out h3 {
+  color: #9A9A9A
+}
+
+.csp-chanCard--out p {
+  color: #6B6B6B
+}
+
+/* the caveat under the two we did not buy — same lilac as the objection
+   rows, so it reads as an aside rather than a fourth channel */
+.csp-chanNote {
+  margin-top: 14px;
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
+  background: #EEECFB
+}
+
+.csp-chanNote span {
+  display: block;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--violet)
+}
+
+.csp-chanNote p {
+  margin: 8px 0 0;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #121212
+}
+
+@media (max-width:900px) {
+  .csp-chanCols {
+    grid-template-columns: 1fr;
+    gap: 32px
+  }
+}
+
+/* the casting section reuses the notched brand-ads cards and the number/tag
+   pairs from the five reasons, so only its own pieces are set here */
+.csp-castSub {
+  margin: 14px 0 clamp(34px, 3.6vw, 48px);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--violet)
+}
+
+.csp-castRow .csp-hookCard {
+  min-height: 250px
+}
+
+.csp-castWhy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-castPointDesc {
+  margin: 14px 0 0;
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #4A4A4A
+}
+
+/* the still and the line it prompted, side by side */
+.csp-castQuote {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(40px, 4.4vw, 60px)
+}
+
+.csp-castQuote img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block
+}
+
+.csp-castQuote p {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.7vw, 24px);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: #6B6B6B
+}
+
+.csp-buyNote em {
+  font-style: normal;
+  color: var(--violet)
+}
+
+@media (max-width:900px) {
+  .csp-castWhy {
+    grid-template-columns: 1fr;
+    gap: 28px
+  }
+
+  .csp-castQuote {
+    grid-template-columns: 1fr;
+    gap: 20px
+  }
+}
+
+/* the founder section: the violet block sits in the row as a fourth column
+   that happens to be filled in, with the three points beside it */
+.csp-founderRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(20px, 2.6vw, 36px);
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-founderCard {
+  padding: clamp(22px, 2.4vw, 30px) clamp(20px, 2.2vw, 26px);
+  background: var(--violet)
+}
+
+.csp-founderCard h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #fff
+}
+
+.csp-founderCard p {
+  margin: 18px 0 0;
+  font-family: var(--body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .72)
+}
+
+@media (max-width:900px) {
+  .csp-founderRow {
+    grid-template-columns: 1fr;
+    gap: 28px
+  }
+}
+
+/* the journey shown a second time with the story's position on it — the
+   steps still ahead fade back, and the one we are at carries the rule */
+.csp-recapSteps {
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-recapSteps .csp-buyStep.ahead {
+  opacity: .48
+}
+
+.csp-recapSteps .csp-buyStep.here {
+  position: relative
+}
+
+/* the rule runs the full height of the row, half a gap left of the column
+   it marks, so it reads as a divider rather than a border on the card */
+.csp-recapSteps .csp-buyStep.here::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: -18px;
+  bottom: 0;
+  width: 1px;
+  background: #C9C9C9
+}
+
+.csp-recapHere {
+  position: absolute;
+  left: -10px;
+  bottom: calc(100% + 26px);
+  padding: 4px 9px;
+  background: var(--acid);
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: #121212
+}
+
+@media (max-width:900px) {
+  /* stacked, the vertical rule has nothing to divide */
+  .csp-recapSteps .csp-buyStep.here::before {
+    display: none
+  }
+
+  .csp-recapHere {
+    position: static;
+    align-self: flex-start;
+    margin-bottom: 10px
+  }
+}
+
 .csp-aoc {
   padding-top: clamp(56px, 7vw, 96px)
 }
@@ -7210,42 +8016,77 @@ button:focus-visible,
 }
 
 /* ── "the reviews" (Helium) ───────────────────
-   dark edge-to-edge panel; the review thumbnail carries a creator tag with
-   the brand's small step on its top-left, and the right column ends on a
-   pale yellow pull line */
+   warm paper panel: the copy column ends on the headline number and the
+   pull line, the creator's screenshot sits framed beside it */
 .csp-in:has(.csp-reviews) {
-  background: #1A1A1A;
-  color: var(--paper)
+  background: #FCFCF2
 }
 
 .csp-reviews {
   padding: clamp(56px, 7vw, 96px) 0
 }
 
-.csp-reviews .csp-eyebrow2 {
-  color: #A8A6AD
-}
-
-.csp-reviews .csp-eyebrow2 b,
-.csp-reviews .csp-aoc-h {
-  color: var(--paper)
-}
-
-.csp-reviews .csp-aoc-copy {
-  color: #D6D6DA;
-  max-width: 36ch
-}
-
 .csp-reviews-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(32px, 4vw, 56px);
-  align-items: start
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, .55fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-reviews-copy p {
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  font-family: var(--body);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #4A4A4A;
+  max-width: 62ch
+}
+
+.csp-reviews-copy .csp-reviews-lead {
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.4;
+  color: var(--violet)
+}
+
+/* the number and the sentence that qualifies it share a baseline, with the
+   rule above separating them from the copy */
+.csp-reviewStat {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 1.6vw, 22px);
+  margin-top: clamp(24px, 2.6vw, 34px);
+  padding-top: clamp(22px, 2.4vw, 30px);
+  border-top: 1px solid #DCDCDC;
+  max-width: 62ch
+}
+
+.csp-reviewStat b {
+  flex: none;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: #121212
+}
+
+.csp-reviewStat span {
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6B6B6B
+}
+
+.csp-reviews .csp-buyNote {
+  margin-top: clamp(24px, 2.6vw, 34px)
 }
 
 .csp-reviewShot {
-  position: relative;
-  margin: 0
+  margin: 0;
+  padding: 10px 10px 18px;
+  background: #fff;
+  border: 1px solid #E4E4E4
 }
 
 .csp-reviewShot img {
@@ -7254,67 +8095,111 @@ button:focus-visible,
   height: auto
 }
 
-.csp-reviewTag {
-  position: absolute;
-  left: 39%;
-  top: 41%;
-  width: 32%;
-  aspect-ratio: 182 / 83;
-  box-sizing: border-box;
-  background: #FAFCC6;
-  /* a small square on the top-left, then the label box stepping down and
-     right from it (all as fractions of this tag's own box) */
-  clip-path: polygon(0 0, 23% 0, 23% 31%, 100% 31%, 100% 100%, 15% 100%, 15% 46%, 0 46%);
-  /* the tag is its own size container, so its children can inset
-     themselves in cqw of the tag's width — the tag is 45.6cqw tall, the step
-     ends 14.1cqw down and 15cqw in */
-  container-type: inline-size;
+.csp-reviewShot figcaption {
   display: block;
-  padding: 0;
-  white-space: nowrap
+  text-align: center;
+  padding-top: 14px
 }
 
-.csp-reviewTag b {
+.csp-reviewShot figcaption b {
   display: block;
-  margin: 19cqw 0 0 21cqw;
-  font-family: var(--body);
-  font-weight: 500;
-  font-size: 9cqw;
-  line-height: 1.15;
-  color: var(--ink)
-}
-
-.csp-reviewTag span {
-  display: block;
-  margin: 1.5cqw 0 0 21cqw;
-  font-family: var(--body);
-  font-size: 6.2cqw;
-  color: #4C4546
-}
-
-.csp-reviews-copy p {
-  margin: 0 0 clamp(24px, 3vw, 40px);
-  font-family: var(--body);
-  font-size: clamp(15px, 1.25vw, 17px);
-  line-height: 1.45;
-  color: #E4E4E8;
-  max-width: 48ch
-}
-
-.csp-reviews-copy .csp-reviews-note {
-  margin: 0;
-  max-width: none;
-  background: #FAFCC6;
-  padding: clamp(24px, 3vw, 40px);
+  font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(20px, 2vw, 28px);
-  line-height: 1.3;
-  color: var(--ink)
+  font-size: 18px;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.csp-reviewShot figcaption span {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--body);
+  font-size: 13px;
+  color: #6B6B6B
 }
 
 @media (max-width:900px) {
   .csp-reviews-body {
     grid-template-columns: 1fr
+  }
+
+  .csp-reviewShot {
+    max-width: 340px
+  }
+}
+
+/* ── the ten performance films ────────────────
+   five across, then the last one alone underneath at the width of two */
+.csp-adsRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+  margin-top: clamp(34px, 3.6vw, 48px)
+}
+
+.csp-adCard {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #E7E7E7
+}
+
+.csp-adCard img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+.csp-adCard--hero {
+  width: min(24%, 260px);
+  margin: clamp(28px, 3vw, 44px) auto 0
+}
+
+/* a translucent disc with a triangle punched into it, so it sits on any
+   frame without a plate behind it */
+.csp-adPlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .34);
+  backdrop-filter: blur(2px)
+}
+
+.csp-adPlay::after {
+  content: "";
+  position: absolute;
+  left: 52%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 8px 0 8px 13px;
+  border-color: transparent transparent transparent #fff
+}
+
+@media (max-width:900px) {
+  .csp-adsRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+
+  .csp-adCard--hero {
+    width: min(48%, 240px)
+  }
+}
+
+@media (max-width:520px) {
+  .csp-adsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .csp-adCard--hero {
+    width: min(60%, 220px)
   }
 }
 
@@ -7648,91 +8533,87 @@ button:focus-visible,
 }
 
 /* ── "the focus" (Helium) ─────────────────────
-   points on the left, the notched yellow quote card (shared .csp-quote*
-   rules) sitting low on the right, on a white page rather than .csp-celeb's
-   dark panel */
-.csp-focus-head {
-  margin-bottom: clamp(40px, 5vw, 64px)
+   a dark full-bleed panel: the three-line headline with two words picked
+   out, the copy under it, and the positioning line in a thin ruled bar */
+.csp-focus {
+  padding: clamp(56px, 7vw, 96px) 0
 }
 
-.csp-focus-body {
-  display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
-  justify-content: space-between;
-  align-items: end;
-  gap: clamp(32px, 6vw, 96px)
+.csp-in:has(.csp-focus) {
+  background: #1A1A1A
 }
 
-.csp-focus-points {
-  display: flex;
-  flex-direction: column;
-  gap: 36px
+.csp-focus .csp-hl-eyebrow {
+  color: #9A9A9A
 }
 
-.csp-focusPoint-h {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 12px
+.csp-focus .csp-hl-eyebrow b {
+  color: var(--paper)
 }
 
-.csp-focusPoint-h svg {
-  flex: none;
-  width: 14px;
-  height: 14px
+.csp-focus .csp-hl-eyebrowDot {
+  background: var(--acid)
 }
 
-.csp-focusPoint-h h3 {
+.csp-focus-h {
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
   font-family: var(--display);
   font-weight: 400;
-  font-size: 22px;
-  letter-spacing: -.01em;
-  color: var(--ink);
-  margin: 0
+  font-size: clamp(30px, 3.8vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--paper)
 }
 
-.csp-focusPoint p {
+.csp-focus-h em {
+  font-style: normal;
+  color: #9B8BF0
+}
+
+.csp-focus-h i {
+  font-style: normal;
+  color: var(--acid)
+}
+
+.csp-focus-copy {
+  max-width: 78ch;
+  margin: clamp(24px, 2.6vw, 34px) 0 0;
   font-family: var(--body);
   font-size: 15px;
-  line-height: 1.45;
-  color: #4C4546;
-  max-width: 36ch;
-  margin: 0
+  line-height: 1.6;
+  color: #C4C4C4
 }
 
-/* desktop only — on phones the shared .csp-quoteCard mobile rules (auto
-   height, a fixed-px notch, content pushed below it) have to win, or the
-   text runs up into the cut corner */
-@media (min-width:761px) {
-  .csp-focus .csp-quoteCard {
-    height: 250px;
-    /* the notch is 60% of the card's height in this design, not the shared 53% */
-    clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 60%, 22% 60%)
-  }
-
-  .csp-focus .csp-quoteMark {
-    height: 60%
-  }
+.csp-focusLine {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(20px, 3vw, 44px);
+  margin-top: clamp(30px, 3.4vw, 44px);
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
+  border: 1px solid #383838
 }
 
-/* the design sets this line in the body face, not the display one */
-.csp-focus .csp-quoteText {
+.csp-focusLine span {
+  flex: none;
   font-family: var(--body);
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 1.25;
-  letter-spacing: -.01em
+  font-size: 13px;
+  color: #9A9A9A
+}
+
+.csp-focusLine p {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(16px, 1.5vw, 21px);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--acid)
 }
 
 @media (max-width:760px) {
-  .csp-focus .csp-quoteText {
-    font-size: 20px
-  }
-}
-
-@media (max-width:900px) {
-  .csp-focus-body {
-    grid-template-columns: 1fr
+  .csp-focusLine {
+    flex-direction: column;
+    gap: 10px
   }
 }
 
@@ -7848,6 +8729,19 @@ button:focus-visible,
   font-size: 14px;
   line-height: 1.6;
   color: #4C4546
+}
+
+/* the brand-ads head now runs as the chip sections do: chip, headline, and
+   the one line under it carrying the positioning in violet */
+.csp-hooks .csp-hooks-h {
+  font-size: clamp(32px, 4vw, 54px);
+  margin: 14px 0 0
+}
+
+.csp-hooks .csp-hooks-copy {
+  margin: clamp(26px, 3vw, 40px) 0 clamp(40px, 4.4vw, 56px);
+  font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--violet)
 }
 
 @media (max-width:900px) {
@@ -9754,5 +10648,986 @@ button:focus-visible,
   .news-h,
   .vfoot__title {
     font-size: 28px
+  }
+}
+
+/* desktop hero skyline: the traced tetris SVG replaces the four stat steps */
+.hx-tet {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: block
+}
+
+@media (min-width:901px) {
+  .hx .hx-stair .hx-step {
+    display: none
+  }
+}
+
+.hx-tet-m,
+.hx-sub-m {
+  display: none
+}
+
+/* mobile hero, per the mobile mock: logo bar, headline, copy and CTA up top,
+   and the traced tetris skyline running full-bleed along the bottom of the
+   screen — no stat cards */
+@media (max-width:900px) {
+  .hx-tet {
+    display: none
+  }
+
+  .hx-in {
+    min-height: 100svh;
+    padding-bottom: 0
+  }
+
+  .hx .hx-stair .hx-step {
+    display: none
+  }
+
+  .hx .hx-stair {
+    display: block;
+    padding: 0;
+    margin-top: auto;
+    padding-top: 16px
+  }
+
+  .hx-tet-m {
+    display: block;
+    width: 100%;
+    height: auto
+  }
+
+  .hx-h {
+    line-height: 1.25
+  }
+
+  .hx-sub {
+    font-size: 15px;
+    line-height: 1.45;
+    margin-top: 20px
+  }
+
+  .hx-sub-d {
+    display: none
+  }
+
+  .hx-sub-m {
+    display: inline
+  }
+
+  .hx-cta {
+    margin-top: 26px
+  }
+
+  .hx-cta-t {
+    height: 40px
+  }
+
+  .hx-cta-i,
+  .hx-cta-i svg {
+    width: 40px;
+    height: 40px
+  }
+}
+
+.hero-curtain .hc-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block
+}
+
+/* ── Where You Are Now, desktop: a dark section. The open stage is a grey
+   card with a two-step notch down its right side (the "Read Case Study" link
+   sits in the lower one), the other stages are plain titles on hairlines, and
+   the board sits on its own panel to the right. The stat card is mobile-only. */
+.wy-read--d {
+  display: none
+}
+
+@media (min-width:901px) {
+  .wy {
+    background: #1B1B1B;
+    --wy-notch1: calc(64 * var(--k));
+    --wy-notch2: calc(182 * var(--k));
+    --wy-step1: calc(39 * var(--k));
+    --wy-tab: calc(58 * var(--k))
+  }
+
+  .wy-h {
+    color: var(--paper)
+  }
+
+  .wy-panel {
+    background: transparent;
+    padding: 0;
+    gap: calc(56 * var(--k));
+    align-items: stretch;
+    height: calc(600 * var(--k));
+    overflow: visible
+  }
+
+  .wy-left {
+    flex: 1 1 0
+  }
+
+  .wy-boardwrap {
+    flex: 1 1 0;
+    align-self: stretch;
+    background: #2B2B2B
+  }
+
+  .wy-grid {
+    grid-template-columns: repeat(4, calc(77 * var(--k)));
+    grid-auto-rows: calc(77 * var(--k));
+    gap: calc(4 * var(--k))
+  }
+
+  .wy-cell {
+    background: #353535;
+    border-radius: calc(2 * var(--k))
+  }
+
+  .wy-item {
+    padding: calc(30 * var(--k)) 0;
+    border-bottom-color: #2A2A2A
+  }
+
+  .wy-item.on {
+    padding-top: 0;
+    border-bottom-color: transparent
+  }
+
+  .wy-title {
+    color: var(--paper);
+    font-size: calc(20 * var(--k));
+    font-weight: 400
+  }
+
+  .wy-bodyIn {
+    padding-top: 0
+  }
+
+  .wy-item.on .wy-lead {
+    background: #323232;
+    padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + var(--wy-step1) + 8px);
+    clip-path: polygon(0 0, 100% 0,
+        100% calc(100% - var(--wy-tab) - var(--wy-step1)),
+        calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),
+        calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab)),
+        calc(100% - var(--wy-notch2)) calc(100% - var(--wy-tab)),
+        calc(100% - var(--wy-notch2)) 100%,
+        0 100%)
+  }
+
+  .wy-leadTitle {
+    color: var(--acid);
+    font-weight: 600;
+    font-size: calc(32 * var(--k));
+    margin: 0 0 calc(12 * var(--k))
+  }
+
+  .wy-lead .wy-copy {
+    color: #E6E6E6;
+    font-size: calc(15 * var(--k));
+    line-height: 1.55;
+    max-width: calc(500 * var(--k));
+    padding: 0;
+    margin: 0
+  }
+
+  .wy-item.on .wy-cardwrap,
+  .wy-item.on .wy-notch {
+    display: none
+  }
+
+  .wy-item.on .wy-read--d {
+    display: inline-flex;
+    position: absolute;
+    right: calc(18 * var(--k));
+    bottom: calc(var(--wy-tab) / 2 - 9 * var(--k));
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: calc(16 * var(--k))
+  }
+}
+
+/* room under the dark section, and a panel tall enough for the longest stage */
+@media (min-width:901px) {
+  .wy {
+    padding-bottom: clamp(40px, 4.5vw, 80px)
+  }
+
+  .wy-panel {
+    height: calc(680 * var(--k))
+  }
+}
+
+/* ── featured work: the stacking deck ──
+   Every card is a full screen pinned just under the heading; the next one
+   slides up over it, and the one underneath eases back (--q, 0..1, set from
+   scroll by FeaturedWork.jsx) — shrinking a little and dimming. */
+.fw2-stack {
+  --headH: 0px
+}
+
+.fw2-card {
+  --q: 0;
+  position: sticky;
+  top: var(--headH);
+  height: var(--full);
+  background: var(--paper);
+  transform-origin: 50% 0;
+  transform: scale(calc(1 - .06 * var(--q)));
+  filter: brightness(calc(1 - .28 * var(--q)));
+  will-change: transform
+}
+
+.fw2-row {
+  display: none
+}
+
+/* white breathing room under the last card, before the next section */
+.fw2 {
+  padding-bottom: clamp(48px, 6vw, 96px)
+}
+
+/* less dark space above the Where You Are Now heading */
+@media (min-width:901px) {
+  .wy {
+    padding-top: clamp(56px, 6vw, 100px)
+  }
+}
+
+/* the heading is no longer sticky: it scrolls away, and the cards pin at the top */
+.fw2-head {
+  position: static
+}
+
+.fw2-card {
+  top: 0
+}
+
+/* space between the Featured Work heading and the first card */
+.fw2-head {
+  padding-bottom: clamp(32px, 4vw, 64px)
+}
+
+/* the cards pin a little below the top of the screen, leaving a band of white above */
+.fw2-card {
+  top: clamp(32px, 3.5vw, 72px)
+}
+
+/* card type in fixed sizes: 24px title (wrapping to a second line when long),
+   14px client, 16px "View Work" — the same on every tab */
+.sw-item {
+  display: flex;
+  flex-direction: column
+}
+
+.sw-body,
+.sw-grid--tall .sw-body {
+  flex: 1;
+  height: auto;
+  min-height: 38cqw;
+  padding: 24px 24px 0
+}
+
+.sw-name,
+.sw-grid--tall .sw-name {
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 500
+}
+
+.sw-client,
+.sw-grid--tall .sw-client {
+  font-size: 14px;
+  margin-top: 8px
+}
+
+.sw-view,
+.sw-grid--tall .sw-view {
+  font-size: 16px;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
+  margin-bottom: 24px
+}
+
+.sw-view .wy-mark,
+.sw-grid--tall .sw-view .wy-mark {
+  width: 14px;
+  height: 14px
+}
+
+/* ── featured work (mobile): "Hear it from the Founders" stacking deck ──
+   One acid card per company: the logo in a white notch cut out of the
+   card's top-left, a quote chip on the top-right corner, and a white panel
+   framed by the acid holding the founder photo, their name, the headline
+   plate over the photo's corner and the testimonial. Sizes are in cqw (the
+   card is the container) so it holds its shape at any phone width. Each
+   card pins (top set by FeaturedWorkMobile.jsx) and the next slides over
+   it; --q (0..1) eases the one underneath back. */
+@media (max-width:900px) {
+  .fw {
+    padding: 40px 24px 64px
+  }
+
+  .fw-head {
+    position: static;
+    padding: 0;
+    margin-bottom: 24px
+  }
+
+  .fw-h {
+    font-size: 28px
+  }
+}
+
+.fwm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px
+}
+
+.fwm-card {
+  --q: 0;
+  container-type: inline-size;
+  position: sticky;
+  top: 16px;
+  box-sizing: border-box;
+  padding: 19cqw 2.9cqw 3cqw;
+  /* acid everywhere but the logo's white notch at the top-left */
+  background: linear-gradient(var(--paper), var(--paper)) left top / 38cqw 16.4cqw no-repeat,
+    var(--acid);
+  transform-origin: 50% 0;
+  transform: scale(calc(1 - .06 * var(--q)));
+  filter: brightness(calc(1 - .28 * var(--q)));
+  will-change: transform
+}
+
+.fwm-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 38cqw;
+  height: 16.4cqw;
+  overflow: hidden
+}
+
+.fwm-logo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(var(--zoom, 1))
+}
+
+/* the chip is one piece with the panel: it rises out of the panel's
+   top-right corner and runs past its right edge, so the white steps out
+   into the acid frame there and back in a little lower down */
+.fwm-chip {
+  position: absolute;
+  z-index: 2;
+  right: -2cqw;
+  top: -5.6cqw;
+  width: 8.2cqw;
+  height: 8.1cqw;
+  background: var(--paper)
+}
+
+.fwm-mark {
+  position: absolute;
+  left: 1.5cqw;
+  top: 2.25cqw;
+  width: 5.1cqw;
+  height: 3.15cqw;
+  display: block;
+  fill: #0B0B0D
+}
+
+.fwm-panel {
+  position: relative;
+  background: var(--paper);
+  padding: 3.7cqw 3.4cqw 9cqw
+}
+
+.fwm-top {
+  position: relative;
+  height: 51cqw
+}
+
+.fwm-photo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 49.5cqw;
+  height: 51cqw;
+  object-fit: cover;
+  object-position: center top
+}
+
+.fwm-by {
+  position: absolute;
+  right: 3cqw;
+  top: 2.6cqw;
+  max-width: 42cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2.2cqw;
+  text-align: right
+}
+
+.fwm-by b {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 4.2cqw;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.fwm-by span {
+  font-family: var(--body);
+  font-size: 2.8cqw;
+  line-height: 1.3;
+  color: #4C4546
+}
+
+/* the headline plate sits over the photo's bottom-right corner, flush with
+   the panel's right edge */
+.fwm-line {
+  position: absolute;
+  z-index: 1;
+  right: -2.9cqw;
+  bottom: 0;
+  width: 60cqw;
+  min-height: 17cqw;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 2.6cqw 1.4cqw 2.6cqw 3.4cqw;
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 4.25cqw;
+  line-height: 1.28;
+  letter-spacing: -.01em;
+  color: #121212
+}
+
+.fwm-quote {
+  margin-top: 4cqw
+}
+
+.fwm-quote p {
+  margin: 0 0 4.8cqw;
+  font-family: var(--body);
+  font-size: 3.95cqw;
+  line-height: 1.25;
+  color: #6B6B6B
+}
+
+.fwm-quote p:last-child {
+  margin-bottom: 0
+}
+
+.fwm-quote strong {
+  font-weight: 500;
+  color: #121212
+}
+
+/* the progress rail down the screen's left edge */
+.fwm-rail {
+  position: fixed;
+  z-index: 30;
+  left: 8px;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease
+}
+
+.fwm-rail.is-on {
+  opacity: 1
+}
+
+.fwm-rail span {
+  width: 5px;
+  height: 6px;
+  background: #CFCFCF;
+  transition: height .35s ease, background-color .35s ease
+}
+
+.fwm-rail span.is-active {
+  height: 38px;
+  background: var(--acid)
+}
+
+@media (min-width:901px) {
+  .fwm-rail {
+    display: none
+  }
+}
+
+/* portrait tabs: a smaller corner that stays inside the caption, with the
+   title kept clear of it */
+.sw-item {
+  overflow: hidden
+}
+
+.sw-grid--tall .sw-item {
+  --cu: 8cqw
+}
+
+.sw-grid--tall .sw-name,
+.sw-grid--tall .sw-client {
+  max-width: 70%
+}
+
+/* ── inside the partnership, mobile: left-aligned heading, then one block
+   per funding stage — its key, then its logos three to a row ── */
+.pr-m,
+.pr-h-m {
+  display: none
+}
+
+@media (max-width:900px) {
+  .pr {
+    padding-left: 24px;
+    padding-right: 24px
+  }
+
+  .pr-in {
+    gap: 36px
+  }
+
+  .pr-top,
+  .pr-head {
+    align-items: flex-start;
+    text-align: left
+  }
+
+  .pr-h {
+    font-size: 28px;
+    line-height: 1.15
+  }
+
+  .pr-h-d,
+  .pr-scroll {
+    display: none
+  }
+
+  .pr-h-m {
+    display: inline
+  }
+
+  .pr-m {
+    display: flex;
+    flex-direction: column;
+    gap: 40px
+  }
+
+  .pr-group .pr-key {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-family: var(--body);
+    font-size: 13px;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: #121212
+  }
+
+  .pr-group .pr-key i {
+    width: 9px;
+    height: 9px;
+    display: block;
+    background: var(--bg)
+  }
+
+  .pr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px
+  }
+
+  .pr-mtile {
+    container-type: inline-size;
+    aspect-ratio: 171 / 60;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    overflow: hidden
+  }
+
+  /* width set per logo in Partnership.jsx (see mw in partnership.js) */
+  .pr-mtile img {
+    display: block;
+    height: auto
+  }
+}
+
+/* ── deep dives, mobile (per the mobile mock): 18px card titles, cards about
+   three quarters of the screen wide with every other one stepped down ── */
+@media (max-width:900px) {
+  .cs-sub {
+    font-size: 14px;
+    line-height: 1.35;
+    margin-top: 8px;
+    padding: 0 24px
+  }
+
+  .cs-row {
+    margin-top: 48px
+  }
+
+  .cs-rset {
+    gap: 20px;
+    padding-right: 20px
+  }
+
+  .cs-card {
+    width: min(300px, 75.4vw);
+    height: auto;
+    aspect-ratio: 294 / 391
+  }
+
+  .cs-card:nth-child(even) {
+    margin-top: 31px
+  }
+
+  .cs-title {
+    font-size: 18px;
+    line-height: 1.2;
+    padding: 7.5cqw 7cqw 0
+  }
+}
+
+/* ── selected work, mobile card type: 20px title, 14px client, 14px
+   "View Work" — the same on every tab ── */
+@media (max-width:900px) {
+  .sw-name,
+  .sw-grid--tall .sw-name {
+    font-size: 20px;
+    line-height: 1.25
+  }
+
+  .sw-client,
+  .sw-grid--tall .sw-client {
+    font-size: 14px
+  }
+
+  .sw-view,
+  .sw-grid--tall .sw-view {
+    font-size: 14px
+  }
+
+  .sw-view .wy-mark,
+  .sw-grid--tall .sw-view .wy-mark {
+    width: 12px;
+    height: 12px
+  }
+}
+
+/* ── footer: the "next unicorn?" call to action ── */
+.vfoot {
+  /* the same faint dotted ground the hero has */
+  background-image: radial-gradient(rgba(255, 255, 255, .08) 1.5px, transparent 1.5px);
+  background-size: 32px 32px
+}
+
+.vfoot__copy {
+  gap: 0
+}
+
+.vfoot__title {
+  max-width: none;
+  font-size: clamp(36px, 4.4vw, 64px);
+  line-height: 1.1
+}
+
+.vfoot__sub {
+  margin: clamp(16px, 1.6vw, 24px) 0 0;
+  max-width: 420px;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, .85)
+}
+
+.vfoot__ctaWrap {
+  gap: 24px;
+  margin-top: clamp(24px, 2.4vw, 36px);
+  flex-wrap: wrap;
+  justify-content: center
+}
+
+.vfoot__cta--ghost {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--paper)
+}
+
+.vfoot__cta--ghost .vfoot__ctaLabel {
+  color: var(--paper)
+}
+
+.vfoot__cta--ghost .vfoot__ctaIcon {
+  background: transparent;
+  box-shadow: inset 1px 0 0 var(--paper)
+}
+
+.vfoot__cta--ghost .vfoot__ctaMark i {
+  background: var(--acid)
+}
+
+.vfoot__cta--ghost:hover .vfoot__ctaIcon {
+  background: var(--acid)
+}
+
+.vfoot__cta--ghost:hover .vfoot__ctaMark i {
+  background: var(--ink)
+}
+
+/* a shorter footer to begin with: less runway above the wordmark and less
+   gap around it, so there's little left to collapse on reveal */
+.vfoot__wellWrap {
+  margin-top: clamp(28px, 4vw, 64px);
+  aspect-ratio: 35 / 5.6
+}
+
+.vfoot__bottom {
+  padding-top: clamp(20px, 2.6vw, 36px)
+}
+
+/* testimonials mark their bold lines inline, so no paragraph is bold by itself */
+.fw2-quoteText p:first-child {
+  font-weight: 400;
+  color: #4C4546
+}
+
+.fw2-quoteText p b {
+  font-weight: 600;
+  color: #333
+}
+
+/* ── footer, mobile (per the mobile mock): centred title, the two buttons
+   stacked at one width, no paragraph, and two short notes under the
+   wordmark in place of the tagline / legal row ── */
+.vfoot__m,
+.vfoot__mNote {
+  display: none
+}
+
+@media (max-width:640px) {
+  .vfoot {
+    padding: 54px 20px 22px
+  }
+
+  .vfoot__title {
+    font-size: 34px;
+    line-height: 1.1
+  }
+
+  .vfoot__sub {
+    display: none
+  }
+
+  .vfoot__d {
+    display: none
+  }
+
+  .vfoot__m {
+    display: inline
+  }
+
+  .vfoot__ctaWrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: 32px
+  }
+
+  .vfoot__cta {
+    width: 194px
+  }
+
+  .vfoot__ctaLabel {
+    flex: 1;
+    justify-content: center;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 12px;
+    letter-spacing: .12em
+  }
+
+  .vfoot__ctaIcon {
+    width: 40px;
+    height: 40px
+  }
+
+  /* the cells close up into one solid step, as in the mock */
+  .vfoot__ctaMark {
+    grid-template-columns: repeat(3, 7px);
+    grid-template-rows: repeat(3, 7px);
+    gap: 0
+  }
+
+  .vfoot__wellWrap {
+    margin-top: 48px
+  }
+
+  .vfoot__bottom {
+    padding-top: 40px
+  }
+
+  .vfoot__tagline,
+  .vfoot__legal {
+    display: none
+  }
+
+  .vfoot__bottomRow {
+    align-items: flex-start;
+    justify-content: space-between
+  }
+
+  .vfoot__mNote {
+    display: block;
+    margin: 0;
+    font-family: var(--body);
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, .85)
+  }
+
+  .vfoot__mNote--r {
+    text-align: right
+  }
+}
+
+/* ── campaign page (Vyapar): a back link, the title beside a short blurb, and
+   four wide stills stacked down the page ── */
+.cmp {
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  padding: clamp(20px, 2.4vw, 40px) var(--side) clamp(48px, 6vw, 96px)
+}
+
+.cmp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 14px;
+  color: #121212;
+  text-decoration: none
+}
+
+.cmp-back:hover {
+  color: var(--violet)
+}
+
+.cmp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 64px);
+  margin: clamp(28px, 4.4vw, 72px) 0 clamp(20px, 2.8vw, 44px)
+}
+
+.cmp-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.1vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -.025em
+}
+
+.cmp-by {
+  margin: 8px 0 0;
+  font-family: var(--body);
+  font-size: clamp(12px, .9vw, 14px);
+  color: #3D3D3D
+}
+
+.cmp-about {
+  margin: 0;
+  flex: 0 1 41%;
+  font-family: var(--body);
+  font-size: clamp(13px, 1.05vw, 16px);
+  line-height: 1.5;
+  color: #333
+}
+
+.cmp-frames {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2.2vw, 36px)
+}
+
+.cmp-frame {
+  width: 100%;
+  aspect-ratio: 2.16 / 1;
+  object-fit: cover;
+  display: block;
+  background: #EFEFEF
+}
+
+@media (max-width:700px) {
+  .cmp-head {
+    flex-direction: column;
+    gap: 16px
+  }
+
+  .cmp-about {
+    flex: none
+  }
+
+  .cmp-frame {
+    aspect-ratio: 4 / 3
+  }
+}
+
+/* the site header above the campaign page, then the back link a little under it */
+.cmp-nav {
+  background: var(--paper);
+  padding: clamp(20px, 2.4vw, 40px) var(--side) 0
+}
+
+.cmp-nav + .cmp {
+  min-height: 0;
+  padding-top: clamp(20px, 3vw, 48px)
+}
+
+/* the nav's logo and links are sized in --k (one design px), which the hero
+   and case study pages define on their own wrappers */
+.cmp-nav {
+  --k: min(.0694444vw, 1.19444px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+@media (max-width:900px) {
+  .cmp-nav {
+    --k: 1px
   }
 }

@@ -15,90 +15,9 @@ export default function WhereYouAreNow() {
   const [allOn, setAllOn] = useState(false);
   const [scrollOn, setScrollOn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(0);
-  const bodyInRefs = useRef([]);
-  const leadRefs = useRef([]);
-  const cardwrapRefs = useRef([]);
-  const notchRefs = useRef([]);
   const stickyRef = useRef(null);
   // the mobile pin's current geometry, kept for the title taps (see openStage)
   const pinRef = useRef(null);
-
-  // the stat card is position:absolute (so it sits pinned exactly where the
-  // design wants it, near the light card's tab, rather than just flowing
-  // below it) — that means its vertical offset has to be measured from the
-  // light card's actual rendered height rather than hard-coded, since the
-  // copy text runs 2 or 3 lines depending on the stage
-  useEffect(() => {
-    const place = () => {
-      // this pinned-offset math only applies to the desktop notch/tab
-      // layout (.wy-item.on .wy-cardwrap is position:absolute only at
-      // min-width:901px) — on mobile the card sits in normal flow, so any
-      // leftover inline top/minHeight from a previous wide layout has to be
-      // cleared or it shifts the card up over the copy text above it
-      if (window.innerWidth < 901) {
-        STAGES.forEach((_, i) => {
-          const cardwrap = cardwrapRefs.current[i];
-          const bodyIn = bodyInRefs.current[i];
-          const notch = notchRefs.current[i];
-          if (cardwrap) cardwrap.style.top = "";
-          if (bodyIn) bodyIn.style.minHeight = "";
-          if (notch) notch.style.display = "";
-        });
-        return;
-      }
-      STAGES.forEach((_, i) => {
-        const lead = leadRefs.current[i];
-        const cardwrap = cardwrapRefs.current[i];
-        const bodyIn = bodyInRefs.current[i];
-        const notch = notchRefs.current[i];
-        if (!lead || !cardwrap || !bodyIn) return;
-        // the light card's own bottom padding is its left tab's length —
-        // reset to the baseline before measuring, since a previous call
-        // may have already stretched it (see below), which would otherwise
-        // throw off this measurement on resize/re-runs
-        const leadTabLength = 80;
-        lead.style.setProperty("--wy-tab", `${leadTabLength}px`);
-        const leadTop = lead.offsetTop;
-        // the stat card should sit just under the text's own edge, not the
-        // tab's full length, so the tab peeks out behind it rather than
-        // pushing it down with a huge gap
-        const textEdge = leadTop + lead.offsetHeight - leadTabLength;
-        const cardTop = textEdge;
-        cardwrap.style.top = `${cardTop}px`;
-        // stretch the tab to match the stat card's own rendered height, so
-        // the white strip runs the card's full height instead of just the
-        // baseline peek — card height is intrinsic (content-driven), so
-        // this doesn't feed back into cardTop above
-        const cardHeight = cardwrap.offsetHeight;
-        lead.style.setProperty("--wy-tab", `${cardHeight}px`);
-        bodyIn.style.minHeight = `${cardTop + cardHeight}px`;
-
-        // caps the notch .wy-lead's clip-path cuts out of its own top-right
-        // corner with a matching border, so the stat card's border-right
-        // reads as one continuous line up to that step instead of stopping
-        // short of it. The shallow step sits calc(90 * var(--k)) down from
-        // the lead card's own top — read via the card's padding (also a
-        // calc(N * var(--k)) length) since --k itself isn't resolvable in JS
-        const card = cardwrap.querySelector(".wy-card");
-        if (card && notch) {
-          const kPx = parseFloat(getComputedStyle(card).paddingLeft) / 24;
-          const shallowStepY = leadTop + 90 * kPx;
-          const notchHeight = cardTop - shallowStepY;
-          if (notchHeight > 0) {
-            notch.style.display = "block";
-            notch.style.top = `${shallowStepY}px`;
-            notch.style.height = `${notchHeight}px`;
-          } else {
-            notch.style.display = "none";
-          }
-        }
-      });
-    };
-    place();
-    window.addEventListener("resize", place);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-    return () => window.removeEventListener("resize", place);
-  }, [active, allOn, mobileOpen]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -288,34 +207,16 @@ export default function WhereYouAreNow() {
                     </h3>
                     <div className="wy-body">
                       <div>
-                        <div
-                          className="wy-bodyIn"
-                          ref={(el) => {
-                            bodyInRefs.current[i] = el;
-                          }}
-                        >
-                          <div
-                            className="wy-lead"
-                            ref={(el) => {
-                              leadRefs.current[i] = el;
-                            }}
-                          >
+                        <div className="wy-bodyIn">
+                          <div className="wy-lead">
                             <h3 className="wy-leadTitle">{s.title}</h3>
                             <p className="wy-copy">{s.copy}</p>
                           </div>
-                          <div
-                            className="wy-notch"
-                            aria-hidden="true"
-                            ref={(el) => {
-                              notchRefs.current[i] = el;
-                            }}
-                          />
-                          <div
-                            className="wy-cardwrap"
-                            ref={(el) => {
-                              cardwrapRefs.current[i] = el;
-                            }}
-                          >
+                          {/* desktop: the link sits in the card's lower notch */}
+                          <a className="wy-read wy-read--d" href="#featured">
+                            Read Case Study <WyMark />
+                          </a>
+                          <div className="wy-cardwrap">
                             <div className="wy-card">
                               <div>
                                 <span className="wy-stat">{s.stat}</span>

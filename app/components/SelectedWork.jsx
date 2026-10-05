@@ -3,22 +3,13 @@
 import { useState } from "react";
 import Mark from "./Mark";
 import Reveal from "./Reveal";
-import { SW_FILTERS, SW_ITEMS } from "../data/selectedWork";
-
-// deal the filtered items into groups of six; each group fills one bento
-// block (two across the top, then two + a wide tile beside a tall one)
-function toGroups(items) {
-  const groups = [];
-  for (let at = 0; at < items.length; at += 6) groups.push(items.slice(at, at + 6));
-  return groups;
-}
+import WyMark from "./WyMark";
+import { SW_TABS } from "../data/selectedWork";
 
 export default function SelectedWork() {
-  const [activeCat, setActiveCat] = useState(SW_FILTERS[0].cat);
-  // phones have no hover, so a tap shows a tile's logo + name overlay (and
-  // a second tap, or a tap on another tile, hides it)
-  const [tapped, setTapped] = useState(null);
-  const groups = toGroups(SW_ITEMS.filter((item) => item.cats.includes(activeCat)));
+  const [activeCat, setActiveCat] = useState(SW_TABS[0].cat);
+  const tab = SW_TABS.find((t) => t.cat === activeCat) || SW_TABS[0];
+  const items = tab.items;
 
   return (
     <section className="sw" id="work">
@@ -30,19 +21,16 @@ export default function SelectedWork() {
               <Mark />
             </div>
             <div className="sw-titleRow">
-              <h2 className="sw-h">Our Selected Works</h2>
+              <h2 className="sw-h">We make Ads that people don&rsquo;t skip</h2>
             </div>
           </div>
           <div className="sw-filters" role="group" aria-label="Filter work by service">
-            {SW_FILTERS.map((f) => (
+            {SW_TABS.map((f) => (
               <button
                 key={f.cat}
                 className="sw-filter"
                 aria-pressed={activeCat === f.cat}
-                onClick={() => {
-                  setActiveCat(f.cat);
-                  setTapped(null);
-                }}
+                onClick={() => setActiveCat(f.cat)}
               >
                 {f.label}
               </button>
@@ -51,45 +39,32 @@ export default function SelectedWork() {
         </Reveal>
 
         <div className="sw-field">
-          <div className="sw-grid">
-            {groups.map((group, g) => (
-              <div className="sw-group" key={g}>
-                {group.map((item, i) => (
-                  <a
-                    key={item.img + i}
-                    className={`sw-item${tapped === item.img + i ? " is-open" : ""}`}
-                    href="#work"
-                    onClick={(e) => {
-                      if (!window.matchMedia("(max-width: 640px)").matches) return;
-                      e.preventDefault();
-                      setTapped((t) => (t === item.img + i ? null : item.img + i));
-                    }}
-                  >
-                    <span className="sw-shot">
-                      <img
-                        src={item.img}
-                        alt={item.alt}
-                        loading="lazy"
-                        style={item.pos ? { objectPosition: item.pos } : undefined}
-                      />
-                      <span className="sw-over">
-                        <img
-                          className="sw-logo"
-                          src={item.logo}
-                          alt=""
-                          aria-hidden="true"
-                          style={item.logoScale ? { "--ls": item.logoScale } : undefined}
-                        />
-                        <span className="sw-overLine">
-                          <span>{item.title}</span>
-                          <span className="sw-dash" aria-hidden="true" />
-                          <span>{item.client}</span>
-                        </span>
-                      </span>
-                    </span>
-                  </a>
-                ))}
-              </div>
+          <div className={`sw-grid sw-grid--${tab.layout}`}>
+            {items.map((item) => (
+              <a key={`${tab.cat}-${item.title}`} className="sw-item" href={item.href || "#work"}
+                onClick={item.href ? undefined : (e) => e.preventDefault()}>
+                <span className="sw-shot">
+                  {item.img && <img src={item.img} alt={item.alt} loading="lazy" />}
+                </span>
+                <span className="sw-body">
+                  <h3 className="sw-name">{item.title}</h3>
+                  <span className="sw-client">{item.client}</span>
+                  <span className="sw-view">
+                    View Work <WyMark />
+                  </span>
+                </span>
+                <svg
+                  className="sw-corner"
+                  aria-hidden="true"
+                  viewBox={`0 0 ${item.corner.w} ${item.corner.h}`}
+                  style={{ width: `calc(${item.corner.w} * var(--cu))` }}
+                  shapeRendering="crispEdges"
+                >
+                  {item.corner.cells.map(([c, r]) => (
+                    <rect key={`${c}-${r}`} x={c} y={r} width="1.01" height="1.01" fill="#F5F978" />
+                  ))}
+                </svg>
+              </a>
             ))}
           </div>
         </div>
