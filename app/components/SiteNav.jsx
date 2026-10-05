@@ -9,7 +9,7 @@ import { useLenis } from "lenis/react";
 const NAV_LINKS = [
   { label: "Works", href: "/#featured" },
   { label: "Case study", href: "/#deepdive" },
-  { label: "About Us", href: "/#partnership" },
+  { label: "About Us", href: "/about" },
 ];
 
 function ContactButton({ className = "hx-contact", onClick }) {

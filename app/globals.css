@@ -12353,3 +12353,1099 @@ button:focus-visible,
   position: relative;
   z-index: 1
 }
+
+/* ── about us: the header, a centred heading and a mosaic of yellow tiles
+   with the team's photos set into it — 17 columns by 6 rows ── */
+.ab-nav,
+.ab {
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='4' height='4' fill='%23F7F7F7'/%3E%3C/svg%3E")
+}
+
+.ab-nav {
+  --k: min(.0694444vw, 1.19444px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(20px, 2.4vw, 40px) var(--side) 0
+}
+
+@media (max-width:900px) {
+  .ab-nav {
+    --k: 1px
+  }
+}
+
+.ab {
+  padding: clamp(24px, 3.4vw, 56px) 0 clamp(56px, 6vw, 112px)
+}
+
+.ab-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(14px, 1.6vw, 24px);
+  margin-bottom: clamp(40px, 5.6vw, 92px)
+}
+
+.ab-tagwrap {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 22px
+}
+
+.ab-tag {
+  position: relative;
+  z-index: 1;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--acid);
+  color: #000;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -.03em;
+  white-space: nowrap
+}
+
+.ab-tagwrap .mark {
+  position: absolute;
+  left: calc(100% - 9.4px);
+  top: -3.4px;
+  width: 16.5px;
+  height: 16.5px
+}
+
+.ab-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4.2vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -.03em;
+  color: #121212
+}
+
+.ab-grid {
+  width: 89%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(17, minmax(0, 1fr))
+}
+
+.ab-cell {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover
+}
+
+.ab-a { background: #F6F97A }
+.ab-b { background: #FAF5B3 }
+.ab-c { background: #FDFFD5 }
+
+.ab-photo {
+  background: #fff
+}
+
+/* phones: the same cells re-flow to six across, photos kept in order */
+@media (max-width:700px) {
+  .ab-grid {
+    width: calc(100% - 32px);
+    grid-template-columns: repeat(6, minmax(0, 1fr))
+  }
+
+  .ab-h {
+    font-size: 30px
+  }
+}
+
+/* about us: heading and spacing trimmed to the design */
+.ab-h {
+  font-size: clamp(30px, 3.9vw, 56px)
+}
+
+.ab-head {
+  margin-bottom: clamp(36px, 4.7vw, 76px)
+}
+
+@media (max-width:700px) {
+  .ab-h {
+    font-size: 30px
+  }
+}
+
+@media (max-width:700px) {
+  .ab-br {
+    display: none
+  }
+
+  .ab-head {
+    padding: 0 16px
+  }
+
+  .ab-h {
+    font-size: 28px
+  }
+}
+
+/* about us, "Why Vidrow": a left-aligned heading over four text blocks, two across */
+.ab-why {
+  background: var(--paper);
+  padding: clamp(48px, 6.2vw, 96px) 5% clamp(64px, 8vw, 128px)
+}
+
+.ab-whyIn {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px
+}
+
+.ab-whyH {
+  margin: 0;
+  max-width: 14em;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  color: #121212
+}
+
+.ab-whyGrid {
+  width: 100%;
+  margin-top: clamp(40px, 5.6vw, 88px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(48px, 8vw, 130px) 6%
+}
+
+.ab-whyBlock {
+  max-width: 560px
+}
+
+.ab-whyBlock h3 {
+  margin: 0 0 clamp(12px, 1.2vw, 18px);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(15px, 1.25vw, 18px);
+  color: #333
+}
+
+.ab-whyBlock p {
+  margin: 0 0 1.4em;
+  font-family: var(--body);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.5;
+  color: #4C4546
+}
+
+.ab-whyBlock p:last-child {
+  margin-bottom: 0
+}
+
+@media (max-width:700px) {
+  .ab-whyGrid {
+    grid-template-columns: 1fr;
+    gap: 36px
+  }
+
+  .ab-whyH {
+    font-size: 28px
+  }
+
+  .ab-why {
+    padding-left: 16px;
+    padding-right: 16px
+  }
+}
+
+/* the "Why Vidrow" heading sits on exactly two lines on desktop */
+@media (min-width:701px) {
+  .ab-whyH {
+    max-width: none
+  }
+}
+
+/* about us: 72px of space left and right of the mosaic and the Why Vidrow blocks */
+@media (min-width:701px) {
+  .ab-grid {
+    width: calc(100% - 144px)
+  }
+
+  .ab-why {
+    padding-left: 72px;
+    padding-right: 72px
+  }
+
+  .ab-whyIn {
+    max-width: none
+  }
+}
+
+/* ── about us, "The Founders": a centred heading over the two founders'
+   violet cards. Each card's yellow step block (name plate, a full-width
+   band, then the role strip) is placed in % of the card and the type in cqw,
+   so it holds its shape at any width; the second card mirrors the block. ── */
+.abf {
+  background: var(--paper);
+  padding: clamp(56px, 6.5vw, 104px) var(--side)
+}
+
+.abf-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(14px, 1.6vw, 24px);
+  margin-bottom: clamp(40px, 5.8vw, 84px)
+}
+
+.abf-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.34vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  color: #121212
+}
+
+.abf-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 2.9vw, 42px)
+}
+
+.abf-card {
+  position: relative;
+  width: min(30.4vw, 438px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--violet);
+  container-type: inline-size;
+  margin: 0
+}
+
+.abf-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom
+}
+
+.abf-socials {
+  position: absolute;
+  z-index: 1;
+  top: 3.4%;
+  right: 3.1%;
+  display: flex;
+  gap: 2.7cqw
+}
+
+.abf-social {
+  display: block;
+  width: 6.6cqw;
+  height: 6.6cqw
+}
+
+.abf-social svg {
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+.abf-block {
+  position: absolute;
+  background: var(--acid)
+}
+
+.abf-block--name {
+  left: 0;
+  width: 65%;
+  top: 74.3%;
+  height: 11%
+}
+
+.abf-block--band {
+  left: 0;
+  right: 0;
+  top: 85.3%;
+  height: 4.6%
+}
+
+.abf-block--role {
+  left: 40.3%;
+  right: 0;
+  top: 89.9%;
+  bottom: 0
+}
+
+.abf-name,
+.abf-role {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: #121212
+}
+
+/* centred in the name plate */
+.abf-name {
+  left: 4.2%;
+  top: 74.3%;
+  height: 11%;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 5.3cqw;
+  letter-spacing: -.02em;
+  white-space: nowrap
+}
+
+/* centred on the band and role strip together, inside the strip */
+.abf-role {
+  left: 45%;
+  top: 85.3%;
+  bottom: 0;
+  font-family: var(--body);
+  font-size: 4.2cqw;
+  letter-spacing: -.01em
+}
+
+/* the second card: name plate on the right, role strip on the left */
+.abf-card--flip .abf-block--name {
+  left: 41%;
+  width: auto;
+  right: 0
+}
+
+.abf-card--flip .abf-block--role {
+  left: 0;
+  right: auto;
+  width: 51.5%
+}
+
+.abf-card--flip .abf-name {
+  left: 45.5%
+}
+
+.abf-card--flip .abf-role {
+  left: 5%
+}
+
+@media (max-width:700px) {
+  .abf-row {
+    flex-direction: column;
+    align-items: center
+  }
+
+  .abf-card {
+    width: min(100%, 438px)
+  }
+
+  .abf-h {
+    font-size: 28px
+  }
+}
+
+/* about us: the black band of four proof cards — a tetris-notched black block
+   with each card on a white tab carrying its label */
+.ab-proof {
+  background: var(--paper);
+  padding: 0 0 clamp(48px, 6vw, 96px)
+}
+
+.ab-proofRow {
+  position: relative;
+  background: #050505;
+  padding: 5vw 4.9% 6vw 5.1%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3.4vw;
+  /* the block's own outline, in the design's proportions: wider through the
+     middle, notched along the bottom edge */
+  clip-path: polygon(3.5% 0, 97.1% 0, 97.1% 9.3%, 100% 9.3%, 100% 91%, 97.1% 91%, 97.1% 100%,
+      75.4% 100%, 75.4% 91%, 72% 91%, 72% 100%, 29.8% 100%, 29.8% 92.3%, 22.4% 92.3%,
+      22.4% 100%, 3.5% 100%, 3.5% 91%, 0 91%, 0 9.3%, 3.5% 9.3%)
+}
+
+.ab-proofCard {
+  position: relative;
+  margin-top: 2.5vw
+}
+
+.ab-proofTab {
+  position: absolute;
+  left: -4.7%;
+  bottom: 100%;
+  width: 43.6%;
+  min-width: max-content;
+  height: 2.5vw;
+  min-height: 28px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  padding: 0 10px
+}
+
+.ab-proofTab .mark {
+  position: absolute;
+  left: calc(100% - 20px);
+  top: 4px;
+  width: 12px;
+  height: 12px
+}
+
+.ab-tag--sm {
+  height: 16px;
+  font-size: 11px;
+  padding: 0 5px
+}
+
+.ab-proofBody {
+  background: var(--paper);
+  padding: 22px 16px 24px;
+  min-height: 15vw;
+  color: #333
+}
+
+.ab-proofBody h3 {
+  margin: 0 0 clamp(20px, 2.8vw, 40px);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.3
+}
+
+.ab-proofBody p {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(11px, .85vw, 13px);
+  line-height: 1.5;
+  color: #4C4546
+}
+
+/* "We invest in startups we work with": three bordered cards stepping up, a
+   yellow corner on each, and a quote bar under them */
+.ab-invest {
+  background: var(--paper);
+  padding: 0 72px clamp(64px, 8vw, 128px)
+}
+
+.ab-invest .ab-whyIn {
+  padding: 0
+}
+
+.ab-stairs {
+  margin-top: clamp(48px, 6vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end
+}
+
+.ab-stair {
+  --cu: clamp(18px, 1.7vw, 24px);
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #C9C9C9;
+  background: var(--paper);
+  padding: clamp(20px, 2vw, 28px) clamp(18px, 1.8vw, 26px);
+  margin-left: -1px
+}
+
+.ab-stair h3 {
+  margin: 0 0 clamp(20px, 2.6vw, 38px);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: clamp(16px, 1.4vw, 20px);
+  color: #1A1A1A
+}
+
+.ab-stair p {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(11px, .85vw, 13px);
+  line-height: 1.55;
+  color: #333
+}
+
+.ab-stair--1 { min-height: clamp(260px, 25vw, 360px) }
+.ab-stair--2 { min-height: clamp(300px, 28vw, 400px) }
+.ab-stair--3 { min-height: clamp(380px, 35.5vw, 510px) }
+
+.ab-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  display: block;
+  pointer-events: none
+}
+
+.ab-quote {
+  margin-top: 18px;
+  background: #F7F7F7;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 26px);
+  padding: clamp(18px, 2vw, 28px) clamp(18px, 2.2vw, 32px)
+}
+
+.ab-quoteMark {
+  flex: none;
+  width: clamp(28px, 3.4vw, 48px);
+  height: auto
+}
+
+.ab-quote p {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.4;
+  color: #1A1A1A
+}
+
+@media (max-width:900px) {
+  .ab-proofRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px 5vw;
+    padding: 44px 5vw 40px;
+    clip-path: none
+  }
+
+  .ab-proofCard {
+    margin-top: 0
+  }
+
+  .ab-proofBody {
+    min-height: 0
+  }
+
+  .ab-proofTab {
+    height: 28px
+  }
+}
+
+@media (max-width:640px) {
+  .ab-proofRow {
+    grid-template-columns: 1fr
+  }
+
+  .ab-invest {
+    padding: 0 16px 56px
+  }
+
+  .ab-stairs {
+    grid-template-columns: 1fr;
+    gap: 16px
+  }
+
+  .ab-stair {
+    --cu: 26px;
+    margin-left: 0;
+    min-height: 0 !important;
+    padding-bottom: 72px
+  }
+}
+
+/* about us hero: the header lines up with the mosaic below it, 72px in from each side */
+@media (min-width:701px) {
+  .ab-nav {
+    padding-left: 72px;
+    padding-right: 72px
+  }
+}
+
+/* the proof cards' label tabs: the tab hugs a normal 14px tag, and the tag's
+   icon hangs off its corner like every other section tag */
+.ab-proofTab {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 12px 17px 12px 12px
+}
+
+.ab-proofTab .ab-tagwrap .mark {
+  position: absolute;
+  left: calc(100% - 9.4px);
+  top: -3.4px;
+  width: 16.5px;
+  height: 16.5px
+}
+
+/* about us, "How Vidrow works": a centred heading over four grey cards with a
+   2 x 2 yellow block set into the point where they meet */
+.ab-how {
+  background: var(--paper);
+  padding: 0 72px clamp(64px, 8vw, 128px)
+}
+
+.ab-howHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px
+}
+
+.ab-howHead .ab-whyH {
+  max-width: none
+}
+
+.ab-howGrid {
+  position: relative;
+  margin-top: clamp(40px, 5.6vw, 88px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 10px
+}
+
+.ab-howCard {
+  background: #F4F4F4;
+  min-height: clamp(220px, 18.8vw, 270px);
+  box-sizing: border-box;
+  padding: clamp(28px, 3.2vw, 46px) clamp(22px, 2.2vw, 32px) clamp(28px, 3.4vw, 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px
+}
+
+.ab-howCard h3 {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(18px, 1.6vw, 23px);
+  line-height: 1.25;
+  color: #444
+}
+
+.ab-howCard p {
+  margin: 0;
+  max-width: 470px;
+  font-family: var(--body);
+  font-size: clamp(12px, .95vw, 14px);
+  line-height: 1.45;
+  color: #4C4546
+}
+
+/* the cards in the right-hand column start a little further in, like the design */
+.ab-howCard:nth-child(even) {
+  padding-left: clamp(40px, 5.6vw, 80px)
+}
+
+.ab-howBlock {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(2, clamp(44px, 4.7vw, 66px));
+  gap: 4px;
+  padding: 4px;
+  background: var(--paper)
+}
+
+.ab-howBlock i {
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: #F6F97A
+}
+
+@media (max-width:700px) {
+  .ab-how {
+    padding: 0 16px 56px
+  }
+
+  .ab-howGrid {
+    grid-template-columns: 1fr;
+    gap: 10px
+  }
+
+  .ab-howCard:nth-child(even) {
+    padding-left: clamp(22px, 2.2vw, 32px)
+  }
+
+  .ab-howCard {
+    min-height: 0
+  }
+
+  .ab-howBlock {
+    display: none
+  }
+}
+
+/* ── about us, "The Whole Team": heading and blurb side by side, then a
+   4-up grid of portrait cards. Each photo steps down into the yellow name
+   plate at its bottom-left; card innards are in cqw so they scale with
+   the card. ── */
+.abt {
+  background: var(--paper);
+  padding: clamp(48px, 6vw, 96px) 5% 85px
+}
+
+.abt-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: clamp(40px, 6.2vw, 90px)
+}
+
+.abt-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 1.6vw, 24px)
+}
+
+.abt-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.34vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  color: #121212
+}
+
+.abt-blurb {
+  margin: 0;
+  width: min(39vw, 560px);
+  padding-top: 18px;
+  font-family: var(--body);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.55;
+  color: #5A5A62
+}
+
+.abt-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.3vw, 33px)
+}
+
+.abt-card {
+  container-type: inline-size;
+  margin: 0
+}
+
+.abt-shot {
+  position: relative;
+  aspect-ratio: 144 / 177;
+  overflow: hidden
+}
+
+.abt-shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom
+}
+
+/* the two steps rising out of the plate at the photo's bottom-left */
+.abt-step {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  background: var(--acid)
+}
+
+.abt-step--1 {
+  width: 10cqw;
+  height: 20.8cqw
+}
+
+.abt-step--2 {
+  width: 19.4cqw;
+  height: 11.1cqw
+}
+
+.abt-plate {
+  position: relative;
+  height: 25cqw;
+  padding: 3.6cqw 15cqw 0 6.2cqw;
+  box-sizing: border-box;
+  background: var(--acid)
+}
+
+.abt-name {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 7.6cqw;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #121212;
+  white-space: nowrap
+}
+
+.abt-role {
+  margin: 2cqw 0 0;
+  font-family: var(--body);
+  font-size: 3.9cqw;
+  line-height: 1.3;
+  color: #121212;
+  white-space: nowrap
+}
+
+.abt-in {
+  position: absolute;
+  top: 3.6cqw;
+  right: 5.5cqw;
+  width: 8cqw;
+  height: 8cqw
+}
+
+.abt-in svg {
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+@media (max-width:900px) {
+  .abt-head {
+    flex-direction: column;
+    gap: 16px
+  }
+
+  .abt-blurb {
+    width: auto;
+    padding-top: 0
+  }
+
+  .abt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+@media (max-width:700px) {
+  .abt {
+    padding-left: 16px;
+    padding-right: 16px
+  }
+
+  .abt-h {
+    font-size: 28px
+  }
+
+  /* half a phone is narrow for the card's type: a touch larger, and the
+     role may wrap */
+  .abt-name {
+    font-size: 8.4cqw
+  }
+
+  .abt-role {
+    font-size: 5cqw;
+    white-space: normal
+  }
+
+  .abt-plate {
+    height: auto;
+    min-height: 25cqw;
+    padding-bottom: 4cqw
+  }
+}
+
+/* every section tag icon is 12 x 12, on every screen size */
+.sw-tagwrap .mark,
+.fo-tagwrap .mark,
+.pr-tagwrap .mark,
+.news-tagwrap .mark,
+.cs-tagwrap .mark,
+.ab-tagwrap .mark,
+.ab-proofTab .ab-tagwrap .mark,
+.wy-tagwrap .wy-tagMark {
+  width: 12px;
+  height: 12px;
+  left: calc(100% - 7px);
+  top: -1.4px
+}
+
+.fw-tagwrap .mark,
+.fw2-tagwrap .mark,
+.lev-eyebrow .mark {
+  width: 12px;
+  height: 12px;
+  left: calc(100% - 7px);
+  top: -5.4px
+}
+
+/* about us: the hero heading is 56px, every other section heading 48px (phones keep 28px) */
+@media (min-width:701px) {
+  .ab-h {
+    font-size: 56px
+  }
+
+  .ab-whyH {
+    font-size: 48px
+  }
+}
+
+/* about us proof cards: 18px titles, 14px body */
+.ab-proofBody h3 {
+  font-size: 18px
+}
+
+.ab-proofBody p {
+  font-size: 14px
+}
+
+/* about us stepped cards: 24px titles, 14px body */
+.ab-stair h3 {
+  font-size: 24px
+}
+
+.ab-stair p {
+  font-size: 14px
+}
+
+/* about us quote bar: 20px, medium weight */
+.ab-quote p {
+  font-size: 20px;
+  font-weight: 500
+}
+
+/* about us "How Vidrow works" cards: 24px medium titles, 14px body */
+.ab-howCard h3 {
+  font-size: 24px;
+  font-weight: 500
+}
+
+.ab-howCard p {
+  font-size: 14px
+}
+
+/* ── about us: the homepage's frame ──
+   Sections are capped at the page's --maxw (1720px) and centred; the dotted
+   hero ground still runs edge to edge, with its content held to the same
+   frame. Side space is 72px on desktop and the page's own --side on phones. */
+.ab-nav {
+  padding-left: max(72px, (100% - var(--maxw)) / 2 + 72px);
+  padding-right: max(72px, (100% - var(--maxw)) / 2 + 72px)
+}
+
+.ab-grid {
+  max-width: calc(var(--maxw) - 144px)
+}
+
+.ab-why,
+.ab-proof,
+.ab-invest,
+.ab-how,
+.abf,
+.abt {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto
+}
+
+/* the black band's proportions were in viewport units; they now follow the
+   capped width, so it keeps its shape past 1720px */
+.ab-proofRow {
+  --u: min(1vw, 17.2px);
+  padding: calc(5 * var(--u)) 4.9% calc(6 * var(--u)) 5.1%;
+  gap: calc(3.4 * var(--u))
+}
+
+.ab-proofCard {
+  margin-top: calc(2.5 * var(--u))
+}
+
+.ab-proofBody {
+  min-height: calc(15 * var(--u))
+}
+
+@media (max-width:700px) {
+  .ab-nav {
+    padding-left: var(--side);
+    padding-right: var(--side)
+  }
+}
+
+/* about us on phones: the homepage's 20px side space everywhere, and the
+   black band's padding put back after the width-cap rules above */
+@media (max-width:900px) {
+  .ab-proofRow {
+    padding: 80px var(--side) 72px;
+    gap: 68px 5vw
+  }
+
+  .ab-proofCard {
+    margin-top: 0
+  }
+
+  .ab-proofBody {
+    min-height: 0
+  }
+}
+
+@media (max-width:700px) {
+  .ab-grid {
+    width: calc(100% - 2 * var(--side))
+  }
+
+  .ab-head {
+    padding: 0 var(--side)
+  }
+
+  .ab-why,
+  .ab-invest,
+  .ab-how {
+    padding-left: var(--side);
+    padding-right: var(--side)
+  }
+
+  .abt {
+    padding-left: var(--side);
+    padding-right: var(--side)
+  }
+
+  .ab-quote {
+    align-items: flex-start
+  }
+
+  .ab-quote p {
+    font-size: 16px
+  }
+
+  .ab-quoteMark {
+    width: 28px
+  }
+}
+
+/* about us hero: phones swap the 17-column mosaic for their own 12 x 9 one
+   (see ABOUT_ROWS_MOBILE), in the mobile mock's three yellows */
+.ab-grid--m {
+  display: none
+}
+
+.ab-mg { background: #FCEF88 }
+.ab-my { background: #FAFCA9 }
+.ab-ml { background: #FBFAC4 }
+
+@media (max-width:700px) {
+  .ab-grid--d {
+    display: none
+  }
+
+  .ab-grid--m {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr))
+  }
+}
