@@ -24,19 +24,20 @@ export default function SelectedWork() {
               <h2 className="sw-h">We make Ads that people don&rsquo;t skip</h2>
             </div>
           </div>
-          <div className="sw-filters" role="group" aria-label="Filter work by service">
-            {SW_TABS.map((f) => (
-              <button
-                key={f.cat}
-                className="sw-filter"
-                aria-pressed={activeCat === f.cat}
-                onClick={() => setActiveCat(f.cat)}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
         </Reveal>
+
+        <div className="sw-filters" role="group" aria-label="Filter work by service">
+          {SW_TABS.map((f) => (
+            <button
+              key={f.cat}
+              className="sw-filter"
+              aria-pressed={activeCat === f.cat}
+              onClick={() => setActiveCat(f.cat)}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
 
         <div className="sw-field">
           <div className={`sw-grid sw-grid--${tab.layout}`}>

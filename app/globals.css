@@ -11631,3 +11631,12 @@ button:focus-visible,
     --k: 1px
   }
 }
+
+/* the filter tabs stay pinned to the top while the cards scroll under them */
+.sw-filters {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--paper);
+  padding-block: 12px
+}
