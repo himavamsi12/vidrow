@@ -2,17 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
 
 // the heavy block quote mark that opens each testimonial
 function QuoteMark() {
   return (
-    <svg className="fw2-mark" viewBox="0 0 24 24" aria-hidden="true">
+    <svg className="fw2-mark" viewBox="0 0 160 100" aria-hidden="true">
       <path
         fill="#0B0B0D"
-        d="M0 4h10v9H5v4H0zM14 4h10v9h-5v4h-5z"
+        d="M0 0h64v24H32v24h32v52H0zM96 0h64v24h-32v24h32v52H96z"
       />
     </svg>
   );
@@ -166,8 +166,8 @@ export default function FeaturedWork() {
     <section className="fw2">
       <Reveal className="fw2-head">
         <div className="fw2-tagwrap">
-          <span className="fw2-tag">Featured work</span>
-          <Mark />
+          <span className="fw2-tag">Testimonials</span>
+          <TagMark />
         </div>
         <h2 className="fw2-h">Hear it from the founders</h2>
       </Reveal>
@@ -185,12 +185,8 @@ export default function FeaturedWork() {
                 <div className="fw2-frame">
                   <Ground />
 
-                  <span className="fw2-logo" style={{ "--trim": item.logo.trim, "--lscale": item.logo.scale }}>
-                    {item.logo.type === "image" ? (
-                      <img src={item.logo.src} alt={item.logo.alt} />
-                    ) : (
-                      <b>{item.logo.value || item.logo.alt}</b>
-                    )}
+                  <span className={`fw2-logo${(item.deskLogo || item.logo).sq ? " fw2-logo--sq" : ""}`} style={{ "--lw": `${(item.deskLogo || item.logo).w ?? 68}%` }}>
+                    <img src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
                   </span>
 
                   <figure className="fw2-photo">

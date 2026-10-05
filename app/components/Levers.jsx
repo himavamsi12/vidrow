@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import { CUBE_PX, CUBE_W, PIECES } from "../data/levers";
 
 function seg(x, a, b) {
@@ -257,7 +257,21 @@ export default function Levers() {
     window.addEventListener("resize", setupLevers);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setupLevers);
 
+    // the pieces land on slot positions measured up front, so any layout
+    // change that isn't a window resize (a label's spacing or wrap, a late
+    // style update) would leave them parked where the slots used to be —
+    // re-measure whenever the stage or a column changes size
+    let roFrame = 0;
+    const ro = new ResizeObserver(() => {
+      cancelAnimationFrame(roFrame);
+      roFrame = requestAnimationFrame(setupLevers);
+    });
+    ro.observe(levStage);
+    levCols.forEach((c) => c && ro.observe(c));
+
     return () => {
+      ro.disconnect();
+      cancelAnimationFrame(roFrame);
       window.removeEventListener("scroll", onLevScroll);
       window.removeEventListener("resize", setupLevers);
     };
@@ -304,7 +318,7 @@ export default function Levers() {
             <div className="lev-eyebrow" ref={eyebrowRef}>
               <span className="lev-eyebrow-t">
                 The levers
-                <Mark />
+                <TagMark />
               </span>
             </div>
             <h2 className="lev-h">

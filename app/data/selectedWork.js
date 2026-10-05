@@ -24,17 +24,18 @@ const card = (i, [title, client, img, href]) => ({
 // one tab per service, each with its own cards. "wide" tabs show three
 // landscape stills across; "tall" ones show four portrait reels.
 //
-// TODO: Fayda Uthaiye (Apnamart) is using a stand-in still, and Bachatt has
+// TODO: Bachatt has
 // no image yet; the corner shapes beyond the first tab are approximations.
 export const SW_TABS = [
   {
     cat: "brand",
+    short: "Brand", // the phone layout's shorter tab label
     label: "Brand Marketing",
     layout: "wide",
     items: [
       ["Pay for Cooling", "Helium Smart Air", "5.png", "/campaign/pay-for-cooling"],
       ["Bimaari par Bhari", "PlatinumRx", "2.png", "/campaign/bimaari-par-bhari"],
-      ["Fayda Uthaiye", "Apnamart", "6.png", "/campaign/fayda-uthaiye"],
+      ["Fayda Uthaiye", "Apnamart", "apnamart-1.png", "/campaign/fayda-uthaiye"],
       ["Business Banega Digital", "Vyapar", "vyapar.png", "/campaign/vyapar"],
       ["Khul ke Bolega", "Eloelo", "eloela.png"],
       ["Stressfree Buying", "Ivy Homes", "ivyhomes.png", "/campaign/stressfree-buying"],
@@ -42,6 +43,7 @@ export const SW_TABS = [
   },
   {
     cat: "celebrity",
+    short: "Celebrity", // the phone layout's shorter tab label
     label: "Celebrity Performance",
     layout: "wide",
     items: [
@@ -55,6 +57,7 @@ export const SW_TABS = [
   },
   {
     cat: "global",
+    short: "AI", // the phone layout's shorter tab label
     label: "Global Launch",
     layout: "wide",
     items: [
@@ -68,6 +71,7 @@ export const SW_TABS = [
   },
   {
     cat: "content",
+    short: "Ads", // the phone layout's shorter tab label
     label: "Branded Content",
     layout: "wide",
     items: [
@@ -81,6 +85,7 @@ export const SW_TABS = [
   },
   {
     cat: "creatives",
+    short: "Performance", // the phone layout's shorter tab label
     label: "Performance Creatives",
     layout: "tall",
     items: [
@@ -96,6 +101,7 @@ export const SW_TABS = [
   },
   {
     cat: "social",
+    short: "Social", // the phone layout's shorter tab label
     label: "Social Media",
     layout: "tall",
     items: [

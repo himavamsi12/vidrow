@@ -1,4 +1,4 @@
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { PR_STAGES, PR_TILES, PR_GROUPS } from "../data/partnership";
 
@@ -9,8 +9,8 @@ export default function Partnership() {
         <Reveal className="pr-top">
           <div className="pr-head">
             <div className="pr-tagwrap">
-              <span className="pr-tag">Inside the partnership</span>
-              <Mark />
+              <span className="pr-tag">Inside The Partnership</span>
+              <TagMark />
             </div>
             <h2 className="pr-h">
               <span className="pr-h-d">

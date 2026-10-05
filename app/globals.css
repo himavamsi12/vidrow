@@ -905,7 +905,7 @@ html.nav-hidden .hx-bar {
   font-weight: 400;
   margin: 0;
   font-size: min(calc(64 * var(--k)), 64px);
-  line-height: 1.5;
+  line-height: 1.15;
   letter-spacing: calc(-2 * var(--k));
   color: #121212
 }
@@ -2534,7 +2534,9 @@ html.nav-hidden .hx-bar {
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
-  display: block
+  display: block;
+  /* the founders read in black and white against the acid ground */
+  filter: grayscale(1)
 }
 
 /* the bottom-left white block is the headline's own box rather than part
@@ -2579,9 +2581,10 @@ html.nav-hidden .hx-bar {
   justify-content: center
 }
 
+/* two notched blocks filling ~5/8 of the chip's width */
 .fw2-mark {
-  width: calc(24 * var(--k));
-  height: calc(24 * var(--k));
+  width: calc(50 * var(--k));
+  height: calc(31.25 * var(--k));
   display: block
 }
 
@@ -3497,8 +3500,12 @@ html.nav-hidden .hx-bar {
     --slotH: clamp(64px, 13.3vh, 120px)
   }
 
+  /* a fixed 28px from the piece's bottom edge to the label at any screen
+     height — the line box is trimmed to the type so the 28px reads as the
+     gap to the letters, not to the leading above them */
   .lev-col h3 {
-    margin-top: clamp(10px, 3.1vh, 28px);
+    margin-top: 28px;
+    line-height: 1;
     font-size: clamp(13px, 1.67vh, 15px)
   }
 
@@ -4761,54 +4768,6 @@ html.nav-hidden .hx-bar {
   width: min(578px, 100%)
 }
 
-.news-nav {
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: 24px
-}
-
-.news-nav button {
-  width: 48px;
-  height: 48px;
-  border: 1px solid #E4E4E4;
-  padding: 0;
-  cursor: pointer;
-  background: var(--paper);
-  display: grid;
-  place-items: center;
-  transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
-}
-
-.news-nav button:hover {
-  background: #121212;
-  border-color: #121212
-}
-
-.news-nav svg path {
-  stroke: #121212;
-  transition: stroke var(--btn-dur) var(--btn-ease)
-}
-
-.news-nav svg {
-  width: 26px;
-  height: 26px;
-  display: block
-}
-
-.news-nav button:hover svg path {
-  stroke: var(--paper)
-}
-
-.news-nav .prev svg {
-  transform: rotate(180deg)
-}
-
-/* the under-the-cards pair is mobile's only nav (see the 759px block) */
-.news-nav--mobile {
-  display: none
-}
-
 .news-rail {
   width: 100%
 }
@@ -5059,37 +5018,10 @@ html.nav-hidden .hx-bar {
     gap: 20px
   }
 
-  /* the row is still swipeable — the JS leaves the track's transform alone
-     here — and the side arrows give way to the pair (and counter) under
-     the cards */
+  /* no arrows on a phone: the row is swiped instead (the JS leaves the
+     track's transform alone here) */
   .news-side {
     display: none
-  }
-
-  /* centred under the cards: ← 01/04 → */
-  .news-nav--mobile {
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 32px
-  }
-
-  .news-nav--mobile button {
-    width: 44px;
-    height: 44px
-  }
-
-  .news-nav--mobile svg path {
-    stroke: #121212
-  }
-
-  .news-index--mobile {
-    font-family: var(--body);
-    font-size: 16px;
-    letter-spacing: .01em;
-    color: #9A9A9A;
-    font-variant-numeric: tabular-nums
   }
 
   .news-rail {
@@ -11073,7 +11005,9 @@ button:focus-visible,
   width: 49.5cqw;
   height: 51cqw;
   object-fit: cover;
-  object-position: center top
+  object-position: center top;
+  /* the founders read in black and white against the acid ground */
+  filter: grayscale(1)
 }
 
 .fwm-by {
@@ -11639,4 +11573,761 @@ button:focus-visible,
   z-index: 30;
   background: var(--paper);
   padding-block: 12px
+}
+
+/* every section heading but the hero's is 48px (phones keep their 28px) */
+@media (min-width:641px) {
+  .fw2-h,
+  .wy-h,
+  .lev-h,
+  .sw-h,
+  .pr-h,
+  .cs-h,
+  .fo-h,
+  .news-h,
+  .vfoot__title {
+    font-size: 48px !important
+  }
+}
+
+/* the tag's corner icon is violet on the dark Where You Are Now section */
+.wy-tagwrap .mark {
+  color: var(--violet)
+}
+
+/* the tag's corner icon: a solid violet step, upright, tucked behind the tag's top-right corner */
+.wy-tagwrap .wy-tagMark {
+  position: absolute;
+  left: calc(100% - 8 * var(--k));
+  top: calc(-4 * var(--k));
+  width: calc(14 * var(--k));
+  height: calc(14 * var(--k));
+  z-index: 0
+}
+
+.wy-tagwrap .wy-tag {
+  z-index: 1
+}
+
+/* the pinned stage holds a little below the top of the screen, so the tag
+   keeps the spacing above it while the stages step through */
+@media (min-width:901px) {
+  .wy-track.scroll-on .wy-sticky {
+    --wy-pin: clamp(48px, 4vw, 80px);
+    top: var(--wy-pin);
+    height: calc(100vh - var(--wy-pin))
+  }
+}
+
+/* section tag icons: solid violet step, upright, tucked behind the tag */
+.mark--solid {
+  display: block;
+  transform: none !important;
+  color: var(--violet);
+  z-index: 0
+}
+
+.fw-tag,
+.fw2-tag,
+.lev-eyebrow-t,
+.sw-tag,
+.cs-tag,
+.fo-tag,
+.pr-tag,
+.news-tag {
+  position: relative;
+  z-index: 1
+}
+
+/* the headline's underlines are gone */
+.hx-h u {
+  text-decoration: none
+}
+
+/* hero headline: 68px on desktop, scaling down with the frame on smaller screens */
+@media (min-width:901px) {
+  .hx-h {
+    font-size: min(calc(68 * var(--k)), 68px)
+  }
+}
+
+/* Where You Are Now: the step hangs one third of its size above and past the tag's corner, like the other sections */
+.wy-tagwrap .wy-tagMark {
+  left: calc(100% - 9.33 * var(--k));
+  top: 0
+}
+
+/* the logo is centred in the card's top-left white block */
+.fw2-logo {
+  left: 0;
+  width: 15.56%;
+  justify-content: center
+}
+
+.fw2-logo img {
+  width: auto;
+  height: auto;
+  max-width: 62%;
+  max-height: 42%;
+  object-position: center;
+  translate: none;
+  transform-origin: 50% 50%
+}
+
+/* every testimonial logo is drawn at the same width, whatever its file's proportions */
+.fw2-logo img {
+  width: var(--lw, 56%);
+  max-width: 80%;
+  max-height: 48%;
+  scale: 1
+}
+
+/* exactly 24px from the bottom of the tabs to the cards (the tabs keep 12px of
+   padding under them, and the section's own gap is pulled back to fit) */
+.sw-filters {
+  margin-bottom: calc(12px - clamp(28px, 3.4vw, 48px))
+}
+
+/* filter tab labels are 14px */
+.sw-filter {
+  font-size: 14px
+}
+
+/* portrait cards: titles get the full caption width (so long ones fit on two
+   lines) and a little less side padding */
+.sw-grid--tall .sw-name,
+.sw-grid--tall .sw-client {
+  max-width: 100%
+}
+
+.sw-grid--tall .sw-body {
+  padding-inline: 20px
+}
+
+/* partnership, desktop: the stage key sits between the heading and the table,
+   with the spacing from the design (tag > heading > key > table) */
+@media (min-width:901px) {
+  .pr {
+    --pr-gap: clamp(28px, 3.6vw, 52px);
+    padding-top: clamp(40px, 4.8vw, 80px)
+  }
+
+  .pr-head {
+    gap: clamp(20px, 3.8vw, 56px)
+  }
+
+  .pr-legend {
+    grid-column: auto;
+    grid-row: auto;
+    align-self: auto;
+    justify-self: auto;
+    margin-top: calc(clamp(40px, 6vw, 96px) - var(--pr-gap));
+    margin-bottom: calc(clamp(64px, 10.5vw, 170px) - var(--pr-gap));
+    align-self: center;
+    gap: 8px clamp(20px, 2.2vw, 32px);
+    font-size: 15px;
+    color: #121212
+  }
+
+  .pr-legend span {
+    gap: 10px
+  }
+
+  .pr-legend i {
+    width: 14px;
+    height: 14px
+  }
+}
+
+@media (max-width:900px) {
+  .pr-legend {
+    display: none
+  }
+}
+
+/* partnership, desktop: 32px between the tag, the heading, the key and the table */
+@media (min-width:901px) {
+  .pr-in {
+    gap: 32px
+  }
+
+  .pr-head {
+    gap: 32px
+  }
+
+  .pr-legend {
+    margin-top: 0;
+    margin-bottom: 0
+  }
+}
+
+/* partnership, desktop: the whole section as designed — tag, heading, then the
+   table straight under it with the stage key tucked into its empty top row.
+   32px between the tag, the heading and the table. */
+@media (min-width:901px) {
+  .pr {
+    padding-top: clamp(48px, 5.2vw, 104px);
+    padding-bottom: clamp(40px, 3.6vw, 72px)
+  }
+
+  .pr-in,
+  .pr-head {
+    gap: 32px
+  }
+
+  .pr-table {
+    gap: clamp(3px, .3vw, 6px)
+  }
+
+  .pr-tile {
+    aspect-ratio: 176 / 126
+  }
+
+  .pr-legend {
+    grid-column: 2 / 10;
+    grid-row: 1;
+    align-self: start;
+    justify-self: center;
+    margin: clamp(16px, 1.6vw, 32px) 0 0;
+    gap: 8px clamp(20px, 1.5vw, 30px);
+    font-size: clamp(12px, .8vw, 15px);
+    color: #121212
+  }
+
+  .pr-legend span {
+    gap: 8px
+  }
+
+  .pr-legend i {
+    width: .8em;
+    height: .8em
+  }
+}
+
+.cs-sub {
+  color: #4C4546
+}
+
+/* section tag icons sit in FRONT of the tag, hanging over its top-right
+   corner: half the icon past the tag's right edge, and nearly all of it
+   above the tag's top edge (the wrappers are 4px taller than their tags,
+   so the tops below are measured from the wrapper) */
+.mark--solid,
+.wy-tagwrap .wy-tagMark {
+  z-index: 2
+}
+
+.fw-tagwrap .mark,
+.fw2-tagwrap .mark {
+  left: calc(100% - 7.5px);
+  top: -13px
+}
+
+.lev-eyebrow .mark {
+  left: calc(100% - 7.5px);
+  top: -13px
+}
+
+.sw-tagwrap .mark {
+  left: calc(100% - 7.5px);
+  top: -9px
+}
+
+.cs-tagwrap .mark {
+  left: calc(100% - 6 * var(--k));
+  top: calc(-6.6 * var(--k))
+}
+
+.fo-tagwrap .mark,
+.pr-tagwrap .mark,
+.news-tagwrap .mark {
+  left: calc(100% - 6px);
+  top: -6.6px
+}
+
+.wy-tagwrap .wy-tagMark {
+  left: calc(100% - 7 * var(--k));
+  top: calc(-8.3 * var(--k))
+}
+
+.news-sub {
+  color: #4C4546
+}
+
+/* tag icons, final: about as tall as the tag itself, in front of it, with a bit
+   over half of it past the tag's right edge and under half of it above the
+   tag's top (wrappers sit 4px above their tags, so tops are measured from the
+   wrapper) */
+.sw-tagwrap .mark,
+.fo-tagwrap .mark,
+.pr-tagwrap .mark,
+.news-tagwrap .mark {
+  width: 16.5px;
+  height: 16.5px;
+  left: calc(100% - 9.4px);
+  top: -3.4px
+}
+
+.cs-tagwrap .mark {
+  width: calc(16.5 * var(--k));
+  height: calc(16.5 * var(--k));
+  left: calc(100% - 9.4 * var(--k));
+  top: calc(-3.4 * var(--k))
+}
+
+.wy-tagwrap .wy-tagMark {
+  width: calc(16.5 * var(--k));
+  height: calc(16.5 * var(--k));
+  left: calc(100% - 9.4 * var(--k));
+  top: calc(-3.4 * var(--k))
+}
+
+.lev-eyebrow .mark {
+  width: 16.5px;
+  height: 16.5px;
+  left: calc(100% - 9.4px);
+  top: -7.4px
+}
+
+.fw-tagwrap .mark,
+.fw2-tagwrap .mark {
+  width: 22px;
+  height: 22px;
+  left: calc(100% - 12.5px);
+  top: -10px
+}
+
+/* news card headlines are 26px */
+.news-card .news-title {
+  font-size: 26px
+}
+
+/* footer, per the design: solid step icons, a two-line blurb, smaller bottom row */
+.vfoot__ctaStep {
+  width: 40px;
+  height: 40px;
+  display: block;
+  fill: var(--violet);
+  transition: fill var(--btn-dur) var(--btn-ease)
+}
+
+.vfoot__cta:hover .vfoot__ctaStep {
+  fill: var(--acid)
+}
+
+.vfoot__cta--ghost .vfoot__ctaStep {
+  fill: var(--acid)
+}
+
+.vfoot__cta--ghost:hover .vfoot__ctaStep {
+  fill: var(--ink)
+}
+
+@media (min-width:641px) {
+  .vfoot__sub {
+    max-width: none
+  }
+}
+
+@media (max-width:640px) {
+  .vfoot__subBr {
+    display: none
+  }
+}
+
+.vfoot__tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .85)
+}
+
+.vfoot__legal {
+  font-size: 12px;
+  color: rgba(255, 255, 255, .85)
+}
+
+.vfoot__dot {
+  color: rgba(255, 255, 255, .85)
+}
+
+/* the footer heading is 64px (the other section headings are 48px) */
+@media (min-width:641px) {
+  .vfoot__title {
+    font-size: 64px !important
+  }
+}
+
+/* footer: the square-dot grid from the design as its ground (20px pitch, 3px
+   dots), light on the dark, sitting under the wordmark */
+.vfoot {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect x='8' y='8' width='3' height='3' fill='%23fff' fill-opacity='.12'/%3E%3C/svg%3E");
+  background-size: 20px 20px;
+  background-repeat: repeat
+}
+
+/* mobile testimonial logos: the same new logos as desktop, centred in the
+   white block at one shared width */
+.fwm-logo {
+  display: grid;
+  place-items: center
+}
+
+.fwm-logo img {
+  position: static;
+  inset: auto;
+  width: var(--lw, 56%);
+  height: auto;
+  max-width: 80%;
+  max-height: 48%;
+  transform: none
+}
+
+/* testimonial logos a little bigger, one shared width, centred in the block */
+.fw2-logo img,
+.fwm-logo img {
+  max-width: 95%;
+  max-height: 56%
+}
+
+/* ── Where You Are Now, mobile (per the mobile mock): the desktop look on a
+   phone — a dark section with a left-aligned white heading, the open stage
+   a grey card with a two-step notch at its bottom-right holding "Read Case
+   Study", the other stages plain white titles on hairlines. No stat card,
+   no board. ── */
+@media (max-width:900px) {
+  .wy {
+    background: #121212;
+    --wy-notch1: 42px;
+    --wy-notch2: 180px;
+    --wy-step1: 40px;
+    --wy-tab: 44px
+  }
+
+  .wy-in {
+    padding: 56px 20px 48px
+  }
+
+  .wy-head {
+    align-items: flex-start;
+    text-align: left
+  }
+
+  .wy-h {
+    color: var(--paper);
+    font-size: 28px;
+    line-height: 1.2;
+    text-align: left
+  }
+
+  .wy .wy-panel {
+    background: transparent;
+    padding: 0;
+    margin-top: 0;
+    border: 0
+  }
+
+  .wy .wy-item:last-child {
+    border-bottom: 0
+  }
+
+  /* the card styling holds on every stage, not just the open one, so a
+     stage that's closing keeps this look while it collapses instead of
+     flashing the old light card */
+  .wy-boardwrap,
+  .wy .wy-cardwrap,
+  .wy .wy-notch {
+    display: none
+  }
+
+  .wy .wy-item {
+    padding: 22px 0;
+    border-top: 0;
+    border-bottom: 1px solid #2E2E2E
+  }
+
+  .wy .wy-item.on {
+    padding: 0
+  }
+
+  .wy .wy-title {
+    color: var(--paper);
+    font-family: var(--body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0
+  }
+
+  .wy .wy-bodyIn {
+    position: relative;
+    padding: 0;
+    border: 0
+  }
+
+  .wy .wy-item .wy-lead {
+    background: #2A2A2A;
+    border: 0;
+    padding: 16px 16px calc(var(--wy-tab) + var(--wy-step1) + 4px);
+    clip-path: polygon(0 0, 100% 0,
+        100% calc(100% - var(--wy-tab) - var(--wy-step1)),
+        calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),
+        calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab)),
+        calc(100% - var(--wy-notch2)) calc(100% - var(--wy-tab)),
+        calc(100% - var(--wy-notch2)) 100%,
+        0 100%)
+  }
+
+  .wy .wy-leadTitle {
+    color: var(--acid);
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.25;
+    margin: 0 0 8px
+  }
+
+  .wy .wy-lead .wy-copy {
+    color: #CFCFCF;
+    font-size: 14px;
+    line-height: 1.32;
+    padding: 0;
+    margin: 0;
+    max-width: none
+  }
+
+  /* the link is the notch's lower step itself — same box, so the label can
+     never run out past it onto the grey card, whatever the font renders at */
+  .wy .wy-item .wy-read--d {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: var(--wy-notch2);
+    height: var(--wy-tab);
+    box-sizing: border-box;
+    padding: 0 12px;
+    white-space: nowrap;
+    color: var(--paper);
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 14px;
+    text-decoration: none
+  }
+
+  .wy .wy-read--d .wy-mark {
+    width: 12px;
+    height: 12px
+  }
+}
+
+/* flex, not grid: a grid's auto column shrank to the logo and sat at the
+   block's left edge, and the logo's percentage width had nothing to resolve
+   against */
+.fwm-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+/* the white notch is the logo box itself, so the logo is centred in exactly
+   what you see. (It used to be a background gradient on the card sized in
+   cqw, and a container's own cqw resolve against the page, not the card —
+   so the white block and the logo box came out different sizes.) */
+.fwm-card {
+  background: var(--acid)
+}
+
+.fwm-logo {
+  background: var(--paper)
+}
+
+/* mobile testimonials: every card is as tall as the longest one (rows of
+   one shared size), with the white panel running to the card's foot and
+   the copy set from its top, so the deck reads as one even stack */
+.fwm-list {
+  display: grid;
+  grid-auto-rows: 1fr
+}
+
+.fwm-card {
+  display: flex;
+  flex-direction: column
+}
+
+.fwm-panel {
+  flex: 1
+}
+
+/* type sized to the mobile mock */
+.fwm-by b {
+  font-weight: 600;
+  font-size: 4.4cqw
+}
+
+.fwm-line {
+  padding-right: .6cqw;
+  font-size: 4.45cqw;
+  line-height: 1.22
+}
+
+.fwm-quote p {
+  font-size: 4.25cqw;
+  line-height: 1.16
+}
+
+/* ── selected work, phone: "Selected Works" / "The Creatives That Scaled", the
+   tabs on two pinned lines with short labels, tighter spacing and captions ── */
+.sw .sw-m {
+  display: none
+}
+
+@media (max-width:640px) {
+  .sw .sw-d {
+    display: none
+  }
+
+  .sw .sw-m {
+    display: inline
+  }
+
+  .sw {
+    padding: 28px 16px 40px
+  }
+
+  .sw-in {
+    gap: 20px
+  }
+
+  .sw-head,
+  .sw-headL {
+    gap: 10px
+  }
+
+  .sw-h {
+    font-size: 28px !important;
+    line-height: 1.15
+  }
+
+  /* wraps onto two lines instead of scrolling sideways, and stays pinned */
+  .sw-filters {
+    width: auto;
+    max-width: none;
+    margin: 0 0 4px;
+    padding: 10px 0;
+    overflow: visible;
+    flex-wrap: wrap;
+    gap: 8px;
+    top: 0
+  }
+
+  .sw-filter {
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px
+  }
+
+  .sw-filter[data-cat="creatives"] { order: 1 }
+  .sw-filter[data-cat="brand"] { order: 2 }
+  .sw-filter[data-cat="celebrity"] { order: 3 }
+  .sw-filter[data-cat="social"] { order: 4 }
+  .sw-filter[data-cat="global"] { order: 5 }
+  .sw-filter[data-cat="content"] { order: 6 }
+
+  .sw-grid,
+  .sw-grid--tall {
+    gap: 28px
+  }
+
+  .sw-body,
+  .sw-grid--tall .sw-body {
+    min-height: 0;
+    padding: 18px 14px 0
+  }
+
+  .sw-name,
+  .sw-grid--tall .sw-name {
+    font-size: 18px
+  }
+
+  .sw-client,
+  .sw-grid--tall .sw-client {
+    font-size: 13px;
+    margin-top: 6px
+  }
+
+  .sw-view,
+  .sw-grid--tall .sw-view {
+    font-size: 14px;
+    padding-top: 22px;
+    margin-bottom: 16px
+  }
+}
+
+/* the padded square Helium file: let it overflow the box vertically (only its
+   blank padding gets clipped) so the word itself comes out at the shared size */
+.fw2-logo--sq img,
+.fwm-logo--sq img {
+  max-width: none;
+  max-height: none;
+  flex: none
+}
+
+/* phones: every section tag icon is 12 x 12 */
+@media (max-width:900px) {
+  .mark--solid,
+  .wy-tagwrap .wy-tagMark {
+    width: 12px;
+    height: 12px
+  }
+
+  .sw-tagwrap .mark,
+  .fo-tagwrap .mark,
+  .pr-tagwrap .mark,
+  .news-tagwrap .mark,
+  .cs-tagwrap .mark,
+  .wy-tagwrap .wy-tagMark {
+    left: calc(100% - 7px);
+    top: -1.4px
+  }
+
+  .fw-tagwrap .mark,
+  .fw2-tagwrap .mark,
+  .lev-eyebrow .mark {
+    left: calc(100% - 7px);
+    top: -5.4px
+  }
+}
+
+@media (max-width:900px) {
+  .sw-tagwrap .mark,
+  .fo-tagwrap .mark,
+  .pr-tagwrap .mark,
+  .news-tagwrap .mark,
+  .cs-tagwrap .mark,
+  .fw-tagwrap .mark,
+  .fw2-tagwrap .mark,
+  .lev-eyebrow .mark,
+  .wy-tagwrap .wy-tagMark {
+    width: 12px;
+    height: 12px
+  }
+}
+
+/* phones: the 26px news title above overflows a card this narrow, so it
+   scales with the card again, as the base rule sets it */
+@media (max-width:759px) {
+  .news-card .news-title {
+    font-size: 6.31cqw
+  }
+}
+
+/* the Playbook section: 80px under its panel on desktop */
+@media (min-width:901px) {
+  .wy {
+    padding-bottom: 80px
+  }
 }

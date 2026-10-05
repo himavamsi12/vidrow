@@ -3,15 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FOOTER_PIECES } from "../data/footerPieces";
 
-const CTA_CELLS = [
-  [0, 0],
-  [1, 0],
-  [2, 0],
-  [1, 1],
-  [2, 1],
-  [2, 2],
-];
-
 // the piece data's first drop is scheduled ~1.7s in; the whole timeline is
 // shifted back by that lead so the fall starts the moment the well is seen
 const LEAD = Math.min(...FOOTER_PIECES.filter((p) => !p.pre).map((p) => p.at));
@@ -163,12 +154,13 @@ export default function Footer({ hideCta = false }) {
       {!hideCta && (
       <div className="vfoot__copy">
         <h2 className="vfoot__title">
-          Are you building the <br />
-          next unicorn?
+          Are You Building The <br />
+          Next Unicorn?
         </h2>
         <p className="vfoot__sub">
-          We work with a small number of startups at a time. If you&rsquo;re serious about scaling
-          to the next round, we&rsquo;d like to hear from you.
+          We work with a small number of startups at a time. If you&rsquo;re serious{" "}
+          <br className="vfoot__subBr" />
+          about scaling to the next round, we&rsquo;d like to hear from you.
         </p>
         <div className="vfoot__ctaWrap">
           <a className="vfoot__cta" href="/contact">
@@ -177,21 +169,17 @@ export default function Footer({ hideCta = false }) {
               <span className="vfoot__m">Click to grow</span>
             </span>
             <span className="vfoot__ctaIcon">
-              <span className="vfoot__ctaMark">
-                {CTA_CELLS.map(([x, y], i) => (
-                  <i key={i} style={{ "--x": x, "--y": y }} />
-                ))}
-              </span>
+              <svg className="vfoot__ctaStep" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />
+              </svg>
             </span>
           </a>
           <a className="vfoot__cta vfoot__cta--ghost" href="/#work">
             <span className="vfoot__ctaLabel">See our work</span>
             <span className="vfoot__ctaIcon">
-              <span className="vfoot__ctaMark">
-                {CTA_CELLS.map(([x, y], i) => (
-                  <i key={i} style={{ "--x": x, "--y": y }} />
-                ))}
-              </span>
+              <svg className="vfoot__ctaStep" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />
+              </svg>
             </span>
           </a>
         </div>

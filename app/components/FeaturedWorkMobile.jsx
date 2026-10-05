@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
 
@@ -108,8 +108,8 @@ export default function FeaturedWorkMobile() {
     <section className="fw" ref={sectionRef}>
       <Reveal className="fw-head">
         <div className="fw-tagwrap">
-          <span className="fw-tag">Featured work</span>
-          <Mark />
+          <span className="fw-tag">Testimonials</span>
+          <TagMark />
         </div>
         <h2 className="fw-h">Hear it from the Founders</h2>
       </Reveal>
@@ -122,8 +122,8 @@ export default function FeaturedWorkMobile() {
 
           return (
             <article key={item.id} className="fwm-card">
-              <span className="fwm-logo" style={{ "--zoom": item.logo.zoom }}>
-                <img src={item.logo.src} alt={item.logo.alt} />
+              <span className={`fwm-logo${(item.deskLogo || item.logo).sq ? " fwm-logo--sq" : ""}`} style={{ "--lw": `${(item.deskLogo || item.logo).w ?? 68}%` }}>
+                <img src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
               </span>
               <div className="fwm-panel">
                 <span className="fwm-chip">
@@ -135,7 +135,7 @@ export default function FeaturedWorkMobile() {
                     <b>-{founder.name}</b>
                     {founder.role && <span>{founder.role}</span>}
                   </div>
-                  <h3 className="fwm-line">{item.line}</h3>
+                  <h3 className="fwm-line">{item.mobileLine || item.line}</h3>
                 </div>
 
                 <div className="fwm-quote">

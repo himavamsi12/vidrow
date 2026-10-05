@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
 import { SW_TABS } from "../data/selectedWork";
@@ -17,11 +17,16 @@ export default function SelectedWork() {
         <Reveal className="sw-head">
           <div className="sw-headL">
             <div className="sw-tagwrap">
-              <span className="sw-tag">Selected Work</span>
-              <Mark />
+              <span className="sw-tag">
+                Selected Work<span className="sw-m">s</span>
+              </span>
+              <TagMark />
             </div>
             <div className="sw-titleRow">
-              <h2 className="sw-h">We make Ads that people don&rsquo;t skip</h2>
+              <h2 className="sw-h">
+                <span className="sw-d">We make Ads that people don&rsquo;t skip</span>
+                <span className="sw-m">The Creatives That Scaled</span>
+              </h2>
             </div>
           </div>
         </Reveal>
@@ -31,10 +36,12 @@ export default function SelectedWork() {
             <button
               key={f.cat}
               className="sw-filter"
+              data-cat={f.cat}
               aria-pressed={activeCat === f.cat}
               onClick={() => setActiveCat(f.cat)}
             >
-              {f.label}
+              <span className="sw-d">{f.label}</span>
+              <span className="sw-m">{f.short}</span>
             </button>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 
 // the four story cards. Each image is a cut-out that sits on the card's
@@ -93,8 +93,8 @@ export default function CaseStudies() {
     <section className="cs" id="deepdive">
       <Reveal className="cs-head">
         <div className="cs-tagwrap">
-          <span className="cs-tag">Case study</span>
-          <Mark />
+          <span className="cs-tag">Case Study</span>
+          <TagMark />
         </div>
         <h2 className="cs-h">Deep Dives</h2>
         <p className="cs-sub">The latest stories, ideas, and shifts worth paying attention to.</p>

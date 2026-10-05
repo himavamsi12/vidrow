@@ -9,8 +9,7 @@ import { useLenis } from "lenis/react";
 const NAV_LINKS = [
   { label: "Works", href: "/#featured" },
   { label: "Case study", href: "/#deepdive" },
-  { label: "Partnership", href: "/#partnership" },
-  { label: "Founders", href: "/#people" },
+  { label: "About Us", href: "/#partnership" },
 ];
 
 function ContactButton({ className = "hx-contact", onClick }) {
@@ -20,12 +19,7 @@ function ContactButton({ className = "hx-contact", onClick }) {
       <span className="hx-contact-i" aria-hidden="true">
         <svg viewBox="0 0 40 40" aria-hidden="true">
           <g fill="var(--acid)">
-            <rect x="10" y="10" width="6" height="6" />
-            <rect x="17" y="10" width="6" height="6" />
-            <rect x="24" y="10" width="6" height="6" />
-            <rect x="17" y="17" width="6" height="6" />
-            <rect x="24" y="17" width="6" height="6" />
-            <rect x="24" y="24" width="6" height="6" />
+            <path d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />
           </g>
         </svg>
       </span>

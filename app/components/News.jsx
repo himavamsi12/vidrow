@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { NEWS_ITEMS } from "../data/news";
 
@@ -33,9 +33,6 @@ export default function News() {
   const trackRef = useRef(null);
   // index of the leftmost visible card
   const [, setAt] = useState(0);
-  // the same, for the phone rail — which is swiped, not paged, so it's
-  // read back from the rail's own scroll position
-  const [railAt, setRailAt] = useState(0);
 
   // On desktop the row is moved by transform rather than by scrolling it: a
   // scroll animation there gets reverted by the snap container and by Lenis,
@@ -65,36 +62,6 @@ export default function News() {
 
   const page = (dir) => setAt((i) => place(i + dir));
 
-  // the phone rail is a real overflow scroller (no transform), so its own
-  // arrows scroll it one card at a time instead of paging the track
-  const swipe = (dir) => {
-    const track = trackRef.current;
-    const rail = track?.parentElement;
-    if (!rail) return;
-    const cards = [...track.children];
-    const step =
-      cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
-    rail.scrollBy({ left: dir * step, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const track = trackRef.current;
-    const rail = track?.parentElement;
-    if (!rail) return;
-    const onScroll = () => {
-      const cards = track.children;
-      if (cards.length < 2) return;
-      const step = cards[1].offsetLeft - cards[0].offsetLeft;
-      if (!step) return;
-      // the last card can't scroll flush left, so the end of the rail counts
-      // as reaching it
-      const atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
-      setRailAt(atEnd ? cards.length - 1 : Math.round(rail.scrollLeft / step));
-    };
-    rail.addEventListener("scroll", onScroll, { passive: true });
-    return () => rail.removeEventListener("scroll", onScroll);
-  }, []);
-
   // keep the row aligned as the breakpoint (and so cards-per-view) changes
   useEffect(() => {
     setAt((i) => place(i));
@@ -110,11 +77,11 @@ export default function News() {
           <Reveal className="news-head">
             <div className="news-tagwrap">
               <span className="news-tag">News</span>
-              <Mark />
+              <TagMark />
             </div>
-            <h2 className="news-h">Trends worth knowing</h2>
+            <h2 className="news-h">In The News</h2>
             <p className="news-sub">
-              The latest stories, ideas, and shifts worth paying attention to.
+              The startups and founders we work with end up getting noticed
             </p>
           </Reveal>
         </div>
@@ -152,20 +119,6 @@ export default function News() {
               ))}
             </div>
           </Reveal>
-        </div>
-
-        {/* mobile only: the topbar has no room for the arrows at this width,
-            so they sit under the cards and drive the rail's own scroll */}
-        <div className="news-nav news-nav--mobile">
-          <button className="prev" type="button" aria-label="Previous articles" onClick={() => swipe(-1)}>
-            <NavArrow />
-          </button>
-          <span className="news-index--mobile" aria-hidden="true">
-            {String(railAt + 1).padStart(2, "0")}/{String(NEWS_ITEMS.length).padStart(2, "0")}
-          </span>
-          <button className="next" type="button" aria-label="Next articles" onClick={() => swipe(1)}>
-            <NavArrow />
-          </button>
         </div>
       </div>
     </section>

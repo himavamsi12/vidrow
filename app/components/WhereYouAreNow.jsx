@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Mark from "./Mark";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
 import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
@@ -175,8 +174,8 @@ export default function WhereYouAreNow() {
           <div className="wy-in">
             <Reveal className="wy-head">
               <div className="wy-tagwrap">
-                <span className="wy-tag">Where You Are Now</span>
-                <Mark />
+                <span className="wy-tag">The Playbook</span>
+                <WyMark className="wy-tagMark" />
               </div>
               <h2 className="wy-h">
                 We help founders hit their <br className="wy-hBreak" />

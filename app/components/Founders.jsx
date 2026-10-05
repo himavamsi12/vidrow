@@ -1,4 +1,4 @@
-import Mark from "./Mark";
+import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 
 export default function Founders() {
@@ -8,7 +8,7 @@ export default function Founders() {
         <Reveal className="fo-head">
           <div className="fo-tagwrap">
             <span className="fo-tag">Founders</span>
-            <Mark />
+            <TagMark />
           </div>
           <h2 className="fo-h">The people behind this</h2>
         </Reveal>
