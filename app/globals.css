@@ -4846,12 +4846,18 @@ html.nav-hidden .hx-bar {
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease)
+  transition: background-color var(--btn-dur) var(--btn-ease), border-color var(--btn-dur) var(--btn-ease), opacity .25s ease, visibility .25s
 }
 
 .news-side--prev {
   left: 0;
   transform: translate(-60%, -50%)
+}
+
+.news-side.is-off {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none
 }
 
 .news-side--next {
@@ -10748,7 +10754,7 @@ button:focus-visible,
 
   .wy-item.on .wy-lead {
     background: #323232;
-    padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + var(--wy-step1) + 8px);
+    padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + 24 * var(--k));
     clip-path: polygon(0 0, 100% 0,
         100% calc(100% - var(--wy-tab) - var(--wy-step1)),
         calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),
@@ -11651,6 +11657,14 @@ button:focus-visible,
   }
 }
 
+/* from 1280px up the headline holds to its two lines — Marketing Partner
+   behind / Fastest Growing Startups. — instead of wrapping inside the copy box */
+@media (min-width:1280px) {
+  .hx-h {
+    white-space: nowrap
+  }
+}
+
 /* Where You Are Now: the step hangs one third of its size above and past the tag's corner, like the other sections */
 .wy-tagwrap .wy-tagMark {
   left: calc(100% - 9.33 * var(--k));
@@ -11788,7 +11802,7 @@ button:focus-visible,
     grid-row: 1;
     align-self: start;
     justify-self: center;
-    margin: clamp(16px, 1.6vw, 32px) 0 0;
+    margin: 0;
     gap: 8px clamp(20px, 1.5vw, 30px);
     font-size: clamp(12px, .8vw, 15px);
     color: #121212
@@ -12066,7 +12080,7 @@ button:focus-visible,
   .wy .wy-item .wy-lead {
     background: #2A2A2A;
     border: 0;
-    padding: 16px 16px calc(var(--wy-tab) + var(--wy-step1) + 4px);
+    padding: 16px 16px calc(var(--wy-tab) + 20px);
     clip-path: polygon(0 0, 100% 0,
         100% calc(100% - var(--wy-tab) - var(--wy-step1)),
         calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),

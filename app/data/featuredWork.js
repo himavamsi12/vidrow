@@ -11,7 +11,7 @@ export const FEATURED_WORK = [
   {
     id: "helium",
     logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4, zoom: 2.4 },
-    deskLogo: { src: "/featured%20works/helium.png", alt: "Helium", w: 92, sq: true },
+    deskLogo: { src: "/featured%20works/helium.png", alt: "Helium", w: 80, sq: true },
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
@@ -54,7 +54,7 @@ export const FEATURED_WORK = [
     id: "masai-school",
     href: "/case-study/masai",
     logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School", trim: 0.049, zoom: 1.85 },
-    deskLogo: { src: "/featured%20works/logo-masai.png", alt: "Masai School" },
+    deskLogo: { src: "/featured%20works/logo-masai.png", alt: "Masai School", w: 58 },
     name: "Masai School",
     category: "masaischool.com",
     photos: [
@@ -90,7 +90,7 @@ export const FEATURED_WORK = [
   {
     id: "grexa-ai",
     logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI", trim: 0.042, zoom: 1.9 },
-    deskLogo: { src: "/featured%20works/logo-grexa.png", alt: "Grexa AI" },
+    deskLogo: { src: "/featured%20works/logo-grexa.png", alt: "Grexa AI", w: 58 },
     name: "Grexa AI",
     category: "grexa.ai",
     solo: true,

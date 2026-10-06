@@ -32,7 +32,11 @@ function ReadMark() {
 export default function News() {
   const trackRef = useRef(null);
   // index of the leftmost visible card
-  const [, setAt] = useState(0);
+  const [at, setAt] = useState(0);
+  // index of the last page, so the next arrow can step aside at the end
+  const maxRef = useRef(0);
+  const atRef = useRef(0);
+  const [max, setMax] = useState(null);
 
   // On desktop the row is moved by transform rather than by scrolling it: a
   // scroll animation there gets reverted by the snap container and by Lenis,
@@ -55,19 +59,26 @@ export default function News() {
     const perView = step ? Math.max(1, Math.round((track.parentElement.clientWidth + gap) / step)) : 1;
     const max = Math.max(0, cards.length - perView);
     const clamped = Math.min(Math.max(i, 0), max);
+    maxRef.current = max;
 
     track.style.transform = `translate3d(${-clamped * step}px, 0, 0)`;
     return clamped;
   }, []);
 
-  const page = (dir) => setAt((i) => place(i + dir));
+  const go = (i) => {
+    atRef.current = place(i);
+    setAt(atRef.current);
+    setMax(maxRef.current);
+  };
+  const page = (dir) => go(atRef.current + dir);
 
   // keep the row aligned as the breakpoint (and so cards-per-view) changes
   useEffect(() => {
-    setAt((i) => place(i));
-    const onResize = () => setAt((i) => place(i));
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const sync = () => go(atRef.current);
+    sync();
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place]);
 
   return (
@@ -88,10 +99,24 @@ export default function News() {
 
         {/* desktop arrows sit on the row's two edges, centred on the cards */}
         <div className="news-stage">
-          <button className="news-side news-side--prev" type="button" aria-label="Previous articles" onClick={() => page(-1)}>
+          <button
+            className={`news-side news-side--prev${at === 0 ? " is-off" : ""}`}
+            type="button"
+            aria-label="Previous articles"
+            aria-hidden={at === 0}
+            tabIndex={at === 0 ? -1 : 0}
+            onClick={() => page(-1)}
+          >
             <NavArrow />
           </button>
-          <button className="news-side news-side--next" type="button" aria-label="Next articles" onClick={() => page(1)}>
+          <button
+            className={`news-side news-side--next${max !== null && at >= max ? " is-off" : ""}`}
+            type="button"
+            aria-label="Next articles"
+            aria-hidden={max !== null && at >= max}
+            tabIndex={max !== null && at >= max ? -1 : 0}
+            onClick={() => page(1)}
+          >
             <NavArrow />
           </button>
 
