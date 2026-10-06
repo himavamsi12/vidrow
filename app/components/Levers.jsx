@@ -317,7 +317,7 @@ export default function Levers() {
           <div className="lev-mid" ref={midRef}>
             <div className="lev-eyebrow" ref={eyebrowRef}>
               <span className="lev-eyebrow-t">
-                The levers
+                The Levers
                 <TagMark />
               </span>
             </div>

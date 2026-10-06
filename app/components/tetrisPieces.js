@@ -18,9 +18,10 @@ export const TET_PIECES = [
 // move up as rigid shapes, so the skyline keeps its exact outline the whole
 // way; the points on the bottom edge stay put, below the screen, so each
 // piece's body just keeps extending down to cover what it rises off.
-export const tetPoints = (pts, dy = 0, t = 0, travel = 0) =>
+// `base` is the canvas height, where the bottom edge sits.
+export const tetPoints = (pts, dy = 0, t = 0, travel = 0, base = TET_H) =>
   pts
-    .map(([x, y]) => `${x},${y >= TET_H ? y + dy + travel : y + dy - travel * t}`)
+    .map(([x, y]) => `${x},${y >= base ? y + dy + travel : y + dy - travel * t}`)
     .join(" ");
 
 // the mobile hero's skyline, traced from the mobile mock on a 505 x 404

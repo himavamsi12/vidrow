@@ -21,7 +21,7 @@ function Para({ text }) {
   return <p>{parts.map((t, i) => (i % 2 ? <strong key={i}>{t}</strong> : t))}</p>;
 }
 
-// how far below the top of the screen a card pins
+// how far below the pinned heading a card pins
 const STICK = 16;
 
 /**
@@ -58,8 +58,11 @@ export default function FeaturedWorkMobile() {
       // hidden on desktop: nothing to lay out
       if (!list.offsetParent) return;
       const vh = window.innerHeight;
+      // the heading is pinned at the top, so cards pin just below it
+      const head = section.querySelector(".fw-head");
+      const pin = (head ? head.offsetHeight : 0) + STICK;
       const tops = cards.map((card) => {
-        const top = Math.min(STICK, vh - card.offsetHeight - STICK);
+        const top = Math.min(pin, vh - card.offsetHeight - STICK);
         card.style.top = `${top}px`;
         return top;
       });

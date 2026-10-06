@@ -7,7 +7,7 @@ import { useLenis } from "lenis/react";
 // study page that's a real navigation, from the homepage itself the browser
 // just scrolls (same path, only the fragment differs)
 const NAV_LINKS = [
-  { label: "Works", href: "/#featured" },
+  { label: "Works", href: "/#work" },
   { label: "Case study", href: "/#deepdive" },
   { label: "About Us", href: "/about" },
 ];

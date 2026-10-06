@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import { TET_W, TET_H, TET_PIECES, tetPoints } from "./tetrisPieces";
+import { TET_W, TET_H, TET_PIECES, TET_M_W, TET_M_H, TET_M_PIECES, tetPoints } from "./tetrisPieces";
 
 // timings for the three acts: the staircase growing to cover the screen,
 // a short hold while the page jumps to Featured Work behind it (invisible),
@@ -12,6 +12,17 @@ const HOLD_MS = 100;
 const FADE_MS = 600; // matches .hero-curtain's lift-off transform transition
 const TAG_GAP = 24; // px left above the Featured Work tag once revealed
 const RISE_MS = 1400; // #featured.is-rising's slide-up: its delays plus the 1s slide
+
+// the hero draws a different skyline on desktop and on phones, so the
+// curtain rises whichever one is on screen
+const SKYLINES = {
+  desktop: { sel: ".hx-tet", w: TET_W, h: TET_H, pieces: TET_PIECES, seam: 0 },
+  mobile: { sel: ".hx-tet-m", w: TET_M_W, h: TET_M_H, pieces: TET_M_PIECES, seam: 3 },
+};
+// the top of a skyline's lowest piece: rising this far (plus a little)
+// clears every piece off the top of the screen
+const lowestTop = (sky) =>
+  Math.max(...sky.pieces.map((p) => Math.min(...p.pts.map(([, y]) => y))));
 
 /**
  * A fixed, viewport-covering overlay that plays the hero's staircase-close
@@ -29,6 +40,7 @@ export default function HeroCurtain() {
   const [closed, setClosed] = useState(false);
   const [fading, setFading] = useState(false);
   const svgRef = useRef(null); // polygons are driven straight from the rAF loop, not React state
+  const [sky, setSky] = useState(SKYLINES.desktop);
   const [vbH, setVbH] = useState(TET_H);
   const [skyDy, setSkyDy] = useState(0); // where the hero's skyline actually sits, in viewBox units
   const lenis = useLenis();
@@ -56,24 +68,24 @@ export default function HeroCurtain() {
   useEffect(() => {
     if (!mounted) return;
     const de = document.documentElement;
-    setVbH((TET_W * de.clientHeight) / de.clientWidth);
-  }, [mounted]);
+    setVbH((sky.w * de.clientHeight) / de.clientWidth);
+  }, [mounted, sky]);
 
   useEffect(() => {
     if (!closed) return;
     let raf;
     const start = performance.now();
     const dy = skyDy;
-    // far enough that the lowest piece (its top is 353 down the skyline) clears the top of the screen
-    const travel = dy + 353 + 10;
+    // far enough that the lowest piece clears the top of the screen
+    const travel = dy + lowestTop(sky) + 10;
     const apply = (t) => {
       const polys = svgRef.current?.children;
       if (!polys) return;
       // the paper-coloured backing is drawn first, then the pieces over it
-      TET_PIECES.forEach((p, i) => {
-        const pts = tetPoints(p.pts, dy, t, travel);
+      sky.pieces.forEach((p, i) => {
+        const pts = tetPoints(p.pts, dy, t, travel, sky.h);
         polys[i]?.setAttribute("points", pts);
-        polys[TET_PIECES.length + i]?.setAttribute("points", pts);
+        polys[sky.pieces.length + i]?.setAttribute("points", pts);
       });
     };
     const tick = (now) => {
@@ -83,18 +95,15 @@ export default function HeroCurtain() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [closed, vbH, skyDy]);
+  }, [closed, vbH, skyDy, sky]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
 
-    // the curtain is a desktop-only reveal. The width is checked again when
-    // the gesture actually fires rather than only here, so a window that
-    // becomes narrow after load (or a device that reports its width late)
-    // can't leave the listeners armed and play it on mobile
+    // which skyline (and Featured Work layout) is showing is read when the
+    // gesture fires, so a window resized after load still gets the right one
     const desktop = () => window.innerWidth > 900;
-    if (!desktop()) return;
 
     // a page load that already targets a section (e.g. a nav link from the
     // case study page landing on /#partnership) means the user never saw
@@ -108,22 +117,30 @@ export default function HeroCurtain() {
     }
 
     let touchStartY = 0;
+    const blockTouch = (e) => {
+      if (e.cancelable) e.preventDefault();
+    };
 
     const trigger = () => {
-      if (firedRef.current || !desktop()) return;
+      if (firedRef.current) return;
       firedRef.current = true;
+      const isDesktop = desktop();
+      const line = isDesktop ? SKYLINES.desktop : SKYLINES.mobile;
 
       lenis?.stop();
       document.body.style.overflow = "hidden";
+      // a touch scroll is native, so hold the page still under the curtain
+      window.addEventListener("touchmove", blockTouch, { passive: false });
       // sized before it mounts, so its first paint is already the screen-sized
       // skyline rather than one stretched to fit for a frame
       const de = document.documentElement;
-      const scale = de.clientWidth / TET_W;
+      const scale = de.clientWidth / line.w;
+      setSky(line);
       setVbH(de.clientHeight / scale);
       // the hero isn't always exactly one screen tall, so line the curtain's
       // skyline up with where the hero's actually sits on screen
-      const sky = document.querySelector(".hx-tet");
-      setSkyDy(sky ? sky.getBoundingClientRect().top / scale : de.clientHeight / scale - TET_H);
+      const skyEl = document.querySelector(line.sel);
+      setSkyDy(skyEl ? skyEl.getBoundingClientRect().top / scale : de.clientHeight / scale - line.h);
       setMounted(true);
 
       setTimeout(() => {
@@ -136,9 +153,12 @@ export default function HeroCurtain() {
         // padding, not the tag's rect — the heading is still offset by its
         // not-yet-played fade-up at this point.
         const section = document.getElementById("featured");
-        const head = section?.querySelector(".fw2-head");
+        const head = section?.querySelector(isDesktop ? ".fw2-head" : ".fw-head");
         if (section) {
-          const pad = head ? parseFloat(getComputedStyle(head).paddingTop) : 0;
+          let pad = head ? parseFloat(getComputedStyle(head).paddingTop) : 0;
+          // on phones the tag also sits below the mobile section's own padding
+          const fw = !isDesktop && section.querySelector(".fw");
+          if (fw) pad += parseFloat(getComputedStyle(fw).paddingTop);
           const top =
             section.getBoundingClientRect().top + window.scrollY + Math.max(pad - TAG_GAP, 0);
           if (lenis) {
@@ -165,6 +185,7 @@ export default function HeroCurtain() {
           }
           setTimeout(() => {
             document.body.style.overflow = "";
+            window.removeEventListener("touchmove", blockTouch);
             lenis?.start();
             setMounted(false);
             setClosed(false);
@@ -235,6 +256,7 @@ export default function HeroCurtain() {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("click", onClickCapture, true);
+      window.removeEventListener("touchmove", blockTouch);
       document.body.style.overflow = "";
     };
   }, [lenis]);
@@ -250,23 +272,31 @@ export default function HeroCurtain() {
         ref={svgRef}
         className="hc-svg"
         shapeRendering="crispEdges"
-        viewBox={`0 0 ${TET_W} ${vbH}`}
+        viewBox={`0 0 ${sky.w} ${vbH}`}
         preserveAspectRatio="none"
       >
         {/* a paper-coloured copy of every piece, thickened past the seams,
             so the hero's headline doesn't show through the gaps while it rises */}
-        {TET_PIECES.map((p, i) => (
+        {sky.pieces.map((p, i) => (
           <polygon
             key={`back-${i}`}
             fill="var(--paper)"
             stroke="var(--paper)"
             strokeWidth="10"
             strokeLinejoin="miter"
-            points={tetPoints(p.pts, skyDy, 0, vbH + 400)}
+            points={tetPoints(p.pts, skyDy, 0, vbH + 400, sky.h)}
           />
         ))}
-        {TET_PIECES.map((p, i) => (
-          <polygon key={i} fill={p.fill} points={tetPoints(p.pts, skyDy, 0, vbH + 400)} />
+        {/* the mobile skyline keeps its paper seams between pieces, as in the hero */}
+        {sky.pieces.map((p, i) => (
+          <polygon
+            key={i}
+            fill={p.fill}
+            stroke={sky.seam ? "var(--paper)" : undefined}
+            strokeWidth={sky.seam || undefined}
+            strokeLinejoin="miter"
+            points={tetPoints(p.pts, skyDy, 0, vbH + 400, sky.h)}
+          />
         ))}
       </svg>
     </div>

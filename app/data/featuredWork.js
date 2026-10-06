@@ -1,5 +1,5 @@
-// deskLogo.w is its width as a % of the white block (wordmarks 68, the padded
-// square Helium file larger so its word reads the same size).
+// deskLogo.w is its width as a % of the white block (wordmarks 68 by default,
+// less for the ones that read large).
 // deskLogo is the logo shown on the desktop card (centred in its white block);
 // logo is the square one the mobile card scales up.
 // logo.zoom: how far the mobile card scales its logo up inside the white
@@ -11,7 +11,7 @@ export const FEATURED_WORK = [
   {
     id: "helium",
     logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4, zoom: 2.4 },
-    deskLogo: { src: "/featured%20works/helium.png", alt: "Helium", w: 80, sq: true },
+    deskLogo: { src: "/logos/helium%20logo%20-new.png", alt: "Helium", w: 60 },
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [

@@ -40,8 +40,10 @@ export default function SelectedWork() {
               aria-pressed={activeCat === f.cat}
               onClick={() => setActiveCat(f.cat)}
             >
-              <span className="sw-d">{f.label}</span>
-              <span className="sw-m">{f.short}</span>
+              {/* data-text feeds an invisible bold copy that holds the
+                  tab at its selected width, so picking one doesn't reflow
+                  the row */}
+              <span className="sw-filterT" data-text={f.label}>{f.label}</span>
             </button>
           ))}
         </div>

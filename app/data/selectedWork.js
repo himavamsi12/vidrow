@@ -24,12 +24,10 @@ const card = (i, [title, client, img, href]) => ({
 // one tab per service, each with its own cards. "wide" tabs show three
 // landscape stills across; "tall" ones show four portrait reels.
 //
-// TODO: Bachatt has
-// no image yet; the corner shapes beyond the first tab are approximations.
+// TODO: the corner shapes beyond the first tab are approximations.
 export const SW_TABS = [
   {
     cat: "brand",
-    short: "Brand", // the phone layout's shorter tab label
     label: "Brand Marketing",
     layout: "wide",
     items: [
@@ -43,7 +41,6 @@ export const SW_TABS = [
   },
   {
     cat: "celebrity",
-    short: "Celebrity", // the phone layout's shorter tab label
     label: "Celebrity Performance",
     layout: "wide",
     items: [
@@ -57,7 +54,6 @@ export const SW_TABS = [
   },
   {
     cat: "global",
-    short: "AI", // the phone layout's shorter tab label
     label: "Global Launch",
     layout: "wide",
     items: [
@@ -71,7 +67,6 @@ export const SW_TABS = [
   },
   {
     cat: "content",
-    short: "Ads", // the phone layout's shorter tab label
     label: "Branded Content",
     layout: "wide",
     items: [
@@ -85,11 +80,10 @@ export const SW_TABS = [
   },
   {
     cat: "creatives",
-    short: "Performance", // the phone layout's shorter tab label
     label: "Performance Creatives",
     layout: "tall",
     items: [
-      ["Bachatt hai to Budget hai", "Bachatt", null],
+      ["Bachatt hai to Budget hai", "Bachatt", "performation creative.png"],
       ["Dump Title", "Groww", "groww.png"],
       ["Signup For the Test", "Masai", "masai.png"],
       ["Buy your first Substitute Medicine", "Platinum Rx", "platinumrx1.png"],
@@ -101,7 +95,6 @@ export const SW_TABS = [
   },
   {
     cat: "social",
-    short: "Social", // the phone layout's shorter tab label
     label: "Social Media",
     layout: "tall",
     items: [

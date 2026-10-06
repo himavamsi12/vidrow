@@ -23,7 +23,7 @@ const DIMS = {
   "glance.svg": [83, 30],
   "gocredit.svg": [91, 20],
   "goodscore.svg": [99, 16],
-  "grexalogo.svg": [90, 28],
+  "grexa.png": [90, 28],
   "groww.svg": [106, 29],
   "helium.svg": [105, 26],
   "housie.svg": [85, 22],
@@ -70,7 +70,7 @@ const OPTICAL = {
 // The top row's middle is left empty for the legend.
 const P = "/partnership/";
 export const PR_TILES = [
-  [1, 1, "seed", "Grexa", "grexalogo.svg", 90],
+  [1, 1, "seed", "Grexa", "grexa.png", 90],
   [10, 1, "c", "Porter", "porter.svg", 93],
 
   [1, 2, "seed", "Neural Garage", "neuralgarage.svg", 107],

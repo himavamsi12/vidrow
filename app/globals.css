@@ -77,6 +77,14 @@
   }
 }
 
+/* desktop: never less than 72px each side, growing with the screen (72px at
+   1440, 96px at 1920) up to 120px */
+@media (min-width:901px) {
+  :root {
+    --side: clamp(72px, 5vw, 120px)
+  }
+}
+
 * {
   box-sizing: border-box
 }
@@ -554,6 +562,17 @@ html.nav-hidden .hx-bar {
   animation-delay: .33s
 }
 
+/* the same rise on the mobile layout (not its fixed rail, which carries
+   its own centring transform) */
+#featured.is-rising .fw > .fw-head,
+#featured.is-rising .fw > .fwm-list {
+  animation: featured-rise 1s cubic-bezier(.2, .7, .2, 1) .25s both
+}
+
+#featured.is-rising .fw > .fwm-list {
+  animation-delay: .33s
+}
+
 @keyframes featured-rise {
   from {
     opacity: 0;
@@ -563,14 +582,6 @@ html.nav-hidden .hx-bar {
   to {
     opacity: 1;
     transform: none
-  }
-}
-
-/* desktop-only reveal: mobile scrolls from the hero into the page normally,
-   so the curtain never paints there even if something mounts it */
-@media (max-width:900px) {
-  .hero-curtain {
-    display: none
   }
 }
 
@@ -10919,9 +10930,12 @@ button:focus-visible,
     padding: 40px 24px 64px
   }
 
+  /* the heading stays pinned at the top while the cards stack under it */
   .fw-head {
-    position: static;
-    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 16px 0 0;
     margin-bottom: 24px
   }
 
@@ -11377,7 +11391,7 @@ button:focus-visible,
 
 @media (max-width:640px) {
   .vfoot {
-    padding: 115px 20px 22px
+    padding: 60px 20px 22px
   }
 
   .vfoot__title {
@@ -12243,13 +12257,6 @@ button:focus-visible,
     padding: 0 14px;
     font-size: 13px
   }
-
-  .sw-filter[data-cat="creatives"] { order: 1 }
-  .sw-filter[data-cat="brand"] { order: 2 }
-  .sw-filter[data-cat="celebrity"] { order: 3 }
-  .sw-filter[data-cat="social"] { order: 4 }
-  .sw-filter[data-cat="global"] { order: 5 }
-  .sw-filter[data-cat="content"] { order: 6 }
 
   .sw-grid,
   .sw-grid--tall {
@@ -13470,5 +13477,69 @@ button:focus-visible,
   .ab-grid--m {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr))
+  }
+}
+
+/* "The Levers" tag: the same title-case 14px tag as every other section's
+   (it was set apart in spaced capitals) */
+.lev-eyebrow-t {
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em;
+  text-transform: none;
+  white-space: nowrap
+}
+
+/* the selected tab turns bold; each tab is sized for its bold label up
+   front (an invisible, zero-height bold copy), so selecting one never
+   widens it and reflows the tabs around it */
+.sw-filterT {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.sw-filterT::after {
+  content: attr(data-text);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none
+}
+
+
+/* desktop testimonial cards: the brand block's logo starts on the same line as
+   the "Testimonials" heading above it (--side from the page edge). The white
+   block hugs the logo — a --side gutter, the logo's own width (--lwn of 13% of
+   the card), then a 48px gutter — instead of a fixed 224/1440 piece with the
+   logo centred in it. */
+@media (min-width:901px) {
+  .fw2-brand {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(var(--side) + 13% * var(--lwn, .68) + 48px);
+    height: 17.34%;
+    background: var(--paper)
+  }
+
+  .fw2-logo {
+    left: var(--side);
+    width: calc(13% * var(--lwn, .68));
+    justify-content: flex-start
+  }
+
+  .fw2-logo img {
+    width: 100%;
+    max-width: 100%;
+    object-position: left center
   }
 }
