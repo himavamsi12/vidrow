@@ -12325,10 +12325,10 @@ button:focus-visible,
   }
 }
 
-/* the Playbook section: 80px under its panel on desktop */
+/* the Playbook section: 130px under its panel on desktop */
 @media (min-width:901px) {
   .wy {
-    padding-bottom: 80px
+    padding-bottom: 130px
   }
 }
 
