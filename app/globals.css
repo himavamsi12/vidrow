@@ -12256,6 +12256,15 @@ button:focus-visible,
     gap: 28px
   }
 
+  /* a smaller yellow tetris corner on phones */
+  .sw-item {
+    --cu: 7.5cqw
+  }
+
+  .sw-grid--tall .sw-item {
+    --cu: 6.4cqw
+  }
+
   .sw-body,
   .sw-grid--tall .sw-body {
     min-height: 0;
