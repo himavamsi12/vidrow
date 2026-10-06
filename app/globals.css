@@ -5127,7 +5127,7 @@ html.nav-hidden .hx-bar {
   overflow: hidden;
   background: var(--ink);
   color: var(--paper);
-  padding: clamp(32px, 4vw, 56px) var(--side) clamp(20px, 2.8vw, 38px);
+  padding: 115px var(--side) clamp(20px, 2.8vw, 38px);
   display: flex;
   flex-direction: column;
   /* the title and CTA stay put at the top: the runway the wordmark falls
@@ -11371,7 +11371,7 @@ button:focus-visible,
 
 @media (max-width:640px) {
   .vfoot {
-    padding: 54px 20px 22px
+    padding: 115px 20px 22px
   }
 
   .vfoot__title {
