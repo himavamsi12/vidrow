@@ -1,12 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import "@videojs/react/video/skin.css";
+import { VideoPlayer, VideoSkin } from "@videojs/react/video";
+import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
 
 const STREAM = "https://customer-np97ccync4jeshuk.cloudflarestream.com";
 
 // one frame on a campaign page: a still, or — when the frame carries a
 // Cloudflare Stream `video` id — the video's own thumbnail with a play mark
-// on it, swapped for the player once it's clicked
+// on it, swapped for the Video.js player (Cloudflare Stream engine) once it's
+// clicked
 export default function CampaignFrame({ frame, title }) {
   const [playing, setPlaying] = useState(false);
 
@@ -17,15 +21,11 @@ export default function CampaignFrame({ frame, title }) {
   return (
     <div className="cmp-video">
       {playing ? (
-        <iframe
-          className="cmp-videoPlayer"
-          src={`${STREAM}/${frame.video}/iframe?autoplay=true&poster=${encodeURIComponent(
-            `${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=2s`,
-          )}`}
-          title={title}
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-        />
+        <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=2s&height=900`}>
+          <VideoSkin style={{ width: "100%", height: "100%" }}>
+            <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
+          </VideoSkin>
+        </VideoPlayer>
       ) : (
         <button type="button" className="cmp-videoPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
           <img
