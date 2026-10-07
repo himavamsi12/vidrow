@@ -11334,7 +11334,7 @@ button:focus-visible,
 }
 
 .vfoot__cta--ghost {
-  background: transparent;
+  background: #000;
   box-shadow: inset 0 0 0 1px var(--paper)
 }
 
@@ -11343,7 +11343,7 @@ button:focus-visible,
 }
 
 .vfoot__cta--ghost .vfoot__ctaIcon {
-  background: transparent;
+  background: #000;
   box-shadow: inset 1px 0 0 var(--paper)
 }
 
@@ -12731,11 +12731,11 @@ button:focus-visible,
   color: #121212
 }
 
-/* centred in the name plate */
+/* centred on the name plate and the band under it together */
 .abf-name {
   left: 4.2%;
   top: 74.3%;
-  height: 11%;
+  height: 15.6%;
   font-family: var(--display);
   font-weight: 400;
   font-size: 5.3cqw;
@@ -13413,7 +13413,8 @@ button:focus-visible,
 
 /* about us stepped cards: 24px titles, 14px body */
 .ab-stair h3 {
-  font-size: 24px
+  font-size: 24px;
+  font-weight: 500
 }
 
 .ab-stair p {
@@ -13534,15 +13535,14 @@ button:focus-visible,
   }
 }
 
-/* about us hero: phones swap the 17-column mosaic for their own 12 x 9 one
-   (see ABOUT_ROWS_MOBILE), in the mobile mock's three yellows */
+/* about us hero: phones swap the 17-column mosaic for their own 11 x 12 one
+   (see ABOUT_ROWS_MOBILE), in the mobile mock's two yellows */
 .ab-grid--m {
   display: none
 }
 
-.ab-mg { background: #FCEF88 }
-.ab-my { background: #FAFCA9 }
-.ab-ml { background: #FBFAC4 }
+.ab-my { background: #F6FA78 }
+.ab-ml { background: #FDF7B5 }
 
 @media (max-width:700px) {
   .ab-grid--d {
@@ -13551,7 +13551,7 @@ button:focus-visible,
 
   .ab-grid--m {
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr))
+    grid-template-columns: repeat(11, minmax(0, 1fr))
   }
 }
 
@@ -13716,25 +13716,25 @@ button:focus-visible,
 /* about us, "Why Vidrow" on phones: the four blocks as stacked grey cards */
 @media (max-width:700px) {
   .ab-whyGrid {
-    gap: 14px;
+    gap: 12px;
     margin-top: 24px
   }
 
   .ab-whyBlock {
     max-width: none;
-    padding: 20px 18px 22px;
-    background: #F7F7F7;
-    border-radius: 2px
+    padding: 16px;
+    background: #F8F8F8
   }
 
   .ab-whyBlock h3 {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+    font-weight: 600;
     font-size: 18px
   }
 
   .ab-whyBlock p {
-    font-size: 15px;
-    line-height: 1.5
+    font-size: 14px;
+    line-height: 20px
   }
 }
 
@@ -13777,7 +13777,7 @@ button:focus-visible,
 
   .ab-proofTrack {
     display: flex;
-    gap: 16px;
+    gap: 48px;
     padding: 44px var(--side) 0 calc(var(--side) + 12px);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -13790,7 +13790,7 @@ button:focus-visible,
   }
 
   .ab-proofCard {
-    flex: 0 0 calc(100% - var(--side) - 12px - 8px);
+    flex: 0 0 100%;
     scroll-snap-align: start
   }
 
@@ -13799,7 +13799,7 @@ button:focus-visible,
   }
 
   .ab-proofBody {
-    min-height: 220px;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: space-between
@@ -13849,5 +13849,137 @@ button:focus-visible,
   .ab-proofDots .is-on {
     width: 26px;
     background: var(--acid)
+  }
+}
+
+/* about us and the campaign pages use the homepage's own fixed, hide-on-scroll
+   bar; outside the hero it needs its own --k, and a spacer holds its place */
+.hx-bar--page {
+  --k: min(.0694444vw, 1.19444px)
+}
+
+.hx-bar-gap {
+  height: calc(86 * min(.0694444vw, 1.19444px));
+  background: var(--paper)
+}
+
+.ab-nav + .hx-bar-gap,
+.hx-bar + .hx-bar-gap {
+  margin: 0
+}
+
+@media (max-width:900px) {
+  .hx-bar--page {
+    --k: 1px
+  }
+
+  .hx-bar-gap {
+    height: 82px
+  }
+}
+
+/* about us on phones: the hero heading is 36px, every section heading 28px */
+@media (max-width:700px) {
+  .ab-h {
+    font-size: 36px
+  }
+
+  .ab-whyH,
+  .abf-h,
+  .abt-h {
+    font-size: 28px
+  }
+}
+
+/* about us stepped partner cards on phones: Inter Medium 18px titles */
+@media (max-width:700px) {
+  .ab-stair h3 {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.3
+  }
+}
+
+/* "How Vidrow works" on phones: a left-aligned heading over a one-card-at-a-time
+   carousel (it autoplays, see AboutHow), a dash per card underneath */
+.ab-howDots {
+  display: none
+}
+
+@media (max-width:700px) {
+  .ab-howHead {
+    align-items: flex-start;
+    text-align: left
+  }
+
+  .ab-howGrid {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none
+  }
+
+  .ab-howGrid::-webkit-scrollbar {
+    display: none
+  }
+
+  .ab-howCard,
+  .ab-howCard:nth-child(even) {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: #F8F8F8
+  }
+
+  .ab-howCard h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3
+  }
+
+  .ab-howCard p {
+    max-width: none;
+    font-size: 14px;
+    line-height: 20px
+  }
+
+  .ab-howDots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 22px
+  }
+
+  .ab-howDots span {
+    width: 6px;
+    height: 4px;
+    background: #888
+  }
+
+  .ab-howDots .is-on {
+    width: 36px;
+    background: var(--acid)
+  }
+}
+
+/* about us team photos on desktop: the person a little smaller in the frame,
+   still standing on the plate */
+@media (min-width:701px) {
+  .abt-shot img {
+    transform: scale(.9);
+    transform-origin: center bottom
+  }
+}
+
+/* about us proof cards on desktop: every card's text starts at the same height,
+   whether the title takes one line or two */
+@media (min-width:701px) {
+  .ab-proofBody h3 {
+    min-height: 2.6em
   }
 }

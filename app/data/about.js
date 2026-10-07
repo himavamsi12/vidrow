@@ -19,18 +19,20 @@ export const ABOUT_PHOTOS = [
   "hero12", "hero13", "hero15", "hero18",
 ];
 
-// the phone mosaic: 12 columns x 9 rows, row by row, laid out to the mobile
-// mock. G, Y and L are its three yellows (gold, yellow, pale); P is a team
-// photo, taken in turn from the same PHOTOS in reading order (the mock has
-// 16 photo cells, so the last photo sits this one out).
+// the phone mosaic: 11 columns x 12 rows, row by row, laid out to the mobile
+// mock. Y and L are its two yellows (bright, pale); P is a team photo, taken
+// in turn from the same PHOTOS in reading order.
 export const ABOUT_ROWS_MOBILE = [
-  "LPLPLLPYPYYY",
-  "LLGLLLYYLYGG",
-  "LGGLYYLYLLPG",
-  "YPYYYPLPYYLG",
-  "YYLPLLLLLYYP",
-  "LYLLYYYLPYYL",
-  "LPYLLPYYYLLP",
-  "LLLGLLLLLLLG",
-  "PGGGGLPLLGGG",
+  "YPLLLPYLLLP",
+  "YYLLYYYYPLY",
+  "LYPYYYLYYLL",
+  "LLLLYLLPYLY",
+  "YPLYYYYLLYY",
+  "LLYYYLPYLPY",
+  "YYLPLLYYLLL",
+  "LYYLLYYPYYP",
+  "LPYLYYLLYLL",
+  "LLLLPYLLPYL",
+  "YYPLYYYYLYL",
+  "YYYLLLPYLYY",
 ];

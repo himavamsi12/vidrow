@@ -21,9 +21,10 @@ export default async function CampaignPage({ params }) {
 
   return (
     <>
-      <header className="cmp-nav">
+      <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
+      <div className="hx-bar-gap" aria-hidden="true" />
 
       <main className="cmp">
         <a className="cmp-back" href="/">

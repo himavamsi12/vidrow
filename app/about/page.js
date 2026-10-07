@@ -4,10 +4,11 @@ import TagMark from "../components/TagMark";
 import AboutFounders from "../components/AboutFounders";
 import AboutTeam from "../components/AboutTeam";
 import AboutProof from "../components/AboutProof";
+import AboutHow from "../components/AboutHow";
 import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS } from "../data/about";
 
 export const metadata = {
-  title: "About Us — Vidrow",
+  title: "About Us | Vidrow",
 };
 
 // flatten the rows into one run of cells (row-major), so the same markup lays
@@ -26,14 +27,14 @@ const WHY = [
   {
     title: "Who We Work With",
     body: [
-      "We work with startups from Seed to Series C \u2014 the stage where brand and growth decisions compound the most.",
+      "We work with startups from Seed to Series C, the stage where brand and growth decisions compound the most.",
       "The choices made here shape more than just pipeline. They influence how investors see you, how talent thinks about joining, and how customers choose to trust you.",
     ],
   },
   {
     title: "What We Do",
     body: [
-      "We become the marketing team most early-stage companies can\u2019t afford to hire full-time \u2014 thinking in systems, not campaigns.",
+      "We become the marketing team most early-stage companies can\u2019t afford to hire full-time, thinking in systems, not campaigns.",
       "We build the customer journey from stranger to lead, lead to customer, and customer to advocate, while staying close to revenue and measuring pipeline, conversion, CAC, and retention.",
     ],
   },
@@ -47,7 +48,7 @@ const WHY = [
   {
     title: "Why Vidrow",
     body: [
-      "Neither option was built for the way startups actually work \u2014 pivoting every three months, building and validating simultaneously, and needing a partner who thinks like a founder, not like a contractor.",
+      "Neither option was built for the way startups actually work, pivoting every three months, building and validating simultaneously, and needing a partner who thinks like a founder, not like a contractor.",
     ],
   },
 ];
@@ -66,7 +67,7 @@ const PROOF = [
   },
   {
     tag: "Foundation",
-    title: "IIT Kanpur \u2014 Engineering-First Team",
+    title: "IIT Kanpur: Engineering-First Team",
     body: "Both founders and the core team built from IIT Kanpur and equivalent engineering backgrounds. Analytical rigour is the baseline.",
   },
   {
@@ -82,19 +83,19 @@ const INVEST = [
   {
     title: "Not a Gesture. A way to mean it.",
     body:
-      "Not as a gesture, and not as a hook. We do it because the word partner gets thrown around a lot in this industry, and we wanted a way to mean it. When we believe in what you\u2019re building, we put money behind it \u2014 which means our incentives sit exactly where yours do. We\u2019re not billing hours and moving on. We\u2019re in the round with you, watching the same metrics, thinking about the same milestones, and just as invested in what happens at the next raise.",
+      "Not as a gesture, and not as a hook. We do it because the word partner gets thrown around a lot in this industry, and we wanted a way to mean it. When we believe in what you\u2019re building, we put money behind it, which means our incentives sit exactly where yours do. We\u2019re not billing hours and moving on. We\u2019re in the round with you, watching the same metrics, thinking about the same milestones, and just as invested in what happens at the next raise.",
     corner: { w: 2, h: 2, cells: [[1, 0], [0, 1], [1, 1]] },
   },
   {
     title: "Real Skin In The Game.",
     body:
-      "Because founders don\u2019t need another vendor. They need someone with real skin in the game. They don\u2019t want to execute briefs. We want to solve problems. That only happens when the founder or the leadership team is directly involved \u2014 when someone on the client side actually cares about the outcome the way we do.",
+      "Because founders don\u2019t need another vendor. They need someone with real skin in the game. They don\u2019t want to execute briefs. We want to solve problems. That only happens when the founder or the leadership team is directly involved, when someone on the client side actually cares about the outcome the way we do.",
     corner: { w: 3, h: 2, cells: [[1, 0], [0, 1], [1, 1], [2, 1]] },
   },
   {
     title: "A Deliberate Constraint",
     body:
-      "So we made a choice: startups only. Seed to Series B. Funded, product-focused, founder-led. That constraint is what allows us to go deep instead of wide \u2014 to know what a PMF-stage startup actually needs versus a Series B brand build, and to have a real opinion about the difference.",
+      "So we made a choice: startups only. Seed to Series B. Funded, product-focused, founder-led. That constraint is what allows us to go deep instead of wide, to know what a PMF-stage startup actually needs versus a Series B brand build, and to have a real opinion about the difference.",
     corner: { w: 3, h: 2, cells: [[0, 0], [1, 0], [1, 1], [2, 1]] },
   },
 ];
@@ -103,19 +104,19 @@ const INVEST = [
 const HOW = [
   {
     title: "Your out-of-house marketing team.",
-    body: "We act as your marketing function, not a supplier to it. When a problem appears \u2014 a new channel, a pivot, a fundraise deadline that changes everything \u2014 we engage like a team member, not a vendor waiting for a brief. The scope expands and contracts with where you are.",
+    body: "We act as your marketing function, not a supplier to it. When a problem appears (a new channel, a pivot, a fundraise deadline that changes everything), we engage like a team member, not a vendor waiting for a brief. The scope expands and contracts with where you are.",
   },
   {
     title: "We say no to transactional work.",
-    body: "If you come to us with \u201c20 videos, one week, here\u2019s the money\u201d \u2014 we\u2019ll pass. Not because we can\u2019t. Because that\u2019s not how meaningful work happens. We want the problem first. Every engagement starts with a conversation about where you are and what you\u2019re trying to unlock.",
+    body: "If you come to us with \u201c20 videos, one week, here\u2019s the money\u201d, we\u2019ll pass. Not because we can\u2019t. Because that\u2019s not how meaningful work happens. We want the problem first. Every engagement starts with a conversation about where you are and what you\u2019re trying to unlock.",
   },
   {
     title: "Engineering mindset, creative output.",
-    body: "The team thinks in numbers first. Creativity is built on top of that. Most of our team comes from engineering and analytical backgrounds \u2014 IIT and equivalent. What that means in practice: every creative decision is tied to an outcome it\u2019s supposed to produce.",
+    body: "The team thinks in numbers first. Creativity is built on top of that. Most of our team comes from engineering and analytical backgrounds, IIT and equivalent. What that means in practice: every creative decision is tied to an outcome it\u2019s supposed to produce.",
   },
   {
     title: "Deep over wide, always.",
-    body: "We\u2019d rather work deeply with five clients than superficially with fifty. Our client base is intentionally small. When you work with us, you get senior attention \u2014 not a junior team handling your account while the principals are elsewhere.",
+    body: "We\u2019d rather work deeply with five clients than superficially with fifty. Our client base is intentionally small. When you work with us, you get senior attention, not a junior team handling your account while the principals are elsewhere.",
   },
 ];
 
@@ -140,9 +141,10 @@ export default function AboutPage() {
   const mobileCells = buildCells(ABOUT_ROWS_MOBILE);
   return (
     <>
-      <header className="ab-nav">
+      <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
+      <div className="hx-bar-gap" aria-hidden="true" />
 
       <main className="ab">
         <div className="ab-head">
@@ -166,7 +168,7 @@ export default function AboutPage() {
           )}
         </div>
 
-        {/* phones get a mosaic of their own: 12 x 9, per the mobile mock */}
+        {/* phones get a mosaic of their own: 11 x 12, per the mobile mock */}
         <div className="ab-grid ab-grid--m">
           {mobileCells.map((c, i) =>
             c.src ? (
@@ -249,17 +251,7 @@ export default function AboutPage() {
           </h2>
         </div>
 
-        <div className="ab-howGrid">
-          {HOW.map((c) => (
-            <article className="ab-howCard" key={c.title}>
-              <h3>{c.title}</h3>
-              <p>{c.body}</p>
-            </article>
-          ))}
-          <span className="ab-howBlock" aria-hidden="true">
-            <i /><i /><i /><i />
-          </span>
-        </div>
+        <AboutHow cards={HOW} />
       </section>
 
       <AboutFounders />
