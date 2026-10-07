@@ -38,7 +38,7 @@ export default async function CampaignPage({ params }) {
           <p className="cmp-about">{c.about}</p>
         </header>
 
-        <div className="cmp-frames">
+        <div className={c.layout === "tall" ? "cmp-frames cmp-frames--tall" : "cmp-frames"}>
           {c.frames.map((f, i) => (
             <CampaignFrame key={i} frame={f} title={`${c.title} \u2014 film ${i + 1}`} />
           ))}

@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import TagMark from "../components/TagMark";
 import AboutFounders from "../components/AboutFounders";
 import AboutTeam from "../components/AboutTeam";
+import AboutProof from "../components/AboutProof";
 import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS } from "../data/about";
 
 export const metadata = {
@@ -202,22 +203,7 @@ export default function AboutPage() {
       </section>
 
       <section className="ab-proof">
-        <div className="ab-proofRow">
-          {PROOF.map((c) => (
-            <article className="ab-proofCard" key={c.tag}>
-              <span className="ab-proofTab">
-                <span className="ab-tagwrap">
-                  <span className="ab-tag">{c.tag}</span>
-                  <TagMark />
-                </span>
-              </span>
-              <div className="ab-proofBody">
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <AboutProof cards={PROOF} />
       </section>
 
       <section className="ab-invest">

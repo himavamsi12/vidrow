@@ -13610,6 +13610,22 @@ button:focus-visible,
   height: 100%
 }
 
+/* portrait campaigns (social media): the videos three across */
+.cmp-frames--tall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr)
+}
+
+.cmp-frames--tall .cmp-video {
+  aspect-ratio: 9 / 16
+}
+
+@media (max-width:700px) {
+  .cmp-frames--tall {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
 /* campaign pages on phones: more room between the blurb and the first frame,
    and between the last frame and the footer */
 @media (max-width:700px) {
@@ -13619,5 +13635,144 @@ button:focus-visible,
 
   .cmp {
     padding-bottom: 88px
+  }
+}
+
+/* about us, "Why Vidrow" on phones: the four blocks as stacked grey cards */
+@media (max-width:700px) {
+  .ab-whyGrid {
+    gap: 14px;
+    margin-top: 24px
+  }
+
+  .ab-whyBlock {
+    max-width: none;
+    padding: 20px 18px 22px;
+    background: #F7F7F7;
+    border-radius: 2px
+  }
+
+  .ab-whyBlock h3 {
+    margin-bottom: 14px;
+    font-size: 18px
+  }
+
+  .ab-whyBlock p {
+    font-size: 15px;
+    line-height: 1.5
+  }
+}
+
+/* about us proof cards: on desktop the track is transparent to the grid, and
+   the arrows / progress strip are phone-only */
+.ab-proofTrack {
+  display: contents
+}
+
+.ab-proofNav {
+  display: none
+}
+
+/* on phones: one card at a time, swiped or stepped with the arrows */
+@media (max-width:700px) {
+  .ab-proofRow {
+    display: block;
+    overflow: hidden;
+    padding: 72px 0 36px
+  }
+
+  .ab-proofRow::before,
+  .ab-proofRow::after {
+    content: "";
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: var(--paper)
+  }
+
+  .ab-proofRow::before {
+    left: 0;
+    top: 0
+  }
+
+  .ab-proofRow::after {
+    right: 0;
+    bottom: 0
+  }
+
+  .ab-proofTrack {
+    display: flex;
+    gap: 16px;
+    padding: 44px var(--side) 0 calc(var(--side) + 12px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: calc(var(--side) + 12px);
+    scrollbar-width: none
+  }
+
+  .ab-proofTrack::-webkit-scrollbar {
+    display: none
+  }
+
+  .ab-proofCard {
+    flex: 0 0 calc(100% - var(--side) - 12px - 8px);
+    scroll-snap-align: start
+  }
+
+  .ab-proofTab {
+    left: -12px
+  }
+
+  .ab-proofBody {
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+  }
+
+  .ab-proofBody h3 {
+    margin-bottom: 24px;
+    font-size: 18px
+  }
+
+  .ab-proofBody p {
+    padding-right: 0;
+    font-size: 15px
+  }
+
+  .ab-proofNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 28px
+  }
+
+  .ab-proofArrow {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: var(--paper);
+    font-size: 20px;
+    line-height: 1;
+    color: #121212;
+    cursor: pointer
+  }
+
+  .ab-proofDots {
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  .ab-proofDots span {
+    width: 4px;
+    height: 3px;
+    background: #777
+  }
+
+  .ab-proofDots .is-on {
+    width: 26px;
+    background: var(--acid)
   }
 }
