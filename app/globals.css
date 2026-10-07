@@ -13385,6 +13385,12 @@ button:focus-visible,
   top: -1.4px
 }
 
+/* the Playbook tag's icon shares .wy-mark with the "Read full story" arrow,
+   whose phone margin would push it 8px further right than the other tags' icons */
+.wy-tagwrap .wy-tagMark {
+  margin: 0
+}
+
 .fw-tagwrap .mark,
 .fw2-tagwrap .mark,
 .lev-eyebrow .mark {
@@ -14008,4 +14014,12 @@ button:focus-visible,
    stretch the design too far; the margin above covers whatever is left. */
 .fw2-card {
   --full: clamp(min(640px, 100vh), calc(100vh - clamp(32px, 3.5vw, 72px)), 50vw)
+}
+
+/* Where You Are Now: on screens wider than the 1720 cap, the dark ground runs
+   out to both edges, the same way the footer's does */
+@media (min-width:901px) {
+  .wy {
+    border-image: conic-gradient(#1B1B1B 0 0) fill 0 / / 0 100vmax
+  }
 }
