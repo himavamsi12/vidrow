@@ -241,7 +241,7 @@ export default function AboutPage() {
 
         <div className="ab-quote">
           <svg className="ab-quoteMark" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#F5F978" d="M0 4h10v9H5v4H0zM14 4h10v9h-5v4h-5z" />
+            <path fill="#121212" d="M0 4h10v9H5v4H0zM14 4h10v9h-5v4h-5z" />
           </svg>
           <p>
             There&rsquo;s no market differentiation in being one of many vendors. We&rsquo;d rather be the
