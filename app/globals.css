@@ -14067,3 +14067,33 @@ button:focus-visible,
     width: 51.5%
   }
 }
+
+/* the back link stays pinned under the site bar as the page scrolls, and rides
+   up to the top edge when the bar hides itself on a scroll down */
+.cmp-backBar {
+  --k: min(.0694444vw, 1.19444px);
+  position: sticky;
+  top: calc(86 * var(--k));
+  z-index: 900;
+  margin: 0 calc(-1 * var(--side));
+  padding: 12px var(--side);
+  background: var(--paper);
+  transition: top .35s cubic-bezier(.16, .84, .34, 1)
+}
+
+@media (min-width:901px) {
+  .cmp-backBar {
+    --k: min(.0694444vw, .1111vh, 1.19444px)
+  }
+}
+
+@media (max-width:900px) {
+  .cmp-backBar {
+    --k: 1px;
+    top: 82px
+  }
+}
+
+html.nav-hidden .cmp-backBar {
+  top: 0
+}

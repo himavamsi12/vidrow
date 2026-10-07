@@ -27,9 +27,11 @@ export default async function CampaignPage({ params }) {
       <div className="hx-bar-gap" aria-hidden="true" />
 
       <main className="cmp">
-        <a className="cmp-back" href="/">
-          <span aria-hidden="true">&larr;</span> Back to Home page
-        </a>
+        <div className="cmp-backBar">
+          <a className="cmp-back" href="/#work">
+            <span aria-hidden="true">&larr;</span> Back to Home page
+          </a>
+        </div>
 
         <header className="cmp-head">
           <div className="cmp-title">

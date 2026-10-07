@@ -208,8 +208,8 @@ export const CAMPAIGNS = {
     ],
   },
   apnamart: {
-    title: "Apnamart",
-    by: "Apnamart - Anupam Kher",
+    title: "Fayda Uthaiye",
+    by: "Apnamart",
     about: ABOUT,
     frames: [
       video("42d0d1564b3b5b27352749f7fab1f42e","Apnamart, film 1"),
@@ -220,8 +220,8 @@ export const CAMPAIGNS = {
     ],
   },
   eloelo: {
-    title: "Elo Elo",
-    by: "Elo Elo - Anupam Kher",
+    title: "Khul ke Bolega",
+    by: "Eloelo",
     about: ABOUT,
     frames: [
       video("19676b4587a227b740c7aa8dfa002e68", "Elo Elo, film 1"),
@@ -229,8 +229,8 @@ export const CAMPAIGNS = {
     ],
   },
   helium: {
-    title: "Helium",
-    by: "Helium - Anupam Kher",
+    title: "Pay for Cooling",
+    by: "Helium Smart Air",
     about: ABOUT,
     frames: [
       video("f05f15baef6f3fa850ca99e97ff2d73a", "Helium, film 1"),
@@ -241,8 +241,8 @@ export const CAMPAIGNS = {
     ],
   },
   ivyhomes: {
-    title: "Ivy Homes",
-    by: "Ivy Homes - Anupam Kher",
+    title: "Stressfree Buying",
+    by: "Ivy Homes",
     about: ABOUT,
     frames: [
       video("309d1dce77cabc97336fe633405475c0", "Ivy Homes, Possesion"),
@@ -253,8 +253,8 @@ export const CAMPAIGNS = {
     ],
   },
   platinumrx: {
-    title: "Platinum RX",
-    by: "Platinum RX - Anupam Kher",
+    title: "Bimaari par Bhari",
+    by: "PlatinumRx",
     about: ABOUT,
     frames: [
       video("eb54a821aed01f7b4d1851159be31a54", "Platinum RX, film 1"),
@@ -263,8 +263,8 @@ export const CAMPAIGNS = {
     ],
   },
   curious_jr_shailesh: {
-    title: "Curious Jr - Shailesh",
-    by: "Curious Jr - Shailesh - Anupam Kher",
+    title: "Shailesh Lodha",
+    by: "Physics Wallah - Ratta nahi Padhai",
     about: ABOUT,
     frames: [
       video("286c07ac44c4ace2bf472cb426600160", "Curious Jr - Shailesh, film 1"),
@@ -276,8 +276,8 @@ export const CAMPAIGNS = {
     ],
   },
   oolka_jimmy: {
-    title: "Oolka Jimmy",
-    by: "Oolka Jimmy - Anupam Kher",
+    title: "Jimy Shergil",
+    by: "Ookla - Credit Socre Badhao",
     about: ABOUT,
     frames: [
       video("7557ddc957b671c1e1a2649192a873c9", "Oolka Jimmy, film 1"),
@@ -288,8 +288,8 @@ export const CAMPAIGNS = {
     ],
   },
   platinumrx_anup_soni: {
-    title: "Platinum RX - Anup Soni",
-    by: "Platinum RX - Anup Soni",
+    title: "Anup Soni",
+    by: "Platinum Rx - Aapki mehnat Ki Kamai",
     about: ABOUT,
     frames: [
       video("27d821612014a64fe4c2818bdd798f85", "Platinum RX - Anup Soni, film 1"),
@@ -301,8 +301,8 @@ export const CAMPAIGNS = {
     ],
   },
   platinumrx_anupam_kher: {
-    title: "Platinum RX - Anupam Kher",
-    by: "Platinum RX - Anupam Kher",
+    title: "Anupam Kher",
+    by: "PlatinumRx - Smart Choice",
     about: ABOUT,
     frames: [
       video("23c24839c157306de2636c473e87154b", "Platinum RX - Anupam Kher, film 1"),
@@ -314,8 +314,8 @@ export const CAMPAIGNS = {
     ],
   },
   seekho_naveen_kasturia: {
-    title: "Seekho - Naveen Kasturia",
-    by: "Seekho - Naveen Kasturia",
+    title: "Naveen kasturia",
+    by: "Seekho - Seekhega India",
     about: ABOUT,
     frames: [
       video("79be8b74182f5a492e9dffaff4774126", "Seekho - Naveen Kasturia, youtube, film 1"),
@@ -326,8 +326,8 @@ export const CAMPAIGNS = {
     ],
   },
   seekho_mandar: {
-    title: "Seekho - Mandar",
-    by: "Seekho - Mandar",
+    title: "Mandar Chandwadkar",
+    by: "Seekho - Kuchh naya Seekho",
     about: ABOUT,
     frames: [
       video("fb9afb53398265bd9d65a407e2f39c38", "Seekho - Mandar, film 1"),
@@ -338,8 +338,9 @@ export const CAMPAIGNS = {
     ],
   },
   Bachatt_brandformance: {
-    title: "Bachatt - brandformance",
-    by: "Bachatt - brandformance",
+    title: "Bachatt hai to Budget hai",
+    by: "Bachatt",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("660559078e11ffc47f182ac800fccf98", "Bachatt - brandformance, film 1"),
@@ -361,8 +362,9 @@ export const CAMPAIGNS = {
     ],
   },
   groww: {
-    title: "Groww",
+    title: "Dump Title",
     by: "Groww",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("3bd7b9625d51678b4053ebbb791d698b", "Groww, film 1"),
@@ -373,8 +375,9 @@ export const CAMPAIGNS = {
     ],
   },
   helium_Ads: {
-    title: "Helium Ads",
-    by: "Helium Ads",
+    title: "Book now on website",
+    by: "Helium",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("cf9cccab9dd945b19466385c49d6641d", "Helium Ads, film 1"),
@@ -386,8 +389,9 @@ export const CAMPAIGNS = {
     ],
   },
   masai_Ads: {
-    title: "Masai Ads",
-    by: "Masai Ads",
+    title: "Signup For the Test",
+    by: "Masai",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("d511b23b5036e711f169b555a2943b8d", "Masai Ads, film 1"),
@@ -398,8 +402,9 @@ export const CAMPAIGNS = {
     ],
   },
   oolka_Ads: {
-    title: "Oolka Ads",
-    by: "Oolka Ads",
+    title: "Start Subscription",
+    by: "Ookla",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("96b61f4139b242df93110bd90e4c01f2", "Oolka Ads, film 1"),
@@ -413,8 +418,9 @@ export const CAMPAIGNS = {
     ],
   },
   pice_Ads: {
-    title: "Pice Ads",
-    by: "Pice Ads",
+    title: "Try First Transaction",
+    by: "Pice",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("12567b669c9e6f55d0204803ab7b4eec", "Pice Ads, film 1"),
@@ -425,8 +431,9 @@ export const CAMPAIGNS = {
     ],
   },
   performance_platinum_rx: {
-    title: "Platinum RX",
-    by: "Platinum RX",
+    title: "Buy your first Substitute Medicine",
+    by: "Platinum Rx",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("e899e733a6cb5fb4bdceb8c3211625d9", "Performance Platinum RX, film 1"),
@@ -436,8 +443,9 @@ export const CAMPAIGNS = {
     ],
   },
   pw_cjr_ads: {
-    title: "PW CJR Ads",
-    by: "PW CJR Ads",
+    title: "Try Demo classes",
+    by: "Curious Jr",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("bcb2a06c0c118fe0561b71a00fb07899", "PW CJR Ads, film 1"),
@@ -446,39 +454,5 @@ export const CAMPAIGNS = {
       video("2beda0ac594ef582bfd2ac5bea178592", "PW CJR Ads, film 4"),
       video("070147df130638341e499be7857e51e5", "PW CJR Ads, film 5"),
     ],
-  },
-  "bimaari-par-bhari": {
-    title: "Bimaari par Bhari",
-    by: "PlatinumRx - Anupam Kher",
-    about: ABOUT,
-    frames: [
-      still("platinum-rx.png", "Anupam Kher seated in a dressing room"),
-      still("2.png", "Anupam Kher beside a phone showing PlatinumRx savings"),
-      still("platinumrtx.png", "Anupam Kher with the PlatinumRx app"),
-    ],
-  },
-  "stressfree-buying": {
-    title: "Stressfree Buying",
-    by: "Ivy Homes",
-    about: ABOUT,
-    frames: [
-      still("ivyhomes.png", "Two policemen in a new flat"),
-      still("3.png", "A family talking through a renovation"),
-      still("4.png", "An Ivy Homes agent"),
-      still("ivyhomes.png", "Two policemen in a new flat"),
-      still("3.png", "A family talking through a renovation"),
-    ],
-  },
-  "pay-for-cooling": {
-    title: "Pay for cooling",
-    by: "Helium Smart",
-    about: ABOUT,
-    frames: Array.from({ length: 5 }, () => still("5.png", "A man gesturing in front of a Helium air conditioner")),
-  },
-  "fayda-uthaiye": {
-    title: "Fayda Uthaiye",
-    by: "Apnamart",
-    about: ABOUT,
-    frames: Array.from({ length: 5 }, () => still("6.png", "An Apnamart store assistant among the shelves")),
   },
 };
