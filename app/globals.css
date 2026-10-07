@@ -13764,7 +13764,7 @@ button:focus-visible,
   .ab-proofRow {
     display: block;
     overflow: hidden;
-    padding: 72px 0 36px
+    padding: 136px 0 112px
   }
 
   .ab-proofRow::before,
@@ -14023,5 +14023,47 @@ button:focus-visible,
 @media (min-width:901px) {
   .wy {
     border-image: conic-gradient(#1B1B1B 0 0) fill 0 / / 0 100vmax
+  }
+}
+
+/* the founder cards on phones: the name centred in its yellow block (the plate
+   and the band under it), the role centred in the strip beneath */
+@media (max-width:700px) {
+  .abf-name,
+  .abf-card--flip .abf-name {
+    right: auto;
+    height: 16.3%;
+    padding: 0 3%;
+    justify-content: center;
+    text-align: center
+  }
+
+  .abf-name {
+    left: 0;
+    width: 62%
+  }
+
+  .abf-card--flip .abf-name {
+    left: 37%;
+    width: 63%
+  }
+
+  .abf-role,
+  .abf-card--flip .abf-role {
+    top: 86.2%;
+    height: 13.8%;
+    justify-content: center;
+    text-align: center
+  }
+
+  .abf-role {
+    left: 42%;
+    right: 0
+  }
+
+  .abf-card--flip .abf-role {
+    left: 0;
+    right: auto;
+    width: 51.5%
   }
 }
