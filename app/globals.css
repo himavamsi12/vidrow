@@ -12784,6 +12784,61 @@ button:focus-visible,
     width: min(100%, 438px)
   }
 
+  .abf-block--name {
+    width: 62%;
+    top: 74.2%;
+    height: 12%
+  }
+
+  .abf-block--band {
+    top: 86.2%;
+    height: 4.3%
+  }
+
+  .abf-block--role {
+    left: 42%;
+    top: 90.5%
+  }
+
+  .abf-name {
+    left: 5.5%;
+    right: 10%;
+    top: 74.2%;
+    height: 12%;
+    width: auto;
+    font-size: clamp(18px, 4.6vw, 28px);
+    line-height: 1;
+    white-space: normal;
+    text-align: left;
+    align-items: center
+  }
+
+  .abf-role {
+    left: 46.5%;
+    top: 86.2%;
+    bottom: auto;
+    height: 12%;
+    font-size: clamp(11px, 3.2vw, 16px);
+    line-height: 1.1;
+    align-items: center
+  }
+
+  .abf-card--flip .abf-block--name {
+    left: 37%;
+    width: 63%
+  }
+
+  .abf-card--flip .abf-name {
+    left: 42%;
+    right: 6%;
+    text-align: left
+  }
+
+  .abf-card--flip .abf-role {
+    left: 7%;
+    top: 86.2%
+  }
+
   .abf-h {
     font-size: 28px
   }
@@ -12936,6 +12991,10 @@ button:focus-visible,
   flex: none;
   width: clamp(28px, 3.4vw, 48px);
   height: auto
+}
+
+.ab-quoteMark path {
+  fill: #121212 !important
 }
 
 .ab-quote p {
@@ -13169,13 +13228,17 @@ button:focus-visible,
 
 .abt-card {
   container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 0
 }
 
 .abt-shot {
   position: relative;
   aspect-ratio: 144 / 177;
-  overflow: hidden
+  overflow: hidden;
+  flex-shrink: 0
 }
 
 .abt-shot img {
@@ -13268,6 +13331,18 @@ button:focus-visible,
   .abt {
     padding-left: 16px;
     padding-right: 16px
+  }
+
+  .abt-grid {
+    align-items: stretch
+  }
+
+  .abt-card {
+    height: 100%
+  }
+
+  .abt-shot {
+    aspect-ratio: 4 / 5
   }
 
   .abt-h {
