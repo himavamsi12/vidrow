@@ -52,6 +52,21 @@ export default function FeaturedWorkMobile() {
     if (!cards.length) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // every card as tall as the longest one, so the deck reads as one even
+    // stack. Done here rather than with a grid of equal rows: a sticky item
+    // inside a grid is held to its own row, which on iPhones left the deck
+    // not stacking at all.
+    const equalise = () => {
+      if (!list.offsetParent) return;
+      cards.forEach((card) => {
+        card.style.minHeight = "";
+      });
+      const tallest = Math.max(...cards.map((card) => card.offsetHeight));
+      cards.forEach((card) => {
+        card.style.minHeight = `${tallest}px`;
+      });
+    };
+
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -87,20 +102,27 @@ export default function FeaturedWorkMobile() {
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    // a change of width, a landed image or a webfont changes the cards' heights
+    const onResize = () => {
+      equalise();
+      onScroll();
+    };
     updateRef.current = update;
 
+    equalise();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    // images landing change the cards' heights
-    window.addEventListener("load", onScroll);
+    window.addEventListener("resize", onResize);
+    window.addEventListener("load", onResize);
+    document.fonts?.ready.then(onResize).catch(() => {});
     return () => {
       if (frame) cancelAnimationFrame(frame);
       updateRef.current = null;
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      window.removeEventListener("load", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
       cards.forEach((card) => {
+        card.style.minHeight = "";
         card.style.top = "";
         card.style.removeProperty("--q");
       });

@@ -103,6 +103,9 @@ body {
   font-size: 16px;
   line-height: 1.5;
   overflow-x: hidden;
+  /* clip, where it's supported: unlike hidden it doesn't make the body a
+     scroll container, which on iOS Safari stops position: sticky working */
+  overflow-x: clip;
 }
 
 /* every section is capped at 1720 (--maxw) and centred — past that the
@@ -10718,7 +10721,7 @@ button:focus-visible,
     padding: 0;
     gap: calc(56 * var(--k));
     align-items: stretch;
-    height: calc(600 * var(--k));
+    height: calc(500 * var(--k));
     overflow: visible
   }
 
@@ -10727,7 +10730,7 @@ button:focus-visible,
   }
 
   .wy-boardwrap {
-    flex: 1 1 0;
+    flex: 1.15 1 0;
     align-self: stretch;
     background: #2B2B2B
   }
@@ -12177,8 +12180,8 @@ button:focus-visible,
    one shared size), with the white panel running to the card's foot and
    the copy set from its top, so the deck reads as one even stack */
 .fwm-list {
-  display: grid;
-  grid-auto-rows: 1fr
+  display: flex;
+  flex-direction: column
 }
 
 .fwm-card {
@@ -13853,19 +13856,23 @@ button:focus-visible,
 }
 
 /* about us and the campaign pages use the homepage's own fixed, hide-on-scroll
-   bar; outside the hero it needs its own --k, and a spacer holds its place */
-.hx-bar--page {
+   bar; outside the hero it needs its own --k, the same one the hero sets
+   (width- and height-led on desktop), and a spacer holds its place */
+.hx-bar--page,
+.hx-bar-gap {
   --k: min(.0694444vw, 1.19444px)
 }
 
-.hx-bar-gap {
-  height: calc(86 * min(.0694444vw, 1.19444px));
-  background: var(--paper)
+@media (min-width:901px) {
+  .hx-bar--page,
+  .hx-bar-gap {
+    --k: min(.0694444vw, .1111vh, 1.19444px)
+  }
 }
 
-.ab-nav + .hx-bar-gap,
-.hx-bar + .hx-bar-gap {
-  margin: 0
+.hx-bar-gap {
+  height: calc(86 * var(--k));
+  background: var(--paper)
 }
 
 @media (max-width:900px) {
@@ -13982,4 +13989,23 @@ button:focus-visible,
   .ab-proofBody h3 {
     min-height: 2.6em
   }
+}
+
+/* case study pages: the same room under the shared bar the old nav left */
+.csp .hx-bar-gap {
+  margin-bottom: clamp(40px, 6vw, 72px)
+}
+
+/* testimonial deck: on a tall or wide screen the pinned card is shorter than
+   the window, so the next card showed under it. Pad each card out to the
+   bottom of the window (below its pin offset) so only one is ever in view. */
+.fw2-card:not(:last-child) {
+  margin-bottom: max(0px, calc(100vh - clamp(32px, 3.5vw, 72px) - var(--full)))
+}
+
+/* testimonial deck: the card grows to fill the window below its pin offset, so
+   there's no white under it. Capped at 50vw so a tall, narrow window doesn't
+   stretch the design too far; the margin above covers whatever is left. */
+.fw2-card {
+  --full: clamp(min(640px, 100vh), calc(100vh - clamp(32px, 3.5vw, 72px)), 50vw)
 }

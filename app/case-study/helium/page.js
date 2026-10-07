@@ -416,9 +416,10 @@ export default function HeliumCaseStudy() {
   return (
     <>
     <main className="csp">
-      <header className="csp-nav">
+      <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
+      <div className="hx-bar-gap" aria-hidden="true" />
 
       <CspSectionNav sections={SECTIONS} darkSectionIds={["csp-sec-focus", "csp-sec-films"]} />
 

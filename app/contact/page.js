@@ -38,7 +38,7 @@ export default function ContactPage() {
   return (
     <>
       <main className="contact sec">
-        <header className="hx-bar">
+        <header className="hx-bar hx-bar--page">
           <SiteNav logoHref="/" />
         </header>
 
