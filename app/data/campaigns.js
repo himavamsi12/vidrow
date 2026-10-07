@@ -8,16 +8,19 @@ const ABOUT =
 
 const still = (file, alt) => ({ src: `/selected/${file}`, alt });
 
+// a frame played from Cloudflare Stream: `id` is the video's id in its watch link
+const video = (id, alt) => ({ video: id, alt });
+
 export const CAMPAIGNS = {
   vyapar: {
     title: "Business Banega Digital",
     by: "Vyapar - Manoj Joshi",
     about: ABOUT,
     frames: [
-      still("1.png", "A shop owner greets a customer while a photographer shoots the counter"),
-      still("vyapar1.png", "Two men at a desk going through the day\u2019s accounts"),
-      still("vyapar.png", "A shopkeeper shows the Vyapar app on his phone"),
-      still("5.png", "A shopkeeper writing in his ledger"),
+      video("5892a5659d9d6b84b47781adc7664991", "Business Banega Digital \u2014 Vyapar, film 1"),
+      video("3a1fe7a7c49a99b2257b49048fdfd7b7", "Business Banega Digital \u2014 Vyapar, film 2"),
+      video("c5183e74e4233770bd96ec0b0ada5c0f", "Business Banega Digital \u2014 Vyapar, film 3"),
+      video("8a869636f24364c7ecfe0370b2a5e04d", "Business Banega Digital \u2014 Vyapar, film 4"),
     ],
   },
   "bimaari-par-bhari": {

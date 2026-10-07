@@ -13549,3 +13549,78 @@ button:focus-visible,
 .news-sub {
   font-size: 16px
 }
+
+/* a campaign frame that plays a video: its own thumbnail, a translucent box
+   with the site's step mark in the middle, the player in its place once clicked */
+.cmp-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 480 / 252;
+  background: #121212;
+  container-type: inline-size
+}
+
+.cmp-videoPlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer
+}
+
+.cmp-videoPoster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block
+}
+
+.cmp-videoMark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(56px, 7.6cqw, 117px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  background: rgba(190, 188, 184, .72);
+  display: grid;
+  place-items: center;
+  transition: background-color .25s ease, transform .25s ease
+}
+
+.cmp-videoMark img {
+  width: 50%;
+  height: auto;
+  display: block
+}
+
+.cmp-videoPlay:hover .cmp-videoMark {
+  background: rgba(190, 188, 184, .88);
+  transform: translate(-50%, -50%) scale(1.06)
+}
+
+.cmp-videoPlayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0
+}
+
+/* campaign pages on phones: more room between the blurb and the first frame,
+   and between the last frame and the footer */
+@media (max-width:700px) {
+  .cmp-head {
+    margin-bottom: 40px
+  }
+
+  .cmp {
+    padding-bottom: 88px
+  }
+}

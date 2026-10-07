@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import SiteNav from "../../components/SiteNav";
 import Footer from "../../components/Footer";
+import CampaignFrame from "../../components/CampaignFrame";
 import { CAMPAIGNS } from "../../data/campaigns";
 
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function CampaignPage({ params }) {
 
         <div className="cmp-frames">
           {c.frames.map((f, i) => (
-            <img key={i} className="cmp-frame" src={f.src} alt={f.alt} />
+            <CampaignFrame key={i} frame={f} title={`${c.title} \u2014 film ${i + 1}`} />
           ))}
         </div>
       </main>
