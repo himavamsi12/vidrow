@@ -1,21 +1,20 @@
 import TagMark from "./TagMark";
 
-// linkedin / x: profile URLs. The LinkedIn icon always shows (linked once it has a URL);
-// the X icon is hidden until its card has an x URL.
+// linkedin / x: profile URLs. Both icons always show, linked once they have a URL.
 const FOUNDERS = [
   {
     name: "Aditya Raj Somani",
     role: "Co-Founder",
     photo: "/about%20us/team/aditya%20raipng.png",
     linkedin: "https://www.linkedin.com/in/adityarajasomani/",
-    x: "",
+    x: "https://x.com/adityarajsomani",
   },
   {
     name: "Anushank Jain",
     role: "Co-Founder",
     photo: "/about%20us/team/anushank%20jain.png",
     linkedin: "https://www.linkedin.com/in/anushank-jain-7390a696/",
-    x: "",
+    x: "https://x.com/anushankjain",
   },
 ];
 
@@ -78,11 +77,9 @@ export default function AboutFounders() {
               <Social href={f.linkedin} label={`${f.name} on LinkedIn`}>
                 <LinkedInIcon />
               </Social>
-              {f.x && (
-                <Social href={f.x} label={`${f.name} on X`}>
-                  <XIcon />
-                </Social>
-              )}
+              <Social href={f.x} label={`${f.name} on X`}>
+                <XIcon />
+              </Social>
             </div>
             <span className="abf-block abf-block--name" aria-hidden="true" />
             <span className="abf-block abf-block--band" aria-hidden="true" />

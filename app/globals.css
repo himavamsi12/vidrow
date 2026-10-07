@@ -10768,7 +10768,7 @@ button:focus-visible,
 
   .wy-item.on .wy-lead {
     background: #323232;
-    padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + 24 * var(--k));
+    padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + var(--wy-step1) + 20 * var(--k));
     clip-path: polygon(0 0, 100% 0,
         100% calc(100% - var(--wy-tab) - var(--wy-step1)),
         calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),
@@ -11347,7 +11347,9 @@ button:focus-visible,
 
 .vfoot__cta--ghost .vfoot__ctaIcon {
   background: #000;
-  box-shadow: inset 1px 0 0 var(--paper)
+  /* the divider on the left and the button's outline round the rest: the icon
+     is opaque now, so the button's own inset outline no longer shows through it */
+  box-shadow: inset 0 0 0 1px var(--paper)
 }
 
 .vfoot__cta--ghost .vfoot__ctaMark i {

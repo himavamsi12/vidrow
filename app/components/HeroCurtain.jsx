@@ -45,6 +45,9 @@ export default function HeroCurtain() {
   const [skyDy, setSkyDy] = useState(0); // where the hero's skyline actually sits, in viewBox units
   const lenis = useLenis();
   const firedRef = useRef(false);
+  // true from the moment a reveal starts until its curtain has fully gone, so
+  // nothing can start a second one on top of it
+  const busyRef = useRef(false);
 
   // mount first with the resting staircase shape, then flip to "closed" a
   // couple of frames later so the browser actually has a starting point to
@@ -122,8 +125,9 @@ export default function HeroCurtain() {
     };
 
     const trigger = () => {
-      if (firedRef.current) return;
+      if (firedRef.current || busyRef.current) return;
       firedRef.current = true;
+      busyRef.current = true;
       const isDesktop = desktop();
       const line = isDesktop ? SKYLINES.desktop : SKYLINES.mobile;
 
@@ -190,6 +194,7 @@ export default function HeroCurtain() {
             setMounted(false);
             setClosed(false);
             setFading(false);
+            busyRef.current = false;
           }, FADE_MS);
         }, HOLD_MS);
       }, CLOSE_MS);
@@ -205,8 +210,16 @@ export default function HeroCurtain() {
     const onTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
     };
+    // not passive: the swipe that starts the reveal is cancelled here, so the
+    // page never begins its own native scroll under the curtain (on iPhones
+    // that showed as the hero shifting, and the small scroll it caused also
+    // re-armed the trigger, so the curtain played twice)
     const onTouchMove = (e) => {
-      if (touchStartY - e.touches[0].clientY > 5) trigger();
+      if (busyRef.current) return;
+      if (touchStartY - e.touches[0].clientY > 5) {
+        if (!firedRef.current && e.cancelable && window.scrollY < 40) e.preventDefault();
+        trigger();
+      }
     };
     const onKeyDown = (e) => {
       if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") trigger();
@@ -224,6 +237,7 @@ export default function HeroCurtain() {
       // scrolling back up into the hero re-arms the curtain, so scrolling
       // down through it again replays the same reveal instead of doing
       // nothing the second time
+      if (busyRef.current) return;
       if (window.scrollY < 40) {
         firedRef.current = false;
         return;
@@ -243,7 +257,7 @@ export default function HeroCurtain() {
 
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("click", onClickCapture, true);
