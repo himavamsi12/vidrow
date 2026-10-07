@@ -93,9 +93,9 @@ export default function Hero() {
             <u className="hx-w hx-w-y">Marketing</u>{" "}
             <u className="hx-w hx-w-v">Partner</u>
             {/* mobile folds the headline into three lines of its own:
-                Marketing Partner / behind Fastest / Growing Startups. */}
+                Marketing Partner / Behind Fastest / Growing Startups. */}
             <br className="hx-br-m" />{" "}
-            behind
+            Behind
             <br className="hx-br-d" />
             {" "}Fastest
             <br className="hx-br-m" />{" "}

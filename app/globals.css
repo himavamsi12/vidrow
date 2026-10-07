@@ -13543,3 +13543,9 @@ button:focus-visible,
     object-position: left center
   }
 }
+
+/* the subtext under each section heading (Deep Dives, In The News) is 16px at every width */
+.cs-sub,
+.news-sub {
+  font-size: 16px
+}

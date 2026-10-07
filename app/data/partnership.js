@@ -66,6 +66,42 @@ const OPTICAL = {
   "Kuku FM": .9, Emergent: .9, Vyapar: .9, Maxim: .9, Wellopia: .9, Away: .9,
 };
 
+// each logo's website, from Portfolio_Logo_Website_Links.docx. A logo with no
+// verified link there has no entry, and its tile is not clickable.
+const SITE = {
+  Grexa: "https://grexa.ai/",
+  "Neural Garage": "https://visualdub.ai/",
+  "Slay Fashion": "https://slay.fashion/",
+  Helium: "https://www.helium.com/",
+  Nubra: "https://nubra.io/",
+  Pice: "https://piceapp.com/",
+  Periskope: "https://www.getperiscope.ai/",
+  "Little Farm": "https://thelittlefarm.co.in/",
+  Lila: "https://liva.ai/",
+  Vahak: "https://www.vahak.in/",
+  Goodscore: "https://goodscore.app/",
+  "Material Depot": "https://materialdepot.com/",
+  Sahi: "https://www.sahi.com/",
+  Atomberg: "https://atomberg.com/",
+  Groww: "https://groww.in/",
+  Wellopia: "https://www.wellopia.in/",
+  Kutumb: "https://www.kutumbapp.com/",
+  PlatinumRx: "https://www.platinumrx.in/",
+  Eloelo: "https://www.eloelo.in/",
+  Masai: "https://www.masaischool.com/",
+  Glance: "https://www.glance.app/",
+  Emergent: "https://emergent.sh/",
+  PagarBook: "https://pagarbook.com/",
+  Oolka: "https://oolka.in/",
+  Besharam: "https://in.imbesharam.com/",
+  Vyapar: "https://vyapar.com/",
+  "Super K": "https://www.superk.in/",
+  ShareChat: "https://sharechat.com/",
+  "Kuku FM": "https://kukufm.com/",
+  Porter: "https://porter.in/",
+  "Physics Wallah": "https://www.pw.live/",
+};
+
 // the periodic table: one tile per logo on a 10 x 6 grid (col, row from 1).
 // The top row's middle is left empty for the legend.
 const P = "/partnership/";
@@ -122,6 +158,7 @@ export const PR_TILES = [
   [10, 6, "c", "Kuku FM", "kukufm.svg", 85],
 ].map(([c, r, stage, label, file, vw]) => ({
   c, r, stage, label, logo: P + encodeURIComponent(file),
+  href: SITE[label],
   // the logo's drawn width as a share of its tile: the file's own width at
   // 1.07x, on a tile 137 wide (measured off the design)
   w: +((vw * 1.07 * 100) / 137).toFixed(1),

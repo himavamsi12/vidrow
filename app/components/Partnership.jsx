@@ -32,16 +32,20 @@ export default function Partnership() {
                 </span>
               ))}
             </div>
-            {PR_TILES.map((t) => (
-              <div
-                key={`${t.c}-${t.r}`}
-                className="pr-tile"
-                data-stage={t.stage}
-                style={{ "--c": t.c, "--r": t.r }}
-              >
-                <img src={t.logo} alt={t.label} loading="lazy" style={{ width: `${t.w}%` }} />
-              </div>
-            ))}
+            {PR_TILES.map((t) => {
+              const Tile = t.href ? "a" : "div";
+              return (
+                <Tile
+                  key={`${t.c}-${t.r}`}
+                  className="pr-tile"
+                  data-stage={t.stage}
+                  style={{ "--c": t.c, "--r": t.r }}
+                  {...(t.href ? { href: t.href, target: "_blank", rel: "noopener noreferrer", "aria-label": t.label } : {})}
+                >
+                  <img src={t.logo} alt={t.label} loading="lazy" style={{ width: `${t.w}%` }} />
+                </Tile>
+              );
+            })}
           </div>
         </div>
 
@@ -54,11 +58,18 @@ export default function Partnership() {
                 {g.label}
               </span>
               <div className="pr-grid">
-                {g.tiles.map((t) => (
-                  <div key={t.label} className="pr-mtile">
-                    <img src={t.logo} alt={t.label} loading="lazy" style={{ width: `${t.mw}cqw`, scale: t.label === "Vahak" ? 1.45 : undefined }} />
-                  </div>
-                ))}
+                {g.tiles.map((t) => {
+                  const Tile = t.href ? "a" : "div";
+                  return (
+                    <Tile
+                      key={t.label}
+                      className="pr-mtile"
+                      {...(t.href ? { href: t.href, target: "_blank", rel: "noopener noreferrer", "aria-label": t.label } : {})}
+                    >
+                      <img src={t.logo} alt={t.label} loading="lazy" style={{ width: `${t.mw}cqw`, scale: t.label === "Vahak" ? 1.45 : undefined }} />
+                    </Tile>
+                  );
+                })}
               </div>
             </div>
           ))}
