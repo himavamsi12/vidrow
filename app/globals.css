@@ -2558,12 +2558,21 @@ html[data-hero-curtain] .hx-bar {
   /* like the phone cards: the box starts at the tetris block's top edge and
      the cut-out is pinned to that edge, so every founder's head starts at
      the same level whatever the file's proportions */
-  object-fit: cover;
-  object-position: center top;
+  /* the whole cut-out shows: it fills the box's height at its own width,
+     centred on the box, so a wider photo spills a little past each side
+     rather than being clipped on the right */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
   display: block;
   /* the founders read in black and white against the acid ground */
   filter: grayscale(1)
 }
+
 
 /* the bottom-left white block is the headline's own box rather than part
    of the ground, so it covers the photo's shoulder like the design does */
@@ -2599,10 +2608,11 @@ html[data-hero-curtain] .hx-bar {
 
 .fw2-chip {
   position: absolute;
-  /* a true square in design px (79 x 80), butted against the quote panel's
-     left edge and standing 15px above its top, so it keeps its shape however
-     the card's proportions stretch the blocks around it */
-  left: calc(59.17% - 79 * var(--k));
+  /* a true square in design px (79 x 80), so it keeps its shape however the
+     card's proportions stretch the blocks around it */
+  /* its right edge runs 11.5px past the panel's left edge, and the panel
+     starts 65px below the chip's top, so the two read as one stepped shape */
+  left: calc(59.17% - 67.5 * var(--k));
   top: calc(8.75% - 15 * var(--k));
   width: calc(79 * var(--k));
   height: calc(80 * var(--k));
@@ -2623,7 +2633,7 @@ html[data-hero-curtain] .hx-bar {
 .fw2-quote {
   position: absolute;
   left: 61.46%;
-  top: 15%;
+  top: 22.8%;
   right: 6.9%;
   bottom: 6.25%;
   display: flex;
@@ -10214,7 +10224,7 @@ button:focus-visible,
   font-weight: 400;
   letter-spacing: -.03em;
   line-height: 1.05;
-  margin: 0 0 clamp(28px, 3vw, 42px)
+  margin: 0 0 20px
 }
 
 .contact-sub {
@@ -10310,7 +10320,7 @@ button:focus-visible,
 }
 
 .contact-label {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.3;
   color: #111
 }
@@ -10382,20 +10392,20 @@ button:focus-visible,
   margin-top: 4px;
   display: flex;
   align-items: stretch;
-  height: 36px;
+  height: 44px;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--paper);
   font-family: var(--body);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .1em
 }
 
 .contact-submit-label {
-  width: 179px;
+  width: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10403,7 +10413,7 @@ button:focus-visible,
 }
 
 .contact-submit-icon {
-  width: 36px;
+  width: 48px;
   background: var(--acid);
   color: var(--violet);
   display: grid;
@@ -10418,8 +10428,8 @@ button:focus-visible,
 }
 
 .contact-submit-icon svg {
-  width: 34px;
-  height: 34px
+  width: 40px;
+  height: 40px
 }
 
 @media (max-width:900px) {
@@ -10463,7 +10473,7 @@ button:focus-visible,
 
   .contact-head .d1 {
     font-size: 36px;
-    margin-bottom: 24px
+    margin-bottom: 26px
   }
 
   .contact-row {
@@ -10493,7 +10503,7 @@ button:focus-visible,
 
   .contact-submit {
     align-self: stretch;
-    height: 39px
+    height: 44px
   }
 
   .contact-submit-label {
@@ -10502,7 +10512,7 @@ button:focus-visible,
   }
 
   .contact-submit-icon {
-    width: 39px
+    width: 48px
   }
 
   .contact-links {
@@ -10981,7 +10991,7 @@ button:focus-visible,
 
 .fwm-by span {
   font-family: var(--body);
-  font-size: 2.8cqw;
+  font-size: 10px;
   line-height: 1.3;
   color: #4C4546
 }
@@ -11010,7 +11020,7 @@ button:focus-visible,
 }
 
 .fwm-quote {
-  margin-top: 4cqw
+  margin-top: 20px
 }
 
 .fwm-quote p {
@@ -12123,12 +12133,12 @@ button:focus-visible,
 /* type sized to the mobile mock */
 .fwm-by b {
   font-weight: 600;
-  font-size: 4.4cqw
+  font-size: 14px
 }
 
 .fwm-line {
   padding-right: .6cqw;
-  font-size: 4.45cqw;
+  font-size: 16px;
   line-height: 1.22
 }
 
@@ -12487,7 +12497,7 @@ button:focus-visible,
   gap: clamp(60px, 8vw, 120px);
   color: #4C4546;
   font-family: var(--body);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5
 }
@@ -12533,7 +12543,7 @@ button:focus-visible,
   .ab-openingCopy {
     grid-template-columns: 1fr;
     gap: 0;
-    font-size: 15px
+    font-size: 16px
   }
 
   .ab-openingColumn {
@@ -13338,7 +13348,10 @@ button:focus-visible,
     white-space: normal
   }
 
+  /* the plate fills the card, so a role that wraps to two lines doesn't
+     leave its neighbour's plate shorter */
   .abt-plate {
+    flex: 1;
     height: auto;
     min-height: 25cqw;
     padding-bottom: 4cqw
@@ -13916,8 +13929,7 @@ button:focus-visible,
    still standing on the plate */
 @media (min-width:701px) {
   .abt-shot img {
-    transform: scale(.9);
-    transform-origin: center bottom
+    transform: none
   }
 }
 
@@ -14398,5 +14410,49 @@ button:disabled {
 @media (max-width:640px) {
   .vfoot--showSub .vfoot__wellWrap {
     margin-top: 40px
+  }
+}
+
+/* the panel is exactly as tall as the stage list, so the gap under the heading is
+   a steady 80px at every stage; the board centres on the list, and the pinned
+   block lines up from the top so the heading never moves as stages open */
+@media (min-width:901px) {
+  .wy-in {
+    gap: 80px
+  }
+
+  .wy-panel {
+    height: auto;
+    align-items: center
+  }
+
+  .wy-sticky {
+    align-items: flex-start
+  }
+}
+
+/* the board no longer follows the list as stages open and close: the panel is a
+   fixed height (the tallest open state), the list hangs from its top, and the
+   board sits still in the middle of it */
+@media (min-width:901px) {
+  .wy-panel {
+    height: calc(500 * var(--k));
+    align-items: flex-start
+  }
+
+  .wy-left {
+    align-self: flex-start
+  }
+
+  .wy-boardwrap {
+    align-self: center
+  }
+}
+
+/* photos with their own backdrop fill the frame edge to edge (no shrink, so no
+   border of another shade) */
+@media (min-width:701px) {
+  .abt-shot--solid img {
+    transform: none
   }
 }

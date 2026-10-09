@@ -78,7 +78,7 @@ export const FEATURED_WORK = [
     name: "Apnamart",
     category: "apnamart.in",
     solo: true,
-    photos: [{ src: "/featured%20works/Abhishek%20Singh.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
+    photos: [{ src: "/featured%20works/apnamart-founder.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
     plates: [{ name: "Abhishek Singh", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the Apnamart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding Apnamart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",

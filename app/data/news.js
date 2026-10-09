@@ -15,7 +15,7 @@ export const NEWS_ITEMS = [
     href: "https://www.financialexpress.com/business/news/edtech-startup-masai-targets-rs-450-crore-revenue-in-fy27/4205228/",
   },
   {
-    img: "/news-imgs/news-4.png",
+    img: "/news-imgs/grow-founder.png",
     title: "Groww leads India's top brokerages",
     href: "https://economictimes.indiatimes.com/markets/stocks/news/groww-leads-indias-top-brokerages-in-july-with-over-70000-new-active-accounts/articleshow/133195517.cms?from=mdr",
   },

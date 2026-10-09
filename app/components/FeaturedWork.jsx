@@ -47,7 +47,7 @@ const GROUND = [
   [0, 362, 86, 96],
   [0, 458, 172, 62],
   [0, 520, 258, 32],
-  [852, 56, 588, 584], // quote panel
+  [852, 106, 588, 534], // quote panel (its top sits 65px under the chip's)
   [662, 552, 190, 88], // step off the panel's bottom-left
 ];
 

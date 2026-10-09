@@ -34,8 +34,9 @@ export default function PrTable({ children }) {
         lenisRef.current?.stop();
         timer = setTimeout(() => lenisRef.current?.start(), PLAY_MS);
       },
-      // fires once the table's top is well up the screen, so it's mostly in view
-      { rootMargin: "0px 0px -55% 0px" }
+      // fires once the table's top is up near the top quarter of the screen,
+      // under the heading, so the whole table is in view while it holds
+      { rootMargin: "0px 0px -73% 0px" }
     );
     io.observe(el);
     return () => {

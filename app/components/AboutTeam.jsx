@@ -25,6 +25,10 @@ const TEAM = [
   { name: "Anshika Bhatnagar", role: "Creative Associate - Social", bg: "#F3B1BD", linkedin: "https://www.linkedin.com/in/anshika-b-698ba842a" },
 ].map((m, i) => ({ ...m, photo: `/about%20us/team/team${i + 1}.png` }));
 
+// the photos that come with their own backdrop (no transparent ground): these
+// fill the whole frame instead of being shrunk, so no flat bg colour shows round them
+const SOLID = new Set([5, 8, 9, 16, 17, 18]);
+
 function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -60,9 +64,9 @@ export default function AboutTeam() {
       </div>
 
       <div className="abt-grid">
-        {TEAM.map((m) => (
+        {TEAM.map((m, i) => (
           <article className="abt-card" key={m.name}>
-            <div className="abt-shot" style={{ background: m.bg }}>
+            <div className={`abt-shot${SOLID.has(i + 1) ? " abt-shot--solid" : ""}`} style={{ background: m.bg }}>
               <img src={m.photo} alt={m.name} loading="lazy" />
               <span className="abt-step abt-step--1" aria-hidden="true" />
               <span className="abt-step abt-step--2" aria-hidden="true" />
