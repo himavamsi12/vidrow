@@ -10938,7 +10938,7 @@ button:focus-visible,
 .fwm-panel {
   position: relative;
   background: var(--paper);
-  padding: 3.7cqw 3.4cqw 9cqw
+  padding: 3.7cqw 3.4cqw 33cqw
 }
 
 .fwm-top {
@@ -14110,10 +14110,10 @@ html.nav-hidden .cmp-backBar {
 
 .pr-table.in .pr-tile {
   opacity: 1;
-  animation: pr-drop 1.5s cubic-bezier(.16, 1, .3, 1) backwards;
+  animation: pr-drop 1s cubic-bezier(.16, 1, .3, 1) backwards;
   will-change: transform, opacity;
   backface-visibility: hidden;
-  animation-delay: calc(var(--g, 0) * .5s)
+  animation-delay: calc(var(--g, 0) * .3s)
 }
 
 .pr-tile[data-stage="a"] { --g: 1 }
@@ -14271,5 +14271,62 @@ button:disabled {
     width: 100%;
     margin: 0;
     align-self: stretch
+  }
+}
+
+/* The Playbook (desktop): the same left/right inset as every other section —
+   --side, growing past the 1720 cap the way the nav and cards do — instead of
+   its own 6% inset inside a narrower box */
+@media (min-width:901px) {
+  .wy-in {
+    max-width: none;
+    padding-left: max(var(--side), (100% - var(--maxw)) / 2 + var(--side));
+    padding-right: max(var(--side), (100% - var(--maxw)) / 2 + var(--side))
+  }
+}
+
+/* The Playbook (desktop): the open stage's copy runs about half of its card, and the
+   board beside it is a little bigger */
+@media (min-width:901px) {
+  .wy .wy-item.on .wy-lead .wy-copy {
+    max-width: 52%
+  }
+
+  /* the stage list takes a little over half the panel; the board gets the
+     rest, bigger, pushed to the panel's right edge */
+  .wy-panel {
+    justify-content: space-between
+  }
+
+  .wy-left {
+    flex: 0 0 68%
+  }
+
+  .wy-boardwrap {
+    flex: 0 0 calc(290 * var(--k))
+  }
+
+  .wy-grid {
+    grid-template-columns: repeat(4, calc(66 * var(--k)));
+    grid-auto-rows: calc(66 * var(--k));
+    gap: calc(5 * var(--k))
+  }
+}
+
+/* every open stage card is the same height, so the short first one isn't
+   squat next to the longer ones */
+@media (min-width:901px) {
+  .wy .wy-item.on .wy-lead {
+    min-height: calc(335 * var(--k));
+    box-sizing: border-box
+  }
+}
+
+/* the stat/quote card isn't shown on desktop (the open stage is just the
+   title + copy card). Left in the flow it still took up space in a stage
+   that was closing, flashing its quote while the stage collapsed */
+@media (min-width:901px) {
+  .wy-cardwrap {
+    display: none
   }
 }

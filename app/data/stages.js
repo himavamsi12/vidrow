@@ -9,7 +9,7 @@ export const STAGES = [
   },
   {
     title: "Reach Fundraise Targets Months Early",
-    copy: "We engineer full-funnel marketing strategies to accelerate your next fundraise. Performance marketing drives targeted acquisition, social proof builds credibility, and strategic celebrity partnerships strengthen brand authority helping startups reach fundraise targets months ahead of projection.",
+    copy: "We engineer a full-funnel marketing plan to achieve your next fundraise targets. We systematically cover every touchpoint of your customer journey. Performance marketing drives targeted acquisition. Strategic social proof establish credibility. A high-trust celebrity association anchors brand legitimacy and positioning.\n\nWe make sure that even a new brand comes out with full category authority. Startups working with us are hitting their fundraise targets months ahead of projection.",
     stat: "4 Months",
     quote:
       "Selling 500 units a day within a month of launch, well ahead of what the plan allowed for.",
@@ -17,14 +17,14 @@ export const STAGES = [
   },
   {
     title: "Unlock All Scaling Levers",
-    copy: "We build high-conversion creatives across UGC, AI content, influencers, paid partnerships, and celebrity campaigns\u2014each engineered for conversions. Creative diversity unlocks new audiences, keeps performance fresh, and helps acquisition compound. Startups have scaled user acquisition up to 10X in three months.",
+    copy: "We systematically build and operate every high-conversion creative format \u2014 UGC, AI content, paid partnerships, influencer collaborations, and celebrity-led campaigns \u2014 each engineered precisely toward one outcome: conversions.\n\nCreative diversity feeds the algorithm. Fresh formats unlock new audience pools. Saturation becomes irrelevant. And your performance marketing stops hitting ceilings and starts compounding. Startups working with this framework have scaled their user acquisition up to 10X within three months.",
     stat: "−38% CAC",
     quote: "Acquisition cost cut by more than a third while revenue kept climbing month on month.",
     client: "Masai",
   },
   {
     title: "Build Category Authority",
-    copy: "We build brand and social campaigns with one strategic goal: owning the category. We define the positioning that makes your brand the market reference point\u2014whether disrupting an incumbent or creating a new space. Category leaders attract disproportionate media attention, top talent, strategic partnerships, and capital, creating lasting market authority.",
+    copy: "We build brand and social campaigns rooted in a single strategic objective - **owning the category**. We identify the precise positioning that gives your brand the rightful claim to lead. Whether you are disrupting an incumbent-dominated space or pioneering an entirely new category, we make sure you become the reference point in the market.\n\nCategory leaders attract disproportionate media attention, top-tier talent, strategic partnerships and raises the most capital.",
     stat: "3× recall",
     quote: "The awareness layer that carried the brand from Series B all the way to acquisition.",
     client: "Testbook",

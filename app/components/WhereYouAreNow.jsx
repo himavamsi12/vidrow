@@ -55,9 +55,11 @@ export default function WhereYouAreNow() {
         setAllOn(false);
         let pr = -track.getBoundingClientRect().top / span;
         pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
-        // one extra stretch up front where every stage is still collapsed
-        // and one at the end where the last stage stays open and the whole board lights
-        setActive(Math.min(STAGES.length, Math.floor(pr * (STAGES.length + 2)) - 1));
+        // collapsed until the section comes up to the screen, then the first
+        // stage opens at once; one extra stretch at the end keeps the last
+        // stage open while the whole board lights
+        const arrived = track.getBoundingClientRect().top <= window.innerHeight * 0.3;
+        setActive(arrived ? Math.min(STAGES.length, Math.floor(pr * (STAGES.length + 1))) : -1);
       });
     };
 
@@ -150,11 +152,11 @@ export default function WhereYouAreNow() {
     if (!pin) {
       if (scrollOn) {
         // desktop: land in the middle of this stage's stretch of the scroll
-        // (one collapsed stretch up front, one lit-board stretch at the end)
+        // (plus one lit-board stretch at the end)
         const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
         const span = window.innerHeight * 3.8;
         window.scrollTo({
-          top: trackTop + (span * (i + 1.5)) / (STAGES.length + 2),
+          top: trackTop + (span * (i + 0.5)) / (STAGES.length + 1),
           behavior: "smooth",
         });
         return;
@@ -219,7 +221,7 @@ export default function WhereYouAreNow() {
                         <div className="wy-bodyIn">
                           <div className="wy-lead">
                             <h3 className="wy-leadTitle">{s.title}</h3>
-                            <p className="wy-copy">{s.copy}</p>
+                            <p className="wy-copy">{s.copy.split(/(\*\*[^*]+\*\*)/).map((t, k) => (t.startsWith("**") ? <b key={k}>{t.slice(2, -2)}</b> : t))}</p>
                           </div>
                           {/* desktop: the link sits in the card's lower notch */}
                           <a className="wy-read wy-read--d" href="#featured">
