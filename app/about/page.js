@@ -209,7 +209,11 @@ export default function AboutPage() {
             <span className="ab-tag">Not an agency, but a partner</span>
             <TagMark />
           </div>
-          <h2 className="ab-whyH">We Invest In Startups We Work With</h2>
+          <h2 className="ab-whyH">
+            We invest Capital in
+            <br className="ab-investHeadingBreak" />
+            {" "}Startups we work with
+          </h2>
         </div>
 
         <Reveal className="ab-stairs" replay resetOnExit rootMargin="0px" threshold={0.3}>
