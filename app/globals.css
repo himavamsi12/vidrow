@@ -4091,7 +4091,7 @@ html[data-hero-curtain] .hx-bar {
 }
 
 .cs-row:hover .cs-rtrack,
-.cs-row:focus-within .cs-rtrack {
+.cs-row:has(:focus-visible) .cs-rtrack {
   animation-play-state: paused
 }
 
@@ -14242,7 +14242,7 @@ html.nav-hidden .cmp-backBar {
 }
 
 .cs-row:hover .cs-arrow,
-.cs-row:focus-within .cs-arrow {
+.cs-row:has(:focus-visible) .cs-arrow {
   opacity: 1;
   pointer-events: auto
 }
