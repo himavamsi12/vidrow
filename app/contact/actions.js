@@ -17,12 +17,13 @@ export async function submitContact(data) {
   // hidden honeypot field: real people never fill it, bots usually do
   if (clip(data?.website, 200)) return { ok: true };
 
-  const name = clip(data?.name, 200);
+  const name = [clip(data?.firstName, 100), clip(data?.lastName, 100)].filter(Boolean).join(" ");
+  const company = clip(data?.company, 200);
   const email = clip(data?.email, 200);
   const requirement = clip(data?.requirement, 100);
 
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !requirement) {
-    return { ok: false, error: "Please fill in your name, email and requirement." };
+    return { ok: false, error: "Please fill in your first name, email and requirement." };
   }
 
   const supabase = getClient();
@@ -36,7 +37,8 @@ export async function submitContact(data) {
     email,
     phone: clip(data?.phone, 40) || null,
     requirement,
-    message: clip(data?.message, 5000) || null,
+    // the table has no company column, so it rides along at the top of the message
+    message: [company && `Company: ${company}`, clip(data?.message, 5000)].filter(Boolean).join("\n\n") || null,
   });
 
   if (error) {

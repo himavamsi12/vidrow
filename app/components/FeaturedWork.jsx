@@ -47,7 +47,6 @@ const GROUND = [
   [0, 362, 86, 96],
   [0, 458, 172, 62],
   [0, 520, 258, 32],
-  [773, 41, 79, 80], // quote-mark chip
   [852, 56, 588, 584], // quote panel
   [662, 552, 190, 88], // step off the panel's bottom-left
 ];
@@ -98,8 +97,9 @@ export default function FeaturedWork() {
     let frame = 0;
     const update = () => {
       frame = 0;
-      // the heading scrolls away with the page now, so the cards pin at the very top
-      const headH = 0;
+      // the heading stays pinned, so the cards pin just under it
+      const headH = head ? head.offsetHeight : 0;
+      stack.style.setProperty("--headH", `${headH}px`);
       if (reduce) return;
       const vh = window.innerHeight;
       cards.forEach((card, i) => {
@@ -120,11 +120,14 @@ export default function FeaturedWork() {
     updateRef.current = update;
 
     update();
+    const ro = head ? new ResizeObserver(onScroll) : null;
+    ro?.observe(head);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
       updateRef.current = null;
+      ro?.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       cards.forEach((card) => card.style.removeProperty("--q"));

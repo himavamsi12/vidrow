@@ -104,7 +104,7 @@ export default function SiteNav({ logoHref = "/" }) {
         lastY = y;
         // the page moving itself (FeaturedWork holding a card in place
         // while the one above collapses) isn't the user scrolling up
-        if (root.dataset.scrollHold) {
+        if (root.dataset.scrollHold || root.dataset.heroCurtain) {
           upFrom = null;
           return;
         }

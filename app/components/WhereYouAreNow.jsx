@@ -43,11 +43,11 @@ export default function WhereYouAreNow() {
         setScrollOn(true);
         const track = trackRef.current;
         if (!track) return;
-        // compute the span from the .scroll-on height formula (420vh) rather
+        // compute the span from the .scroll-on height formula (480vh) rather
         // than measuring the track's current offsetHeight — scrollOn was
         // just requested via setState, which hasn't re-rendered yet, so the
         // element is still measuring its pre-scroll-on (short) height here
-        const span = window.innerHeight * 3.2;
+        const span = window.innerHeight * 3.8;
         if (span < 80) {
           setAllOn(true);
           return;
@@ -55,7 +55,9 @@ export default function WhereYouAreNow() {
         setAllOn(false);
         let pr = -track.getBoundingClientRect().top / span;
         pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
-        setActive(Math.min(STAGES.length - 1, Math.floor(pr * STAGES.length)));
+        // one extra stretch up front where every stage is still collapsed
+        // and one at the end where the last stage stays open and the whole board lights
+        setActive(Math.min(STAGES.length, Math.floor(pr * (STAGES.length + 2)) - 1));
       });
     };
 
@@ -146,6 +148,17 @@ export default function WhereYouAreNow() {
   const openStage = (i) => {
     const pin = pinRef.current;
     if (!pin) {
+      if (scrollOn) {
+        // desktop: land in the middle of this stage's stretch of the scroll
+        // (one collapsed stretch up front, one lit-board stretch at the end)
+        const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
+        const span = window.innerHeight * 3.8;
+        window.scrollTo({
+          top: trackTop + (span * (i + 1.5)) / (STAGES.length + 2),
+          behavior: "smooth",
+        });
+        return;
+      }
       setMobileOpen(i);
       return;
     }
@@ -158,13 +171,14 @@ export default function WhereYouAreNow() {
 
   const isOn = (i) => {
     if (allOn) return true;
-    if (scrollOn) return i === active;
+    if (scrollOn) return i === Math.min(active, STAGES.length - 1);
     return i === mobileOpen;
   };
   const isLit = (cellIndex) => {
     if (allOn) return true;
     if (active < 0) return false;
-    return STAGE_PIECES.slice(0, active + 1).some((piece) => piece.cells.includes(cellIndex));
+    if (active >= STAGES.length) return true;
+    return STAGE_PIECES[active].cells.includes(cellIndex);
   };
 
   return (
@@ -178,8 +192,7 @@ export default function WhereYouAreNow() {
                 <WyMark className="wy-tagMark" />
               </div>
               <h2 className="wy-h">
-                We help founders hit their <br className="wy-hBreak" />
-                milestones faster.
+                Hit Your Milestone Faster
               </h2>
             </Reveal>
 
@@ -189,13 +202,10 @@ export default function WhereYouAreNow() {
                   <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
                     <h3
                       className="wy-title"
-                      onClick={() => {
-                        if (!scrollOn) openStage(i);
-                      }}
-                      role={scrollOn ? undefined : "button"}
-                      tabIndex={scrollOn ? undefined : 0}
+                      onClick={() => openStage(i)}
+                      role="button"
+                      tabIndex={0}
                       onKeyDown={(e) => {
-                        if (scrollOn) return;
                         if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
                           openStage(i);

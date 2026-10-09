@@ -1,5 +1,6 @@
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
+import PrTable from "./PrTable";
 import { PR_STAGES, PR_TILES, PR_GROUPS } from "../data/partnership";
 
 export default function Partnership() {
@@ -23,7 +24,7 @@ export default function Partnership() {
         </Reveal>
 
         <div className="pr-scroll">
-          <div className="pr-table">
+          <PrTable>
             <div className="pr-legend">
               {PR_STAGES.map((s) => (
                 <span key={s.key} className="pr-key" data-stage={s.key}>
@@ -46,7 +47,7 @@ export default function Partnership() {
                 </Tile>
               );
             })}
-          </div>
+          </PrTable>
         </div>
 
         {/* mobile: one block per stage, its logos three to a row */}

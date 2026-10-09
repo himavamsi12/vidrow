@@ -1,5 +1,6 @@
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
+import CsRow from "./CsRow";
 
 // the four story cards. Each image is a cut-out that sits on the card's
 // coloured panel; the brand runs along the foot, as a white logo or plain text.
@@ -102,7 +103,7 @@ export default function CaseStudies() {
 
       {/* the cards drift sideways on a loop, pausing while one is hovered —
           two copies back to back so the seam never shows */}
-      <div className="cs-row">
+      <CsRow>
         <div className="cs-rtrack">
           {[0, 1].map((copy) => (
             <div className="cs-rset" key={copy} aria-hidden={copy === 1 || undefined}>
@@ -132,7 +133,7 @@ export default function CaseStudies() {
             </div>
           ))}
         </div>
-      </div>
+      </CsRow>
     </section>
   );
 }

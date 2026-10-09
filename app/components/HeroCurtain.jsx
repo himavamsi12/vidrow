@@ -81,12 +81,13 @@ export default function HeroCurtain() {
     const dy = skyDy;
     // far enough that the lowest piece clears the top of the screen
     const travel = dy + lowestTop(sky) + 10;
+    const flat = Math.min(...sky.pieces.flatMap((p) => p.pts.map(([, y]) => y)));
     const apply = (t) => {
       const polys = svgRef.current?.children;
       if (!polys) return;
       // the paper-coloured backing is drawn first, then the pieces over it
       sky.pieces.forEach((p, i) => {
-        const pts = tetPoints(p.pts, dy, t, travel, sky.h);
+        const pts = tetPoints(p.pts, dy, t, travel, sky.h, flat);
         polys[i]?.setAttribute("points", pts);
         polys[sky.pieces.length + i]?.setAttribute("points", pts);
       });
@@ -132,6 +133,9 @@ export default function HeroCurtain() {
       const line = isDesktop ? SKYLINES.desktop : SKYLINES.mobile;
 
       lenis?.stop();
+      // the nav drops under the curtain and stops reacting to scrolling while
+      // it plays, so the page jump behind it can't make it hide and re-show
+      document.documentElement.dataset.heroCurtain = "1";
       document.body.style.overflow = "hidden";
       // a touch scroll is native, so hold the page still under the curtain
       window.addEventListener("touchmove", blockTouch, { passive: false });
@@ -157,6 +161,7 @@ export default function HeroCurtain() {
         // padding, not the tag's rect — the heading is still offset by its
         // not-yet-played fade-up at this point.
         const section = document.getElementById("featured");
+        document.documentElement.classList.add("nav-hidden");
         const head = section?.querySelector(isDesktop ? ".fw2-head" : ".fw-head");
         if (section) {
           let pad = head ? parseFloat(getComputedStyle(head).paddingTop) : 0;
@@ -191,6 +196,7 @@ export default function HeroCurtain() {
             document.body.style.overflow = "";
             window.removeEventListener("touchmove", blockTouch);
             lenis?.start();
+            delete document.documentElement.dataset.heroCurtain;
             setMounted(false);
             setClosed(false);
             setFading(false);

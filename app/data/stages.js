@@ -24,7 +24,7 @@ export const STAGES = [
   },
   {
     title: "Build Category Authority",
-    copy: "We build brand and social campaigns with one strategic goal: owning the category. We define the positioning that makes your brand the market reference point\u2014whether disrupting an incumbent or creating a new space. Category leaders attract disproportionate media attention, top talent, strategic partnerships, and capital, creating lasting market advantage.",
+    copy: "We build brand and social campaigns with one strategic goal: owning the category. We define the positioning that makes your brand the market reference point\u2014whether disrupting an incumbent or creating a new space. Category leaders attract disproportionate media attention, top talent, strategic partnerships, and capital, creating lasting market authority.",
     stat: "3× recall",
     quote: "The awareness layer that carried the brand from Series B all the way to acquisition.",
     client: "Testbook",

@@ -19,10 +19,19 @@ export const TET_PIECES = [
 // way; the points on the bottom edge stay put, below the screen, so each
 // piece's body just keeps extending down to cover what it rises off.
 // `base` is the canvas height, where the bottom edge sits.
-export const tetPoints = (pts, dy = 0, t = 0, travel = 0, base = TET_H) =>
-  pts
-    .map(([x, y]) => `${x},${y >= base ? y + dy + travel : y + dy - travel * t}`)
+// Over the last stretch of the rise the stepped tops ease up onto `flat` (the
+// skyline's highest edge), so the curtain leaves as a straight bar rather than
+// as the tetris outline.
+export const tetPoints = (pts, dy = 0, t = 0, travel = 0, base = TET_H, flat = null) => {
+  const m = flat === null ? 0 : Math.min(Math.max((t - 0.55) / 0.45, 0), 1);
+  return pts
+    .map(([x, y]) => {
+      if (y >= base) return `${x},${y + dy + travel}`;
+      const yy = y + (flat === null ? 0 : (flat - y) * m);
+      return `${x},${yy + dy - travel * t}`;
+    })
     .join(" ");
+};
 
 // the mobile hero's skyline, traced from the mobile mock on a 505 x 404
 // canvas. Edges that meet the screen run a few units past the canvas, so the
