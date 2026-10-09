@@ -9,10 +9,11 @@ export default function Reveal({
   replay = false,
   resetOnExit = false,
   rootMargin,
+  threshold,
   children,
   ...rest
 }) {
-  const [ref, inView] = useReveal(replay, resetOnExit, rootMargin);
+  const [ref, inView] = useReveal(replay, resetOnExit, rootMargin, threshold);
   return (
     <Tag ref={ref} className={`${className} rv${inView ? " in" : ""}`.trim()} {...rest}>
       {children}

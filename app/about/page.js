@@ -152,34 +152,49 @@ export default function AboutPage() {
 
       <section className="ab-why">
         <div className="ab-opening">
-          <span className="ab-openingLabel">01 — OPENING STATEMENT</span>
+          <div className="ab-tagwrap">
+            <span className="ab-tag">Why Vidrow</span>
+            <TagMark />
+          </div>
           <h2 className="ab-openingH">
-            We exist because founders
+            We exist because founders deserve
             <br />
-            deserve better than the
-            <br />
-            choice they&apos;re currently
-            <br />
-            given.
+            better marketing in early stages
           </h2>
 
           <div className="ab-openingCopy">
-            <p>
-              There are two kinds of marketing partners available to most funded startups. The first:
-              basic agencies with execution capabilities but no real expertise. Fast, cheap, and
-              completely interchangeable. The second: legacy agencies built for 200-crore AOPs,
-              which means your 10-crore startup gets a junior team, a rigid process, and no real
-              attention.
-            </p>
-            <p>
-              Neither option was built for the way startups actually work — pivoting every three
-              months, building and validating simultaneously, needing a partner who thinks like a
-              founder, not like a contractor.
-            </p>
-            <p>
-              We built Vidrow because we had been founders ourselves and we knew that gap was
-              real. And nobody was filling it right.
-            </p>
+            <div className="ab-openingColumn">
+              <p className="ab-openingPara--separated">
+                Most startups get handed a generic marketing playbook — hire a growth team, find
+                production houses, start Meta-Google and that&apos;s it. It looks like marketing. It
+                rarely works like marketing.
+              </p>
+              <p>
+                We work with startups from Seed to Series C — the window where brand and growth
+                decisions compound the most. The choices made in this phase don&apos;t just drive
+                this quarter&apos;s pipeline. They shape how investors see you, how talent thinks
+                about joining, and how customers decide whether to trust you with their money.
+              </p>
+              <p className="ab-openingPara--separated">
+                We come in as the marketing team most early-stage companies can&apos;t afford to
+                hire full-time — one that thinks in systems, not campaigns. We help build the
+                complete customer journey — the architecture of how a stranger becomes a lead, a lead
+                becomes a customer, and a customer becomes someone who tells others. We stay close
+                to revenue. We measure pipeline, conversion, CAC, and retention, and make sure you
+                achieve your next fundraise goal months early.
+              </p>
+            </div>
+            <div className="ab-openingColumn">
+              <p className="ab-openingPara--separated">
+                Neither option was built for the way startups actually work — pivoting every three
+                months, building and validating simultaneously, needing a partner who thinks like a
+                founder, not like a contractor.
+              </p>
+              <p>
+                We built Vidrow because we had been founders ourselves and we knew that gap was
+                real. And nobody was filling it right.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -197,7 +212,7 @@ export default function AboutPage() {
           <h2 className="ab-whyH">We Invest In Startups We Work With</h2>
         </div>
 
-        <Reveal className="ab-stairs" replay resetOnExit rootMargin="0px">
+        <Reveal className="ab-stairs" replay resetOnExit rootMargin="0px" threshold={0.3}>
           {INVEST.map((c, i) => (
             <article className={`ab-stair ab-stair--${i + 1}`} key={c.title}>
               <h3>{c.title}</h3>
