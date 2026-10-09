@@ -14263,3 +14263,13 @@ input[type="radio"] {
 button:disabled {
   cursor: not-allowed
 }
+
+/* phones: the tag and heading start at the same left edge as the cards below
+   (the head box was shrink-wrapped and centred, which pushed it inward) */
+@media (max-width:900px) {
+  .wy-head {
+    width: 100%;
+    margin: 0;
+    align-self: stretch
+  }
+}
