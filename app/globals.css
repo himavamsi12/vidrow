@@ -12456,12 +12456,11 @@ button:focus-visible,
 /* about us opening statement */
 .ab-why {
   background: var(--paper);
-  padding: clamp(80px, 14.5vw, 124px) clamp(32px, 11.6vw, 100px) 112px
+  padding: clamp(48px, 6.2vw, 96px) 72px clamp(64px, 8vw, 128px)
 }
 
 .ab-opening {
   width: 100%;
-  max-width: 1320px;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -12526,15 +12525,11 @@ button:focus-visible,
 
 @media (max-width:700px) {
   .ab-why {
-    padding: 72px 20px 88px
+    padding: 48px var(--side) 56px
   }
 }
 
 @media (max-width:900px) {
-  .ab-opening {
-    max-width: 680px
-  }
-
   .ab-openingCopy {
     grid-template-columns: 1fr;
     gap: 0;
@@ -13505,10 +13500,6 @@ button:focus-visible,
     padding-right: var(--side)
   }
 
-  .ab-why {
-    padding-left: 20px;
-    padding-right: 20px
-  }
 }
 
 /* about us hero: phones swap the 17-column mosaic for their own 11 x 12 one
