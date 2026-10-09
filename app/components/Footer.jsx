@@ -12,7 +12,7 @@ const LEAD = Math.min(...FOOTER_PIECES.filter((p) => !p.pre).map((p) => p.at));
 // stops falling
 const REVEAL_DELAY = 4260 - LEAD;
 
-export default function Footer({ hideCta = false }) {
+export default function Footer({ hideCta = false, hideContactCta = false }) {
   const footerRef = useRef(null);
   const wellRef = useRef(null);
   const wellWrapRef = useRef(null);
@@ -125,7 +125,10 @@ export default function Footer({ hideCta = false }) {
     const rect = wrap.getBoundingClientRect();
     // the well's own height: the floor the runway can't collapse past
     const wellHeight = (rect.width * 5) / 35;
-    footer.style.minHeight = `${footer.getBoundingClientRect().height}px`;
+    // on phones the runway is only a few px, so there's nothing to hold the
+    // height for — pinning it there just kept stale extra space if the footer
+    // had been measured at a larger size
+    if (window.innerWidth > 640) footer.style.minHeight = `${footer.getBoundingClientRect().height}px`;
     const collapsedHeight = wellHeight;
     if (reduce) {
       wrap.style.height = `${collapsedHeight}px`;
@@ -145,12 +148,13 @@ export default function Footer({ hideCta = false }) {
 
   return (
     <footer
-      className={`vfoot vfoot--v2${playing ? " is-playing" : ""}${revealed ? " is-revealed" : ""}${hideCta ? " vfoot--noCta" : ""}`}
+      className={`vfoot vfoot--v2${playing ? " is-playing" : ""}${revealed ? " is-revealed" : ""}${hideCta ? " vfoot--noCta" : ""}${hideContactCta ? " vfoot--showSub" : ""}`}
       id="contact"
       ref={footerRef}
     >
-      {/* the contact page is already the destination the CTA points to, so
-          it drops the heading + button (see app/contact/page.js) */}
+      {/* the contact page is already where "Get in touch" points, so it keeps
+          the heading and "See our work" but drops that one button
+          (see app/contact/page.js) */}
       {!hideCta && (
       <div className="vfoot__copy">
         <h2 className="vfoot__title">
@@ -163,6 +167,7 @@ export default function Footer({ hideCta = false }) {
           about scaling to the next round, we&rsquo;d like to hear from you.
         </p>
         <div className="vfoot__ctaWrap">
+          {!hideContactCta && (
           <a className="vfoot__cta" href="/contact">
             <span className="vfoot__ctaLabel">
               <span className="vfoot__d">Get in touch</span>
@@ -174,6 +179,7 @@ export default function Footer({ hideCta = false }) {
               </svg>
             </span>
           </a>
+          )}
           <a className="vfoot__cta vfoot__cta--ghost" href="/#work">
             <span className="vfoot__ctaLabel">See our work</span>
             <span className="vfoot__ctaIcon">

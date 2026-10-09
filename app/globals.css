@@ -14383,3 +14383,20 @@ button:disabled {
     display: none
   }
 }
+
+/* the contact page's footer keeps its line of copy on phones too (every other
+   page's footer drops it there) */
+@media (max-width:640px) {
+  .vfoot--showSub .vfoot__sub {
+    display: block;
+    max-width: 320px;
+    margin: 16px auto 0;
+    text-align: center
+  }
+}
+
+@media (max-width:640px) {
+  .vfoot--showSub .vfoot__wellWrap {
+    margin-top: 40px
+  }
+}

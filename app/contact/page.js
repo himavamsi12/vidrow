@@ -73,7 +73,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <Footer hideCta />
+      <Footer hideContactCta />
     </>
   );
 }
