@@ -165,20 +165,20 @@ export default function AboutPage() {
           <div className="ab-openingCopy">
             <div className="ab-openingColumn">
               <p className="ab-openingPara--separated">
-                Most startups get handed a generic marketing playbook — hire a growth team, find
+                Most startups get handed a generic marketing playbook, hire a growth team, find
                 production houses, start Meta-Google and that&apos;s it. It looks like marketing. It
                 rarely works like marketing.
               </p>
               <p>
-                We work with startups from Seed to Series C — the window where brand and growth
+                We work with startups from Seed to Series C, the window where brand and growth
                 decisions compound the most. The choices made in this phase don&apos;t just drive
                 this quarter&apos;s pipeline. They shape how investors see you, how talent thinks
                 about joining, and how customers decide whether to trust you with their money.
               </p>
               <p className="ab-openingPara--separated">
                 We come in as the marketing team most early-stage companies can&apos;t afford to
-                hire full-time — one that thinks in systems, not campaigns. We help build the
-                complete customer journey — the architecture of how a stranger becomes a lead, a lead
+                hire full-time, one that thinks in systems, not campaigns. We help build the
+                complete customer journey, the architecture of how a stranger becomes a lead, a lead
                 becomes a customer, and a customer becomes someone who tells others. We stay close
                 to revenue. We measure pipeline, conversion, CAC, and retention, and make sure you
                 achieve your next fundraise goal months early.
@@ -186,7 +186,7 @@ export default function AboutPage() {
             </div>
             <div className="ab-openingColumn">
               <p className="ab-openingPara--separated">
-                Neither option was built for the way startups actually work — pivoting every three
+                Neither option was built for the way startups actually work, pivoting every three
                 months, building and validating simultaneously, needing a partner who thinks like a
                 founder, not like a contractor.
               </p>
