@@ -5,6 +5,7 @@ import AboutFounders from "../components/AboutFounders";
 import AboutTeam from "../components/AboutTeam";
 import AboutProof from "../components/AboutProof";
 import AboutHow from "../components/AboutHow";
+import Reveal from "../components/Reveal";
 import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS } from "../data/about";
 
 export const metadata = {
@@ -21,37 +22,6 @@ function buildCells(rows = ABOUT_ROWS) {
     )
   );
 }
-
-// the "Why Vidrow" blocks, two across
-const WHY = [
-  {
-    title: "Who We Work With",
-    body: [
-      "We work with startups from Seed to Series C, the stage where brand and growth decisions compound the most.",
-      "The choices made here shape more than just pipeline. They influence how investors see you, how talent thinks about joining, and how customers choose to trust you.",
-    ],
-  },
-  {
-    title: "What We Do",
-    body: [
-      "We become the marketing team most early-stage companies can\u2019t afford to hire full-time, thinking in systems, not campaigns.",
-      "We build the customer journey from stranger to lead, lead to customer, and customer to advocate, while staying close to revenue and measuring pipeline, conversion, CAC, and retention.",
-    ],
-  },
-  {
-    title: "How We Think",
-    body: [
-      "We stay close to revenue.",
-      "We measure pipeline, conversion, CAC, and retention, and make sure you achieve your next fundraise goal months early.",
-    ],
-  },
-  {
-    title: "Why Vidrow",
-    body: [
-      "Neither option was built for the way startups actually work, pivoting every three months, building and validating simultaneously, and needing a partner who thinks like a founder, not like a contractor.",
-    ],
-  },
-];
 
 // the black band of four proof cards
 const PROOF = [
@@ -181,25 +151,35 @@ export default function AboutPage() {
       </main>
 
       <section className="ab-why">
-        <div className="ab-whyIn">
-          <div className="ab-tagwrap">
-            <span className="ab-tag">Why Vidrow</span>
-            <TagMark />
-          </div>
-          <h2 className="ab-whyH">
-            We exist because founders deserve <br className="ab-br" />
-            better marketing in early stages
+        <div className="ab-opening">
+          <span className="ab-openingLabel">01 — OPENING STATEMENT</span>
+          <h2 className="ab-openingH">
+            We exist because founders
+            <br />
+            deserve better than the
+            <br />
+            choice they&apos;re currently
+            <br />
+            given.
           </h2>
 
-          <div className="ab-whyGrid">
-            {WHY.map((b) => (
-              <div className="ab-whyBlock" key={b.title}>
-                <h3>{b.title}</h3>
-                {b.body.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            ))}
+          <div className="ab-openingCopy">
+            <p>
+              There are two kinds of marketing partners available to most funded startups. The first:
+              basic agencies with execution capabilities but no real expertise. Fast, cheap, and
+              completely interchangeable. The second: legacy agencies built for 200-crore AOPs,
+              which means your 10-crore startup gets a junior team, a rigid process, and no real
+              attention.
+            </p>
+            <p>
+              Neither option was built for the way startups actually work — pivoting every three
+              months, building and validating simultaneously, needing a partner who thinks like a
+              founder, not like a contractor.
+            </p>
+            <p>
+              We built Vidrow because we had been founders ourselves and we knew that gap was
+              real. And nobody was filling it right.
+            </p>
           </div>
         </div>
       </section>
@@ -217,7 +197,7 @@ export default function AboutPage() {
           <h2 className="ab-whyH">We Invest In Startups We Work With</h2>
         </div>
 
-        <div className="ab-stairs">
+        <Reveal className="ab-stairs" replay resetOnExit rootMargin="0px">
           {INVEST.map((c, i) => (
             <article className={`ab-stair ab-stair--${i + 1}`} key={c.title}>
               <h3>{c.title}</h3>
@@ -225,18 +205,7 @@ export default function AboutPage() {
               <Corner corner={c.corner} />
             </article>
           ))}
-        </div>
-
-        <div className="ab-quote">
-          <svg className="ab-quoteMark" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#121212" d="M0 4h10v9H5v4H0zM14 4h10v9h-5v4h-5z" />
-          </svg>
-          <p>
-            There&rsquo;s no market differentiation in being one of many vendors. We&rsquo;d rather be the
-            best partner for a small set of founders than a forgettable agency for a large set of
-            brands.
-          </p>
-        </div>
+        </Reveal>
       </section>
 
       <section className="ab-how">
