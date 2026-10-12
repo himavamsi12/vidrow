@@ -21,6 +21,8 @@ const FOUNDERS = [
     photo: "/about%20us/team/anushank%20jain.png",
     linkedin: "https://www.linkedin.com/in/anushank-jain-7390a696/",
     x: "https://x.com/anushankjain",
+    // placeholder until his real bio is in
+    bio: ["Bio coming soon."],
   },
 ];
 
