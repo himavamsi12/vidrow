@@ -15449,3 +15449,10 @@ body{font-size:1.1940vw}
     margin-bottom: 0
   }
 }
+
+/* phones: the Selected Work cards' "View Work" label is purple */
+@media (max-width:900px) {
+  .sw .sw-item .sw-view {
+    color: var(--violet)
+  }
+}
