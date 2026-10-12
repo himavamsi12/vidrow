@@ -944,8 +944,9 @@ html[data-hero-curtain] .hx-bar {
 
 .hx-w {
   position: relative;
-  /* each word is hoverable: it lights its own block in the staircase */
-  cursor: pointer
+  /* each word is hoverable: it lights its own block in the staircase (the
+     words aren't links, so the cursor stays the normal arrow) */
+  cursor: default
 }
 
 .hx-w::before {
