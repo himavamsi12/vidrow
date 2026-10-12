@@ -14607,9 +14607,9 @@ button:disabled {
 }
 
 .abf-bio p {
-  margin: 0 0 1.6cqw;
+  margin: 0 0 16px;
   font-family: var(--body);
-  font-size: 3.6cqw;
+  font-size: 16px;
   line-height: 1.5;
   opacity: 0;
   transition: opacity .25s ease
@@ -14706,4 +14706,34 @@ button:disabled {
     right: 0;
     width: auto
   }
+}
+
+/* about us proof cards: all four white bodies are as tall as the tallest one
+   (the grid already stretches the cards; the body now fills its card) */
+@media (min-width:701px) {
+  .ab-proofCard {
+    display: flex;
+    flex-direction: column
+  }
+
+  .ab-proofBody {
+    flex: 1
+  }
+}
+
+/* about us "We invest Capital" cards, 1440px and down: the stair heights come
+   from the first card's text (its fixed-size copy is taller than the old
+   viewport-based heights as the page narrows). The first card is as tall as its
+   copy needs, and the other two keep the same steps above it. */
+@media (min-width:701px) and (max-width:1440px) {
+  .ab-stair--1 { min-height: calc(691px - 23vw) }
+  .ab-stair--2 { min-height: calc(691px - 23vw + 2.8vw) }
+  .ab-stair--3 { min-height: calc(691px - 23vw + 10.4vw) }
+}
+
+/* the same on tablets (701 to 900px), where the copy wraps further */
+@media (min-width:701px) and (max-width:900px) {
+  .ab-stair--1 { min-height: calc(1579px - 121.5vw) }
+  .ab-stair--2 { min-height: calc(1579px - 121.5vw + 2.8vw) }
+  .ab-stair--3 { min-height: calc(1579px - 121.5vw + 10.4vw) }
 }

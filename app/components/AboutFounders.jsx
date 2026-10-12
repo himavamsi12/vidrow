@@ -21,8 +21,10 @@ const FOUNDERS = [
     photo: "/about%20us/team/anushank%20jain.png",
     linkedin: "https://www.linkedin.com/in/anushank-jain-7390a696/",
     x: "https://x.com/anushankjain",
-    // placeholder until his real bio is in
-    bio: ["Bio coming soon."],
+    bio: [
+      "Anushank has been in content and marketing from past 12 years and has been part of Indian startup ecosystem for past 9 years now. A 3x founder of HPF Films, Doeasily and Vidrow, Anushank sold his first startup HPF Films to Sharechat and built Ads engine for 30Mn users which gave him understanding of adtech adding to content and marketing background.",
+      "Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
+    ],
   },
 ];
 
