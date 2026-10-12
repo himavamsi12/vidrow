@@ -10478,7 +10478,7 @@ button:focus-visible,
 
   .contact-head .d1 {
     font-size: 36px;
-    margin-bottom: 26px
+    margin-bottom: 4px
   }
 
   .contact-row {
@@ -12572,8 +12572,8 @@ button:focus-visible,
   }
 
   .ab-openingPara--separated {
-    padding-bottom: 28px;
-    border-bottom: 1px solid #ddd;
+    padding-bottom: 0;
+    border-bottom: 0;
     margin-bottom: 28px !important
   }
 
@@ -15319,5 +15319,28 @@ body{font-size:1.1940vw}
 @media (max-width:700px) {
   .cmp-frames--tall:has(> :nth-child(2):last-child) {
     grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+/* a landscape video inside a portrait campaign: it takes a full row at 16:9
+   instead of being cropped into a tall frame */
+.cmp-frames--tall .cmp-video--wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9
+}
+
+/* phones: the portrait Selected Work images are shorter (4:5 instead of
+   584:983), so one card doesn't fill the whole screen */
+@media (max-width:640px) {
+  .sw-grid--tall .sw-shot {
+    aspect-ratio: 4 / 5
+  }
+}
+
+/* about us proof cards on phones: swipe only, no arrow buttons (the strip of
+   dots stays) */
+@media (max-width:700px) {
+  .ab-proofArrow {
+    display: none
   }
 }

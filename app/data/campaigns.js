@@ -9,7 +9,8 @@ const ABOUT =
 const still = (file, alt) => ({ src: `/selected/${file}`, alt });
 
 // a frame played from Cloudflare Stream: `id` is the video's id in its watch link
-const video = (id, alt) => ({ video: id, alt });
+// `wide` marks a landscape video inside a portrait (`layout: "tall"`) campaign
+const video = (id, alt, wide) => (wide ? { video: id, alt, wide: true } : { video: id, alt });
 
 export const CAMPAIGNS = {
   vyapar: {
@@ -119,7 +120,7 @@ export const CAMPAIGNS = {
     layout: "tall",
     about: ABOUT,
     frames: [
-      video("e3f03f08a008187943b20170bf16139f", "Book flights with Power - Away, film 1"),
+      video("e3f03f08a008187943b20170bf16139f", "Book flights with Power - Away, film 1", true),
       video("373a4711947b624836b9103e7269f1d3", "Book flights with Power - Away, film 2"),
       video("d4447351c3ae60b101dfb1bdbeb8420a", "Book flights with Power - Away, film 3"),
       video("d95e32d974e4e016c2e6df6705d6687e", "Book flights with Power - Away, film 4"),
@@ -148,7 +149,6 @@ export const CAMPAIGNS = {
       video("e1f024f107d289bba91dbc8f694e0ff2", "For Future Officers - Testbook, film 2"),
       video("9a3d566d1dee558af9d8b7828c78302c", "For Future Officers - Testbook, film 3"),
       video("2ca5ffe2444508c2ff4896f6903bca71", "For Future Officers - Testbook, film 4"),
-      video("dcee18be37878aeb590d58d6bf4c167c", "For Future Officers - Testbook, film 5"),
     ],
   },
   "unlock-zindagi": {
@@ -266,6 +266,7 @@ export const CAMPAIGNS = {
   curious_jr_shailesh: {
     title: "Shailesh Lodha",
     by: "Physics Wallah - Ratta nahi Padhai",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("286c07ac44c4ace2bf472cb426600160", "Curious Jr - Shailesh, film 1"),
@@ -279,6 +280,7 @@ export const CAMPAIGNS = {
   oolka_jimmy: {
     title: "Jimy Shergil",
     by: "Ookla - Credit Socre Badhao",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("7557ddc957b671c1e1a2649192a873c9", "Oolka Jimmy, film 1"),
@@ -291,6 +293,7 @@ export const CAMPAIGNS = {
   platinumrx_anup_soni: {
     title: "Anup Soni",
     by: "Platinum Rx - Aapki mehnat Ki Kamai",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("27d821612014a64fe4c2818bdd798f85", "Platinum RX - Anup Soni, film 1"),
@@ -318,6 +321,7 @@ export const CAMPAIGNS = {
   seekho_naveen_kasturia: {
     title: "Naveen kasturia",
     by: "Seekho - Seekhega India",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("79be8b74182f5a492e9dffaff4774126", "Seekho - Naveen Kasturia, youtube, film 1"),
@@ -330,6 +334,7 @@ export const CAMPAIGNS = {
   seekho_mandar: {
     title: "Mandar Chandwadkar",
     by: "Seekho - Kuchh naya Seekho",
+    layout: "tall",
     about: ABOUT,
     frames: [
       video("fb9afb53398265bd9d65a407e2f39c38", "Seekho - Mandar, film 1"),
@@ -369,11 +374,11 @@ export const CAMPAIGNS = {
     layout: "tall",
     about: ABOUT,
     frames: [
-      video("3bd7b9625d51678b4053ebbb791d698b", "Groww, film 1"),
+      video("3bd7b9625d51678b4053ebbb791d698b", "Groww, film 1", true),
       video("39c897647d2a214bf4c15cf29a0293e6", "Groww, film 2"),
-      video("238ad87e2036686a885405e7b9c771ec", "Groww, film 3"),
-      video("c536a42642e01c517aef9bfd36f0a058", "Groww, film 4"),
-      video("8199317d024c550c1025237f98ffb4c6", "Groww, film 5"),
+      video("238ad87e2036686a885405e7b9c771ec", "Groww, film 3", true),
+      video("c536a42642e01c517aef9bfd36f0a058", "Groww, film 4", true),
+      video("8199317d024c550c1025237f98ffb4c6", "Groww, film 5", true),
     ],
   },
   helium_Ads: {

@@ -46,6 +46,45 @@ export default function SmoothScrolling({ children }) {
       return;
     }
 
+    // Back from a campaign page: the homepage is loaded again from scratch,
+    // so put the page back on Selected Work where the card was opened. The
+    // sections above it (the pinned Playbook and Levers) settle their
+    // heights over the first moments, so the spot is re-applied until the
+    // layout has stopped moving or the user takes over.
+    let saved = null;
+    try {
+      const nav = performance.getEntriesByType("navigation")[0];
+      saved = JSON.parse(sessionStorage.getItem("sw-return") || "null");
+      if (!nav || nav.type !== "back_forward") saved = null;
+    } catch {}
+    if (saved && document.getElementById("work")) {
+      let stopped = false;
+      const put = () => {
+        if (stopped) return;
+        const sec = document.getElementById("work");
+        if (!sec) return;
+        const y = sec.getBoundingClientRect().top + window.scrollY + saved.offset;
+        const lenis = lenisRef.current?.lenis;
+        if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+        else window.scrollTo(0, y);
+      };
+      const stop = () => {
+        stopped = true;
+        clearInterval(iv);
+        ["wheel", "touchstart", "keydown", "mousedown"].forEach((t) =>
+          window.removeEventListener(t, stop)
+        );
+      };
+      ["wheel", "touchstart", "keydown", "mousedown"].forEach((t) =>
+        window.addEventListener(t, stop, { passive: true })
+      );
+      const iv = setInterval(put, 100);
+      setTimeout(stop, 3000);
+      put();
+      // Lenis may not be attached yet on the first call; the interval covers it
+      return;
+    }
+
     window.scrollTo(0, 0);
   }, []);
 

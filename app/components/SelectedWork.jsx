@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
@@ -8,6 +8,33 @@ import { SW_TABS } from "../data/selectedWork";
 
 export default function SelectedWork() {
   const [activeCat, setActiveCat] = useState(SW_TABS[0].cat);
+
+  // coming back from a campaign page reopens the tab that was on
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem("sw-cat");
+      if (saved && SW_TABS.some((t) => t.cat === saved)) setActiveCat(saved);
+    } catch {}
+  }, []);
+
+  // a campaign page is a full page load, so on Back the homepage starts over
+  // and SmoothScrolling puts the page back at this spot from what's saved
+  // here: where this section sat relative to the viewport when a card was
+  // opened.
+  const rememberSpot = () => {
+    try {
+      const sec = document.getElementById("work");
+      const offset = window.scrollY - (sec.getBoundingClientRect().top + window.scrollY);
+      sessionStorage.setItem("sw-return", JSON.stringify({ offset }));
+    } catch {}
+  };
+
+  const pick = (cat) => {
+    setActiveCat(cat);
+    try {
+      sessionStorage.setItem("sw-cat", cat);
+    } catch {}
+  };
   const tab = SW_TABS.find((t) => t.cat === activeCat) || SW_TABS[0];
   const items = tab.items;
 
@@ -38,7 +65,7 @@ export default function SelectedWork() {
               className="sw-filter"
               data-cat={f.cat}
               aria-pressed={activeCat === f.cat}
-              onClick={() => setActiveCat(f.cat)}
+              onClick={() => pick(f.cat)}
             >
               {/* data-text feeds an invisible bold copy that holds the
                   tab at its selected width, so picking one doesn't reflow
@@ -52,7 +79,7 @@ export default function SelectedWork() {
           <div className={`sw-grid sw-grid--${tab.layout}`}>
             {items.map((item) => (
               <a key={`${tab.cat}-${item.title}`} className="sw-item" href={item.href || "#work"}
-                onClick={item.href ? undefined : (e) => e.preventDefault()}>
+                onClick={item.href ? rememberSpot : (e) => e.preventDefault()}>
                 <span className="sw-shot">
                   {item.img && <img src={item.img} alt={item.alt} loading="lazy" />}
                 </span>

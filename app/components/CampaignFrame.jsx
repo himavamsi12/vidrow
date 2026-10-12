@@ -33,7 +33,7 @@ export default function CampaignFrame({ frame, title }) {
   }
 
   return (
-    <div className="cmp-video">
+    <div className={`cmp-video${frame.wide ? " cmp-video--wide" : ""}`}>
       {playing ? (
         <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=2s&height=900`}>
           <VideoSkin style={{ width: "100%", height: "100%" }}>
