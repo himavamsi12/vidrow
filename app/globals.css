@@ -10899,10 +10899,10 @@ button:focus-visible,
   /* acid everywhere but the logo's white notch at the top-left */
   background: linear-gradient(var(--paper), var(--paper)) left top / 38cqw 16.4cqw no-repeat,
     var(--acid);
-  transform-origin: 50% 0;
-  transform: scale(calc(1 - .06 * var(--q)));
-  filter: brightness(calc(1 - .28 * var(--q)));
-  will-change: transform
+  /* a plain stack: the card underneath keeps its size while the next one
+     slides over it, and only darkens (--q, 0..1, is set from scroll) */
+  transform: none;
+  filter: brightness(calc(1 - .28 * var(--q)))
 }
 
 .fwm-logo {
@@ -14076,7 +14076,10 @@ html.nav-hidden .cmp-backBar {
 @media (min-width:901px) {
   .wy {
     --wy-notch1: calc(52 * var(--k));
-    --wy-notch2: calc(150 * var(--k));
+    /* the label's size, and a notch wide enough to hold the label and its icon
+       at that size (the notch is the clip-path's step and the label's box) */
+    --wy-readfs: clamp(14px, 1.111vw, 20px);
+    --wy-notch2: max(calc(150 * var(--k)), calc(var(--wy-readfs) * 11.6));
     --wy-step1: calc(32 * var(--k));
     --wy-tab: calc(46 * var(--k))
   }
@@ -14145,7 +14148,12 @@ html.nav-hidden .cmp-backBar {
     gap: calc(12 * var(--k));
     background: transparent;
     color: var(--paper);
-    font-size: calc(13 * var(--k))
+    /* 16px on a 1440 screen (1.111vw), growing with the viewport up to 20px */
+    font-size: var(--wy-readfs)
+  }
+
+  .wy .wy-item.on .wy-read--d .wy-mark {
+    flex: none
   }
 
   .wy-boardwrap {
@@ -14492,7 +14500,7 @@ button:disabled {
    pinned under the heading, which pins them off the heading's height. */
 @media (max-width:900px) {
   .fw .fw-head {
-    padding-bottom: 32px
+    padding-bottom: 24px
   }
 }
 
