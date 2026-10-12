@@ -14624,15 +14624,21 @@ button:disabled {
 }
 
 @media (hover: hover) and (min-width: 701px) {
+  .abf-card--bio {
+    /* an even ease-in-out: gentle at both ends, no hard jump at the start */
+    --abf-ease: cubic-bezier(.5, .05, .25, 1)
+  }
+
   /* explicit left / width / top / height for every block, so they can animate
      (the base rules size some of them with right: 0 or bottom: 0) */
   .abf-card--bio .abf-block,
   .abf-card--bio .abf-name,
   .abf-card--bio .abf-role {
-    /* closing: the height comes back first, then the width */
-    transition: top .5s cubic-bezier(.16, .84, .34, 1), height .5s cubic-bezier(.16, .84, .34, 1),
-      left .5s cubic-bezier(.16, .84, .34, 1) .45s, width .5s cubic-bezier(.16, .84, .34, 1) .45s,
-      opacity .3s ease .3s
+    /* closing: the height comes back first, then the width, one after the other */
+    transition: top .4s var(--abf-ease), height .4s var(--abf-ease),
+      left .3s var(--abf-ease) .4s, width .3s var(--abf-ease) .4s,
+      opacity .2s ease .2s;
+    will-change: top, height, left, width
   }
 
   .abf-card--bio .abf-block--name { right: auto; width: 65%; left: 0; top: 74.3%; height: 11% }
@@ -14645,9 +14651,9 @@ button:disabled {
     width: 100% !important;
     top: 0 !important;
     height: 100% !important;
-    /* opening: the width first, then the height */
-    transition: left .5s cubic-bezier(.16, .84, .34, 1), width .5s cubic-bezier(.16, .84, .34, 1),
-      top .6s cubic-bezier(.16, .84, .34, 1) .45s, height .6s cubic-bezier(.16, .84, .34, 1) .45s
+    /* opening: the width first, then the height, one after the other */
+    transition: left .3s var(--abf-ease), width .3s var(--abf-ease),
+      top .45s var(--abf-ease) .28s, height .45s var(--abf-ease) .28s
   }
 
   .abf-card--bio:hover .abf-name,
@@ -14676,7 +14682,7 @@ button:disabled {
   .abf-card--bio:hover .abf-bio p,
   .abf-card--bio:focus-within .abf-bio p {
     opacity: 1;
-    transition-delay: 1.05s
+    transition-delay: .6s
   }
 }
 
