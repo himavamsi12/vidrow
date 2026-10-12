@@ -15282,3 +15282,21 @@ body{font-size:1.1940vw}
     font-size: 24px
   }
 }
+
+/* phones: the acid blocks are sized in % of the card, so on wider phones their
+   edges land between pixels and a hairline shows. Let each overlap the next. */
+@media (max-width:700px) {
+  .abf-block--name {
+    height: calc(12% + 1px)
+  }
+  .abf-block--band {
+    height: calc(4.3% + 1px)
+  }
+}
+
+/* Selected Works filter tabs: 36px tall on 1440px and wider */
+@media (min-width:1440px) {
+  .sw-filter {
+    height: 36px
+  }
+}
