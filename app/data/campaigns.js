@@ -223,6 +223,7 @@ export const CAMPAIGNS = {
     title: "Khul ke Bolega",
     by: "Eloelo",
     about: ABOUT,
+    layout: "tall",
     frames: [
       video("19676b4587a227b740c7aa8dfa002e68", "Elo Elo, film 1"),
       video("08e6995af62f3fabb0122e8bf9a917a9", "Elo Elo, film 2"),
@@ -304,6 +305,7 @@ export const CAMPAIGNS = {
     title: "Anupam Kher",
     by: "PlatinumRx - Smart Choice",
     about: ABOUT,
+    layout: "tall",
     frames: [
       video("23c24839c157306de2636c473e87154b", "Platinum RX - Anupam Kher, film 1"),
       video("a9baf34a743f2f74acc62368b749033d", "Platinum RX - Anupam Kher, film 2"),

@@ -15308,3 +15308,16 @@ body{font-size:1.1940vw}
     padding-left: calc(clamp(40px, 5.6vw, 80px) + 24px)
   }
 }
+
+/* a portrait campaign with only two videos: they sit side by side at the same
+   size as the three-across ones, centred */
+.cmp-frames--tall:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 33.333%));
+  justify-content: center
+}
+
+@media (max-width:700px) {
+  .cmp-frames--tall:has(> :nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
