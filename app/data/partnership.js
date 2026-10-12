@@ -72,7 +72,7 @@ const SITE = {
   Grexa: "https://grexa.ai/",
   "Neural Garage": "https://visualdub.ai/",
   "Slay Fashion": "https://slay.fashion/",
-  Helium: "https://www.helium.com/",
+  Helium: "https://heliumair.in/",
   Nubra: "https://nubra.io/",
   Pice: "https://piceapp.com/",
   Periskope: "https://www.getperiscope.ai/",

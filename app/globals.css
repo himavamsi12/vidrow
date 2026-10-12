@@ -4139,6 +4139,9 @@ html[data-hero-curtain] .hx-bar {
   padding: 5.4cqw 7.3cqw 0;
   font-family: var(--body);
   font-weight: 400;
+  /* white on a colour renders heavier on macOS by default */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 7.3cqw;
   line-height: 1.07;
   letter-spacing: -.01em
@@ -14812,4 +14815,14 @@ button:disabled {
 .wy .wy-item .wy-lead .wy-copy b,
 .wy .wy-item .wy-lead .wy-copy strong {
   color: #F6F6F6
+}
+
+/* Playbook open stage on 1440px and wider: fixed 16px copy, 32px heading */
+@media (min-width:1440px) {
+  .wy .wy-item.on .wy-lead .wy-copy {
+    font-size: 16px
+  }
+  .wy .wy-item.on .wy-title {
+    font-size: 32px
+  }
 }

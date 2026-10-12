@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
@@ -19,13 +19,16 @@ export default function SmoothScrolling({ children }) {
   // turned off, not just overridden after. The one exception is an actual
   // #hash in the URL (e.g. a nav link from the case study page to a
   // homepage section): that still has to land on its target, not the top.
-  useEffect(() => {
+  useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
 
     const target = window.location.hash && document.querySelector(window.location.hash);
     if (target) {
+      // land on the section before the first paint, so there is no flash of
+      // the top of the page and no visible scroll
+      target.scrollIntoView({ behavior: "instant" });
       // give Lenis a tick to attach before handing it the jump, so it isn't
       // left thinking the page is still at 0 and fighting the next real
       // scroll — falls back to a plain jump if it isn't ready yet. A plain
