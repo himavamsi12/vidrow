@@ -63,8 +63,8 @@ function Social({ href, label, children }) {
 }
 
 // "Built by founders": the two founders on violet cards, each with a yellow
-// step block under the photo carrying their name and role. The second card's
-// block is the first's mirrored.
+// step block under the photo carrying their name and role (the same layout on
+// both cards).
 export default function AboutFounders() {
   return (
     <section className="abf">
@@ -81,7 +81,7 @@ export default function AboutFounders() {
 
       <div className="abf-row">
         {FOUNDERS.map((f, i) => (
-          <article className={`abf-card${i % 2 ? " abf-card--flip" : ""}${f.bio ? " abf-card--bio" : ""}`} key={f.name}>
+          <article className={`abf-card${f.bio ? " abf-card--bio" : ""}`} key={f.name}>
             <img className="abf-photo" src={f.photo} alt={f.name} />
             <div className="abf-socials">
               <Social href={f.linkedin} label={`${f.name} on LinkedIn`}>
