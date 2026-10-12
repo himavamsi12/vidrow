@@ -43,11 +43,11 @@ export default function WhereYouAreNow() {
         setScrollOn(true);
         const track = trackRef.current;
         if (!track) return;
-        // compute the span from the .scroll-on height formula (480vh) rather
+        // compute the span from the .scroll-on height formula (700vh) rather
         // than measuring the track's current offsetHeight — scrollOn was
         // just requested via setState, which hasn't re-rendered yet, so the
         // element is still measuring its pre-scroll-on (short) height here
-        const span = window.innerHeight * 3.8;
+        const span = window.innerHeight * 6;
         if (span < 80) {
           setAllOn(true);
           return;
@@ -158,7 +158,7 @@ export default function WhereYouAreNow() {
         // desktop: land in the middle of this stage's stretch of the scroll
         // (plus one lit-board stretch at the end)
         const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
-        const span = window.innerHeight * 3.8;
+        const span = window.innerHeight * 6;
         window.scrollTo({
           top: trackTop + (span * (i + 0.5)) / (STAGES.length + 1),
           behavior: "smooth",

@@ -1,5 +1,6 @@
 "use client";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
@@ -47,6 +48,24 @@ export default function SmoothScrolling({ children }) {
 
     window.scrollTo(0, 0);
   }, []);
+
+  // coming back (browser Back) to a page, the browser puts the page at its
+  // old scroll position behind Lenis's back, so Lenis still holds the target
+  // from the page just left and the first scroll glides toward that stale
+  // spot — landing on a different section. Re-sync it to where the page
+  // really is, a few times because the position is restored a moment after
+  // the page renders.
+  const pathname = usePathname();
+  useEffect(() => {
+    const sync = () => {
+      const lenis = lenisRef.current?.lenis;
+      if (!lenis) return;
+      lenis.resize();
+      lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+    };
+    const timers = [0, 150, 400, 900].map((ms) => setTimeout(sync, ms));
+    return () => timers.forEach(clearTimeout);
+  }, [pathname]);
 
   return (
     <ReactLenis root options={LENIS_OPTIONS} ref={lenisRef}>

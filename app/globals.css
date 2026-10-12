@@ -14323,7 +14323,7 @@ html.nav-hidden .cmp-backBar {
    close in one flowing motion instead of snapping from stage to stage */
 @media (min-width:901px) {
   .wy-track.scroll-on {
-    height: 480vh
+    height: 700vh
   }
 
   .wy-body {
@@ -15298,5 +15298,13 @@ body{font-size:1.1940vw}
 @media (min-width:1440px) {
   .sw-filter {
     height: 36px
+  }
+}
+
+/* About "How Vidrow works": the right-hand column's text sits a little
+   further in from the yellow block */
+@media (min-width:901px) {
+  .ab-howCard:nth-child(even) {
+    padding-left: calc(clamp(40px, 5.6vw, 80px) + 24px)
   }
 }
