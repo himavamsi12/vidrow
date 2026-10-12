@@ -15456,3 +15456,9 @@ body{font-size:1.1940vw}
     color: var(--violet)
   }
 }
+
+/* mobile testimonial stack: the white headline box sits above the card's
+   darkening overlay, so it darkens on its own by the same amount */
+.fwm-line {
+  filter: brightness(calc(1 - .28 * var(--q, 0)))
+}
