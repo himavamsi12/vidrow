@@ -14806,3 +14806,10 @@ button:disabled {
     transition-delay: .45s
   }
 }
+
+/* Playbook copy colour */
+.wy .wy-item .wy-lead .wy-copy,
+.wy .wy-item .wy-lead .wy-copy b,
+.wy .wy-item .wy-lead .wy-copy strong {
+  color: #F6F6F6
+}
