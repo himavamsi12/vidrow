@@ -13601,7 +13601,7 @@ button:focus-visible,
     position: absolute;
     left: 0;
     top: 0;
-    width: calc(var(--side) + 13% * var(--lwn, .68) + 48px);
+    width: calc(var(--side) + 13% * .68 + 48px);
     height: 17.34%;
     background: var(--paper)
   }
