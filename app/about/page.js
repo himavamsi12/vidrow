@@ -167,8 +167,8 @@ export default function AboutPage() {
             <TagMark />
           </div>
           <h2 className="ab-openingH">
-            We exist because founders deserve
-            <br />
+            We exist because founders deserve{" "}
+            <br className="ab-openingBr" />
             better marketing in early stages
           </h2>
 

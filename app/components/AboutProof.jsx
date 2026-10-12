@@ -1,11 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TagMark from "./TagMark";
+
+const AUTOPLAY_MS = 4000;
 
 // the black band of proof cards. On desktop the cards sit in a grid; on
 // phones the track scrolls one card at a time, with arrows and a progress
-// strip under it (hidden on desktop).
+// strip under it (hidden on desktop). There it also advances itself every
+// 4 seconds, looping back to the first card (swipe to move sooner).
 export default function AboutProof({ cards }) {
   const track = useRef(null);
   const [index, setIndex] = useState(0);
@@ -22,6 +25,16 @@ export default function AboutProof({ cards }) {
     const step = el.children[1] ? el.children[1].offsetLeft - el.children[0].offsetLeft : el.clientWidth;
     setIndex(Math.max(0, Math.min(cards.length - 1, Math.round(el.scrollLeft / step))));
   };
+
+  // phones only: the grid isn't scrollable on desktop. Restarts whenever the
+  // card changes, so a swipe gets a full 4 seconds before the next advance.
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 700px)");
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!phone.matches || still.matches) return;
+    const t = setTimeout(() => goTo((index + 1) % cards.length), AUTOPLAY_MS);
+    return () => clearTimeout(t);
+  }, [index, cards.length]);
 
   return (
     <div className="ab-proofRow">

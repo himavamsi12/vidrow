@@ -15392,7 +15392,7 @@ body{font-size:1.1940vw}
 
   .abf-role,
   .abf-card--flip .abf-role {
-    font-size: calc(clamp(11px, 3.2vw, 16px) + 2px)
+    font-size: 18px
   }
 }
 
@@ -15441,7 +15441,7 @@ body{font-size:1.1940vw}
   .abf-mbio p {
     margin: 0 0 14px;
     font-family: var(--body);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5
   }
 
@@ -15461,4 +15461,12 @@ body{font-size:1.1940vw}
    darkening overlay, so it darkens on its own by the same amount */
 .fwm-line {
   filter: brightness(calc(1 - .28 * var(--q, 0)))
+}
+
+/* About "Why Vidrow" heading: the line break is for desktop only — on phones
+   the text runs on after "deserve" */
+@media (max-width:700px) {
+  .ab-openingBr {
+    display: none
+  }
 }
