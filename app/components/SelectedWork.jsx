@@ -9,10 +9,12 @@ import { SW_TABS } from "../data/selectedWork";
 export default function SelectedWork() {
   const [activeCat, setActiveCat] = useState(SW_TABS[0].cat);
 
-  // coming back from a campaign page reopens the tab that was on
+  // a page load starts on the first tab; only coming back from a campaign page
+  // (a card was opened) reopens the tab that card was in, once
   useEffect(() => {
     try {
       const saved = sessionStorage.getItem("sw-cat");
+      sessionStorage.removeItem("sw-cat");
       if (saved && SW_TABS.some((t) => t.cat === saved)) setActiveCat(saved);
     } catch {}
   }, []);
@@ -26,15 +28,10 @@ export default function SelectedWork() {
       const sec = document.getElementById("work");
       const offset = window.scrollY - (sec.getBoundingClientRect().top + window.scrollY);
       sessionStorage.setItem("sw-return", JSON.stringify({ offset }));
+      sessionStorage.setItem("sw-cat", activeCat);
     } catch {}
   };
 
-  const pick = (cat) => {
-    setActiveCat(cat);
-    try {
-      sessionStorage.setItem("sw-cat", cat);
-    } catch {}
-  };
   const tab = SW_TABS.find((t) => t.cat === activeCat) || SW_TABS[0];
   const items = tab.items;
 
@@ -65,7 +62,7 @@ export default function SelectedWork() {
               className="sw-filter"
               data-cat={f.cat}
               aria-pressed={activeCat === f.cat}
-              onClick={() => pick(f.cat)}
+              onClick={() => setActiveCat(f.cat)}
             >
               {/* data-text feeds an invisible bold copy that holds the
                   tab at its selected width, so picking one doesn't reflow

@@ -15344,3 +15344,109 @@ body{font-size:1.1940vw}
     display: none
   }
 }
+
+/* mobile testimonial stack: the card underneath darkens through an overlay
+   instead of a filter, so the founder's photo stays at full brightness */
+.fwm-card {
+  filter: none
+}
+
+.fwm-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #000;
+  opacity: calc(.28 * var(--q, 0));
+  pointer-events: none
+}
+
+.fwm-photo {
+  z-index: 2
+}
+
+.fwm-chip {
+  z-index: 1
+}
+
+.fwm-by,
+.fwm-line {
+  z-index: 3
+}
+
+/* founder cards: "Co-Founder" is 20px on 1440px and wider; on phones the name
+   sits a little further left in its yellow block */
+@media (min-width:1440px) {
+  .abf-role,
+  .abf-card--flip .abf-role {
+    font-size: 20px
+  }
+}
+
+@media (max-width:700px) {
+  .abf-name,
+  .abf-card--flip .abf-name {
+    padding: 0 0 0 8%;
+    justify-content: flex-start;
+    text-align: left
+  }
+
+  .abf-role,
+  .abf-card--flip .abf-role {
+    font-size: calc(clamp(11px, 3.2vw, 16px) + 2px)
+  }
+}
+
+/* phone mosaic photos are backgrounds (so they can be enlarged within their
+   tile), anchored at the top so the face stays in */
+.ab-photo--m {
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: 50% 0
+}
+
+/* footer on phones: no dotted background (it showed as a grid on some screens) */
+@media (max-width:900px) {
+  .vfoot::before {
+    display: none
+  }
+}
+
+/* founder cards: each card sits in a wrapper so, on phones, the bio can be
+   written out under it (there's no hover there). On desktop the wrapper
+   vanishes and the hover panel does the job. */
+.abf-item {
+  display: contents
+}
+
+.abf-mbio {
+  display: none
+}
+
+@media (max-width:700px) {
+  .abf-item {
+    display: block;
+    width: min(100%, 438px)
+  }
+
+  .abf-item .abf-card {
+    width: 100%
+  }
+
+  .abf-mbio {
+    display: block;
+    margin-top: 20px;
+    color: #3A3A3A
+  }
+
+  .abf-mbio p {
+    margin: 0 0 14px;
+    font-family: var(--body);
+    font-size: 12px;
+    line-height: 1.5
+  }
+
+  .abf-mbio p:last-child {
+    margin-bottom: 0
+  }
+}

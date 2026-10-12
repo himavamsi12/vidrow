@@ -99,8 +99,8 @@ export default function WhereYouAreNow() {
       }
       const vh = window.innerHeight;
       const h = sticky.offsetHeight;
-      // a full screen and a bit of scrolling per stage
-      const span = Math.round(vh * 1.2 * n);
+      // two screens of scrolling per stage
+      const span = Math.round(vh * 2 * n);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section
       // heading scrolls away first and the open card is never cut off at

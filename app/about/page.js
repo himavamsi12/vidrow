@@ -6,7 +6,7 @@ import AboutTeam from "../components/AboutTeam";
 import AboutProof from "../components/AboutProof";
 import AboutHow from "../components/AboutHow";
 import Reveal from "../components/Reveal";
-import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS } from "../data/about";
+import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS, ABOUT_PHOTOS_MOBILE, ABOUT_PHOTO_ZOOM_MOBILE } from "../data/about";
 
 export const metadata = {
   title: "About Us | Vidrow",
@@ -14,12 +14,14 @@ export const metadata = {
 
 // flatten the rows into one run of cells (row-major), so the same markup lays
 // out as 17 columns on a desktop and re-flows to 6 on a phone
-function buildCells(rows = ABOUT_ROWS) {
+function buildCells(rows = ABOUT_ROWS, photos = ABOUT_PHOTOS) {
   let photo = 0;
   return rows.flatMap((row) =>
-    [...row].map((code) =>
-      code === "P" ? { code, src: `/about%20us/hero/${ABOUT_PHOTOS[photo++]}.png` } : { code }
-    )
+    [...row].map((code) => {
+      if (code !== "P") return { code };
+      const name = photos[photo++];
+      return { code, src: `/about%20us/hero/${name}.png`, zoom: ABOUT_PHOTO_ZOOM_MOBILE[name] };
+    })
   );
 }
 
@@ -108,7 +110,7 @@ function Corner({ corner }) {
 
 export default function AboutPage() {
   const cells = buildCells();
-  const mobileCells = buildCells(ABOUT_ROWS_MOBILE);
+  const mobileCells = buildCells(ABOUT_ROWS_MOBILE, ABOUT_PHOTOS_MOBILE);
   return (
     <>
       <header className="hx-bar hx-bar--page">
@@ -142,7 +144,15 @@ export default function AboutPage() {
         <div className="ab-grid ab-grid--m">
           {mobileCells.map((c, i) =>
             c.src ? (
-              <img key={i} className="ab-cell ab-photo" src={c.src} alt="" />
+              <span
+                key={i}
+                className="ab-cell ab-photo ab-photo--m"
+                style={{
+                  backgroundImage: `url(${c.src})`,
+                  backgroundSize: `${(c.zoom?.[0] || 1) * 100}%`,
+                  backgroundPosition: c.zoom ? `${c.zoom[1]}% ${c.zoom[2]}%` : undefined,
+                }}
+              />
             ) : (
               <span key={i} className={`ab-cell ab-m${c.code.toLowerCase()}`} />
             )

@@ -14,6 +14,10 @@ const FOUNDERS = [
       "Aditya has been in content industry since his college time in IITK, i.e. 12 years. It's the same amount of time he has been part of startup ecosystem in India. When everyone in content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF films - a short format content engine in pre TikTok and reels era.",
       "That combination of being a content native and a founder is what eventually led to this agency. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
     ],
+    // the shorter text written out under the card on phones
+    mobileBio: [
+      "Aditya has been in content industry since his college time in IITK, i.e. 12 years. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
+    ],
   },
   {
     name: "Anushank Jain",
@@ -24,6 +28,9 @@ const FOUNDERS = [
     bio: [
       "Anushank has been in content and marketing from past 12 years and has been part of Indian startup ecosystem for past 9 years now. A 3x founder of HPF Films, Doeasily and Vidrow, Anushank sold his first startup HPF Films to Sharechat and built Ads engine for 30Mn users which gave him understanding of adtech adding to content and marketing background.",
       "Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
+    ],
+    mobileBio: [
+      "Anushank has been in content and marketing from past 12 years and has been part of Indian startup ecosystem for past 9 years now. Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
     ],
   },
 ];
@@ -81,7 +88,8 @@ export default function AboutFounders() {
 
       <div className="abf-row">
         {FOUNDERS.map((f, i) => (
-          <article className={`abf-card${f.bio ? " abf-card--bio" : ""}`} key={f.name}>
+          <div className="abf-item" key={f.name}>
+          <article className={`abf-card${f.bio ? " abf-card--bio" : ""}`}>
             <img className="abf-photo" src={f.photo} alt={f.name} />
             <div className="abf-socials">
               <Social href={f.linkedin} label={`${f.name} on LinkedIn`}>
@@ -104,6 +112,14 @@ export default function AboutFounders() {
               </div>
             )}
           </article>
+          {f.bio && (
+            <div className="abf-mbio">
+              {(f.mobileBio || f.bio).map((para, j) => (
+                <p key={j}>{para}</p>
+              ))}
+            </div>
+          )}
+          </div>
         ))}
       </div>
     </section>

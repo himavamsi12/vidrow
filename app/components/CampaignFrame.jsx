@@ -35,7 +35,7 @@ export default function CampaignFrame({ frame, title }) {
   return (
     <div className={`cmp-video${frame.wide ? " cmp-video--wide" : ""}`}>
       {playing ? (
-        <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=2s&height=900`}>
+        <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`}>
           <VideoSkin style={{ width: "100%", height: "100%" }}>
             <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
           </VideoSkin>
@@ -44,7 +44,7 @@ export default function CampaignFrame({ frame, title }) {
         <button type="button" className="cmp-videoPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
           <img
             className="cmp-videoPoster"
-            src={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=2s&height=900`}
+            src={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`}
             alt={frame.alt}
           />
           <span className="cmp-videoMark" aria-hidden="true">

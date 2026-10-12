@@ -49,8 +49,8 @@ export default function SmoothScrolling({ children }) {
     // Back from a campaign page: the homepage is loaded again from scratch,
     // so put the page back on Selected Work where the card was opened. The
     // sections above it (the pinned Playbook and Levers) settle their
-    // heights over the first moments, so the spot is re-applied until the
-    // layout has stopped moving or the user takes over.
+    // heights over the first moments, so the spot is kept in place while
+    // the layout settles.
     let saved = null;
     try {
       const nav = performance.getEntriesByType("navigation")[0];
@@ -58,30 +58,40 @@ export default function SmoothScrolling({ children }) {
       if (!nav || nav.type !== "back_forward") saved = null;
     } catch {}
     if (saved && document.getElementById("work")) {
-      let stopped = false;
-      const put = () => {
-        if (stopped) return;
-        const sec = document.getElementById("work");
-        if (!sec) return;
-        const y = sec.getBoundingClientRect().top + window.scrollY + saved.offset;
-        const lenis = lenisRef.current?.lenis;
-        if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+      const lenis = () => lenisRef.current?.lenis;
+      const jump = (y) => {
+        // Lenis caps every scroll at the page height it last measured, which
+        // is stale while the sections above are still growing — re-measure
+        // first, or the page (and the user's own next scroll) is held short
+        if (lenis()) {
+          lenis().resize();
+          lenis().scrollTo(y, { immediate: true, force: true });
+        }
         else window.scrollTo(0, y);
       };
-      const stop = () => {
-        stopped = true;
-        clearInterval(iv);
-        ["wheel", "touchstart", "keydown", "mousedown"].forEach((t) =>
-          window.removeEventListener(t, stop)
-        );
+      const workTop = () => document.getElementById("work").getBoundingClientRect().top + window.scrollY;
+      // the sections above settle their heights over the first moments, so
+      // keep putting the page back on the spot until the user scrolls
+      // themselves. If they scroll before the layout has settled, switch to
+      // only following the shifts: whenever a section above grows or shrinks
+      // and pushes Selected Work, move the page by the same amount.
+      let userScrolled = false;
+      const onInput = () => {
+        userScrolled = true;
+        lenis()?.resize();
       };
-      ["wheel", "touchstart", "keydown", "mousedown"].forEach((t) =>
-        window.addEventListener(t, stop, { passive: true })
-      );
-      const iv = setInterval(put, 100);
-      setTimeout(stop, 3000);
-      put();
-      // Lenis may not be attached yet on the first call; the interval covers it
+      const inputs = ["wheel", "touchmove", "keydown"];
+      inputs.forEach((t) => window.addEventListener(t, onInput, { passive: true }));
+      let last = workTop();
+      jump(last + saved.offset);
+      const iv = setInterval(() => {
+        const top = workTop();
+        if (!userScrolled) jump(top + saved.offset);
+        else if (Math.abs(top - last) >= 1) jump(window.scrollY + top - last);
+        last = top;
+      }, 50);
+      setTimeout(() => inputs.forEach((t) => window.removeEventListener(t, onInput)), 6000);
+      setTimeout(() => clearInterval(iv), 6000);
       return;
     }
 

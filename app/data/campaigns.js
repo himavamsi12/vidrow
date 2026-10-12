@@ -10,7 +10,8 @@ const still = (file, alt) => ({ src: `/selected/${file}`, alt });
 
 // a frame played from Cloudflare Stream: `id` is the video's id in its watch link
 // `wide` marks a landscape video inside a portrait (`layout: "tall"`) campaign
-const video = (id, alt, wide) => (wide ? { video: id, alt, wide: true } : { video: id, alt });
+// `thumb` is the second the poster is taken from (2 by default)
+const video = (id, alt, wide, thumb) => ({ video: id, alt, ...(wide ? { wide: true } : {}), ...(thumb ? { thumb } : {}) });
 
 export const CAMPAIGNS = {
   vyapar: {
@@ -199,12 +200,12 @@ export const CAMPAIGNS = {
     by: "Vyapar",
     about: ABOUT,
     frames: [
-      video("40993c3cc3b779c6badee38305ef7bca", "Vyapari ko salam - Vyapar, film 1"),
-      video("69465cc384da1c7a6a259b40ff80b91d", "Vyapari ko salam - Vyapar, film 2"),
-      video("7ba43a25ac04a549cd9dc5d24a618c4d", "Vyapari ko salam - Vyapar, film 3"),
-      video("440166288a851690e221e9deb72a6428", "Vyapari ko salam - Vyapar, film 4"),
-      video("74de7464cae6aeffe53df5637d155b9f", "Vyapari ko salam - Vyapar, film 5"),
-      video("aa9c5074c01a2ccba6c86d6dfcfc091e", "Vyapari ko salam - Vyapar, film 6"),
+      video("40993c3cc3b779c6badee38305ef7bca", "Vyapari ko salam - Vyapar, film 1", false, 6),
+      video("69465cc384da1c7a6a259b40ff80b91d", "Vyapari ko salam - Vyapar, film 2", false, 6),
+      video("7ba43a25ac04a549cd9dc5d24a618c4d", "Vyapari ko salam - Vyapar, film 3", false, 6),
+      video("440166288a851690e221e9deb72a6428", "Vyapari ko salam - Vyapar, film 4", false, 6),
+      video("74de7464cae6aeffe53df5637d155b9f", "Vyapari ko salam - Vyapar, film 5", false, 6),
+      video("aa9c5074c01a2ccba6c86d6dfcfc091e", "Vyapari ko salam - Vyapar, film 6", false, 6),
     ],
   },
   apnamart: {
@@ -375,10 +376,10 @@ export const CAMPAIGNS = {
     about: ABOUT,
     frames: [
       video("3bd7b9625d51678b4053ebbb791d698b", "Groww, film 1", true),
-      video("39c897647d2a214bf4c15cf29a0293e6", "Groww, film 2"),
       video("238ad87e2036686a885405e7b9c771ec", "Groww, film 3", true),
       video("c536a42642e01c517aef9bfd36f0a058", "Groww, film 4", true),
       video("8199317d024c550c1025237f98ffb4c6", "Groww, film 5", true),
+      video("39c897647d2a214bf4c15cf29a0293e6", "Groww, film 2"),
     ],
   },
   helium_Ads: {
