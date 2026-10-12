@@ -15,6 +15,10 @@ export default function SelectedWork() {
     try {
       const saved = sessionStorage.getItem("sw-cat");
       sessionStorage.removeItem("sw-cat");
+      // only the browser's Back/Forward; a fresh visit, a reload or the
+      // logo/nav back to the homepage always starts on Brand Marketing
+      const nav = performance.getEntriesByType("navigation")[0];
+      if (!nav || nav.type !== "back_forward") return;
       if (saved && SW_TABS.some((t) => t.cat === saved)) setActiveCat(saved);
     } catch {}
   }, []);
