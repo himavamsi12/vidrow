@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const AUTOPLAY_MS = 4000;
 
@@ -10,6 +10,34 @@ const AUTOPLAY_MS = 4000;
 export default function AboutHow({ cards }) {
   const track = useRef(null);
   const [index, setIndex] = useState(0);
+  // desktop reveal: the cards start folded into the yellow block at the grid's
+  // centre ("armed"), then grow out of it one by one once the grid scrolls into
+  // view ("in"). Armed only when the browser can run it, so it never hides the
+  // cards for anyone who can't see the reveal.
+  const [armed, setArmed] = useState(false);
+  const [shown, setShown] = useState(false);
+
+  useLayoutEffect(() => {
+    const wide = window.matchMedia("(min-width: 701px)");
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (wide.matches && !still.matches && "IntersectionObserver" in window) setArmed(true);
+  }, []);
+
+  useEffect(() => {
+    if (!armed) return;
+    const el = track.current;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [armed]);
 
   const goTo = (i) => {
     const el = track.current;
@@ -35,7 +63,11 @@ export default function AboutHow({ cards }) {
 
   return (
     <>
-      <div className="ab-howGrid" ref={track} onScroll={onScroll}>
+      <div
+        className={`ab-howGrid${armed ? " is-armed" : ""}${shown ? " is-in" : ""}`}
+        ref={track}
+        onScroll={onScroll}
+      >
         {cards.map((c) => (
           <article className="ab-howCard" key={c.title}>
             <h3>{c.title}</h3>

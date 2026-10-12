@@ -8,6 +8,12 @@ const FOUNDERS = [
     photo: "/about%20us/team/aditya%20raipng.png",
     linkedin: "https://www.linkedin.com/in/adityarajasomani/",
     x: "https://x.com/adityarajsomani",
+    // shown in the yellow block that grows up the card on hover; paragraphs
+    // are separate entries
+    bio: [
+      "Aditya has been in content industry since his college time in IITK, i.e. 12 years. It's the same amount of time he has been part of startup ecosystem in India. When everyone in content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF films - a short format content engine in pre TikTok and reels era.",
+      "That combination of being a content native and a founder is what eventually led to this agency. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
+    ],
   },
   {
     name: "Anushank Jain",
@@ -71,7 +77,7 @@ export default function AboutFounders() {
 
       <div className="abf-row">
         {FOUNDERS.map((f, i) => (
-          <article className={`abf-card${i % 2 ? " abf-card--flip" : ""}`} key={f.name}>
+          <article className={`abf-card${i % 2 ? " abf-card--flip" : ""}${f.bio ? " abf-card--bio" : ""}`} key={f.name}>
             <img className="abf-photo" src={f.photo} alt={f.name} />
             <div className="abf-socials">
               <Social href={f.linkedin} label={`${f.name} on LinkedIn`}>
@@ -86,6 +92,13 @@ export default function AboutFounders() {
             <span className="abf-block abf-block--role" aria-hidden="true" />
             <h3 className="abf-name">{f.name}</h3>
             <p className="abf-role">{f.role}</p>
+            {f.bio && (
+              <div className="abf-bio">
+                {f.bio.map((para, j) => (
+                  <p key={j}>{para}</p>
+                ))}
+              </div>
+            )}
           </article>
         ))}
       </div>
