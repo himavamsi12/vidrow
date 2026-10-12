@@ -127,6 +127,14 @@ export default function HeroCurtain() {
 
     const trigger = () => {
       if (firedRef.current || busyRef.current) return;
+      // already well past the hero (the browser put the page back mid-way
+      // after Back from a campaign page): the user never scrolled out of
+      // the hero, so this is not the reveal — and playing it would jump the
+      // page to Featured Work. Scrolling back up to the hero re-arms it.
+      if (window.scrollY > window.innerHeight * 0.9) {
+        firedRef.current = true;
+        return;
+      }
       firedRef.current = true;
       busyRef.current = true;
       const isDesktop = desktop();
