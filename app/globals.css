@@ -14438,10 +14438,9 @@ button:disabled {
   }
 }
 
-/* the contact page's footer keeps its line of copy on phones too (every other
-   page's footer drops it there) */
+/* every footer keeps its line of copy on phones too */
 @media (max-width:640px) {
-  .vfoot--showSub .vfoot__sub {
+  .vfoot .vfoot__sub {
     display: block;
     max-width: 320px;
     margin: 16px auto 0;
