@@ -99,8 +99,11 @@ export default function WhereYouAreNow() {
       }
       const vh = window.innerHeight;
       const h = sticky.offsetHeight;
-      // two screens of scrolling per stage
-      const span = Math.round(vh * 2 * n);
+      // two screens of scrolling per stage, except the first, which is
+      // already open on arrival and so only needs a short stretch
+      const first = Math.round(vh * 0.8);
+      const per = Math.round(vh * 2);
+      const span = first + per * (n - 1);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section
       // heading scrolls away first and the open card is never cut off at
@@ -110,7 +113,7 @@ export default function WhereYouAreNow() {
         ? panel.getBoundingClientRect().top - sticky.getBoundingClientRect().top
         : 0;
       const top = h <= vh ? Math.round((vh - h) / 2) : Math.round(Math.max(vh - h, -panelTop));
-      pinRef.current = { span, top };
+      pinRef.current = { span, top, first, per };
       sticky.style.position = "sticky";
       sticky.style.top = `${top}px`;
       track.style.height = `${h + span}px`;
@@ -121,9 +124,8 @@ export default function WhereYouAreNow() {
     const onScroll = () => {
       const pin = pinRef.current;
       if (!pin) return;
-      let pr = (pin.top - track.getBoundingClientRect().top) / pin.span;
-      pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
-      const target = Math.min(n - 1, Math.floor(pr * n));
+      const d = pin.top - track.getBoundingClientRect().top;
+      const target = d < pin.first ? 0 : Math.min(n - 1, 1 + Math.floor((d - pin.first) / pin.per));
       // step one stage at a time: opening a stage changes the pinned block's
       // height (and so its offset), which can make the target jump past the
       // next stage if it were applied directly
@@ -170,7 +172,7 @@ export default function WhereYouAreNow() {
     }
     const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({
-      top: trackTop - pin.top + (pin.span * (i + 0.5)) / STAGES.length,
+      top: trackTop - pin.top + (i === 0 ? pin.first / 2 : pin.first + pin.per * (i - 0.5)),
       behavior: "smooth",
     });
   };
