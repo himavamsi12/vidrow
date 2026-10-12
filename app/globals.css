@@ -14743,3 +14743,60 @@ button:disabled {
   .ab-stair--2 { min-height: calc(1579px - 121.5vw + 2.8vw) }
   .ab-stair--3 { min-height: calc(1579px - 121.5vw + 10.4vw) }
 }
+
+/* team cards, on hover: the yellow name plate grows up the card to cover the
+   photo, and the person's description fades in on it. Only for people who have
+   a bio (.abt-card--bio), and only where there's a real hover (desktop). */
+.abt-bio {
+  display: none
+}
+
+@media (hover: hover) and (min-width: 701px) {
+  .abt-card--bio {
+    position: relative;
+    --abt-ease: cubic-bezier(.5, .05, .25, 1)
+  }
+
+  .abt-bio {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 25cqw; /* the plate's own height, so it starts as the plate */
+    box-sizing: border-box;
+    padding: 0 6.2cqw;
+    overflow: hidden;
+    background: var(--acid);
+    color: #3A3A3A;
+    opacity: 0;
+    pointer-events: none;
+    transition: height .45s var(--abt-ease), opacity .15s ease .3s
+  }
+
+  .abt-bio p {
+    margin: 0 0 3.6cqw;
+    font-family: var(--body);
+    font-size: 4.3cqw;
+    line-height: 1.45;
+    white-space: pre-line;
+    opacity: 0;
+    transition: opacity .2s ease
+  }
+
+  .abt-bio p:first-child {
+    margin-top: 7cqw
+  }
+
+  .abt-card--bio:hover .abt-bio {
+    height: 100%;
+    opacity: 1;
+    transition: height .45s var(--abt-ease), opacity .12s ease
+  }
+
+  .abt-card--bio:hover .abt-bio p {
+    opacity: 1;
+    transition-delay: .3s
+  }
+}
