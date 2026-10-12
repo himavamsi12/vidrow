@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CornerArrow } from "./ContactIcons";
 import { submitContact } from "../contact/actions";
 
@@ -26,6 +26,24 @@ export default function ContactForm() {
   const [form, setForm] = useState(INITIAL);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const controlRef = useRef(null);
+
+  // close the list on an outside click or Escape
+  useEffect(() => {
+    if (!open) return;
+    const away = (e) => {
+      if (!controlRef.current?.contains(e.target)) setOpen(false);
+    };
+    const esc = (e) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("pointerdown", away);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("pointerdown", away);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [open]);
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
@@ -108,17 +126,45 @@ export default function ContactForm() {
 
       <label className="contact-field contact-field--select">
         <span className="contact-label">What are you looking for?</span>
-        <span className="contact-control">
-          <select value={form.requirement} onChange={update("requirement")} required>
-            <option value="" disabled>
-              What&apos;s the requirement
-            </option>
-            {REQUIREMENTS.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
+        <span className="contact-control" ref={controlRef}>
+          <input
+            className="contact-select-value"
+            tabIndex={-1}
+            aria-hidden="true"
+            required
+            value={form.requirement}
+            onChange={() => {}}
+          />
+          <button
+            type="button"
+            className={`contact-select${form.requirement ? "" : " is-empty"}`}
+            aria-haspopup="listbox"
+            aria-expanded={open}
+            onClick={(e) => {
+              e.preventDefault();
+              setOpen((o) => !o);
+            }}
+          >
+            {form.requirement || "What\u2019s the requirement"}
+          </button>
+          {open && (
+            <ul className="contact-options" role="listbox">
+              {REQUIREMENTS.map((r) => (
+                <li
+                  key={r}
+                  role="option"
+                  aria-selected={form.requirement === r}
+                  className={form.requirement === r ? "is-on" : ""}
+                  onClick={() => {
+                    setForm((f) => ({ ...f, requirement: r }));
+                    setOpen(false);
+                  }}
+                >
+                  {r}
+                </li>
+              ))}
+            </ul>
+          )}
           <svg className="contact-field-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M4 7.5 10 13.5 16 7.5" stroke="currentColor" strokeWidth="1.4" />
           </svg>

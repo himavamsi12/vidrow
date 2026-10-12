@@ -15190,3 +15190,95 @@ body{font-size:1.1940vw}
 .abf-bio p{font-size:1.1940vw}
 @media (hover: hover) and (min-width: 701px){.abt-bio p{font-size:4.3cqw}}
 }
+
+/* requirement dropdown: our own list under the field (the native popup opened
+   at the top of the screen on phones) */
+.contact-field .contact-select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 40px 0 12px;
+  border: 1px solid #D7D7D7;
+  border-radius: 0;
+  background: #fff;
+  font-family: var(--body);
+  font-size: 13px;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  outline: none;
+  transition: border-color .2s ease
+}
+
+.contact-field .contact-select.is-empty {
+  color: #8C8C8C
+}
+
+.contact-field .contact-select:focus-visible,
+.contact-field .contact-select[aria-expanded="true"] {
+  border-color: #111
+}
+
+.contact-select-value {
+  position: absolute !important;
+  inset: 0;
+  height: 100% !important;
+  opacity: 0;
+  pointer-events: none
+}
+
+.contact-options {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #111
+}
+
+.contact-options li {
+  padding: 11px 12px;
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer
+}
+
+.contact-options li:hover,
+.contact-options li.is-on {
+  background: #F3F3F3
+}
+
+@media (max-width: 900px) {
+  .contact-field .contact-select,
+  .contact-options li {
+    font-size: 14px
+  }
+
+  .contact-field .contact-select {
+    height: 43px
+  }
+}
+
+/* desktop testimonial author: 4px between the name and the role */
+@media (min-width:901px) {
+  .fw2-by {
+    gap: 4px
+  }
+  .fw2-by b,
+  .fw2-by span {
+    line-height: 1
+  }
+}
+
+/* desktop testimonial headline: 24px from 1440px up */
+@media (min-width:1440px) {
+  .fw2-headline {
+    font-size: 24px
+  }
+}
