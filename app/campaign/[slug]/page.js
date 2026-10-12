@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const c = CAMPAIGNS[slug];
-  return { title: c ? `${c.title} \u2014 ${c.by.split(" - ")[0]} | Vidrow` : "Campaign | Vidrow" };
+  return { title: c ? `${c.title} - ${c.by.split(" - ")[0]} | Vidrow` : "Campaign | Vidrow" };
 }
 
 export default async function CampaignPage({ params }) {
@@ -43,7 +43,7 @@ export default async function CampaignPage({ params }) {
 
         <div className={c.layout === "tall" ? "cmp-frames cmp-frames--tall" : "cmp-frames"}>
           {c.frames.map((f, i) => (
-            <CampaignFrame key={i} frame={f} title={`${c.title} \u2014 film ${i + 1}`} />
+            <CampaignFrame key={i} frame={f} title={`${c.title} - film ${i + 1}`} />
           ))}
         </div>
       </main>

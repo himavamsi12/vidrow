@@ -57,7 +57,7 @@ export default function Founders() {
                     FOUNDERS + TEAM
                   </b>
                   <p>
-                    Engineers turned marketers — a pedigree that sets Vidrow apart from traditional
+                    Engineers turned marketers, a pedigree that sets Vidrow apart from traditional
                     agencies.
                   </p>
                 </div>

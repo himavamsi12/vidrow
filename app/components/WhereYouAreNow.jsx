@@ -99,8 +99,8 @@ export default function WhereYouAreNow() {
       }
       const vh = window.innerHeight;
       const h = sticky.offsetHeight;
-      // half a screen of scrolling per stage
-      const span = Math.round(vh * 0.5 * n);
+      // a full screen and a bit of scrolling per stage
+      const span = Math.round(vh * 1.2 * n);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section
       // heading scrolls away first and the open card is never cut off at
@@ -123,7 +123,11 @@ export default function WhereYouAreNow() {
       if (!pin) return;
       let pr = (pin.top - track.getBoundingClientRect().top) / pin.span;
       pr = pr < 0 ? 0 : pr > 1 ? 1 : pr;
-      setMobileOpen(Math.min(n - 1, Math.floor(pr * n)));
+      const target = Math.min(n - 1, Math.floor(pr * n));
+      // step one stage at a time: opening a stage changes the pinned block's
+      // height (and so its offset), which can make the target jump past the
+      // next stage if it were applied directly
+      setMobileOpen((cur) => (target > cur ? cur + 1 : target < cur ? cur - 1 : cur));
     };
 
     const onResize = () => {

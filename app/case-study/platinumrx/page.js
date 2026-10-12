@@ -6,7 +6,7 @@ import CspMoreRow from "../../components/CspMoreRow";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
-  title: "PlatinumRx — Case Study | Vidrow",
+  title: "PlatinumRx - Case Study | Vidrow",
 };
 
 const MORE_STORIES = [1, 2, 3];
@@ -16,7 +16,7 @@ const AOC = [
     n: "01",
     title: "The Audience",
     head: "The monthly refill",
-    desc: "Diabetes, BP, thyroid and cardiac patients — people who buy the same medicine every month, for years.",
+    desc: "Diabetes, BP, thyroid and cardiac patients, people who buy the same medicine every month, for years.",
   },
   {
     n: "02",
@@ -103,14 +103,14 @@ export default function PlatinumRxCaseStudy() {
           </h1>
           <p className="csp-note">
             A premium AC brand. A 90-day window. One bold question: could the right pieces,
-            assembled correctly, sell 500 units a day — entirely from a website?
+            assembled correctly, sell 500 units a day, entirely from a website?
           </p>
         </div>
 
         <div className="csp-banner">
           <img
             src="/casestudy%20images/hero-image.png"
-            alt="PlatinumRx: Healthcare App — Start Your Monthly Savings Journey"
+            alt="PlatinumRx: Healthcare App - Start Your Monthly Savings Journey"
           />
           <span className="csp-bannerTag">
             <img src="/casestudy%20images/platinumrx-lockup.png" alt="Vidrow x PlatinumRx" />
@@ -192,7 +192,7 @@ export default function PlatinumRxCaseStudy() {
             </h2>
             <p className="csp-mid-copy">
               PlatinumRx was already spending when we arrived. What changed was how far the same
-              money went — and who was on screen when it did.
+              money went, and who was on screen when it did.
             </p>
           </div>
 
@@ -269,7 +269,7 @@ export default function PlatinumRxCaseStudy() {
             </div>
 
             <div className="csp-how-right">
-              <img src="/casestudy%20images/image.png" alt="They Saw It — PlatinumRx spokesperson" />
+              <img src="/casestudy%20images/image.png" alt="They Saw It - PlatinumRx spokesperson" />
             </div>
           </div>
         </section>
@@ -322,7 +322,7 @@ export default function PlatinumRxCaseStudy() {
                     Celebrity was not the expensive option here. It was the one that worked hardest.
                   </p>
                   <p className="csp-quoteSub">
-                    Meta charged us less to show it — the auction rewards what people watch.
+                    Meta charged us less to show it, the auction rewards what people watch.
                   </p>
                 </div>
               </div>
@@ -365,7 +365,7 @@ export default function PlatinumRxCaseStudy() {
               </h2>
             </div>
             <p className="csp-cac-copy">
-              Several producers&apos; creative ran side by side in this account — same targeting,
+              Several producers&apos; creative ran side by side in this account, same targeting,
               same conversion event, same bidding. As the spend opened up, this is whose cost per
               new customer held and whose did not.
             </p>

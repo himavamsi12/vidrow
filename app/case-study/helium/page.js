@@ -7,7 +7,7 @@ import CspCoverflow from "../../components/CspCoverflow";
 import Mark from "../../components/Mark";
 
 export const metadata = {
-  title: "Helium — Case Study | Vidrow",
+  title: "Helium - Case Study | Vidrow",
 };
 
 const SECTIONS = [
@@ -383,7 +383,7 @@ const PERF_ADS = [
 
 const PERF_AD_HERO = {
   src: "/casestudy%20images/casestudy-helium/ad-6.png",
-  alt: "Agar — the closing performance film",
+  alt: "Agar - the closing performance film",
 };
 
 const HOOKS = [
@@ -888,8 +888,8 @@ export default function HeliumCaseStudy() {
           </h2>
 
           <p className="csp-focus-copy">
-            Traditional advertising sells the film. People remember the face, the joke, the line
-            &mdash; and forget whose product it was. We built every frame the other way round: the
+            Traditional advertising sells the film. People remember the face, the joke, the line,
+            and forget whose product it was. We built every frame the other way round: the
             only thing you carry out of it is Helium.
           </p>
 
@@ -1116,14 +1116,14 @@ export default function HeliumCaseStudy() {
               </p>
               <p>
                 So we placed the product with two channels this audience already trusts, for
-                hands-on reviews in their own words. Outside our control &mdash; which is exactly
+                hands-on reviews in their own words. Outside our control, which is exactly
                 why it works.
               </p>
 
               <div className="csp-reviewStat">
                 <b>186k+</b>
                 <span>
-                  views, all high-intent. This is a review, not content &mdash; views climbed as
+                  views, all high-intent. This is a review, not content, views climbed as
                   sales climbed, which is the correlation.
                 </span>
               </div>

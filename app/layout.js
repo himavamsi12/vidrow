@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Vidrow — Marketing partner behind fastest growing startups",
+  title: "Vidrow - Marketing partner behind fastest growing startups",
 };
 import SmoothScrolling from "./components/SmoothScrolling";
 

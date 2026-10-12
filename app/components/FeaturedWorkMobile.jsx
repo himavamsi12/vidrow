@@ -77,7 +77,9 @@ export default function FeaturedWorkMobile() {
       const head = section.querySelector(".fw-head");
       const pin = (head ? head.offsetHeight : 0) + STICK;
       const tops = cards.map((card) => {
-        const top = Math.min(pin, vh - card.offsetHeight - STICK);
+        // always just below the pinned heading, so a card's top (and its
+        // logo) is never tucked behind it
+        const top = pin;
         card.style.top = `${top}px`;
         return top;
       });

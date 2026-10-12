@@ -4,7 +4,7 @@ import ContactForm from "../components/ContactForm";
 import { WhatsappIcon, CalendarIcon, LocationIcon, CornerArrow } from "../components/ContactIcons";
 
 export const metadata = {
-  title: "Contact — Vidrow",
+  title: "Contact - Vidrow",
 };
 
 const CONTACT_LINKS = [

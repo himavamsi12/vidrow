@@ -4,7 +4,7 @@ import CspMoreRow from "../../components/CspMoreRow";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
-  title: "Masai — Case Study | Vidrow",
+  title: "Masai - Case Study | Vidrow",
 };
 
 const SECTIONS = [
@@ -166,14 +166,14 @@ export default function PlatinumRxCaseStudy() {
           <p className="csp-note">
             Masai&apos;s performance came from influencer marketing on Instagram, Twitter and
             LinkedIn. It did not scale, and growth stagnated. The job: scale performance
-            marketing with cost per booking under control — and creative costs low.
+            marketing with cost per booking under control, and creative costs low.
           </p>
         </div>
 
         <div className="csp-banner">
           <img
             src="/casestudy%20images/masai-hero.png"
-            alt="Masai — India's fastest growing career school"
+            alt="Masai - India's fastest growing career school"
           />
           <span className="csp-bannerTag">
             <img src="/casestudy%20images/masai-lockup.png" alt="Vidrow x Masai" />
@@ -181,7 +181,7 @@ export default function PlatinumRxCaseStudy() {
         </div>
 
         <p className="csp-bannerCaption">
-          <b>~306 ads</b> one tile each — every ad we shipped into the account across the six
+          <b>~306 ads</b> one tile each, every ad we shipped into the account across the six
           months, each with multiple hooks.
         </p>
 
@@ -214,7 +214,7 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-aoc-h">Total Vidrow Output</h2>
             </div>
             <p className="csp-aoc-copy">
-              Masai runs online tech courses. Nobody buys one off an ad — they book a paid slot
+              Masai runs online tech courses. Nobody buys one off an ad, they book a paid slot
               for Masai&apos;s entrance test first, so every ad in this account is bought and
               judged on test bookings. Masai already ran a large Meta engine with creative
               arriving from several sources, and Meta funds whatever performs.
@@ -252,7 +252,7 @@ export default function PlatinumRxCaseStudy() {
             </h2>
             <p className="csp-mid-copy">
               December was the last month before we took the creative over. Since then we&apos;ve
-              scaled Masai to nearly five times while sustaining the CAC — and not one month has
+              scaled Masai to nearly five times while sustaining the CAC, and not one month has
               dropped back below where we started.
             </p>
           </div>
@@ -301,7 +301,7 @@ export default function PlatinumRxCaseStudy() {
             <p className="csp-flow-copy">
               Three sources feed the batch, the right creator carries it, and every concept
               ships with three different hooks as three separate ads. Meta decides which of them
-              survive — and that answer sets the next batch.
+              survive, and that answer sets the next batch.
             </p>
           </div>
 
@@ -363,12 +363,12 @@ export default function PlatinumRxCaseStudy() {
             </svg>
             <span className="csp-flow-arrowhead csp-flow-arrowhead--up" style={{ left: "10.5%" }} />
             <span className="csp-flow-loopLabel">
-              every result — win or loss — goes straight back into next week&apos;s batch
+              every result, win or loss, goes straight back into next week&apos;s batch
             </span>
           </div>
 
           <p className="csp-howNote">
-            36% of our ads with a real budget beat the account&apos;s average cost — against 27%
+            36% of our ads with a real budget beat the account&apos;s average cost, against 27%
             of everything else running.
           </p>
         </section>
@@ -391,7 +391,7 @@ export default function PlatinumRxCaseStudy() {
             </h2>
             <p className="csp-won-copy">
               Meta was never told to favour our ads. It moved the money there because they
-              converted — and it moved more of it than the share of ads we made.
+              converted, and it moved more of it than the share of ads we made.
             </p>
 
             <div className="csp-won-left">
@@ -423,7 +423,7 @@ export default function PlatinumRxCaseStudy() {
                 </div>
                 <div className="csp-won-note">
                   <p>
-                    We made just over half the ads — and took a bigger share of the bookings and
+                    We made just over half the ads, and took a bigger share of the bookings and
                     a bigger share of the budget than that.
                   </p>
                 </div>
@@ -548,7 +548,7 @@ export default function PlatinumRxCaseStudy() {
 
           <p className="csp-howNote">
             Reading left to right: the biggest single ad, then the biggest five, and so on to all
-            of them. The Vidrow line never drops below the rest — so this is not one runaway
+            of them. The Vidrow line never drops below the rest, so this is not one runaway
             winner flattering an average.
           </p>
         </section>

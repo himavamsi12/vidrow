@@ -56,7 +56,7 @@ export default function AboutTeam() {
         </div>
         <p className="abt-blurb">
           Most creative teams will tell you they&rsquo;re data-driven. Ours didn&rsquo;t have to
-          learn that &mdash; it&rsquo;s just how they&rsquo;re wired. The team is largely IIT Kanpur
+          learn that, it&rsquo;s just how they&rsquo;re wired. The team is largely IIT Kanpur
           alumni, which means systems thinking, first-principles reasoning, and an almost
           inconvenient obsession with how things actually work aren&rsquo;t values we had to
           instill. They came standard.

@@ -17,7 +17,7 @@ const card = (i, [title, client, img, href]) => ({
   title,
   client,
   img: img ? P + encodeURIComponent(img) : null,
-  alt: `${title} \u2014 ${client}`,
+  alt: `${title} - ${client}`,
   corner: S[i % S.length],
 });
 

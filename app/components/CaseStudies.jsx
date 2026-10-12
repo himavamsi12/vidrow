@@ -39,9 +39,9 @@ const DEEP_DIVES = [
     kind: "cu",
     title: "CuriousJr observed a dip of 23% in CAC with UGC creatives",
     img: "/deep drives/curious js.png",
-    logo: "/testimonial-logos/casestudy-logo-1.png",
+    logo: "/deep%20drives/curious%20jr.png",
     logoAlt: "CuriousJr",
-    logoFx: "dark",
+    logoFx: "none", // the supplied two-tone logo, shown as is
   },
   {
     kind: "ap",

@@ -17,7 +17,7 @@ export const STAGES = [
   },
   {
     title: "Unlock All Scaling Levers",
-    copy: "We systematically build and operate every high-conversion creative format \u2014 UGC, AI content, paid partnerships, influencer collaborations, and celebrity-led campaigns \u2014 each engineered precisely toward one outcome: conversions.\n\nCreative diversity feeds the algorithm. Fresh formats unlock new audience pools. Saturation becomes irrelevant. And your performance marketing stops hitting ceilings and starts compounding. Startups working with this framework have scaled their user acquisition up to 10X within three months.",
+    copy: "We systematically build and operate every high-conversion creative format (UGC, AI content, paid partnerships, influencer collaborations, and celebrity-led campaigns), each engineered precisely toward one outcome: conversions.\n\nCreative diversity feeds the algorithm. Fresh formats unlock new audience pools. Saturation becomes irrelevant. And your performance marketing stops hitting ceilings and starts compounding. Startups working with this framework have scaled their user acquisition up to 10X within three months.",
     stat: "−38% CAC",
     quote: "Acquisition cost cut by more than a third while revenue kept climbing month on month.",
     client: "Masai",

@@ -3837,6 +3837,7 @@ html[data-hero-curtain] .hx-bar {
   display: block;
   background: var(--paper);
   border: 1px solid #E3E3E3;
+  border-radius: 4px;
   text-decoration: none;
   color: #1A1A1A
 }
@@ -12034,7 +12035,7 @@ button:focus-visible,
   .wy .wy-item .wy-lead {
     background: #2A2A2A;
     border: 0;
-    padding: 16px 16px calc(var(--wy-tab) + 20px);
+    padding: 16px 16px calc(var(--wy-tab) + var(--wy-step1) + 2px);
     clip-path: polygon(0 0, 100% 0,
         100% calc(100% - var(--wy-tab) - var(--wy-step1)),
         calc(100% - var(--wy-notch1)) calc(100% - var(--wy-tab) - var(--wy-step1)),
@@ -12083,7 +12084,10 @@ button:focus-visible,
     font-family: var(--body);
     font-weight: 400;
     font-size: 14px;
-    text-decoration: none
+    text-decoration: none;
+    /* phones: the label is not a link */
+    pointer-events: none;
+    cursor: default
   }
 
   .wy .wy-read--d .wy-mark {
@@ -12180,19 +12184,27 @@ button:focus-visible,
     line-height: 1.15
   }
 
-  /* wraps onto two lines instead of scrolling sideways, and stays pinned */
+  /* one row that scrolls sideways (bleeding to the screen's edges), and stays
+     pinned */
   .sw-filters {
-    width: auto;
-    max-width: none;
-    margin: 0 0 4px;
-    padding: 10px 0;
-    overflow: visible;
-    flex-wrap: wrap;
+    width: calc(100% + 2 * var(--side));
+    max-width: calc(100% + 2 * var(--side));
+    margin: 0 calc(-1 * var(--side)) 4px;
+    padding: 10px var(--side);
+    box-sizing: border-box;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
     gap: 8px;
     top: 0
   }
 
+  .sw-filters::-webkit-scrollbar {
+    display: none
+  }
+
   .sw-filter {
+    flex: none;
     height: 34px;
     padding: 0 14px;
     font-size: 13px
@@ -12315,7 +12327,7 @@ button:focus-visible,
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect x='8' y='8' width='3' height='3' fill='%23fff' fill-opacity='.14'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect x='8' y='8' width='3' height='3' fill='%23fff' fill-opacity='.09'/%3E%3C/svg%3E");
   background-size: 20px 20px
 }
 
@@ -13119,6 +13131,9 @@ button:focus-visible,
 }
 
 /* the cards in the right-hand column start a little further in, like the design */
+/* and the left-hand ones match, so both columns' text sits the same distance
+   in from its card's edge (phones stack the cards and keep the tighter inset) */
+.ab-howCard,
 .ab-howCard:nth-child(even) {
   padding-left: clamp(40px, 5.6vw, 80px)
 }
@@ -13151,6 +13166,7 @@ button:focus-visible,
     gap: 10px
   }
 
+  .ab-howCard,
   .ab-howCard:nth-child(even) {
     padding-left: clamp(22px, 2.2vw, 32px)
   }
@@ -13200,7 +13216,7 @@ button:focus-visible,
 
 .abt-blurb {
   margin: 0;
-  width: min(39vw, 560px);
+  width: min(48vw, 700px);
   padding-top: 18px;
   font-family: var(--body);
   font-size: clamp(13px, 1vw, 15px);
@@ -14219,7 +14235,9 @@ html.nav-hidden .cmp-backBar {
   padding: 0;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, .28);
+  /* dark glass, so the white arrow reads over light card art too (a white
+     fill vanished into the Vyapar laptop screen) */
+  background: rgba(17, 17, 17, .5);
   border: 1px solid rgba(255, 255, 255, .55);
   color: #fff;
   cursor: pointer;
@@ -14248,12 +14266,22 @@ html.nav-hidden .cmp-backBar {
 }
 
 .cs-arrow:hover {
-  background: rgba(255, 255, 255, .45)
+  background: rgba(17, 17, 17, .72)
 }
 
-@media (hover: none) {
+@media (hover: none), (max-width: 900px) {
   .cs-arrow {
     display: none
+  }
+
+  /* phones: swipe sideways to move the loop (see CsRow); a tap's sticky
+     hover must not freeze it */
+  .cs-row {
+    touch-action: pan-y
+  }
+
+  .cs-row:hover .cs-rtrack {
+    animation-play-state: running
   }
 }
 
@@ -14354,7 +14382,9 @@ button:disabled {
    board beside it is a little bigger */
 @media (min-width:901px) {
   .wy .wy-item.on .wy-lead .wy-copy {
-    max-width: 52%
+    max-width: 62%;
+    /* 16px on a 1440 screen (1.111vw), growing with the viewport on bigger ones */
+    font-size: clamp(14px, 1.111vw, 24px)
   }
 
   /* the stage list takes a little over half the panel; the board gets the
@@ -14364,17 +14394,17 @@ button:disabled {
   }
 
   .wy-left {
-    flex: 0 0 68%
+    flex: 0 0 62%
   }
 
   .wy-boardwrap {
-    flex: 0 0 calc(290 * var(--k))
+    flex: 0 0 calc(330 * var(--k))
   }
 
   .wy-grid {
-    grid-template-columns: repeat(4, calc(66 * var(--k)));
-    grid-auto-rows: calc(66 * var(--k));
-    gap: calc(5 * var(--k))
+    grid-template-columns: repeat(4, calc(75 * var(--k)));
+    grid-auto-rows: calc(75 * var(--k));
+    gap: calc(6 * var(--k))
   }
 }
 
@@ -14454,5 +14484,71 @@ button:disabled {
 @media (min-width:701px) {
   .abt-shot--solid img {
     transform: none
+  }
+}
+
+/* phones: more air between the "Hear it from the Founders" heading and the
+   first card. Padding (not margin) so it also holds while the cards are
+   pinned under the heading, which pins them off the heading's height. */
+@media (max-width:900px) {
+  .fw .fw-head {
+    padding-bottom: 32px
+  }
+}
+
+/* desktop: exactly 40px from the heading to the filter tabs (the section's own
+   gap, clamp(28px, 3.4vw, 48px), plus the tabs' 12px of padding, is pulled
+   back to fit) */
+@media (min-width:901px) {
+  .sw-filters {
+    margin-top: calc(28px - clamp(28px, 3.4vw, 48px))
+  }
+}
+
+/* desktop: 60px above the Testimonials tag (the heading is pinned, and the
+   cards pin off its measured height, so they follow) */
+@media (min-width:901px) {
+  .fw2-head {
+    padding-top: 60px
+  }
+}
+
+/* founder cards on desktop: the same as phones, the name centred in its yellow
+   block and the role centred in the block under it (the second card mirrors) */
+@media (min-width:701px) {
+  .abf-name,
+  .abf-card--flip .abf-name {
+    box-sizing: border-box;
+    padding: 0 3%;
+    justify-content: center;
+    text-align: center
+  }
+
+  .abf-name {
+    left: 0;
+    width: 65%
+  }
+
+  .abf-card--flip .abf-name {
+    left: 41%;
+    right: 0;
+    width: auto
+  }
+
+  .abf-role,
+  .abf-card--flip .abf-role {
+    justify-content: center;
+    text-align: center
+  }
+
+  .abf-role {
+    left: 40.3%;
+    right: 0
+  }
+
+  .abf-card--flip .abf-role {
+    left: 0;
+    right: auto;
+    width: 51.5%
   }
 }

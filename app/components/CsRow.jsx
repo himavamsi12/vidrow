@@ -35,8 +35,42 @@ export default function CsRow({ children }) {
     requestAnimationFrame(tick);
   };
 
+  // touch: drag the loop sideways with a finger. The drag scrubs the CSS
+  // animation's clock (so the loop keeps wrapping) and the drift resumes on
+  // release.
+  const drag = useRef(null);
+  const onPointerDown = (e) => {
+    if (e.pointerType !== "touch") return;
+    const track = rowRef.current?.querySelector(".cs-rtrack");
+    const anim = track?.getAnimations()[0];
+    if (!anim) return;
+    anim.pause();
+    drag.current = { x: e.clientX, anim, track, t: anim.currentTime };
+  };
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d) return;
+    const dur = d.anim.effect.getComputedTiming().duration;
+    const dx = e.clientX - d.x;
+    const t = d.t - (dx / (d.track.scrollWidth / 2)) * dur;
+    d.anim.currentTime = ((t % dur) + dur) % dur;
+  };
+  const onPointerEnd = () => {
+    const d = drag.current;
+    if (!d) return;
+    drag.current = null;
+    d.anim.play();
+  };
+
   return (
-    <div className="cs-row" ref={rowRef}>
+    <div
+      className="cs-row"
+      ref={rowRef}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerEnd}
+      onPointerCancel={onPointerEnd}
+    >
       {children}
       <button type="button" className="cs-arrow cs-arrow--l" aria-label="Previous stories" onClick={() => step(-1)}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" /></svg>
