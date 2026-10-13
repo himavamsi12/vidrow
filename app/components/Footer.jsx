@@ -143,7 +143,24 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
     const t = setTimeout(() => {
       wrap.style.height = `${collapsedHeight}px`;
     }, 20);
-    return () => clearTimeout(t);
+    // those heights are px measured at this width; when the window is
+    // resized (a desktop window narrowed to phone width), they'd hold the
+    // old size and leave a tall empty gap, so re-fit them to the new width
+    let lastW = window.innerWidth;
+    const onResize = () => {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      footer.style.minHeight = "";
+      wrap.style.transition = "none";
+      wrap.style.height = `${(wrap.getBoundingClientRect().width * 5) / 35}px`;
+      void wrap.offsetHeight;
+      wrap.style.transition = "";
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", onResize);
+    };
   }, [revealed]);
 
   return (

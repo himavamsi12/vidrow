@@ -177,18 +177,27 @@ export default function WhereYouAreNow() {
     });
   };
 
+  // desktop: hovering a stage's title opens it (and lights its piece) on the
+  // spot. The hovered stage holds until the scroll moves on to another stage,
+  // so moving the pointer off the list doesn't snap it shut
+  const [hovered, setHovered] = useState(null);
+  useEffect(() => {
+    setHovered(null);
+  }, [active]);
+  const shown = scrollOn && hovered !== null ? hovered : active;
+
   const isOn = (i) => {
     if (allOn) return true;
-    if (scrollOn) return i === Math.min(active, STAGES.length - 1);
+    if (scrollOn) return i === Math.min(shown, STAGES.length - 1);
     return i === mobileOpen;
   };
   const isLit = (cellIndex) => {
     if (allOn) return true;
-    if (active < 0) return false;
-    if (active >= STAGES.length) return true;
+    if (shown < 0) return false;
+    if (shown >= STAGES.length) return true;
     // only the open stage's piece is highlighted; once the last card has
     // opened and scrolled past, the whole board lights (allOn / active >= length)
-    return STAGE_PIECES[active].cells.includes(cellIndex);
+    return STAGE_PIECES[shown].cells.includes(cellIndex);
   };
 
   return (
@@ -212,13 +221,24 @@ export default function WhereYouAreNow() {
                   <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
                     <h3
                       className="wy-title"
-                      onClick={() => openStage(i)}
+                      // mousemove rather than mouseenter: opening a stage
+                      // shifts the titles under a still pointer, and a real
+                      // move is needed before that next title opens
+                      onMouseMove={() => {
+                        if (scrollOn && hovered !== i) setHovered(i);
+                      }}
+                      onClick={() => {
+                        // desktop opens on hover; a click there does nothing
+                        // more. Phones still scroll to the tapped stage
+                        if (!scrollOn) openStage(i);
+                      }}
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
-                          openStage(i);
+                          if (scrollOn) setHovered(i);
+                          else openStage(i);
                         }
                       }}
                     >

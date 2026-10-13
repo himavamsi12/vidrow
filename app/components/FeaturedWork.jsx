@@ -171,7 +171,7 @@ export default function FeaturedWork() {
           <span className="fw2-tag">Testimonials</span>
           <TagMark />
         </div>
-        <h2 className="fw2-h">Hear it from the founders</h2>
+        <h2 className="fw2-h">Hear it from Partnering Founders</h2>
       </Reveal>
 
       <div className="fw2-stack" ref={stackRef}>

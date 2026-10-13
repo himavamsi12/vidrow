@@ -138,7 +138,7 @@ export default function FeaturedWorkMobile() {
           <span className="fw-tag">Testimonials</span>
           <TagMark />
         </div>
-        <h2 className="fw-h">Hear it from the Founders</h2>
+        <h2 className="fw-h">Hear it from Partnering Founders</h2>
       </Reveal>
 
       <div className="fwm-list" ref={listRef}>

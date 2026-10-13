@@ -7,7 +7,7 @@ import TagMark from "./TagMark";
 // linkedin: profile URL — the icon shows either way, linked only with one.
 const TEAM = [
   { name: "Nipun Angrish", role: "Director - Brand & Content", bg: "#B78F85", linkedin: "https://www.linkedin.com/in/nipun-angrish/", bio: "Hyperactive, hyperventilating and just hyper for no rhyme or reason." },
-  { name: "Yash Choudhary", role: "Director - Performance & Ad Ops", bg: "#8E916D", linkedin: "https://www.linkedin.com/in/yash-choudhary-iim-iit/", bio: "Yash is here to test fast, learn faster, and scale what works. He's in it for the compounding: small wins, stacked daily, turning into enduring brands." },
+  { name: "Yash Choudhary", role: "Director - Performance & Ad Ops", bg: "#8E916D", drop: "11%", linkedin: "https://www.linkedin.com/in/yash-choudhary-iim-iit/", bio: "Yash is here to test fast, learn faster, and scale what works. He's in it for the compounding: small wins, stacked daily, turning into enduring brands." },
   { name: "Aaryan Mehar", role: "Creative Manager - Performance", bg: "#F7ECE1", linkedin: "https://www.linkedin.com/in/aaryan-mehar" },
   { name: "Narottam", role: "Creative Manager - Performance", bg: "#809181", linkedin: "https://www.linkedin.com/in/narottam-kumar-pankaj-b5101b239/", bio: "If you can’t understand my thought process, congratulations - you’re probably an MBA + Millennial combo. 💀\n\nMy creative thinking and Planing can solve almost any problem.\nThe only catch?\n\nGive me the deadline + 2 days. 🗿\nAfter that, the results will pay for your KPIs.\n\nProcess: questionable.\nIdeas: unhinged.\nExecution: somehow works.\nKPI: paid. 💀" },
   { name: "Shruthy Suvarna", role: "Creative Manager - Socials", bg: "#7891B9", linkedin: "https://www.linkedin.com/in/shruthysuvarna/", bio: "I call it social media strategy. My phone calls it screen time." },
@@ -69,7 +69,15 @@ export default function AboutTeam() {
         {TEAM.map((m, i) => (
           <article className={`abt-card${m.bio ? " abt-card--bio" : ""}`} key={m.name}>
             <div className={`abt-shot${SOLID.has(i + 1) ? " abt-shot--solid" : ""}`} style={{ background: m.bg }}>
-              <img src={m.photo} alt={m.name} loading="lazy" />
+              <img
+                src={m.photo}
+                alt={m.name}
+                loading="lazy"
+                // a shot framed tighter than the rest is moved down in its frame
+                // so every head sits at about the same height (the plate covers
+                // what drops off the bottom)
+                style={m.drop ? { transform: `translateY(${m.drop})` } : undefined}
+              />
               <span className="abt-step abt-step--1" aria-hidden="true" />
               <span className="abt-step abt-step--2" aria-hidden="true" />
             </div>

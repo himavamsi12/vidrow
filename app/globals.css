@@ -14203,10 +14203,10 @@ html.nav-hidden .cmp-backBar {
 
 .pr-table.in .pr-tile {
   opacity: 1;
-  animation: pr-drop 1s cubic-bezier(.16, 1, .3, 1) backwards;
+  animation: pr-drop .75s cubic-bezier(.16, 1, .3, 1) backwards;
   will-change: transform, opacity;
   backface-visibility: hidden;
-  animation-delay: calc(var(--g, 0) * .3s)
+  animation-delay: calc(var(--g, 0) * .22s)
 }
 
 .pr-tile[data-stage="a"] { --g: 1 }
@@ -17556,5 +17556,16 @@ html {
 
   .cap-choices {
     gap: 30px
+  }
+}
+
+/* about us: the Founders and Team sections use the same 72px side space as
+   every other section (they were on --side / 5%, which grew past 72px on
+   wide screens and pulled them in) */
+@media (min-width:761px) {
+  .abf,
+  .abt {
+    padding-left: 72px;
+    padding-right: 72px
   }
 }
