@@ -17576,3 +17576,50 @@ html {
 .wy .wy-item.on .wy-lead {
   cursor: pointer
 }
+
+/* the page loader: a white screen over everything, the logo animation in the
+   middle, fading away once it has played (see PageLoader.jsx) */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  transition: opacity .5s ease
+}
+
+/* the video frame is mostly empty around the logo, so it's shown at about
+   half the screen; the tiles land around a quarter of the screen tall */
+.page-loader video {
+  width: min(55vw, 97.8vh);
+  height: auto;
+  display: block
+}
+
+/* the video is centred on the screen itself (not as a grid item), so on
+   phones, where it's wider than the screen, it overflows evenly both sides
+   instead of starting at the left edge */
+.page-loader video {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+@media (max-width:640px) {
+  .page-loader video {
+    width: 120vw;
+    max-width: none
+  }
+}
+
+.page-loader.is-fading {
+  opacity: 0;
+  pointer-events: none
+}
+
+html.is-loading,
+html.is-loading body {
+  overflow: hidden
+}

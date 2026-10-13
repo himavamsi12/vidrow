@@ -127,6 +127,9 @@ export default function HeroCurtain() {
 
     const trigger = () => {
       if (firedRef.current || busyRef.current) return;
+      // the page loader is still covering the site: a scroll now isn't the
+      // user moving past the hero they haven't seen yet
+      if (document.documentElement.classList.contains("is-loading")) return;
       // already well past the hero (the browser put the page back mid-way
       // after Back from a campaign page): the user never scrolled out of
       // the hero, so this is not the reveal — and playing it would jump the

@@ -4,10 +4,11 @@ export const metadata = {
   title: "Vidrow - Marketing partner behind fastest growing startups",
 };
 import SmoothScrolling from "./components/SmoothScrolling";
+import PageLoader from "./components/PageLoader";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -17,7 +18,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <SmoothScrolling>{children}</SmoothScrolling>
+        <SmoothScrolling>
+          <PageLoader />
+          {children}
+        </SmoothScrolling>
       </body>
     </html>
   );
