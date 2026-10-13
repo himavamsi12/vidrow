@@ -37,6 +37,9 @@ const SECTIONS = [
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
+// the rail flips light-on-dark over these two dark panels
+const DARK_SECTIONS = ["csp-sec-focus", "csp-sec-films"];
+
 const MORE_STORIES = [
   {
     key: "masai",
@@ -421,7 +424,7 @@ export default function HeliumCaseStudy() {
       </header>
       <div className="hx-bar-gap" aria-hidden="true" />
 
-      <CspSectionNav sections={SECTIONS} darkSectionIds={["csp-sec-focus", "csp-sec-films"]} />
+      <CspSectionNav sections={SECTIONS} darkSectionIds={DARK_SECTIONS} />
 
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-hl-head">

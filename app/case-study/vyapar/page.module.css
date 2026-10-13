@@ -187,7 +187,7 @@
 }
 
 .brief {
-  padding: 8px 0 74px;
+  padding: 8px 0 36px;
   border-bottom: 1px solid #dedede;
 }
 
@@ -196,46 +196,69 @@
   margin-bottom: 38px;
 }
 
+/* The Situation and The Mandate share one grid: the label on the left, the
+   content starting at the same column on the right */
 .situation {
   display: grid;
-  grid-template-columns: minmax(150px, .7fr) 2fr;
-  gap: 28px;
+  grid-template-columns: minmax(0, 290fr) minmax(0, 915fr);
   align-items: start;
-  margin-bottom: 82px;
+  margin-bottom: 128px;
 }
 
 .situation > b {
   width: fit-content;
-  padding: 7px 16px;
+  padding: 6px 16px;
   background: #f3f3f3;
   font-family: var(--display);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.brief .situation p {
+  max-width: 920px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.65;
 }
 
 .mandate {
   display: grid;
-  grid-template-columns: 1fr 3.2fr;
-  gap: 28px;
+  grid-template-columns: minmax(0, 290fr) minmax(0, 915fr);
   align-items: start;
-  padding-bottom: 42px;
-  border-bottom: 1px solid #d7d7d7;
+  padding-bottom: 62px;
+  border-bottom: 1px solid #cfcfcf;
 }
 
+/* the acid label with a small violet block sitting on its top-right corner */
 .mandate h3 {
+  position: relative;
   width: fit-content;
-  margin: 0;
-  padding: 8px 16px;
+  margin: 2px 0 0;
+  padding: 6px 16px;
   background: var(--vyapar-acid);
   font-family: var(--display);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* the site's violet step mark on the label's top-right corner */
+.mandate h3::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  width: 30px;
+  height: 30px;
+  background: var(--vyapar-violet);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 66.667% 100%, 66.667% 66.667%, 33.333% 66.667%, 33.333% 33.333%, 0 33.333%);
 }
 
 .mandate ol {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(20px, 3.6vw, 54px);
+  gap: clamp(16px, 1.6vw, 24px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -244,33 +267,38 @@
 .mandate li {
   display: grid;
   align-content: start;
-  gap: 32px;
+  justify-items: start;
+  gap: 40px;
 }
 
 .mandate li > span {
   display: grid;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   place-items: center;
-  background: #f1f1f1;
+  background: #efefef;
+  font-family: var(--display);
   font-size: 18px;
 }
 
 .mandate li > b {
   font-family: var(--display);
-  font-size: clamp(17px, 1.7vw, 24px);
-  font-weight: 500;
+  font-size: clamp(17px, 1.45vw, 21px);
+  font-weight: 400;
   line-height: 1.2;
+  letter-spacing: -.01em;
 }
 
+/* starts just inside the content column above, its rule a little to the left */
 .briefNote {
-  max-width: 800px;
-  margin: 16px 0 0 auto;
-  padding: 4px 0 4px 24px;
+  max-width: 900px;
+  margin: 16px 0 0 calc(290 / 1205 * 100% - 14px);
+  padding: 2px 0 2px 25px;
   border-left: 3px solid var(--vyapar-ink);
-  font-family: var(--display);
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.35;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.5;
+  color: #111;
 }
 
 .approach {
@@ -286,28 +314,32 @@
 .approachGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: clamp(14px, 1.5vw, 22px);
 }
 
 .approachCard {
+  --tab: 85%;
+  --fill: #f1f1f1;
   position: relative;
   display: flex;
-  min-height: 300px;
+  min-height: 330px;
   flex-direction: column;
-  padding: 24px 22px 20px;
-  border: 4px solid #f0f0f0;
+  padding: 22px 20px 20px;
+  border: 3px solid #f0f0f0;
   background: #fff;
 }
 
 .approachCard:first-child {
+  --tab: 63%;
+  --fill: var(--vyapar-acid);
   border-color: var(--vyapar-acid);
 }
 
 .approachCard h3 {
   margin: 0 0 10px;
   font-family: var(--display);
-  font-size: 25px;
-  font-weight: 500;
+  font-size: clamp(20px, 1.75vw, 25px);
+  font-weight: 400;
   line-height: 1.15;
 }
 
@@ -318,36 +350,25 @@
   line-height: 1.5;
 }
 
+/* the stepped note: a raised tab behind its first line (from the left edge)
+   over a strip that runs the card's full width along the bottom */
 .approachNote {
   position: relative;
   z-index: 1;
-  margin: auto -22px -20px;
-  padding: 18px;
-  background: #f1f1f1;
-  font-family: var(--display);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-.approachCard:first-child .approachNote {
-  background: var(--vyapar-acid);
-}
-
-.cardIndex {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  z-index: 2;
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  background: var(--vyapar-violet);
-  color: #fff;
-  font-size: 12px;
+  margin: auto -23px -23px;
+  padding: 14px 20px 20px;
+  background:
+    linear-gradient(var(--fill), var(--fill)) 0 100% / 100% 58% no-repeat,
+    linear-gradient(var(--fill), var(--fill)) 0 0 / var(--tab) 100% no-repeat;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.25vw, 18px);
   font-weight: 600;
+  line-height: 1.4;
+  color: #111;
+  /* the notes break where the design does (\n in APPROACH) */
+  white-space: pre-line;
 }
+
 
 .sequence {
   padding: 8px 0 74px;
@@ -355,7 +376,7 @@
 }
 
 .sequence h2 {
-  margin: 0 0 54px;
+  margin: 0 0 64px;
   font-family: var(--display);
   font-size: clamp(32px, 3.2vw, 46px);
   font-weight: 400;
@@ -364,45 +385,52 @@
 }
 
 .sequenceGrid {
+  --num: 44px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 54px 60px;
+  gap: 62px clamp(40px, 6vw, 84px);
 }
 
+/* the number box on top; the title steps down from its right edge, and the
+   copy lines up under the title */
 .sequenceCard > div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: var(--num) auto;
+  grid-template-rows: var(--num) auto;
+  justify-content: start;
+  margin-bottom: 24px;
 }
 
 .sequenceCard > div > span {
   display: grid;
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
+  width: var(--num);
+  height: var(--num);
   place-items: center;
   background: #e2dcff;
   font-family: var(--display);
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 19px;
+  font-weight: 400;
 }
 
 .sequenceCard h3 {
-  margin: 0 0 0 -1px;
-  padding: 10px 16px;
-  background: #fbfba6;
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  margin: 0;
+  padding: 8px 12px 9px;
+  background: #f8fbc4;
   font-family: var(--display);
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: clamp(17px, 1.45vw, 20px);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .sequenceCard p {
   max-width: 520px;
-  margin: 0 0 0 52px;
-  color: var(--copy);
-  font-size: 15px;
-  line-height: 1.55;
+  margin: 0 0 0 var(--num);
+  color: #4a4a4a;
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.32;
 }
 
 .difference {
@@ -412,31 +440,32 @@
 .comparison {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 22px;
 }
 
 .comparison article {
-  min-height: 340px;
-  padding: clamp(26px, 3vw, 44px);
+  min-height: 0;
+  padding: 40px 40px 40px;
 }
 
 .comparison article > span {
   color: #7e7e7e;
   font-size: 11px;
-  letter-spacing: .17em;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 .comparison h3 {
-  margin: 12px 0 24px;
+  margin: 10px 0 18px;
   font-family: var(--display);
-  font-size: 28px;
-  font-weight: 500;
+  font-size: clamp(20px, 1.75vw, 24px);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
+/* one rule under every point, the last included */
 .comparison ul {
   display: grid;
-  gap: 22px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -444,42 +473,57 @@
 
 .comparison li {
   position: relative;
-  padding-left: 32px;
+  padding: 13px 0 13px 30px;
+  border-bottom: 1px solid #dcdcdc;
   font-size: 15px;
   line-height: 1.4;
 }
 
 .competitors {
-  background: #f2f2f2;
-  color: #828282;
+  background: #f4f4f4;
+  color: #666;
 }
 
+.competitors h3 {
+  color: #111;
+}
+
+/* thin line icons, drawn as masks so they take the panel's colours */
 .competitors li::before,
 .vidrowPlaybook li::before {
+  content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  font-size: 22px;
-  line-height: 1;
+  top: calc(13px + .7em - 7px);
+  width: 14px;
+  height: 14px;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
 }
 
 .competitors li::before {
-  content: "×";
-  color: #aaa;
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 2l10 10M12 2L2 12' stroke='black' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  background: #9a9a9a;
 }
 
+/* the dark panel has a small square cut from its top-right corner */
 .vidrowPlaybook {
-  background: #191919;
+  background: #1b1b1b;
   color: #fff;
+  clip-path: polygon(0 0, calc(100% - 30px) 0, calc(100% - 30px) 30px, 100% 30px, 100% 100%, 0 100%);
 }
 
 .vidrowPlaybook > span {
   color: var(--vyapar-acid) !important;
 }
 
+.vidrowPlaybook li {
+  border-bottom-color: #353535;
+}
+
 .vidrowPlaybook li::before {
-  content: "✓";
-  color: var(--vyapar-acid);
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1.5 7.5l3.5 3.5 7.5-8' stroke='black' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+  background: var(--vyapar-acid);
 }
 
 .earlyAdopters {
@@ -622,8 +666,7 @@
 
 .takeawayHead {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(36px, 7vw, 120px);
+  grid-template-columns: minmax(0, 562fr) minmax(0, 447fr);
   align-items: start;
 }
 
@@ -652,55 +695,71 @@
   line-height: 1.5;
 }
 
+/* three overlapping steps down to the right: each card the same size, and
+   each later card carries a small tab on its top-left that sits over the
+   previous card's corner */
 .authorityStats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   gap: 0;
-  margin-top: 44px;
+  margin-top: 54px;
 }
 
 .authorityCard {
+  --fill: #f8fbc4;
+  position: relative;
   min-width: 0;
-  min-height: 180px;
-  padding: 20px 24px;
-  background: #fbfcae;
+  aspect-ratio: 336 / 151;
+  box-sizing: border-box;
+  padding: 20px 20px 16px;
+  background: var(--fill);
 }
 
 .authorityCard:nth-child(2) {
+  --fill: #c9bffa;
   z-index: 1;
-  margin-top: 56px;
-  background: #c9bcff;
+  margin-top: 31.85%;
 }
 
 .authorityCard:nth-child(3) {
-  margin-top: 112px;
-  background: #fbfcae;
+  z-index: 2;
+  margin-top: 63.7%;
+}
+
+.authorityCard:nth-child(n + 2)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -13.1%;
+  width: 13.1%;
+  height: 29.1%;
+  background: var(--fill);
 }
 
 .authorityValue {
   display: block;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-family: var(--display);
-  font-size: clamp(24px, 2.5vw, 34px);
-  font-weight: 500;
-  letter-spacing: -.035em;
+  font-size: clamp(28px, 2.9vw, 40px);
+  font-weight: 400;
+  letter-spacing: -.02em;
   line-height: 1.05;
 }
 
 .authorityLabel {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   color: var(--vyapar-ink);
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.3;
 }
 
 .authorityCard p {
   margin: 0;
   color: #555;
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .proof {
@@ -722,7 +781,7 @@
 .proofGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 44px 30px;
+  gap: 40px 28px;
 }
 
 .proofCard {
@@ -752,20 +811,20 @@
 
 .proofValue {
   display: block;
-  margin: 18px 0 10px;
+  margin: 16px 0 22px;
   font-family: var(--display);
-  font-size: clamp(38px, 4vw, 54px);
-  font-weight: 500;
-  letter-spacing: -.035em;
+  font-size: clamp(34px, 3.1vw, 44px);
+  font-weight: 400;
+  letter-spacing: -.02em;
   line-height: 1;
 }
 
 .proofCard p {
-  max-width: 360px;
+  max-width: 340px;
   margin: 0;
-  color: #aaa;
-  font-size: 14px;
-  line-height: 1.55;
+  color: #b4b4b4;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .testimonial {
@@ -1218,5 +1277,298 @@
 
   .proofCard p {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .briefNote {
+    margin: 24px 0 0;
+    padding-left: 18px;
+    font-size: 15px;
+  }
+
+  .brief .situation p {
+    font-size: 14px;
+  }
+
+  .situation {
+    margin-bottom: 52px;
+  }
+}
+
+@media (max-width: 760px) {
+  .approachCard {
+    --tab: 62%;
+  }
+
+  .approachCard:first-child {
+    --tab: 50%;
+  }
+
+  .approachNote {
+    margin: auto -19px -19px;
+    padding: 12px 16px 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sequenceGrid {
+    --num: 36px;
+    gap: 36px;
+  }
+
+  .sequenceCard > div {
+    margin-bottom: 16px;
+  }
+
+  .sequenceCard > div > span {
+    font-size: 16px;
+  }
+
+  .sequenceCard p {
+    margin-left: var(--num);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+}
+
+/* 06 Name It: centred label, a smaller heading, and the campaign films as a
+   full-bleed coverflow (the centre film opens the campaign page) */
+.earlyAdopters .sectionLabel {
+  justify-content: center;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+.earlyAdopters .sectionLabel > span {
+  background: #fbfba6;
+}
+
+.earlyAdopters .sectionLabel b {
+  color: #9a9a9a;
+}
+
+.earlyAdopters h2 {
+  margin-bottom: 20px;
+  font-size: clamp(32px, 3.3vw, 48px);
+}
+
+.earlyAdopters > p {
+  max-width: 900px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.earlyAdopters .campaignCaption {
+  margin: 0 0 clamp(56px, 7vw, 104px);
+}
+
+/* the section spans the full page width so its text and the coverflow both
+   centre on the page, not on the content column beside the side rail */
+@media (min-width: 761px) {
+  .earlyAdopters {
+    margin-right: -58px;
+    margin-left: -208px;
+    padding-right: 58px;
+    padding-left: 58px;
+  }
+}
+
+.earlyCover {
+  padding-bottom: clamp(40px, 6vw, 110px);
+}
+
+.earlyAdopters > p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 760px) {
+  .proof h2 br {
+    display: none;
+  }
+}
+
+/* phones: the same staircase, stacked — each card a little narrower and
+   further right, its tab overlapping the card above's corner */
+@media (max-width: 760px) {
+  .authorityStats {
+    display: block;
+    margin-top: 32px;
+  }
+
+  .authorityCard {
+    width: 82%;
+    aspect-ratio: auto;
+    min-height: 0;
+    padding: 18px 18px 20px;
+  }
+
+  .authorityCard:nth-child(2) {
+    margin: -36px 0 0 9%;
+  }
+
+  .authorityCard:nth-child(3) {
+    margin: -36px 0 0 18%;
+  }
+
+  .authorityCard:nth-child(n + 2) {
+    padding-top: 22px;
+  }
+
+  .authorityCard:nth-child(n + 2)::before {
+    left: -30px;
+    width: 30px;
+    height: 36px;
+  }
+
+  .authorityValue {
+    font-size: clamp(28px, 8vw, 34px);
+  }
+}
+
+@media (max-width: 760px) {
+  /* room at the foot of each card for the next card's tab to overlap */
+  .authorityCard:not(:last-child) {
+    padding-bottom: 56px;
+  }
+}
+
+/* 11 In Their Words, matched to the design */
+.testimonialGrid {
+  grid-template-columns: minmax(0, 661fr) minmax(0, 328fr);
+}
+
+.testimonialQuote {
+  justify-content: flex-start;
+  padding-top: 13%;
+  padding-bottom: 60px;
+}
+
+.testimonialQuote > p {
+  max-width: 420px;
+  color: #3d3d3d;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.testimonialQuote footer {
+  margin-top: 22px;
+}
+
+.testimonialQuote footer b {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.testimonialQuote footer span {
+  font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .testimonial > h2 br {
+    display: none;
+  }
+
+  .testimonialQuote {
+    padding-top: 104px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .testimonialQuote {
+    padding: 96px 22px 28px 22px;
+  }
+
+  .testimonialQuote::before {
+    width: 108px;
+  }
+
+  .testimonialQuote > p {
+    max-width: none;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+}
+
+/* the testimonial quote at 18px */
+.testimonialQuote > p {
+  max-width: 470px;
+  font-size: 18px;
+}
+
+@media (max-width: 760px) {
+  .testimonialQuote > p {
+    font-size: 16px;
+  }
+}
+
+/* the hero's co-brand plate: Vidrow step mark | Vyapar logo, both in black */
+.brandPlate {
+  width: auto;
+  height: auto;
+  gap: 14px;
+  padding: 14px 20px;
+}
+
+.brandPlate i {
+  width: 1px;
+  height: 26px;
+  background: #0b0b0d;
+}
+
+.brandPlate .plateMark {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.brandPlate .plateLogo {
+  display: block;
+  width: 96px;
+  height: auto;
+  /* the supplied logo is white; render it black */
+  filter: brightness(0);
+}
+
+@media (max-width: 760px) {
+  .brandPlate {
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .brandPlate i {
+    height: 18px;
+  }
+
+  .brandPlate .plateMark {
+    width: 16px;
+    height: 16px;
+  }
+
+  .brandPlate .plateLogo {
+    width: 70px;
+  }
+}
+
+/* the side films run off the screen edges; clip them so they don't widen the
+   page (on phones that made the whole page zoom out) */
+.earlyCover {
+  overflow-x: clip;
+}
+
+@media (max-width: 760px) {
+  .earlyCover {
+    margin-left: calc(-1 * clamp(20px, 5vw, 58px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 58px));
   }
 }

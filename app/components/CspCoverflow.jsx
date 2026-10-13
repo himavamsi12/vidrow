@@ -6,8 +6,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // neighbours angle away on either side with the edges of the page cutting
 // them off. Clicking a side slide (or the arrow keys, or a swipe) brings it
 // to the centre, and the row wraps round so there's always one each side.
-export default function CspCoverflow({ slides }) {
-  const [active, setActive] = useState(0);
+// With `href`, the centre slide carries a play mark and opens that page.
+export default function CspCoverflow({ slides, start = 0, href }) {
+  const [active, setActive] = useState(start);
   const n = slides.length;
   const touchX = useRef(null);
 
@@ -65,9 +66,17 @@ export default function CspCoverflow({ slides }) {
             tabIndex={-1}
             onClick={() => {
               if (rel !== 0) pick(rel);
+              else if (href) window.location.href = href;
             }}
           >
             <img src={s.src} alt="" draggable="false" />
+            {href && rel === 0 && (
+              <span className="csp-coverPlay" aria-hidden="true">
+                <svg viewBox="0 0 40 40">
+                  <path d="M15 11.5 29 20 15 28.5z" />
+                </svg>
+              </span>
+            )}
           </button>
         );
       })}

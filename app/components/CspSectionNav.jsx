@@ -182,7 +182,7 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [sections, darkSectionIds]);
 
   // one piece lands per section reached — same landed/thud logic as
   // case-masai.html's tick(), just driven by the real section index instead
@@ -246,7 +246,7 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [sections]);
 
   const total = sections.length;
 

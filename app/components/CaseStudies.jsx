@@ -45,8 +45,8 @@ const DEEP_DIVES = [
   },
   {
     kind: "ap",
-    title: "Apnamart is running the marketing effort without an inhouse marketing team",
-    img: "/deep drives/apnamart.png",
+    title: "Apna Mart builds absolute category authority in staples category",
+    img: "/deep drives/apnamart deep drive.png",
     logo: "/partnership/apnamart.svg",
     logoAlt: "Apnamart",
     logoFx: "none",

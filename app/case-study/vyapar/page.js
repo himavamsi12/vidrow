@@ -1,11 +1,12 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspMoreRow from "../../components/CspMoreRow";
+import CspCoverflow from "../../components/CspCoverflow";
 import CspSectionNav from "../../components/CspSectionNav";
 import styles from "./page.module.css";
 
 export const metadata = {
-  title: "Vyapar — Case Study | Vidrow",
+  title: "Vyapar - Case Study | Vidrow",
 };
 
 const SECTIONS = [
@@ -23,7 +24,7 @@ const SECTIONS = [
 ];
 
 const MANDATE = [
-  "Build large top of the funnel and grow the category itself.",
+  "Build large Top of the funnel and grow the category itself",
   "Make Vyapar the name the category answers to.",
   "Build with one consistent voice from day one.",
   "Win mass India: small traders, retailers, wholesalers.",
@@ -33,45 +34,45 @@ const APPROACH = [
   {
     title: "Name it",
     copy: "The first campaign was a dozen films, each aimed at a different owner and emotion.",
-    detail: "200 Mn+ impressions in 3 months — and the line still runs today.",
-    note: "‘Har Business Banega Digital’",
+    detail: "200 Mn+ impressions in 3 months, and the line still runs today.",
+    note: "‘Har Business\nBanega Digital’",
   },
   {
     title: "Give it a face",
     copy: "To win the late majority without pushing CAC, the category needed a familiar face.",
     detail: "Across regional TV & digital in native languages. Brand impact grew multifold.",
-    note: "Manoj Joshi played trader, wholesaler & retailer",
+    note: "Manoj Joshi played\ntrader, wholesaler &\nretailer",
   },
   {
     title: "Stand for owner",
     copy: "Leaders sell a product; authorities speak for the people who use it.",
-    detail: "Relatable stories — funny, emotional, philosophical.",
-    note: "Travelled organically into family WhatsApp groups.",
+    detail: "Relatable stories: funny, emotional, philosophical.",
+    note: "Travelled organically\ninto family WhatsApp\ngroups.",
   },
   {
     title: "Never let go",
     copy: "Every Vyapar campaign since 2020 has been Vidrow’s.",
     detail: "Consistency turns a leader into the default category answer.",
-    note: "6 years of one voice & one line.",
+    note: "6 years of one voice\n& one line.",
   },
 ];
 
 const SEQUENCE = [
   {
     title: "Name the Category",
-    copy: "We launched ‘Har Business Banega Digital’ — a campaign of 12+ films, each targeting a different owner type and emotion. The line gave the category a name before any competitor could. It clocked 200 Mn+ views and still runs today.",
+    copy: "We launched ‘Har Business Banega Digital’, a campaign of 12+ films, each targeting a different owner type and emotion. The line gave the category a name before any competitor could. It clocked 200 Mn+ views and still runs today.",
   },
   {
     title: "Give It a Face",
-    copy: "To reach mass India without inflating CAC, we cast Manoj Joshi — a face the late majority trusted — playing trader, wholesaler, and retailer across regional TV and digital in native languages. Brand impact multiplied without the price tag of a Bollywood A-lister.",
+    copy: "To reach mass India without inflating CAC, we cast Manoj Joshi, a face the late majority trusted, playing trader, wholesaler, and retailer across regional TV and digital in native languages. Brand impact multiplied without the price tag of a Bollywood A-lister.",
   },
   {
     title: "Stand for the Owner",
-    copy: "Category leaders speak for their community. We built relatable stories — funny, emotional, philosophical — that felt less like ads and more like a mirror. These films travelled organically into WhatsApp groups, earning reach no media buy could deliver.",
+    copy: "Category leaders speak for their community. We built relatable stories (funny, emotional, philosophical) that felt less like ads and more like a mirror. These films travelled organically into WhatsApp groups, earning reach no media buy could deliver.",
   },
   {
     title: "Never Let Go",
-    copy: "Every Vyapar campaign since 2020 has been Vidrow’s. Six years, one voice, one line. Consistency is what turns a market leader into the default category answer. The brand didn’t just grow — it became the reference point.",
+    copy: "Every Vyapar campaign since 2020 has been Vidrow’s. Six years, one voice, one line. Consistency is what turns a market leader into the default category answer. The brand didn’t just grow, it became the reference point.",
   },
 ];
 
@@ -99,7 +100,7 @@ const COMMUNITY_FILMS = [
 
 const AUTHORITY_STATS = [
   {
-    label: "Views",
+    label: "views",
     value: "400 Mn+",
     copy: "Brand marketing reach generated organically across campaigns.",
   },
@@ -109,9 +110,9 @@ const AUTHORITY_STATS = [
     copy: "Massive scale achieved without performance spend dilution.",
   },
   {
-    label: "Rivals",
+    label: "now sell “vs Vyapar”",
     value: "9+ rivals",
-    copy: "Now sell “Vs Vyapar”. Challengers define themselves against the default category answer.",
+    copy: "Challengers define themselves against the default category answer.",
   },
 ];
 
@@ -129,7 +130,7 @@ const PROOF = [
   {
     label: "Search",
     value: "#1",
-    copy: "Vyapar ranks for “best GST billing software India” — brand now equals category.",
+    copy: "Vyapar ranks for “best GST billing software India”. Brand now equals category.",
   },
   {
     label: "Store",
@@ -144,7 +145,7 @@ const PROOF = [
   {
     label: "Expansion",
     value: "2025",
-    copy: "Vyapar acquired Suvit and relaunched as Vyapar TaxOne — the name now stretches to CAs.",
+    copy: "Vyapar acquired Suvit and relaunched as Vyapar TaxOne, and the name now stretches to CAs.",
   },
 ];
 
@@ -159,6 +160,7 @@ const MORE_STORIES = [
     logoAlt: "Masai",
     stat: "10x",
     statLabel: "ROI",
+    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
   },
   {
     key: "helium",
@@ -170,15 +172,19 @@ const MORE_STORIES = [
     logoAlt: "Helium",
     stat: "10x",
     statLabel: "ROI",
+    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
   },
   {
     key: "platinumrx",
     href: "/case-study/platinumrx",
-    image: "/casestudy%20images/casestudy-recommendations/platinumx.png",
+    image: "/casestudy%20images/hero-image.png",
     imageAlt: "PlatinumRx case study",
-    brand: "PlatinumRx",
+    logoType: "image",
+    logoSrc: "/partnership/platinumRx.svg",
+    logoAlt: "PlatinumRx",
     stat: "10x",
     statLabel: "ROI",
+    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
   },
 ];
 
@@ -240,9 +246,11 @@ export default function VyaparCaseStudy() {
                 fetchPriority="high"
               />
               <span className={styles.brandPlate}>
-                <img src="/Logo.svg" alt="Vidrow" />
+                <svg className={styles.plateMark} viewBox="0 0 40 40" role="img" aria-label="Vidrow">
+                  <path fill="#0B0B0D" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
                 <i aria-hidden="true" />
-                <img src="/logos/vyapar.png" alt="Vyapar" />
+                <img className={styles.plateLogo} src="/partnership/vyapar.svg" alt="Vyapar" />
               </span>
             </div>
             <div className={styles.heroMeta}>
@@ -275,7 +283,7 @@ export default function VyaparCaseStudy() {
             <p>
               Vidrow was roped into Vyapar’s Journey 2020. Vyapar had built a free billing
               and accounting app for small businesses and already had product-market fit.
-              But accounting software in India still meant a desktop, a licence and a CA —
+              But accounting software in India still meant a desktop, a licence and a CA,
               there was no category a shop owner could see himself in. The mandate was brand
               marketing only, no performance spend. <strong>The job we set ourselves: make
               Vyapar the name the category is known by.</strong>
@@ -311,7 +319,7 @@ export default function VyaparCaseStudy() {
             </div>
             <p className={styles.briefNote}>
               Meanwhile, competitors were spending crores on celebrity endorsements.
-              Vyapar chose a different path — research-driven content.
+              Vyapar chose a different path: research-driven content.
             </p>
           </section>
         </div>
@@ -321,13 +329,12 @@ export default function VyaparCaseStudy() {
             <SectionLabel number="03">The Approach</SectionLabel>
             <h2>Vyapar didn’t just sell an APP.<br />Vyapar built the CATEGORY.</h2>
             <div className={styles.approachGrid}>
-              {APPROACH.map((item, index) => (
+              {APPROACH.map((item) => (
                 <article className={styles.approachCard} key={item.title}>
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
                   <p>{item.detail}</p>
                   <b className={styles.approachNote}>{item.note}</b>
-                  <span className={styles.cardIndex}>0{index + 1}</span>
                 </article>
               ))}
             </div>
@@ -398,7 +405,9 @@ export default function VyaparCaseStudy() {
               more awareness than we set out for.
             </p>
             <span className={styles.campaignCaption}>Click on the image below to view the campaign</span>
-            <FilmStrip films={EARLY_FILMS} className={styles.earlyFilms} />
+            <div className={styles.earlyCover}>
+              <CspCoverflow slides={EARLY_FILMS} start={1} href="/campaign/vyapar" />
+            </div>
           </section>
         </div>
 
@@ -439,10 +448,10 @@ export default function VyaparCaseStudy() {
                 The Vyapar brand grew and became the market leader. Now, it was time to build
                 a community. A loyal community is any brand’s safe haven and it can be
                 achieved only by standing for something beyond business. From the start
-                Vyapar had only one vision — ‘Help the small Business Owner’. So we, at
+                Vyapar had only one vision: ‘Help the small Business Owner’. So we, at
                 Vidrow, decided to make it the centre of our next campaign. We chose
                 interesting stories about business-owners and communicated it with full
-                conviction — be it fun, or emotional or philosophical. Here are some of the
+                conviction, be it fun, or emotional or philosophical. Here are some of the
                 stories that went viral, found space in family WhatsApp groups and also in
                 people’s hearts.
               </p>
@@ -455,7 +464,7 @@ export default function VyaparCaseStudy() {
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.proof} id="vyapar-proof">
             <SectionLabel number="09" light>The Proof · Where Vyapar Stands in 2026</SectionLabel>
-            <h2>The market rearranged itself<br />around the brand we built.</h2>
+            <h2>The market rearranged itself{" "}<br />around the brand we built.</h2>
             <div className={styles.proofGrid}>
               {PROOF.map((item) => (
                 <article className={styles.proofCard} key={item.label}>
@@ -480,8 +489,8 @@ export default function VyaparCaseStudy() {
               </div>
               <div className={styles.takeawayCopy}>
                 <p>
-                  This was brand marketing only — not a rupee of performance spend. Built as a
-                  sequence — name the category, give it a face, stand for the owner, never let
+                  This was brand marketing only, not a rupee of performance spend. Built as a
+                  sequence: name the category, give it a face, stand for the owner, never let
                   go. It did what reach alone can’t: make Vyapar the name the category answers
                   to.
                 </p>
@@ -503,14 +512,14 @@ export default function VyaparCaseStudy() {
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.testimonial} id="vyapar-testimonial">
             <SectionLabel number="11">In Their Words</SectionLabel>
-            <h2>“Vidrow has been our go-to partners for any marketing efforts.”</h2>
+            <h2>“Vidrow has been our go-to partners{" "}<br />for any marketing efforts.”</h2>
             <div className={styles.testimonialGrid}>
               <blockquote className={styles.testimonialQuote}>
                 <p>
                   Vyapar has been working with Vidrow since 2020 and the outcome has been
                   amazing. Be it brand or performance marketing, we have collaborated with
                   Vidrow to create relatable and creative campaigns. ‘Har Business Banega
-                  Digital’ — our tagline campaign — also came out of this collaboration.
+                  Digital’, our tagline campaign, also came out of this collaboration.
                 </p>
                 <footer>
                   <b>Sumit Agrawal</b>
@@ -531,8 +540,28 @@ export default function VyaparCaseStudy() {
           <section className="csp-more" id="vyapar-more">
             <div className="csp-more-head">
               <h2 className="csp-more-h">More founder journeys.</h2>
+              <a className="csp-more-cta csp-more-cta--desktop" href="/#featured">
+                  <span className="csp-more-cta-label">See all case studies</span>
+                  <span className="csp-more-cta-i" aria-hidden="true">
+                    <svg viewBox="0 0 40 40" aria-hidden="true">
+                      <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                    </svg>
+                  </span>
+                </a>
             </div>
-            <CspMoreRow stories={MORE_STORIES} />
+            <CspMoreRow
+              stories={MORE_STORIES}
+              cta={
+                <a className="csp-more-cta csp-more-cta--mobile" href="/#featured">
+                  <span className="csp-more-cta-label">See all case studies</span>
+                  <span className="csp-more-cta-i" aria-hidden="true">
+                    <svg viewBox="0 0 40 40" aria-hidden="true">
+                      <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                    </svg>
+                  </span>
+                </a>
+              }
+            />
           </section>
         </div>
       </main>
