@@ -144,7 +144,11 @@ export default function HeroCurtain() {
       // the nav drops under the curtain and stops reacting to scrolling while
       // it plays, so the page jump behind it can't make it hide and re-show
       document.documentElement.dataset.heroCurtain = "1";
-      document.body.style.overflow = "hidden";
+      // locked on <html>, not <body>: with Lenis stopped <html> is already
+      // overflow: hidden, and a hidden <body> under it becomes its own
+      // scroll box, which unpins Featured Work's sticky heading for the
+      // length of the curtain — it then jumped back into place as it lifted
+      document.documentElement.style.overflow = "hidden";
       // a touch scroll is native, so hold the page still under the curtain
       window.addEventListener("touchmove", blockTouch, { passive: false });
       // sized before it mounts, so its first paint is already the screen-sized
@@ -201,7 +205,7 @@ export default function HeroCurtain() {
             setTimeout(() => section.classList.remove("is-rising"), RISE_MS);
           }
           setTimeout(() => {
-            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
             window.removeEventListener("touchmove", blockTouch);
             lenis?.start();
             delete document.documentElement.dataset.heroCurtain;
@@ -285,7 +289,7 @@ export default function HeroCurtain() {
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("click", onClickCapture, true);
       window.removeEventListener("touchmove", blockTouch);
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [lenis]);
 

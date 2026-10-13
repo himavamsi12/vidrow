@@ -15470,3 +15470,11 @@ body{font-size:1.1940vw}
     display: none
   }
 }
+
+/* the scrollbar's space is always kept: the hero curtain hides the page's
+   scrollbar while it plays (body overflow: hidden), and with a classic
+   (non-overlay) scrollbar its return made the page 15px narrower, reflowing
+   every width-scaled section — Featured Work jumped as the curtain lifted */
+html {
+  scrollbar-gutter: stable
+}
