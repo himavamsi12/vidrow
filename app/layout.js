@@ -4,7 +4,7 @@ export const metadata = {
   title: "Vidrow - Marketing partner behind fastest growing startups",
 };
 import SmoothScrolling from "./components/SmoothScrolling";
-import PageLoader from "./components/PageLoader";
+// import PageLoader from "./components/PageLoader";
 
 export default function RootLayout({ children }) {
   return (
@@ -19,7 +19,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <SmoothScrolling>
-          <PageLoader />
+          {/* the page loader is switched off for now; put <PageLoader />
+              back here to turn it on again */}
           {children}
         </SmoothScrolling>
       </body>
