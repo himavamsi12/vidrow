@@ -186,7 +186,9 @@ export default function WhereYouAreNow() {
     if (allOn) return true;
     if (active < 0) return false;
     if (active >= STAGES.length) return true;
-    return STAGE_PIECES[active].cells.includes(cellIndex);
+    // the board stacks up like Tetris: every piece up to the current stage
+    // stays in place, and the new one drops in on top of them
+    return STAGE_PIECES.slice(0, active + 1).some((p) => p.cells.includes(cellIndex));
   };
 
   return (

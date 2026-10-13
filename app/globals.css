@@ -17127,3 +17127,33 @@ html {
 .ab-stair p + p {
   margin-top: 1em
 }
+
+/* Playbook board: each lit cell's colour drops in from above its square and
+   settles (rather than the whole square cross-fading), so a new piece reads
+   as falling into place on the stack */
+.wy-cell {
+  position: relative;
+  overflow: hidden;
+  /* the empty square's grey stays put under the falling colour */
+  background: #2E2E2E !important;
+  transition: none
+}
+
+.wy-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--wy-shade, #715BE4);
+  transform: translateY(-101%);
+  transition: transform .75s cubic-bezier(.22, 1, .36, 1)
+}
+
+.wy-cell.lit::before {
+  transform: none
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .wy-cell::before {
+    transition: none
+  }
+}
