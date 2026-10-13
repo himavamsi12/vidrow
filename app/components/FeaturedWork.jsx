@@ -168,7 +168,7 @@ export default function FeaturedWork() {
     <section className="fw2">
       <Reveal className="fw2-head">
         <div className="fw2-tagwrap">
-          <span className="fw2-tag">Partnering Founders</span>
+          <span className="fw2-tag">Testimonials</span>
           <TagMark />
         </div>
         <h2 className="fw2-h">Hear it from the founders</h2>

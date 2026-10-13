@@ -135,7 +135,7 @@ export default function FeaturedWorkMobile() {
     <section className="fw" ref={sectionRef}>
       <Reveal className="fw-head">
         <div className="fw-tagwrap">
-          <span className="fw-tag">Partnering Founders</span>
+          <span className="fw-tag">Testimonials</span>
           <TagMark />
         </div>
         <h2 className="fw-h">Hear it from the Founders</h2>
