@@ -43,7 +43,13 @@ export default async function CampaignPage({ params }) {
 
         <div className={c.layout === "tall" ? "cmp-frames cmp-frames--tall" : "cmp-frames"}>
           {c.frames.map((f, i) => (
-            <CampaignFrame key={i} frame={f} title={`${c.title} - film ${i + 1}`} />
+            <CampaignFrame
+              key={i}
+              frame={f}
+              title={`${c.title} - film ${i + 1}`}
+              muted={slug === "vyapar"}
+              useHls={slug === "vyapar"}
+            />
           ))}
         </div>
       </main>

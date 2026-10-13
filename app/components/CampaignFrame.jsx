@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "@videojs/react/video/skin.css";
 import { VideoPlayer, VideoSkin } from "@videojs/react/video";
 import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
+import { HlsJsVideo } from "@videojs/react/media/hlsjs-video";
 
 const STREAM = "https://customer-np97ccync4jeshuk.cloudflarestream.com";
 
@@ -15,7 +16,7 @@ let stopActive = null;
 // Cloudflare Stream `video` id — the video's own thumbnail with a play mark
 // on it, swapped for the Video.js player (Cloudflare Stream engine) once it's
 // clicked
-export default function CampaignFrame({ frame, title }) {
+export default function CampaignFrame({ frame, title, muted = false, useHls = false }) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,16 @@ export default function CampaignFrame({ frame, title }) {
       {playing ? (
         <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`}>
           <VideoSkin style={{ width: "100%", height: "100%" }}>
-            <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
+            {useHls ? (
+              <HlsJsVideo
+                src={`${STREAM}/${frame.video}/manifest/video.m3u8`}
+                autoPlay
+                muted={muted}
+                playsInline
+              />
+            ) : (
+              <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
+            )}
           </VideoSkin>
         </VideoPlayer>
       ) : (
