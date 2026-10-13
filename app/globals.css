@@ -17592,7 +17592,7 @@ html {
 /* the video frame is mostly empty around the logo, so it's shown at about
    half the screen; the tiles land around a quarter of the screen tall */
 .page-loader video {
-  width: min(55vw, 97.8vh);
+  width: min(40vw, 71vh);
   height: auto;
   display: block
 }
