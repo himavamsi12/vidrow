@@ -17122,3 +17122,8 @@ html {
   object-position: right center;
   background: #fdeceb
 }
+
+/* about "We invest" cards: a gap between their two paragraphs */
+.ab-stair p + p {
+  margin-top: 1em
+}

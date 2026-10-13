@@ -30,17 +30,17 @@ const PROOF = [
   {
     tag: "Recognition",
     title: "Forbes 30 Under 30 Asia",
-    body: "Vidrow received recognition from Forbes Asia for entrepreneurship and impact in the startup ecosystem.",
+    body: "Vidrow\u2019s cofounder Aditya Raj Somani was named to the Forbes 30 Under 30 Asia 2025 list in the Social Media, Marketing & Advertising category.",
   },
   {
     tag: "First Startup",
     title: "HPF Films \u2192 Acquired by ShareChat, 2020",
-    body: "Aditya and Anushank built a content company producing 2,000 titles/month across 12 languages. Both founders have been through the full startup journey of their own.",
+    body: "Aditya and Anushank built and ran HPF Films to a million-dollar revenue mark before its acquisition by ShareChat in 2020.",
   },
   {
     tag: "Foundation",
-    title: "IIT Kanpur: Engineering-First Team",
-    body: "Both founders and the core team built from IIT Kanpur and equivalent engineering backgrounds. Analytical rigour is the baseline.",
+    title: "IIT Kanpur Engineering-First Team",
+    body: "Both founders and the core team come from IIT Kanpur. Ex-Drama and Films Club members of IIT Kanpur, they bring the best blend of creativity, analytics and strategy.",
   },
   {
     tag: "Success",
@@ -53,21 +53,27 @@ const PROOF = [
 // corner (a grid of w x h units and the filled [col, row] cells)
 const INVEST = [
   {
-    title: "Not a Gesture. A way to mean it.",
-    body:
-      "Not as a gesture, and not as a hook. We do it because the word partner gets thrown around a lot in this industry, and we wanted a way to mean it. When we believe in what you\u2019re building, we put money behind it, which means our incentives sit exactly where yours do. We\u2019re not billing hours and moving on. We\u2019re in the round with you, watching the same metrics, thinking about the same milestones, and just as invested in what happens at the next raise.",
+    title: "Why are we investing?",
+    body: [
+      "We want our work to help you raise the next round faster and bigger.",
+      "Our investment ties our upside to your valuation, not our service invoice. We chase business targets rather than vanity metrics. This is our way of saying that we believe in the founder and we want to build alongside them. This is real Skin In The Game.",
+    ],
     corner: { w: 2, h: 2, cells: [[1, 0], [0, 1], [1, 1]] },
   },
   {
-    title: "Real Skin In The Game.",
-    body:
-      "Because founders don\u2019t need another vendor. They need someone with real skin in the game. They don\u2019t want to execute briefs. We want to solve problems. That only happens when the founder or the leadership team is directly involved, when someone on the client side actually cares about the outcome the way we do.",
+    title: "Who Are We Investing In?",
+    body: [
+      "We back startups from pre-seed to Series C, led by founders with aggressive ambitions. We look for products where marketing can make a real difference to growth: categories where sharper positioning, better creative and smarter performance marketing can change the trajectory of a company.",
+      "If marketing can be your unfair advantage, we\u2019d like to talk.",
+    ],
     corner: { w: 3, h: 2, cells: [[1, 0], [0, 1], [1, 1], [2, 1]] },
   },
   {
-    title: "A Deliberate Constraint",
-    body:
-      "So we made a choice: startups only. Seed to Series B. Funded, product-focused, founder-led. That constraint is what allows us to go deep instead of wide, to know what a PMF-stage startup actually needs versus a Series B brand build, and to have a real opinion about the difference.",
+    title: "What Does It Mean For Founders?",
+    body: [
+      "We build the traction founders take into investor meetings: user growth, lower CAC and the revenue that makes the next round happen. As investors, that next round matters just as much to us as it does to the founders.",
+      "With our investment, founders get more than capital. They get a marketing partner for the whole journey, through thick and thin. When they launch a new product, enter a new market, pivot completely or prepare for the next raise, they will always have an experienced marketing team in their corner.",
+    ],
     corner: { w: 3, h: 2, cells: [[0, 0], [1, 0], [1, 1], [2, 1]] },
   },
 ];
@@ -230,7 +236,9 @@ export default function AboutPage() {
           {INVEST.map((c, i) => (
             <article className={`ab-stair ab-stair--${i + 1}`} key={c.title}>
               <h3>{c.title}</h3>
-              <p>{c.body}</p>
+              {c.body.map((para, k) => (
+                <p key={k}>{para}</p>
+              ))}
               <Corner corner={c.corner} />
             </article>
           ))}
