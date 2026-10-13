@@ -17569,3 +17569,10 @@ html {
     padding-right: 72px
   }
 }
+
+/* the Playbook stage titles open on hover, so they show the pointer hand,
+   and so does the open card */
+.wy .wy-title,
+.wy .wy-item.on .wy-lead {
+  cursor: pointer
+}

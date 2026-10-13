@@ -184,6 +184,40 @@ export default function WhereYouAreNow() {
   useEffect(() => {
     setHovered(null);
   }, [active]);
+  // opening a stage animates the cards' heights, which slides the other
+  // titles under the pointer. Acting on the pointer while that runs made the
+  // stages flick back and forth, so a title only opens once the pointer has
+  // rested on it for a moment, and never while a change is still settling
+  // A title that only slid under a still pointer is ignored: the pointer
+  // has to actually move after a stage opens before another one can open.
+  const hoverTimer = useRef(0);
+  const settleUntil = useRef(0);
+  const pointer = useRef({ x: 0, y: 0 });
+  const openedAt = useRef({ x: -999, y: -999 });
+  useEffect(() => {
+    const onMove = (e) => {
+      pointer.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      clearTimeout(hoverTimer.current);
+    };
+  }, []);
+  const hoverStage = (i) => {
+    clearTimeout(hoverTimer.current);
+    if (!scrollOn || i === hovered) return;
+    const wait = Math.max(140, settleUntil.current - performance.now());
+    hoverTimer.current = setTimeout(() => {
+      const p = pointer.current;
+      const o = openedAt.current;
+      if (Math.abs(p.x - o.x) + Math.abs(p.y - o.y) < 6) return;
+      openedAt.current = { ...p };
+      settleUntil.current = performance.now() + 750;
+      setHovered(i);
+    }, wait);
+  };
+  const leaveStage = () => clearTimeout(hoverTimer.current);
   const shown = scrollOn && hovered !== null ? hovered : active;
 
   const isOn = (i) => {
@@ -221,12 +255,8 @@ export default function WhereYouAreNow() {
                   <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
                     <h3
                       className="wy-title"
-                      // mousemove rather than mouseenter: opening a stage
-                      // shifts the titles under a still pointer, and a real
-                      // move is needed before that next title opens
-                      onMouseMove={() => {
-                        if (scrollOn && hovered !== i) setHovered(i);
-                      }}
+                      onMouseEnter={() => hoverStage(i)}
+                      onMouseLeave={leaveStage}
                       onClick={() => {
                         // desktop opens on hover; a click there does nothing
                         // more. Phones still scroll to the tapped stage
