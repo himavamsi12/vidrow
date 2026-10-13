@@ -17481,3 +17481,80 @@ html {
     padding-left: 28px
   }
 }
+
+/* ── Apnamart on phones ── */
+@media (max-width:640px) {
+  .csp-in:has(> .cap-context) {
+    margin-top: 56px
+  }
+
+  .cap-meta {
+    row-gap: 16px
+  }
+
+  .cap-meta .csp-metaValue {
+    font-size: 18px
+  }
+
+  /* the script choices: number box beside the title, the note under both */
+  .cap-choices {
+    gap: 22px
+  }
+
+  .cap-choices li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    align-items: center
+  }
+
+  .cap-choices .cst-reqNum {
+    margin: 0
+  }
+
+  .cap-choiceTitle {
+    justify-self: start;
+    margin: 0
+  }
+
+  .cap-choices p {
+    grid-column: 2;
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.4
+  }
+
+  .cap-choices li:first-child p {
+    grid-row: 1;
+    margin: 0
+  }
+
+  .cap-pillars li {
+    font-size: 15px
+  }
+
+  .cap-stratIntro {
+    font-size: 15px;
+    line-height: 1.4
+  }
+
+  .cap-result .cst-secH {
+    font-size: 26px
+  }
+
+  .cap-result .cst-outVal {
+    font-size: 30px
+  }
+}
+
+/* phones: more room between the pillars list and the script choices, and
+   between each choice */
+@media (max-width:640px) {
+  .cap-stratRow {
+    gap: 56px
+  }
+
+  .cap-choices {
+    gap: 30px
+  }
+}
