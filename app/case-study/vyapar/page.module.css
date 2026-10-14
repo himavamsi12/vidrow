@@ -1572,3 +1572,114 @@
     margin-right: calc(-1 * clamp(20px, 5vw, 58px));
   }
 }
+
+/* desktop type and spacing, per the design feedback: hero facts at 22px,
+   every section headline at 40px, body copy at 16px, the approach card
+   titles at 24px, the proof and authority notes at 14px, and no rule
+   under the mandate */
+@media (min-width: 901px) {
+  .page .heroMeta b,
+  .page .heroMeta .result b {
+    font-size: 22px;
+  }
+
+  .page .problem h2,
+  .page .brief > h2,
+  .page .approach h2,
+  .page .sequence h2,
+  .page .difference h2,
+  .page .earlyAdopters h2,
+  .page .storySection h2,
+  .page .proof h2,
+  .page .takeaway h2,
+  .page .testimonial > h2 {
+    font-size: 40px;
+  }
+
+  .page .problem > p,
+  .page .brief .situation p,
+  .page .sequenceCard > p,
+  .page .comparison li,
+  .page .earlyAdopters > p:not(.sectionLabel) {
+    font-size: 16px;
+  }
+
+  .page .approachCard h3 {
+    font-size: 24px;
+  }
+
+  .page .proofCard p,
+  .page .authorityCard p {
+    font-size: 14px;
+  }
+
+  /* no rule between the mandate and the note under it: the note just sits
+     a clear gap below the mandate's items */
+  .page .mandate {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .page .briefNote {
+    margin-top: 64px;
+  }
+
+  /* and a wide clear space under the note before the section's own rule */
+  .page .brief {
+    padding-bottom: 120px;
+  }
+}
+
+/* no divider lines between the sections, and no rule under the last item
+   of either comparison list */
+.page .problem,
+.page .brief,
+.page .approach,
+.page .sequence {
+  border-bottom: 0;
+}
+
+.page .comparison li:last-child {
+  border-bottom: 0;
+}
+
+/* phones: "Vyapar didn't just sell an APP. / Vyapar built the CATEGORY."
+   holds to its two lines, sized to the screen so the longer line fits
+   inside the 20px side margins */
+@media (max-width: 760px) {
+  .page .approach h2 {
+    font-size: min(31.2px, calc((100vw - 40px) / 12.2));
+    white-space: nowrap;
+  }
+}
+
+/* phones: the four approach cards become a swipeable strip showing one
+   card at a time (SwipeCarousel also advances it on its own), every card
+   in the acid colour like the first, with the note's raised tab wide
+   enough that its first line never runs past it onto the white */
+@media (max-width: 760px) {
+  .approachGrid {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .approachGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .approachCard,
+  .approachCard:first-child {
+    --tab: 78%;
+    --fill: var(--vyapar-acid);
+    min-height: 0;
+    scroll-snap-align: start;
+    border-color: var(--vyapar-acid);
+  }
+}

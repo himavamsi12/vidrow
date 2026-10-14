@@ -132,7 +132,7 @@ function VidrowMark() {
 export default function VisualDubCaseStudy() {
   return (
     <>
-    <main className="csp">
+    <main className="csp csp--vdub">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>

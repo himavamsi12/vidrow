@@ -17634,6 +17634,27 @@ html {
   pointer-events: none
 }
 
+/* the logo flying onto the navbar (see PageLoader.jsx): the white clears
+   off the page as it goes, then the video fades out over the navbar's own
+   logo, which fades in beneath it */
+.page-loader.is-flying {
+  background: transparent;
+  pointer-events: none;
+  transition: background-color .9s ease
+}
+
+.page-loader.is-landing video {
+  opacity: 0
+}
+
+.hx-logo {
+  transition: opacity .35s ease
+}
+
+html.is-loading .hx-logo {
+  opacity: 0
+}
+
 html.is-loading,
 html.is-loading body {
   overflow: hidden
@@ -17815,5 +17836,117 @@ html.is-loading body {
   .csp--stealth .cst-outNote {
     font-size: 16px;
     font-weight: 400
+  }
+}
+
+/* Visual Dub case study (desktop), per the design feedback: the hero note
+   at 14px, body copy at 16px, the requirement and point numbers at 20px,
+   the TOFU points and the BOFU explainer copy at 18px */
+@media (min-width:901px) {
+  .csp--vdub .cst-metaNote {
+    font-size: 14px
+  }
+
+  .csp--vdub .cst-problemCopy p,
+  .csp--vdub .cvd-mofuCopy,
+  .csp--vdub .cst-req p,
+  .csp--vdub .cvd-careDesc,
+  .csp--vdub .cvd-launchCopy {
+    font-size: 16px
+  }
+
+  .csp--vdub .cst-reqNum {
+    font-size: 20px
+  }
+
+  .csp--vdub .cvd-point p,
+  .csp--vdub .cvd-bofuCopy p:not(.cst-outNote) {
+    font-size: 18px
+  }
+}
+
+/* Apnamart case study (desktop), per the design feedback: the hero note
+   and the observation copy at 14px, the body copy at 16px, the number
+   boxes at 20px, and more room between the communication pillars */
+@media (min-width:901px) {
+  .csp--apna .cap-note,
+  .csp--apna .cst-stepDesc {
+    font-size: 14px
+  }
+
+  .csp--apna .cst-problemCopy p,
+  .csp--apna p.cst-problemCopy {
+    font-size: 16px
+  }
+
+  .csp--apna .cst-reqNum {
+    font-size: 20px
+  }
+
+  .csp--apna .cap-pillars li {
+    padding: 20px 0
+  }
+
+  .csp--apna .cap-pillars li:first-child {
+    padding-top: 0
+  }
+}
+
+/* Visual Dub (phones): the three ICP films sit two to a row, so each is
+   big enough to read; the third starts the next row */
+@media (max-width:900px) {
+  .cvd-icpRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px
+  }
+
+  .cvd-icp figcaption {
+    font-size: 14px
+  }
+}
+
+/* Stealth App wins (phones): a more compact card. Thinner frame, a
+   shorter acid step, a smaller number and tighter spacing, so the four
+   cards don't each take up most of the screen */
+@media (max-width:640px) {
+  .cst-wins {
+    gap: 12px
+  }
+
+  .cst-win {
+    padding: 14px 16px 18px;
+    border-width: 4px;
+    background:
+      linear-gradient(var(--acid), var(--acid)) 0 0 / 70% 38px no-repeat,
+      linear-gradient(var(--acid), var(--acid)) 0 0 / 46% 80px no-repeat,
+      #fff
+  }
+
+  .cst-winTag {
+    font-size: 12px
+  }
+
+  .cst-winVal {
+    margin-top: 2px;
+    font-size: 34px
+  }
+
+  .cst-winTitle {
+    margin: 22px 0 6px;
+    font-size: 16px
+  }
+
+  .cst-winDesc {
+    font-size: 14px;
+    line-height: 1.5
+  }
+}
+
+/* Stealth App (phones): the big "LTV" is scaled down to sit with the rest
+   of the phone type */
+@media (max-width:640px) {
+  .cst-ltv {
+    margin-top: 16px;
+    font-size: 48px
   }
 }

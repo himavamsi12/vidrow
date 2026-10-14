@@ -3,6 +3,7 @@ import SiteNav from "../../components/SiteNav";
 import CspMoreRow from "../../components/CspMoreRow";
 import CspCoverflow from "../../components/CspCoverflow";
 import CspSectionNav from "../../components/CspSectionNav";
+import SwipeCarousel from "../../components/SwipeCarousel";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -328,7 +329,7 @@ export default function VyaparCaseStudy() {
           <section className={styles.approach} id="vyapar-approach">
             <SectionLabel number="03">The Approach</SectionLabel>
             <h2>Vyapar didn’t just sell an APP.<br />Vyapar built the CATEGORY.</h2>
-            <div className={styles.approachGrid}>
+            <SwipeCarousel className={styles.approachGrid}>
               {APPROACH.map((item) => (
                 <article className={styles.approachCard} key={item.title}>
                   <h3>{item.title}</h3>
@@ -337,7 +338,7 @@ export default function VyaparCaseStudy() {
                   <b className={styles.approachNote}>{item.note}</b>
                 </article>
               ))}
-            </div>
+            </SwipeCarousel>
           </section>
         </div>
 

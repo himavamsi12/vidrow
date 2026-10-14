@@ -43,7 +43,10 @@ const PILLARS = [
 ];
 
 const SCRIPT_CHOICES = [
-  { desc: "To make our scripts Social-Media-First and avoid hard-selling of Staples." },
+  {
+    title: "Social-media-first scripts",
+    desc: "To make our scripts Social-Media-First and avoid hard-selling of Staples.",
+  },
   {
     title: "Character-driven storytelling",
     desc: "Use nuances and created situations that Bhide would often experience",
@@ -137,7 +140,7 @@ function VidrowMark() {
 export default function ApnamartCaseStudy() {
   return (
     <>
-    <main className="csp">
+    <main className="csp csp--apna">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
