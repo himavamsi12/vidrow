@@ -14351,7 +14351,15 @@ html.nav-hidden .cmp-backBar {
   }
 
   .wy-title {
-    transition: color .5s ease, opacity .5s ease, max-height .9s cubic-bezier(.22, 1, .36, 1)
+    /* on closing, the title fades back in only once the card's own title
+       has mostly faded, so the two never show at once */
+    transition: color .5s ease, opacity .4s ease .35s, max-height .9s cubic-bezier(.22, 1, .36, 1)
+  }
+
+  /* on opening, it goes at once (only the space it took folds away), so it
+     doesn't linger over the card's own title as the card grows */
+  .wy-item.on .wy-title {
+    transition: color .5s ease, opacity 0s, max-height .9s cubic-bezier(.22, 1, .36, 1)
   }
 
   .wy-cell {
