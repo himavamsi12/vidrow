@@ -17929,3 +17929,110 @@ html.is-loading body {
     font-size: 48px
   }
 }
+
+/* About, Why Vidrow: the Success card under the right-hand copy, a light
+   outlined card with its acid tag sitting on the top edge, just out past
+   the card's left side */
+.ab-whyCard {
+  position: relative;
+  margin-top: 64px;
+  padding: 28px 24px 20px;
+  border: 1px solid #E6E6E6;
+  background: #fff
+}
+
+.ab-whyCardTag {
+  position: absolute;
+  left: -34px;
+  top: 0;
+  transform: translateY(-50%)
+}
+
+.ab-openingColumn .ab-whyCard h3 {
+  margin: 0 0 40px;
+  max-width: 300px;
+  font-family: var(--body);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #2B2B2B;
+  text-align: left
+}
+
+.ab-openingColumn .ab-whyCard p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: left
+}
+
+@media (max-width:700px) {
+  .ab-whyCard {
+    margin-top: 40px;
+    padding: 26px 18px 18px
+  }
+
+  .ab-whyCardTag {
+    left: -8px
+  }
+
+  .ab-openingColumn .ab-whyCard h3 {
+    margin-bottom: 20px;
+    font-size: 18px
+  }
+
+  .ab-openingColumn .ab-whyCard p {
+    font-size: 14px
+  }
+}
+
+/* desktop: the Success card drops to the foot of its column, so its
+   bottom edge lines up with the last line of the left column, and it
+   stops short of the column's right edge to sit inside the copy */
+@media (min-width:901px) {
+  .ab-openingColumn:has(> .ab-whyCard) {
+    display: flex;
+    flex-direction: column
+  }
+
+  .ab-openingColumn:has(> .ab-whyCard) > p:nth-last-child(2) {
+    margin-bottom: 24px
+  }
+
+  .ab-whyCard {
+    margin: auto 32px 0 0
+  }
+}
+
+/* About: the black proof band holds three cards now (Success moved up into
+   Why Vidrow), so desktop lays them out three across */
+@media (min-width:901px) {
+  .ab-proofRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+}
+
+/* About proof band, now three cards:
+   - tablets (two columns): the odd last card runs the full row instead of
+     leaving an empty slot beside it
+   - phones: the title and text sit together at the top of each card (the
+     cards still match heights via the track) rather than being pushed to
+     the card's top and bottom with a big gap between */
+@media (min-width:701px) and (max-width:900px) {
+  .ab-proofCard:last-child:nth-child(odd) {
+    grid-column: 1 / -1
+  }
+
+  /* its tab hangs out by the same amount as the half-width cards' tabs
+     (their offset is a share of the card, so it doubled here) */
+  .ab-proofCard:last-child:nth-child(odd) .ab-proofTab {
+    left: -2.35%
+  }
+}
+
+@media (max-width:700px) {
+  .ab-proofBody {
+    min-height: 0;
+    justify-content: flex-start
+  }
+}

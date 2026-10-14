@@ -49,6 +49,8 @@ const PROOF = [
   },
 ];
 
+const SUCCESS = PROOF.find((c) => c.tag === "Success");
+
 // "We invest in startups": three cards that step up, each with its own yellow
 // corner (a grid of w x h units and the filled [col, row] cells)
 const INVEST = [
@@ -210,13 +212,24 @@ export default function AboutPage() {
                 We built Vidrow because we had been founders ourselves and we knew that gap was
                 real. And nobody was filling it right.
               </p>
+              {/* the Success proof card lives here, under the copy, as a light
+                  outlined card with its tag on the top edge (not in the black
+                  band, which keeps the other three) */}
+              <article className="ab-whyCard">
+                <span className="ab-tagwrap ab-whyCardTag">
+                  <span className="ab-tag">{SUCCESS.tag}</span>
+                  <TagMark />
+                </span>
+                <h3>{SUCCESS.title}</h3>
+                <p>{SUCCESS.body}</p>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
       <section className="ab-proof">
-        <AboutProof cards={PROOF} />
+        <AboutProof cards={PROOF.filter((c) => c !== SUCCESS)} />
       </section>
 
       <section className="ab-invest">
