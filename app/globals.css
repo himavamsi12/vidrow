@@ -2948,16 +2948,8 @@ html[data-hero-curtain] .hx-bar {
 }
 
 @media (min-width:901px) {
-  /* the open stage's title folds away (rather than vanishing) as its card
-     opens, and folds back in as it closes */
-  .wy-title {
-    max-height: 3em;
-    overflow: hidden
-  }
-
-  .wy-item.on .wy-title {
-    max-height: 0;
-    opacity: 0
+  .wy {
+    --wy-ltfs: calc(28 * var(--k))
   }
 
   .wy-item .wy-lead {
@@ -10737,6 +10729,10 @@ button:focus-visible,
     margin: 0 0 calc(12 * var(--k))
   }
 
+  .wy {
+    --wy-ltfs: calc(32 * var(--k))
+  }
+
   .wy-lead .wy-copy {
     color: #E6E6E6;
     font-size: calc(15 * var(--k));
@@ -14142,6 +14138,10 @@ html.nav-hidden .cmp-backBar {
     font-size: calc(26 * var(--k))
   }
 
+  .wy {
+    --wy-ltfs: calc(26 * var(--k))
+  }
+
   .wy-lead .wy-copy {
     font-size: calc(14 * var(--k));
     line-height: 1.4;
@@ -14351,15 +14351,8 @@ html.nav-hidden .cmp-backBar {
   }
 
   .wy-title {
-    /* on closing, the title fades back in only once the card's own title
-       has mostly faded, so the two never show at once */
-    transition: color .5s ease, opacity .4s ease .35s, max-height .9s cubic-bezier(.22, 1, .36, 1)
-  }
-
-  /* on opening, it goes at once (only the space it took folds away), so it
-     doesn't linger over the card's own title as the card grows */
-  .wy-item.on .wy-title {
-    transition: color .5s ease, opacity 0s, max-height .9s cubic-bezier(.22, 1, .36, 1)
+    transition: color .5s ease, background-color .5s ease, box-shadow .5s ease,
+      font-size .9s cubic-bezier(.22, 1, .36, 1), padding .9s cubic-bezier(.22, 1, .36, 1)
   }
 
   .wy-cell {
@@ -14907,6 +14900,7 @@ body{font-size:1.1940vw}
 .wy-stat{font-size:calc(20 * var(--k))}
 .wy-quote{font-size:calc(14 * var(--k))}
 @media (min-width:901px){.wy-leadTitle{font-size:calc(28 * var(--k))}}
+@media (min-width:901px){.wy{--wy-ltfs:calc(28 * var(--k))}}
 .wy-read{font-size:calc(12 * var(--k))}
 .wy-client{font-size:calc(22 * var(--k))}
 @media (min-width:901px){.wy-h{font-size:calc(56 * var(--k))}}
@@ -15127,6 +15121,7 @@ body{font-size:1.1940vw}
 .contact-form-error{font-size:1.0448vw}
 @media (min-width:901px){.wy-title{font-size:calc(20 * var(--k))}}
 @media (min-width:901px){.wy-leadTitle{font-size:calc(32 * var(--k))}}
+@media (min-width:901px){.wy{--wy-ltfs:calc(32 * var(--k))}}
 @media (min-width:901px){.wy-lead .wy-copy{font-size:calc(15 * var(--k))}}
 @media (min-width:901px){.wy-item .wy-read--d{font-size:calc(16 * var(--k))}}
 .sw-name,
@@ -15199,6 +15194,7 @@ body{font-size:1.1940vw}
 .news-sub{font-size:1.1940vw}
 @media (min-width:901px){.wy-title{font-size:calc(18 * var(--k))}}
 @media (min-width:901px){.wy-leadTitle{font-size:calc(26 * var(--k))}}
+@media (min-width:901px){.wy{--wy-ltfs:calc(26 * var(--k))}}
 @media (min-width:901px){.wy-lead .wy-copy{font-size:calc(14 * var(--k))}}
 @media (min-width:901px){.wy .wy-item .wy-read--d{font-size:var(--wy-readfs)}}
 @media (min-width:901px){.wy .wy-item .wy-lead .wy-copy{font-size:clamp(14px, 1.111vw, 24px)}}
@@ -17638,4 +17634,72 @@ html {
 html.is-loading,
 html.is-loading body {
   overflow: hidden
+}
+
+/* The Playbook (desktop): the stage's own title becomes the open card's
+   header. It stays where it is, turns yellow, grows and takes the card's
+   grey behind it, and only the body under it unfolds, so the card's top
+   edge never moves while a stage opens or closes. The card's second copy
+   of the title is hidden. --wy-ltfs is that title's size at each width,
+   set next to each .wy-leadTitle font-size above */
+@media (min-width:901px) {
+  .wy .wy-item,
+  .wy .wy-item.on {
+    padding-top: 0
+  }
+
+  .wy .wy-item .wy-title {
+    padding: calc(24 * var(--k)) 0 0;
+    line-height: 1.25
+  }
+
+  .wy .wy-item.on .wy-title {
+    padding: calc(28 * var(--k)) calc(20 * var(--k)) calc(8 * var(--k));
+    background-color: #323232;
+    /* the same grey a hair past its bottom edge, covering the anti-aliased
+       seam where it meets the card body on a fractional pixel */
+    box-shadow: 0 2px 0 #323232;
+    color: var(--acid);
+    font-size: var(--wy-ltfs);
+    font-weight: 600
+  }
+
+  /* the body's grey fades with the header's, so the two never show as
+     different shades (a visible cut) partway through */
+  .wy .wy-item .wy-lead {
+    background-color: transparent;
+    transition: background-color .5s ease;
+    padding-top: 0;
+    min-height: calc(299 * var(--k) - 1.25 * var(--wy-ltfs))
+  }
+
+  .wy .wy-item.on .wy-lead {
+    background-color: #323232
+  }
+
+  /* the card body itself neither fades nor slides (that dimmed its grey
+     against the header's and opened a gap under it); only its text and
+     link fade and rise into place */
+  .wy .wy-item .wy-bodyIn {
+    opacity: 1;
+    transform: none
+  }
+
+  .wy .wy-item .wy-lead .wy-copy,
+  .wy .wy-item .wy-read--d {
+    opacity: 0;
+    translate: 0 calc(10 * var(--k));
+    transition: opacity .5s ease, translate .9s cubic-bezier(.22, 1, .36, 1)
+  }
+
+  .wy .wy-item.on .wy-lead .wy-copy,
+  .wy .wy-item.on .wy-read--d {
+    opacity: 1;
+    translate: none;
+    transition: opacity .6s ease .1s, translate .9s cubic-bezier(.22, 1, .36, 1) .1s
+  }
+
+  .wy .wy-leadTitle {
+    display: none
+  }
 }
