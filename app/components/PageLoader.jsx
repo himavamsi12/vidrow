@@ -8,7 +8,7 @@ const FADE_MS = 500;
 // never hold the site behind the loader longer than this, whatever happens
 const MAX_MS = 10000;
 
-// The Vidrow loader: a white screen playing /vidrow-loader.webm on every page
+// The Vidrow loader: a white screen playing /video-loader-transparent.webm on every page
 // load. The first load in a browser session plays the whole video; later
 // loads show at least its first 5 seconds. Either way it also waits for the
 // page itself to finish loading, then fades away.
@@ -93,7 +93,7 @@ export default function PageLoader() {
 
   return (
     <div className={`page-loader${state === "fading" ? " is-fading" : ""}`} aria-hidden="true">
-      <video ref={videoRef} src="/vidrow-loader.webm" muted playsInline autoPlay preload="auto" />
+      <video ref={videoRef} src="/video-loader-transparent.webm" muted playsInline autoPlay preload="auto" />
     </div>
   );
 }

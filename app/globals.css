@@ -11620,9 +11620,10 @@ button:focus-visible,
   }
 }
 
-/* from 1280px up the headline holds to its two lines — Marketing Partner
-   behind / Fastest Growing Startups. — instead of wrapping inside the copy box */
-@media (min-width:1280px) {
+/* on every desktop width the headline holds to its two lines (Marketing
+   Partner Behind / Fastest Growing Startups.) instead of wrapping inside the
+   copy box; the whole hero scales with the frame, so it fits at any width */
+@media (min-width:901px) {
   .hx-h {
     white-space: nowrap
   }
@@ -15287,10 +15288,12 @@ body{font-size:1.1940vw}
   }
 }
 
-/* desktop testimonial headline: 24px from 1440px up */
+/* desktop testimonial headline: 24px from 1440px up, in a box wide enough
+   for that fixed size (the scaled width left the longer lines on three) */
 @media (min-width:1440px) {
   .fw2-headline {
-    font-size: 24px
+    font-size: 24px;
+    width: calc(var(--side) + 32px + 375px)
   }
 }
 
