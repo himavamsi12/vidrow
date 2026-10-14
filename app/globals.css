@@ -2902,7 +2902,7 @@ html[data-hero-curtain] .hx-bar {
 }
 
 /* caps the notch the light card's clip-path cuts out of its top-right
-   corner (desktop only — see .wy-item.on .wy-lead's clip-path and the
+   corner (desktop only — see .wy-item .wy-lead's clip-path and the
    height this is given in WhereYouAreNow.jsx) so the stat card's border
    reads as one continuous line running up to that step instead of
    stopping short of it */
@@ -2948,11 +2948,19 @@ html[data-hero-curtain] .hx-bar {
 }
 
 @media (min-width:901px) {
-  .wy-item.on .wy-title {
-    display: none
+  /* the open stage's title folds away (rather than vanishing) as its card
+     opens, and folds back in as it closes */
+  .wy-title {
+    max-height: 3em;
+    overflow: hidden
   }
 
-  .wy-item.on .wy-lead {
+  .wy-item.on .wy-title {
+    max-height: 0;
+    opacity: 0
+  }
+
+  .wy-item .wy-lead {
     display: block;
     background: #F0F0F0;
     /* the bottom padding is the left tab's length — WhereYouAreNow.jsx
@@ -10710,7 +10718,7 @@ button:focus-visible,
     padding-top: 0
   }
 
-  .wy-item.on .wy-lead {
+  .wy-item .wy-lead {
     background: #323232;
     padding: calc(24 * var(--k)) calc(24 * var(--k)) calc(var(--wy-tab) + var(--wy-step1) + 20 * var(--k));
     clip-path: polygon(0 0, 100% 0,
@@ -10743,7 +10751,7 @@ button:focus-visible,
     display: none
   }
 
-  .wy-item.on .wy-read--d {
+  .wy-item .wy-read--d {
     display: inline-flex;
     position: absolute;
     right: calc(18 * var(--k));
@@ -14126,7 +14134,7 @@ html.nav-hidden .cmp-backBar {
     font-size: calc(18 * var(--k))
   }
 
-  .wy-item.on .wy-lead {
+  .wy-item .wy-lead {
     padding: calc(28 * var(--k)) calc(20 * var(--k)) calc(var(--wy-tab) + var(--wy-step1))
   }
 
@@ -14140,7 +14148,7 @@ html.nav-hidden .cmp-backBar {
     max-width: calc(440 * var(--k))
   }
 
-  .wy .wy-item.on .wy-read--d {
+  .wy .wy-item .wy-read--d {
     right: 0;
     bottom: 0;
     width: var(--wy-notch2);
@@ -14156,7 +14164,7 @@ html.nav-hidden .cmp-backBar {
     font-size: var(--wy-readfs)
   }
 
-  .wy .wy-item.on .wy-read--d .wy-mark {
+  .wy .wy-item .wy-read--d .wy-mark {
     flex: none
   }
 
@@ -14339,11 +14347,11 @@ html.nav-hidden .cmp-backBar {
   }
 
   .wy-item {
-    transition: border-color .5s ease
+    transition: border-color .5s ease, padding .9s cubic-bezier(.22, 1, .36, 1)
   }
 
   .wy-title {
-    transition: color .5s ease
+    transition: color .5s ease, opacity .5s ease, max-height .9s cubic-bezier(.22, 1, .36, 1)
   }
 
   .wy-cell {
@@ -14393,7 +14401,7 @@ button:disabled {
 /* The Playbook (desktop): the open stage's copy runs about half of its card, and the
    board beside it is a little bigger */
 @media (min-width:901px) {
-  .wy .wy-item.on .wy-lead .wy-copy {
+  .wy .wy-item .wy-lead .wy-copy {
     max-width: 62%;
     /* 16px on a 1440 screen (1.111vw), growing with the viewport on bigger ones */
     font-size: clamp(14px, 1.111vw, 24px)
@@ -14423,7 +14431,7 @@ button:disabled {
 /* every open stage card is the same height, so the short first one isn't
    squat next to the longer ones */
 @media (min-width:901px) {
-  .wy .wy-item.on .wy-lead {
+  .wy .wy-item .wy-lead {
     min-height: calc(335 * var(--k));
     box-sizing: border-box
   }
@@ -14818,7 +14826,7 @@ button:disabled {
 
 /* Playbook open stage on 1440px and wider: fixed 16px copy, 32px heading */
 @media (min-width:1440px) {
-  .wy .wy-item.on .wy-lead .wy-copy {
+  .wy .wy-item .wy-lead .wy-copy {
     font-size: 16px
   }
   .wy .wy-item.on .wy-title {
@@ -15112,7 +15120,7 @@ body{font-size:1.1940vw}
 @media (min-width:901px){.wy-title{font-size:calc(20 * var(--k))}}
 @media (min-width:901px){.wy-leadTitle{font-size:calc(32 * var(--k))}}
 @media (min-width:901px){.wy-lead .wy-copy{font-size:calc(15 * var(--k))}}
-@media (min-width:901px){.wy-item.on .wy-read--d{font-size:calc(16 * var(--k))}}
+@media (min-width:901px){.wy-item .wy-read--d{font-size:calc(16 * var(--k))}}
 .sw-name,
 .sw-grid--tall .sw-name{font-size:1.7910vw}
 .sw-client,
@@ -15184,8 +15192,8 @@ body{font-size:1.1940vw}
 @media (min-width:901px){.wy-title{font-size:calc(18 * var(--k))}}
 @media (min-width:901px){.wy-leadTitle{font-size:calc(26 * var(--k))}}
 @media (min-width:901px){.wy-lead .wy-copy{font-size:calc(14 * var(--k))}}
-@media (min-width:901px){.wy .wy-item.on .wy-read--d{font-size:var(--wy-readfs)}}
-@media (min-width:901px){.wy .wy-item.on .wy-lead .wy-copy{font-size:clamp(14px, 1.111vw, 24px)}}
+@media (min-width:901px){.wy .wy-item .wy-read--d{font-size:var(--wy-readfs)}}
+@media (min-width:901px){.wy .wy-item .wy-lead .wy-copy{font-size:clamp(14px, 1.111vw, 24px)}}
 .abf-bio p{font-size:1.1940vw}
 @media (hover: hover) and (min-width: 701px){.abt-bio p{font-size:4.3cqw}}
 }
@@ -17573,7 +17581,7 @@ html {
 /* the Playbook stage titles open on hover, so they show the pointer hand,
    and so does the open card */
 .wy .wy-title,
-.wy .wy-item.on .wy-lead {
+.wy .wy-item .wy-lead {
   cursor: pointer
 }
 
