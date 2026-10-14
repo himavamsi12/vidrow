@@ -473,7 +473,16 @@ export default function VyaparCaseStudy() {
                     <i aria-hidden="true" />
                     {item.label}
                   </span>
-                  <b className={styles.proofValue}>{item.value}</b>
+                  <b className={styles.proofValue}>
+                    {/* the unit after the figure (Mn+, Cr+, the star) is its
+                        own span so phones can set it smaller */}
+                    {item.value.replace(/\s*(Mn\+|Cr\+|★)$/, "")}
+                    {item.value.match(/\s*(Mn\+|Cr\+|★)$/) && (
+                      <span className={`${styles.proofUnit}${item.value.endsWith("★") ? ` ${styles.proofStar}` : ""}`}>
+                        {item.value.match(/\s*(Mn\+|Cr\+|★)$/)[0]}
+                      </span>
+                    )}
+                  </b>
                   <p>{item.copy}</p>
                 </article>
               ))}

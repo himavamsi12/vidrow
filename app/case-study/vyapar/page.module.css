@@ -1683,3 +1683,17 @@
     border-color: var(--vyapar-acid);
   }
 }
+
+/* phones: the unit after a proof figure (Mn+, Cr+, the star) is set
+   smaller than the number itself */
+@media (max-width: 760px) {
+  .proofUnit {
+    font-size: .6em;
+  }
+}
+
+/* the star has no space before it in the data (unlike Mn+ / Cr+), so it
+   gets a small gap of its own */
+.proofStar {
+  margin-left: .25em;
+}
