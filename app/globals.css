@@ -17784,3 +17784,33 @@ html.is-loading body {
     margin-top: -16px
   }
 }
+
+/* Stealth App case study (desktop), per the design feedback: body copy at
+   16px, the problem statement wide enough to sit in five lines, the
+   feature card titles at 18px, the output figures at 48px and its closing
+   note at 16px regular */
+@media (min-width:901px) {
+  .csp--stealth .cst-problemCopy {
+    width: min(660px, 54%);
+    font-size: 16px
+  }
+
+  .csp--stealth .cst-outcomeCopy p,
+  .csp--stealth .cst-ltvSub,
+  .csp--stealth .cst-outputCopy {
+    font-size: 16px
+  }
+
+  .csp--stealth .cst-winTitle {
+    font-size: 18px
+  }
+
+  .csp--stealth .cst-outVal {
+    font-size: 48px
+  }
+
+  .csp--stealth .cst-outNote {
+    font-size: 16px;
+    font-weight: 400
+  }
+}

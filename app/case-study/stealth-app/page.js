@@ -129,7 +129,7 @@ function VidrowMark() {
 export default function StealthAppCaseStudy() {
   return (
     <>
-    <main className="csp">
+    <main className="csp csp--stealth">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
