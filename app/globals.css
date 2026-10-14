@@ -17634,27 +17634,6 @@ html {
   pointer-events: none
 }
 
-/* the logo flying onto the navbar (see PageLoader.jsx): the white clears
-   off the page as it goes, then the video fades out over the navbar's own
-   logo, which fades in beneath it */
-.page-loader.is-flying {
-  background: transparent;
-  pointer-events: none;
-  transition: background-color .9s ease
-}
-
-.page-loader.is-landing video {
-  opacity: 0
-}
-
-.hx-logo {
-  transition: opacity .35s ease
-}
-
-html.is-loading .hx-logo {
-  opacity: 0
-}
-
 html.is-loading,
 html.is-loading body {
   overflow: hidden
