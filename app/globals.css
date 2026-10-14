@@ -17772,3 +17772,15 @@ html.is-loading body {
     transition: opacity .6s ease .1s, translate .9s cubic-bezier(.22, 1, .36, 1) .1s
   }
 }
+
+/* Selected Work (phones): the cards sit closer under the filter tabs, 14px
+   below them instead of 34px */
+@media (max-width:900px) {
+  .sw-filters {
+    margin-bottom: 0
+  }
+
+  .sw-filters + .sw-field {
+    margin-top: -16px
+  }
+}
