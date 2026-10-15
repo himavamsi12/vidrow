@@ -4739,12 +4739,6 @@ html[data-hero-curtain] .hx-bar {
   display: block
 }
 
-.pr-tile:hover {
-  transform: scale(1.04);
-  position: relative;
-  z-index: 1
-}
-
 [data-stage="seed"] { --bg: #F5F978 }
 [data-stage="a"] { --bg: #FBF5B4 }
 [data-stage="b"] { --bg: #9482F0 }
