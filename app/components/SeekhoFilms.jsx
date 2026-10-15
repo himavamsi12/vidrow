@@ -47,12 +47,19 @@ function Film({ film }) {
 
 /** The Mandar Chandwadkar films from the Seekho campaign page. Each card shows the
  *  film's own still; clicking it plays the film in place. */
-export default function SeekhoFilms({ films }) {
+export default function SeekhoFilms({ films, captions, className = "" }) {
   return (
-    <div className="csk-films">
-      {films.map((f) => (
-        <Film key={f.video} film={f} />
-      ))}
+    <div className={`csk-films ${className}`.trim()}>
+      {films.map((f, i) =>
+        captions ? (
+          <figure className="ccj-style" key={f.video}>
+            <Film film={f} />
+            <figcaption>{captions[i]}</figcaption>
+          </figure>
+        ) : (
+          <Film key={f.video} film={f} />
+        )
+      )}
     </div>
   );
 }

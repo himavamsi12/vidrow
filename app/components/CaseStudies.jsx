@@ -44,6 +44,7 @@ const DEEP_DIVES = [
     logo: "/deep%20drives/curious%20jr.png",
     logoAlt: "CuriousJr",
     logoFx: "none", // the supplied two-tone logo, shown as is
+    href: "/case-study/curiousjr",
   },
   {
     kind: "ap",
@@ -92,7 +93,71 @@ const DEEP_DIVES = [
 // is always wider than even a very wide screen and the loop never shows a
 // gap before it wraps
 const REPEAT = 2;
-const CARDS = Array.from({ length: REPEAT }, () => DEEP_DIVES).flat();
+
+// one story card: the title on top, the cut-out, the brand along the foot
+function DiveCard({ d, repeat = false }) {
+  const Tag = d.href ? "a" : "article";
+  const link = d.href ? { href: d.href, tabIndex: repeat ? -1 : undefined } : {};
+  return (
+    <Tag className={`cs-card cs-card-${d.kind}`} {...link}>
+      <h3 className="cs-title">{d.title}</h3>
+      <img className="cs-person" src={d.img} alt="" loading="lazy" />
+      {d.logo ? (
+        <img
+          className={`cs-logo${d.logoFx === "none" ? "" : d.logoFx === "dark" ? " cs-logo--dark" : " cs-logo--white"}`}
+          src={d.logo}
+          alt={repeat ? "" : d.logoAlt}
+          loading="lazy"
+        />
+      ) : (
+        <span className="cs-name">{d.name}</span>
+      )}
+    </Tag>
+  );
+}
+
+// three of the stories, a different three on each page: the list (minus the
+// page's own story) is started at a point worked out from the page's address
+const pickThree = (list, seed = "") => {
+  let h = 0;
+  for (const c of seed) h = (h * 31 + c.charCodeAt(0)) % 9973;
+  const start = h % list.length;
+  return [0, 1, 2].map((i) => list[(start + i) % list.length]);
+};
+
+/** The Deep Dives cards. On the homepage they loop sideways; `embed` (a case
+ *  study page) shows three still cards instead. `exclude` is the href of a
+ *  case study to leave out: a page doesn't offer itself. */
+export function DeepDiveCards({ exclude, embed = false }) {
+  const dives = exclude ? DEEP_DIVES.filter((d) => d.href !== exclude) : DEEP_DIVES;
+
+  if (embed) {
+    return (
+      <div className="cs-three">
+        {pickThree(dives, exclude).map((d) => (
+          <DiveCard key={d.kind} d={d} />
+        ))}
+      </div>
+    );
+  }
+
+  const cards = Array.from({ length: REPEAT }, () => dives).flat();
+  return (
+    <CsRow>
+      <div className="cs-rtrack">
+        {[0, 1].map((copy) => (
+          <div className="cs-rset" key={copy} aria-hidden={copy === 1 || undefined}>
+            {cards.map((d, i) => (
+              // only the first pass of the first copy is announced and
+              // tabbable; the repeats are there for the loop
+              <DiveCard key={i} d={d} repeat={copy === 1 || i >= dives.length} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </CsRow>
+  );
+}
 
 export default function CaseStudies() {
   return (
@@ -108,37 +173,7 @@ export default function CaseStudies() {
 
       {/* the cards drift sideways on a loop, pausing while one is hovered —
           two copies back to back so the seam never shows */}
-      <CsRow>
-        <div className="cs-rtrack">
-          {[0, 1].map((copy) => (
-            <div className="cs-rset" key={copy} aria-hidden={copy === 1 || undefined}>
-              {CARDS.map((d, i) => {
-                const Tag = d.href ? "a" : "article";
-                // only the first pass of the first copy is announced and
-                // tabbable; the repeats are there for the loop
-                const repeat = copy === 1 || i >= DEEP_DIVES.length;
-                const link = d.href ? { href: d.href, tabIndex: repeat ? -1 : undefined } : {};
-                return (
-                  <Tag key={i} className={`cs-card cs-card-${d.kind}`} {...link}>
-                    <h3 className="cs-title">{d.title}</h3>
-                    <img className="cs-person" src={d.img} alt="" loading="lazy" />
-                    {d.logo ? (
-                      <img
-                        className={`cs-logo${d.logoFx === "none" ? "" : d.logoFx === "dark" ? " cs-logo--dark" : " cs-logo--white"}`}
-                        src={d.logo}
-                        alt={repeat ? "" : d.logoAlt}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span className="cs-name">{d.name}</span>
-                    )}
-                  </Tag>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </CsRow>
+      <DeepDiveCards />
     </section>
   );
 }

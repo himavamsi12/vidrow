@@ -1,8 +1,7 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
-import CspMoreRow from "../../components/CspMoreRow";
-import { moreStories } from "../../data/moreStories";
+import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "Stealth App - Case Study | Vidrow",
@@ -64,8 +63,6 @@ const OUTPUT = [
   { tag: "Paying users acquired", val: "3,00,000" },
   { tag: "Daily acquisition rate achieved", val: "10,000", desc: "paid users / day" },
 ];
-
-const MORE_STORIES = moreStories("stealth-app");
 
 const SECTIONS = [
   { id: "csp-sec-hero", label: "Stealth App" },
@@ -345,19 +342,17 @@ export default function StealthAppCaseStudy() {
               </a>
           </div>
 
-          <CspMoreRow
-            stories={MORE_STORIES}
-            cta={
-              <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
-                <span className="csp-more-cta-label">See all case studies</span>
-                <span className="csp-more-cta-i" aria-hidden="true">
-                  <svg viewBox="0 0 40 40" aria-hidden="true">
-                    <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
-                  </svg>
-                </span>
-              </a>
-            }
-          />
+          <DeepDiveCards embed exclude="/case-study/stealth-app" />
+          <div className="csp-more-ctaMobile">
+            <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
+              <span className="csp-more-cta-label">See all case studies</span>
+              <span className="csp-more-cta-i" aria-hidden="true">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
+              </span>
+            </a>
+          </div>
         </section>
       </div>
     </main>

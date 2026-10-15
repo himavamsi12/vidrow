@@ -2,15 +2,12 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
 import CspReelRow from "../../components/CspReelRow";
-import CspMoreRow from "../../components/CspMoreRow";
-import { moreStories } from "../../data/moreStories";
+import { DeepDiveCards } from "../../components/CaseStudies";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
   title: "PlatinumRx - Case Study | Vidrow",
 };
-
-const MORE_STORIES = moreStories("platinumrx");
 
 const AOC = [
   {
@@ -484,7 +481,7 @@ export default function PlatinumRxCaseStudy() {
             <h2 className="csp-more-h">More deep dives.</h2>
           </div>
 
-          <CspMoreRow stories={MORE_STORIES} />
+          <DeepDiveCards embed exclude="/case-study/platinumrx" />
         </section>
       </div>
     </main>

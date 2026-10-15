@@ -18824,3 +18824,401 @@ html.is-loading body {
     font-size: 14px
   }
 }
+
+/* three still story cards at the foot of a case study page */
+.cs-three {
+  --k: min(.0694444cqw, 1.19444px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 56px)
+}
+
+.cs-three .cs-card {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 336 / 479
+}
+
+.cs-three .cs-card:nth-child(even) {
+  margin-top: 0
+}
+
+@media (max-width:760px) {
+  .cs-three {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 16px;
+    margin-left: calc(var(--side) * -1);
+    margin-right: calc(var(--side) * -1);
+    padding: 0 var(--side)
+  }
+
+  .cs-three::-webkit-scrollbar {
+    display: none
+  }
+
+  .cs-three .cs-card {
+    flex: 0 0 80%;
+    scroll-snap-align: start
+  }
+}
+
+.csp-more-ctaMobile {
+  display: none
+}
+
+@media (max-width:760px) {
+  .csp-more-ctaMobile {
+    display: flex;
+    margin-top: 24px
+  }
+}
+
+/* PW CuriousJr: the goals list beside the problem copy */
+.ccj-wanted h3 {
+  margin: 0 0 24px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #111
+}
+
+.csp--cjr .csk-hero {
+  object-fit: cover
+}
+
+/* PW CuriousJr: 02 the four factors, 03 the communication */
+.ccj-factors {
+  align-items: start
+}
+
+.ccj-list {
+  margin: 28px 0 24px
+}
+
+.ccj-list .csk-trait {
+  padding: 15px 0
+}
+
+.ccj-list .csk-trait:first-child {
+  padding-top: 0
+}
+
+.ccj-list .csk-trait .cst-reqNum {
+  min-width: 43px;
+  height: 43px
+}
+
+.ccj-list .csk-trait p {
+  color: #111
+}
+
+.ccj-after {
+  margin: 0
+}
+
+.ccj-venn {
+  justify-self: center;
+  width: min(418px, 100%);
+  height: auto;
+  margin-top: 28px;
+  font-family: var(--body);
+  font-size: 14px;
+  overflow: visible
+}
+
+.ccj-venn text {
+  fill: #111
+}
+
+.ccj-commsLabel {
+  margin: clamp(32px, 4vw, 52px) 0 0;
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: var(--violet)
+}
+
+.ccj-comms {
+  list-style: none;
+  margin: clamp(32px, 4vw, 52px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 4vw, 56px);
+  align-items: start
+}
+
+.ccj-comm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.ccj-commMain,
+.ccj-commSub {
+  margin: 14px 0 0;
+  padding-left: 43px;
+  font-family: var(--body)
+}
+
+.ccj-commMain {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #2A2A2A
+}
+
+.ccj-commSub {
+  font-size: 15px;
+  line-height: 1.35;
+  color: #7A7A7A
+}
+
+@media (max-width:900px) {
+  .ccj-comms {
+    grid-template-columns: 1fr;
+    row-gap: 32px
+  }
+
+  .ccj-venn {
+    justify-self: start;
+    margin-top: 0
+  }
+}
+
+@media (max-width:640px) {
+  .ccj-commMain {
+    font-size: 17px
+  }
+}
+
+/* CuriousJr: the problem copy runs wider, on three lines */
+.csp--cjr .csk-problemCopy {
+  width: min(540px, 56%)
+}
+
+@media (max-width:900px) {
+  .csp--cjr .csk-problemCopy {
+    width: auto;
+    max-width: 460px
+  }
+}
+
+/* PW CuriousJr: 04 the video styles */
+.ccj-stylesTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+  margin-top: 22px
+}
+
+.ccj-stylesTop .cst-secH {
+  margin: 0;
+  max-width: 480px;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.1
+}
+
+.ccj-stylesCopy p {
+  margin: 0 0 16px;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5A5A62
+}
+
+.ccj-films {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(32px, 4vw, 52px)
+}
+
+.ccj-style {
+  margin: 0;
+  min-width: 0
+}
+
+.ccj-styleFrame {
+  aspect-ratio: 226 / 336;
+  background: #1A1A1A url("/casestudy-curios-jr/hero.png") var(--p) 50% / 400% auto no-repeat
+}
+
+.ccj-style figcaption {
+  margin-top: 14px;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.3;
+  color: #1A1C1C
+}
+
+@media (max-width:900px) {
+  .ccj-stylesTop {
+    grid-template-columns: 1fr
+  }
+
+  .ccj-films {
+    display: flex
+  }
+
+  .ccj-style {
+    flex: 0 0 min(62%, 260px);
+    scroll-snap-align: start
+  }
+
+  .ccj-style .csk-film {
+    flex: none;
+    width: 100%
+  }
+}
+
+/* PW CuriousJr: 05 Impact, a dark band */
+.ccj-impactH {
+  max-width: none
+}
+
+.ccj-impactRow {
+  display: grid;
+  grid-template-columns: minmax(0, .5fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 52px)
+}
+
+.ccj-stat {
+  padding: 26px 0 34px;
+  border-top: 1px solid #3A3A3A
+}
+
+.ccj-statLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #D8D8D8
+}
+
+.ccj-sq {
+  width: 7px;
+  height: 7px;
+  display: block
+}
+
+.ccj-sq--acid {
+  background: var(--acid)
+}
+
+.ccj-sq--lilac {
+  background: #C9C5FB
+}
+
+.ccj-statVal {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(36px, 3.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: #fff
+}
+
+.ccj-statDesc {
+  margin: 18px 0 0;
+  max-width: 260px;
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1.5;
+  color: #A8A8A8
+}
+
+.ccj-chart {
+  margin: 0
+}
+
+.ccj-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #222;
+  font-family: var(--body)
+}
+
+.ccj-cTitle {
+  font-size: 12px;
+  fill: #fff
+}
+
+.ccj-cKey {
+  font-size: 8px;
+  fill: #CFCFCF
+}
+
+.ccj-cTick {
+  font-size: 7.5px;
+  fill: #A8A8A8
+}
+
+.ccj-cAxis {
+  font-size: 9px;
+  fill: #A8A8A8
+}
+
+.ccj-chart figcaption {
+  margin-top: 14px;
+  font-family: var(--body);
+  font-size: 11px;
+  color: #A8A8A8
+}
+
+@media (max-width:900px) {
+  .ccj-impactRow {
+    grid-template-columns: 1fr
+  }
+
+  .ccj-stat {
+    padding-bottom: 28px
+  }
+}
+
+@media (max-width:640px) {
+  .ccj-commMain,
+  .ccj-commSub {
+    padding-left: 0
+  }
+
+  .ccj-key2 {
+    display: none
+  }
+
+  .ccj-cTitle {
+    font-size: 16px
+  }
+
+  .ccj-cKey {
+    font-size: 10px
+  }
+
+  .ccj-cTick {
+    font-size: 11px
+  }
+
+  .ccj-cAxis {
+    font-size: 12px
+  }
+
+  .ccj-statVal {
+    font-size: 34px
+  }
+}
+
+.ccj-style .csk-film {
+  aspect-ratio: 226 / 336
+}

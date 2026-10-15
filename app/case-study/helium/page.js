@@ -1,8 +1,7 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
-import CspMoreRow from "../../components/CspMoreRow";
-import { moreStories } from "../../data/moreStories";
+import { DeepDiveCards } from "../../components/CaseStudies";
 import CspSectionNav from "../../components/CspSectionNav";
 import CspCoverflow from "../../components/CspCoverflow";
 import Mark from "../../components/Mark";
@@ -40,8 +39,6 @@ const SECTIONS = [
 
 // the rail flips light-on-dark over these two dark panels
 const DARK_SECTIONS = ["csp-sec-focus", "csp-sec-films"];
-
-const MORE_STORIES = moreStories("helium");
 
 const BRAND_STATS = [
   { val: "4 Mn+", label: "Impressions" },
@@ -1169,19 +1166,17 @@ export default function HeliumCaseStudy() {
               </a>
           </div>
 
-          <CspMoreRow
-            stories={MORE_STORIES}
-            cta={
-              <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
-                <span className="csp-more-cta-label">See all case studies</span>
-                <span className="csp-more-cta-i" aria-hidden="true">
-                  <svg viewBox="0 0 40 40" aria-hidden="true">
-                    <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
-                  </svg>
-                </span>
-              </a>
-            }
-          />
+          <DeepDiveCards embed exclude="/case-study/helium" />
+          <div className="csp-more-ctaMobile">
+            <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
+              <span className="csp-more-cta-label">See all case studies</span>
+              <span className="csp-more-cta-i" aria-hidden="true">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
+              </span>
+            </a>
+          </div>
         </section>
       </div>
     </main>

@@ -1,7 +1,6 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
-import CspMoreRow from "../../components/CspMoreRow";
-import { moreStories } from "../../data/moreStories";
+import { DeepDiveCards } from "../../components/CaseStudies";
 import CspCoverflow from "../../components/CspCoverflow";
 import CspSectionNav from "../../components/CspSectionNav";
 import SwipeCarousel from "../../components/SwipeCarousel";
@@ -150,8 +149,6 @@ const PROOF = [
     copy: "Vyapar acquired Suvit and relaunched as Vyapar TaxOne, and the name now stretches to CAs.",
   },
 ];
-
-const MORE_STORIES = moreStories("vyapar");
 
 function SectionLabel({ number, children, light = false }) {
   return (
@@ -523,19 +520,17 @@ export default function VyaparCaseStudy() {
                   </span>
                 </a>
             </div>
-            <CspMoreRow
-              stories={MORE_STORIES}
-              cta={
-                <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
-                  <span className="csp-more-cta-label">See all case studies</span>
-                  <span className="csp-more-cta-i" aria-hidden="true">
-                    <svg viewBox="0 0 40 40" aria-hidden="true">
-                      <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
-                    </svg>
-                  </span>
-                </a>
-              }
-            />
+            <DeepDiveCards embed exclude="/case-study/vyapar" />
+          <div className="csp-more-ctaMobile">
+            <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
+              <span className="csp-more-cta-label">See all case studies</span>
+              <span className="csp-more-cta-i" aria-hidden="true">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
+              </span>
+            </a>
+          </div>
           </section>
         </div>
       </main>
