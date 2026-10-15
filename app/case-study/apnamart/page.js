@@ -4,7 +4,7 @@ import CspSectionNav from "../../components/CspSectionNav";
 import CspMoreRow from "../../components/CspMoreRow";
 
 export const metadata = {
-  title: "Apnamart - Case Study | Vidrow",
+  title: "ApnaMart - Case Study | Vidrow",
 };
 
 // what was already fixed, and what the ads still had to do
@@ -15,7 +15,7 @@ const CONSTRAINTS = [
   "It was essential for the ads to work across Social Media Channel (organically) while also bringing in low CAC through paid distribution",
 ];
 
-// what matters most to an Apnamart customer
+// what matters most to an ApnaMart customer
 const OBSERVATIONS = [
   {
     title: "Savings",
@@ -23,7 +23,7 @@ const OBSERVATIONS = [
   },
   {
     title: "Quality",
-    desc: "When it comes to food items, the customers of Apnamart (mostly married women) value Quality very highly",
+    desc: "When it comes to food items, the customers of ApnaMart (mostly married women) value Quality very highly",
   },
   {
     title: "Trust",
@@ -38,8 +38,8 @@ const OBSERVATIONS = [
 // 03: what the ads put front and centre, and how the scripts were written
 const PILLARS = [
   "Careful Item Inspection",
-  "Highlighting the Diverse range of Products at Apnamart",
-  "Hunting Discounts and avail various offers at Apnamart",
+  "Highlighting the Diverse range of Products at ApnaMart",
+  "Hunting Discounts and avail various offers at ApnaMart",
 ];
 
 const SCRIPT_CHOICES = [
@@ -55,7 +55,7 @@ const SCRIPT_CHOICES = [
     title: "Situational humor",
     desc: "To improve the engagement on our ads, we made the scripts fun to watch and added humor",
   },
-  { title: "Cultural familiarity", desc: "with the people in Apnamart\u2019s Operating Regions" },
+  { title: "Cultural familiarity", desc: "with the people in ApnaMart\u2019s Operating Regions" },
 ];
 
 // 04: the five films, each poster cropped from its panel of the hero image
@@ -64,14 +64,14 @@ const FILMS = [
   "High Quality",
   "Hunting Discounts",
   "Huge Variety",
-  "Free Delivery by Apnamart",
+  "Free Delivery by ApnaMart",
   "Quality Obsession and Inspection",
 ];
 
 // 05: the results, swatches alternating acid / lilac
 const RESULTS = [
-  { tag: "Organic views", val: "3.7M+", desc: "From Apnamart\u2019s Social Media Pages" },
-  { tag: "Organic shares", val: "17.8K+", desc: "From Apnamart\u2019s Social Media Pages" },
+  { tag: "Organic views", val: "3.7M+", desc: "From ApnaMart\u2019s Social Media Pages" },
+  { tag: "Organic shares", val: "17.8K+", desc: "From ApnaMart\u2019s Social Media Pages" },
   { tag: "In the CPM", val: "50% \u2193", desc: "As compared to their BAU Campaigns" },
   { tag: "In the completion rate", val: "2x \u2191", desc: "As compared to their BAU Campaigns" },
 ];
@@ -119,7 +119,7 @@ const MORE_STORIES = [
 ];
 
 const SECTIONS = [
-  { id: "csp-sec-hero", label: "Apnamart" },
+  { id: "csp-sec-hero", label: "ApnaMart" },
   { id: "csp-sec-context", label: "Context & Challenge" },
   { id: "csp-sec-customers", label: "Understanding Customers" },
   { id: "csp-sec-strategy", label: "Creative Strategy" },
@@ -158,7 +158,7 @@ export default function ApnamartCaseStudy() {
           <p className="csp-note cap-note">
             An everyday grocery retail chain and quick commerce platform expanding rapidly across
             Eastern India. To actively engage with their customers and stay on top of minds,
-            Apnamart runs various Sale Events and Offers.
+            ApnaMart runs various Sale Events and Offers.
           </p>
         </div>
 
@@ -166,19 +166,19 @@ export default function ApnamartCaseStudy() {
           <img
             className="cst-bannerImg cst-bannerImg--full"
             src="/casestudy%20images/apnamart%20hero.png"
-            alt="Mandar Chandwadkar in five scenes from the Apnamart campaign"
+            alt="Mandar Chandwadkar in five scenes from the ApnaMart campaign"
           />
           <span className="cst-plate">
             <VidrowMark />
             <i aria-hidden="true" />
-            <img className="cst-appLogo cap-logo" src="/casestudy%20images/apna%20amrt.png" alt="Apnamart" />
+            <img className="cst-appLogo cap-logo" src="/casestudy%20images/apna%20amrt.png" alt="ApnaMart" />
           </span>
         </div>
 
         <div className="cst-meta cap-meta">
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Client</span>
-            <span className="csp-metaValue">Apnamart</span>
+            <span className="csp-metaValue">ApnaMart</span>
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Celebrity</span>
@@ -206,10 +206,10 @@ export default function ApnamartCaseStudy() {
               <p>
                 An everyday grocery retail chain and quick commerce platform expanding rapidly
                 across Eastern India. To actively engage with their customers and stay on top of
-                minds, Apnamart runs various Sale Events and Offers.
+                minds, ApnaMart runs various Sale Events and Offers.
               </p>
               <p>
-                While analysing the data, Apnamart figured that for their customers, they had
+                While analysing the data, ApnaMart figured that for their customers, they had
                 built a unique selling point around being the best place for getting the best
                 staples around.
               </p>
@@ -248,7 +248,7 @@ export default function ApnamartCaseStudy() {
               </h2>
             </div>
             <p className="cst-problemCopy">
-              We started by breaking down what matters most to Apnamart customers. Then we started
+              We started by breaking down what matters most to ApnaMart customers. Then we started
               finding those insights that matched perfectly with Mandar&rsquo;s iconic character
               &lsquo;Bhide&rsquo; from Taarak Mehta Ka Ooltah Chashmah.
             </p>

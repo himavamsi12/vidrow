@@ -133,7 +133,7 @@ export const PR_TILES = [
   [7, 4, "a", "Kim", "kim.svg", 82],
   [8, 4, "b", "Jar", "jar.svg", 71],
   [9, 4, "c", "Inshorts", "inshorts.svg", 95],
-  [10, 4, "c", "Apnamart", "apnamart.svg", 110],
+  [10, 4, "c", "ApnaMart", "apnamart.svg", 110],
 
   [1, 5, "seed", "Khare", "khare.svg", 82],
   [2, 5, "seed", "Wellopia", "wellopia.svg", 85],

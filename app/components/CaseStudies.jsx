@@ -48,7 +48,7 @@ const DEEP_DIVES = [
     title: "Apna Mart builds absolute category authority in staples category",
     img: "/deep drives/apnamart deep drive.png",
     logo: "/partnership/apnamart.svg",
-    logoAlt: "Apnamart",
+    logoAlt: "ApnaMart",
     logoFx: "none",
   },
   {

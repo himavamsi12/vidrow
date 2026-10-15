@@ -47,14 +47,14 @@ export const CAMPAIGNS = {
   },
   "just-fake-it": {
     title: "Just Fake it",
-    by: "Drama",
+    by: "DRAMA",
     about: ABOUT,
     frames: [
-      video("749ae13764daa82544648a618edbf168", "Just Fake it - Drama, film 1"),
-      video("5d5344258125000e29e1acd9a6486939", "Just Fake it - Drama, film 2"),
-      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake it - Drama, film 3"),
-      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake it - Drama, film 4"),
-      video("c0813173af097255a02abe7db752ecd5", "Just Fake it - Drama, film 5"),
+      video("749ae13764daa82544648a618edbf168", "Just Fake it - DRAMA, film 1"),
+      video("5d5344258125000e29e1acd9a6486939", "Just Fake it - DRAMA, film 2"),
+      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake it - DRAMA, film 3"),
+      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake it - DRAMA, film 4"),
+      video("c0813173af097255a02abe7db752ecd5", "Just Fake it - DRAMA, film 5"),
     ],
   },
   "maximise": {
@@ -83,23 +83,23 @@ export const CAMPAIGNS = {
   },
   "stop-testing-your-team": {
     title: "Stop testing your team",
-    by: "Gocodeo",
+    by: "GoCodeo",
     about: ABOUT,
     frames: [
-      video("468bbe10614a1ab654d658c0bfe27cf8", "Stop testing your team - Gocodeo, film 1"),
+      video("468bbe10614a1ab654d658c0bfe27cf8", "Stop testing your team - GoCodeo, film 1"),
     ],
   },
   "fayda-uthaao": {
     title: "Fayda Uthaao",
-    by: "Apnamart",
+    by: "ApnaMart",
     layout: "tall",
     about: ABOUT,
     frames: [
-      video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaao - Apnamart, film 1"),
-      video("b9bef7e9a05e8175bd43c6eddd74a664", "Fayda Uthaao - Apnamart, film 2"),
-      video("64c2040320351e1a738835b69ae613d6", "Fayda Uthaao - Apnamart, film 3"),
-      video("af988159fcf1a4735fcc37d7686f2f2d", "Fayda Uthaao - Apnamart, film 4"),
-      video("e43b93aa9f90f9faf8992f181cc0ae87", "Fayda Uthaao - Apnamart, film 5"),
+      video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaao - ApnaMart, film 1"),
+      video("b9bef7e9a05e8175bd43c6eddd74a664", "Fayda Uthaao - ApnaMart, film 2"),
+      video("64c2040320351e1a738835b69ae613d6", "Fayda Uthaao - ApnaMart, film 3"),
+      video("af988159fcf1a4735fcc37d7686f2f2d", "Fayda Uthaao - ApnaMart, film 4"),
+      video("e43b93aa9f90f9faf8992f181cc0ae87", "Fayda Uthaao - ApnaMart, film 5"),
     ],
   },
   "smart-ac-smart-customer": {
@@ -187,12 +187,12 @@ export const CAMPAIGNS = {
   },
   "india-ka-internet": {
     title: "India ka internet",
-    by: "Sharechat",
+    by: "ShareChat",
     about: ABOUT,
     frames: [
-      video("605ec6b16138510cfab5d25189f1a523", "India ka internet - Sharechat, film 1"),
-      video("39b1757f700e0fdb67bc0775af66625e", "India ka internet - Sharechat, film 2"),
-      video("a7731fa57b1deaff864468d1829e89c7", "India ka internet - Sharechat, film 3"),
+      video("605ec6b16138510cfab5d25189f1a523", "India ka internet - ShareChat, film 1"),
+      video("39b1757f700e0fdb67bc0775af66625e", "India ka internet - ShareChat, film 2"),
+      video("a7731fa57b1deaff864468d1829e89c7", "India ka internet - ShareChat, film 3"),
     ],
   },
   "vyapari-ko-salam": {
@@ -210,14 +210,14 @@ export const CAMPAIGNS = {
   },
   apnamart: {
     title: "Fayda Uthaiye",
-    by: "Apnamart",
+    by: "ApnaMart",
     about: ABOUT,
     frames: [
-      video("42d0d1564b3b5b27352749f7fab1f42e","Apnamart, film 1"),
-      video("95a9e8494eedf78dc80f1f26247e94da", "Apnamart, film 2"),
-      video("f7d99955fde4bd4fa2b020ebaf4f461f", "Apnamart, film 3"),
-      video("2a943c2a25a2f0e385e48fb2c78c5af5", "Apnamart, film 4"),
-      video("7fff47a3392285a788b5c09a3e0e67ed", "Apnamart, film 5"),
+      video("42d0d1564b3b5b27352749f7fab1f42e","ApnaMart, film 1"),
+      video("95a9e8494eedf78dc80f1f26247e94da", "ApnaMart, film 2"),
+      video("f7d99955fde4bd4fa2b020ebaf4f461f", "ApnaMart, film 3"),
+      video("2a943c2a25a2f0e385e48fb2c78c5af5", "ApnaMart, film 4"),
+      video("7fff47a3392285a788b5c09a3e0e67ed", "ApnaMart, film 5"),
     ],
   },
   eloelo: {
@@ -280,7 +280,7 @@ export const CAMPAIGNS = {
   },
   oolka_jimmy: {
     title: "Jimy Shergil",
-    by: "Ookla - Credit Socre Badhao",
+    by: "Oolka - Credit Socre Badhao",
     layout: "tall",
     about: ABOUT,
     frames: [
@@ -320,7 +320,7 @@ export const CAMPAIGNS = {
     ],
   },
   seekho_naveen_kasturia: {
-    title: "Naveen kasturia",
+    title: "Naveen Kasturia",
     by: "Seekho - Seekhega India",
     layout: "tall",
     about: ABOUT,
@@ -411,7 +411,7 @@ export const CAMPAIGNS = {
   },
   oolka_Ads: {
     title: "Start Subscription",
-    by: "Ookla",
+    by: "Oolka",
     layout: "tall",
     about: ABOUT,
     frames: [

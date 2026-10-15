@@ -134,7 +134,7 @@ export default function FeaturedWork() {
     };
   }, []);
 
-  // the longest testimonials (Apnamart's, say) run past their panel. Rather
+  // the longest testimonials (ApnaMart's, say) run past their panel. Rather
   // than letting one card scroll while the rest don't, each quote's type is
   // stepped down until it fits its own panel — the shorter ones keep the
   // design's size untouched.

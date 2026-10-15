@@ -73,19 +73,19 @@ export const FEATURED_WORK = [
   },
   {
     id: "apnamart",
-    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "Apnamart", scale: 0.75, zoom: 0.85 },
-    deskLogo: { src: "/featured%20works/logo-apnamart.png", alt: "Apnamart" },
-    name: "Apnamart",
+    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "ApnaMart", scale: 0.75, zoom: 0.85 },
+    deskLogo: { src: "/featured%20works/logo-apnamart.png", alt: "ApnaMart" },
+    name: "ApnaMart",
     category: "apnamart.in",
     solo: true,
     photos: [{ src: "/featured%20works/apnamart-founder.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
     plates: [{ name: "Abhishek Singh", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
-      "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the Apnamart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding Apnamart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
+      "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
     mobileQuote:
-      "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the Apnamart team. From brand positioning to performance and offline marketing, they [[go deep, challenge our thinking, and stay focused on outcomes.]]\n\nWhen we handed them our toughest challenge - rebranding Apnamart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
-    mobileLine: "Apnamart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 Cr",
-    line: "Apnamart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
+      "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. From brand positioning to performance and offline marketing, they [[go deep, challenge our thinking, and stay focused on outcomes.]]\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
+    mobileLine: "ApnaMart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 Cr",
+    line: "ApnaMart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
   },
   {
     id: "grexa-ai",
