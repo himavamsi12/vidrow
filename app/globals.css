@@ -19806,3 +19806,12 @@ html.is-loading body {
     width: min(340px, 38%)
   }
 }
+
+/* the yellow rule is as tall as its note (with a little air), not the whole headline */
+@media (min-width:901px) {
+  .csk-note {
+    align-self: center;
+    padding-top: 10px;
+    padding-bottom: 10px
+  }
+}
