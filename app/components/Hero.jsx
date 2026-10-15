@@ -1,10 +1,10 @@
 "use client";
 
 import SiteNav from "./SiteNav";
+import HeroScroll from "./HeroScroll";
 import {
-  TET_W,
-  TET_H,
-  TET_PIECES,
+  SKY_PIECES,
+  SKY_VIEWBOX,
   TET_M_W,
   TET_M_H,
   TET_M_PIECES,
@@ -20,12 +20,6 @@ export default function Hero() {
         </div>
 
         <div className="hx-stair" aria-hidden="true">
-          {/* desktop: the tetris skyline, traced from the design mock */}
-          <svg className="hx-tet" viewBox={`0 0 ${TET_W} ${TET_H}`} preserveAspectRatio="xMidYMax meet">
-            {TET_PIECES.map((p, i) => (
-              <polygon key={i} fill={p.fill} points={tetPoints(p.pts)} />
-            ))}
-          </svg>
           {/* mobile: its own, narrower skyline, traced from the mobile mock */}
           <svg className="hx-tet-m" viewBox={`0 0 ${TET_M_W} ${TET_M_H}`} preserveAspectRatio="xMidYMax meet">
             {TET_M_PIECES.map((p, i) => (
@@ -85,6 +79,17 @@ export default function Hero() {
             </span>
           </div>
         </div>
+
+        {/* desktop: the tetris skyline, one svg per piece so the scroll curtain
+            can raise each on its own delay (see HeroScroll) */}
+        <div className="hx-sky" aria-hidden="true">
+          {SKY_PIECES.map((p, i) => (
+            <svg key={i} className="hx-piece" data-d={p.d} viewBox={SKY_VIEWBOX} preserveAspectRatio="xMidYMax slice">
+              <polygon fill={p.fill} points={p.pts} />
+            </svg>
+          ))}
+        </div>
+        <HeroScroll />
 
         <div className="hx-copy">
           <h1 className="hx-h">

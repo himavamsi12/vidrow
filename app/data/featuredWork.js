@@ -37,7 +37,7 @@ export const FEATURED_WORK = [
     name: "PlatinumRx",
     category: "Consumer Health",
     photos: [
-      { src: "/ashish.png", cls: "fw-ph1" },
+      { src: "/Platinum.png", cls: "fw-ph1" },
       { src: "/work/Piyush Platinum.png", cls: "fw-ph2" },
     ],
     plates: [

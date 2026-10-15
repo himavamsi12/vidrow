@@ -76,6 +76,7 @@ const DEEP_DIVES = [
     img: "/deep drives/seekho.png",
     logo: "/partnership/seekho.svg",
     logoAlt: "Seekho",
+    href: "/case-study/seekho",
     logoFx: "none",
   },
   {

@@ -127,6 +127,8 @@ export default function HeroCurtain() {
 
     const trigger = () => {
       if (firedRef.current || busyRef.current) return;
+      // on desktop the hero is a scroll-scrubbed curtain of its own (HeroScroll)
+      if (desktop()) return;
       // the page loader is still covering the site: a scroll now isn't the
       // user moving past the hero they haven't seen yet
       if (document.documentElement.classList.contains("is-loading")) return;
