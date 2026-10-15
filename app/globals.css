@@ -18131,7 +18131,7 @@ html.is-loading body {
 .csk-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
   gap: clamp(24px, 5vw, 72px);
   margin-bottom: clamp(24px, 3vw, 40px)
 }
@@ -18141,14 +18141,17 @@ html.is-loading body {
 }
 
 /* the side note, set off by a yellow rule */
+/* the yellow rule runs the full height of the headline, the copy centred on it */
 .csk-note {
   flex: none;
+  display: flex;
+  align-items: center;
   width: min(236px, 30%);
-  margin: 6px 0 0;
-  padding-left: 12px;
-  border-left: 2px solid var(--acid);
+  margin: 0;
+  padding-left: 22px;
+  border-left: 4px solid var(--acid);
   font-family: var(--body);
-  font-size: 10.5px;
+  font-size: 12px;
   line-height: 1.6;
   color: #5A5A62
 }
@@ -19221,4 +19224,11 @@ html.is-loading body {
 
 .ccj-style .csk-film {
   aspect-ratio: 226 / 336
+}
+
+/* CuriousJr: the headline note holds to three lines */
+@media (min-width:901px) {
+  .csp--cjr .csk-note {
+    width: min(270px, 34%)
+  }
 }
