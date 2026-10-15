@@ -59,7 +59,7 @@ export const SW_TABS = [
     items: [
       ["Don\u2019t Just Dub!", "VisualDub", "visualdb.png", "/campaign/dont-just-dub"],
       ["Stop testing your team", "Gocodeo", "gacodeo.png", "/campaign/stop-testing-your-team"],
-      ["Whatspp Solved", "Periscope", "periscope.png", "/campaign/whatspp-solved"],
+      ["Whatspp Solved", "Periskope", "periscope.png", "/campaign/whatspp-solved"],
       ["Just Fake it", "Drama", "drama.png", "/campaign/just-fake-it"],
       ["Not Just AI", "Kim.CC", "klim.cc.png", "/campaign/not-just-ai"],
       ["Maximise", "Maxim", "maxim.png", "/campaign/maximise"],

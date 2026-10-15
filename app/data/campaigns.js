@@ -75,10 +75,10 @@ export const CAMPAIGNS = {
   },
   "whatspp-solved": {
     title: "Whatspp Solved",
-    by: "Periscope",
+    by: "Periskope",
     about: ABOUT,
     frames: [
-      video("d8a6d10220482c663f830a13c13d1feb", "Whatspp Solved - Periscope, film 1"),
+      video("d8a6d10220482c663f830a13c13d1feb", "Whatspp Solved - Periskope, film 1"),
     ],
   },
   "stop-testing-your-team": {
