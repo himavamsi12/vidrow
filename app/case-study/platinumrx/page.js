@@ -3,13 +3,14 @@ import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
 import CspReelRow from "../../components/CspReelRow";
 import CspMoreRow from "../../components/CspMoreRow";
+import { moreStories } from "../../data/moreStories";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
   title: "PlatinumRx - Case Study | Vidrow",
 };
 
-const MORE_STORIES = [1, 2, 3];
+const MORE_STORIES = moreStories("platinumrx");
 
 const AOC = [
   {
@@ -102,8 +103,9 @@ export default function PlatinumRxCaseStudy() {
             August At a Controlled CAC.
           </h1>
           <p className="csp-note">
-            A premium AC brand. A 90-day window. One bold question: could the right pieces,
-            assembled correctly, sell 500 units a day, entirely from a website?
+            A medicines app. Chronic-medicine users who reorder every month. One bold question:
+            could the right pieces, assembled correctly, triple the business in three months at a
+            controlled CAC?
           </p>
         </div>
 
@@ -120,7 +122,7 @@ export default function PlatinumRxCaseStudy() {
         <div className="csp-meta">
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Client</span>
-            <span className="csp-metaValue">PlatinumRX</span>
+            <span className="csp-metaValue">PlatinumRx</span>
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Timeline</span>
@@ -146,7 +148,7 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-aoc-h">
                 The audience.
                 <br />
-                The Objective. The contraint.
+                The Objective. The constraint.
               </h2>
             </div>
             <p className="csp-aoc-copy">
@@ -479,7 +481,7 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
+            <h2 className="csp-more-h">More deep dives.</h2>
           </div>
 
           <CspMoreRow stories={MORE_STORIES} />

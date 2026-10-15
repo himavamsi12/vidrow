@@ -11473,7 +11473,7 @@ button:focus-visible,
 
 .cmp-about {
   margin: 0;
-  flex: 0 1 41%;
+  flex: 0 1 56%;
   font-family: var(--body);
   font-size: clamp(13px, 1.05vw, 16px);
   line-height: 1.5;
@@ -14823,7 +14823,7 @@ button:disabled {
 .wy .wy-item .wy-lead .wy-copy,
 .wy .wy-item .wy-lead .wy-copy b,
 .wy .wy-item .wy-lead .wy-copy strong {
-  color: #F6F6F6
+  color: #DEDEDE
 }
 
 /* Playbook open stage on 1440px and wider: fixed 16px copy, 32px heading */
@@ -18035,4 +18035,10 @@ html.is-loading body {
     min-height: 0;
     justify-content: flex-start
   }
+}
+
+/* the loader has already played in this browser (set by the script in the
+   page head before first paint) */
+.loader-played .page-loader {
+  display: none !important
 }

@@ -49,15 +49,20 @@ export default function PageLoader() {
       return;
     }
 
+    // saved as soon as it starts, so leaving early still counts as played
+    // (a beat later, so a dev double-mount doesn't see its own flag)
+    const mark = setTimeout(() => {
+      try {
+        localStorage.setItem(KEY, "1");
+      } catch {}
+    }, 300);
+
     let videoDone = false;
     let pageDone = document.readyState === "complete";
     let finished = false;
     const finish = () => {
       if (finished) return;
       finished = true;
-      try {
-        localStorage.setItem(KEY, "1");
-      } catch {}
       setState("fading");
       setTimeout(() => setState("gone"), FADE_MS);
     };
@@ -95,6 +100,7 @@ export default function PageLoader() {
       v?.removeEventListener("error", onFail);
       window.removeEventListener("load", onLoad);
       clearTimeout(cap);
+      clearTimeout(mark);
     };
   }, []);
 

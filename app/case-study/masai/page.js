@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspMoreRow from "../../components/CspMoreRow";
+import { moreStories } from "../../data/moreStories";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
@@ -48,42 +49,7 @@ function smoothPath(points) {
   return d;
 }
 
-const MORE_STORIES = [
-  {
-    key: "platinumrx",
-    href: "/case-study/platinumrx",
-    image: "/casestudy%20images/casestudy-recommendations/platinumx.png",
-    imageAlt: "PlatinumRx",
-    brand: "PlatinumRx",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "helium",
-    href: "/#featured",
-    image: "/casestudy%20images/casestudy-recommendations/helium.png",
-    imageAlt: "Helium",
-    logoType: "image",
-    logoSrc: "/casestudy%20images/casestudy-recommendations/helium-logo.png",
-    logoAlt: "Helium",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "vyapar",
-    href: "/#featured",
-    image: "/casestudy%20images/casestudy-recommendations/vyapar.png",
-    imageAlt: "Vyapar",
-    logoType: "image",
-    logoSrc: "/logos/vyapar.png",
-    logoAlt: "Vyapar",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-];
+const MORE_STORIES = moreStories("masai");
 
 const PROGRAMMES = [
   {
@@ -598,8 +564,8 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
-            <a className="csp-more-cta csp-more-cta--desktop" href="/#featured">
+            <h2 className="csp-more-h">More deep dives.</h2>
+            <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
               <span className="csp-more-cta-label">See all case studies</span>
               <span className="csp-more-cta-i" aria-hidden="true">
                 <svg viewBox="0 0 40 40" aria-hidden="true">
@@ -612,7 +578,7 @@ export default function PlatinumRxCaseStudy() {
           <CspMoreRow
             stories={MORE_STORIES}
             cta={
-              <a className="csp-more-cta csp-more-cta--mobile" href="/#featured">
+              <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
                 <span className="csp-more-cta-label">See all case studies</span>
                 <span className="csp-more-cta-i" aria-hidden="true">
                   <svg viewBox="0 0 40 40" aria-hidden="true">

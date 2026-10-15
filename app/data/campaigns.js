@@ -1,11 +1,7 @@
 // the campaign pages (/campaign/<slug>), opened from the Selected Work cards.
 //
-// TODO: every `about` is the same stand-in blurb the mock uses, and the frames
-// are stand-in stills from /public/selected — swap in each campaign's own copy
-// and frames as they arrive.
-const ABOUT =
-  "Running a business is hard enough. Managing bills, accounts and everyday operations shouldn\u2019t be. Vyapar helps small business owners amplify their day-to-day business management. Vidrow brought this idea to life through relatable storytelling, using Manoj Joshi to connect Vyapar with the real-world challenges of Indian business owners.";
-
+// `about` is the short description under the title (from the campaign briefs);
+// the page hides the block when a campaign has none.
 const still = (file, alt) => ({ src: `/selected/${file}`, alt });
 
 // a frame played from Cloudflare Stream: `id` is the video's id in its watch link
@@ -17,7 +13,7 @@ export const CAMPAIGNS = {
   vyapar: {
     title: "Business Banega Digital",
     by: "Vyapar - Manoj Joshi",
-    about: ABOUT,
+    about: "Small-business owners upgrade their phones but still lose evenings to ledgers, stock checks and tax-season panic. Vyapar makes going digital a human story about winning back time and running the business with confidence. Manoj Joshi\u2019s merchant characters turn late-night bookkeeping, GST anxiety and a daughter\u2019s place in the family business into warm, recognisable comedy. Billing, inventory and accounting become the route to a calmer shop and a fuller life, not another complicated piece of technology.",
     frames: [
       video("5892a5659d9d6b84b47781adc7664991", "Business Banega Digital - Vyapar, film 1"),
       video("3a1fe7a7c49a99b2257b49048fdfd7b7", "Business Banega Digital - Vyapar, film 2"),
@@ -27,40 +23,40 @@ export const CAMPAIGNS = {
   },
   "dont-just-dub": {
     title: "Don\u2019t Just Dub!",
-    by: "VisualDub",
-    about: ABOUT,
+    by: "Neural Garage",
+    about: "Ever watched a dubbed film where the words changed, but the actor\u2019s mouth didn\u2019t? It breaks the spell. \u201cDon\u2019t Just Dub!\u201d introduced VisualDub by putting that familiar problem in the hands of directors, creators and marketers. Product demonstrations and brand examples showed how AI matches lips and jaw movements to new dialogue, languages and personalised messages. One performance could now speak to many audiences, without looking like it had been borrowed from another language.",
     frames: [
-      video("94f6ce29c2968c1173c12c300dff400a", "Don\u2019t Just Dub! - VisualDub, film 1"),
-      video("8124355290b768643da812671022beed", "Don\u2019t Just Dub! - VisualDub, film 2"),
-      video("5bd02c3a7ae53729c030574fecfbef32", "Don\u2019t Just Dub! - VisualDub, film 3"),
-      video("03709a4fd5e67950677a216ef324805b", "Don\u2019t Just Dub! - VisualDub, film 4"),
-      video("5855d8d3892e44152e0df4e77a6fa47f", "Don\u2019t Just Dub! - VisualDub, film 5"),
-      video("c180ee2f8b1949017e121c9d6db08353", "Don\u2019t Just Dub! - VisualDub, film 6"),
-      video("b928117a094cf572cdcd8a97bb31e6aa", "Don\u2019t Just Dub! - VisualDub, film 7"),
-      video("7d7670fa795e9c9b55981cc3beb81d46", "Don\u2019t Just Dub! - VisualDub, film 8"),
-      video("6d13affe10d12db0f8b56e4cc7483536", "Don\u2019t Just Dub! - VisualDub, film 9"),
-      video("2e7fc86428cb9466d0523671a37f2ec4", "Don\u2019t Just Dub! - VisualDub, film 10"),
-      video("dc44bf8e719578e8ed1772c66a51e52d", "Don\u2019t Just Dub! - VisualDub, film 11"),
-      video("c971c8572b030712374cfe12e02f2ea4", "Don\u2019t Just Dub! - VisualDub, film 12"),
-      video("469c1ad832bc1c7343ef4d5b54f53ad5", "Don\u2019t Just Dub! - VisualDub, film 13"),
+      video("94f6ce29c2968c1173c12c300dff400a", "Don\u2019t Just Dub! - Neural Garage, film 1"),
+      video("8124355290b768643da812671022beed", "Don\u2019t Just Dub! - Neural Garage, film 2"),
+      video("5bd02c3a7ae53729c030574fecfbef32", "Don\u2019t Just Dub! - Neural Garage, film 3"),
+      video("03709a4fd5e67950677a216ef324805b", "Don\u2019t Just Dub! - Neural Garage, film 4"),
+      video("5855d8d3892e44152e0df4e77a6fa47f", "Don\u2019t Just Dub! - Neural Garage, film 5"),
+      video("c180ee2f8b1949017e121c9d6db08353", "Don\u2019t Just Dub! - Neural Garage, film 6"),
+      video("b928117a094cf572cdcd8a97bb31e6aa", "Don\u2019t Just Dub! - Neural Garage, film 7"),
+      video("7d7670fa795e9c9b55981cc3beb81d46", "Don\u2019t Just Dub! - Neural Garage, film 8"),
+      video("6d13affe10d12db0f8b56e4cc7483536", "Don\u2019t Just Dub! - Neural Garage, film 9"),
+      video("2e7fc86428cb9466d0523671a37f2ec4", "Don\u2019t Just Dub! - Neural Garage, film 10"),
+      video("dc44bf8e719578e8ed1772c66a51e52d", "Don\u2019t Just Dub! - Neural Garage, film 11"),
+      video("c971c8572b030712374cfe12e02f2ea4", "Don\u2019t Just Dub! - Neural Garage, film 12"),
+      video("469c1ad832bc1c7343ef4d5b54f53ad5", "Don\u2019t Just Dub! - Neural Garage, film 13"),
     ],
   },
   "just-fake-it": {
     title: "Just Fake it",
-    by: "DRAMA",
-    about: ABOUT,
+    by: "SyncMonster",
+    about: "The shoot is done. Then someone asks for a little more excitement. Or happiness. Or anything except another take. \u201cJust Fake It\u201d made that familiar feedback loop the starting point for DRAMA, an AI expression editor. Comic stories about creators, founders and bad acting showed how an uploaded performance could change emotion with a click or a slider. The idea turned a request for a reshoot into a request for a setting: how much drama would you like?",
     frames: [
-      video("749ae13764daa82544648a618edbf168", "Just Fake it - DRAMA, film 1"),
-      video("5d5344258125000e29e1acd9a6486939", "Just Fake it - DRAMA, film 2"),
-      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake it - DRAMA, film 3"),
-      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake it - DRAMA, film 4"),
-      video("c0813173af097255a02abe7db752ecd5", "Just Fake it - DRAMA, film 5"),
+      video("749ae13764daa82544648a618edbf168", "Just Fake it - SyncMonster, film 1"),
+      video("5d5344258125000e29e1acd9a6486939", "Just Fake it - SyncMonster, film 2"),
+      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake it - SyncMonster, film 3"),
+      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake it - SyncMonster, film 4"),
+      video("c0813173af097255a02abe7db752ecd5", "Just Fake it - SyncMonster, film 5"),
     ],
   },
   "maximise": {
     title: "Maximise",
     by: "Maxim",
-    about: ABOUT,
+    about: "An AI application can work perfectly once and fail on the very next response. How do you test something that won\u2019t give the same answer twice? \u201cMaximise\u201d made the uncertainty of building AI the case for a different kind of testing platform. An animated product explainer connected experimentation, evaluations, human feedback and production monitoring in one continuous workflow. Maxim was presented as a way to replace guesswork with evidence, so teams could build and ship AI with more confidence.",
     frames: [
       video("f44de3f203d53b7e1bf91c93bff602df", "Maximise - Maxim, film 1"),
     ],
@@ -68,23 +64,23 @@ export const CAMPAIGNS = {
   "not-just-ai": {
     title: "Not Just AI",
     by: "Kim.CC",
-    about: ABOUT,
+    about: "An AI chatbot can sound wonderfully helpful while making promises your business cannot keep. \u201cNot Just AI\u201d took that blind enthusiasm to a support group where chatbot disasters were celebrated as breakthroughs. Refunds for everyone, callbacks from a team that didn\u2019t exist and referrals to a competitor made the cost of unchecked automation impossible to miss. \u201cDon\u2019t be a fanboy. Fix your chatbot\u201d positioned Kim against AI for its own sake, and for customer support that actually works.",
     frames: [
       video("e9f769e30abb3dd0f3b1c396da92fb7a", "Not Just AI - Kim.CC, film 1"),
     ],
   },
   "whatspp-solved": {
-    title: "Whatspp Solved",
+    title: "WhatsApp Solved",
     by: "Periskope",
-    about: ABOUT,
+    about: "Your business runs on WhatsApp. So why is it the channel you have the least control over? \u201cWhatsApp Solved\u201d turned missed messages, scattered numbers and endless groups into a problem every growing team could recognise. Founders and product demonstrations introduced a shared inbox, AI follow-ups, tickets and analytics built around the team\u2019s existing WhatsApp numbers. WhatsApp could stay where the conversations happened, without remaining where the work got lost.",
     frames: [
-      video("d8a6d10220482c663f830a13c13d1feb", "Whatspp Solved - Periskope, film 1"),
+      video("d8a6d10220482c663f830a13c13d1feb", "WhatsApp Solved - Periskope, film 1"),
     ],
   },
   "stop-testing-your-team": {
     title: "Stop testing your team",
     by: "GoCodeo",
-    about: ABOUT,
+    about: "Writing code can feel like making art. Spending hours writing tests rarely does. \u201cStop Testing Your Team\u201d followed a developer who wanted to get back to the work she loved. A playful conversation with her manager led into a demonstration of GoCodeo generating test plans, writing tests and helping catch errors. Testing became the AI\u2019s job, giving the developer more room to be a developer again.",
     frames: [
       video("468bbe10614a1ab654d658c0bfe27cf8", "Stop testing your team - GoCodeo, film 1"),
     ],
@@ -92,8 +88,8 @@ export const CAMPAIGNS = {
   "fayda-uthaao": {
     title: "Fayda Uthaao",
     by: "ApnaMart",
+    about: "Groceries don\u2019t arrive in a vacuum. They arrive in the middle of family jokes, hungry children and somebody deciding what to cook. ApnaMart joined those moments with short creator comedies and playful kitchen reels. Delivery bags, app orders and everyday ingredients became part of the story, from a child\u2019s salt-and-sugar trick to a last-minute Maggi request. Rather than interrupting the feed with a hard sell, the films made ApnaMart feel like part of the household routine.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaao - ApnaMart, film 1"),
       video("b9bef7e9a05e8175bd43c6eddd74a664", "Fayda Uthaao - ApnaMart, film 2"),
@@ -105,8 +101,8 @@ export const CAMPAIGNS = {
   "smart-ac-smart-customer": {
     title: "Smart AC, Smart Customer",
     by: "Helium",
+    about: "When an AC stops cooling, how do you know whether it needs a repair or you\u2019re being sold one? Helium made the customer the person with the answers, using app diagnostics, energy tracking and service booking. A technician\u2019s troubleshooting story, a comic repair visit and creator demos showed what happens when the AC tells you what\u2019s going on. Alongside its right-size cooling message, the films made \u201csmart\u201d mean something useful: less guesswork about your room, your bill and your AC.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("adc15feb64d00dac356f310912609945", "Smart AC, Smart Customer - Helium, film 1"),
       video("48c0a5373c29bec7f99f01f0ced0c193", "Smart AC, Smart Customer - Helium, film 2"),
@@ -118,8 +114,8 @@ export const CAMPAIGNS = {
   "book-flights-with-power": {
     title: "Book flights with Power",
     by: "Away",
+    about: "Five apps open, fares compared, and the price still goes up at checkout. Sound familiar? Away introduced a different habit: negotiate the flight before you pay. Travel creators showed its AI searching supplier networks, finding a negotiated fare and keeping convenience and booking fees out of the final price. The films turned travellers from passive price-checkers into people who could ask for a better deal.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("e3f03f08a008187943b20170bf16139f", "Book flights with Power - Away, film 1", true),
       video("373a4711947b624836b9103e7269f1d3", "Book flights with Power - Away, film 2"),
@@ -131,8 +127,8 @@ export const CAMPAIGNS = {
   "pickled-in-life": {
     title: "Pickled in life",
     by: "The Little Farm Co",
+    about: "A plain lunch, a shared paratha, an office tiffin. Sometimes all the meal needs is a little achar. The Little Farm Co. put its homestyle pickles into the moments people already eat, laugh and share. Creator films moved from recipe-making to family banter, a group meal and packed lunches, letting the jar appear where the flavour belongs. Pickle became more than a product on a shelf: a small, familiar reason to look forward to the next bite.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("17921e1f678d1c94e891066aa4b04861", "Pickled in life - The Little Farm Co, film 1"),
       video("dd394e47578c240574a01e1d999805d9", "Pickled in life - The Little Farm Co, film 2"),
@@ -144,7 +140,7 @@ export const CAMPAIGNS = {
   "for-future-officers": {
     title: "For Future Officers",
     by: "Testbook",
-    about: ABOUT,
+    about: "A government job can begin with a big dream and an even bigger bill for moving away to prepare. \u201cFor Future Officers\u201d brought the ambition back home, with films about aspiring teachers, civil servants and people determined to change Bihar. Family stories, a classroom oath and \u201cDelhi Mat Chal\u201d showed Testbook SuperCoaching bringing teachers, classes and guidance to the student\u2019s screen. The message was simple: preparing for a bigger future shouldn\u2019t mean putting a bigger burden on your family.",
     frames: [
       video("6e9ce1c6c56f63d48dfee48f61787c6a", "For Future Officers - Testbook, film 1"),
       video("e1f024f107d289bba91dbc8f694e0ff2", "For Future Officers - Testbook, film 2"),
@@ -155,7 +151,7 @@ export const CAMPAIGNS = {
   "unlock-zindagi": {
     title: "Unlock Zindagi",
     by: "Glance",
-    about: ABOUT,
+    about: "Some dreams get put away so quietly that everyday life starts to feel like a locked room. \u201cUnlock Zindagi\u201d invited people to step outside it, through a shared film told in English and Hindi. Stories of finding a voice, revisiting an unfinished passion and choosing love turned the idea of unlocking into something larger than a phone screen. Glance became an invitation to open up to life, not simply another place to scroll.",
     frames: [
       video("131b67bc2d569de6e03970849bb97697", "Unlock Zindagi - Glance, film 1"),
       video("640557ec71063d6955a0a5af5e11cd8d", "Unlock Zindagi - Glance, film 2"),
@@ -164,7 +160,7 @@ export const CAMPAIGNS = {
   "david-vs-goliath": {
     title: "David vs Goliath",
     by: "Grexa",
-    about: ABOUT,
+    about: "When customers choose whoever shows up first on Google or replies first on WhatsApp, a good local business can still get overlooked. \u201cDavid vs Goliath\u201d put small-business owners at the centre of the answer, from a travel agency and bike workshop to gyms, clinics and a coaching class. Their own stories showed Grexa handling enquiries, follow-ups, reviews and marketing while they got back to the work they knew best. AI stopped being a big-company advantage and became another pair of hands for the neighbourhood business.",
     frames: [
       video("f758f6a7038765d7117afae3f67e0d7b", "David vs Goliath - Grexa, film 1"),
       video("3acadc007c627cba04d541130fa488bf", "David vs Goliath - Grexa, film 2"),
@@ -177,7 +173,7 @@ export const CAMPAIGNS = {
   "porter-hai-partner": {
     title: "Porter hai Partner",
     by: "Porter",
-    about: ABOUT,
+    about: "Running a small business is hard enough without running a transport business on the side. \u201cPorter Hai Partner\u201d let customers and driver-partners explain what changed when they found Porter. A printer and a plywood merchant showed how on-demand vehicles helped them move goods, while drivers spoke about finding work, paying off loans and earning respect. Together, the stories made Porter feel like a partner in progress, on both sides of every delivery.",
     frames: [
       video("1b159aa19c5d8c64530134d434db1d16", "Porter hai Partner - Porter, film 1"),
       video("4d3dc720cc0bbfb6ca7a608c10200b89", "Porter hai Partner - Porter, film 2"),
@@ -188,7 +184,7 @@ export const CAMPAIGNS = {
   "india-ka-internet": {
     title: "India ka internet",
     by: "ShareChat",
-    about: ABOUT,
+    about: "For millions of Indians, the internet spoke a language that wasn\u2019t theirs. Their talent deserved a larger audience. \u201cIndia Ka Internet\u201d followed an educator, an aspiring speaker and a son helping his mother\u2019s clothing business find its way online. Their stories showed how sharing in a familiar language could open doors to students, viewers and customers far beyond home. ShareChat made the internet feel less like somewhere to fit in, and more like somewhere to belong.",
     frames: [
       video("605ec6b16138510cfab5d25189f1a523", "India ka internet - ShareChat, film 1"),
       video("39b1757f700e0fdb67bc0775af66625e", "India ka internet - ShareChat, film 2"),
@@ -198,7 +194,7 @@ export const CAMPAIGNS = {
   "vyapari-ko-salam": {
     title: "Vyapari ko salam",
     by: "Vyapar",
-    about: ABOUT,
+    about: "A businessman is often judged by the risk he takes, rather than the families and livelihoods his business supports. \u201cVyapari Ko Salaam\u201d gave that work the respect it deserved through stories of marriage, career choices, family legacies and an ageing shopkeeper. Emotional dramas and an Akbar-Birbal comedy showed how one business can hold up a household, create jobs and help a country grow. Vyapar became more than an app for running a business. It became a salute to the people who choose to build one.",
     frames: [
       video("40993c3cc3b779c6badee38305ef7bca", "Vyapari ko salam - Vyapar, film 1", false, 6),
       video("69465cc384da1c7a6a259b40ff80b91d", "Vyapari ko salam - Vyapar, film 2", false, 6),
@@ -211,7 +207,7 @@ export const CAMPAIGNS = {
   apnamart: {
     title: "Fayda Uthaiye",
     by: "ApnaMart",
-    about: ABOUT,
+    about: "Grocery shoppers want the familiarity of their neighbourhood store without giving up choice, quality or savings. ApnaMart turns the quirks of everyday shopping into a comic invitation to take advantage of a better local grocery experience. In-store sketches stretch quality checks, forgotten lists, dry-fruit temptation and Thursday deals to absurd lengths, with a delivery gag completing the range. Each joke lands on a practical benefit, making ApnaMart\u2019s variety, value and convenience feel familiar rather than corporate.",
     frames: [
       video("42d0d1564b3b5b27352749f7fab1f42e","ApnaMart, film 1"),
       video("95a9e8494eedf78dc80f1f26247e94da", "ApnaMart, film 2"),
@@ -223,7 +219,7 @@ export const CAMPAIGNS = {
   eloelo: {
     title: "Khul ke Bolega",
     by: "Eloelo",
-    about: ABOUT,
+    about: "For a shy young person, speaking freely can be harder than finding something to say, especially when background becomes a reason to feel judged. Eloelo positions its live social rooms as a bridge from hesitation to confidence: jo Eloelo kholega, khul ke bolega. College stories about a Valentine\u2019s letter, small-town insecurity and asking someone out show what that hesitation feels like, then bring the app\u2019s easy conversation into the real world. The campaign gives a live-social platform an emotional role: a place to practise being yourself before taking that confidence beyond the screen.",
     layout: "tall",
     frames: [
       video("19676b4587a227b740c7aa8dfa002e68", "Elo Elo, film 1"),
@@ -233,7 +229,7 @@ export const CAMPAIGNS = {
   helium: {
     title: "Pay for Cooling",
     by: "Helium Smart Air",
-    about: ABOUT,
+    about: "Air-conditioner buyers are sold bigger tonnage and longer feature names, while the real questions are comfort, bills and upkeep. Helium cuts through that noise with a simple idea: don\u2019t pay for marketing, pay for cooling. A comic ad-set conversation between the actor and founders turns right-sized cooling, app- based health checks and electricity tracking into everyday demonstrations. The films make a technical challenger brand easy to understand: less sales talk, more control over the cooling you actually need.",
     frames: [
       video("f05f15baef6f3fa850ca99e97ff2d73a", "Helium, film 1"),
       video("a5c4fb593ce18c3f6f93d8de815734c8", "Helium, film 2"),
@@ -245,7 +241,7 @@ export const CAMPAIGNS = {
   ivyhomes: {
     title: "Stressfree Buying",
     by: "Ivy Homes",
-    about: ABOUT,
+    about: "Buying a resale home brings a long list of suspicions, from hidden paperwork problems to surprise costs and delayed possession. Ivy Homes turns that buyer\u2019s interrogation into the campaign itself, with a comic police officer determined to catch the sales pitch out. Five exchanges with the officer and his hapless subordinate Shetty test legal checks, renovation, pricing, possession and post-booking surprises. Every objection becomes a reason to trust Ivy\u2019s verified, move-in-ready homes, giving stress-free buying a concrete meaning.",
     frames: [
       video("309d1dce77cabc97336fe633405475c0", "Ivy Homes, Possesion"),
       video("f35deeb5ade88fae9999754e93334e28", "Ivy Homes, legal"),
@@ -257,18 +253,18 @@ export const CAMPAIGNS = {
   platinumrx: {
     title: "Bimaari par Bhari",
     by: "PlatinumRx",
-    about: ABOUT,
+    about: "When medicine is for someone you love, choosing a cheaper brand can feel like choosing less care. PlatinumRx challenges that emotional equation with Anupam Kher and the thought: love your family, not the medicine brand. Ad-set comedy punctures gimmicky offers and expensive-is-better thinking, then explains branded alternatives through salt, strength and doctor review. The campaign reframes medicine savings as informed care rather than compromise, giving families a reason to question the brand premium.",
     frames: [
-      video("eb54a821aed01f7b4d1851159be31a54", "Platinum RX, film 1"),
-      video("fb44c37fca415eba584a3cd9fde88ec8", "Platinum RX, film 2"),
-      video("2ce79ff3d26dddde865172f626976220", "Platinum RX, film 3"),
+      video("eb54a821aed01f7b4d1851159be31a54", "PlatinumRx, film 1"),
+      video("fb44c37fca415eba584a3cd9fde88ec8", "PlatinumRx, film 2"),
+      video("2ce79ff3d26dddde865172f626976220", "PlatinumRx, film 3"),
     ],
   },
   curious_jr_shailesh: {
     title: "Shailesh Lodha",
     by: "Physics Wallah - Ratta nahi Padhai",
+    about: "When marks fall, parents often add pressure and tuition, while children still struggle to understand what they are memorising. CuriousJr, powered by Physics Wallah, makes the alternative clear: understanding and individual attention, not more rote learning. Shailesh Lodha appears in parent conversations, a founder interview, classroom addresses and a school-award story to explain practical teaching, personal mentors and progress updates. The films invite parents to try a different learning experience, framing better support as a way to protect both a child\u2019s confidence and childhood.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("286c07ac44c4ace2bf472cb426600160", "Curious Jr - Shailesh, film 1"),
       video("775fd2d492dce0d98cace5046f00e5aa", "Curious Jr - Shailesh, film 2"),
@@ -279,10 +275,10 @@ export const CAMPAIGNS = {
     ],
   },
   oolka_jimmy: {
-    title: "Jimy Shergil",
-    by: "Oolka - Credit Socre Badhao",
+    title: "Jimmy Sheirgill",
+    by: "Oolka - Credit Score Badhao",
+    about: "A credit score can shut people out of loans, while errors, recovery pressure and confusing repayment terms leave them unsure how to respond. Oolka casts Jimmy Sheirgill as the authority who explains the problem and points borrowers towards a way to act. Loan-office drama, a recovery-agent confrontation and classroom-style explanations show an AI assistant reading reports, helping raise disputes and preparing communication with lenders. The campaign turns an intimidating financial number into a set of understandable next steps, positioning Oolka as help for borrowers who feel outmatched.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("7557ddc957b671c1e1a2649192a873c9", "Oolka Jimmy, film 1"),
       video("2ac2c3f6d0ca9dc235defebcbd329b0b", "Oolka Jimmy, film 2"),
@@ -293,37 +289,37 @@ export const CAMPAIGNS = {
   },
   platinumrx_anup_soni: {
     title: "Anup Soni",
-    by: "Platinum Rx - Aapki mehnat Ki Kamai",
+    by: "PlatinumRx - Aapki mehnat Ki Kamai",
+    about: "A small pharmacy discount can feel like a win even when the underlying medicine bill remains painfully high. PlatinumRx uses Anup Soni\u2019s investigative authority to ask what people are really paying for: medicine or the layers around its brand. Police, clinic and pharmacy settings combine direct explanations, price-build-up graphics and a customer confrontation to introduce the app\u2019s branded alternatives. The campaign makes price awareness the first step towards a different purchase decision, anchored in the line: your hard-earned money is for medicines, not commissions.",
     layout: "tall",
-    about: ABOUT,
     frames: [
-      video("27d821612014a64fe4c2818bdd798f85", "Platinum RX - Anup Soni, film 1"),
-      video("a4088867f56ea7fc10fbd4e1d5639595", "Platinum RX - Anup Soni, film 2"),
-      video("65f1f8556941359fefcb537ac6db2190", "Platinum RX - Anup Soni, film 3"),
-      video("a72a31092e1156f9d791fd965b25a278", "Platinum RX - Anup Soni, film 4"),
-      video("4c3d6d8e20a8165761917640458e3811", "Platinum RX - Anup Soni, film 5"),
-      video("f807f04d5523dd446dfc0282a9387621", "Platinum RX - Anup Soni, film 6"),
+      video("27d821612014a64fe4c2818bdd798f85", "PlatinumRx - Anup Soni, film 1"),
+      video("a4088867f56ea7fc10fbd4e1d5639595", "PlatinumRx - Anup Soni, film 2"),
+      video("65f1f8556941359fefcb537ac6db2190", "PlatinumRx - Anup Soni, film 3"),
+      video("a72a31092e1156f9d791fd965b25a278", "PlatinumRx - Anup Soni, film 4"),
+      video("4c3d6d8e20a8165761917640458e3811", "PlatinumRx - Anup Soni, film 5"),
+      video("f807f04d5523dd446dfc0282a9387621", "PlatinumRx - Anup Soni, film 6"),
     ],
   },
   platinumrx_anupam_kher: {
     title: "Anupam Kher",
     by: "PlatinumRx - Smart Choice",
-    about: ABOUT,
+    about: "Recurring medicine bills hurt household budgets, but familiar brands and scepticism about cheaper alternatives make change difficult. PlatinumRx uses Anupam Kher\u2019s authority and plain speaking to make a smarter choice feel worth investigating. Direct addresses, a mock news report, a supply-chain lesson, a pharmacy confrontation and a founder conversation explain the brand premium and answer doubts. The films move from reassurance to action, asking viewers to search their medicines and consider branded alternatives rather than accept the monthly bill unquestioningly.",
     layout: "tall",
     frames: [
-      video("23c24839c157306de2636c473e87154b", "Platinum RX - Anupam Kher, film 1"),
-      video("a9baf34a743f2f74acc62368b749033d", "Platinum RX - Anupam Kher, film 2"),
-      video("770d9353aef765fb940c94210897fdf8", "Platinum RX - Anupam Kher, film 3"),
-      video("768fbaf9dd42a2cac642af924a7a60af", "Platinum RX - Anupam Kher, film 4"),
-      video("aba888b35f0e553781b5a8eb1bd1e631", "Platinum RX - Anupam Kher, film 5"),
-      video("a7771551fc363b2a9acf1e7a9f0a146c", "Platinum RX - Anupam Kher, film 6"),
+      video("23c24839c157306de2636c473e87154b", "PlatinumRx - Anupam Kher, film 1"),
+      video("a9baf34a743f2f74acc62368b749033d", "PlatinumRx - Anupam Kher, film 2"),
+      video("770d9353aef765fb940c94210897fdf8", "PlatinumRx - Anupam Kher, film 3"),
+      video("768fbaf9dd42a2cac642af924a7a60af", "PlatinumRx - Anupam Kher, film 4"),
+      video("aba888b35f0e553781b5a8eb1bd1e631", "PlatinumRx - Anupam Kher, film 5"),
+      video("a7771551fc363b2a9acf1e7a9f0a146c", "PlatinumRx - Anupam Kher, film 6"),
     ],
   },
   seekho_naveen_kasturia: {
     title: "Naveen Kasturia",
     by: "Seekho - Seekhega India",
+    about: "Many people want to earn more, speak better or handle life independently, but assume they need money, credentials or specialist skills before they can begin. Naveen Kasturia makes starting feel approachable, presenting short lessons as the first step towards a new possibility. Character-led films cover content creation, spoken English through Bolo by Seekho, small- business ideas, government paperwork and fantasy-cricket learning. Across different ambitions, the campaign sells the same shift: stop treating knowledge as someone else\u2019s advantage and start learning a practical skill yourself.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("79be8b74182f5a492e9dffaff4774126", "Seekho - Naveen Kasturia, youtube, film 1"),
       video("9fffd24edfcd6ae87f3759a37acbb3c3", "Seekho - Naveen Kasturia, English with captions, film 2"),
@@ -335,8 +331,8 @@ export const CAMPAIGNS = {
   seekho_mandar: {
     title: "Mandar Chandwadkar",
     by: "Seekho - Kuchh naya Seekho",
+    about: "People lose time and money to everyday paperwork because the process feels harder than asking an agent to do it. Seekho makes useful knowledge the hero, with Mandar Chandwadkar as the familiar person who knows a simpler route. Comic scenes around birth certificates, licences, Aadhaar changes and a worker\u2019s e-Shram question point to step-by-step videos, while a festive address contrasts endless scrolling with learning. The campaign gives the learning app an immediate purpose: turn a phone already used for entertainment into a tool for handling everyday tasks.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("fb9afb53398265bd9d65a407e2f39c38", "Seekho - Mandar, film 1"),
       video("a98bcbcb8a6a854e580be2f1a76b0227", "Seekho - Mandar, film 2"),
@@ -348,8 +344,8 @@ export const CAMPAIGNS = {
   Bachatt_brandformance: {
     title: "Bachatt hai to Budget hai",
     by: "Bachatt",
+    about: "A better school laptop, a new car, a parent\u2019s treatment. Why should every family decision end with \u201cbudget hai?\u201d Bachatt turned that familiar question into a different answer: \u201cBudget nahi. Bachatt hai.\u201d Everyday family and shopkeeper stories showed small, regular savings becoming money for the things that matter, followed by a simple app demonstration. Across Hindi, Marathi and Telugu films, saving became less about a distant financial goal and more about saying yes when life asks.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("660559078e11ffc47f182ac800fccf98", "Bachatt - brandformance, film 1"),
       video("d3c22ad63f21703585a68bd9ad0e0fae", "Bachatt - brandformance, film 2"),
@@ -372,8 +368,8 @@ export const CAMPAIGNS = {
   groww: {
     title: "Dump Title",
     by: "Groww",
+    about: "Choosing a mutual fund can feel harder than starting to invest. Trading can mean jumping between screens before you even place an order. Groww brought both problems back to something simple: the right tools, in one app. Creator-led explainers and conversations showed fund comparison, SIPs, a first stock investment and trading directly from charts. Instead of another reason to put it off, each film gave people a practical next step towards starting or switching.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("3bd7b9625d51678b4053ebbb791d698b", "Groww, film 1", true),
       video("238ad87e2036686a885405e7b9c771ec", "Groww, film 3", true),
@@ -385,8 +381,8 @@ export const CAMPAIGNS = {
   helium_Ads: {
     title: "Book now on website",
     by: "Helium",
+    about: "Why buy a bigger AC when all you need to cool is a compact bedroom? Helium asked people to choose an AC for their space, rather than the size a salesman tells them to buy. Creator explainers and podcast-style conversations introduced its compact design, app controls, energy tracking and fault alerts, with films for summer heat and monsoon humidity. The familiar AC purchase became a question of fit, running cost and control, with a direct invitation to book on the website.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("cf9cccab9dd945b19466385c49d6641d", "Helium Ads, film 1"),
       video("a47ba234f76e7a24630691c2d9716125", "Helium Ads, film 2"),
@@ -399,8 +395,8 @@ export const CAMPAIGNS = {
   masai_Ads: {
     title: "Signup For the Test",
     by: "Masai",
+    about: "Want to work in AI, learn the business of films or earn an MBA while working? The ambition is clear. The route often isn\u2019t. Masai\u2019s admissions films made that route easier to see, introducing specific programs from IIT- and IIM-linked institutions. Direct-to-camera creators broke down what students would learn, who would teach them and how projects or campus experiences fit in. Each film turned a broad career wish into a specific course to explore, with a test or application as the next step.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("d511b23b5036e711f169b555a2943b8d", "Masai Ads, film 1"),
       video("b41db9b74ed6e9bda2c5fd66780179c8", "Masai Ads, film 2"),
@@ -412,8 +408,8 @@ export const CAMPAIGNS = {
   oolka_Ads: {
     title: "Start Subscription",
     by: "Oolka",
+    about: "A low credit score can stand between you and a bike, a home or a loan you can afford. But a number alone doesn\u2019t tell you what to do. Oolka introduced an AI credit expert that explains the problem and helps you take the next step. Comedy, creator stories, animated characters and a catchy credit-score song made report errors, repayments and loan conversations feel less intimidating. The aim was to move people from worrying about their score to opening Oolka and working on it.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("96b61f4139b242df93110bd90e4c01f2", "Oolka Ads, film 1"),
       video("ac9b388f562b8206477cd6282cf7f966", "Oolka Ads, film 2"),
@@ -428,8 +424,8 @@ export const CAMPAIGNS = {
   pice_Ads: {
     title: "Try First Transaction",
     by: "Pice",
+    about: "A supplier\u2019s offer won\u2019t wait for cash to arrive. Neither will a school-fee deadline or an unexpected expense. Pice\u2019s films made those everyday money gaps the starting point, rather than another complicated financial pitch. Shopkeeper conversations and direct explainers showed education payments, credit and invoice financing, while a VoiceKhata film showed bookkeeping by voice. Each story connected a digital tool to a familiar task: pay the fee, buy the stock or finish the day\u2019s accounts.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("12567b669c9e6f55d0204803ab7b4eec", "Pice Ads, film 1"),
       video("b440590ab3139d8ef9c6befb06311d7e", "Pice Ads, film 2"),
@@ -440,21 +436,21 @@ export const CAMPAIGNS = {
   },
   performance_platinum_rx: {
     title: "Buy your first Substitute Medicine",
-    by: "Platinum Rx",
+    by: "PlatinumRx",
+    about: "When medicine is a monthly expense, a high bill can start to feel unavoidable. A cheaper alternative can feel like a compromise. PlatinumRx challenged that hesitation by explaining what goes into the medicine and what goes into its price. A marriage proposal, a candid pharmacy conversation and straight-talking explainers made suitable generic substitutes easier to understand. The invitation was simple: check your prescription on PlatinumRx before accepting the bill you\u2019ve always paid.",
     layout: "tall",
-    about: ABOUT,
     frames: [
-      video("e899e733a6cb5fb4bdceb8c3211625d9", "Performance Platinum RX, film 1"),
-      video("a5461a86055bfd3bd6a4fcd97d4386e5", "Performance Platinum RX, film 2"),
-      video("0d7c6b6fa502d19f0bbeb350e34176f8", "Performance Platinum RX, film 3"),
-      video("9b2c8328268f979865eddeb1f0750239", "Performance Platinum RX, film 4"),
+      video("e899e733a6cb5fb4bdceb8c3211625d9", "Performance PlatinumRx, film 1"),
+      video("a5461a86055bfd3bd6a4fcd97d4386e5", "Performance PlatinumRx, film 2"),
+      video("0d7c6b6fa502d19f0bbeb350e34176f8", "Performance PlatinumRx, film 3"),
+      video("9b2c8328268f979865eddeb1f0750239", "Performance PlatinumRx, film 4"),
     ],
   },
   pw_cjr_ads: {
     title: "Try Demo classes",
     by: "Curious Jr",
+    about: "More tuition doesn\u2019t always mean more understanding. Sometimes a child still can\u2019t explain the basics. CuriousJr put that gap at the centre of conversations between parents, teachers and children. A parent-teacher confrontation, a quiz show and everyday maths stories brought its interactive classes, concept-led teaching and personal doubt support to life. Instead of asking parents to buy another class on faith, the films invited them to try a demo and see a different way to learn.",
     layout: "tall",
-    about: ABOUT,
     frames: [
       video("bcb2a06c0c118fe0561b71a00fb07899", "PW CJR Ads, film 1"),
       video("7c8200bb8d83f93d289657572d87eeed", "PW CJR Ads, film 2"),

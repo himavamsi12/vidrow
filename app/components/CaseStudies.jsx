@@ -26,6 +26,7 @@ const DEEP_DIVES = [
     title: "0 to 300k paid users in 80 days",
     img: "/deep drives/stealth app.png",
     name: "Stealth App",
+    href: "/case-study/stealth-app",
   },
   {
     kind: "ma",
@@ -34,6 +35,7 @@ const DEEP_DIVES = [
     logo: "/partnership/MASAI.svg",
     logoAlt: "Masai",
     logoFx: "none", // already a white mark
+    href: "/case-study/masai",
   },
   {
     kind: "cu",
@@ -45,19 +47,21 @@ const DEEP_DIVES = [
   },
   {
     kind: "ap",
-    title: "Apna Mart builds absolute category authority in staples category",
+    title: "ApnaMart builds absolute category authority in staples category",
     img: "/deep drives/apnamart deep drive.png",
     logo: "/partnership/apnamart.svg",
     logoAlt: "ApnaMart",
     logoFx: "none",
+    href: "/case-study/apnamart",
   },
   {
     kind: "vy",
-    title: "Vyapar built it\u2019s category authority through it\u2019s businessmen first brand narratives",
+    title: "Vyapar built its category authority through its businessman-first brand narratives",
     img: "/deep drives/vyapar.png",
     logo: "/partnership/vyapar.svg",
     logoAlt: "Vyapar",
     logoFx: "none",
+    href: "/case-study/vyapar",
   },
   {
     kind: "gs",
@@ -68,7 +72,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "se",
-    title: "Seekho achieves 30% dip in CAC with celebrity performance Marketing",
+    title: "Seekho achieves 30% dip in CAC with celebrity performance marketing",
     img: "/deep drives/seekho.png",
     logo: "/partnership/seekho.svg",
     logoAlt: "Seekho",

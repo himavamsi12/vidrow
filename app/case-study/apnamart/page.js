@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
 import CspMoreRow from "../../components/CspMoreRow";
+import { moreStories } from "../../data/moreStories";
 
 export const metadata = {
   title: "ApnaMart - Case Study | Vidrow",
@@ -79,44 +80,7 @@ const RESULTS = [
 // the side rail flips light-on-dark over the results band
 const DARK_SECTIONS = ["csp-sec-result"];
 
-const MORE_STORIES = [
-  {
-    key: "masai",
-    href: "/case-study/masai",
-    image: "/casestudy%20images/casestudy-recommendations/masai.png",
-    imageAlt: "Masai",
-    logoType: "image",
-    logoSrc: "/casestudy%20images/casestudy-recommendations/masai-logo.png",
-    logoAlt: "Masai",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "helium",
-    href: "/case-study/helium",
-    image: "/casestudy%20images/casestudy-recommendations/helium.png",
-    imageAlt: "Helium",
-    logoType: "image",
-    logoSrc: "/casestudy%20images/casestudy-recommendations/helium-logo.png",
-    logoAlt: "Helium",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "vyapar",
-    href: "/case-study/vyapar",
-    image: "/casestudy%20images/casestudy-recommendations/vyapar.png",
-    imageAlt: "Vyapar",
-    logoType: "image",
-    logoSrc: "/partnership/vyapar.svg",
-    logoAlt: "Vyapar",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-];
+const MORE_STORIES = moreStories("apnamart");
 
 const SECTIONS = [
   { id: "csp-sec-hero", label: "ApnaMart" },
@@ -367,8 +331,8 @@ export default function ApnamartCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
-            <a className="csp-more-cta csp-more-cta--desktop" href="/#featured">
+            <h2 className="csp-more-h">More deep dives.</h2>
+            <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
                 <span className="csp-more-cta-label">See all case studies</span>
                 <span className="csp-more-cta-i" aria-hidden="true">
                   <svg viewBox="0 0 40 40" aria-hidden="true">
@@ -381,7 +345,7 @@ export default function ApnamartCaseStudy() {
           <CspMoreRow
             stories={MORE_STORIES}
             cta={
-              <a className="csp-more-cta csp-more-cta--mobile" href="/#featured">
+              <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
                 <span className="csp-more-cta-label">See all case studies</span>
                 <span className="csp-more-cta-i" aria-hidden="true">
                   <svg viewBox="0 0 40 40" aria-hidden="true">

@@ -9,7 +9,7 @@ export const STAGES = [
   },
   {
     title: "Reach Fundraise Targets Months Early",
-    copy: "We engineer a full-funnel marketing plan to achieve your next fundraise targets. We systematically cover every touchpoint of your customer journey. Performance marketing drives targeted acquisition. Strategic social proof establish credibility. A high-trust celebrity association anchors brand legitimacy and positioning.\n\nWe make sure that even a new brand comes out with full category authority. Startups working with us are hitting their fundraise targets months ahead of projection.",
+    copy: "We engineer a full-funnel marketing plan to achieve your next fundraise targets. We systematically cover every touchpoint of your customer journey. Performance marketing drives targeted acquisition. Strategic social proof establishes credibility. A high-trust celebrity association anchors brand legitimacy and positioning.\n\nWe make sure that even a new brand comes out with full category authority. Startups working with us are hitting their fundraise targets months ahead of projection.",
     stat: "4 Months",
     quote:
       "Selling 500 units a day within a month of launch, well ahead of what the plan allowed for.",
@@ -24,7 +24,7 @@ export const STAGES = [
   },
   {
     title: "Build Category Authority",
-    copy: "We build brand and social campaigns rooted in a single strategic objective - **owning the category**. We identify the precise positioning that gives your brand the rightful claim to lead. Whether you are disrupting an incumbent-dominated space or pioneering an entirely new category, we make sure you become the reference point in the market.\n\nCategory leaders attract disproportionate media attention, top-tier talent, strategic partnerships and raises the most capital.",
+    copy: "We build brand and social campaigns rooted in a single strategic objective - **owning the category**. We identify the precise positioning that gives your brand the rightful claim to lead. Whether you are disrupting an incumbent-dominated space or pioneering an entirely new category, we make sure you become the reference point in the market.\n\nCategory leaders attract disproportionate media attention, top-tier talent, strategic partnerships and raise the most capital.",
     stat: "3× recall",
     quote: "The awareness layer that carried the brand from Series B all the way to acquisition.",
     client: "Testbook",

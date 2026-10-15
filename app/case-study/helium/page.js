@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
 import CspMoreRow from "../../components/CspMoreRow";
+import { moreStories } from "../../data/moreStories";
 import CspSectionNav from "../../components/CspSectionNav";
 import CspCoverflow from "../../components/CspCoverflow";
 import Mark from "../../components/Mark";
@@ -40,44 +41,7 @@ const SECTIONS = [
 // the rail flips light-on-dark over these two dark panels
 const DARK_SECTIONS = ["csp-sec-focus", "csp-sec-films"];
 
-const MORE_STORIES = [
-  {
-    key: "masai",
-    href: "/case-study/masai",
-    image: "/casestudy%20images/casestudy-recommendations/masai.png",
-    imageAlt: "Masai",
-    logoType: "image",
-    logoSrc: "/casestudy%20images/casestudy-recommendations/masai-logo.png",
-    logoAlt: "Masai",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "helium",
-    href: "/case-study/helium",
-    image: "/casestudy%20images/casestudy-recommendations/helium.png",
-    imageAlt: "Helium",
-    logoType: "image",
-    logoSrc: "/casestudy%20images/casestudy-recommendations/helium-logo.png",
-    logoAlt: "Helium",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-  {
-    key: "vyapar",
-    href: "/#featured",
-    image: "/casestudy%20images/casestudy-recommendations/vyapar.png",
-    imageAlt: "Vyapar",
-    logoType: "image",
-    logoSrc: "/logos/vyapar.png",
-    logoAlt: "Vyapar",
-    stat: "10x",
-    statLabel: "ROI",
-    desc: "We rebuilt the acquisition funnel from the ground up, focusing on regional influencers and hyper-local performance creatives.",
-  },
-];
+const MORE_STORIES = moreStories("helium");
 
 const BRAND_STATS = [
   { val: "4 Mn+", label: "Impressions" },
@@ -1194,8 +1158,8 @@ export default function HeliumCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
-            <a className="csp-more-cta csp-more-cta--desktop" href="/#featured">
+            <h2 className="csp-more-h">More deep dives.</h2>
+            <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
                 <span className="csp-more-cta-label">See all case studies</span>
                 <span className="csp-more-cta-i" aria-hidden="true">
                   <svg viewBox="0 0 40 40" aria-hidden="true">
@@ -1208,7 +1172,7 @@ export default function HeliumCaseStudy() {
           <CspMoreRow
             stories={MORE_STORIES}
             cta={
-              <a className="csp-more-cta csp-more-cta--mobile" href="/#featured">
+              <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
                 <span className="csp-more-cta-label">See all case studies</span>
                 <span className="csp-more-cta-i" aria-hidden="true">
                   <svg viewBox="0 0 40 40" aria-hidden="true">

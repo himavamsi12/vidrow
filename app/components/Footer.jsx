@@ -242,7 +242,7 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
         <div className="vfoot__bottomIn">
           <div className="vfoot__bottom">
             <div className="vfoot__bottomRow">
-              <p className="vfoot__tagline">We make ad&rsquo;s that people don&rsquo;t skip</p>
+              <p className="vfoot__tagline">We make ads that people don&rsquo;t skip</p>
               {/* mobile swaps the row for two short two-line notes */}
               <p className="vfoot__mNote">
                 Marketing Partner behind
@@ -250,7 +250,7 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
                 Fastest Growing startups.
               </p>
               <p className="vfoot__mNote vfoot__mNote--r">
-                © 2024.
+                © 2026.
                 <br />
                 All rights reserved.
               </p>

@@ -38,7 +38,7 @@ export default async function CampaignPage({ params }) {
             <h1 className="cmp-h">{c.title}</h1>
             <p className="cmp-by">{c.by}</p>
           </div>
-          <p className="cmp-about">{c.about}</p>
+          {c.about && <p className="cmp-about">{c.about}</p>}
         </header>
 
         <div className={c.layout === "tall" ? "cmp-frames cmp-frames--tall" : "cmp-frames"}>

@@ -11,12 +11,12 @@ const FOUNDERS = [
     // shown in the yellow block that grows up the card on hover; paragraphs
     // are separate entries
     bio: [
-      "Aditya has been in content industry since his college time in IITK, i.e. 12 years. It's the same amount of time he has been part of startup ecosystem in India. When everyone in content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF films - a short format content engine in pre TikTok and reels era.",
+      "Aditya has been in the content industry since his college days at IITK, i.e. 12 years. It's the same amount of time he has been part of the startup ecosystem in India. When everyone in the content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF films - a short format content engine in the pre-TikTok, pre-Reels era.",
       "That combination of being a content native and a founder is what eventually led to this agency. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
     ],
     // the shorter text written out under the card on phones
     mobileBio: [
-      "Aditya has been in content industry since his college time in IITK, i.e. 12 years. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
+      "Aditya has been in the content industry since his college days at IITK, i.e. 12 years. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
     ],
   },
   {
@@ -26,11 +26,11 @@ const FOUNDERS = [
     linkedin: "https://www.linkedin.com/in/anushank-jain-7390a696/",
     x: "https://x.com/anushankjain",
     bio: [
-      "Anushank has been in content and marketing from past 12 years and has been part of Indian startup ecosystem for past 9 years now. A 3x founder of HPF Films, Doeasily and Vidrow, Anushank sold his first startup HPF Films to ShareChat and built Ads engine for 30Mn users which gave him understanding of adtech adding to content and marketing background.",
+      "Anushank has been in content and marketing for the past 12 years and part of the Indian startup ecosystem for the past 9 years. A 3x founder of HPF Films, Doeasily and Vidrow, Anushank sold his first startup HPF Films to ShareChat and built the ads engine for 30Mn users, adding adtech depth to his content and marketing background.",
       "Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
     ],
     mobileBio: [
-      "Anushank has been in content and marketing from past 12 years and has been part of Indian startup ecosystem for past 9 years now. Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
+      "Anushank has been in content and marketing for the past 12 years and part of the Indian startup ecosystem for the past 9 years. Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
     ],
   },
 ];

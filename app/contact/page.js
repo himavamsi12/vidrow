@@ -12,15 +12,15 @@ const CONTACT_LINKS = [
     key: "whatsapp",
     tone: "acid",
     Icon: WhatsappIcon,
-    label: "Ping us in Whatsapp",
-    href: "https://wa.me/911234567890",
+    label: "Ping us on WhatsApp",
+    href: "https://wa.me/917753058498",
   },
   {
     key: "call",
     tone: "violet",
     Icon: CalendarIcon,
     label: "Set up a call",
-    href: "mailto:hello@vidrow.com",
+    href: "mailto:contact@vidrow.in",
   },
   {
     key: "location",

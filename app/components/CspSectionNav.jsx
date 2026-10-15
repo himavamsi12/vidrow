@@ -72,19 +72,7 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
 
     const pieces = [];
     let row = 0;
-    // an even split of the two shades, shuffled — not an independent random
-    // pick per piece, which at only 10 pieces is prone to a lopsided run
-    // (all-violet, in this case) purely by chance. Built once, client-side
-    // only (this effect never runs during SSR), so the shuffle is safe —
-    // no server/client mismatch to worry about the way there would be if
-    // this rendered in JSX.
-    const PIECE_COUNT = BLOCKS.reduce((n, b) => n + (b === "O" ? 1 : 2), 0);
-    const bag = Array.from({ length: PIECE_COUNT }, (_, i) => SHADES[i % SHADES.length]);
-    for (let i = bag.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [bag[i], bag[j]] = [bag[j], bag[i]];
-    }
-    const add = (cells) => pieces.push({ c: bag[pieces.length], cells });
+    const add = (cells) => pieces.push({ c: SHADES[0], cells });
     BLOCKS.forEach((b) => {
       const r = row;
       if (b === "O") {
@@ -110,9 +98,88 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
 
     const owner = {};
     pieces.forEach((p, n) => p.cells.forEach((c) => { owner[`${c[0]},${c[1]}`] = n; }));
-    const edge = (n, c, r) => {
-      const k = owner[`${c},${r}`];
-      return k !== undefined && k !== n ? GAP / 2 : 0;
+
+    // Colour the pieces so that touching pieces differ wherever possible. A
+    // random pick lets two same-coloured pieces sit side by side, and the
+    // thin gap between them then reads as a stray notch cut into one odd
+    // shape instead of two tetrominoes. With only two shades a few touching
+    // pairs can't be avoided (three pieces can all touch), so this searches
+    // for the assignment with the fewest same-colour neighbours, keeping the
+    // two shades balanced, over many random starts. Built client-side only,
+    // so the randomness is safe here.
+    const touch = pieces.map(() => new Set());
+    pieces.forEach((p, n) =>
+      p.cells.forEach(([c, r]) =>
+        [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dc, dr]) => {
+          const k = owner[`${c + dc},${r + dr}`];
+          if (k !== undefined && k !== n) touch[n].add(k);
+        })
+      )
+    );
+    const clash = (cols) => {
+      let bad = 0;
+      touch.forEach((set, n) => set.forEach((k) => { if (k > n && cols[k] === cols[n]) bad++; }));
+      return bad;
+    };
+    let best = null;
+    let bestScore = Infinity;
+    for (let t = 0; t < 120; t++) {
+      const cols = pieces.map(() => (Math.random() < 0.5 ? 0 : 1));
+      let improved = true;
+      while (improved) {
+        improved = false;
+        for (let n = 0; n < cols.length; n++) {
+          const before = clash(cols);
+          cols[n] ^= 1;
+          if (clash(cols) < before) improved = true;
+          else cols[n] ^= 1;
+        }
+      }
+      const ones = cols.reduce((a, c) => a + c, 0);
+      const score = clash(cols) * 100 + Math.abs(cols.length - 2 * ones);
+      if (score < bestScore) { bestScore = score; best = cols.slice(); }
+    }
+    pieces.forEach((p, n) => { p.c = SHADES[best[n]]; });
+
+    // Each piece is drawn as ONE shape: the outline of its cells, with every
+    // edge that borders another piece pulled in by half the gap (edges on the
+    // rail's own border stay flush). One outline means a corner is a single
+    // clean corner, with no seams between a piece's cells and no stepped
+    // joints where gaps cross, which separate per-cell boxes can't avoid.
+    const hg = GAP / 2;
+    const outline = (p, n) => {
+      const has = (c, y) => p.cells.some(([cc, rr]) => cc === c && ROWS - 1 - rr === y);
+      const gapAt = (c, y) => {
+        const k = owner[`${c},${ROWS - 1 - y}`];
+        return k !== undefined && k !== n ? hg : 0;
+      };
+      // directed boundary edges, interior on the right (screen y points down);
+      // `n` is the unit vector pointing into the piece
+      const edges = [];
+      p.cells.forEach(([c, r]) => {
+        const y = ROWS - 1 - r;
+        if (!has(c, y - 1)) edges.push({ x1: c, y1: y, x2: c + 1, y2: y, nx: 0, ny: 1, g: gapAt(c, y - 1) });
+        if (!has(c + 1, y)) edges.push({ x1: c + 1, y1: y, x2: c + 1, y2: y + 1, nx: -1, ny: 0, g: gapAt(c + 1, y) });
+        if (!has(c, y + 1)) edges.push({ x1: c + 1, y1: y + 1, x2: c, y2: y + 1, nx: 0, ny: -1, g: gapAt(c, y + 1) });
+        if (!has(c - 1, y)) edges.push({ x1: c, y1: y + 1, x2: c, y2: y, nx: 1, ny: 0, g: gapAt(c - 1, y) });
+      });
+      const next = (e) => edges.find((f) => f !== e && f.x1 === e.x2 && f.y1 === e.y2);
+      const pts = [];
+      const put = (X, Y, dx, dy) => pts.push(`calc(${X * 50}% + ${dx}px) calc(${(Y * 100) / ROWS}% + ${dy}px)`);
+      let e = edges[0];
+      for (let k = 0; k < edges.length; k++) {
+        const f = next(e);
+        if (e.nx * f.nx + e.ny * f.ny === 0) {
+          // a corner: the two inset edges meet at one point
+          put(e.x2, e.y2, e.g * e.nx + f.g * f.nx, e.g * e.ny + f.g * f.ny);
+        } else {
+          // straight on: a step if the two edges are inset differently
+          put(e.x2, e.y2, e.g * e.nx, e.g * e.ny);
+          if (e.g !== f.g) put(f.x1, f.y1, f.g * f.nx, f.g * f.ny);
+        }
+        e = f;
+      }
+      return pts;
     };
 
     well.innerHTML = "";
@@ -121,20 +188,11 @@ export default function CspSectionNav({ sections = DEFAULT_SECTIONS, darkSection
       let low = ROWS - 1;
       el.className = "csp-sideNav-piece";
       el.style.setProperty("--c", p.c);
-      p.cells.forEach((cell) => {
-        const [c, r] = cell;
-        const gl = edge(n, c - 1, r);
-        const gr = edge(n, c + 1, r);
-        const gt = edge(n, c, r + 1);
-        const gb = edge(n, c, r - 1);
-        const i = document.createElement("i");
-        i.style.left = `calc(${c * 50}% + ${gl}px)`;
-        i.style.width = `calc(50% - ${gl + gr}px)`;
-        i.style.top = `calc(${((ROWS - 1 - r) / ROWS) * 100}% + ${gt}px)`;
-        i.style.height = `calc(${100 / ROWS}% - ${gt + gb}px)`;
-        el.appendChild(i);
-        low = Math.min(low, r);
-      });
+      const i = document.createElement("i");
+      i.style.cssText = "left:0;top:0;width:100%;height:100%";
+      i.style.clipPath = `polygon(${outline(p, n).join(", ")})`;
+      el.appendChild(i);
+      p.cells.forEach(([, r]) => { low = Math.min(low, r); });
       el.style.setProperty("--from", `-${(((ROWS - low) / ROWS) * 100 + 3).toFixed(2)}%`);
       well.appendChild(el);
       return el;

@@ -34,7 +34,7 @@ export const FEATURED_WORK = [
     href: "/case-study/platinumrx",
     logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx", trim: 0.25, zoom: 1.6 },
     deskLogo: { src: "/featured%20works/logo-platinumrx.png", alt: "PlatinumRx" },
-    name: "Platinum RX",
+    name: "PlatinumRx",
     category: "Consumer Health",
     photos: [
       { src: "/ashish.png", cls: "fw-ph1" },
@@ -84,8 +84,8 @@ export const FEATURED_WORK = [
       "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
     mobileQuote:
       "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. From brand positioning to performance and offline marketing, they [[go deep, challenge our thinking, and stay focused on outcomes.]]\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
-    mobileLine: "ApnaMart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 Cr",
-    line: "ApnaMart grew it\u2019s revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
+    mobileLine: "ApnaMart grew its revenue 2.5\u00d7 in FY26 to around \u20b9500 Cr",
+    line: "ApnaMart grew its revenue 2.5\u00d7 in FY26 to around \u20b9500 crore",
   },
   {
     id: "grexa-ai",
@@ -100,7 +100,7 @@ export const FEATURED_WORK = [
       "**Six years. Two startups. Vidrow has been with us through both.** From 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns across categories and helping launch new ones. They weren\u2019t just an agency - they were partners we relied on.\n\nWhen we started Grexa AI, Vidrow was our first call for marketing. What sets them apart is their ability to understand the business, technology, and audience - and turn that into campaigns that deliver.\n\nSix years in, the partnership only keeps getting stronger.",
     mobileQuote:
       "[[Six years. Two startups.]] Vidrow has been with us through both. From 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns across categories and helping launch new ones. They weren\u2019t just an agency - they were partners we relied on.\n\nWhen we started Grexa AI, Vidrow was our first call for marketing. What sets them apart is their [[ability to understand the business, technology, and audience]] - and turn that into campaigns that deliver.\n\nSix years in, the partnership only keeps getting stronger.",
-    mobileLine: "Grexa crosses 5lac+ business owner network in a year",
+    mobileLine: "Grexa crosses 500,000+ business owner network in a year",
     line: "Grexa crosses 500,000+ business owner network in a year",
   },
   {

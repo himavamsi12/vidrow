@@ -75,7 +75,7 @@ const SITE = {
   Helium: "https://heliumair.in/",
   Nubra: "https://nubra.io/",
   Pice: "https://piceapp.com/",
-  Periskope: "https://www.getperiscope.ai/",
+  Periskope: "https://periskope.app/",
   "Little Farm": "https://thelittlefarm.co.in/",
   Lila: "https://liva.ai/",
   Vahak: "https://www.vahak.in/",
