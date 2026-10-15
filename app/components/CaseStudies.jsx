@@ -70,6 +70,7 @@ const DEEP_DIVES = [
     img: "/deep drives/goodscore.png",
     logo: "/partnership/goodscore.svg",
     logoAlt: "Goodscore",
+    href: "/case-study/goodscore",
   },
   {
     kind: "se",
