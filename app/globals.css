@@ -15907,7 +15907,7 @@ html {
 .cst-journeyNote {
   margin: clamp(32px, 3.6vw, 52px) 0 0;
   padding-left: 22px;
-  border-left: 4px solid var(--acid);
+  border-left: 2px solid var(--acid);
   font-family: var(--body);
   font-size: clamp(16px, 1.45vw, 20px);
   line-height: 1.4;
@@ -19797,5 +19797,12 @@ html.is-loading body {
 
   .cgs-sharesLabel {
     margin-bottom: 16px
+  }
+}
+
+/* Goodscore: the headline note holds to two lines */
+@media (min-width:901px) {
+  .csp--gs .csk-note {
+    width: min(340px, 38%)
   }
 }
