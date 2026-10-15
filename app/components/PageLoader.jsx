@@ -10,11 +10,9 @@ const FADE_MS = 500;
 const MAX_MS = 10000;
 
 // The Vidrow loader: a white screen playing the Vidrow logo animation
-// when a visit opens on the homepage. The first load in a browser session
-// plays the whole video; later loads show at least its first 5 seconds.
-// Either way it also waits for the page itself to finish loading, then
-// fades away.
-const REPEAT_MS = 5000;
+// on a browser's first visit to the homepage. It plays the whole video,
+// waits for the page itself to finish loading, then fades away. After that
+// it never shows again.
 // Safari (and every browser on iPhone/iPad, which all run on Safari's
 // engine) ignores the WebM's transparency and paints it black, so it gets
 // the same animation as HEVC with alpha instead (same framing, 1280x720)
@@ -41,10 +39,15 @@ export default function PageLoader() {
       setState("gone");
       return;
     }
+    // already played once in this browser: never again
     let seen = false;
     try {
-      seen = sessionStorage.getItem(KEY) === "1";
+      seen = localStorage.getItem(KEY) === "1";
     } catch {}
+    if (seen) {
+      setState("gone");
+      return;
+    }
 
     let videoDone = false;
     let pageDone = document.readyState === "complete";
@@ -53,7 +56,7 @@ export default function PageLoader() {
       if (finished) return;
       finished = true;
       try {
-        sessionStorage.setItem(KEY, "1");
+        localStorage.setItem(KEY, "1");
       } catch {}
       setState("fading");
       setTimeout(() => setState("gone"), FADE_MS);
@@ -80,9 +83,6 @@ export default function PageLoader() {
       v.play()?.catch(onFail);
       if (!hevc && !v.canPlayType('video/webm; codecs="vp9"')) onFail();
     }
-    // already seen this session: 5 seconds of it is enough
-    const short = seen ? setTimeout(onEnded, REPEAT_MS) : 0;
-
     const onLoad = () => {
       pageDone = true;
       check();
@@ -95,7 +95,6 @@ export default function PageLoader() {
       v?.removeEventListener("error", onFail);
       window.removeEventListener("load", onLoad);
       clearTimeout(cap);
-      clearTimeout(short);
     };
   }, []);
 
