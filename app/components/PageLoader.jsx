@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 
 const KEY = "vidrow-loader-played";
 const FADE_MS = 500;
-// never hold the site behind the loader longer than this, whatever happens
-const MAX_MS = 10000;
+// the loader stays up until the page has finished loading, however slow the
+// connection; this only stops a load that never finishes holding the site
+// behind it for good
+const MAX_MS = 30000;
 
 // The Vidrow loader: a white screen playing the Vidrow logo animation
 // on a browser's first visit to the homepage. It plays the whole video,
@@ -32,6 +34,10 @@ export default function PageLoader() {
   const [state, setState] = useState(() => (pathname === "/" ? "show" : "gone")); // show | fading | gone
   const videoRef = useRef(null);
   const lenis = useLenis();
+  // the one-off effect below reads Lenis when the loader finishes, by which
+  // point it has long since been created
+  const lenisRef = useRef(null);
+  lenisRef.current = lenis;
 
   useEffect(() => {
     if (state === "gone") return;
@@ -62,6 +68,13 @@ export default function PageLoader() {
     const finish = () => {
       if (finished) return;
       finished = true;
+      // whatever happened behind the loader (a scroll before the lock took
+      // hold, the browser restoring an old position), the site opens at its
+      // top, unless the address points at a section
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+        lenisRef.current?.scrollTo(0, { immediate: true, force: true });
+      }
       setState("fading");
       setTimeout(() => setState("gone"), FADE_MS);
     };
@@ -83,9 +96,16 @@ export default function PageLoader() {
     v?.addEventListener("error", onFail);
     const hevc = needsHevc();
     if (v) {
-      v.src = hevc ? SRC_HEVC : SRC_WEBM;
-      v.play()?.catch(onFail);
       if (!hevc && !v.canPlayType('video/webm; codecs="vp9"')) onFail();
+      else if (!v.getAttribute("src")) {
+        v.src = hevc ? SRC_HEVC : SRC_WEBM;
+        v.play()?.catch(onFail);
+      }
+      // already started by the inline script in layout.js, which on a slow
+      // connection can be long before this runs: pick up where it is
+      else if (v.ended) onEnded();
+      else if (v.error) onFail();
+      else if (v.paused) v.play()?.catch(onFail);
     }
     const onLoad = () => {
       pageDone = true;
@@ -119,7 +139,8 @@ export default function PageLoader() {
 
   return (
     <div className={`page-loader${state === "fading" ? " is-fading" : ""}`} aria-hidden="true">
-      <video ref={videoRef} muted playsInline autoPlay preload="auto" />
+      {/* its src is set before hydration by the script in layout.js */}
+      <video ref={videoRef} muted playsInline autoPlay preload="auto" suppressHydrationWarning />
     </div>
   );
 }

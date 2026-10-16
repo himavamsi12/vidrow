@@ -2,14 +2,7 @@
 
 import SiteNav from "./SiteNav";
 import HeroScroll from "./HeroScroll";
-import {
-  SKY_PIECES,
-  SKY_VIEWBOX,
-  TET_M_W,
-  TET_M_H,
-  TET_M_PIECES,
-  tetPoints,
-} from "./tetrisPieces";
+import { SKY_PIECES, SKY_VIEWBOX, SKY_M_PIECES, SKY_M_VIEWBOX } from "./tetrisPieces";
 
 export default function Hero() {
   return (
@@ -20,19 +13,15 @@ export default function Hero() {
         </div>
 
         <div className="hx-stair" aria-hidden="true">
-          {/* mobile: its own, narrower skyline, traced from the mobile mock */}
-          <svg className="hx-tet-m" viewBox={`0 0 ${TET_M_W} ${TET_M_H}`} preserveAspectRatio="xMidYMax meet">
-            {TET_M_PIECES.map((p, i) => (
-              <polygon
-                key={i}
-                fill={p.fill}
-                stroke="var(--paper)"
-                strokeWidth="3"
-                strokeLinejoin="miter"
-                points={tetPoints(p.pts)}
-              />
+          {/* mobile: its own, narrower skyline, traced from the mobile mock,
+              one svg per piece for the same scroll curtain as desktop */}
+          <div className="hx-sky-m">
+            {SKY_M_PIECES.map((p, i) => (
+              <svg key={i} className="hx-piece" data-d={p.d} data-rise={p.rise} viewBox={SKY_M_VIEWBOX} preserveAspectRatio="none">
+                <polygon fill={p.fill} points={p.pts} />
+              </svg>
             ))}
-          </svg>
+          </div>
           <div className="hx-step hx-s1 hx-y">
             <span className="hx-stat">
               <strong className="hx-num">12+ Yrs</strong>
@@ -84,7 +73,7 @@ export default function Hero() {
             can raise each on its own delay (see HeroScroll) */}
         <div className="hx-sky" aria-hidden="true">
           {SKY_PIECES.map((p, i) => (
-            <svg key={i} className="hx-piece" data-d={p.d} viewBox={SKY_VIEWBOX} preserveAspectRatio="xMidYMax slice">
+            <svg key={i} className="hx-piece" data-d={p.d} data-rise={p.rise} viewBox={SKY_VIEWBOX} preserveAspectRatio="xMidYMax slice">
               <polygon fill={p.fill} points={p.pts} />
             </svg>
           ))}

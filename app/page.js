@@ -1,5 +1,4 @@
 import Hero from "./components/Hero";
-import HeroCurtain from "./components/HeroCurtain";
 import FeaturedWork from "./components/FeaturedWork";
 import FeaturedWorkMobile from "./components/FeaturedWorkMobile";
 import WhereYouAreNow from "./components/WhereYouAreNow";
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <HeroCurtain />
       {/* two Featured Work layouts share the one anchor: the stacked cards on
           desktop, the original expanding rows on mobile (swapped in CSS) */}
       <div id="featured">

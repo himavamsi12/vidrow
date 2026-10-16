@@ -109,6 +109,11 @@ export default function AboutFounders() {
                 {f.bio.map((para, j) => (
                   <p key={j}>{para}</p>
                 ))}
+                {/* signed off at the foot with the founder's name and role */}
+                <div className="abf-bioSign" aria-hidden="true">
+                  <b>{f.name}</b>
+                  <span>{f.role}</span>
+                </div>
               </div>
             )}
           </article>
