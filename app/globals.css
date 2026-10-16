@@ -10570,6 +10570,65 @@ button:focus-visible,
   color: #D93025
 }
 
+/* after a successful submit: the form's box holds a thank-you note */
+.contact-thanks {
+  min-height: 420px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0
+}
+
+.contact-thanks-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: var(--acid);
+  color: var(--violet);
+  margin-bottom: 28px
+}
+
+.contact-thanks-icon svg {
+  width: 24px;
+  height: 24px
+}
+
+.contact-thanks-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: #1A1C1C
+}
+
+.contact-thanks-p {
+  margin: 14px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #4C4546
+}
+
+.contact-thanks-again {
+  margin-top: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  color: #1A1C1C;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer
+}
+
+@media (max-width:640px) {
+  .contact-thanks {
+    min-height: 320px
+  }
+}
+
 /* every section heading on the phone layout is one size, whatever its
    section's own mobile rule scales it to on wider screens */
 @media (max-width:640px) {

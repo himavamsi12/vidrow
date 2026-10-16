@@ -1,48 +1,55 @@
 "use server";
 
-import { createClient } from "@supabase/supabase-js";
-
 // server-only: the secret key never reaches the browser (no NEXT_PUBLIC_
-// prefix, and this file only runs as a Server Action)
-function getClient() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return null;
-  return createClient(url, key, { auth: { persistSession: false } });
-}
-
+// prefix, and this file only runs as a Server Action). It writes straight to
+// Supabase's REST API rather than through supabase-js, whose client also sets
+// up a realtime socket that crashes on Node versions without a built-in
+// WebSocket (Node 20).
 const clip = (v, n) => String(v ?? "").trim().slice(0, n);
 
 export async function submitContact(data) {
   // hidden honeypot field: real people never fill it, bots usually do
   if (clip(data?.website, 200)) return { ok: true };
 
-  const name = [clip(data?.firstName, 100), clip(data?.lastName, 100)].filter(Boolean).join(" ");
-  const company = clip(data?.company, 200);
-  const email = clip(data?.email, 200);
-  const requirement = clip(data?.requirement, 100);
+  const row = {
+    first_name: clip(data?.firstName, 100),
+    last_name: clip(data?.lastName, 100) || null,
+    email: clip(data?.email, 200),
+    phone: clip(data?.phone, 40) || null,
+    company: clip(data?.company, 200) || null,
+    requirement: clip(data?.requirement, 100),
+    message: clip(data?.message, 5000) || null,
+  };
 
-  if (!name || !/^\S+@\S+\.\S+$/.test(email) || !requirement) {
+  if (!row.first_name || !/^\S+@\S+\.\S+$/.test(row.email) || !row.requirement) {
     return { ok: false, error: "Please fill in your first name, email and requirement." };
   }
 
-  const supabase = getClient();
-  if (!supabase) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
     console.error("contact form: SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing");
     return { ok: false, error: "Something went wrong. Please try again." };
   }
 
-  const { error } = await supabase.from("contact_submissions").insert({
-    name,
-    email,
-    phone: clip(data?.phone, 40) || null,
-    requirement,
-    // the table has no company column, so it rides along at the top of the message
-    message: [company && `Company: ${company}`, clip(data?.message, 5000)].filter(Boolean).join("\n\n") || null,
-  });
-
-  if (error) {
-    console.error("contact form insert failed", error);
+  try {
+    const res = await fetch(`${url.replace(/\/+$/, "")}/rest/v1/contact_submissions`, {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(row),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      console.error("contact form insert failed", res.status, await res.text());
+      return { ok: false, error: "Something went wrong. Please try again." };
+    }
+  } catch (err) {
+    console.error("contact form insert failed", err);
     return { ok: false, error: "Something went wrong. Please try again." };
   }
   return { ok: true };

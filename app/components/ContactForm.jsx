@@ -68,6 +68,22 @@ export default function ContactForm() {
     }
   };
 
+  // once sent, the form gives way to a thank-you note in the same box
+  if (status === "sent") {
+    return (
+      <div className="contact-form contact-thanks" role="status">
+        <span className="contact-thanks-icon" aria-hidden="true">
+          <CornerArrow />
+        </span>
+        <h2 className="contact-thanks-h">Thank you for submitting.</h2>
+        <p className="contact-thanks-p">We&apos;ll reach out to you shortly.</p>
+        <button type="button" className="contact-thanks-again" onClick={() => setStatus("idle")}>
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-row">
@@ -201,7 +217,7 @@ export default function ContactForm() {
 
       <button type="submit" className="contact-submit" disabled={status === "sending"}>
         <span className="contact-submit-label">
-          {status === "sending" ? "SENDING…" : status === "sent" ? "SENT" : "SUBMIT"}
+          {status === "sending" ? "SENDING…" : "SUBMIT"}
         </span>
         <span className="contact-submit-icon">
           <CornerArrow />
