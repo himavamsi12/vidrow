@@ -5,6 +5,7 @@ export const metadata = {
 };
 import SmoothScrolling from "./components/SmoothScrolling";
 import PageLoader from "./components/PageLoader";
+import NoOrphans from "./components/NoOrphans";
 
 export default function RootLayout({ children }) {
   return (
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
       <body>
         <SmoothScrolling>
           <PageLoader />
+          <NoOrphans />
           {children}
         </SmoothScrolling>
       </body>

@@ -8,6 +8,26 @@ import { SW_TABS } from "../data/selectedWork";
 
 export default function SelectedWork() {
   const [activeCat, setActiveCat] = useState(SW_TABS[0].cat);
+  // set once a tab has been clicked, so the cards animate in on a tab change
+  // but not on the page's first paint
+  const [switched, setSwitched] = useState(false);
+
+  // every tab's photos are fetched quietly once the page is idle, so a tab's
+  // cards come in with their photos ready instead of blinking in empty
+  useEffect(() => {
+    const load = () =>
+      SW_TABS.forEach((t) =>
+        t.items.forEach((it) => {
+          if (!it.img) return;
+          const im = new Image();
+          im.decoding = "async";
+          im.src = it.img;
+        })
+      );
+    const ric = window.requestIdleCallback;
+    const id = ric ? ric(load, { timeout: 3000 }) : setTimeout(load, 1500);
+    return () => (ric ? window.cancelIdleCallback(id) : clearTimeout(id));
+  }, []);
 
   // a page load starts on the first tab; only coming back from a campaign page
   // (a card was opened) reopens the tab that card was in, once
@@ -65,7 +85,11 @@ export default function SelectedWork() {
               className="sw-filter"
               data-cat={f.cat}
               aria-pressed={activeCat === f.cat}
-              onClick={() => setActiveCat(f.cat)}
+              onClick={() => {
+                if (f.cat === activeCat) return;
+                setSwitched(true);
+                setActiveCat(f.cat);
+              }}
             >
               {/* data-text feeds an invisible bold copy that holds the
                   tab at its selected width, so picking one doesn't reflow
@@ -76,12 +100,15 @@ export default function SelectedWork() {
         </div>
 
         <div className="sw-field">
-          <div className={`sw-grid sw-grid--${tab.layout}`}>
-            {items.map((item) => (
+          {/* keyed by tab, so a tab change mounts a fresh grid whose cards
+              fade and slide up in turn */}
+          <div key={tab.cat} className={`sw-grid sw-grid--${tab.layout}${switched ? " sw-grid--in" : ""}`}>
+            {items.map((item, i) => (
               <a key={`${tab.cat}-${item.title}`} className="sw-item" href={item.href || "#work"}
+                style={{ "--i": i }}
                 onClick={item.href ? rememberSpot : (e) => e.preventDefault()}>
                 <span className="sw-shot">
-                  {item.img && <img src={item.img} alt={item.alt} loading="lazy" />}
+                  {item.img && <img src={item.img} alt={item.alt} loading="lazy" decoding="async" />}
                 </span>
                 <span className="sw-body">
                   <h3 className="sw-name">{item.title}</h3>

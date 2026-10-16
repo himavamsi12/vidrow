@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
+import CampaignFrame from "../../components/CampaignFrame";
 import SeekhoFilms from "../../components/SeekhoFilms";
 import { CAMPAIGNS } from "../../data/campaigns";
 import { DeepDiveCards } from "../../components/CaseStudies";
@@ -94,7 +95,7 @@ export default function PlatinumRxCaseStudy() {
           <h1 className="csp-h">
             PlatinumRx scaled 3x in 3 months{" "}
             <br />
-            through UGC &amp; Celebrity&nbsp;Performance
+            through UGC &amp; Celebrity Performance
           </h1>
           <p className="csp-note">
             A chronic-medicine app already spending on acquisition. Three months. One question: how
@@ -267,7 +268,8 @@ export default function PlatinumRxCaseStudy() {
             </div>
 
             <div className="csp-how-right">
-              <img src="/platinumrx-img.png" alt="A PlatinumRx performance ad on generic medicines" />
+              {/* the generic-medicines performance ad itself, playable in place */}
+              <CampaignFrame frame={PERF_ADS[0]} title="PlatinumRx performance ad on generic medicines" />
             </div>
           </div>
         </section>
