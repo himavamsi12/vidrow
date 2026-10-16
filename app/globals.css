@@ -19875,6 +19875,50 @@ html.is-loading body {
   color: #6A6A6A
 }
 
+/* Masai: every section's body copy at 16px */
+.csp--masai .csp-aoc-copy,
+.csp--masai .csp-aoc-desc,
+.csp--masai .csp-mid-copy,
+.csp--masai .csp-flow-copy,
+.csp--masai .csp-flow-box p,
+.csp--masai .csp-howNote,
+.csp--masai .csp-out-note {
+  font-size: 16px
+}
+
+/* Masai: the growth copy runs wider */
+.csp--masai .csp-mid-copy {
+  max-width: 60ch
+}
+
+/* Apnamart: body copy at 16px, phase titles a shade lighter, no rule under
+   the last row of a list (scoped under .cao to outrank the Apnamart block,
+   which sits further down this file) */
+.cao .cao-headR,
+.cao .cao-body,
+.cao .cao-darkIntro,
+.cao .cao-resultsCopy p,
+.cao .cao-ba li {
+  font-size: 16px
+}
+
+.cao .cao-phase p {
+  color: #555
+}
+
+.cao-listRow:last-child {
+  border-bottom: 0
+}
+
+/* Phases 1 and 2: the intro copy starts where the assets column below does */
+@media (min-width:901px) {
+  .cao-sec:has(.cao-split) .cao-head {
+    display: grid;
+    grid-template-columns: minmax(0, 520fr) minmax(0, 622fr);
+    gap: clamp(32px, 5vw, 64px)
+  }
+}
+
 /* "The Outcome": light section, one yellow staircase (tall step on the right) */
 .csp-out {
   display: grid;

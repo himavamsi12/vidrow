@@ -15,7 +15,7 @@ export const FEATURED_WORK = [
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
-      { src: "/testimonial-logos/Helium.png", cls: "fw-ph1" },
+      { src: "/Helium.png", cls: "fw-ph1" },
       { src: "/work/Aman Helium.png", cls: "fw-ph2" },
     ],
     plates: [
@@ -78,7 +78,7 @@ export const FEATURED_WORK = [
     name: "ApnaMart",
     category: "apnamart.in",
     solo: true,
-    photos: [{ src: "/featured%20works/apnamart-founder.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
+    photos: [{ src: "/testimonial-logos/Helium.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
     plates: [{ name: "Abhishek Singh", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
