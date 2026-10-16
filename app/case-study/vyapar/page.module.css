@@ -1594,8 +1594,8 @@
     font-size: 40px;
   }
 
-  .page .brief .situation p {
-    font-size: 13px;
+  .page .heroMeta > p {
+    font-size: 16px;
   }
 
   .page .problem > p,
@@ -1694,4 +1694,20 @@
    gets a small gap of its own */
 .proofStar {
   margin-left: .25em;
+}
+
+/* the copy that opens a section runs at 16px on every screen, as on every
+   other case study */
+.page .brief .situation p,
+.page .storyHeading > p,
+.page .takeawayCopy p {
+  font-size: 16px;
+}
+
+/* the hero's note runs as wide as on every other case study (36em at
+   16px); Client and Timeline take just their own width */
+@media (min-width: 1101px) {
+  .page .heroMeta {
+    grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 36em);
+  }
 }

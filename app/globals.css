@@ -4049,7 +4049,7 @@ html[data-hero-curtain] .hx-bar {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.19444px);
-  height: calc(683 * var(--k))
+  height: calc(717 * var(--k))
 }
 
 .cs-head {
@@ -4156,7 +4156,7 @@ html[data-hero-curtain] .hx-bar {
   container-type: inline-size;
   /* four and a half cards across the screen */
   width: calc(294 * var(--k));
-  height: calc(308 * var(--k));
+  height: calc(342 * var(--k));
   overflow: hidden;
   border-radius: 2px;
   color: var(--cs-ink, #fff);
@@ -4214,13 +4214,18 @@ html[data-hero-curtain] .hx-bar {
   object-position: right bottom
 }
 
+/* every brand sits in the same slot, so the logos read at one size and
+   every title starts at the same height and the same left edge: a wide
+   wordmark fills the slot's width, a compact one its height */
 .cs-logo {
   position: relative;
   z-index: 2;
   display: block;
   margin: 8cqw 0 0 7.3cqw;
-  height: auto;
-  width: var(--cs-lw)
+  width: 32cqw;
+  height: 6cqw;
+  object-fit: contain;
+  object-position: left center
 }
 
 .cs-logo--white {
@@ -4234,7 +4239,9 @@ html[data-hero-curtain] .hx-bar {
 .cs-name {
   position: relative;
   z-index: 2;
-  display: block;
+  display: flex;
+  align-items: center;
+  height: 6cqw;
   margin: 8cqw 0 0 7.3cqw;
   font-family: var(--body);
   font-size: 5.2cqw;
@@ -4244,27 +4251,25 @@ html[data-hero-curtain] .hx-bar {
 .cs-card-he {
   --cs-bg: linear-gradient(#245A44, #73C0A2);
   --cs-tint: rgba(255, 255, 255, .13);
-  --cs-w: 62%;
-  --cs-lw: 24cqw
+  --cs-w: 62%
 }
 
 .cs-person {
   bottom: var(--cs-pb, 0)
 }
 
-.cs-card-cu { --cs-ink: #111; --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52%; --cs-lw: 21cqw }
-.cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 44%; --cs-lw: 22cqw }
-.cs-card-ao { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 48%; --cs-lw: 22cqw }
-.cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 62%; --cs-lw: 22cqw }
-.cs-card-gs { --cs-bg: linear-gradient(#3573BE, #4C8BCB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 48%; --cs-lw: 28cqw }
-.cs-card-se { --cs-bg: linear-gradient(#D44CCB, #9D45CB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 46%; --cs-lw: 23cqw }
-.cs-card-ng { --cs-bg: linear-gradient(#2B4CB5, #2F59C4); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 52%; --cs-lw: 37cqw }
+.cs-card-cu { --cs-ink: #111; --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52% }
+.cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 44% }
+.cs-card-ao { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 48% }
+.cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 62% }
+.cs-card-gs { --cs-bg: linear-gradient(#3573BE, #4C8BCB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 48% }
+.cs-card-se { --cs-bg: linear-gradient(#D44CCB, #9D45CB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 46% }
+.cs-card-ng { --cs-bg: linear-gradient(#2B4CB5, #2F59C4); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 52% }
 
 .cs-card-px {
   --cs-bg: linear-gradient(#CB4E4C, #D05A58);
   --cs-tint: rgba(255, 255, 255, .17);
-  --cs-w: 34%;
-  --cs-lw: 40cqw
+  --cs-w: 34%
 }
 
 .cs-card-st {
@@ -4277,8 +4282,7 @@ html[data-hero-curtain] .hx-bar {
 .cs-card-ma {
   --cs-bg: linear-gradient(#7B2831, #B2535C);
   --cs-tint: rgba(255, 255, 255, .14);
-  --cs-w: 50%;
-  --cs-lw: 26cqw
+  --cs-w: 50%
 }
 
 /* PlatinumRx's long title runs wider, for four lines as in its mock */
@@ -4340,7 +4344,7 @@ html[data-hero-curtain] .hx-bar {
 
   .cs-card {
     width: min(300px, 80vw);
-    height: min(314px, 84vw)
+    height: min(348px, 93vw)
   }
 
   .cs-card:nth-child(even) {
@@ -11396,7 +11400,7 @@ button:focus-visible,
   .cs-card {
     width: min(300px, 75.4vw);
     height: auto;
-    aspect-ratio: 336 / 352
+    aspect-ratio: 336 / 390
   }
 
   .cs-card:nth-child(even) {
@@ -21858,4 +21862,40 @@ html.is-loading body {
 .csp .cst-journey {
   border-top: 0;
   border-bottom: 0
+}
+
+/* every case study: the copy that opens a section runs at 16px, on every
+   screen. (main.csp outranks each page's own sizes above.) */
+main.csp .csk-problemCopy,
+main.csp p.cst-problemCopy,
+main.csp .cst-problemCopy p,
+main.csp .cvd-mofuCopy,
+main.csp .cvd-bofuCopy p:not(.cst-outNote),
+main.csp .csp-brief-copy,
+main.csp .csp-under-copy,
+main.csp .csp-focus-copy,
+main.csp .csp-hl-rsub {
+  font-size: 16px
+}
+
+/* and the hero's note, which every other case study already shows at 16px
+   on desktop */
+@media (min-width:901px) {
+  main.csp .cst-metaNote {
+    font-size: 16px
+  }
+}
+
+/* every case study: the hero's note runs as wide as Masai's and
+   PlatinumRx's (36em at 16px), so it sets in fewer, longer lines. Three
+   classes, so it wins over each page's own note width */
+@media (min-width:901px) {
+  .csp .csp-in :is(.csp-note, .csk-note, .csp-hl-note) {
+    width: 36em;
+    max-width: 46%
+  }
+
+  main.csp .cst-meta .cst-metaNote {
+    max-width: 36em
+  }
 }
