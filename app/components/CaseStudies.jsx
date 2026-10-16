@@ -3,44 +3,47 @@ import Reveal from "./Reveal";
 import CsRow from "./CsRow";
 
 // the four story cards. Each image is a cut-out that sits on the card's
-// coloured panel; the brand runs along the foot, as a white logo or plain text.
+// coloured panel; the brand sits at the top, as a white logo or plain text,
+// with the title under it.
 const DEEP_DIVES = [
   {
     kind: "he",
     title: "Helium sold 500 ACs a day within a month of launch.",
-    img: "/deep drives/helium.png",
-    logo: "/partnership/helium.svg",
+    img: "/deepdrive-new/image 294.png",
+    logo: "/deepdrive-new/logos/helium.png",
     logoAlt: "Helium",
+    logoFx: "none",
     href: "/case-study/helium",
   },
   {
     kind: "px",
     title: "PlatinumRx leveraged Celebrity and UGC assets to increase reach 3x in 2 months",
-    img: "/deep drives/platinumrx.png",
-    logo: "/partnership/platinumRx.svg",
+    img: "/deepdrive-new/2.png",
+    logo: "/deepdrive-new/logos/platinumrx.png",
     logoAlt: "PlatinumRx",
+    logoFx: "none",
     href: "/case-study/platinumrx",
   },
   {
     kind: "st",
     title: "0 to 300k paid users in 80 days",
-    img: "/deep drives/stealth app.png",
+    img: "/deepdrive-new/3.png",
     name: "Stealth App",
     href: "/case-study/stealth-app",
   },
   {
     kind: "ma",
     title: "Masai\u2019s Performance marketing scaled by 20x in 10 months.",
-    img: "/deep drives/masai.png",
-    logo: "/partnership/MASAI.svg",
+    img: "/deepdrive-new/4.png",
+    logo: "/deepdrive-new/logos/masai.png",
     logoAlt: "Masai",
-    logoFx: "none", // already a white mark
+    logoFx: "none",
     href: "/case-study/masai",
   },
   {
     kind: "cu",
     title: "CuriousJr observed a dip of 23% in CAC with UGC creatives",
-    img: "/deep drives/curious js.png",
+    img: "/deepdrive-new/5.png",
     logo: "/deep%20drives/curious%20jr.png",
     logoAlt: "CuriousJr",
     logoFx: "none", // the supplied two-tone logo, shown as is
@@ -50,16 +53,25 @@ const DEEP_DIVES = [
     kind: "ap",
     title: "ApnaMart builds absolute category authority in staples category",
     img: "/deep drives/apnamart deep drive.png",
-    logo: "/partnership/apnamart.svg",
+    logo: "/deepdrive-new/logos/apnamart.png",
     logoAlt: "ApnaMart",
     logoFx: "none",
     href: "/case-study/apnamart",
   },
   {
+    kind: "ao",
+    title: "ApnaMart lifted online delivery adoption 4.2x with offline and online marketing",
+    img: "/deepdrive-new/6.png",
+    logo: "/deepdrive-new/logos/apnamart.png",
+    logoAlt: "ApnaMart",
+    logoFx: "none",
+    href: "/case-study/apnamart-online-offline",
+  },
+  {
     kind: "vy",
     title: "Vyapar built its category authority through its businessman-first brand narratives",
-    img: "/deep drives/vyapar.png",
-    logo: "/partnership/vyapar.svg",
+    img: "/deepdrive-new/7.png",
+    logo: "/deepdrive-new/logos/vyapar.png",
     logoAlt: "Vyapar",
     logoFx: "none",
     href: "/case-study/vyapar",
@@ -67,7 +79,7 @@ const DEEP_DIVES = [
   {
     kind: "gs",
     title: "Goodscore reduced creative costs by 75% with celebrity performance assets",
-    img: "/deep drives/goodscore.png",
+    img: "/deepdrive-new/8.png",
     logo: "/partnership/goodscore.svg",
     logoAlt: "Goodscore",
     href: "/case-study/goodscore",
@@ -75,8 +87,8 @@ const DEEP_DIVES = [
   {
     kind: "se",
     title: "Seekho achieves 30% dip in CAC with celebrity performance marketing",
-    img: "/deep drives/seekho.png",
-    logo: "/partnership/seekho.svg",
+    img: "/deepdrive-new/9.png",
+    logo: "/deepdrive-new/seekho.png",
     logoAlt: "Seekho",
     href: "/case-study/seekho",
     logoFx: "none",
@@ -84,9 +96,10 @@ const DEEP_DIVES = [
   {
     kind: "ng",
     title: "NeuralGarage is cracking global marketing at Indian costs",
-    img: "/deep drives/neuralgarage.png",
-    logo: "/partnership/neuralgarage.svg",
+    img: "/deepdrive-new/10.png",
+    logo: "/deepdrive-new/neural garage.png",
     logoAlt: "NeuralGarage",
+    logoFx: "none",
   },
 ];
 
@@ -101,8 +114,6 @@ function DiveCard({ d, repeat = false }) {
   const link = d.href ? { href: d.href, tabIndex: repeat ? -1 : undefined } : {};
   return (
     <Tag className={`cs-card cs-card-${d.kind}`} {...link}>
-      <h3 className="cs-title">{d.title}</h3>
-      <img className="cs-person" src={d.img} alt="" loading="lazy" />
       {d.logo ? (
         <img
           className={`cs-logo${d.logoFx === "none" ? "" : d.logoFx === "dark" ? " cs-logo--dark" : " cs-logo--white"}`}
@@ -113,6 +124,8 @@ function DiveCard({ d, repeat = false }) {
       ) : (
         <span className="cs-name">{d.name}</span>
       )}
+      <h3 className="cs-title">{d.title}</h3>
+      <img className="cs-person" src={d.img} alt="" loading="lazy" />
     </Tag>
   );
 }

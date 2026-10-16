@@ -170,8 +170,8 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
       ref={footerRef}
     >
       {/* the contact page is already where "Get in touch" points, so it keeps
-          the heading and "See our work" but drops that one button
-          (see app/contact/page.js) */}
+          the heading but drops that one button, and "See our work" becomes
+          "Back to home" (see app/contact/page.js) */}
       {!hideCta && (
       <div className="vfoot__copy">
         <h2 className="vfoot__title">
@@ -197,8 +197,8 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
             </span>
           </a>
           )}
-          <a className="vfoot__cta vfoot__cta--ghost" href="/#work">
-            <span className="vfoot__ctaLabel">See our work</span>
+          <a className="vfoot__cta vfoot__cta--ghost" href={hideContactCta ? "/" : "/#work"}>
+            <span className="vfoot__ctaLabel">{hideContactCta ? "Back to home" : "See our work"}</span>
             <span className="vfoot__ctaIcon">
               <svg className="vfoot__ctaStep" viewBox="0 0 40 40" aria-hidden="true">
                 <path d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />

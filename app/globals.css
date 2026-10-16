@@ -4003,7 +4003,7 @@ html[data-hero-curtain] .hx-bar {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.19444px);
-  height: calc(880 * var(--k))
+  height: calc(810 * var(--k))
 }
 
 .cs-head {
@@ -4108,12 +4108,13 @@ html[data-hero-curtain] .hx-bar {
   position: relative;
   flex: none;
   container-type: inline-size;
-  width: calc(336 * var(--k));
-  height: calc(479 * var(--k));
+  width: calc(400 * var(--k));
+  height: calc(419 * var(--k));
   overflow: hidden;
   border-radius: 2px;
   color: var(--cs-ink, #fff);
-  background: var(--cs-bg);
+  /* a soft glow gathers in the bottom-right, where the piece sits */
+  background: radial-gradient(95% 80% at 92% 92%, rgba(255, 255, 255, .5), rgba(255, 255, 255, .22) 38%, rgba(255, 255, 255, 0) 72%), var(--cs-bg);
   text-decoration: none
 }
 
@@ -4128,21 +4129,23 @@ html[data-hero-curtain] .hx-bar {
   position: absolute;
   inset: 0;
   background: var(--cs-tint);
-  clip-path: polygon(55% 36%, 100% 36%, 100% 100%, 0 100%, 0 88.8%, 34.6% 88.8%,
-      34.6% 62.4%, 41.6% 62.4%, 41.6% 53.4%, 55% 53.4%)
+  /* the tetris piece: three steps down the right, then a foot band running
+     left along the bottom */
+  clip-path: polygon(74% 50.9%, 100% 50.9%, 100% 100%, 23.9% 100%, 23.9% 87.4%,
+      93.1% 87.4%, 93.1% 75.2%, 86% 75.2%, 86% 63.1%, 74% 63.1%)
 }
 
 .cs-title {
   position: relative;
   z-index: 2;
   margin: 0;
-  padding: 5.4cqw 7.3cqw 0;
+  padding: 3.4cqw 7.3cqw 0;
   font-family: var(--body);
   font-weight: 400;
   /* white on a colour renders heavier on macOS by default */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 7.3cqw;
+  font-size: 6cqw;
   line-height: 1.07;
   letter-spacing: -.01em
 }
@@ -4158,11 +4161,10 @@ html[data-hero-curtain] .hx-bar {
 }
 
 .cs-logo {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  left: 7.3cqw;
-  bottom: 4.6cqw;
   display: block;
+  margin: 6.6cqw 0 0 7.3cqw;
   height: auto;
   width: var(--cs-lw)
 }
@@ -4176,10 +4178,10 @@ html[data-hero-curtain] .hx-bar {
 }
 
 .cs-name {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  left: 5.2cqw;
-  bottom: 4.6cqw;
+  display: block;
+  margin: 6.6cqw 0 0 7.3cqw;
   font-family: var(--body);
   font-size: 4.2cqw;
   line-height: 1
@@ -4188,44 +4190,41 @@ html[data-hero-curtain] .hx-bar {
 .cs-card-he {
   --cs-bg: linear-gradient(#245A44, #73C0A2);
   --cs-tint: rgba(255, 255, 255, .13);
-  --cs-w: 100%;
-  --cs-lw: 23cqw
+  --cs-w: 62%;
+  --cs-lw: 28cqw
 }
 
 .cs-person {
   bottom: var(--cs-pb, 0)
 }
 
-.cs-card-cu { --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 66%; --cs-lw: 27cqw }
-.cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 66%; --cs-lw: 30cqw }
-.cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 90%; --cs-pb: 12cqw; --cs-lw: 17cqw }
-.cs-card-gs { --cs-bg: linear-gradient(#3573BE, #4C8BCB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 72%; --cs-lw: 22cqw }
-.cs-card-se { --cs-bg: linear-gradient(#D44CCB, #9D45CB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 90%; --cs-pb: 12cqw; --cs-lw: 24cqw }
-.cs-card-ng { --cs-bg: linear-gradient(#2B4CB5, #2F59C4); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 92%; --cs-lw: 24cqw }
-
-.cs-card-he .cs-person {
-  bottom: 12cqw
-}
+.cs-card-cu { --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52%; --cs-lw: 24cqw }
+.cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 44%; --cs-lw: 28cqw }
+.cs-card-ao { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 48%; --cs-lw: 28cqw }
+.cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 62%; --cs-lw: 26cqw }
+.cs-card-gs { --cs-bg: linear-gradient(#3573BE, #4C8BCB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 48%; --cs-lw: 24cqw }
+.cs-card-se { --cs-bg: linear-gradient(#D44CCB, #9D45CB); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 46%; --cs-lw: 28cqw }
+.cs-card-ng { --cs-bg: linear-gradient(#2B4CB5, #2F59C4); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 52%; --cs-lw: 40cqw }
 
 .cs-card-px {
   --cs-bg: linear-gradient(#CB4E4C, #D05A58);
   --cs-tint: rgba(255, 255, 255, .17);
-  --cs-w: 68.6%;
-  --cs-lw: 38cqw
+  --cs-w: 34%;
+  --cs-lw: 44cqw
 }
 
 .cs-card-st {
   --cs-bg: #EFE87A;
   --cs-ink: #111;
   --cs-tint: #FCF7A8;
-  --cs-w: 73.5%
+  --cs-w: 44%
 }
 
 .cs-card-ma {
   --cs-bg: linear-gradient(#7B2831, #B2535C);
   --cs-tint: rgba(255, 255, 255, .14);
-  --cs-w: 67.3%;
-  --cs-lw: 22cqw
+  --cs-w: 50%;
+  --cs-lw: 26cqw
 }
 
 @keyframes cs-drift {
@@ -4272,7 +4271,7 @@ html[data-hero-curtain] .hx-bar {
 
   .cs-card {
     width: min(300px, 80vw);
-    height: min(420px, 110vw)
+    height: min(314px, 84vw)
   }
 
   .cs-card:nth-child(even) {
@@ -11208,7 +11207,7 @@ button:focus-visible,
   .cs-card {
     width: min(300px, 75.4vw);
     height: auto;
-    aspect-ratio: 294 / 391
+    aspect-ratio: 336 / 352
   }
 
   .cs-card:nth-child(even) {
@@ -14944,7 +14943,7 @@ body{font-size:1.1940vw}
 .cs-tag{font-size:calc(14 * var(--k))}
 .cs-h{font-size:4.1791vw}
 .cs-sub{font-size:1.3433vw}
-.cs-title{font-size:7.3cqw}
+.cs-title{font-size:6cqw}
 .cs-name{font-size:4.2cqw}
 .fo-tag{font-size:1.0448vw}
 .fo-h{font-size:4.1791vw}
@@ -18848,7 +18847,7 @@ html.is-loading body {
 .cs-three .cs-card {
   width: 100%;
   height: auto;
-  aspect-ratio: 336 / 479
+  aspect-ratio: 400 / 419
 }
 
 .cs-three .cs-card:nth-child(even) {
