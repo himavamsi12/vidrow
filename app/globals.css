@@ -19220,9 +19220,10 @@ html.is-loading body {
   }
 }
 
-/* CuriousJr: the problem copy runs wider, on three lines */
+/* CuriousJr: the problem copy takes the split's right column, so it starts
+   where the goals list under it does */
 .csp--cjr .csk-problemCopy {
-  width: min(620px, 60%)
+  width: calc((100% - clamp(32px, 6vw, 96px)) / 2)
 }
 
 @media (max-width:900px) {
