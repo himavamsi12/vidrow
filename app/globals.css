@@ -17040,6 +17040,17 @@ html {
   background: #F4F4F4
 }
 
+/* the LinkedIn post screenshot carries its own white card and frame: show
+   it whole on white, without the tile's border */
+.cvd-shot--post:has(img) {
+  border: 0;
+  background: #fff
+}
+
+.cvd-shot--post img {
+  object-fit: contain
+}
+
 .cvd-postPh {
   position: absolute;
   inset: 0;

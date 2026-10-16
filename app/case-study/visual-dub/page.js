@@ -308,9 +308,12 @@ export default function VisualDubCaseStudy() {
             </figure>
 
             <figure className="cvd-mediaItem">
-              {/* TODO: placeholder for the LinkedIn event post screenshot */}
               <span className="cvd-icpShot cvd-shot cvd-shot--post">
-                <span className="cvd-postPh">Event post</span>
+                <img
+                  src="/LinkedIn%20post.png"
+                  alt="LinkedIn post from NeuralGarage's CTO at the VisualDub stand at IEEE SWEAT 2024"
+                  loading="lazy"
+                />
               </span>
               <figcaption>VisualDub showcases these videos in all the events they attend</figcaption>
             </figure>
