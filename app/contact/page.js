@@ -27,7 +27,8 @@ const CONTACT_LINKS = [
     tone: "acid",
     Icon: LocationIcon,
     label: "View Maps",
-    href: "https://maps.google.com/?q=Mumbai,India",
+    // Sakti Statesman, Bengaluru
+    href: "https://www.google.com/maps/place/Sakti+Statesman/@12.9239742,77.6675882,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae1377b38e323f:0xde910e0686a4adac!8m2!3d12.9239742!4d77.6675882!16s%2Fg%2F11f3jg_5h3",
   },
 ];
 

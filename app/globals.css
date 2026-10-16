@@ -14268,7 +14268,17 @@ html.nav-hidden .cmp-backBar {
 }
 
 .pr-table .pr-tile {
-  transition: transform .25s ease, opacity .35s ease
+  position: relative;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .35s ease, box-shadow .3s ease
+}
+
+/* hovering a tile lifts it a little above its neighbours */
+@media (hover: hover) {
+  .pr-table.in .pr-tile:hover {
+    z-index: 2;
+    transform: scale(1.06);
+    box-shadow: 0 10px 24px rgba(20, 20, 40, .14)
+  }
 }
 
 @media (hover: hover) {
