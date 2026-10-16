@@ -1,13 +1,27 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
-import CspReelRow from "../../components/CspReelRow";
+import SeekhoFilms from "../../components/SeekhoFilms";
+import { CAMPAIGNS } from "../../data/campaigns";
 import { DeepDiveCards } from "../../components/CaseStudies";
 import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
   title: "PlatinumRx - Case Study | Vidrow",
 };
+
+// the side rail's sections (this page has no celebrity-ads or CAC sections)
+const SECTIONS = [
+  { id: "csp-sec-hero", label: "Overview" },
+  { id: "csp-sec-aoc", label: "The Audience" },
+  { id: "csp-sec-mid", label: "Where It Landed" },
+  { id: "csp-sec-how", label: "How We Did It" },
+  { id: "csp-sec-hooks", label: "The Hooks" },
+  { id: "csp-sec-reel1", label: "Celebrity Performance" },
+  { id: "csp-sec-reel2", label: "Performance Ads" },
+  { id: "csp-sec-more", label: "More Stories" },
+];
+const NO_DARK = [];
 
 const AOC = [
   {
@@ -53,56 +67,38 @@ const HOOKS = [
   },
 ];
 
+// films from the PlatinumRx campaign pages: one celebrity film each from
+// the Anup Soni and Anupam Kher campaigns (plus a second Anup Soni film), and
+// the four performance films
 const CELEB_ADS = [
-  { label: "Delivery, done" },
-  { label: "Anup Soni" },
-  { label: "Anupam Kher" },
+  CAMPAIGNS.platinumrx_anup_soni.frames[1],
+  CAMPAIGNS.platinumrx_anup_soni.frames[0],
+  CAMPAIGNS.platinumrx_anupam_kher.frames[2],
 ];
 
-const PERF_ADS = [
-  { label: "Generic medicines" },
-  { label: "At the counter" },
-  { label: "Same salt" },
-  { label: "The reorder" },
-];
-
-const CELEB_POINTS = [
-  {
-    title: "The first three seconds",
-    desc: "A known face buys the opening of the ad. Nobody hears a message they scrolled past.",
-  },
-  {
-    title: "Same scripts, same rules",
-    desc: "Celebrity films used the same script formats and ran in the same conversion campaigns as everything else.",
-  },
-  {
-    title: "Judged on cost, not reach",
-    desc: "No awareness budget. Every film answered to cost per new chronic customer.",
-  },
-];
+const PERF_ADS = CAMPAIGNS.performance_platinum_rx.frames;
 
 export default function PlatinumRxCaseStudy() {
   return (
     <>
-    <main className="csp">
+    <main className="csp csp--prx">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
       <div className="hx-bar-gap" aria-hidden="true" />
 
-      <CspSectionNav />
+      <CspSectionNav sections={SECTIONS} darkSectionIds={NO_DARK} />
 
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
-            3x in 3 Months June to
+            PlatinumRx scaled 3x in 3 months{" "}
             <br />
-            August At a Controlled CAC.
+            through UGC &amp; Celebrity Performance
           </h1>
           <p className="csp-note">
-            A medicines app. Chronic-medicine users who reorder every month. One bold question:
-            could the right pieces, assembled correctly, triple the business in three months at a
-            controlled CAC?
+            A chronic-medicine app already spending on acquisition. Three months. One question: how
+            much further could the same money go, and who had to be on screen when it did?
           </p>
         </div>
 
@@ -123,11 +119,11 @@ export default function PlatinumRxCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Timeline</span>
-            <span className="csp-metaValue">June - August</span>
+            <span className="csp-metaValue">June – August</span>
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">3x at a flat CAC</span>
+            <span className="csp-metaValue">3x scale in Reach</span>
           </div>
         </div>
       </div>
@@ -144,8 +140,11 @@ export default function PlatinumRxCaseStudy() {
               </div>
               <h2 className="csp-aoc-h">
                 The audience.
+                <br className="cprx-brD" />
+                <span className="cprx-brM"> </span>
+                The objective.
                 <br />
-                The Objective. The constraint.
+                The constraint.
               </h2>
             </div>
             <p className="csp-aoc-copy">
@@ -232,7 +231,7 @@ export default function PlatinumRxCaseStudy() {
             <h2 className="csp-how-h">
               Nobody searches for a substitute.
               <br />
-              You have to <em>earn the switch.</em>
+              You have to earn the switch.
             </h2>
             <p className="csp-how-copy">
               A chronic patient has taken the same brand for years, on a doctor&apos;s word.
@@ -241,7 +240,7 @@ export default function PlatinumRxCaseStudy() {
             </p>
           </div>
 
-          <div className="csp-how-row">
+          <div className="csp-how-row csp-how-row--portrait">
             <div className="csp-how-left">
               <div className="csp-howBlock">
                 <span className="csp-howTag">Performance Ads</span>
@@ -268,7 +267,7 @@ export default function PlatinumRxCaseStudy() {
             </div>
 
             <div className="csp-how-right">
-              <img src="/casestudy%20images/image.png" alt="They Saw It - PlatinumRx spokesperson" />
+              <img src="/platinumrx-img.png" alt="A PlatinumRx performance ad on generic medicines" />
             </div>
           </div>
         </section>
@@ -276,166 +275,9 @@ export default function PlatinumRxCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-hooks" id="csp-sec-hooks">
-          <h2 className="csp-hooks-h">
-            Every hook had to
-            <br />
-            earn its budget.
-          </h2>
+          <h2 className="csp-hooks-h">Every hook had to earn its budget.</h2>
 
           <CspHooksRow hooks={HOOKS} />
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-celeb" id="csp-sec-celeb">
-          <h2 className="csp-celeb-h">
-            A stranger&apos;s cheaper medicine is a risk.
-            <br />
-            A familiar face <em>is not.</em>
-          </h2>
-          <p className="csp-celeb-copy">
-            Anup Soni, Anupam Kher and Bhide closed the gap between &quot;cheaper&quot; and
-            &quot;safe&quot; in the first three seconds. Nobody switches a lifelong prescription
-            on a stranger&apos;s word.
-          </p>
-
-          <div className="csp-celeb-body">
-            <div className="csp-celeb-points">
-              {CELEB_POINTS.map((p) => (
-                <div className="csp-celebPoint" key={p.title}>
-                  <div className="csp-celebPoint-h">
-                    <img className="csp-celebBars" src="/casestudy%20images/bar-icon.png" alt="" />
-                    <h3>{p.title}</h3>
-                  </div>
-                  <p>{p.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="csp-quoteWrap">
-              <img className="csp-quoteMark" src="/casestudy%20images/quote-mark.svg" alt="" aria-hidden="true" />
-              <div className="csp-quoteCard">
-                <div className="csp-quoteInner">
-                  <span className="csp-quoteEyebrow">Campaign positioning</span>
-                  <p className="csp-quoteText">
-                    Celebrity was not the expensive option here. It was the one that worked hardest.
-                  </p>
-                  <p className="csp-quoteSub">
-                    Meta charged us less to show it, the auction rewards what people watch.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="csp-celebStats">
-            <div className="csp-celebStatBlock csp-celebStatBlock--yellow">
-              <span className="csp-celebStatVal">~16%</span>
-              <div className="csp-celebStatRow">
-                <span className="csp-celebStatVal">below</span>
-                <span className="csp-celebStatLabel">Every other producer&apos;s video</span>
-              </div>
-            </div>
-            <div className="csp-celebStatBlock csp-celebStatBlock--violet">
-              <span className="csp-celebStatVal">~33%</span>
-              <div className="csp-celebStatRow">
-                <span className="csp-celebStatVal">below</span>
-                <span className="csp-celebStatLabel">Cost per impression</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-cac" id="csp-sec-cac">
-          <div className="csp-cac-head">
-            <div className="csp-cac-headL">
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>05</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                CONTROLLED CAC
-              </div>
-              <h2 className="csp-cac-h">
-                Volume is easy.
-                <br />
-                Volume at a <em>stable CAC</em> is the job.
-              </h2>
-            </div>
-            <p className="csp-cac-copy">
-              Several producers&apos; creative ran side by side in this account, same targeting,
-              same conversion event, same bidding. As the spend opened up, this is whose cost per
-              new customer held and whose did not.
-            </p>
-          </div>
-
-          <div className="csp-cac-plot">
-            <div className="csp-cac-plotL">
-              <span className="csp-cac-caption">Cost per new customer (July = 100)</span>
-
-              <div className="csp-cacChart">
-                <svg viewBox="0 0 1160 420" preserveAspectRatio="none" aria-hidden="true">
-                  <line className="csp-cacGrid" x1="0" y1="80" x2="1160" y2="80" />
-                  <line className="csp-cacGrid" x1="0" y1="180" x2="1160" y2="180" />
-                  <line className="csp-cacGrid" x1="0" y1="280" x2="1160" y2="280" />
-                  <line className="csp-cacAxis" x1="0" y1="380" x2="1160" y2="380" />
-
-                  <line className="csp-cacLine csp-cacLine--dark" x1="40" y1="280" x2="1120" y2="80" />
-                  <line className="csp-cacLine csp-cacLine--violet" x1="40" y1="280" x2="1120" y2="253" />
-
-                  <circle className="csp-cacDot csp-cacDot--dark" cx="40" cy="280" r="9" />
-                  <circle className="csp-cacDot csp-cacDot--dark" cx="1120" cy="80" r="9" />
-                  <circle className="csp-cacDot csp-cacDot--violet" cx="1120" cy="253" r="9" />
-
-                  {/* real SVG text, not an HTML overlay positioned by percentage —
-                      its gap above each dot is in the same coordinate space as the
-                      dot itself, so it scales exactly with the chart at every
-                      width instead of drifting close enough to overlap on narrow
-                      screens */}
-                  <text className="csp-cacVal csp-cacVal--start" x="40" y="242" textAnchor="middle">
-                    100
-                  </text>
-                  <text className="csp-cacVal csp-cacVal--darkEnd" x="1120" y="42" textAnchor="middle">
-                    135
-                  </text>
-                  <text className="csp-cacVal csp-cacVal--violetEnd" x="1120" y="215" textAnchor="middle">
-                    106
-                  </text>
-                </svg>
-
-                <div className="csp-cacAxisLabels">
-                  <span>July = 100</span>
-                  <span>As spend scaled</span>
-                </div>
-              </div>
-            </div>
-
-            <aside className="csp-cacCard">
-              <span className="csp-cacCard-val">92%</span>
-              <div className="csp-cacCard-foot">
-                <b>Of new chronic customers</b>
-                <span>
-                  Acquired on a creative
-                  <br />
-                  Vidrow built
-                </span>
-              </div>
-            </aside>
-          </div>
-
-          <div className="csp-cacLegend">
-            <span className="csp-cacLegendItem">
-              <i className="csp-cacSwatch csp-cacSwatch--violet" />
-              Vidrow creative
-            </span>
-            <span className="csp-cacLegendItem">
-              <i className="csp-cacSwatch csp-cacSwatch--dark" />
-              Every other producer
-            </span>
-          </div>
-
-          <p className="csp-howNote">That gap is the whole case study.</p>
         </section>
       </div>
 
@@ -443,7 +285,7 @@ export default function PlatinumRxCaseStudy() {
         <section className="csp-reel" id="csp-sec-reel1">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>06</b>
+            <b>04</b>
             <span className="csp-eyebrow2-sep">·</span>
             CELEBRITY PERFORMANCE ADS
           </div>
@@ -453,7 +295,7 @@ export default function PlatinumRxCaseStudy() {
             for PlatinumRx.
           </h2>
 
-          <CspReelRow ads={CELEB_ADS} />
+          <SeekhoFilms films={CELEB_ADS} className="cprx-films cprx-films--3" />
         </section>
       </div>
 
@@ -461,7 +303,7 @@ export default function PlatinumRxCaseStudy() {
         <section className="csp-reel" id="csp-sec-reel2">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>07</b>
+            <b>05</b>
             <span className="csp-eyebrow2-sep">·</span>
             PERFORMANCE ADS
           </div>
@@ -471,7 +313,7 @@ export default function PlatinumRxCaseStudy() {
             for PlatinumRx.
           </h2>
 
-          <CspReelRow ads={PERF_ADS} four />
+          <SeekhoFilms films={PERF_ADS} className="cprx-films" />
         </section>
       </div>
 

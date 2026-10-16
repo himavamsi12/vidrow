@@ -97,7 +97,7 @@ export default function HeroScroll() {
       if (on === tinted) return;
       tinted = on;
       polys.forEach((g, i) => {
-        if (RISING_FILL[i]) g.style.fill = g.style.stroke = on ? RISING_FILL[i] : "";
+        if (RISING_FILL[i]) g.style.fill = on ? RISING_FILL[i] : "";
       });
     };
 

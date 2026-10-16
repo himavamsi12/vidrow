@@ -7870,6 +7870,21 @@ button:focus-visible,
   }
 }
 
+/* PlatinumRx: a tall ad still on the right, its top level with the top of
+   the first block */
+.csp-how-row--portrait .csp-how-right {
+  width: min(380px, 32%);
+  /* lifted into the empty space beside the heading copy above the row */
+  margin-top: clamp(-120px, -8vw, -48px)
+}
+
+@media (max-width:900px) {
+  .csp-how-row--portrait .csp-how-right {
+    width: 100%;
+    margin-top: 0
+  }
+}
+
 .csp-hooks {
   padding-bottom: clamp(56px, 7vw, 96px)
 }
@@ -18089,7 +18104,7 @@ html.is-loading body {
 
 .hx-sky polygon {
   stroke: var(--paper);
-  stroke-width: 6;
+  stroke-width: 3;
   stroke-linejoin: miter;
   transition: fill .5s ease
 }
@@ -19898,6 +19913,99 @@ html.is-loading body {
 /* Masai: the growth copy runs wider */
 .csp--masai .csp-mid-copy {
   max-width: 60ch
+}
+
+/* PlatinumRx: a wider headline note, as on Masai (em, so it tracks the vw font size) */
+@media (min-width:901px) {
+  .csp--prx .csp-note {
+    width: 36em;
+    max-width: 46%
+  }
+}
+
+/* PlatinumRx: the growth copy and the how-we-did-it blocks run wider */
+.csp--prx .csp-mid-copy {
+  max-width: 60ch
+}
+
+.csp--prx .csp-howDesc {
+  max-width: 68ch
+}
+
+/* PlatinumRx hooks, per the mock: a one-line heading at the section-heading
+   size with room under it (there's no copy line here to space it), and
+   cards with a smaller corner step, tighter padding and the title sitting
+   midway between the number and the line under it */
+.csp--prx .csp-hooks .csp-hooks-h {
+  font-size: clamp(32px, 4vw, 40px);
+  margin: 0 0 clamp(32px, 3.6vw, 48px)
+}
+
+.csp--prx .csp-hookCard {
+  clip-path: polygon(0 0, calc(100% - 36px) 0, calc(100% - 36px) 36px, 100% 36px, 100% 100%, 0 100%);
+  padding: 20px 16px 20px;
+  min-height: 310px
+}
+
+.csp--prx .csp-hookNum {
+  padding-bottom: 48px
+}
+
+.csp--prx .csp-hookTitle {
+  margin: 0 0 auto;
+  padding-bottom: 32px
+}
+
+@media (max-width:900px) {
+  .csp--prx .csp-hookCard {
+    min-height: 260px
+  }
+}
+
+/* PlatinumRx on phones: the headline reflows without its forced break, and
+   the Problem and How-we-did-it headings set in two lines ("The audience.
+   The objective." / "The constraint." and one sentence a line), sized in vw
+   so the lines fit at any phone width */
+.cprx-brM {
+  display: none
+}
+
+@media (max-width:760px) {
+  .csp--prx .csp-h br,
+  .csp--prx .cprx-brD {
+    display: none
+  }
+
+  .csp--prx .cprx-brM {
+    display: inline
+  }
+
+  .csp--prx .csp-aoc-h {
+    font-size: min(28px, 6.6vw)
+  }
+
+  .csp--prx .csp-how-h {
+    font-size: min(28px, 5.3vw)
+  }
+}
+
+/* PlatinumRx: the ad rows play the campaign films, square-cornered, three
+   celebrity films then four performance films (on phones they swipe, as
+   every .csk-films row does) */
+.cprx-films {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 0.9vw, 12px);
+  margin-top: clamp(32px, 4vw, 52px)
+}
+
+.cprx-films--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.8vw, 24px)
+}
+
+.cprx-films .csk-film {
+  aspect-ratio: 9 / 16;
+  border-radius: 0
 }
 
 /* Apnamart: body copy at 16px, phase titles a shade lighter, no rule under
