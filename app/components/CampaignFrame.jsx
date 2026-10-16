@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import "@videojs/react/video/skin.css";
+import { Hotkey } from "@videojs/react";
 import { VideoPlayer, VideoSkin } from "@videojs/react/video";
 import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
 import { HlsJsVideo } from "@videojs/react/media/hlsjs-video";
@@ -48,6 +49,9 @@ export default function CampaignFrame({ frame, title, muted = false, useHls = fa
             ) : (
               <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
             )}
+            {/* the spacebar plays and pauses the open film from anywhere on
+                the page, not only once the player has focus */}
+            <Hotkey keys="Space" action="togglePaused" target="document" />
           </VideoSkin>
         </VideoPlayer>
       ) : (

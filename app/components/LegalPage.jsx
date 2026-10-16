@@ -6,19 +6,23 @@ import { CONTACT_EMAIL } from "../data/legal";
 
 const pad = (n) => String(n).padStart(2, "0");
 
+// the last two words share a no-break space, so a long paragraph never ends
+// on one word alone (text-wrap: pretty misses some of these)
+const tie = (text) => text.replace(/ (\S+)$/, "\u00A0$1");
+
 function Block({ block }) {
   if (block.h) return <h3 className="lg-sub">{block.h}</h3>;
-  if (block.p) return <p>{block.p}</p>;
+  if (block.p) return <p>{tie(block.p)}</p>;
   if (block.list)
     return (
       <ul className="lg-list">
         {block.list.map((item, i) =>
           Array.isArray(item) ? (
             <li key={i}>
-              <strong>{item[0]}</strong> {item[1]}
+              <strong>{item[0]}</strong> {tie(item[1])}
             </li>
           ) : (
-            <li key={i}>{item}</li>
+            <li key={i}>{tie(item)}</li>
           )
         )}
       </ul>
@@ -29,7 +33,7 @@ function Block({ block }) {
         {block.defs.map(([term, meaning]) => (
           <div className="lg-def" key={term}>
             <dt>{term}</dt>
-            <dd>{meaning}</dd>
+            <dd>{tie(meaning)}</dd>
           </div>
         ))}
       </dl>
@@ -45,7 +49,7 @@ function Block({ block }) {
             </span>
             <h4>{c.name}</h4>
             <p className="lg-cardMeta">Administered by {c.admin}</p>
-            <p>{c.purpose}</p>
+            <p>{tie(c.purpose)}</p>
           </article>
         ))}
       </div>
@@ -81,7 +85,7 @@ export default function LegalPage({ doc }) {
           <div className="lg-content">
             <div className="lg-intro">
               {doc.intro.map((p, i) => (
-                <p key={i}>{p}</p>
+                <p key={i}>{tie(p)}</p>
               ))}
             </div>
 

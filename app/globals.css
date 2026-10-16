@@ -143,6 +143,27 @@ a {
   color: inherit
 }
 
+/* no single word left alone on a line: headings even out their lines, and
+   paragraphs re-break their last lines so at least two words carry over (a
+   plain element selector, so any section's own text-wrap still wins) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance
+}
+
+p,
+li,
+dt,
+dd,
+blockquote,
+figcaption {
+  text-wrap: pretty
+}
+
 /* ── type primitives ───────────────────────── */
 .d1,
 .d2,
@@ -4003,7 +4024,7 @@ html[data-hero-curtain] .hx-bar {
   overflow: hidden;
   container-type: inline-size;
   --k: min(.0694444cqw, 1.19444px);
-  height: calc(810 * var(--k))
+  height: calc(683 * var(--k))
 }
 
 .cs-head {
@@ -4089,7 +4110,7 @@ html[data-hero-curtain] .hx-bar {
   display: flex;
   width: max-content;
   /* 3x the length per copy (see REPEAT), so 3x the time at the same speed */
-  animation: cs-drift 90s linear infinite
+  animation: cs-drift 67s linear infinite
 }
 
 .cs-row:hover .cs-rtrack,
@@ -4100,16 +4121,17 @@ html[data-hero-curtain] .hx-bar {
 .cs-rset {
   display: flex;
   align-items: flex-start;
-  gap: calc(32 * var(--k));
-  padding-right: calc(32 * var(--k))
+  gap: calc(26 * var(--k));
+  padding-right: calc(26 * var(--k))
 }
 
 .cs-card {
   position: relative;
   flex: none;
   container-type: inline-size;
-  width: calc(400 * var(--k));
-  height: calc(419 * var(--k));
+  /* four and a half cards across the screen */
+  width: calc(294 * var(--k));
+  height: calc(308 * var(--k));
   overflow: hidden;
   border-radius: 2px;
   color: var(--cs-ink, #fff);
@@ -4121,7 +4143,7 @@ html[data-hero-curtain] .hx-bar {
 /* the lighter stepped shape: wide at the top right, stepping down the left
    to a foot band that runs under the brand */
 .cs-card:nth-child(even) {
-  margin-top: calc(56 * var(--k))
+  margin-top: calc(40 * var(--k))
 }
 
 .cs-card::before {
@@ -4205,7 +4227,7 @@ html[data-hero-curtain] .hx-bar {
   bottom: var(--cs-pb, 0)
 }
 
-.cs-card-cu { --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52%; --cs-lw: 21cqw }
+.cs-card-cu { --cs-ink: #111; --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52%; --cs-lw: 21cqw }
 .cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 44%; --cs-lw: 22cqw }
 .cs-card-ao { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 48%; --cs-lw: 22cqw }
 .cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 62%; --cs-lw: 22cqw }
@@ -4237,6 +4259,16 @@ html[data-hero-curtain] .hx-bar {
 /* PlatinumRx's long title runs wider, for four lines as in its mock */
 .cs-card-px .cs-title {
   padding-right: 9cqw
+}
+
+/* Vyapar's long title runs wider and its laptop sits smaller, so the
+   title clears the screen */
+.cs-card-vy .cs-title {
+  padding-right: 6cqw
+}
+
+.cs-card-vy .cs-person {
+  max-width: 52%
 }
 
 @keyframes cs-drift {
@@ -5680,11 +5712,12 @@ button:focus-visible,
 
 /* the side rail is hidden for now (see .csp-sideNav below), so the content
    sits centred: 72px either side up to 1440, then growing with the screen
-   (96px at 1920) up to 120px, the same inset as the nav so the content lines
-   up with the logo. With the rail back, the left padding was 208px: the
+   (96px at 1920) up to 120px. Past the nav's 1720 frame (--maxw) the content
+   holds to that frame too, so on a big screen it lines up with the logo and
+   the contact button. With the rail back, the left padding was 208px: the
    rail's left offset (58px) + its width (80px) + a 70px gap */
 .csp-in {
-  padding: 0 clamp(72px, 5vw, 120px)
+  padding: 0 max(clamp(72px, 5vw, 120px), (100% - var(--maxw)) / 2 + var(--side))
 }
 
 /* zero-height so it never pushes the sections below it down — it only ever
@@ -13468,7 +13501,8 @@ button:focus-visible,
 
   .abt-role {
     font-size: 5cqw;
-    white-space: normal
+    white-space: normal;
+    text-wrap: balance
   }
 
   /* the plate fills the card, so a role that wraps to two lines doesn't
@@ -13786,6 +13820,12 @@ button:focus-visible,
 .cmp-video > * {
   width: 100%;
   height: 100%
+}
+
+/* the Cloudflare player is an iframe, which swallows clicks: let them fall
+   through to the player so a click on the film plays and pauses it */
+.cmp-video iframe {
+  pointer-events: none
 }
 
 /* portrait campaigns (social media): the videos three across */
@@ -21686,5 +21726,13 @@ html.is-loading body {
   .lg-mail span {
     font-size: 14px;
     padding: 0 14px
+  }
+}
+
+/* every case study's hero subtext, the short note beside the title, at 16px
+   on desktop. Three classes, so it wins over each page's own note size */
+@media (min-width:901px) {
+  .csp .csp-in :is(.csp-note, .csk-note, .csp-hl-note) {
+    font-size: 16px
   }
 }

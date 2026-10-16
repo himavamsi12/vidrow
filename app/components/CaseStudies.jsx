@@ -101,6 +101,7 @@ const DEEP_DIVES = [
     logo: "/deepdrive-new/neural garage.svg",
     logoAlt: "NeuralGarage",
     logoFx: "none",
+    href: "/case-study/visual-dub",
   },
 ];
 

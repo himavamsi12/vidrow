@@ -94,7 +94,7 @@ export default function PlatinumRxCaseStudy() {
           <h1 className="csp-h">
             PlatinumRx scaled 3x in 3 months{" "}
             <br />
-            through UGC &amp; Celebrity Performance
+            through UGC &amp; Celebrity&nbsp;Performance
           </h1>
           <p className="csp-note">
             A chronic-medicine app already spending on acquisition. Three months. One question: how

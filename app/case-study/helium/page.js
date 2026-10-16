@@ -691,7 +691,7 @@ export default function HeliumCaseStudy() {
           <h2 className="csp-reasons-h">
             Five reasons survived.
             <br />
-            Not one of them was the price.
+            Not one of them was the&nbsp;price.
           </h2>
           {REASONS.map((r) => (
             <div className="csp-reason" key={r.n} style={{ "--x": `${r.x}%`, "--y": `${r.y}%` }}>
