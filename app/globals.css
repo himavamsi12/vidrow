@@ -5666,11 +5666,13 @@ button:focus-visible,
   padding-bottom: clamp(56px, 7vw, 100px)
 }
 
-/* left padding = the rail's own left offset (58px) + its width (80px) + a
-   70px gap to the content — so the gap stays exactly 70px if either of
-   those ever changes */
+/* the side rail is hidden for now (see .csp-sideNav below), so the content
+   sits centred: 72px either side up to 1440, then growing with the screen
+   (96px at 1920) up to 120px, the same inset as the nav so the content lines
+   up with the logo. With the rail back, the left padding was 208px: the
+   rail's left offset (58px) + its width (80px) + a 70px gap */
 .csp-in {
-  padding: 0 58px 0 208px
+  padding: 0 clamp(72px, 5vw, 120px)
 }
 
 /* zero-height so it never pushes the sections below it down — it only ever
@@ -5797,10 +5799,10 @@ button:focus-visible,
   background: #2A2A2A
 }
 
-@media (max-width:900px) {
-  .csp-sideNav {
-    display: none
-  }
+/* hidden on every case study for now; remove this to bring the rail back
+   (and restore .csp-in's 208px left padding) */
+.csp-sideNav {
+  display: none
 }
 
 @media (prefers-reduced-motion: reduce) {
