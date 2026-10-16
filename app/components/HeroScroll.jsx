@@ -164,13 +164,26 @@ export default function HeroScroll() {
 
     // ── playing the curtain through ──
     // a wheel or swipe anywhere in the pinned stretch glides the page to its
-    // far end in that direction, locked so further input can't stop it
-    // mid-way; scrolling that stops part-way some other way (keys, the
-    // scrollbar) is finished off in the direction it was going
+    // far end in that direction, locked so a trackpad's momentum after even a
+    // small swipe can't stop it part-way. If the user is still scrolling hard
+    // when it lands (not just the tail of a swipe's momentum), the page
+    // carries on past Featured Work's top instead of coming to rest there, so
+    // a fast scroll never feels braked. Scrolling that stops part-way some
+    // other way (keys, the scrollbar) is finished off in the direction it was
+    // going
     let gliding = false;
     let dir = 1;
     let lastY = window.scrollY;
     let settle = 0;
+    // recent wheel input, to tell a user still scrolling hard from a swipe's
+    // dying momentum (whose deltas are tiny)
+    let wheelLog = [];
+    const pushing = (d) => {
+      const now = performance.now();
+      wheelLog = wheelLog.filter(([t]) => now - t < 160);
+      const sum = wheelLog.reduce((a, [, dy]) => a + dy, 0);
+      return d > 0 ? sum > 140 : sum < -140;
+    };
 
     const pos = () => {
       const sp = span();
@@ -189,14 +202,23 @@ export default function HeroScroll() {
       const frac = Math.min(Math.abs(to - window.scrollY) / sp, 1);
       const done = () => {
         gliding = false;
+        // still scrolling hard as it lands: keep going into the next section
+        const l = lenisRef.current;
+        if (d > 0 && l?.scrollTo && pushing(d)) {
+          l.scrollTo(to + window.innerHeight * 0.35, { force: true });
+        }
       };
       gliding = true;
       clearTimeout(settle);
+      // set off by a hard scroll: a quicker glide at constant speed, so it
+      // hands straight on to the carry-on above with no slow-down between;
+      // a small scroll keeps the soft landing
+      const hard = d > 0 && pushing(d);
       const l = lenisRef.current;
       if (l?.scrollTo) {
         l.scrollTo(to, {
-          duration: GLIDE_MIN_S + GLIDE_S * frac,
-          easing: easeGlide,
+          duration: (GLIDE_MIN_S + GLIDE_S * frac) * (hard ? 0.7 : 1),
+          easing: hard ? (x) => x : easeGlide,
           lock: true,
           force: true,
           onComplete: done,
@@ -204,12 +226,12 @@ export default function HeroScroll() {
       } else {
         window.scrollTo({ top: to, behavior: "smooth" });
       }
-      setTimeout(done, (GLIDE_MIN_S + GLIDE_S * frac) * 1000 + 300);
       return true;
     };
 
     const onWheel = (e) => {
       if (!e.deltaY || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      wheelLog.push([performance.now(), e.deltaY]);
       dir = e.deltaY > 0 ? 1 : -1;
       glide(dir);
     };
@@ -230,13 +252,15 @@ export default function HeroScroll() {
         if (!gliding) dir = y > lastY ? 1 : -1;
         lastY = y;
       }
-      if (!gliding) {
-        clearTimeout(settle);
-        settle = setTimeout(() => {
-          const { sp, t } = pos();
-          if (t > 4 && t < sp - 4) glide(dir);
-        }, 80);
-      }
+      // once the page has come to rest (glide done, or the user's own scroll
+      // stopped), a curtain left part-way is finished off in the direction it
+      // was going
+      clearTimeout(settle);
+      settle = setTimeout(() => {
+        gliding = false;
+        const { sp, t } = pos();
+        if (t > 4 && t < sp - 4) glide(dir);
+      }, 120);
       if (!raf) raf = requestAnimationFrame(tick);
     };
 

@@ -82,55 +82,39 @@ export default function FeaturedWork() {
   useLenis(() => updateRef.current?.());
 
   // a stacking deck: every card is a full screen pinned under the sticky
-  // heading, and each next card slides up over the one before it. As a card
-  // rises over the one beneath, that one eases back — it shrinks a little
-  // and dims — so the deck reads as layers stacking up. Driven straight off
-  // the next card's position, so it only ever depends on scroll.
+  // heading, and each next card slides up over the one before it, all on
+  // plain CSS sticky. The only thing measured is the heading's height, which
+  // the cards pin under (--headH). That runs once per Lenis frame (above),
+  // and only writes when the height has actually changed, so a fast scroll
+  // through the deck never forces the browser to redo layout mid-frame.
   useEffect(() => {
     const stack = stackRef.current;
     if (!stack) return;
-    const cards = [...stack.querySelectorAll(".fw2-card")];
-    if (!cards.length) return;
     const head = stack.parentElement.querySelector(".fw2-head");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    let lastH = -1;
     let frame = 0;
     const update = () => {
       frame = 0;
-      // the heading stays pinned, so the cards pin just under it
       const headH = head ? head.offsetHeight : 0;
+      if (headH === lastH) return;
+      lastH = headH;
       stack.style.setProperty("--headH", `${headH}px`);
-      if (reduce) return;
-      const vh = window.innerHeight;
-      cards.forEach((card, i) => {
-        const next = cards[i + 1];
-        if (!next) return;
-        // 0 while the next card is still a screen below, 1 once it has
-        // reached the heading and fully covers this one
-        const q = Math.min(
-          Math.max((vh - next.getBoundingClientRect().top) / Math.max(vh - headH, 1), 0),
-          1
-        );
-        card.style.setProperty("--q", q.toFixed(3));
-      });
     };
-    const onScroll = () => {
+    const onResize = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
     updateRef.current = update;
 
     update();
-    const ro = head ? new ResizeObserver(onScroll) : null;
+    const ro = head ? new ResizeObserver(onResize) : null;
     ro?.observe(head);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
       if (frame) cancelAnimationFrame(frame);
       updateRef.current = null;
       ro?.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      cards.forEach((card) => card.style.removeProperty("--q"));
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -193,7 +177,10 @@ export default function FeaturedWork() {
                   </span>
 
                   <figure className="fw2-photo">
-                    <img src={photo.src} alt="" loading="lazy" />
+                    {/* loaded up front and decoded off the main thread, so no
+                        card's photo is fetched and decoded mid-scroll as it
+                        slides in */}
+                    <img src={photo.src} alt="" loading="eager" decoding="async" />
                   </figure>
 
                   <h3 className="fw2-headline">{item.line}</h3>
