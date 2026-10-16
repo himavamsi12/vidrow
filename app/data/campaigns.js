@@ -366,7 +366,7 @@ export const CAMPAIGNS = {
     ],
   },
   groww: {
-    title: "Dump Title",
+    title: "Easiest app for Investment",
     by: "Groww",
     about: "Choosing a mutual fund can feel harder than starting to invest. Trading can mean jumping between screens before you even place an order. Groww brought both problems back to something simple: the right tools, in one app. Creator-led explainers and conversations showed fund comparison, SIPs, a first stock investment and trading directly from charts. Instead of another reason to put it off, each film gave people a practical next step towards starting or switching.",
     layout: "tall",
@@ -412,13 +412,12 @@ export const CAMPAIGNS = {
     layout: "tall",
     frames: [
       video("96b61f4139b242df93110bd90e4c01f2", "Oolka Ads, film 1"),
-      video("ac9b388f562b8206477cd6282cf7f966", "Oolka Ads, film 2"),
-      video("c54eb5560feaa9c55674de496dab5318", "Oolka Ads, film 3"),
-      video("6d66f5e2927685f01a1c1417e7d9f86f", "Oolka Ads, film 4"),
-      video("9f0c30782ea1b45380173d67282d5f8e", "Oolka Ads, film 5"),
-      video("69a7439dc94a50de77ef30fface47818", "Oolka Ads, film 6"),
-      video("f7631997b5bb50eadb2ec8fbac3e5ab6", "Oolka Ads, film 7"),
-      video("662a87e28fcfc08a231b2fe3fe0e363c", "Oolka Ads, film 8"),
+      video("c54eb5560feaa9c55674de496dab5318", "Oolka Ads, film 2"),
+      video("6d66f5e2927685f01a1c1417e7d9f86f", "Oolka Ads, film 3"),
+      video("9f0c30782ea1b45380173d67282d5f8e", "Oolka Ads, film 4"),
+      video("69a7439dc94a50de77ef30fface47818", "Oolka Ads, film 5"),
+      video("f7631997b5bb50eadb2ec8fbac3e5ab6", "Oolka Ads, film 6"),
+      video("662a87e28fcfc08a231b2fe3fe0e363c", "Oolka Ads, film 7"),
     ],
   },
   pice_Ads: {

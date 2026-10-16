@@ -260,11 +260,11 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
                 <span className="vfoot__dot" aria-hidden="true">
                   ·
                 </span>
-                <a href="#contact">Privacy</a>
+                <a href="/privacy-policy">Privacy</a>
                 <span className="vfoot__dot" aria-hidden="true">
                   ·
                 </span>
-                <a href="#contact">Terms</a>
+                <a href="/terms-and-conditions">Terms</a>
               </div>
             </div>
           </div>

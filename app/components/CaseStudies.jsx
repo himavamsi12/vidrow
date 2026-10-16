@@ -1,6 +1,7 @@
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import CsRow from "./CsRow";
+import CsThree from "./CsThree";
 
 // the four story cards. Each image is a cut-out that sits on the card's
 // coloured panel; the brand sits at the top, as a white logo or plain text,
@@ -18,7 +19,7 @@ const DEEP_DIVES = [
   {
     kind: "px",
     title: "PlatinumRx leveraged Celebrity and UGC assets to increase reach 3x in 2 months",
-    img: "/deepdrive-new/2.png",
+    img: "/deepdrive-new/2.png?v=2",
     logo: "/deepdrive-new/logos/platinumrx.png",
     logoAlt: "PlatinumRx",
     logoFx: "none",
@@ -35,7 +36,7 @@ const DEEP_DIVES = [
     kind: "ma",
     title: "Masai\u2019s Performance marketing scaled by 20x in 10 months.",
     img: "/deepdrive-new/4.png",
-    logo: "/deepdrive-new/logos/masai.png",
+    logo: "/deepdrive-new/masai-logo.png",
     logoAlt: "Masai",
     logoFx: "none",
     href: "/case-study/masai",
@@ -53,19 +54,10 @@ const DEEP_DIVES = [
     kind: "ap",
     title: "ApnaMart builds absolute category authority in staples category",
     img: "/deep drives/apnamart deep drive.png",
-    logo: "/deepdrive-new/logos/apnamart.png",
+    logo: "/partnership/apnamart.svg",
     logoAlt: "ApnaMart",
-    logoFx: "none",
+    logoFx: "none", // the wordmark's own white and violet; a white filter fills its letters in
     href: "/case-study/apnamart",
-  },
-  {
-    kind: "ao",
-    title: "ApnaMart lifted online delivery adoption 4.2x with offline and online marketing",
-    img: "/deepdrive-new/6.png",
-    logo: "/deepdrive-new/logos/apnamart.png",
-    logoAlt: "ApnaMart",
-    logoFx: "none",
-    href: "/case-study/apnamart-online-offline",
   },
   {
     kind: "vy",
@@ -85,10 +77,19 @@ const DEEP_DIVES = [
     href: "/case-study/goodscore",
   },
   {
+    kind: "ao",
+    title: "ApnaMart lifted online delivery adoption 4.2x with offline and online marketing",
+    img: "/deepdrive-new/6.png",
+    logo: "/partnership/apnamart.svg",
+    logoAlt: "ApnaMart",
+    logoFx: "none", // the wordmark's own white and violet; a white filter fills its letters in
+    href: "/case-study/apnamart-online-offline",
+  },
+  {
     kind: "se",
     title: "Seekho achieves 30% dip in CAC with celebrity performance marketing",
     img: "/deepdrive-new/9.png",
-    logo: "/deepdrive-new/seekho.png",
+    logo: "/deepdrive-new/seekho.svg",
     logoAlt: "Seekho",
     href: "/case-study/seekho",
     logoFx: "none",
@@ -97,7 +98,7 @@ const DEEP_DIVES = [
     kind: "ng",
     title: "NeuralGarage is cracking global marketing at Indian costs",
     img: "/deepdrive-new/10.png",
-    logo: "/deepdrive-new/neural garage.png",
+    logo: "/deepdrive-new/neural garage.svg",
     logoAlt: "NeuralGarage",
     logoFx: "none",
   },
@@ -130,28 +131,20 @@ function DiveCard({ d, repeat = false }) {
   );
 }
 
-// three of the stories, a different three on each page: the list (minus the
-// page's own story) is started at a point worked out from the page's address
-const pickThree = (list, seed = "") => {
-  let h = 0;
-  for (const c of seed) h = (h * 31 + c.charCodeAt(0)) % 9973;
-  const start = h % list.length;
-  return [0, 1, 2].map((i) => list[(start + i) % list.length]);
-};
-
-/** The Deep Dives cards. On the homepage they loop sideways; `embed` (a case
- *  study page) shows three still cards instead. `exclude` is the href of a
- *  case study to leave out: a page doesn't offer itself. */
+/** The Deep Dives cards. On the homepage they loop sideways; `embed` (the
+ *  foot of a case study page) shows three still cards, a random three on
+ *  every visit. `exclude` is the href of a case study to leave out: a page
+ *  doesn't offer itself. */
 export function DeepDiveCards({ exclude, embed = false }) {
   const dives = exclude ? DEEP_DIVES.filter((d) => d.href !== exclude) : DEEP_DIVES;
 
   if (embed) {
     return (
-      <div className="cs-three">
-        {pickThree(dives, exclude).map((d) => (
+      <CsThree>
+        {dives.map((d) => (
           <DiveCard key={d.kind} d={d} />
         ))}
-      </div>
+      </CsThree>
     );
   }
 

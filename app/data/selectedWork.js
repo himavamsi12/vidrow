@@ -84,7 +84,7 @@ export const SW_TABS = [
     layout: "tall",
     items: [
       ["Bachatt hai to Budget hai", "Bachatt", "performation creative.png", "/campaign/Bachatt_brandformance"],
-      ["Dump Title", "Groww", "groww.png", "/campaign/groww"],
+      ["Easiest app for Investment", "Groww", "groww.png", "/campaign/groww"],
       ["Signup For the Test", "Masai", "masai.png", "/campaign/masai_Ads"],
       ["Buy your first Substitute Medicine", "PlatinumRx", "platinumrx1.png", "/campaign/performance_platinum_rx"],
       ["Book now on website", "Helium", "helium.png", "/campaign/helium_Ads"],

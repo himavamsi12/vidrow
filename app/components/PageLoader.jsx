@@ -12,7 +12,7 @@ const MAX_MS = 10000;
 // The Vidrow loader: a white screen playing the Vidrow logo animation
 // on a browser's first visit to the homepage. It plays the whole video,
 // waits for the page itself to finish loading, then fades away. After that
-// it never shows again.
+// it doesn't show again until the browser's cache or site data is cleared.
 // Safari (and every browser on iPhone/iPad, which all run on Safari's
 // engine) ignores the WebM's transparency and paints it black, so it gets
 // the same animation as HEVC with alpha instead (same framing, 1280x720)
@@ -39,12 +39,9 @@ export default function PageLoader() {
       setState("gone");
       return;
     }
-    // already played once in this browser: never again
-    let seen = false;
-    try {
-      seen = localStorage.getItem(KEY) === "1";
-    } catch {}
-    if (seen) {
+    // already played in this browser (the flag and the cached /loader-state
+    // both say so, checked before first paint in layout.js): not again
+    if (document.documentElement.classList.contains("loader-played")) {
       setState("gone");
       return;
     }
@@ -55,6 +52,8 @@ export default function PageLoader() {
       try {
         localStorage.setItem(KEY, "1");
       } catch {}
+      // and put the "played" copy of /loader-state in the HTTP cache
+      fetch("/loader-state", { headers: { "x-loader-seen": "1" } }).catch(() => {});
     }, 300);
 
     let videoDone = false;
