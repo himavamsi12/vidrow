@@ -21979,3 +21979,13 @@ main.csp .csp-hl-rsub {
     margin-bottom: 0
   }
 }
+
+/* every case study: the sentence captions under a banner, a chart or a
+   video run at 16px, on every screen (main.csp outranks each page's own) */
+main.csp .csp-bannerCaption,
+main.csp .csp-bannerCaption b,
+main.csp .ccj-chart > figcaption,
+main.csp .csk-chart > figcaption,
+main.csp .cvd-mediaItem > figcaption {
+  font-size: 16px
+}
