@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 
 // the flat colours the pieces take once they start rising (index = piece)
 const RISING_FILL = ["", "#F5FA5E", "", "#FFE94A", "#FBE556", "", "#FCF6B4", "#F7F97A"];
 
 const easeInOut = (x) => -(Math.cos(Math.PI * Math.min(Math.max(x, 0), 1)) - 1) / 2;
+// the glide sets off at full speed (no slow start) and eases into the end
+const easeGlide = (x) => 1 - Math.pow(1 - x, 3);
+// how long the curtain takes to play through once set off, in seconds
+const GLIDE_S = 0.85;
+const GLIDE_MIN_S = 0.3;
 
 /**
  * Scroll-scrubbed hero curtain (desktop). The hero is pinned for a long
@@ -13,11 +19,15 @@ const easeInOut = (x) => -(Math.cos(Math.PI * Math.min(Math.max(x, 0), 1)) - 1) 
  * screen on its own delay, its body trailing off the bottom, until the
  * skyline has swept the whole hero away. Featured Work is held at the top of
  * the screen behind it and is revealed as the last piece leaves. The pieces
- * follow the page's own (Lenis-smoothed) scroll 1:1, with no snapping or
- * auto-gliding, so the pinned stretch scrolls exactly like the rest of the
- * page.
+ * follow the page's scroll; any wheel or swipe inside the pinned stretch
+ * glides the page right through it (down to Featured Work, or back up to the
+ * top), so the curtain always plays to the end and never stops part-way.
  */
 export default function HeroScroll() {
+  const lenis = useLenis();
+  const lenisRef = useRef(null);
+  lenisRef.current = lenis;
+
   useEffect(() => {
     const hero = document.querySelector(".hx");
     const sky = document.querySelector(".hx-sky");
@@ -152,17 +162,98 @@ export default function HeroScroll() {
       draw(read());
     };
 
+    // ── playing the curtain through ──
+    // a wheel or swipe anywhere in the pinned stretch glides the page to its
+    // far end in that direction, locked so further input can't stop it
+    // mid-way; scrolling that stops part-way some other way (keys, the
+    // scrollbar) is finished off in the direction it was going
+    let gliding = false;
+    let dir = 1;
+    let lastY = window.scrollY;
+    let settle = 0;
+
+    const pos = () => {
+      const sp = span();
+      const top0 = hero.getBoundingClientRect().top + window.scrollY;
+      return { sp, top0, t: window.scrollY - top0 };
+    };
+
+    const glide = (d) => {
+      if (off() || gliding) return false;
+      const { sp, top0, t } = pos();
+      if (sp < 2) return false;
+      // down: from the top of the stretch up to just short of its end;
+      // up: from inside the stretch (or just past it) back to the top
+      if (d > 0 ? t < -4 || t >= sp - 4 : t <= 4 || t > sp + 4) return false;
+      const to = top0 + (d > 0 ? sp : 0);
+      const frac = Math.min(Math.abs(to - window.scrollY) / sp, 1);
+      const done = () => {
+        gliding = false;
+      };
+      gliding = true;
+      clearTimeout(settle);
+      const l = lenisRef.current;
+      if (l?.scrollTo) {
+        l.scrollTo(to, {
+          duration: GLIDE_MIN_S + GLIDE_S * frac,
+          easing: easeGlide,
+          lock: true,
+          force: true,
+          onComplete: done,
+        });
+      } else {
+        window.scrollTo({ top: to, behavior: "smooth" });
+      }
+      setTimeout(done, (GLIDE_MIN_S + GLIDE_S * frac) * 1000 + 300);
+      return true;
+    };
+
+    const onWheel = (e) => {
+      if (!e.deltaY || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      dir = e.deltaY > 0 ? 1 : -1;
+      glide(dir);
+    };
+    let touchY = 0;
+    const onTouchStart = (e) => {
+      touchY = e.touches[0].clientY;
+    };
+    const onTouchEnd = (e) => {
+      const c = e.changedTouches[0];
+      if (!c || Math.abs(c.clientY - touchY) < 8) return;
+      dir = c.clientY < touchY ? 1 : -1;
+      glide(dir);
+    };
+
     const onScroll = () => {
+      const y = window.scrollY;
+      if (y !== lastY) {
+        if (!gliding) dir = y > lastY ? 1 : -1;
+        lastY = y;
+      }
+      if (!gliding) {
+        clearTimeout(settle);
+        settle = setTimeout(() => {
+          const { sp, t } = pos();
+          if (t > 4 && t < sp - 4) glide(dir);
+        }, 80);
+      }
       if (!raf) raf = requestAnimationFrame(tick);
     };
 
     tick();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
     return () => {
+      clearTimeout(settle);
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
       svgs.forEach((s) => (s.style.transform = ""));
       if (featured) featured.style.transform = "";
       hero.classList.remove("hx--covered");

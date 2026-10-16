@@ -19955,6 +19955,18 @@ html.is-loading body {
   max-width: 68ch
 }
 
+/* PlatinumRx: every section's body copy at 16px, as on Masai */
+.csp--prx .csp-aoc-copy,
+.csp--prx .csp-aoc-desc,
+.csp--prx .csp-aoc-note,
+.csp--prx .csp-mid-copy,
+.csp--prx .csp-how-copy,
+.csp--prx .csp-howDesc,
+.csp--prx .csp-howNote,
+.csp--prx .csp-hookDesc {
+  font-size: 16px
+}
+
 /* PlatinumRx hooks, per the mock: a one-line heading at the section-heading
    size with room under it (there's no copy line here to space it), and
    cards with a smaller corner step, tighter padding and the title sitting
