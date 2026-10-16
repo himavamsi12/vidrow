@@ -164,7 +164,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
               <span className="csp-lockup">
                 <VidrowMark />
                 <i aria-hidden="true" />
-                <img src={`${ASSETS}/apnamart-logo.png`} alt="Apnamart" />
+                <img src={`${ASSETS}/apnamart-badge.svg`} alt="Apnamart" />
               </span>
             </span>
           </div>

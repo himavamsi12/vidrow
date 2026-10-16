@@ -132,7 +132,7 @@ export default function ApnamartCaseStudy() {
           <span className="cst-plate">
             <VidrowMark />
             <i aria-hidden="true" />
-            <img className="cst-appLogo cap-logo" src="/casestudy%20images/apna%20amrt.png" alt="ApnaMart" />
+            <img className="cst-appLogo cap-logo" src="/casestudy%20images/casestudy-apnamart-online/apnamart-badge.svg" alt="ApnaMart" />
           </span>
         </div>
 

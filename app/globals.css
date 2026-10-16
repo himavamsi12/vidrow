@@ -17409,8 +17409,17 @@ html {
 }
 
 /* ── Apnamart case study (built on the Stealth App / VisualDub styles) ── */
-.cap-logo {
-  border-radius: 50%
+/* the ApnaMart badge is wide, so it sets its own width rather than
+   filling the square app-logo box */
+.cst-plate .cap-logo {
+  width: 8cqw;
+  height: auto
+}
+
+@media (max-width:760px) {
+  .cst-plate .cap-logo {
+    width: 52px
+  }
 }
 
 .cap-meta {
@@ -21220,11 +21229,10 @@ html.is-loading body {
   }
 }
 
-/* the logo tab: Vidrow mark, rule, then a small round Apnamart logo */
+/* the logo tab: Vidrow mark, rule, then the Apnamart badge filling the rest */
 .cao .csp-bannerTag .csp-lockup img {
-  flex: none;
-  width: 34%;
-  border-radius: 50%
+  flex: 1 1 auto;
+  min-width: 0
 }
 
 @media (max-width:900px) {
@@ -21988,4 +21996,10 @@ main.csp .ccj-chart > figcaption,
 main.csp .csk-chart > figcaption,
 main.csp .cvd-mediaItem > figcaption {
   font-size: 16px
+}
+
+/* Apnamart: no rule under the last communication pillar; the rules between
+   the pillars stay */
+main.csp .cap-pillars li:last-child {
+  border-bottom: 0
 }
