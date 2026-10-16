@@ -20140,25 +20140,37 @@ html.is-loading body {
   }
 }
 
-/* Helium founder points: number tab on top, the highlighted line flush under it
-   (same left edge), then the copy */
+/* Helium points (brief, underdog moves, casting, founder): number tab on top,
+   the highlighted line flush under it (same left edge), then the copy */
+.csp-briefPoint,
+.csp-underMove,
+.csp-castPoint,
 .csp-founderPoint {
   display: flex;
   flex-direction: column;
   align-items: flex-start
 }
 
+.csp-briefPoint .csp-underNum,
+.csp-underMove .csp-underNum,
+.csp-castPoint .csp-underNum,
 .csp-founderPoint .csp-underNum {
   display: block;
   padding: 10px 14px
 }
 
+.csp-briefPoint .csp-underMoveH,
+.csp-underMove .csp-underMoveH,
+.csp-castPoint .csp-underMoveH,
 .csp-founderPoint .csp-underMoveH {
   display: block;
   margin: 0;
   padding: 8px 12px
 }
 
+.csp-briefPoint .csp-briefDesc,
+.csp-underMove .csp-underMoveDesc,
+.csp-castPoint .csp-castPointDesc,
 .csp-founderPoint .csp-castPointDesc {
   margin: 18px 0 0
 }

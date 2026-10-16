@@ -530,8 +530,8 @@ export default function HeliumCaseStudy() {
           <div className="csp-briefPoints">
             {BRIEF_POINTS.map((b) => (
               <div className="csp-briefPoint" key={b.n}>
-                <span className="csp-briefNum">{b.n}</span>
-                <span className="csp-briefTag">{b.tag}</span>
+                <span className="csp-underNum">{b.n}</span>
+                <span className="csp-underMoveH">{b.tag}</span>
                 <p className="csp-briefDesc">{b.desc}</p>
               </div>
             ))}
