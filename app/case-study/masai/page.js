@@ -2,6 +2,8 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
 import CspSectionNav from "../../components/CspSectionNav";
+import SeekhoFilms from "../../components/SeekhoFilms";
+import { CAMPAIGNS } from "../../data/campaigns";
 
 export const metadata = {
   title: "Masai - Case Study | Vidrow",
@@ -13,85 +15,24 @@ const SECTIONS = [
   { id: "csp-sec-mid", label: "Where It Landed" },
   { id: "csp-sec-how", label: "How We Did It" },
   { id: "csp-sec-celeb", label: "What We Won" },
-  { id: "csp-sec-cac", label: "Scale" },
-  { id: "csp-sec-programme", label: "By Programme" },
+  { id: "csp-sec-ads", label: "Ads" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
-// "our ads carried the biggest bets" chart — a cumulative share-of-budget
-// curve read at nine ad-count checkpoints (1, top 5, top 10, ...all). The
-// checkpoints aren't evenly spaced on a real number line, but the chart
-// treats them as categorical ticks (even spacing), which is what lets a
-// span running from "1" to "all" fit legibly on one axis.
-const SCALE_X = [90, 226, 362, 498, 634, 770, 906, 1042, 1178];
-const SCALE_TICKS = ["1", "5", "10", "25", "50", "100", "200", "400", "all"];
-const SCALE_Y_TICKS = [0, 10, 20, 30, 40, 50, 60];
-const VIDROW_PCT = [3, 8, 18, 28, 38, 45, 51, 54, 56];
-const REST_PCT = [2, 6, 13, 22, 30, 37, 41, 43, 45];
-
-const yForPct = (pct) => 380 - pct * 6;
-const VIDROW_PTS = SCALE_X.map((x, i) => [x, yForPct(VIDROW_PCT[i])]);
-const REST_PTS = SCALE_X.map((x, i) => [x, yForPct(REST_PCT[i])]);
-
-// each segment curves through the midpoint between consecutive points
-// (the point itself as the quadratic's control), so the line reads smooth
-// at every joint instead of kinking at each data point
-function smoothPath(points) {
-  let d = `M${points[0][0]},${points[0][1]}`;
-  for (let i = 1; i < points.length; i++) {
-    const [px, py] = points[i - 1];
-    const [x, y] = points[i];
-    d += ` Q${px},${py} ${(px + x) / 2},${(py + y) / 2}`;
-  }
-  const [lx, ly] = points[points.length - 1];
-  d += ` L${lx},${ly}`;
-  return d;
-}
-
-const PROGRAMMES = [
-  {
-    area: "MBA",
-    programme: "Executive & PGPM programmes",
-    val: "-83%",
-    desc: "The account's weakest area became its strongest.",
-  },
-  {
-    area: "PM",
-    programme: "Product management",
-    val: "-32%",
-    desc: "A top-volume programme, materially re-priced.",
-  },
-  {
-    area: "TAMIL",
-    programme: "AI & ML, regional language",
-    val: "-21%",
-    desc: "Written natively for the audience, not dubbed into it.",
-  },
-  {
-    area: "DM",
-    programme: "Digital marketing",
-    val: "-19%",
-    desc: "Sharper openings on a crowded, price-led course.",
-  },
-  {
-    area: "DA",
-    programme: "Data analytics",
-    val: "-4%",
-    desc: "A modest gain on an already-efficient programme.",
-  },
-];
+// the first four films of the Masai campaign page (/campaign/masai_Ads)
+const ADS = CAMPAIGNS.masai_Ads.frames.slice(0, 4);
 
 const AOC = [
   {
     n: "01",
     title: "Window",
     head: "6 Months",
-    desc: "January to June 2026, judged continuously.",
+    desc: "First 3 months for testing and 3 months scaling.",
   },
   {
     n: "02",
     title: "Scope",
-    head: "9 Programmes",
+    head: "9 Different Courses",
     desc: "AI & ML, product management, analytics, MBA and more.",
   },
   {
@@ -103,7 +44,7 @@ const AOC = [
   {
     n: "04",
     title: "Output",
-    head: "~306 Ads made",
+    head: "~700 Ads made",
     desc: "Each shipped with multiple hooks into the account across the six months.",
   },
 ];
@@ -111,7 +52,7 @@ const AOC = [
 export default function PlatinumRxCaseStudy() {
   return (
     <>
-    <main className="csp">
+    <main className="csp csp--masai">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>
@@ -122,9 +63,9 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
-            Spends Scaled 5x in 6
+            Masai reduced dependence on
             <br />
-            Months. At a Sustained CAC.
+            Influencer marketing for scaling
           </h1>
           <p className="csp-note">
             Masai&apos;s performance came from influencer marketing on Instagram, Twitter and
@@ -144,8 +85,10 @@ export default function PlatinumRxCaseStudy() {
         </div>
 
         <p className="csp-bannerCaption">
-          <b>~306 ads</b> one tile each, every ad we shipped into the account across the six
-          months, each with multiple hooks.
+          <b>~700 creator led ads in a period of 6 months</b>{" "}
+          <span style={{ fontSize: "0.8em" }}>
+            each ad with different hook and communication unlocking different audience cohort
+          </span>
         </p>
 
         <div className="csp-meta">
@@ -155,11 +98,11 @@ export default function PlatinumRxCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Timeline</span>
-            <span className="csp-metaValue">Jan - Jun 2026</span>
+            <span className="csp-metaValue">6 Months</span>
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">5x spend, CAC held</span>
+            <span className="csp-metaValue">5x Scale, at same CAC</span>
           </div>
         </div>
       </div>
@@ -174,7 +117,7 @@ export default function PlatinumRxCaseStudy() {
                 <span className="csp-eyebrow2-sep">·</span>
                 THE SETUP
               </div>
-              <h2 className="csp-aoc-h">Total Vidrow Output</h2>
+              <h2 className="csp-aoc-h">Creative Volume</h2>
             </div>
             <p className="csp-aoc-copy">
               Masai runs online tech courses. Nobody buys one off an ad, they book a paid slot
@@ -209,14 +152,18 @@ export default function PlatinumRxCaseStudy() {
               THE GROWTH
             </div>
             <h2 className="csp-mid-h">
-              Spends scaled 5x
+              Growth scaled 5x
               <br />
               in six months.
             </h2>
             <p className="csp-mid-copy">
-              December was the last month before we took the creative over. Since then we&apos;ve
-              scaled Masai to nearly five times while sustaining the CAC, and not one month has
-              dropped back below where we started.
+              We partnered with Masai from Dec&apos;25. Since then we&apos;ve scaled Masai
+              performance marketing engine to nearly five times while sustaining the CAC, and
+              reducing the reliance on expensive influencer marketing.
+            </p>
+            <p className="csp-mid-copy">
+              Creator led performance marketing helped open new audience cohorts for Masai along
+              with predictability on CAC
             </p>
           </div>
 
@@ -262,9 +209,9 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-flow-h">Our Creative Strategy</h2>
             </div>
             <p className="csp-flow-copy">
-              Three sources feed the batch, the right creator carries it, and every concept
-              ships with three different hooks as three separate ads. Meta decides which of them
-              survive, and that answer sets the next batch.
+              Three sources feed the meta ads, the right creator carries it, and every
+              concept ships with three different hooks as three separate ads. Meta decides which
+              of them survive, and that answer sets the next batch.
             </p>
           </div>
 
@@ -273,7 +220,7 @@ export default function PlatinumRxCaseStudy() {
               <div className="csp-flow-box csp-flow-box--yellow">Instagram trends</div>
               <div className="csp-flow-box csp-flow-box--yellow">New concepts</div>
               <div className="csp-flow-box csp-flow-box--yellow" id="csp-flow-doubledown">
-                Double down
+                Winner Double down
               </div>
             </div>
 
@@ -286,7 +233,10 @@ export default function PlatinumRxCaseStudy() {
 
             <div className="csp-flow-box csp-flow-box--violet">
               <h3>Right Creator</h3>
-              <p>We keep the creators who convert and drop the ones who do not.</p>
+              <p>
+                We keep the creators who convert and drop the ones who do not. Right face meant who
+                would look as an edtech expert
+              </p>
             </div>
 
             <div className="csp-flow-connector">
@@ -313,7 +263,9 @@ export default function PlatinumRxCaseStudy() {
               <div className="csp-flow-box csp-flow-box--yellow csp-flow-box--outcome">
                 Did not work → Discard
               </div>
-              <span className="csp-flow-metaLabel">Meta decides which</span>
+              <span className="csp-flow-metaLabel">
+                Meta decides which ad is winning and which doesnt scale
+              </span>
               <div className="csp-flow-box csp-flow-box--yellow csp-flow-box--outcome" id="csp-flow-worked">
                 Worked → Double down
               </div>
@@ -331,230 +283,45 @@ export default function PlatinumRxCaseStudy() {
           </div>
 
           <p className="csp-howNote">
-            36% of our ads with a real budget beat the account&apos;s average cost, against 27%
-            of everything else running.
+            First 3 months went into deciding which are the winning communication angles across
+            different courses and audiences. Next 3 months were spent in scaling it
           </p>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-celeb csp-won" id="csp-sec-celeb">
+        <section className="csp-out" id="csp-sec-celeb">
+          <div className="csp-out-left">
+            <div className="csp-eyebrow2">
+              <span className="csp-eyebrow2-dot" aria-hidden="true" />
+              <b>04</b>
+              <span className="csp-eyebrow2-sep">·</span>
+              WHAT WE WON
+            </div>
+            <h2 className="csp-out-h">The Outcome</h2>
+            <p className="csp-out-note">
+              Even with scaling the CAC didn&apos;t increase in fact even at scale we
+              <br />
+              were able to lower the cost per enrolment by 27%
+            </p>
+          </div>
+          <div className="csp-out-stair">
+            <span className="csp-out-val">-27%</span>
+            <span className="csp-out-label">Lower Cost per Enrolment</span>
+          </div>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csk-sec" id="csp-sec-ads">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>04</b>
+            <b>05</b>
             <span className="csp-eyebrow2-sep">·</span>
-            WHAT WE WON
+            WORKS
           </div>
-
-          <div className="csp-won-layout">
-            <h2 className="csp-celeb-h">
-              Vidrow ads
-              <br />
-              vs others.
-            </h2>
-            <p className="csp-won-copy">
-              Meta was never told to favour our ads. It moved the money there because they
-              converted, and it moved more of it than the share of ads we made.
-            </p>
-
-            <div className="csp-won-left">
-              <span className="csp-won-label">Our share of the spends</span>
-              <div className="csp-won-grid">
-                <div className="csp-won-col">
-                  <div className="csp-won-card csp-won-card--gray">
-                    <span className="csp-won-val">52%</span>
-                    <span className="csp-won-cardLabel">of all the ads that ran</span>
-                  </div>
-                  <div className="csp-won-card csp-won-card--acid">
-                    <span className="csp-won-val">56%</span>
-                    <span className="csp-won-cardLabel">of all the money spent</span>
-                  </div>
-                </div>
-                <div className="csp-won-card csp-won-card--pale">
-                  <span className="csp-won-val">55%</span>
-                  <span className="csp-won-cardLabel">of all the test bookings</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="csp-won-right">
-              <span className="csp-won-label">Why that matters</span>
-              <div className="csp-won-stack">
-                <div className="csp-won-statCard">
-                  <span className="csp-won-statVal">-27%</span>
-                  <span className="csp-won-statLabel">Lower cost per test booking</span>
-                </div>
-                <div className="csp-won-note">
-                  <p>
-                    We made just over half the ads, and took a bigger share of the bookings and
-                    a bigger share of the budget than that.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-cac" id="csp-sec-cac">
-          <div className="csp-cac-head">
-            <div className="csp-cac-headL">
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>05</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                SCALE
-              </div>
-              <h2 className="csp-cac-h">
-                Our ads carried the
-                <br />
-                account&apos;s biggest bets.
-              </h2>
-            </div>
-            <p className="csp-cac-copy">
-              Line up every ad in the account by the budget it carried and add them up one at a
-              time. Our ads are ahead of the rest at the top, in the middle and at the bottom.
-            </p>
-          </div>
-
-          <div className="csp-cac-plot">
-            <div className="csp-cac-plotL">
-              <span className="csp-cac-caption">Share of the account&apos;s budget, added up ad by ad</span>
-
-              <div className="csp-scaleChart">
-                <svg viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">
-                  {SCALE_Y_TICKS.map((pct) => (
-                    <line
-                      key={pct}
-                      className={pct === 0 ? "csp-scaleAxis" : "csp-scaleGrid"}
-                      x1="70"
-                      y1={yForPct(pct)}
-                      x2="1200"
-                      y2={yForPct(pct)}
-                    />
-                  ))}
-
-                  {SCALE_Y_TICKS.map((pct) => (
-                    <text
-                      key={pct}
-                      className="csp-scaleYLabel"
-                      x="52"
-                      y={yForPct(pct) + 6}
-                      textAnchor="end"
-                    >
-                      {pct}%
-                    </text>
-                  ))}
-
-                  <path className="csp-scaleLine csp-scaleLine--dark" d={smoothPath(REST_PTS)} />
-                  <path className="csp-scaleLine csp-scaleLine--violet" d={smoothPath(VIDROW_PTS)} />
-
-                  <circle
-                    className="csp-scaleDot csp-scaleDot--dark"
-                    cx={REST_PTS[REST_PTS.length - 1][0]}
-                    cy={REST_PTS[REST_PTS.length - 1][1]}
-                    r="9"
-                  />
-                  <circle
-                    className="csp-scaleDot csp-scaleDot--violet"
-                    cx={VIDROW_PTS[VIDROW_PTS.length - 1][0]}
-                    cy={VIDROW_PTS[VIDROW_PTS.length - 1][1]}
-                    r="9"
-                  />
-
-                  <text
-                    className="csp-scaleVal csp-scaleVal--violet"
-                    x={VIDROW_PTS[VIDROW_PTS.length - 1][0]}
-                    y={VIDROW_PTS[VIDROW_PTS.length - 1][1] - 20}
-                    textAnchor="end"
-                  >
-                    56%
-                  </text>
-                  <text
-                    className="csp-scaleVal csp-scaleVal--dark"
-                    x={REST_PTS[REST_PTS.length - 1][0]}
-                    y={REST_PTS[REST_PTS.length - 1][1] - 20}
-                    textAnchor="end"
-                  >
-                    45%
-                  </text>
-
-                  {SCALE_X.map((x, i) => (
-                    <text key={SCALE_TICKS[i]} className="csp-scaleXLabel" x={x} y="410" textAnchor="middle">
-                      {SCALE_TICKS[i]}
-                    </text>
-                  ))}
-                </svg>
-              </div>
-            </div>
-
-            <aside className="csp-cacCard">
-              <span className="csp-cacCard-val">4 of 5</span>
-              <div className="csp-cacCard-foot">
-                <b>Top spending ads</b>
-                <span>were Vidrow ads.</span>
-              </div>
-            </aside>
-          </div>
-
-          <div className="csp-cacLegend">
-            <span className="csp-cacLegendItem">
-              <i className="csp-cacSwatch csp-cacSwatch--violet" />
-              Vidrow ads
-            </span>
-            <span className="csp-cacLegendItem">
-              <i className="csp-cacSwatch csp-cacSwatch--dark" />
-              Rest of account
-            </span>
-          </div>
-
-          <p className="csp-howNote">
-            Reading left to right: the biggest single ad, then the biggest five, and so on to all
-            of them. The Vidrow line never drops below the rest, so this is not one runaway
-            winner flattering an average.
-          </p>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-prog" id="csp-sec-programme">
-          <div className="csp-prog-head">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>06</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                BY PROGRAMME
-              </div>
-              <h2 className="csp-prog-h">
-                Biggest gains
-                <br />
-                where it was hardest.
-              </h2>
-            </div>
-            <p className="csp-prog-copy">
-              Each row compares our ad against other video selling the same programme, in the
-              same language.
-            </p>
-          </div>
-
-          <div className="csp-prog-table">
-            <div className="csp-prog-row csp-prog-row--head">
-              <span className="csp-prog-th">Area</span>
-              <span className="csp-prog-th">Programme</span>
-              <span className="csp-prog-th">Vs. rest</span>
-              <span className="csp-prog-th">What it means</span>
-            </div>
-            {PROGRAMMES.map((p) => (
-              <div className="csp-prog-row" key={p.area}>
-                <span className="csp-prog-area">{p.area}</span>
-                <span className="csp-prog-programme">{p.programme}</span>
-                <span className="csp-prog-val">{p.val}</span>
-                <span className="csp-prog-desc">{p.desc}</span>
-              </div>
-            ))}
-          </div>
+          <h2 className="cst-secH">Ads</h2>
+          <SeekhoFilms films={ADS} className="cms-ads" />
         </section>
       </div>
 

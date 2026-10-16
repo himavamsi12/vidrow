@@ -7422,6 +7422,10 @@ button:focus-visible,
   margin: 0
 }
 
+.csp-mid-copy + .csp-mid-copy {
+  margin-top: 1em
+}
+
 .csp-mid-right {
   display: flex;
   align-items: flex-end;
@@ -19813,5 +19817,147 @@ html.is-loading body {
     align-self: center;
     padding-top: 10px;
     padding-bottom: 10px
+  }
+}
+
+/* "The Outcome": light section, one yellow staircase (tall step on the right) */
+.csp-out {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(32px, 6vw, 96px);
+  align-items: end;
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.csp-out-h {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 40px);
+  letter-spacing: -.02em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 16px 0 clamp(32px, 5vw, 64px)
+}
+
+.csp-out-note {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--acid);
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #4C4546
+}
+
+.csp-out-stair {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 272px);
+  aspect-ratio: 272 / 232;
+  background: var(--acid);
+  clip-path: polygon(
+    66% 0, 100% 0, 100% 100%, 0 100%, 0 65.5%, 28.7% 65.5%, 28.7% 31%, 66% 31%
+  )
+}
+
+.csp-out-val {
+  position: absolute;
+  left: 36.8%;
+  top: 36%;
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--violet)
+}
+
+.csp-out-label {
+  position: absolute;
+  left: 12.5%;
+  bottom: 12%;
+  font-family: var(--body);
+  font-size: clamp(12px, 1.1vw, 15px);
+  color: var(--ink)
+}
+
+@media (max-width:900px) {
+  .csp-out {
+    grid-template-columns: 1fr;
+    row-gap: 40px
+  }
+
+  .csp-out-stair {
+    justify-self: start
+  }
+}
+
+/* Masai: the Ads row, four films from the campaign page */
+.cms-ads {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 0.9vw, 12px);
+  margin-top: clamp(32px, 4vw, 56px)
+}
+
+.cms-ads .csk-film {
+  aspect-ratio: 196 / 331;
+  border-radius: 0
+}
+
+@media (max-width:900px) {
+  .cms-ads {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+/* Masai: wider headline note so it sets in three lines (em, so it tracks the vw font size) */
+@media (min-width:901px) {
+  .csp--masai .csp-note {
+    width: 36em;
+    max-width: 46%
+  }
+}
+
+/* Masai on phones: let the forced line breaks reflow, tighten the Outcome block */
+@media (max-width:760px) {
+  .csp--masai .csp-h br,
+  .csp-out-note br {
+    display: none
+  }
+
+  .csp--masai .csp-h {
+    font-size: 30px
+  }
+
+  .csp-out {
+    padding: 40px 0
+  }
+
+  .csp-out-stair {
+    width: min(100%, 240px)
+  }
+
+  .csp-out-val {
+    font-size: 30px
+  }
+
+  .csp-out-label {
+    font-size: 12px
+  }
+}
+
+@media (max-width:480px) {
+  .cms-ads {
+    gap: 8px
+  }
+}
+
+/* Masai on phones: centre the 1X / 5X bars and the Outcome staircase */
+@media (max-width:900px) {
+  .csp--masai .csp-mid-right {
+    justify-content: center
+  }
+
+  .csp-out-stair {
+    justify-self: center
   }
 }
