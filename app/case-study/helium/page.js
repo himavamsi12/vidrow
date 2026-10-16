@@ -919,15 +919,14 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-reviews" id="csp-sec-reviews">
-          <div className="csp-hl-eyebrow">
-            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>18</b>
-            Helium Smart Air Case Study
-          </div>
-          <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
-
           <div className="csp-reviews-body">
             <div className="csp-reviews-copy">
+              <div className="csp-hl-eyebrow">
+                <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+                <b>18</b>
+                Helium Smart Air Case Study
+              </div>
+              <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
               <p className="csp-reviews-lead">
                 We seeded &lsquo;organic&rsquo; reviews on YouTube before we even hit the market.
               </p>

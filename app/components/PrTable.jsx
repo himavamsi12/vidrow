@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 
 // the whole drop-in (last group's delay + its fall, see .pr-table.in in globals.css)
-const PLAY_MS = 1500;
+const PLAY_MS = 1050;
 
 /** The partnership logo table: once most of it is on screen, each stage's tiles
  *  drop in and fade up in turn, and the page holds still until that finishes. */
