@@ -1711,3 +1711,22 @@
     grid-template-columns: auto auto minmax(0, 1fr) minmax(0, 36em);
   }
 }
+
+/* where copy sits beside a heading it centres on the heading's lines: both
+   centre in the row, the copy's top margin matching the 37px section label
+   above the heading */
+@media (min-width: 901px) {
+  .page .problem,
+  .page .storyHeading,
+  .page .takeawayHead {
+    align-items: center;
+  }
+
+  .page .problem > p,
+  .page .storyHeading > p,
+  .page .takeawayHead > .takeawayCopy {
+    align-self: center;
+    margin-top: 37px;
+    margin-bottom: 0;
+  }
+}

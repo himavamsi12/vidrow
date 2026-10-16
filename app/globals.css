@@ -21899,3 +21899,83 @@ main.csp .csp-hl-rsub {
     max-width: 36em
   }
 }
+
+/* every case study: where copy sits beside a heading, it centres on the
+   heading's lines. Heading and copy both centre in the row; the copy's top
+   margin matches the height of the eyebrow above the heading, which drops
+   the copy's centre onto the heading's own (PlatinumRx "The problem" is
+   already centred by its own grid) */
+@media (min-width:901px) {
+  main.csp .csp-head,
+  main.csp .cst-problemTop,
+  main.csp .cst-problem,
+  main.csp .csk-problemTop,
+  main.csp .cao-head,
+  main.csp .ccj-stylesTop,
+  main.csp .csp-brief-head,
+  main.csp .csp-under-head,
+  main.csp .csp-flow-top,
+  main.csp.csp--masai .csp-aoc-head {
+    align-items: center
+  }
+
+  main.csp .csp-head > :first-child,
+  main.csp .cst-problemTop > :first-child,
+  main.csp .cst-problem > :first-child,
+  main.csp .csk-problemTop > :first-child,
+  main.csp .cao-head > :first-child,
+  main.csp .ccj-stylesTop > :first-child,
+  main.csp .csp-brief-head > :first-child,
+  main.csp .csp-under-head > :first-child,
+  main.csp .csp-flow-top > :first-child,
+  main.csp.csp--masai .csp-aoc-head > :first-child {
+    align-self: center
+  }
+
+  /* no eyebrow inside the row: the heading is the row's first child */
+  main.csp .csp-head > .csp-note,
+  main.csp .ccj-stylesTop > .ccj-stylesCopy,
+  main.csp .csp-under-head > .csp-under-copy {
+    align-self: center;
+    margin-top: 0;
+    margin-bottom: 0
+  }
+
+  /* a 34px eyebrow (its 18px line and 16px gap) over the heading */
+  main.csp .cst-problemTop > .cst-problemCopy,
+  main.csp .cst-problem > .cst-problemCopy,
+  main.csp .csk-problemTop > .csk-problemCopy,
+  main.csp .csp-flow-top > .csp-flow-copy,
+  main.csp.csp--masai .csp-aoc-head > .csp-aoc-copy {
+    align-self: center;
+    margin-top: 34px;
+    margin-bottom: 0
+  }
+
+  /* Apnamart Online + Offline: the eyebrow's line and the heading's 20px */
+  main.csp .cao-head > .cao-headR {
+    align-self: center;
+    margin-top: 38px;
+    margin-bottom: 0;
+    padding-top: 0
+  }
+
+  /* PlatinumRx "The problem": the heading centres in its row too, for when
+     the copy runs taller than it */
+  main.csp.csp--prx .csp-aoc-head .csp-aoc-h {
+    align-self: center
+  }
+
+  /* CuriousJr: no gap trailing the last paragraph, so the copy centres on
+     its text */
+  main.csp .ccj-stylesCopy > p:last-child {
+    margin-bottom: 0
+  }
+
+  /* Helium: the eyebrow's 17px line and the heading's own top margin */
+  main.csp .csp-brief-head > .csp-brief-copy {
+    align-self: center;
+    margin-top: calc(17px + clamp(20px, 2.4vw, 28px));
+    margin-bottom: 0
+  }
+}
