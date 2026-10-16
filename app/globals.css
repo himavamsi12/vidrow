@@ -8670,7 +8670,7 @@ button:focus-visible,
   font-size: 14px;
   line-height: 1.4;
   color: #4C4546;
-  max-width: 24ch
+  max-width: 44ch
 }
 
 @media (max-width:900px) {
@@ -20359,5 +20359,644 @@ html.is-loading body {
   .chx-touchTick {
     font-size: 72px;
     padding: 12px 0
+  }
+}
+
+/* ── Apnamart (Online + Offline) case study ───────────────── */
+.cao-note {
+  width: min(463px, 40%)
+}
+
+.cao-sec {
+  padding: clamp(48px, 5vw, 72px) 0 0
+}
+
+.cao-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #828181
+}
+
+.cao-eyebrow b {
+  font-weight: 700;
+  color: #121212
+}
+
+.cao-eyebrowDot {
+  width: 8px;
+  height: 8px;
+  background: var(--violet);
+  flex: none
+}
+
+.cao-h {
+  margin: 20px 0 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 40px);
+  line-height: 1.2;
+  letter-spacing: -.04em;
+  color: #1A1C1C;
+  text-wrap: balance
+}
+
+.cao-h--wide {
+  max-width: 28ch
+}
+
+.cao-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(24px, 5vw, 72px)
+}
+
+.cao-headL {
+  flex: 0 1 476px
+}
+
+.cao-headR {
+  flex: 0 1 534px;
+  padding-top: 34px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444
+}
+
+.cao-headR p {
+  margin: 0 0 16px
+}
+
+.cao-headR p:last-child {
+  margin-bottom: 0
+}
+
+.cao-label {
+  margin: clamp(32px, 4vw, 52px) 0 20px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--violet)
+}
+
+.cao-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  background: #E0DBF9;
+  font-family: var(--display);
+  font-size: 20px;
+  color: #121212
+}
+
+.cao-goals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 64px)
+}
+
+.cao-goal p {
+  margin: 0;
+  padding: 12px 12px 0 46px;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.25;
+  color: #444
+}
+
+.cao-callout {
+  margin: clamp(32px, 4vw, 52px) 0 0;
+  padding: 2px 0 2px 20px;
+  border-left: 4px solid #EFFF19;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: clamp(16px, 1.55vw, 20px);
+  line-height: 1.25;
+  color: #1A1C1C
+}
+
+.cao-callout--sm {
+  margin-top: 20px;
+  font-size: clamp(15px, 1.4vw, 18px)
+}
+
+.cao-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cao-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0
+}
+
+.cao-col .cao-label {
+  margin: 0
+}
+
+.cao-body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.25;
+  color: #444
+}
+
+.cao-list {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+.cao-listRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .15)
+}
+
+.cao-listRow p {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.25;
+  color: #444
+}
+
+.cao-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.cao-chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px
+}
+
+.cao-yChip {
+  padding: 8px 12px;
+  background: #FBFDBF;
+  font-family: var(--display);
+  font-size: clamp(16px, 1.55vw, 20px);
+  line-height: 1.2;
+  color: #121212
+}
+
+/* the four phase boxes, each with a notch cut from its top-right corner */
+.cao-phases {
+  display: flex;
+  align-items: stretch;
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cao-phaseWrap {
+  display: contents
+}
+
+.cao-phase {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 20px;
+  background: #F5F5F5;
+  clip-path: polygon(0 0, calc(100% - 32px) 0, calc(100% - 32px) 32px, 100% 32px, 100% 100%, 0 100%)
+}
+
+.cao-phase.hi {
+  background: #E0DBF9
+}
+
+.cao-phaseLabel {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--violet)
+}
+
+.cao-phase b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(36px, 3.3vw, 48px);
+  line-height: 1.2;
+  color: #181818
+}
+
+.cao-phase p {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.4;
+  color: #1A1C1C
+}
+
+.cao-phaseArrow {
+  flex: none;
+  align-self: center;
+  width: 44px;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 24px;
+  color: #828181
+}
+
+.cao-split {
+  display: grid;
+  grid-template-columns: minmax(0, 520fr) minmax(0, 622fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cao-de {
+  display: flex;
+  flex-direction: column;
+  gap: 32px
+}
+
+.cao-tag {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 10px 16px;
+  background: #FBFDBF;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(18px, 1.7vw, 24px);
+  line-height: 1.2;
+  color: #111
+}
+
+.cao-assets {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0
+}
+
+.cao-assets--row {
+  flex-direction: row;
+  gap: 16px
+}
+
+.cao-assets--row .cao-fig {
+  flex: 1 1 0;
+  min-width: 0
+}
+
+.cao-fig {
+  margin: 0
+}
+
+.cao-fig figcaption {
+  margin-top: 12px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #1A1C1C
+}
+
+.cao-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  object-fit: cover
+}
+
+.cao-pamRow,
+.cao-totoRow {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start
+}
+
+.cao-pamRow img,
+.cao-totoRow img {
+  flex: 1 1 0;
+  min-width: 0
+}
+
+.cao-pamRow img {
+  aspect-ratio: 197 / 278
+}
+
+.cao-totoRow img {
+  aspect-ratio: 303 / 215
+}
+
+.cao-bill {
+  aspect-ratio: 303 / 342
+}
+
+.cao-newsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.cao-newsCol img {
+  aspect-ratio: 303 / 163
+}
+
+@media (max-width:900px) {
+  .cao-head {
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .cao-headL,
+  .cao-headR {
+    flex: none;
+    width: 100%
+  }
+
+  .cao-cols,
+  .cao-split {
+    grid-template-columns: 1fr
+  }
+
+  .cao-goals {
+    grid-template-columns: 1fr;
+    gap: 20px
+  }
+
+  .cao-phases {
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .cao-phaseWrap {
+    display: block
+  }
+
+  .cao-phaseArrow {
+    display: block;
+    width: auto;
+    padding: 8px 0;
+    transform: rotate(90deg)
+  }
+
+  .cao-phase {
+    min-height: 0
+  }
+
+  .cao-note {
+    width: 100%
+  }
+}
+
+@media (max-width:560px) {
+  .cao-assets--row {
+    flex-direction: column
+  }
+}
+
+/* the logo tab: Vidrow mark, rule, then a small round Apnamart logo */
+.cao .csp-bannerTag .csp-lockup img {
+  flex: none;
+  width: 34%;
+  border-radius: 50%
+}
+
+@media (max-width:900px) {
+  .cao-headR {
+    padding-top: 0
+  }
+}
+
+/* Apnamart: Phase 3 on the dark panel */
+.csp-in:has(.cao-dark) {
+  background: #1A1A1A;
+  color: var(--paper);
+  margin-top: clamp(48px, 5vw, 72px)
+}
+
+.cao-dark {
+  padding: clamp(48px, 5vw, 72px) 0
+}
+
+.cao-dark .cao-eyebrow {
+  color: #A8A6AD
+}
+
+.cao-dark .cao-eyebrow b,
+.cao-dark .cao-h {
+  color: var(--paper)
+}
+
+.cao-darkIntro {
+  max-width: 62ch;
+  margin: 20px 0 0;
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #B8B6BD
+}
+
+.cao-label--acid {
+  color: var(--acid)
+}
+
+.cao-dark .cao-listRow {
+  border-bottom-color: rgba(255, 255, 255, .15)
+}
+
+.cao-dark .cao-listRow p {
+  color: var(--paper);
+  font-size: 14px
+}
+
+.cao-dark .cao-list {
+  margin-top: 0
+}
+
+.cao-aware {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 1.1vw, 16px);
+  margin-top: clamp(32px, 4vw, 52px)
+}
+
+.cao-aware img {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+/* Apnamart: Results */
+.cao-h--results {
+  max-width: 44ch
+}
+
+.cao-results {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 52px)
+}
+
+.cao-resultsCopy p {
+  margin: 0 0 24px;
+  max-width: 60ch;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444
+}
+
+.cao-stat {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px 44px;
+  background: #FAFCBF;
+  clip-path: polygon(0 0, calc(100% - 32px) 0, calc(100% - 32px) 30px, 100% 30px, 100% 100%, 0 100%)
+}
+
+.cao-stat > * {
+  margin: 0
+}
+
+.cao-statLabel {
+  margin-top: 6px;
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #121212
+}
+
+.cao-stat b {
+  margin: 24px 0 18px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(52px, 5.6vw, 80px);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: #121212
+}
+
+.cao-statSub {
+  font-family: var(--body);
+  font-size: 20px;
+  color: #121212
+}
+
+.cao-statNote {
+  margin-top: 10px;
+  font-family: var(--body);
+  font-size: 14px;
+  color: #555
+}
+
+.cao-label--sm {
+  margin: 28px 0 16px;
+  font-size: 12px
+}
+
+.cao-ba {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px
+}
+
+.cao-ba h3 {
+  margin: 0 0 10px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 20px;
+  color: #121212
+}
+
+.cao-ba ul {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+.cao-ba li {
+  padding: 4px 0 9px;
+  font-family: var(--body);
+  font-size: 15px;
+  color: #555
+}
+
+.cao-baCol--after {
+  padding-left: 18px;
+  border-left: 2px solid #1A1A1A
+}
+
+@media (max-width:900px) {
+  .cao-results {
+    grid-template-columns: 1fr
+  }
+
+  .cao-aware {
+    grid-template-columns: 1fr
+  }
+}
+
+/* Apnamart on phones: easier line heights, goals beside their chips, no forced
+   break in the headline */
+@media (max-width:760px) {
+  .cao .cst-h br {
+    display: none
+  }
+
+  .cao-body,
+  .cao-listRow p,
+  .cao-goal p,
+  .cao-callout,
+  .cao-headR,
+  .cao-resultsCopy p {
+    line-height: 1.5
+  }
+
+  .cao-goal {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px
+  }
+
+  .cao-goal p {
+    padding: 10px 0 0
+  }
+
+  .cao-dark .cao-listRow p {
+    font-size: 15px
+  }
+
+  .cao-stat {
+    padding: 28px 24px 36px
+  }
+
+  .cao-ba li {
+    font-size: 14px
   }
 }
