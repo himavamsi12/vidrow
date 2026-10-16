@@ -200,9 +200,9 @@
    content starting at the same column on the right */
 .situation {
   display: grid;
-  grid-template-columns: minmax(0, 290fr) minmax(0, 915fr);
+  grid-template-columns: minmax(0, 447fr) minmax(0, 609fr);
   align-items: start;
-  margin-bottom: 128px;
+  margin-bottom: 96px;
 }
 
 .situation > b {
@@ -224,7 +224,7 @@
 
 .mandate {
   display: grid;
-  grid-template-columns: minmax(0, 290fr) minmax(0, 915fr);
+  grid-template-columns: minmax(0, 447fr) minmax(0, 609fr);
   align-items: start;
   padding-bottom: 62px;
   border-bottom: 1px solid #cfcfcf;
@@ -257,8 +257,8 @@
 
 .mandate ol {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 1.6vw, 24px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 32px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -268,22 +268,22 @@
   display: grid;
   align-content: start;
   justify-items: start;
-  gap: 40px;
+  gap: 32px;
 }
 
 .mandate li > span {
   display: grid;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   place-items: center;
   background: #efefef;
   font-family: var(--display);
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .mandate li > b {
   font-family: var(--display);
-  font-size: clamp(17px, 1.45vw, 21px);
+  font-size: clamp(16px, 1.3vw, 18px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -.01em;
@@ -292,8 +292,8 @@
 /* starts just inside the content column above, its rule a little to the left */
 .briefNote {
   max-width: 900px;
-  margin: 16px 0 0 calc(290 / 1205 * 100% - 14px);
-  padding: 2px 0 2px 25px;
+  margin: 16px 0 0 calc(447 / 1056 * 100% - 4px);
+  padding: 2px 0 2px 21px;
   border-left: 3px solid var(--vyapar-ink);
   font-family: var(--body);
   font-size: clamp(15px, 1.2vw, 17px);
@@ -319,20 +319,18 @@
 
 .approachCard {
   --tab: 85%;
-  --fill: #f1f1f1;
+  --fill: var(--vyapar-acid);
   position: relative;
   display: flex;
   min-height: 330px;
   flex-direction: column;
   padding: 22px 20px 20px;
-  border: 3px solid #f0f0f0;
+  border: 3px solid var(--vyapar-acid);
   background: #fff;
 }
 
 .approachCard:first-child {
   --tab: 63%;
-  --fill: var(--vyapar-acid);
-  border-color: var(--vyapar-acid);
 }
 
 .approachCard h3 {
@@ -1596,8 +1594,11 @@
     font-size: 40px;
   }
 
+  .page .brief .situation p {
+    font-size: 13px;
+  }
+
   .page .problem > p,
-  .page .brief .situation p,
   .page .sequenceCard > p,
   .page .comparison li,
   .page .earlyAdopters > p:not(.sectionLabel) {
@@ -1623,15 +1624,12 @@
   .page .briefNote {
     margin-top: 64px;
   }
-
-  /* and a wide clear space under the note before the section's own rule */
-  .page .brief {
-    padding-bottom: 120px;
-  }
 }
 
 /* no divider lines between the sections, and no rule under the last item
    of either comparison list */
+.page .heroMeta,
+.page .mandate,
 .page .problem,
 .page .brief,
 .page .approach,

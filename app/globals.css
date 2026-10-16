@@ -21835,3 +21835,16 @@ html.is-loading body {
 .csp-how-right .cmp-video {
   aspect-ratio: 9 / 16
 }
+
+/* case studies: no full-width rules closing off a section (under the hero
+   facts, the problem statement, around the journey); rules between the
+   items of a list stay */
+.csp .csp-meta,
+.csp .csp-hl-meta,
+.csp .csk-meta,
+.csp .cst-meta,
+.csp .cst-problem,
+.csp .cst-journey {
+  border-top: 0;
+  border-bottom: 0
+}
