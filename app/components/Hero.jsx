@@ -85,7 +85,8 @@ export default function Hero() {
         <div className="hx-sky" aria-hidden="true">
           {SKY_PIECES.map((p, i) => (
             <svg key={i} className="hx-piece" data-d={p.d} viewBox={SKY_VIEWBOX} preserveAspectRatio="xMidYMax slice">
-              <polygon fill={p.fill} points={p.pts} />
+              {/* a stroke in the piece's own colour narrows the seams between pieces */}
+              <polygon fill={p.fill} stroke={p.fill} strokeWidth="2" strokeLinejoin="miter" points={p.pts} />
             </svg>
           ))}
         </div>

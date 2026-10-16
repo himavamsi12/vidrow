@@ -6,6 +6,9 @@ import WyMark from "./WyMark";
 import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
 
 const CELL_COUNT = 16;
+// desktop: screens of scroll the section stays pinned for (the .wy-track
+// .scroll-on height in globals.css is 100vh plus this)
+const SPAN_SCREENS = 3;
 const ACID_CELLS = new Set(STAGE_PIECES.filter((p) => p.acid).flatMap((p) => p.cells));
 
 export default function WhereYouAreNow() {
@@ -43,11 +46,11 @@ export default function WhereYouAreNow() {
         setScrollOn(true);
         const track = trackRef.current;
         if (!track) return;
-        // compute the span from the .scroll-on height formula (700vh) rather
+        // compute the span from the .scroll-on height formula (400vh) rather
         // than measuring the track's current offsetHeight — scrollOn was
         // just requested via setState, which hasn't re-rendered yet, so the
         // element is still measuring its pre-scroll-on (short) height here
-        const span = window.innerHeight * 6;
+        const span = window.innerHeight * SPAN_SCREENS;
         if (span < 80) {
           setAllOn(true);
           return;
@@ -160,7 +163,7 @@ export default function WhereYouAreNow() {
         // desktop: land in the middle of this stage's stretch of the scroll
         // (plus one lit-board stretch at the end)
         const trackTop = trackRef.current.getBoundingClientRect().top + window.scrollY;
-        const span = window.innerHeight * 6;
+        const span = window.innerHeight * SPAN_SCREENS;
         window.scrollTo({
           top: trackTop + (span * (i + 0.5)) / (STAGES.length + 1),
           behavior: "smooth",

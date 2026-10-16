@@ -1,19 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLenis } from "lenis/react";
-
-// the whole drop-in (last group's delay + its fall, see .pr-table.in in globals.css)
-const PLAY_MS = 1050;
 
 /** The partnership logo table: once most of it is on screen, each stage's tiles
- *  drop in and fade up in turn, and the page holds still until that finishes. */
+ *  drop in and fade up in turn. The page keeps scrolling freely while they do. */
 export default function PrTable({ children }) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
-  const lenis = useLenis();
-  const lenisRef = useRef(null);
-  lenisRef.current = lenis;
 
   useEffect(() => {
     const el = ref.current;
@@ -22,30 +15,18 @@ export default function PrTable({ children }) {
       setInView(true);
       return;
     }
-    let timer;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         io.disconnect();
         setInView(true);
-        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduce) return;
-        // hold the page still until the animation has played out
-        lenisRef.current?.stop();
-        timer = setTimeout(() => lenisRef.current?.start(), PLAY_MS);
       },
       // fires once the table's top is up near the top quarter of the screen,
-      // under the heading, so the whole table is in view while it holds
+      // under the heading, so the whole table is in view as it plays
       { rootMargin: "0px 0px -73% 0px" }
     );
     io.observe(el);
-    return () => {
-      io.disconnect();
-      if (timer) {
-        clearTimeout(timer);
-        lenisRef.current?.start();
-      }
-    };
+    return () => io.disconnect();
   }, []);
 
   return (

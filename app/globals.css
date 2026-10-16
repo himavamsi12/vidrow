@@ -14249,7 +14249,7 @@ html.nav-hidden .cmp-backBar {
   .pr-table.in:has(.pr-key[data-stage="a"]:hover) .pr-tile:not([data-stage="a"]),
   .pr-table.in:has(.pr-key[data-stage="b"]:hover) .pr-tile:not([data-stage="b"]),
   .pr-table.in:has(.pr-key[data-stage="c"]:hover) .pr-tile:not([data-stage="c"]) {
-    opacity: .12
+    opacity: .35
   }
 }
 
@@ -14359,11 +14359,13 @@ html.nav-hidden .cmp-backBar {
   }
 }
 
-/* a shorter pinned scroll and softer, longer easing, so the stages open and
-   close in one flowing motion instead of snapping from stage to stage */
+/* a short pinned scroll (three screens for the four stages and the lit
+   board, so the section never feels held) and softer, longer easing, so the
+   stages open and close in one flowing motion instead of snapping from stage
+   to stage. WhereYouAreNow's SPAN_SCREENS has to match: height = 100vh + span */
 @media (min-width:901px) {
   .wy-track.scroll-on {
-    height: 700vh
+    height: 400vh
   }
 
   .wy-body {

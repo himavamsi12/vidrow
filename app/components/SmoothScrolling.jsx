@@ -4,8 +4,10 @@ import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
+// one constant glide for the whole page: a slightly lower lerp eases every
+// wheel tick out a touch longer, and nothing on the page stops or snaps it
 const LENIS_OPTIONS = {
-  lerp: 0.08,
+  lerp: 0.07,
   smoothWheel: true,
   wheelMultiplier: 1,
   touchMultiplier: 1.5,
