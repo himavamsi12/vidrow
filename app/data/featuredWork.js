@@ -15,7 +15,7 @@ export const FEATURED_WORK = [
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
-      { src: "/Helium.png", cls: "fw-ph1" },
+      { src: "/testimonial-logos/Helium.png", cls: "fw-ph1" },
       { src: "/work/Aman Helium.png", cls: "fw-ph2" },
     ],
     plates: [

@@ -3,8 +3,8 @@ import SiteNav from "../../components/SiteNav";
 import CspHooksRow from "../../components/CspHooksRow";
 import { DeepDiveCards } from "../../components/CaseStudies";
 import CspSectionNav from "../../components/CspSectionNav";
-import CspCoverflow from "../../components/CspCoverflow";
-import Mark from "../../components/Mark";
+import SeekhoFilms from "../../components/SeekhoFilms";
+import { CAMPAIGNS } from "../../data/campaigns";
 
 export const metadata = {
   title: "Helium - Case Study | Vidrow",
@@ -27,47 +27,58 @@ const SECTIONS = [
   { id: "csp-sec-cast", label: "The Casting" },
   { id: "csp-sec-focus", label: "The Focus" },
   { id: "csp-sec-founder", label: "The Founder" },
+  { id: "csp-sec-films", label: "One Reason Each" },
   { id: "csp-sec-recap", label: "Where We Are" },
   { id: "csp-sec-ads", label: "Ten Ads" },
-  { id: "csp-sec-films", label: "One Reason Each" },
-  { id: "csp-sec-bperf", label: "Brand Performance" },
-  { id: "csp-sec-pads", label: "Performance Ads" },
   { id: "csp-sec-reviews", label: "The Reviews" },
   { id: "csp-sec-social", label: "Social" },
+  { id: "csp-sec-journey", label: "The Journey" },
+  { id: "csp-sec-talk", label: "Word of Mouth" },
+  { id: "csp-sec-investors", label: "The Investors" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
 // the rail flips light-on-dark over these two dark panels
 const DARK_SECTIONS = ["csp-sec-focus", "csp-sec-films"];
 
-const BRAND_STATS = [
-  { val: "4 Mn+", label: "Impressions" },
-  { val: "3 Mn+", label: "People Reached" },
-  { val: "15%", label: "Cheaper Customer" },
+// "We engineered the whole journey": five touchpoints, the last one the checkout tick
+const JOURNEY = [
+  {
+    when: "They saw it",
+    title: "Brand Films",
+    desc: "Sumeet Vyas introduced Helium and built the first layer of trust.",
+    img: "journey-1.png",
+  },
+  {
+    when: "They considered it",
+    title: "Performance Ads",
+    desc: "One sharp reason, delivered while they were still deciding.",
+    img: "journey-2.png",
+  },
+  {
+    when: "They checked it",
+    title: "The Website",
+    desc: "The same face, so the brand felt familiar and consistent.",
+    img: "journey-3.png",
+  },
+  {
+    when: "They trusted it",
+    title: "YouTube Reviews",
+    desc: "When they went looking for proof, Helium was already there.",
+    img: "journey-4.png",
+  },
 ];
 
-const SEGMENTS = [
-  {
-    eyebrow: "Urban millennials: the second AC",
-    title: "Already owns one",
-    desc: "Wants another for a smaller space, and doesn\u2019t need 1.5 ton to cool it.",
-  },
-  {
-    eyebrow: "The shopkeeper",
-    title: "Runs a small shop",
-    desc: "A big AC is money spent cooling a space that never needed it.",
-  },
-  {
-    eyebrow: "The first upgrade",
-    title: "Buying their first",
-    desc: "Needs to know it is the right call before spending money.",
-  },
-];
-
-const REASON_FILMS = [
-  { src: "/casestudy%20images/casestudy-helium/reason-1.png", alt: "Service, honestly" },
-  { src: "/casestudy%20images/casestudy-helium/reason-2.png", alt: "Built for your weather" },
-  { src: "/casestudy%20images/casestudy-helium/reason-3.png", alt: "Helium brand film" },
+// the five Helium films from the campaign page (/campaign/helium), one reason each
+const REASON_FILMS = CAMPAIGNS.helium.frames;
+// the first four of the tall performance ads on the Helium ads campaign page (/campaign/helium_Ads)
+const PERF_ADS = CAMPAIGNS.helium_Ads.frames.slice(0, 4);
+const REASON_CAPTIONS = [
+  "It is the right size",
+  "Anti-incumbent",
+  "Service, honestly",
+  "Built for your weather",
+  "\u20b930 a day to run",
 ];
 
 // the five surviving reasons, scattered around the centred headline —
@@ -86,8 +97,8 @@ const REASONS = [
 const RESULTS = [
   { val: "2%", label: "of every AC sold online in India" },
   { val: "3.5%", label: "market share on Amazon" },
-  { val: "500", label: "ACs a day from their own website" },
-  { val: "\u20b940 Cr", label: "revenue scaled in one season", hi: true },
+  { val: "600", label: "ACs a day from their own website" },
+  { val: "\u20b925,000", label: "Units sold within 4 months", hi: true },
 ];
 
 // the three Ps that were already fixed before we came in — the fourth,
@@ -210,29 +221,6 @@ const UNDERDOG_MOVES = [
   },
 ];
 
-const UNDERDOG_BRANDS = [
-  {
-    name: "The Whole Truth",
-    vs: "vs legacy protein brands",
-    desc: "Made the ingredient label the entire argument.",
-  },
-  {
-    name: "Mamaearth",
-    vs: "vs personal care giants",
-    desc: "Toxin-free, in a category nobody read the back of.",
-  },
-  {
-    name: "boAt",
-    vs: "vs imported audio",
-    desc: "The aspiration, without the imported price tag.",
-  },
-  {
-    name: "Zerodha",
-    vs: "vs full-service brokers",
-    desc: "Flat fees, against a percentage everyone accepted.",
-  },
-];
-
 // the five messages read across: the habit of the category on one side,
 // where Helium stood on the other
 const MESSAGES = [
@@ -335,21 +323,6 @@ const FOUNDER_POINTS = [
   },
 ];
 
-// the ten performance films — five across, the last one standing alone
-// underneath at full size
-const PERF_ADS = [
-  { src: "/casestudy%20images/casestudy-helium/ad-1.png", alt: "Hi Bata Delta Hai, India" },
-  { src: "/casestudy%20images/casestudy-helium/ad-2.png", alt: "Ab IITians ne banaya hai" },
-  { src: "/casestudy%20images/casestudy-helium/ad-3.png", alt: "Ashish Sharma and Aman Munka" },
-  { src: "/casestudy%20images/casestudy-helium/ad-4.png", alt: "Up to 10 years warranty on compressor" },
-  { src: "/casestudy%20images/casestudy-helium/ad-5.png", alt: "The founder interview cut" },
-];
-
-const PERF_AD_HERO = {
-  src: "/casestudy%20images/casestudy-helium/ad-6.png",
-  alt: "Agar - the closing performance film",
-};
-
 const HOOKS = [
   {
     n: "01",
@@ -391,7 +364,6 @@ export default function HeliumCaseStudy() {
         <div className="csp-hl-head">
           <div>
             <h1 className="csp-hl-h">Helium Smart Air</h1>
-            <p className="csp-hl-kicker">Case Study</p>
           </div>
           <p className="csp-hl-note">
             A 0.8 ton AC at &#8377;16,999, sold online, in a category that has not changed in
@@ -404,6 +376,9 @@ export default function HeliumCaseStudy() {
             src="/casestudy%20images/casestudy-helium/img-hero.png"
             alt="Helium Smart Air on an iceberg"
           />
+          <span className="csp-bannerTag">
+            <img src="/casestudy%20images/helium-lockup.png" alt="Helium" />
+          </span>
         </div>
 
         <div className="csp-hl-meta">
@@ -600,9 +575,10 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-under" id="csp-sec-under">
-          <div className="csp-underChip">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>08</b>
             Helium Smart Air Case Study
-            <Mark className="csp-underMark" />
           </div>
 
           <div className="csp-under-head">
@@ -636,17 +612,6 @@ export default function HeliumCaseStudy() {
               </div>
             ))}
           </div>
-
-          <p className="csp-underLabel csp-underLabel--muted">Indian brands built on exactly this</p>
-          <div className="csp-underBrands">
-            {UNDERDOG_BRANDS.map((b) => (
-              <div className="csp-underBrand" key={b.name}>
-                <h3>{b.name}</h3>
-                <span>{b.vs}</span>
-                <p>{b.desc}</p>
-              </div>
-            ))}
-          </div>
         </section>
 
         {/* the stepped black band — the notch on each side is cut with a
@@ -660,9 +625,10 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-msg" id="csp-sec-msg">
-          <div className="csp-underChip">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>09</b>
             Helium Smart Air Case Study
-            <Mark className="csp-underMark" />
           </div>
 
           <div className="csp-under-head">
@@ -705,15 +671,14 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-hooks" id="csp-sec-hooks">
-          <div className="csp-underChip">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>10</b>
             Helium Smart Air Case Study
-            <Mark className="csp-underMark" />
           </div>
 
           <h2 className="csp-hooks-h">
-            We built the message before
-            <br />
-            building the ad.
+            We built the message before building the ad.
           </h2>
           <p className="csp-hooks-copy">A smaller AC isn&apos;t a cheaper AC. It&apos;s a smarter one.</p>
 
@@ -740,9 +705,10 @@ export default function HeliumCaseStudy() {
 
       <div className="csp-in">
         <section className="csp-chan" id="csp-sec-chan">
-          <div className="csp-underChip">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>11</b>
             Helium Smart Air Case Study
-            <Mark className="csp-underMark" />
           </div>
 
           <div className="csp-under-head">
@@ -792,7 +758,7 @@ export default function HeliumCaseStudy() {
         <section className="csp-cast" id="csp-sec-cast">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>08</b>
+            <b>12</b>
             Helium Smart Air Case Study
           </div>
           <h2 className="csp-hl-rh">We had a message. We still had no trust.</h2>
@@ -818,17 +784,6 @@ export default function HeliumCaseStudy() {
             ))}
           </div>
 
-          <div className="csp-castQuote">
-            <img
-              src="/casestudy%20images/casestudy-helium/casting-still.png"
-              alt="A superstar endorsement, the option Helium did not take"
-            />
-            <p>
-              &lsquo;Bhai would bring attention, but he would also have taken all our
-              funding&rsquo;
-            </p>
-          </div>
-
           <p className="csp-buyNote">
             Casting a known face is a data decision. <em>Not just a taste decision.</em>
           </p>
@@ -839,7 +794,7 @@ export default function HeliumCaseStudy() {
         <section className="csp-focus" id="csp-sec-focus">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>09</b>
+            <b>13</b>
             Helium Smart Air Case Study
           </div>
 
@@ -868,7 +823,7 @@ export default function HeliumCaseStudy() {
         <section className="csp-founder" id="csp-sec-founder">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>10</b>
+            <b>14</b>
             Helium Smart Air Case Study
           </div>
           <h2 className="csp-hl-rh">We put the founder up front.</h2>
@@ -899,29 +854,45 @@ export default function HeliumCaseStudy() {
         </section>
       </div>
 
-      {/* the five moments again, this time with the story's own position
-          marked: everything past consideration is still ahead */}
+      <div className="csp-in">
+        <section className="csp-films chx-films" id="csp-sec-films">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>15</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="chx-films-h">One reason each.</h2>
+          <p className="chx-films-sub">
+            Five films, five messages. No omnibus ad trying to say everything at once.
+          </p>
+
+          <SeekhoFilms films={REASON_FILMS} captions={REASON_CAPTIONS} className="chx-filmRow" />
+
+          <p className="chx-films-note">
+            Each film argues one thing and stops. That is what makes them testable, when a film
+            underperforms you know exactly which claim the market rejected, not just that
+            &ldquo;the creative did not work&rdquo;. All hooks start with talking about the AC.
+          </p>
+        </section>
+      </div>
+
       <div className="csp-in">
         <section className="csp-recap" id="csp-sec-recap">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>11</b>
+            <b>16</b>
             Helium Smart Air Case Study
           </div>
 
           <ol className="csp-buySteps csp-recapSteps">
             {BUY_STEPS.map((s, i) => (
-              <li
-                className={`csp-buyStep${s.hi ? " hi" : ""}${i > 1 ? " ahead" : ""}${
-                  i === 2 ? " here" : ""
-                }`}
-                key={s.stage}
-              >
-                {i === 2 && <span className="csp-recapHere">We&rsquo;re here</span>}
-                <span className="csp-buyStage">{s.stage}</span>
-                <span className="csp-buyDot">{i + 1}</span>
-                <h3 className="csp-buyTitle">{s.title}</h3>
-                <p className="csp-buyDesc">{s.desc}</p>
+              <li className={`csp-buyStep${s.hi ? " hi" : ""}`} key={s.stage}>
+                <div className="csp-buyBody">
+                  <span className="csp-buyStage">{s.stage}</span>
+                  <span className="csp-buyDot">{i + 1}</span>
+                  <h3 className="csp-buyTitle">{s.title}</h3>
+                  <p className="csp-buyDesc">{s.desc}</p>
+                </div>
                 <p className="csp-buyQuote">{s.quote}</p>
               </li>
             ))}
@@ -930,10 +901,10 @@ export default function HeliumCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-ads" id="csp-sec-ads">
+        <section className="chx-ads" id="csp-sec-ads">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>12</b>
+            <b>17</b>
             Helium Smart Air Case Study
           </div>
           <h2 className="csp-hl-rh">
@@ -942,121 +913,7 @@ export default function HeliumCaseStudy() {
             features and value
           </h2>
 
-          <div className="csp-adsRow">
-            {PERF_ADS.map((a) => (
-              <figure className="csp-adCard" key={a.src}>
-                <img src={a.src} alt={a.alt} />
-                <span className="csp-adPlay" aria-hidden="true" />
-              </figure>
-            ))}
-          </div>
-
-          <figure className="csp-adCard csp-adCard--hero">
-            <img src={PERF_AD_HERO.src} alt={PERF_AD_HERO.alt} />
-            <span className="csp-adPlay" aria-hidden="true" />
-          </figure>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-films" id="csp-sec-films">
-          <div className="csp-films-head">
-            <div className="csp-eyebrow2">
-              <span className="csp-eyebrow2-dot" aria-hidden="true" />
-              <b>13</b>
-              <span className="csp-eyebrow2-sep">·</span>
-              THE FIVE BRANDS EACH
-            </div>
-            <h2 className="csp-films-h">One Reason Each</h2>
-          </div>
-
-          <CspCoverflow slides={REASON_FILMS} />
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-bperf" id="csp-sec-bperf">
-          <div className="csp-aoc-head csp-headRight">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>14</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                BRAND PERFORMANCE
-              </div>
-              <h2 className="csp-aoc-h" style={{ textWrap: "balance" }}>
-                Brand ads are traditionally run on Awareness, we ran ours on Conversion!
-              </h2>
-            </div>
-            <p className="csp-aoc-copy">
-              We judged the films on what a customer cost, under the same rules as every other ad
-              in the account.
-            </p>
-          </div>
-
-          {/* three blocks stepping down to the right, each one's top-left
-              tab tucking over the previous block's bottom-right corner */}
-          <div className="csp-stairs">
-            {BRAND_STATS.map((st, i) => (
-              <div className={`csp-stair csp-stair${i + 1}`} key={st.label}>
-                <span className="csp-stairVal">{st.val}</span>
-                <span className="csp-stairLabel">{st.label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csp-pads" id="csp-sec-pads">
-          <div className="csp-aoc-head csp-headRight">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>15</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                PERFORMANCE ADS
-              </div>
-              <h2 className="csp-aoc-h">
-                Performance ads sold features,
-                <br />
-                not feelings.
-              </h2>
-            </div>
-            <p className="csp-aoc-copy">
-              Brand films told people who Helium was. Performance ads told them why they needed
-              one. So we tested who actually buys not age brackets, but reasons.
-            </p>
-          </div>
-
-          <div className="csp-segs">
-            {SEGMENTS.map((sg) => (
-              <div className="csp-seg" key={sg.title}>
-                <span className="csp-segEyebrow">{sg.eyebrow}</span>
-                <h3 className="csp-segTitle">{sg.title}</h3>
-                <p className="csp-segDesc">{sg.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="csp-padStats">
-            <div className="csp-padStat csp-padStat--yellow">
-              <span className="csp-padStatVal">
-                3x
-                <br />
-                ROAS
-              </span>
-              <span className="csp-padStatLabel">Than the industry average</span>
-            </div>
-            <div className="csp-padStat csp-padStat--violet">
-              <span className="csp-padStatVal">
-                500 ACs
-                <br />
-                /day
-              </span>
-              <span className="csp-padStatLabel">AC run rate</span>
-            </div>
-          </div>
+          <SeekhoFilms films={PERF_ADS} className="chx-adRow" />
         </section>
       </div>
 
@@ -1064,7 +921,7 @@ export default function HeliumCaseStudy() {
         <section className="csp-reviews" id="csp-sec-reviews">
           <div className="csp-hl-eyebrow">
             <span className="csp-hl-eyebrowDot" aria-hidden="true" />
-            <b>16</b>
+            <b>18</b>
             Helium Smart Air Case Study
           </div>
           <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
@@ -1099,56 +956,143 @@ export default function HeliumCaseStudy() {
 
             <figure className="csp-reviewShot">
               <img
-                src="/casestudy%20images/casestudy-helium/helium%20thumbnail.png"
-                alt="Gadget Masala's YouTube review of the Helium Air 0.8 ton smart AC"
+                src="/Creator.png"
+                alt="Gadget Masala's YouTube review of the Helium Air 0.8 ton smart AC, YouTube Creator"
               />
-              <figcaption>
-                <b>Gadget Masala</b>
-                <span>YouTube Creator</span>
-              </figcaption>
             </figure>
           </div>
         </section>
       </div>
 
       <div className="csp-in">
-        <section className="csp-social" id="csp-sec-social">
-          <div className="csp-aoc-head csp-headRight">
-            <div>
-              <div className="csp-eyebrow2">
-                <span className="csp-eyebrow2-dot" aria-hidden="true" />
-                <b>17</b>
-                <span className="csp-eyebrow2-sep">·</span>
-                SOCIAL
-              </div>
-              <h2 className="csp-aoc-h">
-                Social took the brand
-                <br />
-                where the ads never ran.
-              </h2>
+        <section className="chx-social" id="csp-sec-social">
+          <div className="chx-social-copy">
+            <div className="csp-hl-eyebrow">
+              <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+              <b>19</b>
+              Helium Smart Air Case Study
             </div>
-            <p className="csp-aoc-copy">
+            <h2 className="csp-hl-rh">Social media built trust and community.</h2>
+            <p className="csp-hl-rsub">
               Brand films built awareness. Performance ads ran where we targeted them. Social went
-              everywhere else and the demand followed it there.
+              everywhere else, and demand followed it there.
+            </p>
+
+            <div className="csp-hl-stats chx-social-stats">
+              <div className="csp-hl-stat">
+                <b>~33k+</b>
+                <span>followers from a standing start, in one season</span>
+              </div>
+              <div className="csp-hl-stat">
+                <b>~637k+</b>
+                <span>top organic views on the brand ads</span>
+              </div>
+              <div className="csp-hl-stat hi">
+                <b>~1.8 Mn+</b>
+                <span>top organic views on the creator collab</span>
+              </div>
+            </div>
+
+            <p className="csp-briefClock">
+              The waitlist came from pincodes no brand film reached and no performance ad targeted.
+              Social built demand ahead of the map, the marketing arrived before the delivery
+              network did.
             </p>
           </div>
 
-          {/* three same-colour blocks overlapping into one stepped band — the
-              middle one drops down, each figure's label sits just below it */}
-          <div className="csp-socialBand">
-            <div className="csp-socialBlock csp-socialBlock1">
-              <span>~33k+</span>
-            </div>
-            <div className="csp-socialBlock csp-socialBlock2">
-              <span>~637k+</span>
-            </div>
-            <div className="csp-socialBlock csp-socialBlock3">
-              <span>~1.8Mn+</span>
-            </div>
-            <p className="csp-socialLabel csp-socialLabel1">Followers, from a standing start, in one season</p>
-            <p className="csp-socialLabel csp-socialLabel2">Top organic views on the brand ads</p>
-            <p className="csp-socialLabel csp-socialLabel3">Top organic views on the creator collab</p>
+          <img
+            className="chx-social-shot"
+            src="/img-insta.png"
+            alt="Helium's Instagram profile, @heliumsmart"
+          />
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="chx-journey" id="csp-sec-journey">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>20</b>
+            Helium Smart Air Case Study
           </div>
+          <h2 className="csp-hl-rh">We engineered the whole journey.</h2>
+          <p className="csp-hl-rsub">Not the ad, the whole path from first sighting to checkout.</p>
+
+          <div className="chx-journeyRow">
+            {JOURNEY.map((j) => (
+              <div className="chx-touch" key={j.title}>
+                <span className="chx-touchWhen">{j.when}</span>
+                <h3 className="chx-touchTitle">{j.title}</h3>
+                <p className="chx-touchDesc">{j.desc}</p>
+                <img
+                  className="chx-touchImg"
+                  src={`/casestudy%20images/casestudy-helium/${j.img}`}
+                  alt={j.title}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+            <div className="chx-touch chx-touch--hi">
+              <span className="chx-touchWhen">They bought it</span>
+              <h3 className="chx-touchTitle">Checkout</h3>
+              <p className="chx-touchDesc">The last step was not convincing. It was making it easy.</p>
+              <span className="chx-touchTick" aria-hidden="true">&#10003;</span>
+            </div>
+          </div>
+
+          <p className="csp-buyNote chx-journeyNote">
+            Five touchpoints. One story. No gap to fall through.
+          </p>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="chx-talk" id="csp-sec-talk">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>21</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">People started talking about the brand on their own.</h2>
+
+          <div className="chx-talkRow">
+            <img
+              className="chx-talkYt"
+              src="/casestudy%20images/casestudy-helium/talk-yt.png"
+              alt="YouTube reviews of the Helium AC by independent creators"
+              loading="lazy"
+            />
+            <img
+              className="chx-talkReel"
+              src="/casestudy%20images/casestudy-helium/talk-reel-1.png"
+              alt="An Instagram reel about the Helium AC"
+              loading="lazy"
+            />
+            <img
+              className="chx-talkReel"
+              src="/casestudy%20images/casestudy-helium/talk-reel-2.png"
+              alt="Another Instagram reel about the Helium AC"
+              loading="lazy"
+            />
+          </div>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="chx-investors" id="csp-sec-investors">
+          <div className="csp-hl-eyebrow">
+            <span className="csp-hl-eyebrowDot" aria-hidden="true" />
+            <b>22</b>
+            Helium Smart Air Case Study
+          </div>
+          <h2 className="csp-hl-rh">The investors were happy too.</h2>
+
+          <img
+            className="chx-tweet"
+            src="/img-tweet.png"
+            alt="Anand Lunia of IndiaQuotient on X: So Helium Air is selling 500 ACs a day, within a month of launch. Founders are about 30 yo. Did they start too early? Too late?"
+            loading="lazy"
+          />
         </section>
       </div>
 

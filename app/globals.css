@@ -6478,7 +6478,8 @@ button:focus-visible,
 .csp-buyStep {
   display: flex;
   flex-direction: column;
-  min-width: 0
+  min-width: 0;
+  container-type: inline-size
 }
 
 .csp-buyStage {
@@ -6511,7 +6512,9 @@ button:focus-visible,
   position: absolute;
   left: 100%;
   top: 50%;
-  width: calc(100% + 20px);
+  /* runs from the dot to the next column: the step's own width (it is a
+     container, below) less the dot, plus the 20px gap */
+  width: calc(100cqw - 22px + 20px);
   height: 1px;
   background: #DCDCDC
 }
@@ -19476,7 +19479,7 @@ html.is-loading body {
 
 .cgs-chart {
   margin: 0;
-  width: min(100%, 400px);
+  width: min(100%, 520px);
   justify-self: center
 }
 
@@ -19959,5 +19962,402 @@ html.is-loading body {
 
   .csp-out-stair {
     justify-self: center
+  }
+}
+
+/* Helium: logo plate in the banner's top-left corner */
+.csp-hl-banner {
+  position: relative
+}
+
+.csp-hl-banner .csp-bannerTag img {
+  width: 68%
+}
+
+/* Helium: "One reason each", five films with a caption under each, on the dark panel */
+.chx-films {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center
+}
+
+.chx-films .csp-hl-eyebrow {
+  color: #9A9A9A
+}
+
+.chx-films .csp-hl-eyebrow b {
+  color: var(--paper)
+}
+
+.chx-films .csp-hl-eyebrowDot {
+  background: var(--acid)
+}
+
+.chx-films-h {
+  margin: clamp(16px, 2vw, 24px) 0 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -.02em;
+  color: var(--paper)
+}
+
+.chx-films-sub {
+  margin: clamp(16px, 2vw, 24px) 0 0;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: #A8A6AD
+}
+
+.chx-filmRow {
+  width: 100%;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1.1vw, 14px);
+  margin-top: clamp(32px, 4vw, 52px);
+  text-align: left
+}
+
+.chx-filmRow .csk-film {
+  aspect-ratio: 16 / 9;
+  border-radius: 6px
+}
+
+.chx-filmRow .ccj-style figcaption {
+  margin-top: 10px;
+  font-size: clamp(12px, 1.05vw, 14px);
+  color: var(--paper)
+}
+
+.chx-films-note {
+  max-width: 64ch;
+  margin: clamp(32px, 4vw, 52px) 0 0;
+  font-family: var(--body);
+  font-size: clamp(13px, 1.05vw, 14px);
+  line-height: 1.6;
+  color: #A8A6AD
+}
+
+@media (max-width:900px) {
+  .chx-filmRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+/* Helium founder points: number tab on top, the highlighted line flush under it
+   (same left edge), then the copy */
+.csp-founderPoint {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.csp-founderPoint .csp-underNum {
+  display: block;
+  padding: 10px 14px
+}
+
+.csp-founderPoint .csp-underMoveH {
+  display: block;
+  margin: 0;
+  padding: 8px 12px
+}
+
+.csp-founderPoint .csp-castPointDesc {
+  margin: 18px 0 0
+}
+
+/* Helium recap: the quote boxes start on one shared line under the tallest copy
+   (their tops align, their bottoms don't), via a two-row subgrid per step */
+.csp-recapSteps {
+  grid-template-rows: auto auto;
+  row-gap: 0
+}
+
+.csp-recapSteps .csp-buyStep {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid
+}
+
+.csp-recapSteps .csp-buyBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0
+}
+
+.csp-recapSteps .csp-buyQuote {
+  margin: 18px 0 0;
+  align-self: start
+}
+
+@media (max-width:900px) {
+  .csp-recapSteps {
+    grid-template-rows: none
+  }
+
+  .csp-recapSteps .csp-buyStep {
+    grid-row: auto;
+    grid-template-rows: none
+  }
+}
+
+/* Helium: "Ten ads", four tall films with rounded corners */
+.chx-adRow {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.1vw, 20px);
+  margin-top: clamp(32px, 4vw, 56px)
+}
+
+.chx-adRow .csk-film {
+  aspect-ratio: 340 / 620;
+  border-radius: clamp(14px, 1.6vw, 24px)
+}
+
+@media (max-width:900px) {
+  .chx-adRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+/* Helium: Social, copy and stat cards on the left, the Instagram profile on the right */
+.chx-social {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+  column-gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  padding: clamp(56px, 7vw, 96px) 0
+}
+
+.chx-social-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.chx-social .csp-briefClock {
+  margin-top: clamp(16px, 1.8vw, 24px)
+}
+
+.chx-social-shot {
+  display: block;
+  width: 100%;
+  height: auto
+}
+
+@media (max-width:900px) {
+  .chx-social {
+    grid-template-columns: 1fr;
+    row-gap: 36px
+  }
+
+  .chx-social-stats {
+    grid-template-columns: 1fr
+  }
+
+  .chx-social-shot {
+    max-width: 300px;
+    justify-self: center
+  }
+}
+
+/* Helium: "We engineered the whole journey", five touchpoint cards on warm paper */
+.csp-in:has(.chx-journey) {
+  background: #FBFBF7
+}
+
+.chx-journey {
+  padding: clamp(56px, 6vw, 88px) 0
+}
+
+.chx-journeyRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: clamp(32px, 3.6vw, 44px)
+}
+
+.chx-touch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 14px 32px;
+  text-align: center;
+  background: #F7F6FF;
+  border: 1px solid #E4E0FA
+}
+
+.chx-touch--hi {
+  background: var(--acid);
+  border-color: var(--acid)
+}
+
+.chx-touchWhen {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--violet)
+}
+
+.chx-touch--hi .chx-touchWhen {
+  color: #121212
+}
+
+.chx-touchTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.5vw, 21px);
+  color: #121212
+}
+
+.chx-touchDesc {
+  margin: 0;
+  font-family: var(--body);
+  font-size: clamp(12.5px, 1vw, 14px);
+  line-height: 1.45;
+  color: #4C4546
+}
+
+.chx-touchImg {
+  display: block;
+  width: 80%;
+  max-width: 190px;
+  aspect-ratio: 130 / 234;
+  margin-top: 4px;
+  object-fit: cover;
+  border-radius: 12px
+}
+
+.chx-touchTick {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--body);
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 1.2;
+  color: #121212
+}
+
+.chx-journeyNote {
+  margin-top: clamp(28px, 3vw, 44px);
+  border-left-width: 4px;
+  padding-left: 20px;
+  font-size: clamp(16px, 1.5vw, 22px)
+}
+
+@media (max-width:900px) {
+  .chx-journeyRow {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .chx-touch--hi {
+    grid-column: 1 / -1
+  }
+}
+
+@media (max-width:560px) {
+  .chx-journeyRow {
+    grid-template-columns: 1fr
+  }
+}
+
+/* Helium: "People started talking", a YouTube strip and two reels, on warm paper */
+.csp-in:has(.chx-talk) {
+  background: #FBFBF7
+}
+
+.chx-talk {
+  padding: clamp(56px, 6vw, 88px) 0
+}
+
+.chx-talkRow {
+  display: grid;
+  grid-template-columns: 610fr 235fr 235fr;
+  gap: clamp(12px, 1.7vw, 24px);
+  align-items: center;
+  margin-top: clamp(32px, 3.6vw, 44px)
+}
+
+.chx-talkYt,
+.chx-talkReel {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px
+}
+
+@media (max-width:760px) {
+  .chx-talkRow {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .chx-talkYt {
+    grid-column: 1 / -1
+  }
+}
+
+/* Helium: "The investors were happy too", the tweet on its own */
+.chx-investors {
+  padding: clamp(56px, 6vw, 88px) 0
+}
+
+.chx-tweet {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  margin-top: clamp(32px, 3.6vw, 44px)
+}
+
+/* Helium on phones: keep the 28px gap between stacked journey steps, and let the
+   "Ten ads" heading reflow instead of orphaning a word */
+@media (max-width:760px) {
+  .csp-recapSteps {
+    row-gap: 28px
+  }
+
+  .chx-ads .csp-hl-rh br {
+    display: none
+  }
+}
+
+/* Helium on phones: more air between the stacked journey steps; bigger type and
+   undistorted, larger screenshots on the touchpoint cards */
+@media (max-width:760px) {
+  .csp-recapSteps {
+    row-gap: 44px
+  }
+
+  .chx-touch {
+    gap: 10px;
+    padding: 28px 18px 32px
+  }
+
+  .chx-touchWhen {
+    font-size: 12px
+  }
+
+  .chx-touchTitle {
+    font-size: 24px
+  }
+
+  .chx-touchDesc {
+    font-size: 16px
+  }
+
+  .chx-touchImg {
+    width: min(100%, 300px);
+    max-width: none;
+    aspect-ratio: auto;
+    height: auto;
+    margin-top: 8px
+  }
+
+  .chx-touchTick {
+    font-size: 72px;
+    padding: 12px 0
   }
 }
