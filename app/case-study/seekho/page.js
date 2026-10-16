@@ -174,7 +174,7 @@ const DARK_SECTIONS = ["csp-sec-impact"];
 export default function SeekhoCaseStudy() {
   return (
     <>
-    <main className="csp csp--seekho">
+    <main className="csp csp--seekho csp--sk">
       <header className="hx-bar hx-bar--page">
         <SiteNav logoHref="/" />
       </header>

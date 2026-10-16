@@ -19008,7 +19008,7 @@ html.is-loading body {
 
 /* CuriousJr: the problem copy runs wider, on three lines */
 .csp--cjr .csk-problemCopy {
-  width: min(540px, 56%)
+  width: min(620px, 60%)
 }
 
 @media (max-width:900px) {
@@ -19820,6 +19820,59 @@ html.is-loading body {
     padding-top: 10px;
     padding-bottom: 10px
   }
+}
+
+/* Seekho: headline note on three lines, problem copy on two (the third
+   card still starts where the copy does), body copy at 16px, no rule
+   under the last trait (csp--sk: csp--seekho is shared by other case studies) */
+@media (min-width:901px) {
+  .csp--sk .csk-note {
+    width: min(330px, 36%)
+  }
+
+  .csp--sk .csk-problem {
+    --csk-aside: min(440px, 40%)
+  }
+}
+
+.csp--sk .csk-prose p,
+.csp--sk .csk-trait p {
+  font-size: 16px
+}
+
+.csp--sk .csk-trait:last-child {
+  border-bottom: 0
+}
+
+/* CuriousJr: body copy at 16px, the communication subtext at 14px, no rule
+   under the last item of either list */
+.csp--cjr .csk-problemCopy,
+.csp--cjr .csk-prose > p,
+.csp--cjr .ccj-stylesCopy p {
+  font-size: 16px
+}
+
+.csp--cjr .ccj-commSub {
+  font-size: 14px
+}
+
+.csp--cjr .csk-trait:last-child {
+  border-bottom: 0
+}
+
+/* Goodscore: setup and hero copy at 16px, the Google stats at 14px, the
+   why-it-worked copy a shade lighter */
+.csp--gs .cgs-setupCopy,
+.csp--gs .cgs-heroCopy {
+  font-size: 16px
+}
+
+.csp--gs .cgs-gStat p {
+  font-size: 14px
+}
+
+.csp--gs .cgs-why .csk-card p {
+  color: #6A6A6A
 }
 
 /* "The Outcome": light section, one yellow staircase (tall step on the right) */
