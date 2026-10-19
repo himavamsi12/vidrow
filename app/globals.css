@@ -15071,7 +15071,10 @@ button:disabled {
     display: block;
     position: absolute;
     z-index: 2;
-    inset: auto 0 0;
+    /* 1px past the card's right edge (the card clips it), so the yellow's
+       edge never lands on a part pixel inside the card and lets a hairline
+       of the photo show down the side */
+    inset: auto -1px 0 0;
     min-height: 45.8cqw;
     box-sizing: border-box;
     padding: 20.8cqw 6.2cqw 3.4cqw;
