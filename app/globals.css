@@ -11618,6 +11618,15 @@ button:focus-visible,
   .vfoot__mNote--r {
     text-align: right
   }
+
+  /* Privacy and Terms, with a little padding so each is an easy tap */
+  .vfoot__mNote a {
+    display: inline-block;
+    padding: 6px 0;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px
+  }
 }
 
 /* ── campaign page (Vyapar): a back link, the title beside a short blurb, and

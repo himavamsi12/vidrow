@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import SiteNav from "../../components/SiteNav";
 import Footer from "../../components/Footer";
 import CampaignFrame from "../../components/CampaignFrame";
+import BackToWork from "../../components/BackToWork";
 import { CAMPAIGNS } from "../../data/campaigns";
 
 export function generateStaticParams() {
@@ -28,9 +29,7 @@ export default async function CampaignPage({ params }) {
 
       <main className="cmp">
         <div className="cmp-backBar">
-          <a className="cmp-back" href="/#work">
-            <span aria-hidden="true">&larr;</span> Back to Home page
-          </a>
+          <BackToWork className="cmp-back" />
         </div>
 
         <header className="cmp-head">

@@ -1704,6 +1704,15 @@
   font-size: 16px;
 }
 
+/* the violet closing line is set exactly like the copy above it (size,
+   weight and leading), only its colour picks it out */
+.page .takeawayCopy b {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
 /* the hero's note runs as wide as on every other case study (36em at
    16px); Client and Timeline take just their own width */
 @media (min-width: 1101px) {

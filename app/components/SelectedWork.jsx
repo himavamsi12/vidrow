@@ -54,15 +54,11 @@ export default function SelectedWork() {
     } catch {}
   }, []);
 
-  // a campaign page is a full page load, so on Back the homepage starts over
-  // and SmoothScrolling puts the page back at this spot from what's saved
-  // here: where this section sat relative to the viewport when a card was
-  // opened.
+  // a campaign page is a full page load, so on Back the homepage starts over;
+  // SmoothScrolling puts the page back at the spot it was left, and the tab
+  // the card was opened from is saved here so it reopens too
   const rememberSpot = () => {
     try {
-      const sec = document.getElementById("work");
-      const offset = window.scrollY - (sec.getBoundingClientRect().top + window.scrollY);
-      sessionStorage.setItem("sw-return", JSON.stringify({ offset }));
       sessionStorage.setItem("sw-cat", activeCat);
     } catch {}
   };

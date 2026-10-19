@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
 import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
@@ -13,7 +12,6 @@ const SPAN_SCREENS = 3;
 const ACID_CELLS = new Set(STAGE_PIECES.filter((p) => p.acid).flatMap((p) => p.cells));
 
 export default function WhereYouAreNow() {
-  const router = useRouter();
   const trackRef = useRef(null);
   const [active, setActive] = useState(-1);
   const [allOn, setAllOn] = useState(false);
@@ -273,8 +271,10 @@ export default function WhereYouAreNow() {
                     key={s.title}
                     onClick={(e) => {
                       // the open card is one big link to its case study; the
-                      // links inside it already go there on their own
-                      if (isOn(i) && !e.target.closest("a")) router.push(s.href);
+                      // links inside it already go there on their own. A full
+                      // page load like every other link, so the homepage saves
+                      // this spot and browser Back returns to it
+                      if (isOn(i) && !e.target.closest("a")) window.location.assign(s.href);
                     }}
                   >
                     <h3

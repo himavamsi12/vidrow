@@ -13,6 +13,24 @@ const LENIS_OPTIONS = {
   touchMultiplier: 1.5,
 };
 
+// the homepage sections a return spot is measured from, in page order
+const HOME_SECTIONS = ["featured", "stage", "levers", "work", "partnership", "deepdive", "news"];
+const HOME_RETURN = "home-return";
+
+// where the visitor is on the homepage: the last section whose top has
+// reached the top of the screen, and how far past its top the screen is
+// (measured from the page top while still in the hero)
+function homeSpot() {
+  let spot = { id: null, offset: window.scrollY };
+  for (const id of HOME_SECTIONS) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const top = el.getBoundingClientRect().top;
+    if (top <= 1) spot = { id, offset: -top };
+  }
+  return spot;
+}
+
 export default function SmoothScrolling({ children }) {
   const lenisRef = useRef(null);
 
@@ -48,18 +66,20 @@ export default function SmoothScrolling({ children }) {
       return;
     }
 
-    // Back from a campaign page: the homepage is loaded again from scratch,
-    // so put the page back on Selected Work where the card was opened. The
-    // sections above it (the pinned Playbook and Levers) settle their
-    // heights over the first moments, so the spot is kept in place while
-    // the layout settles.
+    // Back to the homepage (from a case study, a campaign page or anywhere
+    // else): it is loaded again from scratch, so put the page back where the
+    // visitor left it, saved below as the section that was on screen and how
+    // far into it they were. The sections above it (the pinned Playbook and
+    // Levers) settle their heights over the first moments, so the spot is
+    // kept in place while the layout settles.
     let saved = null;
     try {
       const nav = performance.getEntriesByType("navigation")[0];
-      saved = JSON.parse(sessionStorage.getItem("sw-return") || "null");
+      saved = JSON.parse(sessionStorage.getItem(HOME_RETURN) || "null");
       if (!nav || nav.type !== "back_forward") saved = null;
     } catch {}
-    if (saved && document.getElementById("work")) {
+    const anchor = saved && (saved.id ? document.getElementById(saved.id) : document.body);
+    if (window.location.pathname === "/" && anchor) {
       const lenis = () => lenisRef.current?.lenis;
       const jump = (y) => {
         // Lenis caps every scroll at the page height it last measured, which
@@ -71,12 +91,12 @@ export default function SmoothScrolling({ children }) {
         }
         else window.scrollTo(0, y);
       };
-      const workTop = () => document.getElementById("work").getBoundingClientRect().top + window.scrollY;
+      const anchorTop = () => (saved.id ? anchor.getBoundingClientRect().top + window.scrollY : 0);
       // the sections above settle their heights over the first moments, so
       // keep putting the page back on the spot until the user scrolls
       // themselves. If they scroll before the layout has settled, switch to
       // only following the shifts: whenever a section above grows or shrinks
-      // and pushes Selected Work, move the page by the same amount.
+      // and pushes the saved section, move the page by the same amount.
       let userScrolled = false;
       const onInput = () => {
         userScrolled = true;
@@ -84,10 +104,10 @@ export default function SmoothScrolling({ children }) {
       };
       const inputs = ["wheel", "touchmove", "keydown"];
       inputs.forEach((t) => window.addEventListener(t, onInput, { passive: true }));
-      let last = workTop();
+      let last = anchorTop();
       jump(last + saved.offset);
       const iv = setInterval(() => {
-        const top = workTop();
+        const top = anchorTop();
         if (!userScrolled) jump(top + saved.offset);
         else if (Math.abs(top - last) >= 1) jump(window.scrollY + top - last);
         last = top;
@@ -98,6 +118,28 @@ export default function SmoothScrolling({ children }) {
     }
 
     window.scrollTo(0, 0);
+  }, []);
+
+  // on the homepage, remember where the visitor is whenever they leave it
+  // (a link, the address bar, closing the tab), so Back returns them there
+  useEffect(() => {
+    if (window.location.pathname !== "/") return;
+    const remember = () => {
+      try {
+        sessionStorage.setItem(HOME_RETURN, JSON.stringify(homeSpot()));
+      } catch {}
+    };
+    // a link click saves first, in case the page is torn down without pagehide
+    const onClick = (e) => {
+      const a = e.target.closest?.("a[href]");
+      if (a && a.pathname !== "/" && a.origin === window.location.origin) remember();
+    };
+    document.addEventListener("click", onClick, true);
+    window.addEventListener("pagehide", remember);
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      window.removeEventListener("pagehide", remember);
+    };
   }, []);
 
   // coming back (browser Back) to a page, the browser puts the page at its
