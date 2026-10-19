@@ -75,12 +75,12 @@ export default function PlatinumRxCaseStudy() {
         </div>
 
         <div className="csp-banner">
-          <img
-            src="/casestudy%20images/masai-hero.png"
+          <img fetchPriority="high"
+            src="/casestudy%20images/masai-hero.webp"
             alt="Masai - India's fastest growing career school"
           />
           <span className="csp-bannerTag">
-            <img src="/casestudy%20images/masai-lockup.png" alt="Vidrow x Masai" />
+            <img src="/casestudy%20images/masai-lockup.webp" alt="Vidrow x Masai" />
           </span>
         </div>
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import "@videojs/react/video/skin.css";
-import { VideoPlayer, VideoSkin } from "@videojs/react/video";
-import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
+import { lazy, Suspense, useEffect, useState } from "react";
+
+// the player downloads only once a video is played (see StreamPlayer.jsx)
+const StreamPlayer = lazy(() => import("./StreamPlayer"));
 
 const STREAM = "https://customer-np97ccync4jeshuk.cloudflarestream.com";
 
@@ -25,23 +25,25 @@ function Face({ face }) {
 
   const poster = face.video ? `${STREAM}/${face.video}/thumbnails/thumbnail.jpg?time=2s&height=900` : null;
 
+  const still = poster ? (
+    <button type="button" className="csk-filmPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${face.name}`}>
+      <img src={poster} alt={face.name} loading="lazy" decoding="async" />
+      <span className="csk-filmMark csk-filmMark--s" aria-hidden="true">
+        <i />
+      </span>
+    </button>
+  ) : null;
+
   return (
     <figure className="csk-face">
       <div className="csk-faceFrame">
         {playing ? (
-          <VideoPlayer poster={poster}>
-            <VideoSkin style={{ width: "100%", height: "100%" }}>
-              <CloudflareVideo src={`${STREAM}/${face.video}/watch`} autoPlay playsInline />
-            </VideoSkin>
-          </VideoPlayer>
-        ) : poster ? (
-          <button type="button" className="csk-filmPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${face.name}`}>
-            <img src={poster} alt={face.name} loading="lazy" />
-            <span className="csk-filmMark csk-filmMark--s" aria-hidden="true">
-              <i />
-            </span>
-          </button>
-        ) : null}
+          <Suspense fallback={still}>
+            <StreamPlayer video={face.video} poster={poster} />
+          </Suspense>
+        ) : (
+          still
+        )}
       </div>
       <figcaption>{face.name}</figcaption>
     </figure>

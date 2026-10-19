@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-ExtraLight.ttf") format("truetype");
+  src: url("/font/StackSansNotch-ExtraLight.woff2") format("woff2"), url("/font/StackSansNotch-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
   font-display: swap
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-Light.ttf") format("truetype");
+  src: url("/font/StackSansNotch-Light.woff2") format("woff2"), url("/font/StackSansNotch-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-Regular.ttf") format("truetype");
+  src: url("/font/StackSansNotch-Regular.woff2") format("woff2"), url("/font/StackSansNotch-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-Medium.ttf") format("truetype");
+  src: url("/font/StackSansNotch-Medium.woff2") format("woff2"), url("/font/StackSansNotch-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-SemiBold.ttf") format("truetype");
+  src: url("/font/StackSansNotch-SemiBold.woff2") format("woff2"), url("/font/StackSansNotch-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: "Stack Sans Notch";
-  src: url("/font/StackSansNotch-Bold.ttf") format("truetype");
+  src: url("/font/StackSansNotch-Bold.woff2") format("woff2"), url("/font/StackSansNotch-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap
@@ -59,7 +59,7 @@
   --mute-dark: #8D89A3;
 
   --display: "Stack Sans Notch", "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --body: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --cell: clamp(30px, 4.6vw, 62px);
   --pad: clamp(60px, 8vw, 132px);
@@ -4456,7 +4456,7 @@ html[data-hero-curtain] .hx-bar {
   /* the mobile art is ~27% transparent by design, so this colour is what
      shows through its cut-out blocks — it has to be the page white, not a
      grey placeholder tint (the desktop art is fully opaque, so it's unaffected) */
-  background: var(--paper) url("/founders.png") center top/cover no-repeat
+  background: var(--paper) url("/founders.webp") center top/cover no-repeat
 }
 
 .fo-col {
@@ -4629,7 +4629,7 @@ html[data-hero-curtain] .hx-bar {
        image's own shape — matching the aspect-ratio to its real pixel
        dimensions means cover has nothing to crop, so the whole photo shows */
     aspect-ratio: 730 / 486;
-    background-image: url("/founders-mobile-img.png");
+    background-image: url("/founders-mobile-img.webp");
     background-size: cover
   }
 
@@ -4665,7 +4665,7 @@ html[data-hero-curtain] .hx-bar {
      blocks */
   .fo-shot {
     aspect-ratio: 724 / 720;
-    background-image: url("/founders-mobile1.png")
+    background-image: url("/founders-mobile1.webp")
   }
 
   .fo-lead-t {
@@ -17684,7 +17684,7 @@ html {
   aspect-ratio: 153 / 235;
   border-radius: 6px;
   overflow: hidden;
-  background: url("/casestudy%20images/apnamart%20hero.png") calc(var(--i) * 25%) center / 500% auto no-repeat #1A1A1A;
+  background: url("/casestudy%20images/apnamart%20hero.webp") calc(var(--i) * 25%) center / 500% auto no-repeat #1A1A1A;
   transition: transform .4s ease
 }
 
@@ -19364,7 +19364,7 @@ html.is-loading body {
 
 .ccj-styleFrame {
   aspect-ratio: 226 / 336;
-  background: #1A1A1A url("/casestudy-curios-jr/hero.png") var(--p) 50% / 400% auto no-repeat
+  background: #1A1A1A url("/casestudy-curios-jr/hero.webp") var(--p) 50% / 400% auto no-repeat
 }
 
 .ccj-style figcaption {
@@ -22072,4 +22072,105 @@ main.csp .cvd-mediaItem > figcaption {
    the pillars stay */
 main.csp .cap-pillars li:last-child {
   border-bottom: 0
+}
+
+/* Home, playbook: the open stage's copy at a fixed 16px on desktop */
+@media (min-width:901px) {
+  .wy .wy-item .wy-lead .wy-copy {
+    font-size: 16px
+  }
+}
+
+/* Home, playbook: the first stage's card is shorter, so less empty grey
+   sits under its copy (the other stages keep the shared height) */
+@media (min-width:901px) {
+  .wy .wy-item:first-child .wy-lead {
+    min-height: calc(240 * var(--k) - 1.25 * var(--wy-ltfs))
+  }
+}
+
+/* Home, playbook: the open stage's whole card links to its case study */
+.wy .wy-item.on {
+  cursor: pointer
+}
+
+/* Deep Dives: every brand logo shows at the same visible height. Each file
+   has its own empty padding, so the image is sized from the height of its
+   visible logo (measured from the file), then nudged by eye for logos whose
+   icon or tagline makes the lettering read smaller. The margins keep each
+   logo centred in the same 6cqw slot, 8cqw from the top, so every title
+   still starts on the same line */
+.cs-card .cs-logo {
+  width: auto;
+  max-width: 80cqw
+}
+
+/* Helium (its tagline makes the wordmark smaller) */
+.cs-card-he .cs-logo {
+  height: 7.57cqw;
+  margin-top: 6.82cqw;
+  margin-bottom: -0.39cqw
+}
+
+/* PlatinumRx */
+.cs-card-px .cs-logo {
+  height: 6.23cqw;
+  margin-top: 7.95cqw;
+  margin-bottom: -0.18cqw
+}
+
+/* Masai */
+.cs-card-ma .cs-logo {
+  height: 4.80cqw;
+  margin-top: 8.60cqw;
+  margin-bottom: 0.60cqw
+}
+
+/* CuriousJr */
+.cs-card-cu .cs-logo {
+  height: 9.18cqw;
+  margin-top: 6.72cqw;
+  margin-bottom: -1.90cqw
+}
+
+/* ApnaMart (all caps and very wide) */
+.cs-card-ap .cs-logo {
+  height: 4.27cqw;
+  margin-top: 8.96cqw;
+  margin-bottom: 0.77cqw
+}
+
+/* ApnaMart, online/offline */
+.cs-card-ao .cs-logo {
+  height: 4.27cqw;
+  margin-top: 8.96cqw;
+  margin-bottom: 0.77cqw
+}
+
+/* Vyapar */
+.cs-card-vy .cs-logo {
+  height: 7.56cqw;
+  margin-top: 7.22cqw;
+  margin-bottom: -0.78cqw
+}
+
+/* Goodscore (heavy bold letters) */
+.cs-card-gs .cs-logo {
+  height: 4.32cqw;
+  margin-top: 8.84cqw;
+  margin-bottom: 0.84cqw
+}
+
+/* Seekho (its tall icon makes the wordmark smaller) */
+.cs-card-se .cs-logo {
+  height: 7.18cqw;
+  margin-top: 7.44cqw;
+  margin-bottom: -0.62cqw
+}
+
+/* NeuralGarage (its tall icon makes the wordmark smaller) */
+.cs-card-ng .cs-logo {
+  height: 7.45cqw;
+  margin-top: 7.44cqw;
+  margin-bottom: -0.88cqw
 }

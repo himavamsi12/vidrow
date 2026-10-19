@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import "@videojs/react/video/skin.css";
-import { Hotkey } from "@videojs/react";
-import { VideoPlayer, VideoSkin } from "@videojs/react/video";
-import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
-import { HlsJsVideo } from "@videojs/react/media/hlsjs-video";
+import { lazy, Suspense, useEffect, useState } from "react";
+
+// the player downloads only once a video is played (see StreamPlayer.jsx)
+const StreamPlayer = lazy(() => import("./StreamPlayer"));
 
 const STREAM = "https://customer-np97ccync4jeshuk.cloudflarestream.com";
 
@@ -34,37 +32,24 @@ export default function CampaignFrame({ frame, title, muted = false, useHls = fa
     return <img className="cmp-frame" src={frame.src} alt={frame.alt} />;
   }
 
+  const poster = `${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`;
+  const still = (
+    <button type="button" className="cmp-videoPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
+      <img loading="lazy" decoding="async" className="cmp-videoPoster" src={poster} alt={frame.alt} />
+      <span className="cmp-videoMark" aria-hidden="true">
+        <img loading="lazy" decoding="async" src="/play-step.webp" alt="" />
+      </span>
+    </button>
+  );
+
   return (
     <div className={`cmp-video${frame.wide ? " cmp-video--wide" : ""}`}>
       {playing ? (
-        <VideoPlayer poster={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`}>
-          <VideoSkin style={{ width: "100%", height: "100%" }}>
-            {useHls ? (
-              <HlsJsVideo
-                src={`${STREAM}/${frame.video}/manifest/video.m3u8`}
-                autoPlay
-                muted={muted}
-                playsInline
-              />
-            ) : (
-              <CloudflareVideo src={`${STREAM}/${frame.video}/watch`} autoPlay playsInline />
-            )}
-            {/* the spacebar plays and pauses the open film from anywhere on
-                the page, not only once the player has focus */}
-            <Hotkey keys="Space" action="togglePaused" target="document" />
-          </VideoSkin>
-        </VideoPlayer>
+        <Suspense fallback={still}>
+          <StreamPlayer video={frame.video} poster={poster} useHls={useHls} muted={muted} hotkey />
+        </Suspense>
       ) : (
-        <button type="button" className="cmp-videoPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
-          <img
-            className="cmp-videoPoster"
-            src={`${STREAM}/${frame.video}/thumbnails/thumbnail.jpg?time=${frame.thumb || 2}s&height=900`}
-            alt={frame.alt}
-          />
-          <span className="cmp-videoMark" aria-hidden="true">
-            <img src="/play-step.png" alt="" />
-          </span>
-        </button>
+        still
       )}
     </div>
   );

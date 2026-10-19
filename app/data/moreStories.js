@@ -7,10 +7,10 @@ const STORIES = [
   {
     key: "masai",
     href: "/case-study/masai",
-    image: `${CR}/masai.png`,
+    image: `${CR}/masai.webp`,
     imageAlt: "Masai case study",
     logoType: "image",
-    logoSrc: `${CR}/masai-logo.png`,
+    logoSrc: `${CR}/masai-logo.webp`,
     logoAlt: "Masai",
     stat: "₹250+ Cr",
     statLabel: "revenue",
@@ -19,10 +19,10 @@ const STORIES = [
   {
     key: "helium",
     href: "/case-study/helium",
-    image: `${CR}/helium.png`,
+    image: `${CR}/helium.webp`,
     imageAlt: "Helium case study",
     logoType: "image",
-    logoSrc: `${CR}/helium-logo.png`,
+    logoSrc: `${CR}/helium-logo.webp`,
     logoAlt: "Helium",
     stat: "500",
     statLabel: "ACs a day",
@@ -31,7 +31,7 @@ const STORIES = [
   {
     key: "vyapar",
     href: "/case-study/vyapar",
-    image: `${CR}/vyapar.png`,
+    image: `${CR}/vyapar.webp`,
     imageAlt: "Vyapar case study",
     logoType: "image",
     logoSrc: "/partnership/vyapar.svg",
@@ -43,7 +43,7 @@ const STORIES = [
   {
     key: "platinumrx",
     href: "/case-study/platinumrx",
-    image: `${CR}/platinumx.png`,
+    image: `${CR}/platinumx.webp`,
     imageAlt: "PlatinumRx case study",
     logoType: "image",
     logoSrc: "/partnership/platinumRx.svg",
@@ -55,7 +55,7 @@ const STORIES = [
   {
     key: "apnamart",
     href: "/case-study/apnamart",
-    image: "/deep drives/apnamart deep drive.png",
+    image: "/deep drives/apnamart deep drive.webp",
     imageAlt: "ApnaMart case study",
     logoType: "image",
     logoSrc: "/partnership/apnamart.svg",

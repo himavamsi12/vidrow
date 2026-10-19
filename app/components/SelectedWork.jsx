@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
 import { SW_TABS } from "../data/selectedWork";
+import useNear from "../hooks/useNear";
 
 export default function SelectedWork() {
   const [activeCat, setActiveCat] = useState(SW_TABS[0].cat);
@@ -12,22 +13,33 @@ export default function SelectedWork() {
   // but not on the page's first paint
   const [switched, setSwitched] = useState(false);
 
-  // every tab's photos are fetched quietly once the page is idle, so a tab's
-  // cards come in with their photos ready instead of blinking in empty
+  // every tab's photos are fetched quietly once the section is near the
+  // screen (not with the page, where they were most of the homepage's
+  // download), so a tab's cards come in with their photos ready instead of
+  // blinking in empty. On a slow or data-saving connection only the open
+  // tab loads, and another tab's photos are fetched when its button is
+  // pointed at or focused, just before it opens
+  const [sectionRef, near] = useNear();
+  const fetched = useRef(new Set());
+  const prefetchTab = (t) => {
+    if (fetched.current.has(t.cat)) return;
+    fetched.current.add(t.cat);
+    t.items.forEach((it) => {
+      if (!it.img) return;
+      const im = new Image();
+      im.decoding = "async";
+      im.src = it.img;
+    });
+  };
   useEffect(() => {
-    const load = () =>
-      SW_TABS.forEach((t) =>
-        t.items.forEach((it) => {
-          if (!it.img) return;
-          const im = new Image();
-          im.decoding = "async";
-          im.src = it.img;
-        })
-      );
+    if (!near) return;
+    const c = navigator.connection;
+    if (c && (c.saveData || /(^|-)2g|3g/.test(c.effectiveType || ""))) return;
+    const load = () => SW_TABS.forEach(prefetchTab);
     const ric = window.requestIdleCallback;
     const id = ric ? ric(load, { timeout: 3000 }) : setTimeout(load, 1500);
     return () => (ric ? window.cancelIdleCallback(id) : clearTimeout(id));
-  }, []);
+  }, [near]);
 
   // a page load starts on the first tab; only coming back from a campaign page
   // (a card was opened) reopens the tab that card was in, once
@@ -59,7 +71,7 @@ export default function SelectedWork() {
   const items = tab.items;
 
   return (
-    <section className="sw" id="work">
+    <section className="sw" id="work" ref={sectionRef}>
       <div className="sw-in">
         <Reveal className="sw-head">
           <div className="sw-headL">
@@ -85,6 +97,8 @@ export default function SelectedWork() {
               className="sw-filter"
               data-cat={f.cat}
               aria-pressed={activeCat === f.cat}
+              onPointerEnter={() => prefetchTab(f)}
+              onFocus={() => prefetchTab(f)}
               onClick={() => {
                 if (f.cat === activeCat) return;
                 setSwitched(true);

@@ -6,6 +6,7 @@ export const STAGES = [
     quote:
       "A health tech startup that built its first 10,000-subscriber base before a single rupee was spent on ads.",
     client: "Jumpp",
+    href: "/case-study/stealth-app",
   },
   {
     title: "Reach Fundraise Targets Months Early",
@@ -14,6 +15,7 @@ export const STAGES = [
     quote:
       "Selling 500 units a day within a month of launch, well ahead of what the plan allowed for.",
     client: "Helium",
+    href: "/case-study/helium",
   },
   {
     title: "Unlock All Scaling Levers",
@@ -21,6 +23,7 @@ export const STAGES = [
     stat: "−38% CAC",
     quote: "Acquisition cost cut by more than a third while revenue kept climbing month on month.",
     client: "Masai",
+    href: "/case-study/platinumrx",
   },
   {
     title: "Build Category Authority",
@@ -28,6 +31,7 @@ export const STAGES = [
     stat: "3× recall",
     quote: "The awareness layer that carried the brand from Series B all the way to acquisition.",
     client: "Testbook",
+    href: "/case-study/vyapar",
   },
 ];
 

@@ -124,9 +124,9 @@ export default function ApnamartCaseStudy() {
         </div>
 
         <div className="cst-banner">
-          <img
+          <img fetchPriority="high"
             className="cst-bannerImg cst-bannerImg--full"
-            src="/casestudy%20images/apnamart%20hero.png"
+            src="/casestudy%20images/apnamart%20hero.webp"
             alt="Mandar Chandwadkar in five scenes from the ApnaMart campaign"
           />
           <span className="cst-plate">

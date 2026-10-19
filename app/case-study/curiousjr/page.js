@@ -148,16 +148,16 @@ export default function CuriousJrCaseStudy() {
         </div>
 
         <div className="csp-banner csk-banner">
-          <img
+          <img fetchPriority="high"
             className="csk-hero"
-            src="/casestudy-curios-jr/hero.png"
+            src="/casestudy-curios-jr/hero.webp"
             alt="PW CuriousJr performance videos: four presenters explaining everyday lessons"
           />
           <span className="csp-bannerTag">
             <span className="csp-lockup">
               <VidrowMark />
               <i aria-hidden="true" />
-              <img src="/deep%20drives/curious%20jr.png" alt="CuriousJr" />
+              <img src="/deep%20drives/curious%20jr.webp" alt="CuriousJr" />
             </span>
           </span>
         </div>

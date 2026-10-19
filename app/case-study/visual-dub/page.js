@@ -109,15 +109,15 @@ export default function VisualDubCaseStudy() {
         </h1>
 
         <div className="cst-banner">
-          <img
+          <img fetchPriority="high"
             className="cst-bannerImg cst-bannerImg--full"
-            src="/casestudy%20images/visual-dub.png"
+            src="/casestudy%20images/visual-dub.webp"
             alt="VisualDub campaign: three presenters on yellow, green and blue backdrops"
           />
           <span className="cst-plate">
             <VidrowMark />
             <i aria-hidden="true" />
-            <img className="cst-appLogo" src="/logos/visual-dub.png" alt="" />
+            <img className="cst-appLogo" src="/logos/visual-dub.webp" alt="" />
             <span className="cst-appName">VisualDub</span>
           </span>
         </div>
@@ -301,7 +301,7 @@ export default function VisualDubCaseStudy() {
             <figure className="cvd-mediaItem">
               <span className="cvd-icpShot cvd-shot cvd-shot--wide">
                 {/* TODO: placeholder — the campaign key art until the master film arrives */}
-                <img src="/casestudy%20images/visual-dub.png" alt="Master video of all 3 ICPs" loading="lazy" />
+                <img src="/casestudy%20images/visual-dub.webp" alt="Master video of all 3 ICPs" loading="lazy" />
                 <span className="cvd-play" aria-hidden="true" />
               </span>
               <figcaption>Master Video of all 3 ICPs</figcaption>
@@ -310,7 +310,7 @@ export default function VisualDubCaseStudy() {
             <figure className="cvd-mediaItem">
               <span className="cvd-icpShot cvd-shot cvd-shot--post">
                 <img
-                  src="/LinkedIn%20post.png"
+                  src="/LinkedIn%20post.webp"
                   alt="LinkedIn post from NeuralGarage's CTO at the VisualDub stand at IEEE SWEAT 2024"
                   loading="lazy"
                 />

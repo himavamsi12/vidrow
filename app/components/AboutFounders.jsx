@@ -5,7 +5,7 @@ const FOUNDERS = [
   {
     name: "Aditya Raj Somani",
     role: "Co-Founder",
-    photo: "/about%20us/team/aditya%20raipng.png",
+    photo: "/about%20us/team/aditya%20raipng.webp",
     linkedin: "https://www.linkedin.com/in/adityarajasomani/",
     x: "https://x.com/adityarajsomani",
     // shown in the yellow block that grows up the card on hover; paragraphs
@@ -22,7 +22,7 @@ const FOUNDERS = [
   {
     name: "Anushank Jain",
     role: "Co-Founder",
-    photo: "/about%20us/team/anushank%20jain.png",
+    photo: "/about%20us/team/anushank%20jain.webp",
     linkedin: "https://www.linkedin.com/in/anushank-jain-7390a696/",
     x: "https://x.com/anushankjain",
     bio: [
@@ -90,7 +90,7 @@ export default function AboutFounders() {
         {FOUNDERS.map((f, i) => (
           <div className="abf-item" key={f.name}>
           <article className={`abf-card${f.bio ? " abf-card--bio" : ""}`}>
-            <img className="abf-photo" src={f.photo} alt={f.name} />
+            <img loading="lazy" decoding="async" className="abf-photo" src={f.photo} alt={f.name} />
             <div className="abf-socials">
               <Social href={f.linkedin} label={`${f.name} on LinkedIn`}>
                 <LinkedInIcon />

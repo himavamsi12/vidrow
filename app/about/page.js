@@ -20,7 +20,7 @@ function buildCells(rows = ABOUT_ROWS, photos = ABOUT_PHOTOS) {
     [...row].map((code) => {
       if (code !== "P") return { code };
       const name = photos[photo++];
-      return { code, src: `/about%20us/hero/${name}.png`, zoom: ABOUT_PHOTO_ZOOM_MOBILE[name] };
+      return { code, src: `/about%20us/hero/${name}.webp`, zoom: ABOUT_PHOTO_ZOOM_MOBILE[name] };
     })
   );
 }
@@ -45,7 +45,7 @@ const PROOF = [
   {
     tag: "Success",
     title: "90% of Startups raise their next round with us",
-    body: "90% of Vidrow clients raise their next round while being actively engaged with us.",
+    body: "9 out of 10 startups we work with raise their next round while they\u2019re with us. That isn\u2019t luck. It\u2019s what happens when marketing is built around the metrics investors actually care about, and when the team running it wants your next round as badly as you do.",
   },
 ];
 

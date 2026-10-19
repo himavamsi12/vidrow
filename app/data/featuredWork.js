@@ -10,13 +10,13 @@
 export const FEATURED_WORK = [
   {
     id: "helium",
-    logo: { type: "image", src: "/featured%20works/helium.png", alt: "Helium", trim: 0.146, scale: 1.4, zoom: 2.4 },
-    deskLogo: { src: "/logos/helium%20logo%20-new.png", alt: "Helium", w: 60 },
+    logo: { type: "image", src: "/featured%20works/helium.webp", alt: "Helium", trim: 0.146, scale: 1.4, zoom: 2.4 },
+    deskLogo: { src: "/logos/helium%20logo%20-new.webp", alt: "Helium", w: 60 },
     name: "Helium Smart Air",
     category: "Consumer Hardware",
     photos: [
-      { src: "/Helium.png", cls: "fw-ph1" },
-      { src: "/work/Aman Helium.png", cls: "fw-ph2" },
+      { src: "/Helium.webp", cls: "fw-ph1" },
+      { src: "/work/Aman Helium.webp", cls: "fw-ph2" },
     ],
     plates: [
       { name: "Ashish Sharma", role: "Founder & CEO", cls: "fw-plate1" },
@@ -32,13 +32,13 @@ export const FEATURED_WORK = [
   {
     id: "platinum-rx",
     href: "/case-study/platinumrx",
-    logo: { type: "image", src: "/featured%20works/platinum.png", alt: "PlatinumRx", trim: 0.25, zoom: 1.6 },
-    deskLogo: { src: "/featured%20works/logo-platinumrx.png", alt: "PlatinumRx" },
+    logo: { type: "image", src: "/featured%20works/platinum.webp", alt: "PlatinumRx", trim: 0.25, zoom: 1.6 },
+    deskLogo: { src: "/featured%20works/logo-platinumrx.webp", alt: "PlatinumRx" },
     name: "PlatinumRx",
     category: "Consumer Health",
     photos: [
-      { src: "/Platinum.png", cls: "fw-ph1" },
-      { src: "/work/Piyush Platinum.png", cls: "fw-ph2" },
+      { src: "/Platinum.webp", cls: "fw-ph1" },
+      { src: "/work/Piyush Platinum.webp", cls: "fw-ph2" },
     ],
     plates: [
       { name: "Ashutosh Pandey", role: "Founder & CEO", cls: "fw-plate1" },
@@ -53,13 +53,13 @@ export const FEATURED_WORK = [
   {
     id: "masai-school",
     href: "/case-study/masai",
-    logo: { type: "image", src: "/featured%20works/masai.png", alt: "Masai School", trim: 0.049, zoom: 1.85 },
-    deskLogo: { src: "/featured%20works/logo-masai.png", alt: "Masai School", w: 58 },
+    logo: { type: "image", src: "/featured%20works/masai.webp", alt: "Masai School", trim: 0.049, zoom: 1.85 },
+    deskLogo: { src: "/featured%20works/logo-masai.webp", alt: "Masai School", w: 58 },
     name: "Masai School",
     category: "masaischool.com",
     photos: [
-      { src: "/featured%20works/Prateek%20Shukla.png", cls: "fw-ph1" },
-      { src: "/featured%20works/Ankit%20Agrawal.png", cls: "fw-ph2 fw-phGrow" },
+      { src: "/featured%20works/Prateek%20Shukla.webp", cls: "fw-ph1" },
+      { src: "/featured%20works/Ankit%20Agrawal.webp", cls: "fw-ph2 fw-phGrow" },
     ],
     plates: [
       { name: "Prateek Shukla", role: "Co-founder & CEO", cls: "fw-plate1" },
@@ -73,12 +73,12 @@ export const FEATURED_WORK = [
   },
   {
     id: "apnamart",
-    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.png", alt: "ApnaMart", scale: 0.75, zoom: 0.85 },
-    deskLogo: { src: "/featured%20works/logo-apnamart.png", alt: "ApnaMart" },
+    logo: { type: "image", src: "/casestudy%20images/apna%20amrt.webp", alt: "ApnaMart", scale: 0.75, zoom: 0.85 },
+    deskLogo: { src: "/featured%20works/logo-apnamart.webp", alt: "ApnaMart" },
     name: "ApnaMart",
     category: "apnamart.in",
     solo: true,
-    photos: [{ src: "/testimonial-logos/Helium.png", cls: "fw-ph fw-phSolo fw-phShrink" }],
+    photos: [{ src: "/testimonial-logos/Helium.webp", cls: "fw-ph fw-phSolo fw-phShrink" }],
     plates: [{ name: "Abhishek Singh", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "We\u2019ve worked with Vidrow for two years, and they\u2019ve become an extension of the ApnaMart team. **From brand positioning to performance and offline marketing, they go deep, challenge our thinking, and stay focused on outcomes.**\n\nWhen we handed them our toughest challenge - rebranding ApnaMart - they delivered a new positioning that will shape our next chapter of growth. Vidrow is a partner we genuinely trust.",
@@ -89,12 +89,12 @@ export const FEATURED_WORK = [
   },
   {
     id: "grexa-ai",
-    logo: { type: "image", src: "/featured%20works/grexa.png", alt: "Grexa AI", trim: 0.042, zoom: 1.9 },
-    deskLogo: { src: "/featured%20works/logo-grexa.png", alt: "Grexa AI", w: 58 },
+    logo: { type: "image", src: "/featured%20works/grexa.webp", alt: "Grexa AI", trim: 0.042, zoom: 1.9 },
+    deskLogo: { src: "/featured%20works/logo-grexa.webp", alt: "Grexa AI", w: 58 },
     name: "Grexa AI",
     category: "grexa.ai",
     solo: true,
-    photos: [{ src: "/featured%20works/Narendra%20Agrawal.png", cls: "fw-ph fw-phSolo" }],
+    photos: [{ src: "/featured%20works/Narendra%20Agrawal.webp", cls: "fw-ph fw-phSolo" }],
     plates: [{ name: "Narendra Agarwal", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "**Six years. Two startups. Vidrow has been with us through both.** From 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns across categories and helping launch new ones. They weren\u2019t just an agency - they were partners we relied on.\n\nWhen we started Grexa AI, Vidrow was our first call for marketing. What sets them apart is their ability to understand the business, technology, and audience - and turn that into campaigns that deliver.\n\nSix years in, the partnership only keeps getting stronger.",
@@ -105,12 +105,12 @@ export const FEATURED_WORK = [
   },
   {
     id: "inkpen-labs",
-    logo: { type: "image", src: "/featured%20works/inkpen%20labs.png", alt: "Inkpen Labs", trim: 0.069, zoom: 1.2 },
-    deskLogo: { src: "/featured%20works/logo-inkpen.png", alt: "Inkpen Labs" },
+    logo: { type: "image", src: "/featured%20works/inkpen%20labs.webp", alt: "Inkpen Labs", trim: 0.069, zoom: 1.2 },
+    deskLogo: { src: "/featured%20works/logo-inkpen.webp", alt: "Inkpen Labs" },
     name: "Inkpen Labs",
     category: "inkpenlabs.com",
     solo: true,
-    photos: [{ src: "/featured%20works/shashank.png", cls: "fw-ph fw-phSolo" }],
+    photos: [{ src: "/featured%20works/shashank.webp", cls: "fw-ph fw-phSolo" }],
     plates: [{ name: "Shashank Shekhar", role: "Founder & CEO", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "**I\u2019ve followed Aditya & Anushank\u2019s entrepreneurial and creative journey closely, and the work they\u2019ve built with Vidrow has always inspired me.** So when we needed a thought partner to move faster, they were the obvious choice.\n\nOver the past six months, they\u2019ve helped us test and iterate towards PMF, bringing expertise across performance marketing, content, research, and product. Their team strikes a rare balance of analytical rigor and creative innovation.",

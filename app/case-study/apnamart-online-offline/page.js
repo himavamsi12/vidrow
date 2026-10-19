@@ -155,7 +155,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
           </div>
 
           <div className="csp-banner csk-banner">
-            <img
+            <img fetchPriority="high"
               className="csk-hero"
               src={`${ASSETS}/hero.jpg`}
               alt="Apnamart transit ad, billboard and ad film for the 15 minute delivery"
@@ -413,7 +413,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
               {[1, 2, 3].map((n) => (
                 <img
                   key={n}
-                  src={`${ASSETS}/aware-${n}.png`}
+                  src={`${ASSETS}/aware-${n}.webp`}
                   alt={`Apnamart digital awareness video, scene ${n}`}
                   loading="lazy"
                 />

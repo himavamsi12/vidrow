@@ -196,13 +196,13 @@ export default function SeekhoCaseStudy() {
         </div>
 
         <div className="csp-banner csk-banner">
-          <img
+          <img fetchPriority="high"
             className="csk-hero"
-            src="/casestudy-seekho/hero.png"
+            src="/casestudy-seekho/hero.webp"
             alt="Mandar Chandwadkar in five Seekho celebrity performance videos"
           />
           <span className="csp-bannerTag">
-            <img src="/casestudy-seekho/lockup.png" alt="Vidrow x Seekho" />
+            <img src="/casestudy-seekho/lockup.webp" alt="Vidrow x Seekho" />
           </span>
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Reveal from "./Reveal";
 import WyMark from "./WyMark";
 import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
@@ -12,6 +13,7 @@ const SPAN_SCREENS = 3;
 const ACID_CELLS = new Set(STAGE_PIECES.filter((p) => p.acid).flatMap((p) => p.cells));
 
 export default function WhereYouAreNow() {
+  const router = useRouter();
   const trackRef = useRef(null);
   const [active, setActive] = useState(-1);
   const [allOn, setAllOn] = useState(false);
@@ -255,15 +257,25 @@ export default function WhereYouAreNow() {
             <div className="wy-panel">
               <div className="wy-left">
                 {STAGES.map((s, i) => (
-                  <article className={`wy-item${isOn(i) ? " on" : ""}`} key={s.title}>
+                  <article
+                    className={`wy-item${isOn(i) ? " on" : ""}`}
+                    key={s.title}
+                    onClick={(e) => {
+                      // the open card is one big link to its case study; the
+                      // links inside it already go there on their own
+                      if (isOn(i) && !e.target.closest("a")) router.push(s.href);
+                    }}
+                  >
                     <h3
                       className="wy-title"
                       onMouseEnter={() => hoverStage(i)}
                       onMouseLeave={leaveStage}
                       onClick={() => {
-                        // desktop opens on hover; a click there does nothing
-                        // more. Phones still scroll to the tapped stage
-                        if (!scrollOn) openStage(i);
+                        // an open stage's title is part of its card, which
+                        // opens the case study (see the article). Otherwise
+                        // desktop opens on hover, and phones scroll to the
+                        // tapped stage
+                        if (!scrollOn && !isOn(i)) openStage(i);
                       }}
                       role="button"
                       tabIndex={0}
@@ -285,7 +297,7 @@ export default function WhereYouAreNow() {
                             <p className="wy-copy">{s.copy.split(/(\*\*[^*]+\*\*)/).map((t, k) => (t.startsWith("**") ? <b key={k}>{t.slice(2, -2)}</b> : t))}</p>
                           </div>
                           {/* desktop: the link sits in the card's lower notch */}
-                          <a className="wy-read wy-read--d" href="#featured">
+                          <a className="wy-read wy-read--d" href={s.href}>
                             Read Case Study <WyMark />
                           </a>
                           <div className="wy-cardwrap">
@@ -294,7 +306,7 @@ export default function WhereYouAreNow() {
                                 <span className="wy-stat">{s.stat}</span>
                                 <p className="wy-quote">&ldquo;{s.quote}&rdquo;</p>
                               </div>
-                              <a className="wy-read" href="#featured">
+                              <a className="wy-read" href={s.href}>
                                 Read full story <WyMark />
                               </a>
                             </div>

@@ -10,8 +10,8 @@ const DEEP_DIVES = [
   {
     kind: "he",
     title: "Helium sold 500 ACs a day within a month of launch.",
-    img: "/deepdrive-new/image 294.png",
-    logo: "/deepdrive-new/logos/helium.png",
+    img: "/deepdrive-new/image 294.webp",
+    logo: "/deepdrive-new/logos/helium.webp",
     logoAlt: "Helium",
     logoFx: "none",
     href: "/case-study/helium",
@@ -19,8 +19,8 @@ const DEEP_DIVES = [
   {
     kind: "px",
     title: "PlatinumRx leveraged Celebrity and UGC assets to increase reach 3x in 2 months",
-    img: "/deepdrive-new/2.png?v=2",
-    logo: "/deepdrive-new/logos/platinumrx.png",
+    img: "/deepdrive-new/2.webp?v=2",
+    logo: "/deepdrive-new/logos/platinumrx.webp",
     logoAlt: "PlatinumRx",
     logoFx: "none",
     href: "/case-study/platinumrx",
@@ -28,15 +28,15 @@ const DEEP_DIVES = [
   {
     kind: "st",
     title: "0 to 300k paid users in 80 days",
-    img: "/deepdrive-new/3.png",
+    img: "/deepdrive-new/3.webp",
     name: "Stealth App",
     href: "/case-study/stealth-app",
   },
   {
     kind: "ma",
     title: "Masai\u2019s Performance marketing scaled by 20x in 10 months.",
-    img: "/deepdrive-new/4.png",
-    logo: "/deepdrive-new/masai-logo.png",
+    img: "/deepdrive-new/4.webp",
+    logo: "/deepdrive-new/masai-logo.webp",
     logoAlt: "Masai",
     logoFx: "none",
     href: "/case-study/masai",
@@ -44,8 +44,8 @@ const DEEP_DIVES = [
   {
     kind: "cu",
     title: "CuriousJr observed a dip of 23% in CAC with UGC creatives",
-    img: "/deepdrive-new/5.png",
-    logo: "/deep%20drives/curious%20jr.png",
+    img: "/deepdrive-new/5.webp",
+    logo: "/deep%20drives/curious%20jr.webp",
     logoAlt: "CuriousJr",
     logoFx: "none", // the supplied two-tone logo, shown as is
     href: "/case-study/curiousjr",
@@ -53,7 +53,7 @@ const DEEP_DIVES = [
   {
     kind: "ap",
     title: "ApnaMart builds absolute category authority in staples category",
-    img: "/deep drives/apnamart deep drive.png",
+    img: "/deep drives/apnamart deep drive.webp",
     logo: "/partnership/apnamart.svg",
     logoAlt: "ApnaMart",
     logoFx: "none", // the wordmark's own white and violet; a white filter fills its letters in
@@ -62,8 +62,8 @@ const DEEP_DIVES = [
   {
     kind: "vy",
     title: "Vyapar built its category authority through its businessman-first brand narratives",
-    img: "/deepdrive-new/7.png",
-    logo: "/deepdrive-new/logos/vyapar.png",
+    img: "/deepdrive-new/7.webp",
+    logo: "/deepdrive-new/logos/vyapar.webp",
     logoAlt: "Vyapar",
     logoFx: "none",
     href: "/case-study/vyapar",
@@ -71,7 +71,7 @@ const DEEP_DIVES = [
   {
     kind: "gs",
     title: "Goodscore reduced creative costs by 75% with celebrity performance assets",
-    img: "/deepdrive-new/8.png",
+    img: "/deepdrive-new/8.webp",
     logo: "/partnership/goodscore.svg",
     logoAlt: "Goodscore",
     href: "/case-study/goodscore",
@@ -79,7 +79,7 @@ const DEEP_DIVES = [
   {
     kind: "ao",
     title: "ApnaMart lifted online delivery adoption 4.2x with offline and online marketing",
-    img: "/deepdrive-new/6.png",
+    img: "/deepdrive-new/6.webp",
     logo: "/partnership/apnamart.svg",
     logoAlt: "ApnaMart",
     logoFx: "none", // the wordmark's own white and violet; a white filter fills its letters in
@@ -88,7 +88,7 @@ const DEEP_DIVES = [
   {
     kind: "se",
     title: "Seekho achieves 30% dip in CAC with celebrity performance marketing",
-    img: "/deepdrive-new/9.png",
+    img: "/deepdrive-new/9.webp",
     logo: "/deepdrive-new/seekho.svg",
     logoAlt: "Seekho",
     href: "/case-study/seekho",
@@ -97,7 +97,7 @@ const DEEP_DIVES = [
   {
     kind: "ng",
     title: "NeuralGarage is cracking global marketing at Indian costs",
-    img: "/deepdrive-new/10.png",
+    img: "/deepdrive-new/10.webp",
     logo: "/deepdrive-new/neural garage.svg",
     logoAlt: "NeuralGarage",
     logoFx: "none",

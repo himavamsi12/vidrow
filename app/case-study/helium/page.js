@@ -47,25 +47,25 @@ const JOURNEY = [
     when: "They saw it",
     title: "Brand Films",
     desc: "Sumeet Vyas introduced Helium and built the first layer of trust.",
-    img: "journey-1.png",
+    img: "journey-1.webp",
   },
   {
     when: "They considered it",
     title: "Performance Ads",
     desc: "One sharp reason, delivered while they were still deciding.",
-    img: "journey-2.png",
+    img: "journey-2.webp",
   },
   {
     when: "They checked it",
     title: "The Website",
     desc: "The same face, so the brand felt familiar and consistent.",
-    img: "journey-3.png",
+    img: "journey-3.webp",
   },
   {
     when: "They trusted it",
     title: "YouTube Reviews",
     desc: "When they went looking for proof, Helium was already there.",
-    img: "journey-4.png",
+    img: "journey-4.webp",
   },
 ];
 
@@ -372,12 +372,12 @@ export default function HeliumCaseStudy() {
         </div>
 
         <div className="csp-hl-banner">
-          <img
-            src="/casestudy%20images/casestudy-helium/img-hero.png"
+          <img fetchPriority="high"
+            src="/casestudy%20images/casestudy-helium/img-hero.webp"
             alt="Helium Smart Air on an iceberg"
           />
           <span className="csp-bannerTag">
-            <img src="/casestudy%20images/helium-lockup.png" alt="Helium" />
+            <img src="/casestudy%20images/helium-lockup.webp" alt="Helium" />
           </span>
         </div>
 
@@ -954,8 +954,8 @@ export default function HeliumCaseStudy() {
             </div>
 
             <figure className="csp-reviewShot">
-              <img
-                src="/Creator.png"
+              <img loading="lazy" decoding="async"
+                src="/Creator.webp"
                 alt="Gadget Masala's YouTube review of the Helium Air 0.8 ton smart AC, YouTube Creator"
               />
             </figure>
@@ -999,9 +999,9 @@ export default function HeliumCaseStudy() {
             </p>
           </div>
 
-          <img
+          <img loading="lazy" decoding="async"
             className="chx-social-shot"
-            src="/img-insta.png"
+            src="/img-insta.webp"
             alt="Helium's Instagram profile, @heliumsmart"
           />
         </section>
@@ -1057,19 +1057,19 @@ export default function HeliumCaseStudy() {
           <div className="chx-talkRow">
             <img
               className="chx-talkYt"
-              src="/casestudy%20images/casestudy-helium/talk-yt.png"
+              src="/casestudy%20images/casestudy-helium/talk-yt.webp"
               alt="YouTube reviews of the Helium AC by independent creators"
               loading="lazy"
             />
             <img
               className="chx-talkReel"
-              src="/casestudy%20images/casestudy-helium/talk-reel-1.png"
+              src="/casestudy%20images/casestudy-helium/talk-reel-1.webp"
               alt="An Instagram reel about the Helium AC"
               loading="lazy"
             />
             <img
               className="chx-talkReel"
-              src="/casestudy%20images/casestudy-helium/talk-reel-2.png"
+              src="/casestudy%20images/casestudy-helium/talk-reel-2.webp"
               alt="Another Instagram reel about the Helium AC"
               loading="lazy"
             />
@@ -1088,7 +1088,7 @@ export default function HeliumCaseStudy() {
 
           <img
             className="chx-tweet"
-            src="/img-tweet.png"
+            src="/img-tweet.webp"
             alt="Anand Lunia of IndiaQuotient on X: So Helium Air is selling 500 ACs a day, within a month of launch. Founders are about 30 yo. Did they start too early? Too late?"
             loading="lazy"
           />

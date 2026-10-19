@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { NEWS_ITEMS } from "../data/news";
+import useNear from "../hooks/useNear";
 
 function NavArrow() {
   return (
@@ -30,6 +31,9 @@ function ReadMark() {
 }
 
 export default function News() {
+  // the cards' photos are CSS backgrounds, which a browser downloads with
+  // the page wherever they sit, so they're only set once the section is near
+  const [sectionRef, near] = useNear();
   const trackRef = useRef(null);
   // index of the leftmost visible card
   const [at, setAt] = useState(0);
@@ -82,7 +86,7 @@ export default function News() {
   }, [place]);
 
   return (
-    <section className="news" id="news">
+    <section className="news" id="news" ref={sectionRef}>
       <div className="news-in">
         <div className="news-topbar">
           <Reveal className="news-head">
@@ -128,7 +132,7 @@ export default function News() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ "--img": `url('${item.img}')` }}
+                  style={near ? { "--img": `url('${item.img}')` } : undefined}
                   key={item.title}
                 >
                   <span className="news-shot" aria-hidden="true" />

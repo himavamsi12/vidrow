@@ -63,12 +63,12 @@ export default function CspMoreRow({ stories, cta }) {
           return (
             <a className="csp-moreCard" href={story?.href ?? "/#deepdive"} key={key}>
               <span className={`csp-moreShot${story ? " csp-moreShot--wide" : ""}`}>
-                <img src={story?.image ?? "/selected/1.png"} alt={story?.imageAlt ?? ""} loading="lazy" />
+                <img src={story?.image ?? "/selected/1.webp"} alt={story?.imageAlt ?? ""} loading="lazy" />
               </span>
 
               {story?.logoType === "image" ? (
                 <span className="csp-moreBrand csp-moreBrand--img">
-                  <img src={story.logoSrc} alt={story.logoAlt ?? story.brand ?? ""} />
+                  <img loading="lazy" decoding="async" src={story.logoSrc} alt={story.logoAlt ?? story.brand ?? ""} />
                 </span>
               ) : (
                 <span className="csp-moreBrand">

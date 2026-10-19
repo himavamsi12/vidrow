@@ -104,12 +104,12 @@ export default function PlatinumRxCaseStudy() {
         </div>
 
         <div className="csp-banner">
-          <img
-            src="/casestudy%20images/hero-image.png"
+          <img fetchPriority="high"
+            src="/casestudy%20images/hero-image.webp"
             alt="PlatinumRx: Healthcare App - Start Your Monthly Savings Journey"
           />
           <span className="csp-bannerTag">
-            <img src="/casestudy%20images/platinumrx-lockup.png" alt="Vidrow x PlatinumRx" />
+            <img src="/casestudy%20images/platinumrx-lockup.webp" alt="Vidrow x PlatinumRx" />
           </span>
         </div>
 

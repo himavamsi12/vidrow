@@ -78,25 +78,25 @@ const SEQUENCE = [
 ];
 
 const EARLY_FILMS = [
-  { src: "/casestudy-vyapar/campaign-01.jpg", alt: "Vyapar campaign film with a small-business owner" },
-  { src: "/casestudy-vyapar/campaign-02.jpg", alt: "Vyapar campaign film featuring a shop customer" },
-  { src: "/casestudy-vyapar/campaign-03.jpg", alt: "Vyapar campaign film featuring a business owner" },
+  { src: "/casestudy-vyapar/campaign-01.webp", alt: "Vyapar campaign film with a small-business owner" },
+  { src: "/casestudy-vyapar/campaign-02.webp", alt: "Vyapar campaign film featuring a shop customer" },
+  { src: "/casestudy-vyapar/campaign-03.webp", alt: "Vyapar campaign film featuring a business owner" },
 ];
 
 const TRUST_FILMS = [
-  { src: "/casestudy-vyapar/film-01.jpg", alt: "Manoj Joshi in a Vyapar campaign film" },
-  { src: "/casestudy-vyapar/film-02.jpg", alt: "A character from the Vyapar business campaign" },
-  { src: "/casestudy-vyapar/film-03.jpg", alt: "A shop owner in a Vyapar campaign film" },
-  { src: "/casestudy-vyapar/hero.jpg", alt: "A family watches a Vyapar campaign film" },
+  { src: "/casestudy-vyapar/film-01.webp", alt: "Manoj Joshi in a Vyapar campaign film" },
+  { src: "/casestudy-vyapar/film-02.webp", alt: "A character from the Vyapar business campaign" },
+  { src: "/casestudy-vyapar/film-03.webp", alt: "A shop owner in a Vyapar campaign film" },
+  { src: "/casestudy-vyapar/hero.webp", alt: "A family watches a Vyapar campaign film" },
 ];
 
 const COMMUNITY_FILMS = [
-  { src: "/casestudy-vyapar/story-01.jpg", alt: "A woman in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-02.jpg", alt: "An older business owner in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-03.jpg", alt: "A young woman in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-04.jpg", alt: "A character in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-05.jpg", alt: "A bride in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-06.jpg", alt: "A woman reacts in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-01.webp", alt: "A woman in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-02.webp", alt: "An older business owner in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-03.webp", alt: "A young woman in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-04.webp", alt: "A character in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-05.webp", alt: "A bride in a Vyapar community campaign" },
+  { src: "/casestudy-vyapar/story-06.webp", alt: "A woman reacts in a Vyapar community campaign" },
 ];
 
 const AUTHORITY_STATS = [
@@ -203,7 +203,7 @@ export default function VyaparCaseStudy() {
             </h1>
             <div className={styles.heroImage}>
               <img
-                src="/casestudy-vyapar/hero.jpg"
+                src="/casestudy-vyapar/hero.webp"
                 alt="A family watches a Vyapar campaign film together"
                 fetchPriority="high"
               />
@@ -499,7 +499,7 @@ export default function VyaparCaseStudy() {
               </blockquote>
               <img
                 className={styles.testimonialPortrait}
-                src="/casestudy-vyapar/sumit-agrawal.jpg"
+                src="/casestudy-vyapar/sumit-agrawal.webp"
                 alt="Sumit Agrawal, CEO of Vyapar"
                 loading="lazy"
               />

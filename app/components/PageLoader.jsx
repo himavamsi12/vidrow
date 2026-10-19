@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
+import { LOADER_POSTER } from "./loaderPoster";
 
 const KEY = "vidrow-loader-played";
 const FADE_MS = 500;
@@ -10,16 +11,23 @@ const FADE_MS = 500;
 // connection; this only stops a load that never finishes holding the site
 // behind it for good
 const MAX_MS = 30000;
+// how long a site that has finished loading still waits for the logo
+// animation to arrive and start, before opening with the still logo
+const START_WAIT_MS = 10000;
 
 // The Vidrow loader: a white screen playing the Vidrow logo animation
-// on a browser's first visit to the homepage. It plays the whole video,
-// waits for the page itself to finish loading, then fades away. After that
+// on a browser's first visit to the homepage. The logo's first frame is on
+// screen from the first paint (the poster, sent inside the page), the
+// animation plays once it has downloaded and keeps looping while the site
+// is still loading, and the loader fades away at the end of the loop in
+// which the site finishes. After that
 // it doesn't show again until the browser's cache or site data is cleared.
 // Safari (and every browser on iPhone/iPad, which all run on Safari's
 // engine) ignores the WebM's transparency and paints it black, so it gets
-// the same animation as HEVC with alpha instead (same framing, 1280x720)
-const SRC_WEBM = "/video-loader-transparent.webm";
-const SRC_HEVC = "/video-loader-transparent.mov";
+// the same animation as HEVC with alpha instead. Both are 960x540 (about 60-70KB),
+// which is still sharper than the loader is ever shown
+const SRC_WEBM = "/video-loader-960.webm";
+const SRC_HEVC = "/video-loader-960.mov";
 const needsHevc = () => {
   const ua = navigator.userAgent;
   const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -63,8 +71,13 @@ export default function PageLoader() {
     }, 300);
 
     let videoDone = false;
+    let failed = false;
     let pageDone = document.readyState === "complete";
     let finished = false;
+    // a loaded site waits for an animation that hasn't started yet (still
+    // downloading) for up to START_WAIT_MS before it opens with only the
+    // still logo shown
+    let startWait = 0;
     const finish = () => {
       if (finished) return;
       finished = true;
@@ -78,45 +91,69 @@ export default function PageLoader() {
       setState("fading");
       setTimeout(() => setState("gone"), FADE_MS);
     };
-    const check = () => {
-      if (videoDone && pageDone) finish();
-    };
-
     const v = videoRef.current;
+    const started = () => !!v && v.currentTime > 0;
+    // the animation always plays through at least once; while the site is
+    // still loading after that, it starts over
     const onEnded = () => {
       videoDone = true;
-      check();
+      if (pageDone) finish();
+      else {
+        v.currentTime = 0;
+        v.play()?.catch(() => {});
+      }
     };
-    // a browser that can't play the video (or blocks autoplay) gets a short
-    // white hold instead of the full animation
+    // a browser that can't play the video (or blocks autoplay) keeps the
+    // still logo up until the site has loaded, and at least a short moment
     const onFail = () => {
-      setTimeout(onEnded, 600);
+      if (failed) return;
+      failed = true;
+      setTimeout(() => {
+        videoDone = true;
+        if (pageDone) finish();
+      }, 600);
     };
+    const onPlaying = () => clearTimeout(startWait);
     v?.addEventListener("ended", onEnded);
     v?.addEventListener("error", onFail);
+    v?.addEventListener("playing", onPlaying);
     const hevc = needsHevc();
     if (v) {
       if (!hevc && !v.canPlayType('video/webm; codecs="vp9"')) onFail();
-      else if (!v.getAttribute("src")) {
+      else if (!window.__vlStarted) {
         v.src = hevc ? SRC_HEVC : SRC_WEBM;
         v.play()?.catch(onFail);
       }
       // already started by the inline script in layout.js, which on a slow
-      // connection can be long before this runs: pick up where it is
+      // connection can be long before this runs: pick up where it is (it
+      // may still be waiting on the download, in which case it plays when
+      // that lands)
+      else if (window.__vlFailed || v.error) onFail();
       else if (v.ended) onEnded();
-      else if (v.error) onFail();
-      else if (v.paused) v.play()?.catch(onFail);
+      else if (v.paused && v.currentSrc) v.play()?.catch(onFail);
     }
     const onLoad = () => {
       pageDone = true;
-      check();
+      if (failed) {
+        if (videoDone) finish();
+      } else if (!started()) {
+        // the site is ready but the animation hasn't begun: wait for it
+        // (it then plays through), up to a limit, then open the site
+        startWait = setTimeout(() => {
+          if (!started()) finish();
+        }, START_WAIT_MS);
+      } else if (v.ended) finish();
+      // otherwise the loop that's playing finishes it (onEnded)
     };
-    if (!pageDone) window.addEventListener("load", onLoad);
+    if (pageDone) onLoad();
+    else window.addEventListener("load", onLoad);
     const cap = setTimeout(finish, MAX_MS);
 
     return () => {
       v?.removeEventListener("ended", onEnded);
       v?.removeEventListener("error", onFail);
+      v?.removeEventListener("playing", onPlaying);
+      clearTimeout(startWait);
       window.removeEventListener("load", onLoad);
       clearTimeout(cap);
       clearTimeout(mark);
@@ -139,8 +176,9 @@ export default function PageLoader() {
 
   return (
     <div className={`page-loader${state === "fading" ? " is-fading" : ""}`} aria-hidden="true">
-      {/* its src is set before hydration by the script in layout.js */}
-      <video ref={videoRef} muted playsInline autoPlay preload="auto" suppressHydrationWarning />
+      {/* its src is set before hydration by the script in layout.js; the
+          poster is the animation's first frame, shown until it plays */}
+      <video ref={videoRef} muted playsInline autoPlay preload="auto" poster={LOADER_POSTER} suppressHydrationWarning />
     </div>
   );
 }

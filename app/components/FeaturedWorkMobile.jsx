@@ -150,14 +150,14 @@ export default function FeaturedWorkMobile() {
           return (
             <article key={item.id} className="fwm-card">
               <span className={`fwm-logo${(item.deskLogo || item.logo).sq ? " fwm-logo--sq" : ""}`} style={{ "--lw": `${(item.deskLogo || item.logo).w ?? 68}%` }}>
-                <img src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
+                <img loading="lazy" decoding="async" src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
               </span>
               <div className="fwm-panel">
                 <span className="fwm-chip">
                   <QuoteMark className="fwm-mark" />
                 </span>
                 <div className="fwm-top">
-                  <img className="fwm-photo" src={item.photos[0].src} alt="" />
+                  <img loading="lazy" decoding="async" className="fwm-photo" src={item.photos[0].src} alt="" />
                   <div className="fwm-by">
                     <b>-{founder.name}</b>
                     {founder.role && <span>{founder.role}</span>}

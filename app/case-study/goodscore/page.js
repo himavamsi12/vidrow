@@ -105,9 +105,9 @@ export default function GoodscoreCaseStudy() {
         </div>
 
         <div className="csp-banner csk-banner">
-          <img
+          <img fetchPriority="high"
             className="csk-hero"
-            src="/casestudy-goodscore/hero.png"
+            src="/casestudy-goodscore/hero.webp"
             alt="Goodscore: Trusted by 5 Crore+ Indians, with a celebrity holding the app"
           />
           <span className="csp-bannerTag">

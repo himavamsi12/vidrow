@@ -173,7 +173,7 @@ export default function FeaturedWork() {
                   <span className="fw2-brand" aria-hidden="true" />
 
                   <span className={`fw2-logo${(item.deskLogo || item.logo).sq ? " fw2-logo--sq" : ""}`} style={{ "--lw": `${(item.deskLogo || item.logo).w ?? 68}%` }}>
-                    <img src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
+                    <img loading="lazy" decoding="async" src={(item.deskLogo || item.logo).src} alt={(item.deskLogo || item.logo).alt} />
                   </span>
 
                   <figure className="fw2-photo">

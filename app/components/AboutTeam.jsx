@@ -25,7 +25,7 @@ const TEAM = [
   { name: "Utkarsh Kumar", role: "Post Production Associate - Performance", bg: "#C39941", linkedin: "https://www.linkedin.com/in/utkarsh-kumar-0906833a3", bio: "Utkarsh Kumar here. Writer, director, actor, and unofficial snack manager. I've led teams, made independent projects, and delivered fast, mostly on chai, deadlines, and pure jugaad. Stories that stay with people, even after the pack-up." },
   { name: "Sandeep", role: "Post Production Associate - Brand", bg: "#8796AC", linkedin: "https://www.linkedin.com/in/sandeeps123/" },
   { name: "Anshika Bhatnagar", role: "Creative Associate - Social", bg: "#F3B1BD", linkedin: "https://www.linkedin.com/in/anshika-b-698ba842a", bio: "I work in social media, so yes, I do get paid to scroll." },
-].map((m, i) => ({ ...m, photo: `/about%20us/team/team${i + 1}.png` }));
+].map((m, i) => ({ ...m, photo: `/about%20us/team/team${i + 1}.webp` }));
 
 // the photos that come with their own backdrop (no transparent ground): these
 // fill the whole frame instead of being shrunk, so no flat bg colour shows round them

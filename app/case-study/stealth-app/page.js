@@ -102,9 +102,9 @@ export default function StealthAppCaseStudy() {
         <h1 className="cst-h">Finding PMF in the paying user cohort</h1>
 
         <div className="cst-banner">
-          <img
+          <img fetchPriority="high"
             className="cst-bannerImg"
-            src="/casestudy%20images/stealth%20app.png"
+            src="/casestudy%20images/stealth%20app.webp"
             alt="Stealth App: 0 to 3 Lakh paying users, June to August"
           />
           <span className="cst-plate">
