@@ -10782,7 +10782,10 @@ button:focus-visible,
     display: block;
     padding: 0;
     margin-top: auto;
-    padding-top: 16px
+    padding-top: 16px;
+    /* above the copy (z-index 3, a flex item of .hx-in like this), so the
+       skyline rises over the heading and the button, as on desktop */
+    z-index: 4
   }
 
   .hx-tet-m {
