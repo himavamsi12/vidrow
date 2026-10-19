@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CornerArrow } from "./ContactIcons";
 import { submitContact } from "../contact/actions";
+import { contactError } from "../lib/contactRules";
 
 const REQUIREMENTS = [
   "Performance marketing",
@@ -50,6 +51,12 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status === "sending") return;
+    // the same checks the server makes, so a typo is caught before sending
+    const invalid = contactError(form);
+    if (invalid) {
+      setError(invalid);
+      return;
+    }
     setStatus("sending");
     setError("");
 
@@ -113,9 +120,13 @@ export default function ContactForm() {
           <span className="contact-label">Email</span>
           <input
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder="Enter the email"
             value={form.email}
             onChange={update("email")}
+            pattern={"[^\\s@]+@[^\\s@.]+(\\.[^\\s@.]+)*\\.[A-Za-z]{2,}"}
+            title="An email like name@company.com"
             required
           />
         </label>
@@ -123,9 +134,14 @@ export default function ContactForm() {
           <span className="contact-label">Phone</span>
           <input
             type="tel"
+            name="phone"
+            autoComplete="tel"
+            inputMode="tel"
             placeholder="Enter your phone"
             value={form.phone}
             onChange={update("phone")}
+            pattern={"\\+?[0-9\\s\\-\\(\\)]{10,20}"}
+            title="10 to 15 digits; spaces, dashes and a leading + are fine"
           />
         </label>
       </div>

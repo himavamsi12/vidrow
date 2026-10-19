@@ -3,6 +3,8 @@ import { TERMS } from "../data/legal";
 
 export const metadata = {
   title: "Terms and Conditions | Vidrow",
+  description:
+    "The terms and conditions for using the Vidrow website.",
 };
 
 export default function TermsPage() {

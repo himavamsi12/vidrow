@@ -1,8 +1,49 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { SITE_URL, SITE_DESCRIPTION } from "./lib/site";
 
+// every page's share preview (WhatsApp, LinkedIn, X) takes its title and
+// description from the page's own; the image is opengraph-image in the
+// page's folder, or the Vidrow card in app/ for pages without one
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Vidrow - Marketing partner behind fastest growing startups",
+  description: SITE_DESCRIPTION,
+  applicationName: "Vidrow",
+  authors: [{ name: "Vidrow" }],
+  creator: "Vidrow",
+  publisher: "Vidrow",
+  category: "Marketing",
+  keywords: [
+    "Vidrow",
+    "startup marketing agency",
+    "performance marketing",
+    "celebrity performance ads",
+    "UGC ads",
+    "brand films",
+    "growth marketing",
+    "Meta ads",
+    "Google ads",
+    "India",
+  ],
+  // each page names itself as the one address to index ("./" is the page's own path)
+  alternates: { canonical: "./" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  // phone numbers and addresses in the copy are not turned into links by iOS
+  formatDetection: { telephone: false, address: false, email: false },
+  openGraph: {
+    url: "./",
+    type: "website",
+    siteName: "Vidrow",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 import SmoothScrolling from "./components/SmoothScrolling";
 import PageLoader from "./components/PageLoader";

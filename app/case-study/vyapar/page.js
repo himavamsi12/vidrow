@@ -8,6 +8,8 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Vyapar - Case Study | Vidrow",
+  description:
+    "How Vidrow helped make Vyapar the name its category is known by, with brand films for small-business owners across India.",
 };
 
 const SECTIONS = [

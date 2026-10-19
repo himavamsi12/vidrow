@@ -5,6 +5,8 @@ import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "Goodscore - Case Study | Vidrow",
+  description:
+    "How celebrity performance ads helped GoodScore scale: one shoot, tested hook by hook, competing on cost per conversion in the same account and auction.",
 };
 
 // the production system: one shoot to eighteen live ads

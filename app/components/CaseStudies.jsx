@@ -73,7 +73,7 @@ const DEEP_DIVES = [
     title: "Goodscore reduced creative costs by 75% with celebrity performance assets",
     img: "/deepdrive-new/8.webp",
     logo: "/partnership/goodscore.svg",
-    logoAlt: "Goodscore",
+    logoAlt: "GoodScore",
     href: "/case-study/goodscore",
   },
   {
@@ -111,23 +111,26 @@ const DEEP_DIVES = [
 const REPEAT = 2;
 
 // one story card: the title on top, the cut-out, the brand along the foot
+// every image has its alt text; a repeat (there for the sideways loop) is
+// hidden from screen readers as a whole instead, so it isn't read twice
 function DiveCard({ d, repeat = false }) {
   const Tag = d.href ? "a" : "article";
   const link = d.href ? { href: d.href, tabIndex: repeat ? -1 : undefined } : {};
+  const brand = d.logoAlt || d.name;
   return (
-    <Tag className={`cs-card cs-card-${d.kind}`} {...link}>
+    <Tag className={`cs-card cs-card-${d.kind}`} {...link} aria-hidden={repeat || undefined}>
       {d.logo ? (
         <img
           className={`cs-logo${d.logoFx === "none" ? "" : d.logoFx === "dark" ? " cs-logo--dark" : " cs-logo--white"}`}
           src={d.logo}
-          alt={repeat ? "" : d.logoAlt}
+          alt={d.logoAlt}
           loading="lazy"
         />
       ) : (
         <span className="cs-name">{d.name}</span>
       )}
       <h3 className="cs-title">{d.title}</h3>
-      <img className="cs-person" src={d.img} alt="" loading="lazy" />
+      <img className="cs-person" src={d.img} alt={`From the ${brand} case study`} loading="lazy" />
     </Tag>
   );
 }

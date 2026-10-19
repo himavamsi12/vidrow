@@ -111,7 +111,7 @@ export default function AboutFounders() {
                     and their LinkedIn and X on the right */}
                 <div className="abf-bioHead">
                   <span className="abf-bioThumb" aria-hidden="true">
-                    <img loading="lazy" decoding="async" src={f.photo} alt="" />
+                    <img loading="lazy" decoding="async" src={f.photo} alt={f.name} />
                   </span>
                   <div aria-hidden="true">
                     <b>{f.name}</b>

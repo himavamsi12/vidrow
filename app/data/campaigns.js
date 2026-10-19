@@ -69,7 +69,7 @@ export const CAMPAIGNS = {
       video("e9f769e30abb3dd0f3b1c396da92fb7a", "Not Just AI - Kim.CC, film 1"),
     ],
   },
-  "whatspp-solved": {
+  "whatsapp-solved": {
     title: "WhatsApp Solved",
     by: "Periskope",
     about: "Periskope turns missed messages and scattered WhatsApp groups into a problem growing teams recognise. Its shared inbox, AI follow-ups, tickets and analytics help keep conversations organised.",
@@ -260,7 +260,7 @@ export const CAMPAIGNS = {
       video("2ce79ff3d26dddde865172f626976220", "PlatinumRx, film 3"),
     ],
   },
-  curious_jr_shailesh: {
+  "curiousjr-shailesh-lodha": {
     title: "Shailesh Lodha",
     by: "Physics Wallah - Ratta nahi Padhai",
     about: "CuriousJr challenges rote learning through stories about parents, children and teachers. The films highlight concept-led teaching, personal mentors and progress updates, inviting parents to try a more supportive learning experience.",
@@ -274,7 +274,7 @@ export const CAMPAIGNS = {
       video("e657e0df8b8135a73aa8ac007aa3cb2a", "Curious Jr - Shailesh, film 6"),
     ],
   },
-  oolka_jimmy: {
+  "oolka-jimmy-shergill": {
     title: "Jimmy Sheirgill",
     by: "Oolka - Credit Score Badhao",
     about: "Jimmy Shergill and relatable borrower stories explain credit-score problems, report disputes and lender communication, turning a confusing financial number into practical next steps.",
@@ -287,7 +287,7 @@ export const CAMPAIGNS = {
       video("d7e4bb8e286b5e8f220394a05208e81b", "Oolka Jimmy, film 5"),
     ],
   },
-  platinumrx_anup_soni: {
+  "platinumrx-anup-soni": {
     title: "Anup Soni",
     by: "PlatinumRx - Aapki mehnat Ki Kamai",
     about: "Anup Soni investigates why medicine bills stay high despite small discounts. Direct explanations and price breakdowns encourage people to understand brand premiums and explore suitable alternatives.",
@@ -301,7 +301,7 @@ export const CAMPAIGNS = {
       video("f807f04d5523dd446dfc0282a9387621", "PlatinumRx - Anup Soni, film 6"),
     ],
   },
-  platinumrx_anupam_kher: {
+  "platinumrx-anupam-kher": {
     title: "Anupam Kher",
     by: "PlatinumRx - Smart Choice",
     about: "Anupam Kher helps PlatinumRx address doubts about cheaper medicine alternatives. Direct explainers and relatable scenarios encourage people to review medicine costs and make informed choices.",
@@ -315,7 +315,7 @@ export const CAMPAIGNS = {
       video("a7771551fc363b2a9acf1e7a9f0a146c", "PlatinumRx - Anupam Kher, film 6"),
     ],
   },
-  seekho_naveen_kasturia: {
+  "seekho-naveen-kasturia": {
     title: "Naveen Kasturia",
     by: "Seekho - Seekhega India",
     about: "Character-led films introduce practical lessons in content creation, spoken English, business ideas and paperwork, encouraging people to turn ambitions into skills they can learn.",
@@ -328,7 +328,7 @@ export const CAMPAIGNS = {
       video("6c4751f502a4f3423b5ce536e6377990", "Seekho - Naveen Kasturia,  PART TIME INCOME , film 5"),
     ],
   },
-  seekho_mandar: {
+  "seekho-mandar-chandwadkar": {
     title: "Mandar Chandwadkar",
     by: "Seekho - Kuchh naya Seekho",
     about: "Seekho turns everyday paperwork problems into simple learning opportunities. Familiar comic scenarios and step-by-step videos show how a phone can help people handle tasks independently.",
@@ -341,7 +341,7 @@ export const CAMPAIGNS = {
       video("62a42983742afdfd0662dedae597ea57", "Seekho - Mandar, film 5"),
     ],
   },
-  Bachatt_brandformance: {
+  "bachatt-brandformance": {
     title: "Bachatt hai to Budget hai",
     by: "Bachatt",
     about: "Family and shopkeeper stories show how regular savings can help fund goals from education to healthcare. Across three languages, Bachatt reframes saving as a way to say yes to life\u2019s needs.",
@@ -378,7 +378,7 @@ export const CAMPAIGNS = {
       video("39c897647d2a214bf4c15cf29a0293e6", "Groww, film 2"),
     ],
   },
-  helium_Ads: {
+  "helium-performance-ads": {
     title: "Book now on website",
     by: "Helium",
     about: "Helium encourages buyers to choose an AC for their room, not an oversized recommendation. Creator explainers highlight compact design, app controls, energy tracking and fault alerts.",
@@ -392,7 +392,7 @@ export const CAMPAIGNS = {
       video("a2969cf38a513af8dc367045ef264bbb", "Helium Ads, film 6"),
     ],
   },
-  masai_Ads: {
+  "masai-performance-ads": {
     title: "Signup For the Test",
     by: "Masai",
     about: "Masai\u2019s admissions films turn broad career ambitions into specific learning options. Creators explain course content, instructors and practical experiences, helping students choose a program and take the next step.",
@@ -405,7 +405,7 @@ export const CAMPAIGNS = {
       video("4b6d6f60f20d50a7c17a5d9d13f02129", "Masai Ads, film 5"),
     ],
   },
-  oolka_Ads: {
+  "oolka-performance-ads": {
     title: "Start Subscription",
     by: "Oolka",
     about: "Oolka introduces an AI credit expert to help explain credit reports, errors and repayments. Comedy, creator stories and animation encourage people to move from worry to practical action.",
@@ -420,7 +420,7 @@ export const CAMPAIGNS = {
       video("662a87e28fcfc08a231b2fe3fe0e363c", "Oolka Ads, film 7"),
     ],
   },
-  pice_Ads: {
+  "pice-performance-ads": {
     title: "Try First Transaction",
     by: "Pice",
     about: "Pice connects everyday money gaps with tools for education payments, credit, invoice financing and voice-based bookkeeping, showing how people can pay fees, buy stock or finish accounts.",
@@ -433,7 +433,7 @@ export const CAMPAIGNS = {
       video("72bf863a69e543fa19d23a0dbd5eeab0", "Pice Ads, film 5"),
     ],
   },
-  performance_platinum_rx: {
+  "platinumrx-performance-ads": {
     title: "Buy your first Substitute Medicine",
     by: "PlatinumRx",
     about: "PlatinumRx explains how medicine ingredients and brand pricing affect the final bill. Relatable stories and straightforward explainers encourage people to check prescriptions for suitable alternatives.",
@@ -445,7 +445,7 @@ export const CAMPAIGNS = {
       video("9b2c8328268f979865eddeb1f0750239", "Performance PlatinumRx, film 4"),
     ],
   },
-  pw_cjr_ads: {
+  "curiousjr-performance-ads": {
     title: "Try Demo classes",
     by: "Curious Jr",
     about: "CuriousJr explores why more tuition does not always mean better understanding. Stories highlight interactive classes, concept-led teaching and doubt support, inviting families to try a demo.",

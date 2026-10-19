@@ -5,6 +5,8 @@
 // Supabase's REST API rather than through supabase-js, whose client also sets
 // up a realtime socket that crashes on Node versions without a built-in
 // WebSocket (Node 20).
+import { contactError } from "../lib/contactRules";
+
 const clip = (v, n) => String(v ?? "").trim().slice(0, n);
 
 export async function submitContact(data) {
@@ -21,9 +23,8 @@ export async function submitContact(data) {
     message: clip(data?.message, 5000) || null,
   };
 
-  if (!row.first_name || !/^\S+@\S+\.\S+$/.test(row.email) || !row.requirement) {
-    return { ok: false, error: "Please fill in your first name, email and requirement." };
-  }
+  const invalid = contactError(data || {});
+  if (invalid) return { ok: false, error: invalid };
 
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;

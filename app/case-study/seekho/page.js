@@ -8,6 +8,8 @@ import SeekhoFaces from "../../components/SeekhoFaces";
 
 export const metadata = {
   title: "Seekho - Case Study | Vidrow",
+  description:
+    "How Vidrow built celebrity performance videos for Seekho with Mandar Chandwadkar, to beat ad fatigue and keep acquisition costs low.",
 };
 
 // the three things wrong with Seekho's ads before this campaign
@@ -46,7 +48,7 @@ const TRAITS = [
 ];
 
 // the five films of the Seekho campaign page, played in place
-const FILMS = CAMPAIGNS.seekho_mandar.frames;
+const FILMS = CAMPAIGNS["seekho-mandar-chandwadkar"].frames;
 
 // the numbers behind the campaign
 const NUMBERS = [

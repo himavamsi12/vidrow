@@ -5,6 +5,8 @@ import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "VisualDub - Case Study | Vidrow",
+  description:
+    "How Vidrow helped VisualDub by NeuralGarage increase outbound conversion and generate high-intent B2B leads with product showcase videos for global buyers.",
 };
 
 // what VisualDub needed the campaign to do
@@ -117,7 +119,7 @@ export default function VisualDubCaseStudy() {
           <span className="cst-plate">
             <VidrowMark />
             <i aria-hidden="true" />
-            <img className="cst-appLogo" src="/logos/visual-dub.webp" alt="" />
+            <img className="cst-appLogo" src="/logos/visual-dub.webp" alt="VisualDub logo" />
             <span className="cst-appName">VisualDub</span>
           </span>
         </div>
@@ -206,7 +208,7 @@ export default function VisualDubCaseStudy() {
                     <span className="cvd-icpShot">
                       <img
                         src={`${STREAM}/${icp.video}/thumbnails/thumbnail.jpg?time=${icp.time}&height=600`}
-                        alt=""
+                        alt={`Video still: ${icp.label}`}
                         loading="lazy"
                       />
                       <span className="cvd-play" aria-hidden="true" />

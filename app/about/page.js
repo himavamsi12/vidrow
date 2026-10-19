@@ -10,6 +10,8 @@ import { ABOUT_ROWS, ABOUT_ROWS_MOBILE, ABOUT_PHOTOS, ABOUT_PHOTOS_MOBILE, ABOUT
 
 export const metadata = {
   title: "About Us | Vidrow",
+  description:
+    "Meet the founders and the largely IIT Kanpur team behind Vidrow, a marketing partner that invests in the startups it works with and plans each stage of growth with founders.",
 };
 
 // flatten the rows into one run of cells (row-major), so the same markup lays
@@ -141,7 +143,7 @@ export default function AboutPage() {
         <div className="ab-grid ab-grid--d">
           {cells.map((c, i) =>
             c.src ? (
-              <img key={i} className="ab-cell ab-photo" src={c.src} alt="" />
+              <img key={i} className="ab-cell ab-photo" src={c.src} alt="A member of the Vidrow team" />
             ) : (
               <span key={i} className={`ab-cell ab-${c.code.toLowerCase()}`} />
             )

@@ -5,6 +5,8 @@ import { WhatsappIcon, CalendarIcon, LocationIcon, CornerArrow } from "../compon
 
 export const metadata = {
   title: "Contact - Vidrow",
+  description:
+    "Tell us where your startup is and what you need next. Write to Vidrow about brand films, performance ads, celebrity campaigns or full-funnel growth marketing.",
 };
 
 const CONTACT_LINKS = [

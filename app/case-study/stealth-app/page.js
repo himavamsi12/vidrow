@@ -5,6 +5,8 @@ import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "Stealth App - Case Study | Vidrow",
+  description:
+    "How Vidrow helped a stealth consumer app find product-market fit in its paying-user cohort, testing features, audiences and creatives to grow paying users.",
 };
 
 // the eight steps from first ad to paying user — the last two (the trial

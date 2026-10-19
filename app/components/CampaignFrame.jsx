@@ -37,7 +37,7 @@ export default function CampaignFrame({ frame, title, muted = false, useHls = fa
     <button type="button" className="cmp-videoPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
       <img loading="lazy" decoding="async" className="cmp-videoPoster" src={poster} alt={frame.alt} />
       <span className="cmp-videoMark" aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/play-step.webp" alt="" />
+        <img loading="lazy" decoding="async" src="/play-step.webp" alt="Play" />
       </span>
     </button>
   );

@@ -5,6 +5,8 @@ import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "ApnaMart - Case Study | Vidrow",
+  description:
+    "How Vidrow built brand recall for ApnaMart around staples with a celebrity campaign made for social media.",
 };
 
 // what was already fixed, and what the ads still had to do

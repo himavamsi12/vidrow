@@ -7,6 +7,8 @@ import { CAMPAIGNS } from "../../data/campaigns";
 
 export const metadata = {
   title: "PW CuriousJr - Case Study | Vidrow",
+  description:
+    "How Vidrow helped PW CuriousJr reduce its cost per lead and generate quality leads with performance videos made for parents.",
 };
 
 // what PW CuriousJr wanted the campaign to do
@@ -39,7 +41,7 @@ const COMMS = [
 ];
 
 // the four video styles, each played from the CuriousJr campaign page's films
-const STYLE_FILMS = CAMPAIGNS.pw_cjr_ads.frames.slice(0, 4);
+const STYLE_FILMS = CAMPAIGNS["curiousjr-performance-ads"].frames.slice(0, 4);
 const STYLES = ["Street Interview", "Direct-to-Camera", "Testimonial", "Expert\u2019s Opinion"];
 
 // the numbers: the square beside each label is yellow or lilac

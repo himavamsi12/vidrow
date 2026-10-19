@@ -5,6 +5,8 @@ import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
   title: "Apnamart (Online + Offline) - Case Study | Vidrow",
+  description:
+    "How Vidrow tested offline and online channels for ApnaMart in Bilaspur, phase by phase, to grow app downloads and online orders.",
 };
 
 const ASSETS = "/casestudy%20images/casestudy-apnamart-online";

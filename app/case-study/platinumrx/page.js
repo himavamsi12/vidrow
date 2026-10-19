@@ -9,6 +9,8 @@ import CspSectionNav from "../../components/CspSectionNav";
 
 export const metadata = {
   title: "PlatinumRx - Case Study | Vidrow",
+  description:
+    "How PlatinumRx scaled through UGC and celebrity performance ads, built with Vidrow to explain substitute medicines and medicine savings.",
 };
 
 // the side rail's sections (this page has no celebrity-ads or CAC sections)
@@ -72,12 +74,12 @@ const HOOKS = [
 // the Anup Soni and Anupam Kher campaigns (plus a second Anup Soni film), and
 // the four performance films
 const CELEB_ADS = [
-  CAMPAIGNS.platinumrx_anup_soni.frames[1],
-  CAMPAIGNS.platinumrx_anup_soni.frames[0],
-  CAMPAIGNS.platinumrx_anupam_kher.frames[2],
+  CAMPAIGNS["platinumrx-anup-soni"].frames[1],
+  CAMPAIGNS["platinumrx-anup-soni"].frames[0],
+  CAMPAIGNS["platinumrx-anupam-kher"].frames[2],
 ];
 
-const PERF_ADS = CAMPAIGNS.performance_platinum_rx.frames;
+const PERF_ADS = CAMPAIGNS["platinumrx-performance-ads"].frames;
 
 export default function PlatinumRxCaseStudy() {
   return (

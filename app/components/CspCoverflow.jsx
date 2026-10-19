@@ -69,7 +69,7 @@ export default function CspCoverflow({ slides, start = 0, href }) {
               else if (href) window.location.href = href;
             }}
           >
-            <img loading="lazy" decoding="async" src={s.src} alt="" draggable="false" />
+            <img loading="lazy" decoding="async" src={s.src} alt={s.alt} draggable="false" />
             {href && rel === 0 && (
               <span className="csp-coverPlay" aria-hidden="true">
                 <svg viewBox="0 0 40 40">

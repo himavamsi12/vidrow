@@ -8,6 +8,8 @@ import { CAMPAIGNS } from "../../data/campaigns";
 
 export const metadata = {
   title: "Helium - Case Study | Vidrow",
+  description:
+    "How Vidrow launched Helium Smart Air, a 0.8 ton AC at ₹16,999 sold online, in a category that has not changed in thirty years: positioning, casting, brand films and performance ads in one summer.",
 };
 
 const SECTIONS = [
@@ -71,8 +73,8 @@ const JOURNEY = [
 
 // the five Helium films from the campaign page (/campaign/helium), one reason each
 const REASON_FILMS = CAMPAIGNS.helium.frames;
-// the first four of the tall performance ads on the Helium ads campaign page (/campaign/helium_Ads)
-const PERF_ADS = CAMPAIGNS.helium_Ads.frames.slice(0, 4);
+// the first four of the tall performance ads on the Helium ads campaign page (/campaign/helium-performance-ads)
+const PERF_ADS = CAMPAIGNS["helium-performance-ads"].frames.slice(0, 4);
 const REASON_CAPTIONS = [
   "It is the right size",
   "Anti-incumbent",

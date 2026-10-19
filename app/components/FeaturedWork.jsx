@@ -6,6 +6,11 @@ import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import { FEATURED_WORK } from "../data/featuredWork";
 
+// the founders in a card's photo, for its alt text: "Ashish Sharma and Aman
+// Munka, Helium Smart Air"
+const founderAlt = (item) =>
+  `${(item.plates || []).map((p) => p.name).join(" and ")}${item.plates?.length ? ", " : ""}${item.name}`;
+
 // the heavy block quote mark that opens each testimonial
 function QuoteMark() {
   return (
@@ -180,7 +185,7 @@ export default function FeaturedWork() {
                     {/* loaded up front and decoded off the main thread, so no
                         card's photo is fetched and decoded mid-scroll as it
                         slides in */}
-                    <img src={photo.src} alt="" loading="eager" decoding="async" />
+                    <img src={photo.src} alt={founderAlt(item)} loading="eager" decoding="async" />
                   </figure>
 
                   <h3 className="fw2-headline">{item.line}</h3>

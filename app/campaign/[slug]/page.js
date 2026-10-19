@@ -12,7 +12,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const c = CAMPAIGNS[slug];
-  return { title: c ? `${c.title} - ${c.by.split(" - ")[0]} | Vidrow` : "Campaign | Vidrow" };
+  if (!c) return { title: "Campaign | Vidrow" };
+  const brand = c.by.split(" - ")[0];
+  return {
+    title: `${c.title} - ${brand} | Vidrow`,
+    // the campaign's own blurb, or a line naming it for the few without one
+    description: c.about || `${c.title}, a campaign Vidrow made for ${brand}.`,
+  };
 }
 
 export default async function CampaignPage({ params }) {

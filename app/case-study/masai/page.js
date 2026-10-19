@@ -7,6 +7,8 @@ import { CAMPAIGNS } from "../../data/campaigns";
 
 export const metadata = {
   title: "Masai - Case Study | Vidrow",
+  description:
+    "How Vidrow helped Masai reduce its dependence on influencer marketing, scaling performance ads built around the right face and hundreds of tested hooks.",
 };
 
 const SECTIONS = [
@@ -19,8 +21,8 @@ const SECTIONS = [
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
-// the first four films of the Masai campaign page (/campaign/masai_Ads)
-const ADS = CAMPAIGNS.masai_Ads.frames.slice(0, 4);
+// the first four films of the Masai campaign page (/campaign/masai-performance-ads)
+const ADS = CAMPAIGNS["masai-performance-ads"].frames.slice(0, 4);
 
 const AOC = [
   {

@@ -166,7 +166,7 @@ export default function FeaturedWorkMobile() {
                   <QuoteMark className="fwm-mark" />
                 </span>
                 <div className="fwm-top">
-                  <img loading="lazy" decoding="async" className="fwm-photo" src={item.photos[0].src} alt="" />
+                  <img loading="lazy" decoding="async" className="fwm-photo" src={item.photos[0].src} alt={`${founder.name}, ${item.name}`} />
                   <div className="fwm-by">
                     <b>-{founder.name}</b>
                     {founder.role && <span>{founder.role}</span>}
