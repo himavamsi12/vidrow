@@ -51,10 +51,6 @@ const WHY = [
   { title: "Channel-role split", desc: "efficiency on Meta, scale on Google, from one shoot" },
 ];
 
-// the Goodscore ads. `video` is a Cloudflare Stream id; an empty card holds
-// its place until that film is added.
-const ADS = [{}, {}, {}];
-
 // the rail flips light-on-dark over the full-funnel band
 const DARK_SECTIONS = ["csp-sec-funnel"];
 
@@ -68,7 +64,6 @@ const SECTIONS = [
   { id: "csp-sec-hero-ad", label: "The Hero Ad" },
   { id: "csp-sec-google", label: "The Other Channel" },
   { id: "csp-sec-why", label: "Why It Worked" },
-  { id: "csp-sec-ads", label: "Works" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
@@ -387,23 +382,6 @@ export default function GoodscoreCaseStudy() {
               </li>
             ))}
           </ol>
-        </section>
-      </div>
-
-      <div className="csp-in">
-        <section className="csk-sec" id="csp-sec-ads">
-          <div className="csp-eyebrow2">
-            <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>01</b>
-            WORKS
-          </div>
-          <h2 className="cst-secH">Ads</h2>
-
-          <div className="csk-films cgs-ads">
-            {ADS.map((ad, i) => (
-              <div className="csk-film cgs-adCard" key={ad.video || i} aria-hidden="true" />
-            ))}
-          </div>
         </section>
       </div>
 

@@ -20115,19 +20115,6 @@ html.is-loading body {
   }
 }
 
-/* Goodscore: the Ads row */
-.cgs-ads {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2.2vw, 29px);
-  margin-top: clamp(32px, 4vw, 56px)
-}
-
-.cgs-adCard {
-  aspect-ratio: 346 / 585;
-  border-radius: 0;
-  background: #D9D9D9
-}
-
 /* Goodscore on phones */
 @media (max-width:640px) {
   /* the logo tab stays clear of the hero image's own headline */

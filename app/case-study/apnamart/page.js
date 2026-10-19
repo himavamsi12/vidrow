@@ -44,7 +44,7 @@ const PILLARS = [
 
 const SCRIPT_CHOICES = [
   {
-    title: "Social-media-first scripts",
+    title: "Social-media-first storytelling",
     desc: "To make our scripts Social-Media-First and avoid hard-selling of Staples.",
   },
   {
