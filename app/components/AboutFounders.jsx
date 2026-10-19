@@ -35,37 +35,38 @@ const FOUNDERS = [
   },
 ];
 
-function LinkedInIcon() {
+// white squares on the photo; `dark` squares (yellow glyph) on the yellow bio
+function LinkedInIcon({ dark }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect width="24" height="24" rx="2" fill="#fff" />
+      <rect width="24" height="24" rx="2" fill={dark ? "#121212" : "#fff"} />
       <path
-        fill="#121212"
+        fill={dark ? "var(--acid)" : "#121212"}
         d="M5.3 9.2h2.9V19H5.3zM6.75 4.6a1.68 1.68 0 1 1 0 3.36 1.68 1.68 0 0 1 0-3.36zM10 9.2h2.78v1.34h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.43V19h-2.9v-4.92c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V19H10z"
       />
     </svg>
   );
 }
 
-function XIcon() {
+function XIcon({ dark }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect width="24" height="24" rx="2" fill="#fff" />
+      <rect width="24" height="24" rx="2" fill={dark ? "#121212" : "#fff"} />
       <path
-        fill="#121212"
+        fill={dark ? "var(--acid)" : "#121212"}
         d="M15.9 5.5h2.1l-4.6 5.25L18.8 18.5h-4.2l-3.3-4.3-3.77 4.3H5.42l4.92-5.62L5.2 5.5h4.3l2.98 3.94zm-.74 11.7h1.17L8.9 6.73H7.65z"
       />
     </svg>
   );
 }
 
-function Social({ href, label, children }) {
+function Social({ href, label, className = "abf-social", children }) {
   return href ? (
-    <a className="abf-social" href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+    <a className={className} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
       {children}
     </a>
   ) : (
-    <span className="abf-social">{children}</span>
+    <span className={className}>{children}</span>
   );
 }
 
@@ -106,14 +107,23 @@ export default function AboutFounders() {
             <p className="abf-role">{f.role}</p>
             {f.bio && (
               <div className="abf-bio">
-                {/* headed with a small portrait, the founder's name and role */}
-                <div className="abf-bioHead" aria-hidden="true">
-                  <span className="abf-bioThumb">
+                {/* headed with a small portrait, the founder's name and role,
+                    and their LinkedIn and X on the right */}
+                <div className="abf-bioHead">
+                  <span className="abf-bioThumb" aria-hidden="true">
                     <img loading="lazy" decoding="async" src={f.photo} alt="" />
                   </span>
-                  <div>
+                  <div aria-hidden="true">
                     <b>{f.name}</b>
                     <span>{f.role}</span>
+                  </div>
+                  <div className="abf-bioSocials">
+                    <Social className="abf-bioSocial" href={f.linkedin} label={`${f.name} on LinkedIn`}>
+                      <LinkedInIcon dark />
+                    </Social>
+                    <Social className="abf-bioSocial" href={f.x} label={`${f.name} on X`}>
+                      <XIcon dark />
+                    </Social>
                   </div>
                 </div>
                 {f.bio.map((para, j) => (

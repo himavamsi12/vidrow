@@ -5,6 +5,7 @@ import TagMark from "./TagMark";
 // bio: shown in the yellow block that grows up the card on hover (lines kept as
 // written; blank lines make paragraphs). Cards without one don't animate.
 // linkedin: profile URL — the icon shows either way, linked only with one.
+// x: X profile URL (optional) — shown in the hover bio when given.
 const TEAM = [
   { name: "Nipun Angrish", role: "Director - Brand & Content", bg: "#B78F85", linkedin: "https://www.linkedin.com/in/nipun-angrish/", bio: "Nipun graduated from Whistling Woods and has been working for eight-plus years in entertainment and media, which is a long time to learn that the best story wins. He has worked with Zee Studios and Kiran Rao, and came out convinced of one thing: a sharp story wrapped in a pop-culture hook will outperform a fat budget any day." },
   { name: "Yash Choudhary", role: "Director - Performance & Ad Ops", bg: "#8E916D", drop: "11%", linkedin: "https://www.linkedin.com/in/yash-choudhary-iim-iit/", bio: "An IIT and IIM grad, he sees performance marketing as a strategy game. Like Dota 2, it’s about reading the lane early and knowing when to farm and when to push. Like Hades, every run is a loop of small upgrades: you fail, learn, pick a better build and go again, so each dud creative sharpens the next. Like Civilisation, it’s a long game of compounding." },
@@ -38,6 +39,18 @@ function LinkedInIcon() {
       <path
         fill="var(--acid)"
         d="M5.3 9.2h2.9V19H5.3zM6.75 4.6a1.68 1.68 0 1 1 0 3.36 1.68 1.68 0 0 1 0-3.36zM10 9.2h2.78v1.34h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.43V19h-2.9v-4.92c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V19H10z"
+      />
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect width="24" height="24" rx="2" fill="#121212" />
+      <path
+        fill="var(--acid)"
+        d="M15.9 5.5h2.1l-4.6 5.25L18.8 18.5h-4.2l-3.3-4.3-3.77 4.3H5.42l4.92-5.62L5.2 5.5h4.3l2.98 3.94zm-.74 11.7h1.17L8.9 6.73H7.65z"
       />
     </svg>
   );
@@ -107,6 +120,22 @@ export default function AboutTeam() {
                 {m.bio.split(/\n{2,}/).map((para, j) => (
                   <p key={j}>{para}</p>
                 ))}
+                {/* their LinkedIn (and X, for anyone with an `x` link) at the
+                    foot of the yellow, clickable while the bio is up */}
+                {(m.linkedin || m.x) && (
+                  <div className="abt-bioSocials">
+                    {m.linkedin && (
+                      <a href={m.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}>
+                        <LinkedInIcon />
+                      </a>
+                    )}
+                    {m.x && (
+                      <a href={m.x} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on X`}>
+                        <XIcon />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </article>
