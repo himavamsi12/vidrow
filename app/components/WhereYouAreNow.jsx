@@ -89,6 +89,13 @@ export default function WhereYouAreNow() {
     if (!track || !sticky) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const n = STAGES.length;
+    // the screen height the pin is sized from. A phone's browser bar sliding
+    // in and out while scrolling resizes the window by its own height, and
+    // re-sizing from that grew and shrank the whole track by several screens'
+    // worth of that height, so everything below the section jumped mid-scroll.
+    // It's taken again only when the width changes (a rotation, a resize)
+    let vhPin = window.innerHeight;
+    let wPin = document.documentElement.clientWidth;
 
     const clear = () => {
       pinRef.current = null;
@@ -102,7 +109,7 @@ export default function WhereYouAreNow() {
         clear();
         return;
       }
-      const vh = window.innerHeight;
+      const vh = vhPin;
       const h = sticky.offsetHeight;
       // two screens of scrolling per stage, except the first, which is
       // already open on arrival and so only needs a short stretch
@@ -138,7 +145,11 @@ export default function WhereYouAreNow() {
     };
 
     const onResize = () => {
-      layout();
+      if (document.documentElement.clientWidth !== wPin) {
+        wPin = document.documentElement.clientWidth;
+        vhPin = window.innerHeight;
+        layout();
+      }
       onScroll();
     };
 

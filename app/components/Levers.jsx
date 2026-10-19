@@ -228,7 +228,9 @@ export default function Levers() {
         levTicking = false;
         if (!levTrack.classList.contains("scroll-on")) return;
         const r = levTrack.getBoundingClientRect();
-        const span = r.height - window.innerHeight;
+        // measured against the pinned stage (one screen tall in CSS), not the
+        // window, whose height changes as a phone's browser bar slides
+        const span = r.height - levStage.offsetHeight;
         const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
         // progress clamps to 0/1 whenever the track is off-screen, so this
         // skips re-writing every piece's styles on each frame elsewhere
@@ -253,8 +255,18 @@ export default function Levers() {
     }
 
     setupLevers();
+    // a phone's browser bar sliding in and out while scrolling fires resize
+    // events with only the height changed; re-measuring on each of them made
+    // the pieces jitter mid-scroll, so only a change of width re-measures (the
+    // stage's own size changes are caught by the observer below)
+    let lastW = document.documentElement.clientWidth;
+    const onResize = () => {
+      if (document.documentElement.clientWidth === lastW) return;
+      lastW = document.documentElement.clientWidth;
+      setupLevers();
+    };
     window.addEventListener("scroll", onLevScroll, { passive: true });
-    window.addEventListener("resize", setupLevers);
+    window.addEventListener("resize", onResize);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(setupLevers);
 
     // the pieces land on slot positions measured up front, so any layout
@@ -273,7 +285,7 @@ export default function Levers() {
       ro.disconnect();
       cancelAnimationFrame(roFrame);
       window.removeEventListener("scroll", onLevScroll);
-      window.removeEventListener("resize", setupLevers);
+      window.removeEventListener("resize", onResize);
     };
   }, [cells, pieceMeta]);
 

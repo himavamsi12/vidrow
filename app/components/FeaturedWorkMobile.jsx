@@ -109,19 +109,28 @@ export default function FeaturedWorkMobile() {
       equalise();
       onScroll();
     };
+    // a phone's browser bar sliding in and out fires resize with only the
+    // height changed, which doesn't change the cards' heights: that only
+    // needs the usual scroll pass, not a re-measure of every card
+    let lastW = document.documentElement.clientWidth;
+    const onWinResize = () => {
+      if (document.documentElement.clientWidth === lastW) return onScroll();
+      lastW = document.documentElement.clientWidth;
+      onResize();
+    };
     updateRef.current = update;
 
     equalise();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onWinResize);
     window.addEventListener("load", onResize);
     document.fonts?.ready.then(onResize).catch(() => {});
     return () => {
       if (frame) cancelAnimationFrame(frame);
       updateRef.current = null;
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", onWinResize);
       window.removeEventListener("load", onResize);
       cards.forEach((card) => {
         card.style.minHeight = "";
