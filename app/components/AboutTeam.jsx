@@ -82,7 +82,9 @@ export default function AboutTeam() {
               <span className="abt-step abt-step--2" aria-hidden="true" />
             </div>
             <div className="abt-plate">
-              <h3 className="abt-name">{m.name}</h3>
+              <h3 className="abt-name" style={{ "--nl": m.name.length }}>
+                {m.name}
+              </h3>
               <p className="abt-role">{m.role}</p>
               {m.linkedin ? (
                 <a

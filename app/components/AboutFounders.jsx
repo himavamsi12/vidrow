@@ -106,14 +106,19 @@ export default function AboutFounders() {
             <p className="abf-role">{f.role}</p>
             {f.bio && (
               <div className="abf-bio">
+                {/* headed with a small portrait, the founder's name and role */}
+                <div className="abf-bioHead" aria-hidden="true">
+                  <span className="abf-bioThumb">
+                    <img loading="lazy" decoding="async" src={f.photo} alt="" />
+                  </span>
+                  <div>
+                    <b>{f.name}</b>
+                    <span>{f.role}</span>
+                  </div>
+                </div>
                 {f.bio.map((para, j) => (
                   <p key={j}>{para}</p>
                 ))}
-                {/* signed off at the foot with the founder's name and role */}
-                <div className="abf-bioSign" aria-hidden="true">
-                  <b>{f.name}</b>
-                  <span>{f.role}</span>
-                </div>
               </div>
             )}
           </article>

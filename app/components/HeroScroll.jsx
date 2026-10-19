@@ -78,6 +78,30 @@ function run(skySel, lenisRef) {
     for (let m = (last + 1) % n; m !== first; m = (m + 1) % n) out.push(P[m]);
     return out;
   });
+  // each body's left and right edge on the canvas (none for the pieces that
+  // don't run off the bottom)
+  const bodies = polys.map((g, i) =>
+    /,6000/.test(g.dataset.t) ? [tops[i][0][0], tops[i][tops[i].length - 1][0]] : null
+  );
+  // the width of the gap from a body's edge to the next body that way (0 when
+  // they meet, or when nothing sits close by)
+  const gapTo = (i, x, d) => {
+    let gap = Infinity;
+    bodies.forEach((b, j) => {
+      if (!b || j === i) return;
+      const dx = d < 0 ? x - b[1] : b[0] - x;
+      if (dx >= 0 && dx < gap) gap = dx;
+    });
+    return gap <= 20 ? gap : 0;
+  };
+  const NS = "http://www.w3.org/2000/svg";
+  const backs = polys.map((g, i) => {
+    if (!bodies[i]) return null;
+    const b = document.createElementNS(NS, "polygon");
+    b.setAttribute("class", "hx-back");
+    g.before(b);
+    return b;
+  });
 
   let raf = 0;
   let lw = 0;
@@ -100,6 +124,7 @@ function run(skySel, lenisRef) {
         g.style.display = "";
         g.setAttribute("points", g.dataset.t);
       });
+      backs.forEach((b) => b?.removeAttribute("points"));
       return;
     }
     const k = W / vbW;
@@ -126,6 +151,22 @@ function run(skySel, lenisRef) {
       const c = tops[i];
       const pts = c.concat(c.slice().reverse().map((q) => [q[0], q[1] + hu]));
       g.setAttribute("points", pts.map((q) => q[0] + "," + Math.round(q[1])).join(" "));
+      // the skyline leaves a small gap between neighbouring bodies; a paper
+      // strip behind each body fills its half of the gap on either side, so
+      // the gaps stay white as the pieces rise instead of showing the hero's
+      // copy and Featured Work through them
+      const back = backs[i];
+      if (!back) return;
+      const x0 = c[0][0];
+      const x1 = c[c.length - 1][0];
+      const y0 = Math.max(...c.map((q) => q[1]));
+      // (each half reaches a hair past the middle, so the two halves overlap
+      // instead of meeting on a part pixel that lets a faint line through)
+      const gl = gapTo(i, x0, -1);
+      const gr = gapTo(i, x1, 1);
+      const l = gl ? x0 - gl / 2 - 1 : x0;
+      const r = gr ? x1 + gr / 2 + 1 : x1;
+      back.setAttribute("points", `${l},${y0} ${r},${y0} ${r},${Math.round(y0 + hu)} ${l},${Math.round(y0 + hu)}`);
     });
   };
 
@@ -332,6 +373,7 @@ function run(skySel, lenisRef) {
     svgs.forEach((s) => (s.style.transform = ""));
     tint(false);
     layout(false);
+    backs.forEach((b) => b?.remove());
     if (featured) featured.style.transform = "";
     hero.classList.remove("hx--covered");
   };
