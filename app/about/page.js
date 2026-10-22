@@ -201,7 +201,7 @@ export default function AboutPage() {
                 complete customer journey, the architecture of how a stranger becomes a lead, a lead
                 becomes a customer, and a customer becomes someone who tells others. We stay close
                 to revenue. We measure pipeline, conversion, CAC, and retention, and make sure you
-                achieve your next fundraise goal months early.
+                reach your next fundraise goal sooner.
               </p>
             </div>
             <div className="ab-openingColumn">

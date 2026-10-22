@@ -19,7 +19,7 @@ const JOURNEY = [
   { tag: "The landing", title: "Launches", desc: "Opens on that feature. No home screen, no searching." },
   { tag: "The \u20b91 trial", title: "Takes Trial", desc: "Takes the \u20b91 trial for a 3-day period." },
   { tag: "Conversion", title: "Trial Run", desc: "Experiences the feature during trial. Product does the selling.", hi: true },
-  { tag: "The autopay", title: "Paid User", desc: "Trial ends. Autopay activates automatically.", hi: true },
+  { tag: "The autopay", title: "Paid User", desc: "Trial ends. Autopay charges the first payment automatically.", hi: true },
 ];
 
 // test → measure → pick → scale, each card's number sitting in an acid step
@@ -34,7 +34,7 @@ const WINS = [
     tag: "Measure",
     val: "1",
     title: "Measure of Success",
-    desc: "We only tracked the final purchase event and nothing else",
+    desc: "We only tracked the first autopay payment and nothing else",
   },
   {
     tag: "Pick",

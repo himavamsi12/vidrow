@@ -18,7 +18,7 @@ export const CUBE_PX = 280; // how wide the assembled block sits on screen
 export const PIECES = [
   {
     lever: "Performance Creatives",
-    copy: "Access Vidrow's high-velocity ads creative engine, trained on ₹1,000 Cr+ of ad spend, delivering the highest win rate across the industry.",
+    copy: "Access Vidrow's high-velocity ads creative engine, trained on ₹1,000 Cr+ of ad spend, built to find winning ads faster.",
     cells: [cell(0, 0, Y), cell(0, 1, Y2), cell(1, 1, Y3)],
   },
   {
@@ -28,7 +28,7 @@ export const PIECES = [
   },
   {
     lever: "Celebrity Performance Creatives",
-    copy: "Unlock 200+ tested celebrity faces for conversion-led campaigns to 3X your user acquisition.",
+    copy: "Unlock 200+ tested celebrity faces for conversion-led campaigns that scale your user acquisition.",
     cells: [cell(3, 0, V), cell(2, 1, V), cell(3, 1, VL)],
   },
   {

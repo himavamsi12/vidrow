@@ -192,8 +192,8 @@ export default function SeekhoCaseStudy() {
             for Performance Marketing.
           </h1>
           <p className="csk-note">
-            We decided a combination of celebrity and performance videos: Celebrity Performance
-            Video, a combination that was never used before by anyone.
+            We decided on a combination of celebrity and performance videos: Celebrity
+            Performance Video.
           </p>
         </div>
 
@@ -293,9 +293,8 @@ export default function SeekhoCaseStudy() {
                 important. Using a known and relatable face also brings higher conversions.
               </p>
               <p>
-                We decided a combination of celebrity and performance videos: Celebrity
-                Performance Video- a combination that was never used before by anyone; A
-                Completely New Solution Of Performance Marketing.
+                We decided on a combination of celebrity and performance videos: Celebrity
+                Performance Video, a new approach to performance marketing.
               </p>
               <p>
                 Now, the problem was to find a face and a personality that would resonate with

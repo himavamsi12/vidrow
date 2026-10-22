@@ -379,7 +379,7 @@ export const CAMPAIGNS = {
     ],
   },
   "helium-performance-ads": {
-    title: "Book now on website",
+    title: "Right-Sized AC",
     by: "Helium",
     about: "Helium encourages buyers to choose an AC for their room, not an oversized recommendation. Creator explainers highlight compact design, app controls, energy tracking and fault alerts.",
     layout: "tall",
@@ -393,7 +393,7 @@ export const CAMPAIGNS = {
     ],
   },
   "masai-performance-ads": {
-    title: "Sign Up for the Test",
+    title: "Course Explainers",
     by: "Masai",
     about: "Masai\u2019s admissions films turn broad career ambitions into specific learning options. Creators explain course content, instructors and practical experiences, helping students choose a program and take the next step.",
     layout: "tall",
@@ -406,7 +406,7 @@ export const CAMPAIGNS = {
     ],
   },
   "oolka-performance-ads": {
-    title: "Start Subscription",
+    title: "AI Credit Expert",
     by: "Oolka",
     about: "Oolka introduces an AI credit expert to help explain credit reports, errors and repayments. Comedy, creator stories and animation encourage people to move from worry to practical action.",
     layout: "tall",
@@ -421,7 +421,7 @@ export const CAMPAIGNS = {
     ],
   },
   "pice-performance-ads": {
-    title: "Try First Transaction",
+    title: "Everyday Money Tools",
     by: "Pice",
     about: "Pice connects everyday money gaps with tools for education payments, credit, invoice financing and voice-based bookkeeping, showing how people can pay fees, buy stock or finish accounts.",
     layout: "tall",
@@ -434,7 +434,7 @@ export const CAMPAIGNS = {
     ],
   },
   "platinumrx-performance-ads": {
-    title: "Buy Your First Substitute Medicine",
+    title: "Medicine Price Explainers",
     by: "PlatinumRx",
     about: "PlatinumRx explains how medicine ingredients and brand pricing affect the final bill. Relatable stories and straightforward explainers encourage people to check prescriptions for suitable alternatives.",
     layout: "tall",
@@ -446,7 +446,7 @@ export const CAMPAIGNS = {
     ],
   },
   "curiousjr-performance-ads": {
-    title: "Try Demo Classes",
+    title: "Concept-Led Learning",
     by: "CuriousJr",
     about: "CuriousJr explores why more tuition does not always mean better understanding. Stories highlight interactive classes, concept-led teaching and doubt support, inviting families to try a demo.",
     layout: "tall",

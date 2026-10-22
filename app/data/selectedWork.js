@@ -85,12 +85,12 @@ export const SW_TABS = [
     items: [
       ["Bachatt hai to Budget hai", "Bachatt", "performation creative.webp", "/campaign/bachatt-brandformance"],
       ["Easiest App for Investment", "Groww", "groww.webp", "/campaign/groww"],
-      ["Sign Up for the Test", "Masai", "masai.webp", "/campaign/masai-performance-ads"],
-      ["Buy Your First Substitute Medicine", "PlatinumRx", "platinumrx1.webp", "/campaign/platinumrx-performance-ads"],
-      ["Book now on website", "Helium", "helium.webp", "/campaign/helium-performance-ads"],
-      ["Try Demo Classes", "CuriousJr", "curiousjr.webp", "/campaign/curiousjr-performance-ads"],
-      ["Start Subscription", "Oolka", "ookla1.webp", "/campaign/oolka-performance-ads"],
-      ["Try First Transaction", "Pice", "pice1.webp", "/campaign/pice-performance-ads"],
+      ["Course Explainers", "Masai", "masai.webp", "/campaign/masai-performance-ads"],
+      ["Medicine Price Explainers", "PlatinumRx", "platinumrx1.webp", "/campaign/platinumrx-performance-ads"],
+      ["Right-Sized AC", "Helium", "helium.webp", "/campaign/helium-performance-ads"],
+      ["Concept-Led Learning", "CuriousJr", "curiousjr.webp", "/campaign/curiousjr-performance-ads"],
+      ["AI Credit Expert", "Oolka", "ookla1.webp", "/campaign/oolka-performance-ads"],
+      ["Everyday Money Tools", "Pice", "pice1.webp", "/campaign/pice-performance-ads"],
     ],
   },
   {

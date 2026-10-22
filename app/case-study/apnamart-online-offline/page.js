@@ -437,8 +437,7 @@ export default function ApnaMartOnlineOfflineCaseStudy() {
                 <p>After the first phase, the results were not very good.</p>
                 <p>
                   However, after phase 2, total app downloads and the adoption rate of online
-                  delivery services in Bilaspur jumped. This meant that Billboards led to a greater
-                  awareness and the newspapers resulted in more downloads.
+                  delivery services in Bilaspur jumped.
                 </p>
                 <p>With the execution of the third phase, the results improved further.</p>
                 <p>

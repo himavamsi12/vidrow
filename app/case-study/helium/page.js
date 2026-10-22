@@ -124,26 +124,26 @@ const FOUR_PS = [
 ];
 
 const CHALLENGES = [
-  "No one bought a ‘cheap’ AC.",
-  "No one bought a 0.8 ton AC.",
-  "No one bought an AC from a D2C website.",
+  "Few people bought a ‘cheap’ AC.",
+  "Few people bought a 0.8 ton AC.",
+  "Few people bought an AC from a D2C website.",
 ];
 
 // the same three objections read twice: first as the reason nobody believed
 // (04), then flipped into the line we ran on (05)
 const OBJECTIONS = [
   {
-    claim: "No one bought a cheap AC",
+    claim: "Few people bought a cheap AC",
     why: "because cheap means bad quality.",
     flip: "but everyone will buy a great AC at a great price.",
   },
   {
-    claim: "No one bought a 0.8 ton AC",
+    claim: "Few people bought a 0.8 ton AC",
     why: "because no brand ever marketed one.",
-    flip: "because no one told them 0.8 ton is all they need.",
+    flip: "because no one told them 0.8 ton is often all they need.",
   },
   {
-    claim: "No one bought an AC from a D2C site",
+    claim: "Few people bought an AC from a D2C site",
     why: "because it is an AC, not sunscreen.",
     flip: "because no one built a buying experience they could trust.",
   },
@@ -191,7 +191,7 @@ const BUY_STEPS = [
   {
     stage: "Validation",
     title: "They go looking for proof",
-    desc: "YouTube reviews, Instagram profile, in someone else’s words, from people the brand does not pay.",
+    desc: "YouTube reviews, Instagram profile, in someone else’s words, not the brand’s.",
     quote: "“Does anyone independent back this?”",
   },
   {
@@ -930,7 +930,7 @@ export default function HeliumCaseStudy() {
               </div>
               <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
               <p className="csp-reviews-lead">
-                We seeded &lsquo;organic&rsquo; reviews on YouTube before we even hit the market.
+                We placed reviews with YouTube creators before we even hit the market.
               </p>
               <p>
                 In April, a buyer had nothing to go on. No ratings to read. Nobody in the building

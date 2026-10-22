@@ -49,8 +49,8 @@ const STORIES = [
     logoSrc: "/partnership/platinumRx.svg",
     logoAlt: "PlatinumRx",
     stat: "3x",
-    statLabel: "in 3 months",
-    desc: "PlatinumRx tripled in three months, June to August, at a controlled CAC.",
+    statLabel: "in 2 months",
+    desc: "PlatinumRx tripled in two months at a controlled CAC.",
   },
   {
     key: "apnamart",

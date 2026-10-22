@@ -231,8 +231,8 @@ export default function VyaparCaseStudy() {
                 <b>Vyapar builds its category authority by becoming the largest player</b>
               </div>
               <p>
-                Vidrow was roped into Vyapar’s Journey 2020. The mandate was brand marketing
-                only, no performance spend.
+                Vidrow was roped into Vyapar’s Journey 2020. The mandate for this work was
+                brand marketing only, no performance spend.
               </p>
             </div>
           </section>
@@ -248,8 +248,8 @@ export default function VyaparCaseStudy() {
               Vidrow was roped into Vyapar’s Journey 2020. Vyapar had built a free billing
               and accounting app for small businesses and already had product-market fit.
               But accounting software in India still meant a desktop, a licence and a CA,
-              there was no category a shop owner could see himself in. The mandate was brand
-              marketing only, no performance spend. <strong>The job we set ourselves: make
+              there was no category a shop owner could see himself in. The mandate for this work
+              was brand marketing only, no performance spend. <strong>The job we set ourselves: make
               Vyapar the name the category is known by.</strong>
             </p>
           </section>
@@ -462,7 +462,7 @@ export default function VyaparCaseStudy() {
               </div>
               <div className={styles.takeawayCopy}>
                 <p>
-                  This was brand marketing only, not a rupee of performance spend. Built as a
+                  This work was brand marketing only, not a rupee of performance spend. Built as a
                   sequence: name the category, give it a face, stand for the owner, never let
                   go. It did what reach alone can’t: make Vyapar the name the category answers
                   to.
