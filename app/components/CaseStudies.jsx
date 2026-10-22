@@ -2,7 +2,6 @@ import TagMark from "./TagMark";
 import Reveal from "./Reveal";
 import CsRow from "./CsRow";
 import CsThree from "./CsThree";
-import CsWayfind from "./CsWayfind";
 
 // the four story cards. Each image is a cut-out that sits on the card's
 // coloured panel; the brand sits at the top, as a white logo or plain text,
@@ -186,9 +185,6 @@ export default function CaseStudies() {
       {/* the cards drift sideways on a loop, pausing while one is hovered —
           two copies back to back so the seam never shows */}
       <DeepDiveCards />
-
-      {/* back to the top, or on down the page */}
-      <CsWayfind />
     </section>
   );
 }
