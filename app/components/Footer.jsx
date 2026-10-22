@@ -169,7 +169,7 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
       id="contact"
       ref={footerRef}
     >
-      {/* the contact page is already where "Get in touch" points, so it keeps
+      {/* the contact page is already where "Click to grow" points, so it keeps
           the heading but drops that one button, and "See our work" becomes
           "Back to home" (see app/contact/page.js) */}
       {!hideCta && (
@@ -187,8 +187,8 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
           {!hideContactCta && (
           <a className="vfoot__cta" href="/contact">
             <span className="vfoot__ctaLabel">
-              <span className="vfoot__d">Get in touch</span>
-              <span className="vfoot__m">Get in touch</span>
+              <span className="vfoot__d">Click to grow</span>
+              <span className="vfoot__m">Click to grow</span>
             </span>
             <span className="vfoot__ctaIcon">
               <svg className="vfoot__ctaStep" viewBox="0 0 40 40" aria-hidden="true">

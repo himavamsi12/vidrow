@@ -26,7 +26,7 @@ export function markNavJump() {
 function ContactButton({ className = "hx-contact", onClick }) {
   return (
     <a className={className} href="/contact" onClick={onClick}>
-      <span>Contact us</span>
+      <span>Click to grow</span>
       <span className="hx-contact-i" aria-hidden="true">
         <svg viewBox="0 0 40 40" aria-hidden="true">
           <g fill="var(--acid)">
