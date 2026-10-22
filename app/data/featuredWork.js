@@ -57,7 +57,7 @@ export const FEATURED_WORK = [
       { src: "/featured%20works/Ankit%20Agrawal.webp", cls: "fw-ph2 fw-phGrow" },
     ],
     plates: [
-      { name: "Prateek Shukla", role: "Co-founder & CEO", company: "Masai", cls: "fw-plate1" },
+      { name: "Prateek Shukla", role: "CEO", company: "Masai", cls: "fw-plate1" },
       { name: "Ankit Agrawal", role: "Co-founder & CTO", cls: "fw-plate2" },
     ],
     quote:
