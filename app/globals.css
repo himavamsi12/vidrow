@@ -5430,6 +5430,10 @@ html[data-hero-curtain] .hx-bar {
 .vfoot__pieceIn i {
   grid-column: calc(var(--x) + 1);
   grid-row: calc(var(--y) + 1);
+  /* half a pixel of bleed on every side: the well's columns land on
+     fractional pixels, so neighbouring tiles could otherwise leave a hairline
+     of the dark footer showing between them */
+  margin: -.5px;
   background: var(--c);
   /* flatten is its own timer (see Footer.jsx), independent of the fall/seat —
      every piece lands in its own shade and only turns yellow once the whole
