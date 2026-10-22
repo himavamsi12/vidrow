@@ -9,7 +9,7 @@ import CsThree from "./CsThree";
 const DEEP_DIVES = [
   {
     kind: "he",
-    title: "Helium sold 500 ACs a day within a month of launch.",
+    title: "Helium sold 500 ACs a day within a month of launch",
     img: "/deepdrive-new/image 294.webp",
     logo: "/deepdrive-new/logos/helium.webp",
     logoAlt: "Helium",
@@ -18,7 +18,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "px",
-    title: "PlatinumRx leveraged Celebrity and UGC assets to increase reach 3x in 3 months",
+    title: "PlatinumRx leveraged celebrity and UGC assets to increase reach 3x in 3 months",
     img: "/deepdrive-new/2.webp?v=2",
     logo: "/deepdrive-new/logos/platinumrx.webp",
     logoAlt: "PlatinumRx",
@@ -34,7 +34,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "ma",
-    title: "Masai\u2019s Performance marketing scaled by 20x in 10 months.",
+    title: "Masai\u2019s performance marketing scaled by 20x in 10 months",
     img: "/deepdrive-new/4.webp",
     logo: "/deepdrive-new/masai-logo.webp",
     logoAlt: "Masai",

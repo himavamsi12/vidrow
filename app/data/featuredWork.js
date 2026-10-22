@@ -100,7 +100,7 @@ export const FEATURED_WORK = [
     photos: [{ src: "/featured%20works/shashank.webp", cls: "fw-ph fw-phSolo" }],
     plates: [{ name: "Shashank Shekhar", role: "Founder & CEO", company: "Inkpen Labs", cls: "fw-plate1 fw-plateSolo" }],
     quote:
-      "**I\u2019ve followed Aditya & Anushank\u2019s entrepreneurial and creative journey closely, and the work they\u2019ve built with Vidrow has always inspired me.** So when we needed a thought partner to move faster, they were the obvious choice.\n\nOver the past six months, they\u2019ve helped us test and iterate towards PMF, bringing expertise across performance marketing, content, research, and product. Their team strikes a rare balance of analytical rigor and creative innovation.",
+      "**I\u2019ve followed Aditya & Anushank\u2019s entrepreneurial and creative journey closely, and the work they\u2019ve built with Vidrow has always inspired me.** So when we needed a thought partner to move faster, they were the obvious choice.\n\nOver the past six months, they\u2019ve helped us test and iterate towards PMF, bringing expertise across performance marketing, content, research, and product. Their team strikes a rare balance of analytical rigour and creative innovation.",
     line: "Inkpen Labs achieved PMF 2X faster",
   },
 ];

@@ -86,16 +86,16 @@ export const CAMPAIGNS = {
     ],
   },
   "fayda-uthaao": {
-    title: "Fayda Uthaao",
+    title: "Fayda Uthaiye",
     by: "ApnaMart",
     about: "Short creator comedies place ApnaMart into everyday family moments, from kitchen jokes to last-minute cravings, making grocery delivery feel like a natural part of household routines.",
     layout: "tall",
     frames: [
-      video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaao - ApnaMart, film 1"),
-      video("b9bef7e9a05e8175bd43c6eddd74a664", "Fayda Uthaao - ApnaMart, film 2"),
-      video("64c2040320351e1a738835b69ae613d6", "Fayda Uthaao - ApnaMart, film 3"),
-      video("af988159fcf1a4735fcc37d7686f2f2d", "Fayda Uthaao - ApnaMart, film 4"),
-      video("e43b93aa9f90f9faf8992f181cc0ae87", "Fayda Uthaao - ApnaMart, film 5"),
+      video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaiye - ApnaMart, film 1"),
+      video("b9bef7e9a05e8175bd43c6eddd74a664", "Fayda Uthaiye - ApnaMart, film 2"),
+      video("64c2040320351e1a738835b69ae613d6", "Fayda Uthaiye - ApnaMart, film 3"),
+      video("af988159fcf1a4735fcc37d7686f2f2d", "Fayda Uthaiye - ApnaMart, film 4"),
+      video("e43b93aa9f90f9faf8992f181cc0ae87", "Fayda Uthaiye - ApnaMart, film 5"),
     ],
   },
   "smart-ac-smart-customer": {

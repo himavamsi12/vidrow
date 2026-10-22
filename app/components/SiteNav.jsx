@@ -8,7 +8,7 @@ import { useLenis } from "lenis/react";
 // just scrolls (same path, only the fragment differs)
 const NAV_LINKS = [
   { label: "Work", href: "/#work" },
-  { label: "Case study", href: "/#deepdive" },
+  { label: "Case Study", href: "/#deepdive" },
   { label: "About Us", href: "/about" },
 ];
 

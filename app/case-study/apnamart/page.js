@@ -55,7 +55,7 @@ const SCRIPT_CHOICES = [
   },
   {
     title: "Situational humour",
-    desc: "To improve the engagement on our ads, we made the scripts fun to watch and added humor",
+    desc: "To improve the engagement on our ads, we made the scripts fun to watch and added humour",
   },
   { title: "Cultural familiarity", desc: "with the people in ApnaMart\u2019s Operating Regions" },
 ];
@@ -239,7 +239,7 @@ export default function ApnamartCaseStudy() {
           <h2 className="cst-secH">
             Character-driven storytelling.{" "}
             <br />
-            Situational humor. Cultural familiarity.
+            Situational humour. Cultural familiarity.
           </h2>
 
           <div className="cap-stratRow">

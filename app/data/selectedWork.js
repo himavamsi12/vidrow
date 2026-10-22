@@ -100,7 +100,7 @@ export const SW_TABS = [
     items: [
       ["Book flights with Power", "Away", "away.webp", "/campaign/book-flights-with-power"],
       ["Smart AC, Smart Customer", "Helium", "helium1.webp", "/campaign/smart-ac-smart-customer"],
-      ["Fayda Uthaao", "ApnaMart", "apnamart1.webp", "/campaign/fayda-uthaao"],
+      ["Fayda Uthaiye", "ApnaMart", "apnamart1.webp", "/campaign/fayda-uthaao"],
       ["Pickled in life", "The Little Farm Co", "the little farm.webp", "/campaign/pickled-in-life"],
     ],
   },

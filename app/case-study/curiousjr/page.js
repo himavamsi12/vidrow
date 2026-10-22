@@ -206,7 +206,7 @@ export default function CuriousJrCaseStudy() {
                 then the CPL has been on a constant rise.
               </p>
               <p>
-                PW CuriousJr also wanted to scale their marketing while avoiding cannibalization
+                PW CuriousJr also wanted to scale their marketing while avoiding cannibalisation
                 and quick fatigue.
               </p>
             </div>

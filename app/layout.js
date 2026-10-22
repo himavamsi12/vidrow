@@ -7,7 +7,7 @@ import { SITE_URL, SITE_DESCRIPTION } from "./lib/site";
 // page's folder, or the Vidrow card in app/ for pages without one
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Vidrow - Marketing partner behind fastest growing startups",
+  title: "Vidrow - Marketing partner behind the fastest-growing startups",
   description: SITE_DESCRIPTION,
   applicationName: "Vidrow",
   authors: [{ name: "Vidrow" }],
