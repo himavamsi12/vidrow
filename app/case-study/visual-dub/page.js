@@ -11,7 +11,7 @@ export const metadata = {
 
 // what VisualDub needed the campaign to do
 const REQUIREMENTS = [
-  "Increase the Outbound Conversion (emails/inmails)",
+  "Increase the Outbound Conversion (emails/InMails)",
   "Establish and strengthen its position as a Global Brand",
   "Engage with and Generate high intent B2B Leads",
   "Explain its technology - highlighting the various use cases and its amazing technology",
@@ -44,7 +44,7 @@ const CARE = [
   },
   {
     title: "Global Identity",
-    desc: "The Campaign positions VisualDub as a Global Tech entity based out of the USA or the UK. Creates an ease in trust for the global stake holders",
+    desc: "The Campaign positions VisualDub as a Global Tech entity based out of the USA or the UK. Creates an ease in trust for the global stakeholders",
   },
 ];
 
@@ -274,7 +274,7 @@ export default function VisualDubCaseStudy() {
           <h2 className="cst-secH">
             The resultant Global Launch Campaign of{" "}
             <br />
-            this collaboration comprised of 4 videos
+            this collaboration comprised 4 videos
           </h2>
           <p className="cvd-launchCopy">
             A series of short product showcase, use showcase, client work were used to remind the
@@ -385,7 +385,7 @@ export default function VisualDubCaseStudy() {
 
               <div className="cvd-bofuCopy">
                 <p>
-                  With VisualDub&rsquo;s potential clients already aware about their global
+                  With VisualDub&rsquo;s potential clients already aware of their global
                   presence and with consideration already built with the help of the use cases
                   videos, now the objective was to explain to high-intent leads about their
                   technology, the ease and the benefits of using VisualDub.

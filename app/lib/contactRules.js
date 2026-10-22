@@ -20,6 +20,7 @@ export function contactError(f) {
   if (phone && (!PHONE_CHARS_RE.test(phone) || phoneDigits(phone) < 10 || phoneDigits(phone) > 15)) {
     return "Please enter a valid phone number (10 to 15 digits), or leave it empty.";
   }
+  if (!t(f.company)) return "Please enter your company or brand.";
   if (!t(f.requirement)) return "Please choose what you're looking for.";
   return "";
 }

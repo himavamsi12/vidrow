@@ -188,7 +188,7 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
           <a className="vfoot__cta" href="/contact">
             <span className="vfoot__ctaLabel">
               <span className="vfoot__d">Get in touch</span>
-              <span className="vfoot__m">Click to grow</span>
+              <span className="vfoot__m">Get in touch</span>
             </span>
             <span className="vfoot__ctaIcon">
               <svg className="vfoot__ctaStep" viewBox="0 0 40 40" aria-hidden="true">
@@ -245,9 +245,9 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
               <p className="vfoot__tagline">We make ads that people don&rsquo;t skip</p>
               {/* mobile swaps the row for two short two-line notes */}
               <p className="vfoot__mNote">
-                Marketing Partner behind
+                We make ads that
                 <br />
-                Fastest Growing startups.
+                people don&rsquo;t skip
               </p>
               {/* the legal links stay on phones, under the copyright line */}
               <p className="vfoot__mNote vfoot__mNote--r">

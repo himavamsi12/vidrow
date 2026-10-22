@@ -1,6 +1,6 @@
 export const STAGES = [
   {
-    title: "Get To PMF Fast",
+    title: "Get to PMF Fast",
     copy: "We design structured performance marketing experiments across product features, pricing hypotheses, and audience segments. Each campaign is a controlled test, generating precise signals on what converts, what retains, and what scales. We systematically analyse the data and help reach scalable audience cohorts fit for your product.",
     stat: "1 Month",
     quote:

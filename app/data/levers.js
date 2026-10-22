@@ -18,12 +18,12 @@ export const CUBE_PX = 280; // how wide the assembled block sits on screen
 export const PIECES = [
   {
     lever: "Performance Creatives",
-    copy: "Access Vidrow's high-velocity ads creative engine, trained on 1000Cr+ of ad spends, delivering the highest win rate across the industry.",
+    copy: "Access Vidrow's high-velocity ads creative engine, trained on ₹1,000 Cr+ of ad spend, delivering the highest win rate across the industry.",
     cells: [cell(0, 0, Y), cell(0, 1, Y2), cell(1, 1, Y3)],
   },
   {
     lever: "Brand Marketing",
-    copy: "Create celebrity-led brand marketing campaigns, built for virality and conceptualised for standing out.",
+    copy: "Create celebrity-led brand marketing campaigns, built for virality and designed to stand out.",
     cells: [cell(1, 0, V), cell(2, 0, VL)],
   },
   {
@@ -38,12 +38,12 @@ export const PIECES = [
   },
   {
     lever: "Ads Account Management",
-    copy: "Bring best practices in Google and Meta ads management with Vidrow's data and tech driven approach.",
+    copy: "Bring best practices to Google and Meta ads management with Vidrow's data- and tech-driven approach.",
     cells: [cell(2, 2, Y2), cell(2, 3, Y), cell(3, 3, Y3)],
   },
   {
     lever: "AI for Marketing",
-    copy: "Plug and play with Vidrow's proprietary AI video ads tool, 'Double Down', built for scaling your winning ads at lower cost and faster TAT.",
+    copy: "Plug and play with Vidrow's proprietary AI video ads tool, 'Double Down', built for scaling your winning ads at lower cost and faster turnaround.",
     cells: [cell(3, 2, V)],
   },
 ];

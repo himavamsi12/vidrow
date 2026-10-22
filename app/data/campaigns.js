@@ -23,34 +23,34 @@ export const CAMPAIGNS = {
   },
   "dont-just-dub": {
     title: "Don\u2019t Just Dub!",
-    by: "Neural Garage",
+    by: "NeuralGarage",
     about: "VisualDub tackles the mismatch between dubbed dialogue and an actor\u2019s mouth movements. Product demos show how AI matches lip movements across languages so one performance can connect with more audiences.",
     frames: [
-      video("94f6ce29c2968c1173c12c300dff400a", "Don\u2019t Just Dub! - Neural Garage, film 1"),
-      video("8124355290b768643da812671022beed", "Don\u2019t Just Dub! - Neural Garage, film 2"),
-      video("5bd02c3a7ae53729c030574fecfbef32", "Don\u2019t Just Dub! - Neural Garage, film 3"),
-      video("03709a4fd5e67950677a216ef324805b", "Don\u2019t Just Dub! - Neural Garage, film 4"),
-      video("5855d8d3892e44152e0df4e77a6fa47f", "Don\u2019t Just Dub! - Neural Garage, film 5"),
-      video("c180ee2f8b1949017e121c9d6db08353", "Don\u2019t Just Dub! - Neural Garage, film 6"),
-      video("b928117a094cf572cdcd8a97bb31e6aa", "Don\u2019t Just Dub! - Neural Garage, film 7"),
-      video("7d7670fa795e9c9b55981cc3beb81d46", "Don\u2019t Just Dub! - Neural Garage, film 8"),
-      video("6d13affe10d12db0f8b56e4cc7483536", "Don\u2019t Just Dub! - Neural Garage, film 9"),
-      video("2e7fc86428cb9466d0523671a37f2ec4", "Don\u2019t Just Dub! - Neural Garage, film 10"),
-      video("dc44bf8e719578e8ed1772c66a51e52d", "Don\u2019t Just Dub! - Neural Garage, film 11"),
-      video("c971c8572b030712374cfe12e02f2ea4", "Don\u2019t Just Dub! - Neural Garage, film 12"),
-      video("469c1ad832bc1c7343ef4d5b54f53ad5", "Don\u2019t Just Dub! - Neural Garage, film 13"),
+      video("94f6ce29c2968c1173c12c300dff400a", "Don\u2019t Just Dub! - NeuralGarage, film 1"),
+      video("8124355290b768643da812671022beed", "Don\u2019t Just Dub! - NeuralGarage, film 2"),
+      video("5bd02c3a7ae53729c030574fecfbef32", "Don\u2019t Just Dub! - NeuralGarage, film 3"),
+      video("03709a4fd5e67950677a216ef324805b", "Don\u2019t Just Dub! - NeuralGarage, film 4"),
+      video("5855d8d3892e44152e0df4e77a6fa47f", "Don\u2019t Just Dub! - NeuralGarage, film 5"),
+      video("c180ee2f8b1949017e121c9d6db08353", "Don\u2019t Just Dub! - NeuralGarage, film 6"),
+      video("b928117a094cf572cdcd8a97bb31e6aa", "Don\u2019t Just Dub! - NeuralGarage, film 7"),
+      video("7d7670fa795e9c9b55981cc3beb81d46", "Don\u2019t Just Dub! - NeuralGarage, film 8"),
+      video("6d13affe10d12db0f8b56e4cc7483536", "Don\u2019t Just Dub! - NeuralGarage, film 9"),
+      video("2e7fc86428cb9466d0523671a37f2ec4", "Don\u2019t Just Dub! - NeuralGarage, film 10"),
+      video("dc44bf8e719578e8ed1772c66a51e52d", "Don\u2019t Just Dub! - NeuralGarage, film 11"),
+      video("c971c8572b030712374cfe12e02f2ea4", "Don\u2019t Just Dub! - NeuralGarage, film 12"),
+      video("469c1ad832bc1c7343ef4d5b54f53ad5", "Don\u2019t Just Dub! - NeuralGarage, film 13"),
     ],
   },
   "just-fake-it": {
-    title: "Just Fake it",
+    title: "Just Fake It",
     by: "SyncMonster",
     about: "DRAMA turns requests for another take into a playful demo of AI expression editing. Creators and founders show how an uploaded performance\u2019s emotion can be adjusted with a click or slider.",
     frames: [
-      video("749ae13764daa82544648a618edbf168", "Just Fake it - SyncMonster, film 1"),
-      video("5d5344258125000e29e1acd9a6486939", "Just Fake it - SyncMonster, film 2"),
-      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake it - SyncMonster, film 3"),
-      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake it - SyncMonster, film 4"),
-      video("c0813173af097255a02abe7db752ecd5", "Just Fake it - SyncMonster, film 5"),
+      video("749ae13764daa82544648a618edbf168", "Just Fake It - SyncMonster, film 1"),
+      video("5d5344258125000e29e1acd9a6486939", "Just Fake It - SyncMonster, film 2"),
+      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake It - SyncMonster, film 3"),
+      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake It - SyncMonster, film 4"),
+      video("c0813173af097255a02abe7db752ecd5", "Just Fake It - SyncMonster, film 5"),
     ],
   },
   "maximise": {
@@ -63,10 +63,10 @@ export const CAMPAIGNS = {
   },
   "not-just-ai": {
     title: "Not Just AI",
-    by: "Kim.CC",
+    by: "Kim.cc",
     about: "Exaggerated chatbot failures show the risks of unchecked automation, from false promises to imaginary support teams. Kim.cc argues for customer support that works, not AI for its own sake.",
     frames: [
-      video("e9f769e30abb3dd0f3b1c396da92fb7a", "Not Just AI - Kim.CC, film 1"),
+      video("e9f769e30abb3dd0f3b1c396da92fb7a", "Not Just AI - Kim.cc, film 1"),
     ],
   },
   "whatsapp-solved": {
@@ -88,7 +88,7 @@ export const CAMPAIGNS = {
   "fayda-uthaao": {
     title: "Fayda Uthaao",
     by: "ApnaMart",
-    about: "Short creator comedies place Apna Mart into everyday family moments, from kitchen jokes to last-minute cravings, making grocery delivery feel like a natural part of household routines.",
+    about: "Short creator comedies place ApnaMart into everyday family moments, from kitchen jokes to last-minute cravings, making grocery delivery feel like a natural part of household routines.",
     layout: "tall",
     frames: [
       video("4d3a295d434093fb8744e26fb36e3b66", "Fayda Uthaao - ApnaMart, film 1"),
@@ -207,7 +207,7 @@ export const CAMPAIGNS = {
   apnamart: {
     title: "Fayda Uthaiye",
     by: "ApnaMart",
-    about: "Apnamart turns familiar grocery-shopping moments into comic stories that highlight variety, quality, savings and convenience, making a better local grocery experience feel relatable.",
+    about: "ApnaMart turns familiar grocery-shopping moments into comic stories that highlight variety, quality, savings and convenience, making a better local grocery experience feel relatable.",
     frames: [
       video("42d0d1564b3b5b27352749f7fab1f42e","ApnaMart, film 1"),
       video("95a9e8494eedf78dc80f1f26247e94da", "ApnaMart, film 2"),
@@ -239,7 +239,7 @@ export const CAMPAIGNS = {
     ],
   },
   ivyhomes: {
-    title: "Stressfree Buying",
+    title: "Stress-Free Buying",
     by: "Ivy Homes",
     about: "A comic police interrogation tests common resale-home worries, from legal checks and renovation to pricing and possession. Each answer reinforces Ivy Homes\u2019 promise of verified, move-in-ready homes.",
     frames: [
@@ -262,20 +262,20 @@ export const CAMPAIGNS = {
   },
   "curiousjr-shailesh-lodha": {
     title: "Shailesh Lodha",
-    by: "Physics Wallah - Ratta nahi Padhai",
+    by: "PhysicsWallah - Ratta nahi Padhai",
     about: "CuriousJr challenges rote learning through stories about parents, children and teachers. The films highlight concept-led teaching, personal mentors and progress updates, inviting parents to try a more supportive learning experience.",
     layout: "tall",
     frames: [
-      video("286c07ac44c4ace2bf472cb426600160", "Curious Jr - Shailesh, film 1"),
-      video("775fd2d492dce0d98cace5046f00e5aa", "Curious Jr - Shailesh, film 2"),
-      video("fdad645d3b3c31870e8bb11fb16357cd", "Curious Jr - Shailesh, film 3"),
-      video("5066daa9d74d0faacdc6ee0ee3467d84", "Curious Jr - Shailesh, film 4"),
-      video("eb6ba7d131252ff2f83335a73b396bf4", "Curious Jr - Shailesh, film 5"),
-      video("e657e0df8b8135a73aa8ac007aa3cb2a", "Curious Jr - Shailesh, film 6"),
+      video("286c07ac44c4ace2bf472cb426600160", "CuriousJr - Shailesh, film 1"),
+      video("775fd2d492dce0d98cace5046f00e5aa", "CuriousJr - Shailesh, film 2"),
+      video("fdad645d3b3c31870e8bb11fb16357cd", "CuriousJr - Shailesh, film 3"),
+      video("5066daa9d74d0faacdc6ee0ee3467d84", "CuriousJr - Shailesh, film 4"),
+      video("eb6ba7d131252ff2f83335a73b396bf4", "CuriousJr - Shailesh, film 5"),
+      video("e657e0df8b8135a73aa8ac007aa3cb2a", "CuriousJr - Shailesh, film 6"),
     ],
   },
   "oolka-jimmy-shergill": {
-    title: "Jimmy Sheirgill",
+    title: "Jimmy Shergill",
     by: "Oolka - Credit Score Badhao",
     about: "Jimmy Shergill and relatable borrower stories explain credit-score problems, report disputes and lender communication, turning a confusing financial number into practical next steps.",
     layout: "tall",
@@ -289,7 +289,7 @@ export const CAMPAIGNS = {
   },
   "platinumrx-anup-soni": {
     title: "Anup Soni",
-    by: "PlatinumRx - Aapki mehnat Ki Kamai",
+    by: "PlatinumRx - Aapki Mehnat Ki Kamai",
     about: "Anup Soni investigates why medicine bills stay high despite small discounts. Direct explanations and price breakdowns encourage people to understand brand premiums and explore suitable alternatives.",
     layout: "tall",
     frames: [
@@ -366,7 +366,7 @@ export const CAMPAIGNS = {
     ],
   },
   groww: {
-    title: "Easiest app for Investment",
+    title: "Easiest App for Investment",
     by: "Groww",
     about: "Creator-led explainers simplify mutual-fund comparisons, SIPs, first stock investments and chart-based trading. Groww brings practical tools together to help people take their next investing step.",
     layout: "tall",
@@ -393,7 +393,7 @@ export const CAMPAIGNS = {
     ],
   },
   "masai-performance-ads": {
-    title: "Signup For the Test",
+    title: "Sign Up for the Test",
     by: "Masai",
     about: "Masai\u2019s admissions films turn broad career ambitions into specific learning options. Creators explain course content, instructors and practical experiences, helping students choose a program and take the next step.",
     layout: "tall",
@@ -434,7 +434,7 @@ export const CAMPAIGNS = {
     ],
   },
   "platinumrx-performance-ads": {
-    title: "Buy your first Substitute Medicine",
+    title: "Buy Your First Substitute Medicine",
     by: "PlatinumRx",
     about: "PlatinumRx explains how medicine ingredients and brand pricing affect the final bill. Relatable stories and straightforward explainers encourage people to check prescriptions for suitable alternatives.",
     layout: "tall",
@@ -446,8 +446,8 @@ export const CAMPAIGNS = {
     ],
   },
   "curiousjr-performance-ads": {
-    title: "Try Demo classes",
-    by: "Curious Jr",
+    title: "Try Demo Classes",
+    by: "CuriousJr",
     about: "CuriousJr explores why more tuition does not always mean better understanding. Stories highlight interactive classes, concept-led teaching and doubt support, inviting families to try a demo.",
     layout: "tall",
     frames: [

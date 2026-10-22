@@ -98,6 +98,8 @@ export default function ContactForm() {
           <span className="contact-label">First name</span>
           <input
             type="text"
+            name="given-name"
+            autoComplete="given-name"
             placeholder="Enter first name"
             value={form.firstName}
             onChange={update("firstName")}
@@ -108,7 +110,9 @@ export default function ContactForm() {
           <span className="contact-label">Last name</span>
           <input
             type="text"
-            placeholder="Enter Last name"
+            name="family-name"
+            autoComplete="family-name"
+            placeholder="Enter last name"
             value={form.lastName}
             onChange={update("lastName")}
           />
@@ -122,7 +126,7 @@ export default function ContactForm() {
             type="email"
             name="email"
             autoComplete="email"
-            placeholder="Enter the email"
+            placeholder="Enter your email"
             value={form.email}
             onChange={update("email")}
             pattern={"[^\\s@]+@[^\\s@.]+(\\.[^\\s@.]+)*\\.[A-Za-z]{2,}"}
@@ -147,12 +151,15 @@ export default function ContactForm() {
       </div>
 
       <label className="contact-field">
-        <span className="contact-label">Company/ Brand</span>
+        <span className="contact-label">Company / Brand</span>
         <input
           type="text"
+          name="organization"
+          autoComplete="organization"
           placeholder="Name of Company/Brand"
           value={form.company}
           onChange={update("company")}
+          required
         />
       </label>
 
@@ -177,7 +184,7 @@ export default function ContactForm() {
               setOpen((o) => !o);
             }}
           >
-            {form.requirement || "What\u2019s the requirement"}
+            {form.requirement || "What\u2019s the requirement?"}
           </button>
           {open && (
             <ul className="contact-options" role="listbox">

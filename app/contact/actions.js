@@ -18,7 +18,7 @@ export async function submitContact(data) {
     last_name: clip(data?.lastName, 100) || null,
     email: clip(data?.email, 200),
     phone: clip(data?.phone, 40) || null,
-    company: clip(data?.company, 200) || null,
+    company: clip(data?.company, 200),
     requirement: clip(data?.requirement, 100),
     message: clip(data?.message, 5000) || null,
   };

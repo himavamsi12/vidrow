@@ -2805,7 +2805,7 @@ html[data-hero-curtain] .hx-bar {
 }
 
 .wy-track.scroll-on {
-  height: 420vh;
+  height: 350vh;
   padding: 0
 }
 
@@ -3412,8 +3412,11 @@ html[data-hero-curtain] .hx-bar {
   position: relative
 }
 
+/* the pinned stretch the cubes play out over: 2 screens of scrolling past
+   the stage's own screen (it was 2.4, which held the page longer than the
+   sections around it) */
 .lev-track.scroll-on {
-  height: 340vh
+  height: 300vh
 }
 
 .lev-stage {
@@ -12380,7 +12383,11 @@ button:focus-visible,
     display: inline
   }
 
+  /* --side matches the 16px padding, so the filter row bleeds exactly to
+     the screen's edges (at 20px it ran 4px past the right edge and the whole
+     page scrolled sideways) */
   .sw {
+    --side: 16px;
     padding: 28px 16px 40px
   }
 
@@ -13531,6 +13538,25 @@ button:focus-visible,
   height: 100%
 }
 
+/* the icon stays small, but the area that takes a tap reaches past it, to
+   about 44px square on a phone (an invisible layer around the icon) */
+a.abt-in::after,
+a.abf-social::after {
+  content: "";
+  position: absolute;
+  inset: -14px
+}
+
+/* the founder's two icons sit close together: their tap areas reach up and
+   down, and only a little sideways, so they never overlap */
+a.abf-social::after {
+  inset: -14px -4px
+}
+
+.abf-social {
+  position: relative
+}
+
 @media (max-width:900px) {
   .abt-head {
     flex-direction: column;
@@ -14191,9 +14217,10 @@ button:focus-visible,
    the window, so the next card showed under it. Pad each card out to the
    bottom of the window (below its pin offset) so only one is ever in view. */
 .fw2-card:not(:last-child) {
-  /* plus a hold: once a card has stuck it stays put for another stretch of
-     scrolling before the next one starts sliding over it */
-  margin-bottom: calc(max(0px, 100vh - var(--headH, 0px) - var(--full)) + 45vh)
+  /* plus a short hold: once a card has stuck it stays put for a brief
+     stretch of scrolling before the next one starts sliding over it (kept
+     short so six testimonials don't hold the page for screens on end) */
+  margin-bottom: calc(max(0px, 100vh - var(--headH, 0px) - var(--full)) + 30vh)
 }
 
 /* the last card holds the same way before the section lets go of it. A
@@ -14204,7 +14231,7 @@ button:focus-visible,
   display: block;
   /* at least as long as every other card's margin, so the card before the
      last one isn't released (and nudged up) before the last one has arrived */
-  height: calc(max(0px, 100vh - var(--headH, 0px) - var(--full)) + 45vh + 120px)
+  height: calc(max(0px, 100vh - var(--headH, 0px) - var(--full)) + 30vh + 120px)
 }
 
 /* testimonial deck: the card grows to fill the window below its pin offset, so
@@ -14573,13 +14600,13 @@ html.nav-hidden .cmp-backBar {
   }
 }
 
-/* a short pinned scroll (three screens for the four stages and the lit
-   board, so the section never feels held) and softer, longer easing, so the
-   stages open and close in one flowing motion instead of snapping from stage
-   to stage. WhereYouAreNow's SPAN_SCREENS has to match: height = 100vh + span */
+/* a short pinned scroll (2.5 screens for the four stages and the lit board,
+   so the section never feels held) and softer, longer easing, so the stages
+   open and close in one flowing motion instead of snapping from stage to
+   stage. WhereYouAreNow's SPAN_SCREENS has to match: height = 100vh + span */
 @media (min-width:901px) {
   .wy-track.scroll-on {
-    height: 400vh
+    height: 350vh
   }
 
   .wy-body {
@@ -18338,10 +18365,11 @@ html.is-loading body {
 }
 
 .ab-openingColumn .ab-whyCard h3 {
-  margin: 0 0 40px;
-  max-width: 300px;
+  margin: 0 0 12px;
+  max-width: 470px;
   font-family: var(--body);
-  font-size: 20px;
+  font-size: 18px;
+  text-wrap: wrap;
   font-weight: 500;
   line-height: 1.3;
   color: #2B2B2B;
@@ -22270,4 +22298,96 @@ main.csp .cap-pillars li:last-child {
   height: 7.45cqw;
   margin-top: 7.44cqw;
   margin-bottom: -0.88cqw
+}
+
+/* the 404 page: the site's header, then a short note in the page's own type,
+   left-aligned on the content column like every other page, and the way
+   back to the homepage */
+.nf {
+  background: var(--paper);
+  color: var(--ink)
+}
+
+.nf-in {
+  min-height: 60vh;
+  padding: clamp(56px, 9vw, 140px) var(--side);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px
+}
+
+.nf-code {
+  margin: 0;
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--acid);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em
+}
+
+.nf-h {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  max-width: 14ch
+}
+
+.nf-sub {
+  margin: 0;
+  max-width: 44ch;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4A4A50
+}
+
+.nf-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px
+}
+
+.nf-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none
+}
+
+.nf-cta svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--acid)
+}
+
+.nf-cta--ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink)
+}
+
+.nf-cta:hover {
+  background: var(--violet);
+  color: var(--paper)
+}
+
+.nf-cta:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px
 }

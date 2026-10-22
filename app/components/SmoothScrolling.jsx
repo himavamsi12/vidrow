@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
+import { markNavJump } from "./SiteNav";
 
 // one constant glide for the whole page: a slightly lower lerp eases every
 // wheel tick out a touch longer, and nothing on the page stops or snaps it
@@ -47,6 +48,8 @@ export default function SmoothScrolling({ children }) {
 
     const target = window.location.hash && document.querySelector(window.location.hash);
     if (target) {
+      // arriving on a section from another page's nav keeps the nav showing
+      markNavJump();
       // land on the section before the first paint, so there is no flash of
       // the top of the page and no visible scroll
       target.scrollIntoView({ behavior: "instant" });

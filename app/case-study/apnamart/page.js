@@ -11,17 +11,17 @@ export const metadata = {
 
 // what was already fixed, and what the ads still had to do
 const CONSTRAINTS = [
-  "Campaign idea and Celebrity (Mandar Chandwadkar) was finalized",
+  "Campaign idea and Celebrity (Mandar Chandwadkar) were finalised",
   "But communication lacked clarity",
   "The final ads needed strong regional resonance",
-  "It was essential for the ads to work across Social Media Channel (organically) while also bringing in low CAC through paid distribution",
+  "It was essential for the ads to work across Social Media Channels (organically) while also bringing in low CAC through paid distribution",
 ];
 
 // what matters most to an ApnaMart customer
 const OBSERVATIONS = [
   {
     title: "Savings",
-    desc: "Customers actively look to maximize discounts and save money. There are high chances that they buy from somewhere else based on price",
+    desc: "Customers actively look to maximise discounts and save money. There are high chances that they buy from somewhere else based on price",
   },
   {
     title: "Quality",
@@ -41,7 +41,7 @@ const OBSERVATIONS = [
 const PILLARS = [
   "Careful Item Inspection",
   "Highlighting the Diverse range of Products at ApnaMart",
-  "Hunting Discounts and avail various offers at ApnaMart",
+  "Hunting Discounts and availing various offers at ApnaMart",
 ];
 
 const SCRIPT_CHOICES = [
@@ -51,10 +51,10 @@ const SCRIPT_CHOICES = [
   },
   {
     title: "Character-driven storytelling",
-    desc: "Use nuances and created situations that Bhide would often experience",
+    desc: "Used nuances and created situations that Bhide would often experience",
   },
   {
-    title: "Situational humor",
+    title: "Situational humour",
     desc: "To improve the engagement on our ads, we made the scripts fun to watch and added humor",
   },
   { title: "Cultural familiarity", desc: "with the people in ApnaMart\u2019s Operating Regions" },
@@ -183,7 +183,7 @@ export default function ApnamartCaseStudy() {
             </div>
           </div>
 
-          <span className="cst-pmfCap cst-pmfCap--violet cap-cap">The constraint</span>
+          <span className="cst-pmfCap cst-pmfCap--violet cap-cap">The constraints</span>
           <ol className="cst-reqs cap-reqs">
             {CONSTRAINTS.map((r, i) => (
               <li className="cst-req" key={r}>
@@ -311,7 +311,7 @@ export default function ApnamartCaseStudy() {
               RESULT
             </div>
             <h2 className="cst-secH">
-              The Films in the campaign were made in a Social-Media First and, hence, brought
+              The Films in the campaign were made Social-Media First and, hence, brought
               great results over both Social Media and Paid Channels.
             </h2>
 

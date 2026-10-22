@@ -19,7 +19,7 @@ const GOALS = ["Reduce their CPL", "Generate Quality Leads"];
 
 // what parents weigh up when choosing an education platform
 const FACTORS = [
-  "Trust on the Education Institute",
+  "Trust in the Education Institute",
   "Quality of Education",
   "Affordability",
   "Monitor Children\u2019s Education",
@@ -35,7 +35,7 @@ const COMMS = [
     sub: "This was important since both the parents were mostly working and, hence, did not have enough time to check their children\u2019s performance.",
   },
   {
-    main: "One thing that was kept common in the communication in all the videos: Physicswallah and Alakh Pandey sir\u2019s names.",
+    main: "One thing that was kept common in the communication in all the videos: PhysicsWallah and Alakh Pandey sir\u2019s names.",
     sub: "This brought a factor of trust, high quality of education and affordability for the parents.",
   },
 ];
@@ -82,7 +82,7 @@ function CplChart() {
         <text x="250" y="260" textAnchor="middle" className="ccj-cAxis">Time (in weeks)</text>
         <text transform="translate(12 150) rotate(-90)" textAnchor="middle" className="ccj-cAxis">CPL</text>
       </svg>
-      <figcaption>(The Avg. CPL mentioned here are for the entire campaign and not for a single video)</figcaption>
+      <figcaption>(The Avg. CPL mentioned here is for the entire campaign and not for a single video)</figcaption>
     </figure>
   );
 }
@@ -95,7 +95,7 @@ function FactorsVenn() {
       <circle cx="118" cy="214" r="119" fill="#C5BEFA" opacity=".85" style={{ mixBlendMode: "multiply" }} />
       <circle cx="298" cy="214" r="119" fill="#E1DDF8" opacity=".9" style={{ mixBlendMode: "multiply" }} />
       <circle cx="208" cy="307" r="119" fill="#D9D9D9" opacity=".9" style={{ mixBlendMode: "multiply" }} />
-      <text x="208" y="38" textAnchor="middle">Trust on the</text>
+      <text x="208" y="38" textAnchor="middle">Trust in the</text>
       <text x="208" y="59" textAnchor="middle">Education Institute</text>
       <text x="58" y="208" textAnchor="middle">Quality of</text>
       <text x="58" y="229" textAnchor="middle">Education</text>
@@ -352,7 +352,7 @@ export default function CuriousJrCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
+            <h2 className="csp-more-h">More deep dives.</h2>
             <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
               <span className="csp-more-cta-label">See all case studies</span>
               <span className="csp-more-cta-i" aria-hidden="true">

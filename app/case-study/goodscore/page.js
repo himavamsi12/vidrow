@@ -4,14 +4,14 @@ import CspSectionNav from "../../components/CspSectionNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
-  title: "Goodscore - Case Study | Vidrow",
+  title: "GoodScore - Case Study | Vidrow",
   description:
     "How celebrity performance ads helped GoodScore scale: one shoot, tested hook by hook, competing on cost per conversion in the same account and auction.",
 };
 
 // the production system: one shoot to eighteen live ads
 const SYSTEM = [
-  { val: "1", label: "shoot day", desc: "8 hours of shoot kept with designed for maximum output" },
+  { val: "1", label: "shoot day", desc: "an 8-hour shoot, designed for maximum output" },
   { val: "6", label: "scripts", desc: "each mapped to a real user intent and structures derived from winning ad formats" },
   { val: "3", label: "hooks per script", desc: "openings tested independently" },
   { val: "18", label: "live ad assets", desc: "cut for Meta feed + YouTube, 16:9 and vertical", hi: true },
@@ -94,7 +94,7 @@ export default function GoodscoreCaseStudy() {
           <h1 className="cst-h">
             How Celebrity Performance
             <br />
-            Ad Helped GoodScore scale
+            Ads Helped GoodScore Scale
           </h1>
           <p className="csk-note">
             Same account. Same auction. Same scoreboard: cost per conversion. The celebrity won.
@@ -150,7 +150,7 @@ export default function GoodscoreCaseStudy() {
             <div className="csk-problemCopy cgs-setupCopy">
               <p>
                 A fast-growing fintech app, running hundreds of UGC, POV and AI-led ads, one of
-                the most aggressive testing programs in the category. But the next challenge was
+                the most aggressive testing programmes in the category. But the next challenge was
                 to find scale efficiently.
               </p>
               <p>So the question wasn&rsquo;t &ldquo;can a celebrity get reach?&rdquo;</p>
@@ -171,7 +171,7 @@ export default function GoodscoreCaseStudy() {
             <b>02</b>
             THE SYSTEM
           </div>
-          <h2 className="cst-secH">Data Backed Face and Script Selection</h2>
+          <h2 className="cst-secH">Data-Backed Face and Script Selection</h2>
 
           <ol className="cgs-flow">
             {SYSTEM.map((st, i) => (
@@ -205,7 +205,7 @@ export default function GoodscoreCaseStudy() {
 
           <div className="cgs-headRow">
             <h2 className="cst-secH cgs-bigH">
-              27% of the ad spends.
+              27% of ad spend.
               <br />
               30% of the conversions.
             </h2>
@@ -390,7 +390,7 @@ export default function GoodscoreCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
+            <h2 className="csp-more-h">More deep dives.</h2>
             <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
               <span className="csp-more-cta-label">See all case studies</span>
               <span className="csp-more-cta-i" aria-hidden="true">

@@ -22,6 +22,18 @@ export function CalendarIcon({ className = "" }) {
   );
 }
 
+// an envelope, drawn like the calendar above: a 25 x 25 outline in currentColor
+export function MailIcon({ className = "" }) {
+  return (
+    <svg className={className} width="25" height="25" viewBox="0 0 25 25" fill="none" aria-hidden="true">
+      <path
+        d="M1 3.5H24C24.5523 3.5 25 3.94772 25 4.5V20.5C25 21.0523 24.5523 21.5 24 21.5H1C0.447715 21.5 0 21.0523 0 20.5V4.5C0 3.94772 0.447715 3.5 1 3.5ZM2.25 7.03V19.25H22.75V7.03L12.5 14.2L2.25 7.03ZM3.9 5.75L12.5 11.77L21.1 5.75H3.9Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function LocationIcon({ className = "" }) {
   return (
     <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">

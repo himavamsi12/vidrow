@@ -8,7 +8,7 @@ import { STAGES, STAGE_PIECES, CELL_SHADES } from "../data/stages";
 const CELL_COUNT = 16;
 // desktop: screens of scroll the section stays pinned for (the .wy-track
 // .scroll-on height in globals.css is 100vh plus this)
-const SPAN_SCREENS = 3;
+const SPAN_SCREENS = 2.5;
 const ACID_CELLS = new Set(STAGE_PIECES.filter((p) => p.acid).flatMap((p) => p.cells));
 
 export default function WhereYouAreNow() {
@@ -109,10 +109,10 @@ export default function WhereYouAreNow() {
       }
       const vh = vhPin;
       const h = sticky.offsetHeight;
-      // two screens of scrolling per stage, except the first, which is
-      // already open on arrival and so only needs a short stretch
-      const first = Math.round(vh * 0.8);
-      const per = Math.round(vh * 2);
+      // one and a half screens of scrolling per stage, except the first,
+      // which is already open on arrival and so only needs a short stretch
+      const first = Math.round(vh * 0.7);
+      const per = Math.round(vh * 1.5);
       const span = first + per * (n - 1);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section

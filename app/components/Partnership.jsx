@@ -18,7 +18,7 @@ export default function Partnership() {
                 A Playbook That Works <br />
                 Across Stages
               </span>
-              <span className="pr-h-m">A playbook that works across industries</span>
+              <span className="pr-h-m">A Playbook That Works Across Stages</span>
             </h2>
           </div>
         </Reveal>

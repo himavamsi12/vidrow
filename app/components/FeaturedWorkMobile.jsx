@@ -15,9 +15,10 @@ function QuoteMark({ className }) {
   );
 }
 
-// a testimonial's [[…]] runs are the lines set darker than the rest
+// a testimonial's **…** runs (the same quote the desktop card shows) are
+// the lines set darker than the rest; [[…]] marks them the same way
 function Para({ text }) {
-  const parts = text.split(/\[\[(.+?)\]\]/);
+  const parts = text.split(/\[\[(.+?)\]\]|\*\*(.+?)\*\*/).filter((t) => t !== undefined);
   return <p>{parts.map((t, i) => (i % 2 ? <strong key={i}>{t}</strong> : t))}</p>;
 }
 
@@ -147,14 +148,14 @@ export default function FeaturedWorkMobile() {
           <span className="fw-tag">Testimonials</span>
           <TagMark />
         </div>
-        <h2 className="fw-h">Hear it from Partnering Founders</h2>
+        <h2 className="fw-h">What our clients&rsquo; founders say</h2>
       </Reveal>
 
       <div className="fwm-list" ref={listRef}>
         {FEATURED_WORK.map((item) => {
           const founder = item.plates[0];
           // testimonials carry their paragraph breaks as blank lines
-          const paras = (item.mobileQuote || item.quote).split(/\n{2,}/);
+          const paras = item.quote.split(/\n{2,}/);
 
           return (
             <article key={item.id} className="fwm-card">
@@ -169,9 +170,9 @@ export default function FeaturedWorkMobile() {
                   <img loading="lazy" decoding="async" className="fwm-photo" src={item.photos[0].src} alt={`${founder.name}, ${item.name}`} />
                   <div className="fwm-by">
                     <b>-{founder.name}</b>
-                    {founder.role && <span>{founder.role}</span>}
+                    {founder.role && <span>{founder.role}{founder.company && `, ${founder.company}`}</span>}
                   </div>
-                  <h3 className="fwm-line">{item.mobileLine || item.line}</h3>
+                  <h3 className="fwm-line">{item.line}</h3>
                 </div>
 
                 <div className="fwm-quote">

@@ -14,7 +14,7 @@ const STORIES = [
     logoAlt: "Masai",
     stat: "₹250+ Cr",
     statLabel: "revenue",
-    desc: "Masai School reaches ₹250+ crore in revenue in Edtech.",
+    desc: "Masai School crosses ₹250+ crore in revenue.",
   },
   {
     key: "helium",

@@ -160,7 +160,7 @@ export default function FeaturedWork() {
           <span className="fw2-tag">Testimonials</span>
           <TagMark />
         </div>
-        <h2 className="fw2-h">Hear it from Partnering Founders</h2>
+        <h2 className="fw2-h">What our clients&rsquo; founders say</h2>
       </Reveal>
 
       <div className="fw2-stack" ref={stackRef}>
@@ -202,7 +202,7 @@ export default function FeaturedWork() {
                     </div>
                     <div className="fw2-by">
                       <b>{founder.name}</b>
-                      {founder.role && <span>{founder.role}</span>}
+                      {founder.role && <span>{founder.role}{founder.company && `, ${founder.company}`}</span>}
                     </div>
                   </div>
                 </div>

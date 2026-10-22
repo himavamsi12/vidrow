@@ -122,7 +122,7 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-aoc-h">Creative Volume</h2>
             </div>
             <p className="csp-aoc-copy">
-              Masai runs online tech courses. Nobody buys one off an ad, they book a paid slot
+              Masai runs online tech courses. Nobody buys one off an ad; they book a paid slot
               for Masai&apos;s entrance test first, so every ad in this account is bought and
               judged on test bookings. Masai already ran a large Meta engine with creative
               arriving from several sources, and Meta funds whatever performs.
@@ -211,7 +211,7 @@ export default function PlatinumRxCaseStudy() {
               <h2 className="csp-flow-h">Our Creative Strategy</h2>
             </div>
             <p className="csp-flow-copy">
-              Three sources feed the meta ads, the right creator carries it, and every
+              Three sources feed the Meta ads, the right creator carries it, and every
               concept ships with three different hooks as three separate ads. Meta decides which
               of them survive, and that answer sets the next batch.
             </p>
@@ -266,7 +266,7 @@ export default function PlatinumRxCaseStudy() {
                 Did not work → Discard
               </div>
               <span className="csp-flow-metaLabel">
-                Meta decides which ad is winning and which doesnt scale
+                Meta decides which ad is winning and which doesn&apos;t scale
               </span>
               <div className="csp-flow-box csp-flow-box--yellow csp-flow-box--outcome" id="csp-flow-worked">
                 Worked → Double down
@@ -302,9 +302,9 @@ export default function PlatinumRxCaseStudy() {
             </div>
             <h2 className="csp-out-h">The Outcome</h2>
             <p className="csp-out-note">
-              Even with scaling the CAC didn&apos;t increase in fact even at scale we
+              Even with scaling, the CAC didn&apos;t increase. In fact, even at scale we
               <br />
-              were able to lower the cost per enrolment by 27%
+              were able to lower the cost per enrolment by 27%.
             </p>
           </div>
           <div className="csp-out-stair">

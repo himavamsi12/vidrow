@@ -32,7 +32,7 @@ const PROOF = [
   {
     tag: "Recognition",
     title: "Forbes 30 Under 30 Asia",
-    body: "Vidrow\u2019s cofounder Aditya Raj Somani was named to the Forbes 30 Under 30 Asia 2025 list in the Social Media, Marketing & Advertising category.",
+    body: "Vidrow\u2019s co-founder Aditya Raj Somani was named to the Forbes 30 Under 30 Asia 2025 list in the Social Media, Marketing & Advertising category.",
   },
   {
     tag: "First Startup",
@@ -46,7 +46,7 @@ const PROOF = [
   },
   {
     tag: "Success",
-    title: "90% of Startups raise their next round with us",
+    title: "90% of partnering Startups successfully raise their next round while working with us",
     body: "9 out of 10 startups we work with raise their next round while they\u2019re with us. That isn\u2019t luck. It\u2019s what happens when marketing is built around the metrics investors actually care about, and when the team running it wants your next round as badly as you do.",
   },
 ];
@@ -60,7 +60,7 @@ const INVEST = [
     title: "Why are we investing?",
     body: [
       "We want our work to help you raise the next round faster and bigger.",
-      "Our investment ties our upside to your valuation, not our service invoice. We chase business targets rather than vanity metrics. This is our way of saying that we believe in the founder and we want to build alongside them. This is real Skin In The Game.",
+      "Our investment ties our upside to your valuation, not our service invoice. We chase business targets rather than vanity metrics. This is our way of saying that we believe in the founder and we want to build alongside them. This is real skin in the game.",
     ],
     corner: { w: 2, h: 2, cells: [[1, 0], [0, 1], [1, 1]] },
   },
@@ -186,7 +186,7 @@ export default function AboutPage() {
             <div className="ab-openingColumn">
               <p className="ab-openingPara--separated">
                 Most startups get handed a generic marketing playbook, hire a growth team, find
-                production houses, start Meta-Google and that&apos;s it. It looks like marketing. It
+                production houses, start running Meta and Google ads and that&apos;s it. It looks like marketing. It
                 rarely works like marketing.
               </p>
               <p>
@@ -241,9 +241,9 @@ export default function AboutPage() {
             <TagMark />
           </div>
           <h2 className="ab-whyH">
-            We invest Capital in
+            We invest capital in
             <br className="ab-investHeadingBreak" />
-            {" "}Startups we work with
+            {" "}the startups we work with
           </h2>
         </div>
 

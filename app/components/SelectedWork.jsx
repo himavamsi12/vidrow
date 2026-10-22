@@ -73,14 +73,14 @@ export default function SelectedWork() {
           <div className="sw-headL">
             <div className="sw-tagwrap">
               <span className="sw-tag">
-                Selected Work<span className="sw-m">s</span>
+                Selected Work
               </span>
               <TagMark />
             </div>
             <div className="sw-titleRow">
               <h2 className="sw-h">
-                <span className="sw-d">We make Ads that people don&rsquo;t skip</span>
-                <span className="sw-m">The Creatives That Scaled</span>
+                <span className="sw-d">We make ads that people don&rsquo;t skip</span>
+                <span className="sw-m">We make ads that people don&rsquo;t skip</span>
               </h2>
             </div>
           </div>

@@ -97,10 +97,10 @@ const REASONS = [
 // the four headline numbers under "What happened in just 90 days?" — the
 // last is the one called out in acid
 const RESULTS = [
-  { val: "2%", label: "of every AC sold online in India" },
+  { val: "2%", label: "of all ACs sold online in India" },
   { val: "3.5%", label: "market share on Amazon" },
   { val: "600", label: "ACs a day from their own website" },
-  { val: "\u20b925,000", label: "Units sold within 4 months", hi: true },
+  { val: "25,000", label: "Units sold within 4 months", hi: true },
 ];
 
 // the three Ps that were already fixed before we came in — the fourth,
@@ -522,7 +522,7 @@ export default function HeliumCaseStudy() {
               <h2 className="csp-hl-rh">The Brief</h2>
             </div>
             <p className="csp-brief-copy">
-              Helium Air came to us with a 0.8 ton AC priced at &#8377;16,999 in a highly
+              Helium Smart Air came to us with a 0.8 ton AC priced at &#8377;16,999 in a highly
               competitive and established category. They had raised $2M in seed funding. The
               challenge was to make the brand feel aspirational and credible without competing on
               discounts or low pricing, while scaling revenue through the peak summer season.
@@ -945,8 +945,8 @@ export default function HeliumCaseStudy() {
               <div className="csp-reviewStat">
                 <b>186k+</b>
                 <span>
-                  views, all high-intent. This is a review, not content, views climbed as
-                  sales climbed, which is the correlation.
+                  views, all high-intent. This is a review, not content: views climbed as
+                  sales climbed.
                 </span>
               </div>
 
@@ -996,7 +996,7 @@ export default function HeliumCaseStudy() {
 
             <p className="csp-briefClock">
               The waitlist came from pincodes no brand film reached and no performance ad targeted.
-              Social built demand ahead of the map, the marketing arrived before the delivery
+              Social built demand ahead of the map: the marketing arrived before the delivery
               network did.
             </p>
           </div>

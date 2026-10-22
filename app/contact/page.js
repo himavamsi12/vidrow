@@ -1,7 +1,7 @@
 import SiteNav from "../components/SiteNav";
 import Footer from "../components/Footer";
 import ContactForm from "../components/ContactForm";
-import { WhatsappIcon, CalendarIcon, LocationIcon, CornerArrow } from "../components/ContactIcons";
+import { WhatsappIcon, MailIcon, LocationIcon, CornerArrow } from "../components/ContactIcons";
 
 export const metadata = {
   title: "Contact - Vidrow",
@@ -18,10 +18,10 @@ const CONTACT_LINKS = [
     href: "https://wa.me/917753058498",
   },
   {
-    key: "call",
+    key: "mail",
     tone: "violet",
-    Icon: CalendarIcon,
-    label: "Set up a call",
+    Icon: MailIcon,
+    label: "Send us a mail",
     href: "mailto:contact@vidrow.in",
   },
   {

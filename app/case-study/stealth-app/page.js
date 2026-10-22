@@ -17,8 +17,8 @@ const JOURNEY = [
   { tag: "The install", title: "Downloads", desc: "Downloads the app directly from that same ad." },
   { tag: "The set-up", title: "Set-up", desc: "Language & phone number. 2 taps and they are in." },
   { tag: "The landing", title: "Launches", desc: "Opens on that feature. No home screen, no searching." },
-  { tag: "The \u20b91 trial", title: "Takes Trial", desc: "Takes the \u20b91 trial for a 3 days period." },
-  { tag: "Conversion", title: "Trial Run", desc: "Experience the feature during trial. Product does the selling.", hi: true },
+  { tag: "The \u20b91 trial", title: "Takes Trial", desc: "Takes the \u20b91 trial for a 3-day period." },
+  { tag: "Conversion", title: "Trial Run", desc: "Experiences the feature during trial. Product does the selling.", hi: true },
   { tag: "The autopay", title: "Paid User", desc: "Trial ends. Autopay activates automatically.", hi: true },
 ];
 
@@ -34,20 +34,20 @@ const WINS = [
     tag: "Measure",
     val: "1",
     title: "Measure of Success",
-    desc: "We only tracked final purchase event and nothing else",
+    desc: "We only tracked the final purchase event and nothing else",
   },
   {
     tag: "Pick",
     val: "3",
     title: "Features worth Backing",
-    desc: "At the end 3 features came out as winners and very clear audience cohort emerged. We doubled down on scaling these features within the audience cohort",
+    desc: "At the end 3 features came out as winners and a very clear audience cohort emerged. We doubled down on scaling these features within the audience cohort",
     strong: true,
   },
   {
     tag: "Scale",
     val: "77%",
     title: "of All Paying Users came from these 3 features",
-    desc: "came from these features where they started. They sold the details",
+    desc: "came from the 3 features they first landed on.",
   },
 ];
 
@@ -60,7 +60,7 @@ const SHARES = [
 
 // the scale-up phase in four numbers; the swatch alternates acid / lilac
 const OUTPUT = [
-  { tag: "Creative", val: "~600+", desc: "ad sets made for 3 features during scale up phase" },
+  { tag: "Creative", val: "600+", desc: "ad sets made for 3 features during scale up phase" },
   { tag: "Customer payback period", val: "~3 Months" },
   { tag: "Paying users acquired", val: "3,00,000" },
   { tag: "Daily acquisition rate achieved", val: "10,000", desc: "paid users / day" },
@@ -149,9 +149,9 @@ export default function StealthAppCaseStudy() {
             <h2 className="cst-secH">Problem Statement</h2>
           </div>
           <p className="cst-problemCopy">
-            Stealth App is in the content space and had the app ready basis the earlier user
+            Stealth App is in the content space and had the app ready based on the earlier user
             research but it was unclear which features within the app and which audience cohort
-            will be the power user. It was a brand-new content platform with no paying users till
+            would be the power users. It was a brand-new content platform with no paying users till
             now. We had the responsibility to find the product-market fit and find the paying
             audience cohort where the CAC-LTV equation would make sense.
           </p>

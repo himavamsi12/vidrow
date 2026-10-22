@@ -4,7 +4,7 @@ import CspSectionNav from "../../components/CspSectionNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
-  title: "Apnamart (Online + Offline) - Case Study | Vidrow",
+  title: "ApnaMart (Online + Offline) - Case Study | Vidrow",
   description:
     "How Vidrow tested offline and online channels for ApnaMart in Bilaspur, phase by phase, to grow app downloads and online orders.",
 };
@@ -30,9 +30,9 @@ const END_GOALS = [
 ];
 
 const CITY_FACTORS = [
-  "We needed good penetration of Apnamart. Many cities checked this requirement",
+  "We needed good penetration of ApnaMart. Many cities checked this requirement",
   "The coverage of the stores should be at least 80% of the city’s population.",
-  "The city should be in the top performing cities where Apnamart stores are available",
+  "The city should be in the top performing cities where ApnaMart stores are available",
 ];
 
 const CHANNELS = [
@@ -50,18 +50,18 @@ const PHASES = [
 
 const PHASE_1 = {
   designing: [
-    "Apnamart’s colours were used to design all the assets. The assets showed a delivery boy with Apnamart’s app and communication was quirky.",
+    "ApnaMart’s colours were used to design all the assets. The assets showed a delivery boy with ApnaMart’s app and communication was quirky.",
     "Catchy Hindi Jingles were written to be played in the totos as part of the transit ads.",
   ],
   execution: [
-    "Pamphlets were distributed with customers who visited the offline Apnamart stores and people who passed by the stores.",
+    "Pamphlets were distributed to customers who visited the offline ApnaMart stores and people who passed by the stores.",
     "Totos were fitted with speakers for playing jingles and these would roam around the 10 testing locations.",
   ],
 };
 
 const PHASE_2 = {
   designing: [
-    "The Billboards were designed to show a delivery boy coming out of Apnamart’s app for delivering the orders establishing their online presence.",
+    "The Billboards were designed to show a delivery boy coming out of ApnaMart’s app for delivering the orders establishing their online presence.",
     "Similarly, in the newspapers, mobile app and delivery boy were shown with varying communications.",
   ],
   execution: [
@@ -71,7 +71,7 @@ const PHASE_2 = {
 };
 
 const PHASE_3_COMMS = [
-  "The story was revolved around the decision-making lady of a middle class house in 3 scenarios - interacting with her maid, her husband and her child. These are seen by every customer of Apnamart and, hence, made the videos relatable for them.",
+  "The story revolved around the decision-making lady of a middle class house in 3 scenarios - interacting with her maid, her husband and her child. These are seen by every customer of ApnaMart and, hence, made the videos relatable for them.",
   "The scripts were quirky and the story was written to be fun-to-watch just like any content on TV or social media",
 ];
 
@@ -131,7 +131,7 @@ function DesignExec({ data }) {
   );
 }
 
-export default function ApnamartOnlineOfflineCaseStudy() {
+export default function ApnaMartOnlineOfflineCaseStudy() {
   return (
     <>
       <main className="csp csp--seekho cao">
@@ -150,8 +150,8 @@ export default function ApnamartOnlineOfflineCaseStudy() {
               and total order numbers.
             </h1>
             <p className="csk-note cao-note">
-              Apnamart is an everyday grocery retail store chain operating in the eastern states of
-              India (West Bengal, Jharkhand, Chhattisgarh). Apnamart also provides 10 minute
+              ApnaMart is an everyday grocery retail store chain operating in the eastern states of
+              India (West Bengal, Jharkhand, Chhattisgarh). ApnaMart also provides 10-minute
               delivery of items through their mobile app.
             </p>
           </div>
@@ -160,13 +160,13 @@ export default function ApnamartOnlineOfflineCaseStudy() {
             <img fetchPriority="high"
               className="csk-hero"
               src={`${ASSETS}/hero.jpg`}
-              alt="Apnamart transit ad, billboard and ad film for the 15 minute delivery"
+              alt="ApnaMart transit ad, billboard and ad film for the 15 minute delivery"
             />
             <span className="csp-bannerTag">
               <span className="csp-lockup">
                 <VidrowMark />
                 <i aria-hidden="true" />
-                <img src={`${ASSETS}/apnamart-badge.svg`} alt="Apnamart" />
+                <img src={`${ASSETS}/apnamart-badge.svg`} alt="ApnaMart" />
               </span>
             </span>
           </div>
@@ -174,7 +174,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
           <div className="csk-meta">
             <div className="csp-metaItem">
               <span className="csp-metaLabel">Client</span>
-              <span className="csp-metaValue">Apnamart</span>
+              <span className="csp-metaValue">ApnaMart</span>
             </div>
             <div className="csp-metaItem">
               <span className="csp-metaLabel">Testing location</span>
@@ -191,24 +191,24 @@ export default function ApnamartOnlineOfflineCaseStudy() {
           <section className="cao-sec" id="csp-sec-problem">
             <div className="cao-head">
               <div className="cao-headL">
-                <Eyebrow n="01">Apnamart &times; Vidrow &middot; Case Study</Eyebrow>
+                <Eyebrow n="01">ApnaMart &times; Vidrow &middot; Case Study</Eyebrow>
                 <h2 className="cao-h">Problem Statement</h2>
               </div>
               <div className="cao-headR">
                 <p>
-                  Apnamart is an everyday grocery retail store chain operating in the eastern
-                  states of India (West Bengal, Jharkhand, Chhattisgarh). Apnamart also provides 10
+                  ApnaMart is an everyday grocery retail store chain operating in the eastern
+                  states of India (West Bengal, Jharkhand, Chhattisgarh). ApnaMart also provides 10
                   minute delivery of items through their mobile app.
                 </p>
                 <p>
-                  Only a few months before this pilot project had Apnamart launched their online
+                  Only a few months before this pilot project had ApnaMart launched their online
                   delivery service enabled by the mobile app, and now wanted to increase the
                   awareness for the same.
                 </p>
               </div>
             </div>
 
-            <p className="cao-label">As end goals, Apnamart wanted to optimise on the following:</p>
+            <p className="cao-label">As end goals, ApnaMart wanted to optimise on the following:</p>
             <div className="cao-goals">
               {END_GOALS.map((g, i) => (
                 <div className="cao-goal" key={g}>
@@ -219,7 +219,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
             </div>
 
             <p className="cao-callout">
-              With a mission to increase the app downloads and total order numbers, Apnamart
+              With a mission to increase the app downloads and total order numbers, ApnaMart
               reached out to Vidrow for the GTM plan.
             </p>
           </section>
@@ -237,7 +237,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
               <div className="cao-col">
                 <p className="cao-body">
                   Since the service was new and there was not much reference in terms of
-                  competitors in Apnamart&rsquo;s cities, we decided to start from a small point and
+                  competitors in ApnaMart&rsquo;s cities, we decided to start from a small point and
                   then scale those marketing channels that provide the best results.
                 </p>
                 <p className="cao-body">
@@ -341,7 +341,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
                 <figure className="cao-fig">
                   <div className="cao-pamRow">
                     <img src={`${ASSETS}/pam-1.jpg`} alt="Pamphlet: 15 minute delivery, download the app" loading="lazy" />
-                    <img src={`${ASSETS}/pam-2.jpg`} alt="Pamphlet: Apnamart app, free delivery" loading="lazy" />
+                    <img src={`${ASSETS}/pam-2.jpg`} alt="Pamphlet: ApnaMart app, free delivery" loading="lazy" />
                     <img src={`${ASSETS}/pam-3.jpg`} alt="Pamphlet: five bad habits of mothers-in-law" loading="lazy" />
                   </div>
                   <figcaption>Pamphlet Assets</figcaption>
@@ -367,11 +367,11 @@ export default function ApnamartOnlineOfflineCaseStudy() {
               </div>
               <div className="cao-headR">
                 <p>
-                  These assets were really important for Apnamart cities even though the cost was
+                  These assets were really important for ApnaMart cities even though the cost was
                   high for them.
                 </p>
                 <p>
-                  While Phase 1 was more around retargeting and being constantly on top of mind of
+                  While Phase 1 was more around retargeting and being constantly top of mind for
                   the customer, this phase was for awareness and adoption.
                 </p>
               </div>
@@ -382,7 +382,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
 
               <div className="cao-assets cao-assets--row">
                 <figure className="cao-fig">
-                  <img className="cao-bill" src={`${ASSETS}/bill.jpg`} alt="Apnamart billboard" loading="lazy" />
+                  <img className="cao-bill" src={`${ASSETS}/bill.jpg`} alt="ApnaMart billboard" loading="lazy" />
                   <figcaption>Billboard</figcaption>
                 </figure>
                 <figure className="cao-fig">
@@ -416,7 +416,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
                 <img
                   key={n}
                   src={`${ASSETS}/aware-${n}.webp`}
-                  alt={`Apnamart digital awareness video, scene ${n}`}
+                  alt={`ApnaMart digital awareness video, scene ${n}`}
                   loading="lazy"
                 />
               ))}
@@ -428,7 +428,7 @@ export default function ApnamartOnlineOfflineCaseStudy() {
           <section className="cao-sec" id="csp-sec-results">
             <Eyebrow n="07">Results</Eyebrow>
             <h2 className="cao-h cao-h--results">
-              The playbook was created and was replicated in the other cities to enable Apnamart to
+              The playbook was created and was replicated in the other cities to enable ApnaMart to
               scale up
             </h2>
 
@@ -440,10 +440,10 @@ export default function ApnamartOnlineOfflineCaseStudy() {
                   delivery services in Bilaspur jumped. This meant that Billboards led to a greater
                   awareness and the newspapers resulted in more downloads.
                 </p>
-                <p>With the execution of the third phase, the results were further higher.</p>
+                <p>With the execution of the third phase, the results improved further.</p>
                 <p>
                   As a result of these, we decided to go ahead with another phase (phase 4) with all
-                  our previous leanings and the channels.
+                  our previous learnings and the channels.
                 </p>
               </div>
 

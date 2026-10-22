@@ -7,10 +7,11 @@ import { LOADER_POSTER } from "./loaderPoster";
 
 const KEY = "vidrow-loader-played";
 const FADE_MS = 500;
-// the loader stays up until the page has finished loading, however slow the
-// connection; this only stops a load that never finishes holding the site
-// behind it for good
-const MAX_MS = 30000;
+// the longest the loader can hold the homepage: it starts lifting by this
+// point after the page began loading (its fade then takes FADE_MS), so the
+// site is fully uncovered by 4 seconds even if the logo animation hasn't
+// finished or the page is still loading
+const MAX_MS = 4000 - FADE_MS;
 // how long a site that has finished loading still waits for the logo
 // animation to arrive and start, before opening with the still logo
 const START_WAIT_MS = 10000;
@@ -147,7 +148,9 @@ export default function PageLoader() {
     };
     if (pageDone) onLoad();
     else window.addEventListener("load", onLoad);
-    const cap = setTimeout(finish, MAX_MS);
+    // measured from when the page began loading, not from this effect
+    // running, so a slow start doesn't add to the wait
+    const cap = setTimeout(finish, Math.max(0, MAX_MS - performance.now()));
 
     return () => {
       v?.removeEventListener("ended", onEnded);

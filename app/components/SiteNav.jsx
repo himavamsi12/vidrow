@@ -12,6 +12,17 @@ const NAV_LINKS = [
   { label: "About Us", href: "/about" },
 ];
 
+// marks the page as jumping to a section from a nav link, for a moment, so
+// the hide-on-scroll-down rule in SiteNav ignores that jump. Also used by
+// SmoothScrolling when a page opens on a #section from another page.
+export function markNavJump() {
+  const root = document.documentElement;
+  root.dataset.navJump = "1";
+  root.classList.remove("nav-hidden");
+  clearTimeout(markNavJump.t);
+  markNavJump.t = setTimeout(() => delete root.dataset.navJump, 700);
+}
+
 function ContactButton({ className = "hx-contact", onClick }) {
   return (
     <a className={className} href="/contact" onClick={onClick}>
@@ -44,6 +55,10 @@ export default function SiteNav({ logoHref = "/" }) {
     const target = document.getElementById(href.split("#")[1]);
     if (!target) return;
     e.preventDefault();
+    // the jump is the visitor choosing a section, not scrolling down past
+    // the nav: keep the nav on screen when they land (see the scroll
+    // handler below)
+    markNavJump();
     // straight to the section, no glide
     if (lenis) lenis.scrollTo(target, { immediate: true, force: true });
     else target.scrollIntoView({ behavior: "instant" });
@@ -87,6 +102,12 @@ export default function SiteNav({ logoHref = "/" }) {
         const y = Math.max(0, window.scrollY);
         const delta = y - lastY;
         lastY = y;
+        // a jump from a nav link lands with the nav showing
+        if (root.dataset.navJump) {
+          upFrom = null;
+          setHidden(false);
+          return;
+        }
         // the page moving itself (FeaturedWork holding a card in place
         // while the one above collapses) isn't the user scrolling up
         if (root.dataset.scrollHold || root.dataset.heroCurtain) {

@@ -102,7 +102,8 @@ export default function Hero() {
               repeatable path to growth.
             </span>
             <span className="hx-sub-m">
-              We help early-stage startups unlock high-velocity growth and hit milestones faster.
+              We work alongside founders to turn marketing into a clearer, faster and more
+              repeatable path to growth.
             </span>
           </p>
           <a className="hx-cta" href="/contact">

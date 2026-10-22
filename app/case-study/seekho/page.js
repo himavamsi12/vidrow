@@ -20,7 +20,7 @@ const PROBLEMS = [
   },
   {
     title: "Low Scalability",
-    desc: "The creatives were not unlocking newer audience.",
+    desc: "The creatives were not unlocking new audiences.",
   },
   {
     title: "High CAC",
@@ -36,7 +36,7 @@ const OPTIONS = [
   },
   {
     title: "New formats of Creator-led Marketing",
-    desc: "Before Vidrow, Seekho always betted on Creator-led videos. Their performance in short duration were good, however, the performance deteriorated when active for over 2 weeks, and they were not scalable.",
+    desc: "Before Vidrow, Seekho always bet on Creator-led videos. Their performance in short duration was good, however, the performance deteriorated when active for over 2 weeks, and they were not scalable.",
   },
 ];
 
@@ -189,7 +189,7 @@ export default function SeekhoCaseStudy() {
           <h1 className="cst-h">
             A Completely New Solution
             <br />
-            of Performance Marketing.
+            for Performance Marketing.
           </h1>
           <p className="csk-note">
             We decided a combination of celebrity and performance videos: Celebrity Performance
@@ -403,7 +403,7 @@ export default function SeekhoCaseStudy() {
       <div className="csp-in">
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
-            <h2 className="csp-more-h">More founder journeys.</h2>
+            <h2 className="csp-more-h">More deep dives.</h2>
             <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
               <span className="csp-more-cta-label">See all case studies</span>
               <span className="csp-more-cta-i" aria-hidden="true">

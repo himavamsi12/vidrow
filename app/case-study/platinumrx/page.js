@@ -325,9 +325,27 @@ export default function PlatinumRxCaseStudy() {
         <section className="csp-more" id="csp-sec-more">
           <div className="csp-more-head">
             <h2 className="csp-more-h">More deep dives.</h2>
+            <a className="csp-more-cta csp-more-cta--desktop" href="/#deepdive">
+              <span className="csp-more-cta-label">See all case studies</span>
+              <span className="csp-more-cta-i" aria-hidden="true">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
+              </span>
+            </a>
           </div>
 
           <DeepDiveCards embed exclude="/case-study/platinumrx" />
+          <div className="csp-more-ctaMobile">
+            <a className="csp-more-cta csp-more-cta--mobile" href="/#deepdive">
+              <span className="csp-more-cta-label">See all case studies</span>
+              <span className="csp-more-cta-i" aria-hidden="true">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path fill="var(--violet)" d="M0 0 H40 V40 H26.667 V26.667 H13.333 V13.333 H0 Z" />
+                </svg>
+              </span>
+            </a>
+          </div>
         </section>
       </div>
     </main>

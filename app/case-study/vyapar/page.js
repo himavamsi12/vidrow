@@ -47,7 +47,7 @@ const APPROACH = [
     note: "Manoj Joshi played\ntrader, wholesaler &\nretailer",
   },
   {
-    title: "Stand for owner",
+    title: "Stand for the Owner",
     copy: "Leaders sell a product; authorities speak for the people who use it.",
     detail: "Relatable stories: funny, emotional, philosophical.",
     note: "Travelled organically\ninto family WhatsApp\ngroups.",
@@ -291,7 +291,7 @@ export default function VyaparCaseStudy() {
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.approach} id="vyapar-approach">
             <SectionLabel number="03">The Approach</SectionLabel>
-            <h2>Vyapar didn’t just sell an APP.<br />Vyapar built the CATEGORY.</h2>
+            <h2>Vyapar didn’t just sell an app.<br />Vyapar built the CATEGORY.</h2>
             <SwipeCarousel className={styles.approachGrid}>
               {APPROACH.map((item) => (
                 <article className={styles.approachCard} key={item.title}>
@@ -358,14 +358,14 @@ export default function VyaparCaseStudy() {
             <SectionLabel number="06" light>Name It</SectionLabel>
             <h2>Finding Early Adopters</h2>
             <p>
-              In the first campaign, both the teams agreed to do a bouquet of creatives with
+              In the first campaign, both teams agreed to do a bouquet of creatives with
               different communications. The idea was to understand what resonates best with
               their potential users. Vidrow created about a dozen videos to diversify the
-              bets. Each creative targeted different demography with different emotions and
-              different offerings. This is when the tagline - ‘Har business banega Digital’
+              bets. Each creative targeted a different demographic with different emotions and
+              different offerings. This is when the tagline - ‘Har Business Banega Digital’
               was conceptualised to bring the campaign under one umbrella. The tagline still
               sticks with the brand. As expected the results were amazing. The campaign
-              reached more than 200 million impressions in mere three months. We had achieved
+              reached more than 200 million impressions in a mere three months. We had achieved
               more awareness than we set out for.
             </p>
             <span className={styles.campaignCaption}>Click on the image below to view the campaign</span>
@@ -485,7 +485,7 @@ export default function VyaparCaseStudy() {
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.testimonial} id="vyapar-testimonial">
             <SectionLabel number="11">In Their Words</SectionLabel>
-            <h2>“Vidrow has been our go-to partners{" "}<br />for any marketing efforts.”</h2>
+            <h2>“Vidrow has been our go-to partner{" "}<br />for any marketing efforts.”</h2>
             <div className={styles.testimonialGrid}>
               <blockquote className={styles.testimonialQuote}>
                 <p>

@@ -11,7 +11,7 @@ const FOUNDERS = [
     // shown in the yellow block that grows up the card on hover; paragraphs
     // are separate entries
     bio: [
-      "Aditya has been in the content industry since his college days at IITK, i.e. 12 years. It's the same amount of time he has been part of the startup ecosystem in India. When everyone in the content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF films - a short format content engine in the pre-TikTok, pre-Reels era.",
+      "Aditya has been in the content industry since his college days at IITK, i.e. 12 years. It's the same amount of time he has been part of the startup ecosystem in India. When everyone in the content industry was chasing YouTube and OTT, Aditya built, scaled and sold his first startup - HPF Films - a short-form content engine in the pre-TikTok, pre-Reels era.",
       "That combination of being a content native and a founder is what eventually led to this agency. He's sat on both sides of the table long enough to know what early-stage companies actually need from their marketing, and what they almost always don't get.",
     ],
     // the shorter text written out under the card on phones
@@ -27,10 +27,10 @@ const FOUNDERS = [
     x: "https://x.com/anushankjain",
     bio: [
       "Anushank has been in content and marketing for the past 12 years and part of the Indian startup ecosystem for the past 9 years. A 3x founder of HPF Films, Doeasily and Vidrow, Anushank sold his first startup HPF Films to ShareChat and built the ads engine for 30Mn users, adding adtech depth to his content and marketing background.",
-      "Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
+      "Given his understanding of content, marketing and product, he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach their next fundraising target.",
     ],
     mobileBio: [
-      "Anushank has been in content and marketing for the past 12 years and part of the Indian startup ecosystem for the past 9 years. Given his understanding of content, marketing and product he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach next fundraising target.",
+      "Anushank has been in content and marketing for the past 12 years and part of the Indian startup ecosystem for the past 9 years. Given his understanding of content, marketing and product, he's uniquely placed to understand what startups at different stages require for marketing and how to efficiently reach their next fundraising target.",
     ],
   },
 ];
