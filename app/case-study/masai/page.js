@@ -100,11 +100,11 @@ export default function PlatinumRxCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Timeline</span>
-            <span className="csp-metaValue">6 Months</span>
+            <span className="csp-metaValue">10 Months</span>
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">5x Scale, at same CAC</span>
+            <span className="csp-metaValue">20x Scale, at same CAC</span>
           </div>
         </div>
       </div>
@@ -176,11 +176,11 @@ export default function PlatinumRxCaseStudy() {
                 <span className="csp-cell" />
                 <span className="csp-cell" />
               </div>
-              <span className="csp-statLabel">Dec 2025</span>
+              <span className="csp-statLabel">Nov 2025</span>
             </div>
             <div className="csp-statCol">
               <div className="csp-statGrid csp-statGrid--lg" style={{ "--rows": 5 }}>
-                <span className="csp-statVal">5X</span>
+                <span className="csp-statVal">20X</span>
                 <span className="csp-cell" />
                 <span className="csp-cell" />
                 <span className="csp-cell" />
@@ -192,7 +192,7 @@ export default function PlatinumRxCaseStudy() {
                 <span className="csp-cell" />
                 <span className="csp-cell" />
               </div>
-              <span className="csp-statLabel">July 2026</span>
+              <span className="csp-statLabel">Sep 2026</span>
             </div>
           </div>
         </section>

@@ -44,7 +44,7 @@ const CARE = [
   },
   {
     title: "Global Identity",
-    desc: "The Campaign positions VisualDub as a Global Tech entity based out of the USA or the UK. Creates an ease in trust for the global stakeholders",
+    desc: "The Campaign positions VisualDub as a Global Tech entity based out of the USA. Creates an ease in trust for the global stakeholders",
   },
 ];
 

@@ -18,7 +18,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "px",
-    title: "PlatinumRx leveraged Celebrity and UGC assets to scale 3x in 2 months",
+    title: "PlatinumRx leveraged Celebrity and UGC assets to increase reach 3x in 3 months",
     img: "/deepdrive-new/2.webp?v=2",
     logo: "/deepdrive-new/logos/platinumrx.webp",
     logoAlt: "PlatinumRx",
@@ -27,14 +27,14 @@ const DEEP_DIVES = [
   },
   {
     kind: "st",
-    title: "0 to 300k paid users in 90 days",
+    title: "0 to 300k paid users in 80 days",
     img: "/deepdrive-new/3.webp",
     name: "Stealth App",
     href: "/case-study/stealth-app",
   },
   {
     kind: "ma",
-    title: "Masai\u2019s Performance marketing scaled 5x at the same CAC in 6 months.",
+    title: "Masai\u2019s Performance marketing scaled by 20x in 10 months.",
     img: "/deepdrive-new/4.webp",
     logo: "/deepdrive-new/masai-logo.webp",
     logoAlt: "Masai",
@@ -43,7 +43,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "cu",
-    title: "CuriousJr observed a dip of 23% in CPL with UGC creatives",
+    title: "CuriousJr observed a dip of 25% in CAC with UGC creatives",
     img: "/deepdrive-new/5.webp",
     logo: "/deep%20drives/curious%20jr.webp",
     logoAlt: "CuriousJr",
@@ -87,7 +87,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "se",
-    title: "Seekho achieves 30% dip in CAC with celebrity performance marketing",
+    title: "Seekho achieves 23% dip in CAC with celebrity performance marketing",
     img: "/deepdrive-new/9.webp",
     logo: "/deepdrive-new/seekho-logo.webp",
     logoAlt: "Seekho",

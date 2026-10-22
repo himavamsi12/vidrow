@@ -128,7 +128,7 @@ export default function StealthAppCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">~3 Lakh paying users</span>
+            <span className="csp-metaValue">3 Lakh paying users</span>
           </div>
           <p className="cst-metaNote">
             It was a brand-new content platform with no paying users till now. We had the
@@ -165,7 +165,7 @@ export default function StealthAppCaseStudy() {
             <b>02</b>
             THE OUTCOME
           </div>
-          <h2 className="cst-secH">Zero to ~3 Lakh paying users in 90 days</h2>
+          <h2 className="cst-secH">Zero to ~3 Lakh paying users in 80 days</h2>
 
           <div className="cst-outcomeRow">
             <div className="cst-outcomeCopy">

@@ -99,8 +99,8 @@ const REASONS = [
 const RESULTS = [
   { val: "2%", label: "of all ACs sold online in India" },
   { val: "3.5%", label: "market share on Amazon" },
-  { val: "600", label: "ACs a day from their own website" },
-  { val: "25,000", label: "Units sold within 4 months", hi: true },
+  { val: "500", label: "ACs a day from their own website" },
+  { val: "25,000", label: "Units sold within 90 days", hi: true },
 ];
 
 // the three Ps that were already fixed before we came in — the fourth,

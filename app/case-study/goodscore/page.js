@@ -126,8 +126,8 @@ export default function GoodscoreCaseStudy() {
             <span className="csp-metaValue">90 Days</span>
           </div>
           <div className="csp-metaItem">
-            <span className="csp-metaLabel">Channels</span>
-            <span className="csp-metaValue">Meta + Google</span>
+            <span className="csp-metaLabel">Outcome</span>
+            <span className="csp-metaValue">50X spend</span>
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@ export default function GoodscoreCaseStudy() {
             <div className="csk-problemCopy cgs-setupCopy">
               <p>
                 A fast-growing fintech app, running hundreds of UGC, POV and AI-led ads, one of
-                the most aggressive testing programmes in the category. But the next challenge was
+                the most aggressive testing programs in the category. But the next challenge was
                 to find scale efficiently.
               </p>
               <p>So the question wasn&rsquo;t &ldquo;can a celebrity get reach?&rdquo;</p>
