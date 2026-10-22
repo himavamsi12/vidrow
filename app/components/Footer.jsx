@@ -2,6 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FOOTER_PIECES } from "../data/footerPieces";
+import { OFFICES } from "../data/offices";
+import { LocationIcon } from "./ContactIcons";
+
+// the office cities, each with a pin and a link to its map
+function OfficeLinks() {
+  return (
+    <span className="vfoot__offices">
+      {OFFICES.map((o) => (
+        <a key={o.key} className="vfoot__office" href={o.map} target="_blank" rel="noopener noreferrer">
+          <LocationIcon className="vfoot__pin" />
+          {o.city}
+        </a>
+      ))}
+    </span>
+  );
+}
 
 // the piece data's first drop is scheduled ~1.7s in; the whole timeline is
 // shifted back by that lead so the fall starts the moment the well is seen
@@ -251,6 +267,8 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
               </p>
               {/* the legal links stay on phones, under the copyright line */}
               <p className="vfoot__mNote vfoot__mNote--r">
+                <OfficeLinks />
+                <br />
                 © 2026. All rights reserved.
                 <br />
                 <a href="/privacy-policy">Privacy</a>
@@ -261,6 +279,8 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
               </p>
 
               <div className="vfoot__legal">
+                <OfficeLinks />
+                <span className="vfoot__bar" aria-hidden="true" />
                 <span>© 2026 Vidrow</span>
                 <span className="vfoot__dot" aria-hidden="true">
                   ·

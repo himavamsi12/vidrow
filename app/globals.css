@@ -5565,6 +5565,32 @@ html[data-hero-curtain] .hx-bar {
   color: rgba(255, 255, 255, .3)
 }
 
+/* the office cities ahead of the copyright, each behind a small acid pin */
+.vfoot__offices {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px
+}
+
+.vfoot__office {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px
+}
+
+.vfoot__pin {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  color: var(--acid)
+}
+
+.vfoot__bar {
+  width: 1px;
+  height: 1em;
+  background: rgba(255, 255, 255, .35)
+}
+
 @media (prefers-reduced-motion:reduce) {
   .vfoot__bottom {
     opacity: 1;
@@ -11647,6 +11673,11 @@ button:focus-visible,
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px
+  }
+
+  /* the pin sits level with its city */
+  .vfoot__mNote a.vfoot__office {
+    display: inline-flex
   }
 }
 
