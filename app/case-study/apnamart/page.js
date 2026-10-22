@@ -311,8 +311,8 @@ export default function ApnamartCaseStudy() {
               RESULT
             </div>
             <h2 className="cst-secH">
-              The Films in the campaign were made Social-Media First and, hence, brought
-              great results over both Social Media and Paid Channels.
+              The films in the campaign were made social-media-first, so they brought
+              great results on both social media and paid channels.
             </h2>
 
             <div className="cst-outStats">

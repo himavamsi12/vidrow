@@ -54,7 +54,7 @@ const FILMS = CAMPAIGNS["seekho-mandar-chandwadkar"].frames;
 const NUMBERS = [
   { val: "10x ROI" },
   { val: "9 weeks", desc: "Ads ran for 9 weeks straight with high performance" },
-  { val: "23%", desc: "Reduced CAC by 23%" },
+  { val: "23%", desc: "Reduced CAC by 30%" },
   { val: "1/5th", desc: "Nearly 1/5th of their total monthly ad spend was spent on only this Campaign for 2 months" },
 ];
 

@@ -43,14 +43,14 @@ export const CAMPAIGNS = {
   },
   "just-fake-it": {
     title: "Just Fake It",
-    by: "SyncMonster",
+    by: "DRAMA",
     about: "DRAMA turns requests for another take into a playful demo of AI expression editing. Creators and founders show how an uploaded performance\u2019s emotion can be adjusted with a click or slider.",
     frames: [
-      video("749ae13764daa82544648a618edbf168", "Just Fake It - SyncMonster, film 1"),
-      video("5d5344258125000e29e1acd9a6486939", "Just Fake It - SyncMonster, film 2"),
-      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake It - SyncMonster, film 3"),
-      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake It - SyncMonster, film 4"),
-      video("c0813173af097255a02abe7db752ecd5", "Just Fake It - SyncMonster, film 5"),
+      video("749ae13764daa82544648a618edbf168", "Just Fake It - DRAMA, film 1"),
+      video("5d5344258125000e29e1acd9a6486939", "Just Fake It - DRAMA, film 2"),
+      video("a0038a53e107363ca19b8c5705fc68de", "Just Fake It - DRAMA, film 3"),
+      video("b40f53a83d3531d1cc28d9a87d7e34b5", "Just Fake It - DRAMA, film 4"),
+      video("c0813173af097255a02abe7db752ecd5", "Just Fake It - DRAMA, film 5"),
     ],
   },
   "maximise": {

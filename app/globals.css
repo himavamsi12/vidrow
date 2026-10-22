@@ -2320,10 +2320,9 @@ html[data-hero-curtain] .hx-bar {
   color: #121212
 }
 
-/* the rule above the first card; every card draws its own under itself */
+/* no rule above the first card; every card draws its own under itself */
 .fw2-stack {
-  position: relative;
-  border-top: 1px solid #E4E4E4
+  position: relative
 }
 
 /* a card's height runs from its row to the full card, set by
@@ -10437,6 +10436,25 @@ button:focus-visible,
   display: block;
   width: 20px;
   height: 20px
+}
+
+/* an office: the pin beside the city, its full address underneath */
+.contact-link--addr {
+  align-items: flex-start;
+  width: auto;
+  max-width: 30em
+}
+
+.contact-addr {
+  display: grid;
+  gap: 4px;
+  padding-top: .35em
+}
+
+.contact-addr-text {
+  font-size: .86em;
+  line-height: 1.45;
+  color: var(--ink)
 }
 
 .contact-form {

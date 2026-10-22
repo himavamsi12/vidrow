@@ -95,7 +95,7 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
-            PlatinumRx scaled 3x in 3 months{" "}
+            PlatinumRx scaled 3X times in 2 months{" "}
             <br />
             through UGC &amp; Celebrity Performance
           </h1>

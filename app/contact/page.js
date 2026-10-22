@@ -25,12 +25,22 @@ const CONTACT_LINKS = [
     href: "mailto:contact@vidrow.in",
   },
   {
-    key: "location",
+    key: "bengaluru",
     tone: "acid",
     Icon: LocationIcon,
-    label: "View Maps",
-    // Sakti Statesman, Bengaluru
+    label: "Bengaluru",
+    address:
+      "6th Floor, Sakti Statesman, Marathahalli - Sarjapur Outer Ring Rd, Green Glen Layout, Bellandur, Bengaluru, Karnataka 560103",
     href: "https://www.google.com/maps/place/Sakti+Statesman/@12.9239742,77.6675882,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae1377b38e323f:0xde910e0686a4adac!8m2!3d12.9239742!4d77.6675882!16s%2Fg%2F11f3jg_5h3",
+  },
+  {
+    key: "mumbai",
+    tone: "violet",
+    Icon: LocationIcon,
+    label: "Mumbai",
+    address:
+      "WeWork Coworking, Malad, Rajan Pada, Mindspace, Malad West, Mumbai, Maharashtra 400064",
+    href: "https://www.google.com/maps/search/?api=1&query=WeWork+Mindspace+Malad+West+Mumbai+400064",
   },
 ];
 
@@ -54,10 +64,10 @@ export default function ContactPage() {
               </div>
 
               <div className="contact-links">
-                {CONTACT_LINKS.map(({ key, tone, Icon, label, href }) => (
+                {CONTACT_LINKS.map(({ key, tone, Icon, label, address, href }) => (
                   <a
                     key={key}
-                    className="contact-link"
+                    className={`contact-link${address ? " contact-link--addr" : ""}`}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -65,7 +75,14 @@ export default function ContactPage() {
                     <span className={`contact-link-icon contact-link-icon--${tone}`}>
                       <Icon />
                     </span>
-                    {label}
+                    {address ? (
+                      <span className="contact-addr">
+                        <span className="contact-addr-city">{label}</span>
+                        <span className="contact-addr-text">{address}</span>
+                      </span>
+                    ) : (
+                      label
+                    )}
                   </a>
                 ))}
               </div>

@@ -47,8 +47,8 @@ const STYLES = ["Street Interview", "Direct-to-Camera", "Testimonial", "Expert\u
 // the numbers: the square beside each label is yellow or lilac
 const STATS = [
   { label: "FATIGUE DURATION", val: "7 Weeks", desc: "even after 7 Weeks the campaign did not stop bringing good conversion rates", tone: "acid" },
-  { label: "CPL", val: "25% \u2193", desc: "for the first week", tone: "lilac" },
-  { label: "MAINTAINED A STEADY CPL", val: "15-20% \u2193", desc: "of 15-20% after the first week", tone: "acid" },
+  { label: "CPL", val: "23% \u2193", desc: "for the first week", tone: "lilac" },
+  { label: "MAINTAINED A STEADY CPL", val: "20% \u2193", desc: "after the first week", tone: "acid" },
 ];
 
 // CPL against time: a drop of about 24% in week 1, then settling near -12%.

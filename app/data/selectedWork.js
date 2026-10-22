@@ -60,7 +60,7 @@ export const SW_TABS = [
       ["Don\u2019t Just Dub!", "NeuralGarage", "visualdb.webp", "/campaign/dont-just-dub"],
       ["Stop testing your team", "GoCodeo", "gacodeo.webp", "/campaign/stop-testing-your-team"],
       ["WhatsApp Solved", "Periskope", "periscope.webp", "/campaign/whatsapp-solved"],
-      ["Just Fake It", "SyncMonster", "drama.webp", "/campaign/just-fake-it"],
+      ["Just Fake It", "DRAMA", "drama.webp", "/campaign/just-fake-it"],
       ["Not Just AI", "Kim.cc", "klim.cc.webp", "/campaign/not-just-ai"],
       ["Maximise", "Maxim", "maxim.webp", "/campaign/maximise"],
     ],

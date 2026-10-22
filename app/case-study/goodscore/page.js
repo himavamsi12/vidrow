@@ -236,9 +236,9 @@ export default function GoodscoreCaseStudy() {
             AND CHEAPER, TOO
           </div>
           <h2 className="cst-secH">
-            Conversions 15% cheaper.
+            Creative costs down 75%.
             <br />
-            Installs 41% cheaper.
+            Conversions and installs cost less, too.
           </h2>
 
           <div className="cgs-panel">

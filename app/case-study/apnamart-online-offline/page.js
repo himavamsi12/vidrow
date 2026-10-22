@@ -150,7 +150,7 @@ export default function ApnaMartOnlineOfflineCaseStudy() {
               and total order numbers.
             </h1>
             <p className="csk-note cao-note">
-              ApnaMart is an everyday grocery retail store chain operating in the eastern states of
+              ApnaMart is an everyday grocery retail store chain operating in eastern and central
               India (West Bengal, Jharkhand, Chhattisgarh). ApnaMart also provides 10-minute
               delivery of items through their mobile app.
             </p>
@@ -196,9 +196,9 @@ export default function ApnaMartOnlineOfflineCaseStudy() {
               </div>
               <div className="cao-headR">
                 <p>
-                  ApnaMart is an everyday grocery retail store chain operating in the eastern
-                  states of India (West Bengal, Jharkhand, Chhattisgarh). ApnaMart also provides 10
-                  minute delivery of items through their mobile app.
+                  ApnaMart is an everyday grocery retail store chain operating in eastern and
+                  central India (West Bengal, Jharkhand, Chhattisgarh). ApnaMart also provides
+                  10-minute delivery of items through their mobile app.
                 </p>
                 <p>
                   Only a few months before this pilot project had ApnaMart launched their online
