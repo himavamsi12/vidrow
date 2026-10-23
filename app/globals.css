@@ -22457,12 +22457,19 @@ main.csp .cap-pillars li:last-child {
   z-index: 900;
   right: 24px;
   bottom: 24px;
-  display: grid;
-  place-items: center;
-  width: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   height: 48px;
+  padding: 0 18px 0 14px;
   background: #F7F97A;
   color: #111;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
   box-shadow: 0 6px 18px rgba(0, 0, 0, .14);
   opacity: 0;
   visibility: hidden;
@@ -22493,7 +22500,8 @@ main.csp .cap-pillars li:last-child {
   .btt {
     right: 16px;
     bottom: 16px;
-    width: 44px;
-    height: 44px
+    height: 44px;
+    padding: 0 14px 0 12px;
+    font-size: 13px
   }
 }

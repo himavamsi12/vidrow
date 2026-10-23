@@ -33,6 +33,7 @@ export default function BackToTop() {
       <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
         <path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" stroke="currentColor" strokeWidth="1.8" />
       </svg>
+      <span className="btt-t">Back to top</span>
     </a>
   );
 }
