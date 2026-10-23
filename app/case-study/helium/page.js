@@ -191,7 +191,7 @@ const BUY_STEPS = [
   {
     stage: "Validation",
     title: "They go looking for proof",
-    desc: "YouTube reviews, Instagram profile, in someone else’s words, not the brand’s.",
+    desc: "YouTube reviews, Instagram profiles, and creator content help buyers validate the brand. Any paid partnerships are disclosed.",
     quote: "“Does anyone independent back this?”",
   },
   {
@@ -270,7 +270,7 @@ const CHANNELS_IN = [
   },
   {
     name: "YouTube Reviews",
-    desc: "Placed with creators, tracked on links. Third-party proof you can still count.",
+    desc: "Creator reviews tracked through links, providing third-party proof of brand credibility.",
   },
 ];
 

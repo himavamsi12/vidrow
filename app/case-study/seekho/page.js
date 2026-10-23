@@ -193,7 +193,7 @@ export default function SeekhoCaseStudy() {
           </h1>
           <p className="csk-note">
             We decided on a combination of celebrity and performance videos: Celebrity
-            Performance Video.
+            Performance Video, a combination that was never used before by anyone.
           </p>
         </div>
 

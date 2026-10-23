@@ -273,7 +273,7 @@ export default function VyaparCaseStudy() {
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.sequence} id="vyapar-sequence">
             <SectionLabel number="04">The Approach</SectionLabel>
-            <h2>Four moves. Executed in sequence.<br />Over five years.</h2>
+            <h2>Four moves. Executed in sequence.<br />Over six years.</h2>
             <div className={styles.sequenceGrid}>
               {SEQUENCE.map((item, index) => (
                 <article className={styles.sequenceCard} key={item.title}>
