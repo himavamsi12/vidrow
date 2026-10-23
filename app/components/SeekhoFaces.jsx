@@ -55,9 +55,12 @@ function Face({ face }) {
 export default function SeekhoFaces({ faces }) {
   return (
     <div className="csk-faces">
-      {faces.map((f) => (
-        <Face key={f.name} face={f} />
-      ))}
+      {/* a face shows once it has a film, never as an empty frame */}
+      {faces
+        .filter((f) => f.video)
+        .map((f) => (
+          <Face key={f.name} face={f} />
+        ))}
     </div>
   );
 }

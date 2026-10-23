@@ -67,7 +67,7 @@ const MOFU = [
   { video: "dc44bf8e719578e8ed1772c66a51e52d", alt: "VisualDub case study film 6" },
 ];
 
-// TODO: placeholder poster for the BoFu tech explainer until the film arrives
+// the BoFu film: the same film as the fifth MoFu tile, as the design has it
 const EXPLAINER = { video: "6d13affe10d12db0f8b56e4cc7483536", time: "3s" };
 
 // the side rail flips light-on-dark over the BoFu band
@@ -374,14 +374,14 @@ export default function VisualDubCaseStudy() {
             <h2 className="cst-secH">Tech Explainer Video</h2>
 
             <div className="cvd-bofuRow">
-              <span className="cvd-icpShot cvd-bofuShot">
+              <PlayFilm className="cvd-icpShot cvd-bofuShot" video={EXPLAINER.video} label="VisualDub tech explainer video">
                 <img
                   src={`${STREAM}/${EXPLAINER.video}/thumbnails/thumbnail.jpg?time=${EXPLAINER.time}&height=720`}
                   alt="VisualDub tech explainer video"
                   loading="lazy"
                 />
                 <span className="cvd-play" aria-hidden="true" />
-              </span>
+              </PlayFilm>
 
               <div className="cvd-bofuCopy">
                 <p>

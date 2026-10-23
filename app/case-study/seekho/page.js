@@ -52,14 +52,14 @@ const FILMS = CAMPAIGNS["seekho-mandar-chandwadkar"].frames;
 
 // the numbers behind the campaign
 const NUMBERS = [
-  { val: "10x ROI" },
+  { val: "90x", desc: "Ad spend on creative investment" },
   { val: "9 weeks", desc: "Ads ran for 9 weeks straight with high performance" },
-  { val: "23%", desc: "Reduced CAC by 30%" },
+  { val: "23%", desc: "Reduction in CAC" },
   { val: "1/5th", desc: "Nearly 1/5th of their total monthly ad spend was spent on only this Campaign for 2 months" },
 ];
 
 // the other faces the campaign was repeated with. `video` is a Cloudflare
-// Stream id; faces without one show an empty frame until their film is added.
+// Stream id; faces without one stay off the page until their film is added.
 const FACES = [
   { name: "Anup Soni", video: "27d821612014a64fe4c2818bdd798f85" },
   { name: "Mandar Chandwadkar 2" },
@@ -67,7 +67,7 @@ const FACES = [
   { name: "Manoj Joshi", video: "5892a5659d9d6b84b47781adc7664991" },
   { name: "Rohitashv Gour" },
   { name: "Naveen Kasturia", video: "79be8b74182f5a492e9dffaff4774126" },
-  { name: "Mandar Chandwadkar 3" },
+  { name: "Mandar Chandwadkar 3", video: "a98bcbcb8a6a854e580be2f1a76b0227" },
 ];
 
 // CAC over time, as drawn in the chart: points are [week, y] with y in the

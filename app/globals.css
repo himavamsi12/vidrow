@@ -17396,6 +17396,13 @@ html {
   color: #3A3A3A
 }
 
+/* the MoFu intro runs wider than the other side notes, as in the design */
+@media (min-width: 901px) {
+  .cvd-mofuCopy {
+    width: min(560px, 46%)
+  }
+}
+
 .cvd-mofuCap {
   margin-top: clamp(40px, 5vw, 64px);
   font-size: 11px
@@ -18643,6 +18650,19 @@ html.is-loading body {
 
 .csk-top .cst-h {
   margin: 0
+}
+
+/* GoodScore's headline holds its two lines on desktop; the note beside it
+   takes the width that's left */
+@media (min-width: 901px) {
+  .csk-top .cgs-h {
+    flex: none
+  }
+
+  .csk-top:has(.cgs-h) .csk-note {
+    flex: 0 1 auto;
+    min-width: 0
+  }
 }
 
 /* the side note, set off by a yellow rule */

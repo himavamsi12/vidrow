@@ -126,7 +126,7 @@ export default function PlatinumRxCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">3x scale in Reach</span>
+            <span className="csp-metaValue">3X scale in Reach</span>
           </div>
         </div>
       </div>

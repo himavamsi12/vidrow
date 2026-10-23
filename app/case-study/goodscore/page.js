@@ -91,10 +91,10 @@ export default function GoodscoreCaseStudy() {
 
       <div className="csp-in" id="csp-sec-hero">
         <div className="csk-top">
-          <h1 className="cst-h">
-            How Celebrity Performance
+          <h1 className="cst-h cgs-h">
+            How Celebrity Performance Ads
             <br />
-            Ads Helped GoodScore Scale
+            can increase Creative Efficiency
           </h1>
           <p className="csk-note">
             Same account. Same auction. Same scoreboard: cost per conversion. The celebrity won.
