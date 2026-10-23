@@ -305,7 +305,6 @@ export default function VisualDubCaseStudy() {
               <span className="cvd-icpShot cvd-shot cvd-shot--wide">
                 {/* TODO: placeholder — the campaign key art until the master film arrives */}
                 <img src="/casestudy%20images/visual-dub.webp" alt="Master video of all 3 ICPs" loading="lazy" />
-                <span className="cvd-play" aria-hidden="true" />
               </span>
               <figcaption>Master Video of all 3 ICPs</figcaption>
             </figure>
