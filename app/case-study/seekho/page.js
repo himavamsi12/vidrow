@@ -62,12 +62,17 @@ const NUMBERS = [
 // Stream id; faces without one stay off the page until their film is added.
 const FACES = [
   { name: "Anup Soni", video: "27d821612014a64fe4c2818bdd798f85" },
-  { name: "Mandar Chandwadkar 2" },
+  { name: "Mandar Chandwadkar" },
   { name: "Himani Shivpuri" },
   { name: "Manoj Joshi", video: "5892a5659d9d6b84b47781adc7664991" },
   { name: "Rohitashv Gour" },
-  { name: "Naveen Kasturia", video: "79be8b74182f5a492e9dffaff4774126" },
-  { name: "Mandar Chandwadkar 3", video: "a98bcbcb8a6a854e580be2f1a76b0227" },
+  { name: "Naveen Kasturia", video: "c296a4bd7dd8692eadc8ae9b2977f1f3", time: 28 },
+  // the rest of the Naveen Kasturia campaign (/campaign/seekho-naveen-kasturia)
+  { name: "Naveen Kasturia", video: "79be8b74182f5a492e9dffaff4774126", time: 2 },
+  { name: "Naveen Kasturia", video: "9fffd24edfcd6ae87f3759a37acbb3c3", time: 6 },
+  { name: "Naveen Kasturia", video: "30421abfab69530769975d47fb7bae6c", time: 24 },
+  { name: "Naveen Kasturia", video: "6c4751f502a4f3423b5ce536e6377990", time: 16 },
+  { name: "Mandar Chandwadkar", video: "a98bcbcb8a6a854e580be2f1a76b0227" },
 ];
 
 // CAC over time, as drawn in the chart: points are [week, y] with y in the

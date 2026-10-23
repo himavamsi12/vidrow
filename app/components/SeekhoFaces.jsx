@@ -23,7 +23,7 @@ function Face({ face }) {
     };
   }, [playing]);
 
-  const poster = face.video ? `${STREAM}/${face.video}/thumbnails/thumbnail.jpg?time=2s&height=900` : null;
+  const poster = face.video ? `${STREAM}/${face.video}/thumbnails/thumbnail.jpg?time=${face.time || 2}s&height=900` : null;
 
   const still = poster ? (
     <button type="button" className="csk-filmPlay" onClick={() => setPlaying(true)} aria-label={`Play video: ${face.name}`}>
@@ -59,7 +59,7 @@ export default function SeekhoFaces({ faces }) {
       {faces
         .filter((f) => f.video)
         .map((f) => (
-          <Face key={f.name} face={f} />
+          <Face key={f.video} face={f} />
         ))}
     </div>
   );
