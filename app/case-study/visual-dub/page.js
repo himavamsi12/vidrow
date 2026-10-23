@@ -106,9 +106,9 @@ export default function VisualDubCaseStudy() {
 
       <div className="csp-in" id="csp-sec-hero">
         <h1 className="cst-h">
-          Increase the Outbound Conversion. Generate
+          Neural Garage built a global brand
           <br />
-          high intent B2B Leads.
+          to Increase the Outbound Conversion
         </h1>
 
         <div className="cst-banner">
