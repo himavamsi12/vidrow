@@ -23,6 +23,16 @@ export function markNavJump() {
   markNavJump.t = setTimeout(() => delete root.dataset.navJump, 700);
 }
 
+// a nav jump lands a section's top edge at the top of the screen, under the
+// sticky nav. Sections marked data-nav-gap (Deep Dives) land just below the
+// nav instead, so their tag and heading show in full; the pinned sections
+// keep landing flush, where their animations expect them
+export function navJumpOffset(target) {
+  if (!target?.hasAttribute("data-nav-gap")) return 0;
+  const bar = document.querySelector(".hx-bar, .csp-nav");
+  return -(bar ? bar.getBoundingClientRect().height : 0);
+}
+
 function ContactButton({ className = "hx-contact", onClick }) {
   return (
     <a className={className} href="/contact" onClick={onClick}>
@@ -60,8 +70,9 @@ export default function SiteNav({ logoHref = "/" }) {
     // handler below)
     markNavJump();
     // straight to the section, no glide
-    if (lenis) lenis.scrollTo(target, { immediate: true, force: true });
-    else target.scrollIntoView({ behavior: "instant" });
+    const offset = navJumpOffset(target);
+    if (lenis) lenis.scrollTo(target, { immediate: true, force: true, offset });
+    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: "instant" });
   };
 
   // the menu is a full-screen overlay, so lock the page behind it while open

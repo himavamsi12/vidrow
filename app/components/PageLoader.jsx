@@ -85,7 +85,7 @@ export default function PageLoader() {
       // whatever happened behind the loader (a scroll before the lock took
       // hold, the browser restoring an old position), the site opens at its
       // top, unless the address points at a section
-      if (!window.location.hash) {
+      if (!window.location.hash && !document.documentElement.dataset.sectionJump) {
         window.scrollTo(0, 0);
         lenisRef.current?.scrollTo(0, { immediate: true, force: true });
       }

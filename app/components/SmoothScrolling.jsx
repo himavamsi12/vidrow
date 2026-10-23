@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { markNavJump } from "./SiteNav";
+import { markNavJump, navJumpOffset } from "./SiteNav";
 
 // one constant glide for the whole page: a slightly lower lerp eases every
 // wheel tick out a touch longer, and nothing on the page stops or snaps it
@@ -50,9 +50,13 @@ export default function SmoothScrolling({ children }) {
     if (target) {
       // arriving on a section from another page's nav keeps the nav showing
       markNavJump();
+      // and tells the first-visit loader not to put the page back at the
+      // top when it lifts (the #hash it checks is dropped below)
+      document.documentElement.dataset.sectionJump = "1";
       // land on the section before the first paint, so there is no flash of
       // the top of the page and no visible scroll
-      target.scrollIntoView({ behavior: "instant" });
+      const offset = navJumpOffset(target);
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: "instant" });
       // give Lenis a tick to attach before handing it the jump, so it isn't
       // left thinking the page is still at 0 and fighting the next real
       // scroll — falls back to a plain jump if it isn't ready yet. A plain
@@ -61,11 +65,39 @@ export default function SmoothScrolling({ children }) {
       // leaving the page stuck at the top instead of landing on the target.
       setTimeout(() => {
         const lenis = lenisRef.current?.lenis;
-        if (lenis) lenis.scrollTo(target, { immediate: true });
-        else target.scrollIntoView();
+        if (lenis) lenis.scrollTo(target, { immediate: true, offset });
+        else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: "instant" });
         // drop the hash once landed, so a reload starts back at the hero
         window.history.replaceState(null, "", window.location.pathname + window.location.search);
       }, 0);
+
+      // a section that lands below the nav (offset) sits inside the section
+      // above it, so the browser no longer holds it in place while the
+      // sections above settle their heights: keep putting it back under the
+      // nav until the layout settles or the visitor scrolls themselves
+      if (offset) {
+        const land = () => {
+          const y = target.getBoundingClientRect().top + window.scrollY + offset;
+          const lenis = lenisRef.current?.lenis;
+          if (lenis) {
+            lenis.resize();
+            lenis.scrollTo(y, { immediate: true, force: true });
+          } else window.scrollTo({ top: y, behavior: "instant" });
+        };
+        const ro = new ResizeObserver(land);
+        ro.observe(document.body);
+        const stop = () => {
+          ro.disconnect();
+          clearTimeout(timer);
+          ["wheel", "touchstart", "keydown", "pointerdown"].forEach((t) =>
+            window.removeEventListener(t, stop)
+          );
+        };
+        const timer = setTimeout(stop, 2500);
+        ["wheel", "touchstart", "keydown", "pointerdown"].forEach((t) =>
+          window.addEventListener(t, stop, { passive: true })
+        );
+      }
       return;
     }
 

@@ -172,7 +172,7 @@ export function DeepDiveCards({ exclude, embed = false }) {
 
 export default function CaseStudies() {
   return (
-    <section className="cs" id="deepdive">
+    <section className="cs" id="deepdive" data-nav-gap>
       <Reveal className="cs-head">
         <div className="cs-tagwrap">
           <span className="cs-tag">Case Study</span>
