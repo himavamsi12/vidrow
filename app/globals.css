@@ -3555,6 +3555,15 @@ html[data-hero-curtain] .hx-bar {
   margin: 8px 0 0
 }
 
+/* a lever's copy can fix its desktop lines with \n in the data; each
+   line holds whole, phones let the lines run on as one paragraph */
+@media (min-width: 901px) {
+  .lev-col p .lev-line {
+    display: block;
+    white-space: nowrap
+  }
+}
+
 /* the labels under the pieces give too, on the same terms as the heading
    above them — the slot itself is sized by Levers.jsx, which scales the
    settled pieces by the stage's own height (the values here are only what

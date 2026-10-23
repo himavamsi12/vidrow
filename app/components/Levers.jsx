@@ -313,7 +313,16 @@ export default function Levers() {
         <br className="lev-br" />
         {pc.lever.slice(pc.lever.lastIndexOf(" ") + 1)}
       </h3>
-      <p>{pc.copy}</p>
+      <p>
+        {pc.copy.includes("\n")
+          ? pc.copy.split("\n").map((l, k) => (
+              <span className="lev-line" key={k}>
+                {k ? " " : ""}
+                {l}
+              </span>
+            ))
+          : pc.copy}
+      </p>
     </div>
   );
 
