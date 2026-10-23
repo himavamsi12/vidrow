@@ -22614,3 +22614,13 @@ main.csp .cap-pillars li:last-child {
     padding: 64px 0
   }
 }
+
+/* Masai's flow: the text in every yellow box sits in the centre of its box,
+   the source boxes on the left and the outcomes on the right alike */
+.csp--masai .csp-flow-box--yellow {
+  text-align: center
+}
+
+.csp--masai .csp-flow-outcomes {
+  text-align: center
+}
