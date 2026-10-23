@@ -265,12 +265,16 @@ export default function Footer({ hideCta = false, hideContactCta = false }) {
                 <br />
                 people don&rsquo;t skip
               </p>
-              {/* the legal links stay on phones, under the copyright line */}
               <p className="vfoot__mNote vfoot__mNote--r">
                 <OfficeLinks />
-                <br />
+              </p>
+              {/* phones: the copyright and the legal links on one centred line
+                  under the two notes */}
+              <p className="vfoot__mNote vfoot__mLegal">
                 © 2026. All rights reserved.
-                <br />
+                <span className="vfoot__dot" aria-hidden="true">
+                  {" · "}
+                </span>
                 <a href="/privacy-policy">Privacy</a>
                 <span className="vfoot__dot" aria-hidden="true">
                   {" · "}

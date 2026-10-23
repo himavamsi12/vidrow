@@ -11657,8 +11657,16 @@ button:focus-visible,
   }
 
   .vfoot__bottomRow {
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between
+  }
+
+  /* the copyright and legal links: their own centred line under the notes */
+  .vfoot__mLegal {
+    flex: 0 0 100%;
+    text-align: center;
+    white-space: nowrap
   }
 
   .vfoot__mNote {
