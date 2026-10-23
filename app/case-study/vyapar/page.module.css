@@ -1498,15 +1498,27 @@
   }
 }
 
-/* the testimonial quote at 18px */
+/* the testimonial a size up: the quote at 20px, its name and role with it */
 .testimonialQuote > p {
-  max-width: 470px;
-  font-size: 18px;
+  max-width: 520px;
+  font-size: 20px;
+}
+
+.testimonialQuote footer b {
+  font-size: 22px;
+}
+
+.testimonialQuote footer span {
+  font-size: 14px;
 }
 
 @media (max-width: 760px) {
   .testimonialQuote > p {
-    font-size: 16px;
+    font-size: 17px;
+  }
+
+  .testimonialQuote footer b {
+    font-size: 20px;
   }
 }
 
