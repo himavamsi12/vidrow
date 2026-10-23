@@ -10453,12 +10453,7 @@ button:focus-visible,
   height: 36px;
   display: grid;
   place-items: center;
-  flex: none;
-  transition: transform .25s var(--btn-ease)
-}
-
-.contact-link:hover .contact-link-icon {
-  transform: translateX(4px)
+  flex: none
 }
 
 .contact-link-icon--acid {
