@@ -85,7 +85,7 @@ export const FEATURED_WORK = [
     category: "grexa.ai",
     solo: true,
     photos: [{ src: "/featured%20works/Narendra%20Agrawal.webp", cls: "fw-ph fw-phSolo" }],
-    plates: [{ name: "Narendra Agarwal", role: "CMO", company: "Grexa", cls: "fw-plate1 fw-plateSolo" }],
+    plates: [{ name: "Narendra Agarwal", role: "Founder & CMO", company: "Grexa", cls: "fw-plate1 fw-plateSolo" }],
     quote:
       "**Six years. Two startups. Vidrow has been with us through both.** From 2020 to 2023, they were deep in the trenches with us at Testbook, executing campaigns across categories and helping launch new ones. They weren\u2019t just an agency - they were partners we relied on.\n\nWhen we started Grexa AI, Vidrow was our first call for marketing. What sets them apart is their ability to understand the business, technology, and audience - and turn that into campaigns that deliver.\n\nSix years in, the partnership only keeps getting stronger.",
     line: "Grexa's network crosses 500,000+ business owners in a year",
