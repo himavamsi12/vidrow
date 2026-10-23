@@ -399,10 +399,10 @@ export default function VyaparCaseStudy() {
               </div>
               <div className={styles.takeawayCopy}>
                 <p>
-                  This work was brand marketing only, not a rupee of performance spend. Built as a
+                  This was brand marketing only, not a rupee of performance spend. Built as a
                   sequence: name the category, give it a face, stand for the owner, never let
-                  go. It did what reach alone can’t: make Vyapar the name the category answers
-                  to.
+                  go. It did what reach alone can’t: it made Vyapar the name the category
+                  answers to.
                 </p>
                 <b>Six years on, the search engine, the app store and the competition all agree.</b>
               </div>
