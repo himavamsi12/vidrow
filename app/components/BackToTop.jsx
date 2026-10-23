@@ -30,8 +30,9 @@ export default function BackToTop() {
       aria-label="Back to top"
       tabIndex={shown ? 0 : -1}
     >
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" stroke="currentColor" strokeWidth="1.8" />
+      {/* the violet staircase mark the site's buttons carry */}
+      <svg viewBox="10 10 20 20" aria-hidden="true">
+        <path fill="var(--violet)" d="M10 10 H30 V30 H23.333 V23.333 H16.667 V16.667 H10 Z" />
       </svg>
       <span className="btt-t">Back to top</span>
     </a>
