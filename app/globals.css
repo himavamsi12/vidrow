@@ -22453,3 +22453,52 @@ main.csp .cap-pillars li:last-child {
   outline: 2px solid var(--violet);
   outline-offset: 2px
 }
+
+/* case studies: Back to top, pinned bottom right once the reader has
+   scrolled past the first screen (see BackToTop.jsx). Acid so it reads on
+   the white pages and the black footer alike */
+.btt {
+  position: fixed;
+  z-index: 900;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #F7F97A;
+  color: #111;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s, background-color .2s ease
+}
+
+.btt.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .3s ease, transform .3s ease, visibility 0s, background-color .2s ease
+}
+
+.btt svg {
+  width: 18px;
+  height: 18px;
+  flex: none
+}
+
+@media (hover: hover) {
+  .btt:hover {
+    background: #FBE556
+  }
+}
+
+@media (max-width: 900px) {
+  .btt {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px
+  }
+}
