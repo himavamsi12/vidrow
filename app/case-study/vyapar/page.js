@@ -3,6 +3,7 @@ import SiteNav from "../../components/SiteNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
 import CspCoverflow from "../../components/CspCoverflow";
 import CspSectionNav from "../../components/CspSectionNav";
+import { PlayFilm } from "../../components/FilmLightbox";
 import SwipeCarousel from "../../components/SwipeCarousel";
 import styles from "./page.module.css";
 
@@ -84,20 +85,22 @@ const EARLY_FILMS = [
   { src: "/casestudy-vyapar/campaign-03.webp", alt: "Vyapar campaign film featuring a business owner" },
 ];
 
+// each film's Stream video, from the Vyapar campaign pages (/campaign/vyapar,
+// /campaign/vyapari-ko-salam); a still plays its film on this page
 const TRUST_FILMS = [
-  { src: "/casestudy-vyapar/film-01.webp", alt: "Manoj Joshi in a Vyapar campaign film" },
-  { src: "/casestudy-vyapar/film-02.webp", alt: "A character from the Vyapar business campaign" },
-  { src: "/casestudy-vyapar/film-03.webp", alt: "A shop owner in a Vyapar campaign film" },
-  { src: "/casestudy-vyapar/hero.webp", alt: "A family watches a Vyapar campaign film" },
+  { video: "5892a5659d9d6b84b47781adc7664991", src: "/casestudy-vyapar/film-01.webp", alt: "Manoj Joshi in a Vyapar campaign film" },
+  { video: "c5183e74e4233770bd96ec0b0ada5c0f", src: "/casestudy-vyapar/film-02.webp", alt: "A character from the Vyapar business campaign" },
+  { video: "8a869636f24364c7ecfe0370b2a5e04d", src: "/casestudy-vyapar/film-03.webp", alt: "A shop owner in a Vyapar campaign film" },
+  { video: "3a1fe7a7c49a99b2257b49048fdfd7b7", src: "/casestudy-vyapar/hero.webp", alt: "A family watches a Vyapar campaign film" },
 ];
 
 const COMMUNITY_FILMS = [
-  { src: "/casestudy-vyapar/story-01.webp", alt: "A woman in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-02.webp", alt: "An older business owner in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-03.webp", alt: "A young woman in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-04.webp", alt: "A character in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-05.webp", alt: "A bride in a Vyapar community campaign" },
-  { src: "/casestudy-vyapar/story-06.webp", alt: "A woman reacts in a Vyapar community campaign" },
+  { video: "440166288a851690e221e9deb72a6428", src: "/casestudy-vyapar/story-01.webp", alt: "A woman in a Vyapar community campaign" },
+  { video: "aa9c5074c01a2ccba6c86d6dfcfc091e", src: "/casestudy-vyapar/story-02.webp", alt: "An older business owner in a Vyapar community campaign" },
+  { video: "7ba43a25ac04a549cd9dc5d24a618c4d", src: "/casestudy-vyapar/story-03.webp", alt: "A young woman in a Vyapar community campaign" },
+  { video: "74de7464cae6aeffe53df5637d155b9f", src: "/casestudy-vyapar/story-04.webp", alt: "A character in a Vyapar community campaign" },
+  { video: "69465cc384da1c7a6a259b40ff80b91d", src: "/casestudy-vyapar/story-05.webp", alt: "A bride in a Vyapar community campaign" },
+  { video: "40993c3cc3b779c6badee38305ef7bca", src: "/casestudy-vyapar/story-06.webp", alt: "A woman reacts in a Vyapar community campaign" },
 ];
 
 const AUTHORITY_STATS = [
@@ -132,19 +135,14 @@ function FilmStrip({ films, className = "" }) {
   return (
     <div className={`${styles.filmStrip} ${className}`}>
       {films.map((film) => (
-        <a
-          className={styles.film}
-          href="/campaign/vyapar"
-          aria-label={`Watch ${film.alt}`}
-          key={film.src}
-        >
+        <PlayFilm className={styles.film} video={film.video} label={film.alt} key={film.src}>
           <img src={film.src} alt={film.alt} loading="lazy" />
           <span className={styles.play} aria-hidden="true">
             <svg viewBox="0 0 40 40">
               <path d="M15 11.5 29 20 15 28.5z" />
             </svg>
           </span>
-        </a>
+        </PlayFilm>
       ))}
     </div>
   );
@@ -335,7 +333,7 @@ export default function VyaparCaseStudy() {
             </p>
             <span className={styles.campaignCaption}>Click on the image below to view the campaign</span>
             <div className={styles.earlyCover}>
-              <CspCoverflow slides={EARLY_FILMS} start={1} href="/campaign/vyapar" />
+              <CspCoverflow slides={EARLY_FILMS} start={1} />
             </div>
           </section>
         </div>

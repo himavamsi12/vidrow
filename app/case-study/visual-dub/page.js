@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
+import { PlayFilm } from "../../components/FilmLightbox";
 import { DeepDiveCards } from "../../components/CaseStudies";
 
 export const metadata = {
@@ -205,14 +206,14 @@ export default function VisualDubCaseStudy() {
               <div className="cvd-icpRow">
                 {ICPS.map((icp) => (
                   <figure className="cvd-icp" key={icp.label}>
-                    <span className="cvd-icpShot">
+                    <PlayFilm className="cvd-icpShot" video={icp.video} label={`${icp.label} film`}>
                       <img
                         src={`${STREAM}/${icp.video}/thumbnails/thumbnail.jpg?time=${icp.time}&height=600`}
                         alt={`Video still: ${icp.label}`}
                         loading="lazy"
                       />
                       <span className="cvd-play" aria-hidden="true" />
-                    </span>
+                    </PlayFilm>
                     <figcaption>{icp.label}</figcaption>
                   </figure>
                 ))}
@@ -287,14 +288,14 @@ export default function VisualDubCaseStudy() {
             <figure className="cvd-mediaItem">
               <div className="cvd-trio">
                 {LAUNCH_ICPS.map((v) => (
-                  <span className="cvd-icpShot cvd-shot" key={v.alt}>
+                  <PlayFilm className="cvd-icpShot cvd-shot" video={v.video} label={v.alt} key={v.alt}>
                     <img
                       src={`${STREAM}/${v.video}/thumbnails/thumbnail.jpg?time=${v.time}&height=600`}
                       alt={v.alt}
                       loading="lazy"
                     />
                     <span className="cvd-play" aria-hidden="true" />
-                  </span>
+                  </PlayFilm>
                 ))}
               </div>
               <figcaption>3 Videos: one of each ICP</figcaption>
@@ -350,14 +351,14 @@ export default function VisualDubCaseStudy() {
           <span className="cst-pmfCap cvd-mofuCap">Below are the videos from this MoFu campaign:</span>
           <div className="cvd-mofuGrid">
             {MOFU.map((v) => (
-              <span className="cvd-icpShot cvd-mofuShot" key={v.video}>
+              <PlayFilm className="cvd-icpShot cvd-mofuShot" video={v.video} label={v.alt} key={v.video}>
                 <img
                   src={`${STREAM}/${v.video}/thumbnails/thumbnail.jpg?time=3s&height=600`}
                   alt={v.alt}
                   loading="lazy"
                 />
                 <span className="cvd-play" aria-hidden="true" />
-              </span>
+              </PlayFilm>
             ))}
           </div>
         </section>

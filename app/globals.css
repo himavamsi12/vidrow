@@ -17859,8 +17859,15 @@ html {
 
 .cap-film {
   display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
   color: #111;
-  text-decoration: none
+  text-align: left;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer
 }
 
 /* each tile shows one fifth of the hero image (its five scenes side by side) */
@@ -22503,5 +22510,77 @@ main.csp .cap-pillars li:last-child {
     height: 44px;
     padding: 0 14px 0 12px;
     font-size: 13px
+  }
+}
+
+/* a still that plays its film (see FilmLightbox.jsx) is a button that
+   otherwise looks like the tile it replaced: zero specificity, so the tile's
+   own classes win */
+:where(.film-btn) {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer
+}
+
+/* a film played over the page (see FilmLightbox.jsx): a dimmed backdrop and
+   the film centred at 16:9, as large as the screen allows */
+.film-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 64px 24px;
+  background: rgba(10, 10, 10, .88);
+  animation: film-lb-in .25s ease
+}
+
+@keyframes film-lb-in {
+  from {
+    opacity: 0
+  }
+}
+
+.film-lb-box {
+  width: min(100%, 1200px, (100vh - 128px) * 16 / 9);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden
+}
+
+.film-lb-box--tall {
+  width: min(100%, 480px, (100vh - 128px) * 9 / 16);
+  aspect-ratio: 9 / 16
+}
+
+.film-lb-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: #F7F97A;
+  color: #111;
+  cursor: pointer
+}
+
+.film-lb-close svg {
+  width: 18px;
+  height: 18px
+}
+
+@media (max-width: 640px) {
+  .film-lb {
+    padding: 64px 0
   }
 }

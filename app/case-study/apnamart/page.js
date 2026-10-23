@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
+import FilmLightbox from "../../components/FilmLightbox";
 
 export const metadata = {
   title: "ApnaMart - Case Study | Vidrow",
@@ -62,12 +63,13 @@ const SCRIPT_CHOICES = [
 
 // 04: the five films, each poster cropped from its panel of the hero image
 // (the five scenes sit side by side in it); they open the campaign page
+// each film's Stream video, from the ApnaMart campaign page (/campaign/apnamart)
 const FILMS = [
-  "High Quality",
-  "Hunting Discounts",
-  "Huge Variety",
-  "Free Delivery by ApnaMart",
-  "Quality Obsession and Inspection",
+  { label: "High Quality", video: "f7d99955fde4bd4fa2b020ebaf4f461f" },
+  { label: "Hunting Discounts", video: "2a943c2a25a2f0e385e48fb2c78c5af5" },
+  { label: "Huge Variety", video: "95a9e8494eedf78dc80f1f26247e94da" },
+  { label: "Free Delivery by ApnaMart", video: "7fff47a3392285a788b5c09a3e0e67ed" },
+  { label: "Quality Obsession and Inspection", video: "42d0d1564b3b5b27352749f7fab1f42e" },
 ];
 
 // 05: the results, swatches alternating acid / lilac
@@ -289,16 +291,14 @@ export default function ApnamartCaseStudy() {
             with the highlighted Qualities and Services
           </h2>
 
-          <div className="cap-filmRow">
-            {FILMS.map((label, i) => (
-              <a className="cap-film" href="/campaign/fayda-uthaao" key={label}>
-                <span className="cap-filmShot" style={{ "--i": i }} role="img" aria-label={`${label} film`}>
-                  <span className="cvd-play" aria-hidden="true" />
-                </span>
-                <span className="cap-filmLabel">{label}</span>
-              </a>
-            ))}
-          </div>
+          {/* each film plays here on the page, over it */}
+          <FilmLightbox
+            films={FILMS}
+            className="cap-filmRow"
+            tileClass="cap-film"
+            shotClass="cap-filmShot"
+            labelClass="cap-filmLabel"
+          />
         </section>
       </div>
 
