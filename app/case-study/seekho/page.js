@@ -71,7 +71,6 @@ const FACES = [
   { name: "Naveen Kasturia", video: "79be8b74182f5a492e9dffaff4774126", time: 2 },
   { name: "Naveen Kasturia", video: "9fffd24edfcd6ae87f3759a37acbb3c3", time: 6 },
   { name: "Naveen Kasturia", video: "30421abfab69530769975d47fb7bae6c", time: 24 },
-  { name: "Naveen Kasturia", video: "6c4751f502a4f3423b5ce536e6377990", time: 16 },
   { name: "Mandar Chandwadkar", video: "a98bcbcb8a6a854e580be2f1a76b0227" },
 ];
 
