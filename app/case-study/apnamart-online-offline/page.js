@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
+import { PlayFilm } from "../../components/FilmLightbox";
 
 export const metadata = {
   title: "ApnaMart (Online + Offline) - Case Study | Vidrow",
@@ -10,6 +11,15 @@ export const metadata = {
 };
 
 const ASSETS = "/casestudy%20images/casestudy-apnamart-online";
+const STREAM = "https://customer-np97ccync4jeshuk.cloudflarestream.com";
+
+// the awareness films, from the Fayda Uthaiye campaign page
+// (/campaign/fayda-uthaao); `time` is the moment each tile's still is taken from
+const AWARE_FILMS = [
+  { video: "4d3a295d434093fb8744e26fb36e3b66", time: "25s", alt: "ApnaMart Fayda Uthaiye film 1" },
+  { video: "b9bef7e9a05e8175bd43c6eddd74a664", time: "16s", alt: "ApnaMart Fayda Uthaiye film 2" },
+  { video: "e43b93aa9f90f9faf8992f181cc0ae87", time: "12s", alt: "ApnaMart Fayda Uthaiye film 5" },
+];
 
 const SECTIONS = [
   { id: "csp-sec-hero", label: "Overview" },
@@ -412,13 +422,15 @@ export default function ApnaMartOnlineOfflineCaseStudy() {
             <ChipList items={PHASE_3_COMMS} />
 
             <div className="cao-aware">
-              {[1, 2, 3].map((n) => (
-                <img
-                  key={n}
-                  src={`${ASSETS}/aware-${n}.webp`}
-                  alt={`ApnaMart digital awareness video, scene ${n}`}
-                  loading="lazy"
-                />
+              {AWARE_FILMS.map((f) => (
+                <PlayFilm className="cao-awareShot" video={f.video} label={f.alt} tall key={f.video}>
+                  <img
+                    src={`${STREAM}/${f.video}/thumbnails/thumbnail.jpg?time=${f.time}&height=900`}
+                    alt={f.alt}
+                    loading="lazy"
+                  />
+                  <span className="cvd-play" aria-hidden="true" />
+                </PlayFilm>
               ))}
             </div>
           </section>

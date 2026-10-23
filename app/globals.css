@@ -21573,10 +21573,21 @@ html.is-loading body {
   margin-top: clamp(32px, 4vw, 52px)
 }
 
-.cao-aware img {
+/* each tile is a still from a (vertical) Fayda Uthaiye film, cropped to the
+   row's landscape shape, that plays its film over the page */
+.cao-awareShot {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 602 / 326;
+  background: #111
+}
+
+.cao-awareShot img {
   display: block;
   width: 100%;
-  height: auto
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%
 }
 
 /* Apnamart: Results */
