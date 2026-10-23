@@ -930,7 +930,7 @@ export default function HeliumCaseStudy() {
               </div>
               <h2 className="csp-hl-rh">One last leg of convincing was left.</h2>
               <p className="csp-reviews-lead">
-                We placed reviews with YouTube creators before we even hit the market.
+                We seeded ‘organic’ reviews on YouTube before we even hit the market.
               </p>
               <p>
                 In April, a buyer had nothing to go on. No ratings to read. Nobody in the building
@@ -946,7 +946,7 @@ export default function HeliumCaseStudy() {
                 <b>186k+</b>
                 <span>
                   views, all high-intent. This is a review, not content: views climbed as
-                  sales climbed.
+                  sales climbed, which is the correlation.
                 </span>
               </div>
 
