@@ -1,7 +1,7 @@
 export const STAGES = [
   {
     title: "Get to PMF Fast",
-    copy: "We design structured performance marketing experiments across product features, pricing hypotheses, and audience segments. Each campaign is a controlled test, generating precise signals on what converts, what retains, and what scales. We systematically analyse the data and help reach scalable audience cohorts fit for your product.",
+    copy: "We design structured performance marketing experiments across product features, pricing hypotheses, and audience segments to help you achieve PMF fast. Each campaign is a controlled test, generating signals on what converts, what retains, and what scales. We systematically analyse the data, isolate the winning variables, and shift budgets dynamically towards the cohorts and features showing the strongest pull from paying audiences.\n\nThe result is a repeatable growth engine, sharper product-market insights, and a clear playbook for where to scale next.",
     stat: "1 Month",
     quote:
       "A health tech startup that built its first 10,000-subscriber base before a single rupee was spent on ads.",
