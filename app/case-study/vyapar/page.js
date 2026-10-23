@@ -21,7 +21,6 @@ const SECTIONS = [
   { id: "vyapar-early-adopters", label: "Name It" },
   { id: "vyapar-trust", label: "Give It a Face" },
   { id: "vyapar-community", label: "Stand for Owner" },
-  { id: "vyapar-proof", label: "The Proof" },
   { id: "vyapar-takeaway", label: "The Takeaway" },
   { id: "vyapar-testimonial", label: "In Their Words" },
 ];
@@ -119,39 +118,6 @@ const AUTHORITY_STATS = [
   },
 ];
 
-const PROOF = [
-  {
-    label: "Reach",
-    value: "200 Mn+",
-    copy: "Views on a single campaign video. Organically.",
-  },
-  {
-    label: "Scale",
-    value: "1 Cr+",
-    copy: "Businesses on the platform. Up from 1 Mn at the start.",
-  },
-  {
-    label: "Search",
-    value: "#1",
-    copy: "Vyapar ranks for “best GST billing software India”. Brand now equals category.",
-  },
-  {
-    label: "Store",
-    value: "4.8★",
-    copy: "Google Play rating across 1.9 lakh reviews. Scale without dilution.",
-  },
-  {
-    label: "Rivals",
-    value: "9+",
-    copy: "Competitors now run “Vyapar alternative” pages. They define themselves against Vyapar.",
-  },
-  {
-    label: "Expansion",
-    value: "2025",
-    copy: "Vyapar acquired Suvit and relaunched as Vyapar TaxOne, and the name now stretches to CAs.",
-  },
-];
-
 function SectionLabel({ number, children, light = false }) {
   return (
     <p className={`${styles.sectionLabel}${light ? ` ${styles.sectionLabelLight}` : ""}`}>
@@ -195,7 +161,7 @@ export default function VyaparCaseStudy() {
 
         <CspSectionNav
           sections={SECTIONS}
-          darkSectionIds={["vyapar-early-adopters", "vyapar-proof"]}
+          darkSectionIds={["vyapar-early-adopters"]}
         />
 
         <div className={`csp-in ${styles.heroWrap}`}>
@@ -425,38 +391,10 @@ export default function VyaparCaseStudy() {
         </div>
 
         <div className={`csp-in ${styles.contentWrap}`}>
-          <section className={styles.proof} id="vyapar-proof">
-            <SectionLabel number="09" light>The Proof · Where Vyapar Stands in 2026</SectionLabel>
-            <h2>The market rearranged itself{" "}<br />around the brand we built.</h2>
-            <div className={styles.proofGrid}>
-              {PROOF.map((item) => (
-                <article className={styles.proofCard} key={item.label}>
-                  <span className={styles.proofLabel}>
-                    <i aria-hidden="true" />
-                    {item.label}
-                  </span>
-                  <b className={styles.proofValue}>
-                    {/* the unit after the figure (Mn+, Cr+, the star) is its
-                        own span so phones can set it smaller */}
-                    {item.value.replace(/\s*(Mn\+|Cr\+|★)$/, "")}
-                    {item.value.match(/\s*(Mn\+|Cr\+|★)$/) && (
-                      <span className={`${styles.proofUnit}${item.value.endsWith("★") ? ` ${styles.proofStar}` : ""}`}>
-                        {item.value.match(/\s*(Mn\+|Cr\+|★)$/)[0]}
-                      </span>
-                    )}
-                  </b>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.takeaway} id="vyapar-takeaway">
             <div className={styles.takeawayHead}>
               <div>
-                <SectionLabel number="10">The Takeaway</SectionLabel>
+                <SectionLabel number="09">The Takeaway</SectionLabel>
                 <h2>Authority compounds.</h2>
               </div>
               <div className={styles.takeawayCopy}>
@@ -483,7 +421,7 @@ export default function VyaparCaseStudy() {
 
         <div className={`csp-in ${styles.contentWrap}`}>
           <section className={styles.testimonial} id="vyapar-testimonial">
-            <SectionLabel number="11">In Their Words</SectionLabel>
+            <SectionLabel number="10">In Their Words</SectionLabel>
             <h2>“Vidrow has been our go-to partner{" "}<br />for any marketing efforts.”</h2>
             <div className={styles.testimonialGrid}>
               <blockquote className={styles.testimonialQuote}>
