@@ -191,7 +191,7 @@ const BUY_STEPS = [
   {
     stage: "Validation",
     title: "They go looking for proof",
-    desc: "YouTube reviews, Instagram profiles, and creator content help buyers validate the brand. Any paid partnerships are disclosed.",
+    desc: "YouTube reviews, Instagram profile, in someone else’s words, from people the brand does not pay.",
     quote: "“Does anyone independent back this?”",
   },
   {

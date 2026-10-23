@@ -109,10 +109,12 @@ export default function WhereYouAreNow() {
       }
       const vh = vhPin;
       const h = sticky.offsetHeight;
-      // one and a half screens of scrolling per stage, except the first,
-      // which is already open on arrival and so only needs a short stretch
-      const first = Math.round(vh * 0.7);
-      const per = Math.round(vh * 1.5);
+      // about one swipe per stage, the same pace as the testimonial cards
+      // above (a new card every ~0.8 screen), so the page doesn't seem to
+      // stall here; the first stage is already open on arrival and so only
+      // needs a short stretch
+      const first = Math.round(vh * 0.4);
+      const per = Math.round(vh * 0.8);
       const span = first + per * (n - 1);
       // centred when it fits. When it doesn't, it's bottom-aligned — but
       // never pinned higher than the dark panel's own top, so the section
