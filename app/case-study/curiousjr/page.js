@@ -139,9 +139,7 @@ export default function CuriousJrCaseStudy() {
       <div className="csp-in" id="csp-sec-hero">
         <div className="csk-top">
           <h1 className="cst-h">
-            Reduce their CPL.
-            <br />
-            Generate Quality Leads.
+            CuriousJr scaled performance marketing to 5X at a lower CPL.
           </h1>
           <p className="csk-note">
             PW CuriousJr is an online education platform that resembles a modern way of the

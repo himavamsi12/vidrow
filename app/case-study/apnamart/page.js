@@ -116,9 +116,9 @@ export default function ApnamartCaseStudy() {
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
-            Strengthen brand recall{" "}
+            Staples became the Hero{" "}
             <br className="cap-br" />
-            around Staples.
+            Category for ApnaMart
           </h1>
           <p className="csp-note cap-note">
             An everyday grocery retail chain and quick commerce platform expanding rapidly across
