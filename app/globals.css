@@ -20522,6 +20522,17 @@ html.is-loading body {
   border-radius: 0
 }
 
+/* CuriousJr: the celebrity performance ads, six films in a row, rounded
+   like the video style films above them */
+.ccj-celeb {
+  grid-template-columns: repeat(6, minmax(0, 1fr))
+}
+
+/* the films are 9:16, so the card is too: no black bars while one plays */
+.ccj-celeb .csk-film {
+  aspect-ratio: 9 / 16
+}
+
 /* Apnamart: body copy at 16px, phase titles a shade lighter, no rule under
    the last row of a list (scoped under .cao to outrank the Apnamart block,
    which sits further down this file) */

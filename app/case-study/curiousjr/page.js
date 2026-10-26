@@ -44,6 +44,16 @@ const COMMS = [
 const STYLE_FILMS = CAMPAIGNS["curiousjr-performance-ads"].frames.slice(0, 4);
 const STYLES = ["Street Interview", "Direct-to-Camera", "Testimonial", "Expert\u2019s Opinion"];
 
+// the celebrity performance ads, played from Cloudflare Stream
+const CELEB_ADS = [
+  "351cd09ee38157cfd25e09215919ff93",
+  "ee84edad0b99305a3d3e174205f42308",
+  "baa263ac2c1a736815f043b930b2bcb8",
+  "662f5ba1a718d377d41393dc55d9e6a3",
+  "6606f6a24881b922e1a31376f13c6cb6",
+  "c1ddd80321567e29cea22c4d154a6d58",
+].map((video, i) => ({ video, alt: `CuriousJr celebrity performance ad, film ${i + 1}` }));
+
 // the numbers: the square beside each label is yellow or lilac
 const STATS = [
   { label: "FATIGUE DURATION", val: "7 Weeks", desc: "even after 7 Weeks the campaign did not stop bringing good conversion rates", tone: "acid" },
@@ -113,6 +123,7 @@ const SECTIONS = [
   { id: "csp-sec-creative", label: "Creative Solution" },
   { id: "csp-sec-styles", label: "Video Styles" },
   { id: "csp-sec-impact", label: "Impact" },
+  { id: "csp-sec-celeb", label: "Celebrity Ads" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
@@ -345,6 +356,24 @@ export default function CuriousJrCaseStudy() {
             </div>
           </section>
         </div>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-reel" id="csp-sec-celeb">
+          <div className="csp-eyebrow2">
+            <span className="csp-eyebrow2-dot" aria-hidden="true" />
+            <b>06</b>
+            <span className="csp-eyebrow2-sep">·</span>
+            CELEBRITY PERFORMANCE ADS
+          </div>
+          <h2 className="csp-reel-h">
+            Celebrity Performance Ads
+            <br />
+            for Curious Jr
+          </h2>
+
+          <SeekhoFilms films={CELEB_ADS} className="ccj-celeb" />
+        </section>
       </div>
 
       <div className="csp-in">
