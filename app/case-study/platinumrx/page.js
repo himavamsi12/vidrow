@@ -95,9 +95,9 @@ export default function PlatinumRxCaseStudy() {
       <div className="csp-in" id="csp-sec-hero">
         <div className="csp-head">
           <h1 className="csp-h">
-            PlatinumRx scaled 3X times in 2 months{" "}
+            PlatinumRx scaled reach through{" "}
             <br />
-            through UGC &amp; Celebrity Performance
+            UGC &amp; Celebrity Performance
           </h1>
           <p className="csp-note">
             A chronic-medicine app already spending on acquisition. Three months. One question: how
@@ -126,7 +126,7 @@ export default function PlatinumRxCaseStudy() {
           </div>
           <div className="csp-metaItem">
             <span className="csp-metaLabel">Result</span>
-            <span className="csp-metaValue">3X scale in Reach</span>
+            <span className="csp-metaValue">XX scale in Reach</span>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function PlatinumRxCaseStudy() {
             </div>
             <div className="csp-statCol">
               <div className="csp-statGrid csp-statGrid--lg" style={{ "--rows": 3 }}>
-                <span className="csp-statVal">3X</span>
+                <span className="csp-statVal">XX</span>
                 <span className="csp-cell" />
                 <span className="csp-cell" />
                 <span className="csp-cell" />
