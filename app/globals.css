@@ -20522,8 +20522,8 @@ html.is-loading body {
   border-radius: 0
 }
 
-/* CuriousJr: the celebrity performance ads, six films in a row, rounded
-   like the video style films above them */
+/* CuriousJr and GoodScore: the celebrity performance ads, six films in a
+   row, rounded like the CuriousJr video style films */
 .ccj-celeb {
   grid-template-columns: repeat(6, minmax(0, 1fr))
 }

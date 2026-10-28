@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import SiteNav from "../../components/SiteNav";
 import CspSectionNav from "../../components/CspSectionNav";
 import { DeepDiveCards } from "../../components/CaseStudies";
+import SeekhoFilms from "../../components/SeekhoFilms";
 
 export const metadata = {
   title: "GoodScore - Case Study | Vidrow",
@@ -56,6 +57,16 @@ const WHY = [
 // the rail flips light-on-dark over the full-funnel band
 const DARK_SECTIONS = ["csp-sec-funnel"];
 
+// the celebrity performance ads, played from Cloudflare Stream
+const CELEB_ADS = [
+  "34e76d0281d7c9cd4c812090b02a47a4",
+  "176be89389f8c8c9bd9dd9ccaf49fb32",
+  "507416cbb711064bb5c3375bcebe18a6",
+  "d9d0db097aadcb71225eb55162af52b2",
+  "9b233c0fc34439e03669a62f6369790d",
+  "07c0b8a05d0dbc20983b32cde8f0065b",
+].map((video, i) => ({ video, alt: `GoodScore celebrity performance ad, film ${i + 1}` }));
+
 const SECTIONS = [
   { id: "csp-sec-hero", label: "GoodScore" },
   { id: "csp-sec-setup", label: "The Setup" },
@@ -66,6 +77,7 @@ const SECTIONS = [
   { id: "csp-sec-hero-ad", label: "The Hero Ad" },
   { id: "csp-sec-google", label: "The Other Channel" },
   { id: "csp-sec-why", label: "Why It Worked" },
+  { id: "csp-sec-celeb", label: "Celebrity Ads" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
 
@@ -384,6 +396,24 @@ export default function GoodscoreCaseStudy() {
               </li>
             ))}
           </ol>
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-reel" id="csp-sec-celeb">
+          <div className="csp-eyebrow2">
+            <span className="csp-eyebrow2-dot" aria-hidden="true" />
+            <b>09</b>
+            <span className="csp-eyebrow2-sep">·</span>
+            CELEBRITY PERFORMANCE ADS
+          </div>
+          <h2 className="csp-reel-h">
+            Celebrity Performance Ads
+            <br />
+            for Good score
+          </h2>
+
+          <SeekhoFilms films={CELEB_ADS} className="ccj-celeb" />
         </section>
       </div>
 
