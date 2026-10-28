@@ -61,17 +61,13 @@ const NUMBERS = [
 // the other faces the campaign was repeated with. `video` is a Cloudflare
 // Stream id; faces without one stay off the page until their film is added.
 const FACES = [
-  { name: "Anup Soni", video: "27d821612014a64fe4c2818bdd798f85" },
-  { name: "Mandar Chandwadkar" },
-  { name: "Himani Shivpuri" },
-  { name: "Manoj Joshi", video: "5892a5659d9d6b84b47781adc7664991" },
-  { name: "Rohitashv Gour" },
-  { name: "Naveen Kasturia", video: "c296a4bd7dd8692eadc8ae9b2977f1f3", time: 28 },
-  // the rest of the Naveen Kasturia campaign (/campaign/seekho-naveen-kasturia)
-  { name: "Naveen Kasturia", video: "79be8b74182f5a492e9dffaff4774126", time: 2 },
-  { name: "Naveen Kasturia", video: "9fffd24edfcd6ae87f3759a37acbb3c3", time: 6 },
-  { name: "Naveen Kasturia", video: "30421abfab69530769975d47fb7bae6c", time: 24 },
-  { name: "Mandar Chandwadkar", video: "a98bcbcb8a6a854e580be2f1a76b0227" },
+  { name: "Anup Soni", video: "bb8b88e05319f14a70f3ecbe3f6bc0fc" },
+  { name: "Mandar Chandwadkar 2", video: "0da70cd329bbd0e028cb9c42199c47a0" },
+  { name: "Himani Shivpuri", video: "85b917f20a5563bdb0f76e2553a9e909" },
+  { name: "Manoj Joshi", video: "718e37855701564076471ce03c8f0bd9" },
+  { name: "Rohitashv Gour", video: "ee9e96648dab6f0c7ac0ef7d350c53da" },
+  { name: "Naveen Kasturia", video: "5e7817d484ca3e810b342876c7a269f7" },
+  { name: "Mandar Chandwadkar 3", video: "c6727df061e18e67ff4bc28088c963f0" },
 ];
 
 // CAC over time, as drawn in the chart: points are [week, y] with y in the
