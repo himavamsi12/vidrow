@@ -67,8 +67,8 @@ const MOFU = [
   { video: "dc44bf8e719578e8ed1772c66a51e52d", alt: "VisualDub case study film 6" },
 ];
 
-// the BoFu film: the same film as the fifth MoFu tile, as the design has it
-const EXPLAINER = { video: "6d13affe10d12db0f8b56e4cc7483536", time: "3s" };
+// the BoFu film: the tech explainer
+const EXPLAINER = { video: "fc2d7031d1dc44fab202074f685e635d", time: "3s" };
 
 // the side rail flips light-on-dark over the BoFu band
 const DARK_SECTIONS = ["csp-sec-bofu"];
