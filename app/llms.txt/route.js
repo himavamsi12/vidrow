@@ -14,6 +14,7 @@ const CASE_STUDIES = [
   ["stealth-app", "Stealth App", "Finding product-market fit in a consumer app's paying-user cohort by testing features, audiences and creatives."],
   ["masai", "Masai", "Reducing dependence on influencer marketing by scaling performance ads built around the right face and tested hooks."],
   ["curiousjr", "PW CuriousJr", "Performance videos for parents that lowered cost per lead and improved lead quality."],
+  ["curiousjr-shailesh-lodha", "CuriousJr × Shailesh Lodha", "Celebrity performance ads from one shoot that beat a mature ad engine on cost per enrolment: 32% of the enrolments from 27% of the spend."],
   ["seekho", "Seekho", "Celebrity performance videos with Mandar Chandwadkar to beat ad fatigue and keep acquisition costs low."],
   ["goodscore", "GoodScore", "Celebrity performance ads from one shoot, tested hook by hook against the rest of the account on cost per conversion."],
   ["vyapar", "Vyapar", "Brand films for small-business owners that made Vyapar the name its category is known by."],

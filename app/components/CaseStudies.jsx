@@ -18,7 +18,7 @@ const DEEP_DIVES = [
   },
   {
     kind: "px",
-    title: "PlatinumRx leveraged celebrity and UGC assets to increase reach 3x in 3 months",
+    title: "PlatinumRx scaled reach through UGC & Celebrity Performance",
     img: "/deepdrive-new/2.webp?v=2",
     logo: "/deepdrive-new/logos/platinumrx.webp",
     logoAlt: "PlatinumRx",
@@ -75,6 +75,15 @@ const DEEP_DIVES = [
     logo: "/partnership/goodscore.svg",
     logoAlt: "GoodScore",
     href: "/case-study/goodscore",
+  },
+  {
+    kind: "cl",
+    title: "CuriousJr cut cost per enrolment by 22% with celebrity performance ads",
+    img: "/deepdrive-new/curiousjr-shailesh.webp",
+    logo: "/deep%20drives/curious%20jr.webp",
+    logoAlt: "CuriousJr",
+    logoFx: "none", // the supplied two-tone logo, shown as is
+    href: "/case-study/curiousjr-shailesh-lodha",
   },
   {
     kind: "ao",

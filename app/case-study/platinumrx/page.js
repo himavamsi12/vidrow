@@ -13,7 +13,7 @@ export const metadata = {
     "How PlatinumRx scaled through UGC and celebrity performance ads, built with Vidrow to explain substitute medicines and medicine savings.",
 };
 
-// the side rail's sections (this page has no celebrity-ads or CAC sections)
+// the side rail's sections (this page has no CAC section)
 const SECTIONS = [
   { id: "csp-sec-hero", label: "Overview" },
   { id: "csp-sec-aoc", label: "The Audience" },
@@ -21,6 +21,7 @@ const SECTIONS = [
   { id: "csp-sec-how", label: "How We Did It" },
   { id: "csp-sec-hooks", label: "The Hooks" },
   { id: "csp-sec-reel1", label: "Celebrity Performance" },
+  { id: "csp-sec-mandar", label: "Mandar's Ads" },
   { id: "csp-sec-reel2", label: "Performance Ads" },
   { id: "csp-sec-more", label: "More Stories" },
 ];
@@ -78,6 +79,16 @@ const CELEB_ADS = [
   CAMPAIGNS["platinumrx-anup-soni"].frames[0],
   CAMPAIGNS["platinumrx-anupam-kher"].frames[2],
 ];
+
+// Mandar's celebrity performance ads, played from Cloudflare Stream
+const MANDAR_ADS = [
+  "cd59e82990a150751c03f6b3c983fa6a",
+  "0b739df253459bf37a739f0bd4f9e479",
+  "e6d8902f09d51d8b0b4f28a2bf22801b",
+  "d9fa6917635347f5832caef15c378cb5",
+  "2cc431f574102866499b8fad7da3953b",
+  "f84f23ec86c4fd1cc43e02321d3587d1",
+].map((video, i) => ({ video, alt: `PlatinumRx celebrity performance ad with Mandar, film ${i + 1}` }));
 
 const PERF_ADS = CAMPAIGNS["platinumrx-performance-ads"].frames;
 
@@ -304,10 +315,28 @@ export default function PlatinumRxCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-reel" id="csp-sec-reel2">
+        <section className="csp-reel" id="csp-sec-mandar">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
             <b>05</b>
+            <span className="csp-eyebrow2-sep">·</span>
+            CELEBRITY PERFORMANCE ADS
+          </div>
+          <h2 className="csp-reel-h">
+            Celebrity Performance Ads
+            <br />
+            From Mandar
+          </h2>
+
+          <SeekhoFilms films={MANDAR_ADS} className="cprx-films cprx-films--6" />
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-reel" id="csp-sec-reel2">
+          <div className="csp-eyebrow2">
+            <span className="csp-eyebrow2-dot" aria-hidden="true" />
+            <b>06</b>
             <span className="csp-eyebrow2-sep">·</span>
             PERFORMANCE ADS
           </div>

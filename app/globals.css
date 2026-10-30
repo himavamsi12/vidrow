@@ -4270,6 +4270,7 @@ html[data-hero-curtain] .hx-bar {
 }
 
 .cs-card-cu { --cs-ink: #111; --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 52% }
+.cs-card-cl { --cs-ink: #111; --cs-bg: linear-gradient(#EE7A2E, #F29B5C); --cs-tint: rgba(255, 255, 255, .14); --cs-w: 58% }
 .cs-card-ap { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 44% }
 .cs-card-ao { --cs-bg: linear-gradient(#2F43D4, #3C5FE0); --cs-tint: rgba(255, 255, 255, .1); --cs-w: 48% }
 .cs-card-vy { --cs-bg: linear-gradient(#D2342A, #EE6F3E); --cs-tint: rgba(255, 255, 255, .12); --cs-w: 62% }
@@ -19382,6 +19383,22 @@ html.is-loading body {
   display: block
 }
 
+/* the row keeps its space but stays hidden until the random three are in,
+   so a slow load never shows the same first three on every page */
+.cs-three:not(.is-picked) {
+  visibility: hidden
+}
+
+.cs-three.is-picked {
+  animation: csThreeIn .3s ease
+}
+
+@keyframes csThreeIn {
+  from {
+    opacity: 0
+  }
+}
+
 .cs-three .cs-card {
   width: 100%;
   height: auto;
@@ -20401,6 +20418,342 @@ html.is-loading body {
   color: #6A6A6A
 }
 
+/* CuriousJr x Shailesh Lodha: built on the GoodScore blocks (csp--gs), with
+   step numbers on the system cards, two-column rows, small source notes,
+   the hero ad's scale chart and the takeaway's stepped blocks */
+.csp--cjs .csk-note {
+  width: min(347px, 30%)
+}
+
+.csp--cjs .cgs-setupCopy {
+  width: min(534px, 46%)
+}
+
+/* each step card has its top-right corner cut away by a page-white square */
+.cjs-flow .cgs-step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: #fff
+}
+
+.cjs-stepNo {
+  margin-bottom: 8px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--violet)
+}
+
+.cjs-flow .cgs-stepVal {
+  font-size: 48px;
+  margin-bottom: 8px
+}
+
+.cjs-flow .cgs-step p {
+  font-size: 14px
+}
+
+.cjs-calloutRest {
+  font-weight: 400;
+  color: #444
+}
+
+.cgs-callout--dark .cjs-calloutRest {
+  color: #BDBDBD
+}
+
+.cjs-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 640fr) minmax(0, 502fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cjs-cols .cgs-callout {
+  margin-top: clamp(20px, 2.4vw, 28px)
+}
+
+.cjs-cols .cgs-callout.cjs-calloutTop {
+  margin-top: 0
+}
+
+.cjs-cols .cgs-bar {
+  width: calc(var(--v) * 1.56%)
+}
+
+.cjs-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px
+}
+
+.cjs-pair .cgs-gStat p,
+.cjs-heroStats .cgs-gStat p {
+  margin-top: 14px
+}
+
+.cjs-body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.4;
+  color: #444
+}
+
+.cjs-note {
+  margin: 20px 0 0;
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #9A9A9A
+}
+
+.cjs-source {
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cjs-note--dark {
+  margin-top: clamp(40px, 4.4vw, 64px);
+  color: #7A7A7A
+}
+
+/* the indexed charts: full labels under each bar, a note under the title */
+.csp--cjs .cgs-col,
+.csp--cjs .cgs-names span {
+  flex-basis: 120px
+}
+
+.csp--cjs .cgs-bars,
+.csp--cjs .cgs-names {
+  gap: 30px
+}
+
+.csp--cjs .cgs-names span {
+  font-size: 14px;
+  white-space: nowrap
+}
+
+.csp--cjs .cgs-chart figcaption {
+  font-size: 14px
+}
+
+.cgs-chart figcaption small {
+  display: block;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 11px;
+  color: #9A9A9A
+}
+
+/* 05 the hero ad: two stats beside the scale chart */
+.cjs-heroRow {
+  display: grid;
+  grid-template-columns: minmax(0, 480fr) minmax(0, 662fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+.cjs-heroStats {
+  display: flex;
+  flex-direction: column;
+  gap: 48px
+}
+
+.cjs-heroStats .cgs-gStat p {
+  max-width: 340px
+}
+
+.cjs-scale {
+  margin: 0
+}
+
+.cjs-scale svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--body)
+}
+
+.cjs-sTitle {
+  font-size: 15px;
+  font-weight: 500;
+  fill: #1A1C1C
+}
+
+.cjs-sKey,
+.cjs-sAxis {
+  font-size: 13px;
+  fill: #6A6A72
+}
+
+.cjs-scale figcaption {
+  margin-top: 20px;
+  font-family: var(--body);
+  font-size: 12px;
+  color: #9A9A9A
+}
+
+.cjs-heroRow + .cgs-callout {
+  margin-top: clamp(32px, 4vw, 60px)
+}
+
+/* 07 the takeaway: heading and copy, then three blocks stepping down,
+   each with a square of its own colour tucked under the one before */
+.cjs-takeTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(24px, 5vw, 72px)
+}
+
+.cjs-takeCopy {
+  flex: none;
+  width: min(534px, 46%);
+  margin: 34px 0 0;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #CFCFCF
+}
+
+.cjs-stairs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(40px, 4.4vw, 64px)
+}
+
+.cjs-stair {
+  position: relative;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  padding: 20px 24px;
+  color: #111
+}
+
+.cjs-stair:nth-child(2) {
+  margin-top: 127px
+}
+
+.cjs-stair:nth-child(3) {
+  margin-top: 254px
+}
+
+.cjs-stair + .cjs-stair::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 52px;
+  height: 52px;
+  background: inherit
+}
+
+.cjs-stair--lemon {
+  background: #FAFCC4
+}
+
+.cjs-stair--lilac {
+  background: #C5BEFA
+}
+
+.cjs-stairVal {
+  font-family: var(--display);
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -.01em
+}
+
+.cjs-stair p {
+  margin: 0;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4
+}
+
+.cjs-stair small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: #4A4A4A
+}
+
+/* 08 five campaign films in a row */
+.ccj-celeb.cjs-films {
+  grid-template-columns: repeat(5, minmax(0, 1fr))
+}
+
+@media (max-width:900px) {
+  .csp--cjs .csk-note,
+  .csp--cjs .cgs-setupCopy,
+  .cjs-takeCopy {
+    width: auto;
+    max-width: 500px
+  }
+
+  .cjs-cols,
+  .cjs-heroRow {
+    grid-template-columns: 1fr
+  }
+
+  .cjs-takeTop {
+    flex-direction: column;
+    gap: 0
+  }
+
+  .cjs-takeCopy {
+    margin-top: 20px
+  }
+
+  /* the blocks stack, no stepping */
+  .cjs-stairs {
+    grid-template-columns: 1fr;
+    gap: 12px
+  }
+
+  .cjs-stair:nth-child(2),
+  .cjs-stair:nth-child(3) {
+    margin-top: 0
+  }
+
+  .cjs-stair + .cjs-stair::before {
+    display: none
+  }
+
+  .cjs-stair {
+    min-height: 140px
+  }
+}
+
+@media (max-width:640px) {
+  .cjs-pair {
+    gap: 20px
+  }
+
+  .csp--cjs .cgs-bars,
+  .csp--cjs .cgs-names {
+    gap: 12px
+  }
+
+  .csp--cjs .cgs-names span {
+    font-size: 12px
+  }
+
+  .cjs-stairVal {
+    font-size: 40px
+  }
+}
+
 /* Masai: every section's body copy at 16px */
 .csp--masai .csp-aoc-copy,
 .csp--masai .csp-aoc-desc,
@@ -20503,7 +20856,7 @@ html.is-loading body {
   }
 }
 
-/* PlatinumRx: the ad rows play the campaign films, square-cornered, three
+/* PlatinumRx: the ad rows play the campaign films, three
    celebrity films then four performance films (on phones they swipe, as
    every .csk-films row does) */
 .cprx-films {
@@ -20517,9 +20870,20 @@ html.is-loading body {
   gap: clamp(12px, 1.8vw, 24px)
 }
 
+/* Mandar's six celebrity films, one row */
+.cprx-films--6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr))
+}
+
 .cprx-films .csk-film {
-  aspect-ratio: 9 / 16;
-  border-radius: 0
+  aspect-ratio: 9 / 16
+}
+
+/* PlatinumRx: every film on the page rounds 14px, like the other case
+   studies' films */
+.csp--prx .csp-how-right .cmp-video {
+  border-radius: 14px;
+  overflow: hidden
 }
 
 /* CuriousJr and GoodScore: the celebrity performance ads, six films in a
@@ -21117,8 +21481,14 @@ html.is-loading body {
   width: min(463px, 40%)
 }
 
+/* no top padding: the 140px .csp-in gap alone sits between sections */
 .cao-sec {
-  padding: clamp(48px, 5vw, 72px) 0 0
+  padding: 0
+}
+
+/* nor under the hero facts: Problem Statement sits the same 140px below them */
+.csp.cao .csk-meta {
+  padding-bottom: 0
 }
 
 .cao-eyebrow {
@@ -22356,8 +22726,9 @@ main.csp .cap-pillars li:last-child {
   margin-bottom: 0.60cqw
 }
 
-/* CuriousJr */
-.cs-card-cu .cs-logo {
+/* CuriousJr (both case studies) */
+.cs-card-cu .cs-logo,
+.cs-card-cl .cs-logo {
   height: 9.18cqw;
   margin-top: 6.72cqw;
   margin-bottom: -1.90cqw
