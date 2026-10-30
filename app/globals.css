@@ -20715,10 +20715,15 @@ html.is-loading body {
     margin-top: 20px
   }
 
-  /* the blocks stack, no stepping */
+  /* the blocks step down and to the right, each one's square
+     biting into the block above, like the desktop stairs turned on end */
   .cjs-stairs {
-    grid-template-columns: 1fr;
-    gap: 12px
+    grid-template-columns: 1fr
+  }
+
+  .cjs-stair {
+    width: 64%;
+    min-height: 140px
   }
 
   .cjs-stair:nth-child(2),
@@ -20726,12 +20731,26 @@ html.is-loading body {
     margin-top: 0
   }
 
-  .cjs-stair + .cjs-stair::before {
-    display: none
+  .cjs-stair:nth-child(2) {
+    margin-left: 18%
   }
 
-  .cjs-stair {
-    min-height: 140px
+  .cjs-stair:nth-child(3) {
+    margin-left: 36%
+  }
+
+  .cjs-stair + .cjs-stair::before {
+    right: auto;
+    left: 0;
+    top: auto;
+    bottom: 100%;
+    width: 40px;
+    height: 40px
+  }
+
+  /* room under the first two labels for the next block's square */
+  .cjs-stair:nth-child(-n+2) {
+    padding-bottom: 56px
   }
 }
 
