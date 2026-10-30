@@ -20,7 +20,8 @@ const SECTIONS = [
   { id: "csp-sec-mid", label: "Where It Landed" },
   { id: "csp-sec-how", label: "How We Did It" },
   { id: "csp-sec-hooks", label: "The Hooks" },
-  { id: "csp-sec-reel1", label: "Celebrity Performance" },
+  { id: "csp-sec-anupam", label: "Anupam Kher's Ads" },
+  { id: "csp-sec-anup", label: "Anup Soni's Ads" },
   { id: "csp-sec-mandar", label: "Mandar's Ads" },
   { id: "csp-sec-reel2", label: "Performance Ads" },
   { id: "csp-sec-more", label: "More Stories" },
@@ -71,15 +72,6 @@ const HOOKS = [
   },
 ];
 
-// films from the PlatinumRx campaign pages: one celebrity film each from
-// the Anup Soni and Anupam Kher campaigns (plus a second Anup Soni film), and
-// the four performance films
-const CELEB_ADS = [
-  CAMPAIGNS["platinumrx-anup-soni"].frames[1],
-  CAMPAIGNS["platinumrx-anup-soni"].frames[0],
-  CAMPAIGNS["platinumrx-anupam-kher"].frames[2],
-];
-
 // Mandar's celebrity performance ads, played from Cloudflare Stream
 const MANDAR_ADS = [
   "cd59e82990a150751c03f6b3c983fa6a",
@@ -89,6 +81,10 @@ const MANDAR_ADS = [
   "2cc431f574102866499b8fad7da3953b",
   "f84f23ec86c4fd1cc43e02321d3587d1",
 ].map((video, i) => ({ video, alt: `PlatinumRx celebrity performance ad with Mandar, film ${i + 1}` }));
+
+// all six films from each of the Anupam Kher and Anup Soni campaigns
+const ANUPAM_ADS = CAMPAIGNS["platinumrx-anupam-kher"].frames;
+const ANUP_ADS = CAMPAIGNS["platinumrx-anup-soni"].frames;
 
 const PERF_ADS = CAMPAIGNS["platinumrx-performance-ads"].frames;
 
@@ -297,7 +293,7 @@ export default function PlatinumRxCaseStudy() {
       </div>
 
       <div className="csp-in">
-        <section className="csp-reel" id="csp-sec-reel1">
+        <section className="csp-reel" id="csp-sec-anupam">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
             <b>04</b>
@@ -307,10 +303,28 @@ export default function PlatinumRxCaseStudy() {
           <h2 className="csp-reel-h">
             Celebrity Performance Ads
             <br />
-            for PlatinumRx.
+            From Anupam Kher
           </h2>
 
-          <SeekhoFilms films={CELEB_ADS} className="cprx-films cprx-films--3" />
+          <SeekhoFilms films={ANUPAM_ADS} className="cprx-films cprx-films--6" />
+        </section>
+      </div>
+
+      <div className="csp-in">
+        <section className="csp-reel" id="csp-sec-anup">
+          <div className="csp-eyebrow2">
+            <span className="csp-eyebrow2-dot" aria-hidden="true" />
+            <b>05</b>
+            <span className="csp-eyebrow2-sep">·</span>
+            CELEBRITY PERFORMANCE ADS
+          </div>
+          <h2 className="csp-reel-h">
+            Celebrity Performance Ads
+            <br />
+            From Anup Soni
+          </h2>
+
+          <SeekhoFilms films={ANUP_ADS} className="cprx-films cprx-films--6" />
         </section>
       </div>
 
@@ -318,7 +332,7 @@ export default function PlatinumRxCaseStudy() {
         <section className="csp-reel" id="csp-sec-mandar">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>05</b>
+            <b>06</b>
             <span className="csp-eyebrow2-sep">·</span>
             CELEBRITY PERFORMANCE ADS
           </div>
@@ -336,7 +350,7 @@ export default function PlatinumRxCaseStudy() {
         <section className="csp-reel" id="csp-sec-reel2">
           <div className="csp-eyebrow2">
             <span className="csp-eyebrow2-dot" aria-hidden="true" />
-            <b>06</b>
+            <b>07</b>
             <span className="csp-eyebrow2-sep">·</span>
             PERFORMANCE ADS
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import "@videojs/react/video/skin.css";
-import { Hotkey } from "@videojs/react";
+import { Gesture, Hotkey } from "@videojs/react";
 import { VideoPlayer, VideoSkin } from "@videojs/react/video";
 import { CloudflareVideo } from "@videojs/react/media/cloudflare-video";
 import { HlsJsVideo } from "@videojs/react/media/hlsjs-video";
@@ -20,6 +20,10 @@ export default function StreamPlayer({ video, poster, useHls = false, muted = fa
         ) : (
           <CloudflareVideo src={`${STREAM}/${video}/watch`} autoPlay playsInline />
         )}
+        {/* on a phone a tap anywhere on the film plays or pauses it (the
+            skin's own touch tap only shows and hides the controls); a mouse
+            click anywhere already does */}
+        <Gesture type="tap" action="togglePaused" pointer="touch" />
         {/* the spacebar plays and pauses the open film from anywhere on
             the page, not only once the player has focus */}
         {hotkey && <Hotkey keys="Space" action="togglePaused" target="document" />}

@@ -19044,6 +19044,13 @@ html.is-loading body {
   height: 100%
 }
 
+/* a Cloudflare Stream film plays in an iframe that would swallow every tap
+   and click; letting them through to the player means a tap anywhere on
+   the film plays or pauses it (the iframe has no controls of its own) */
+.media-container > iframe {
+  pointer-events: none
+}
+
 @media (max-width:900px) {
   .csk-films {
     grid-template-columns: repeat(2, minmax(0, 1fr))
